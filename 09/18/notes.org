@@ -1,0 +1,48 @@
+Welcome back to the
+
+STREAM OF RANDOM
+
+Today we are working on nix for SOLFUNMEME
+
+We are streaming live on X,TIKTOK,TWITCH,RUMBLE.
+
+Our directory is ~/nix2/source/github/meta-introspector/streamofrandom/2025/09/18/
+
+Lets break this down:
+1. ~/nix2/
+   has many submodules see ~/nix2/index/submodules.txt
+    
+2. source/github/meta-introspector/streamofrandom
+   this are our podcast scripts
+   
+3. 2025/09/18/
+   This is todays directory.
+
+We have the following goals:
+1. Build our system from pure nix and rust.
+2. A (brainstorm,
+   stream consiousness,   
+   practice mindfulness,
+   be one,
+   Recharge and reload,
+   reflect, introspect,
+   apply tactics,
+   apply policies,
+   observe, orient, decide, act,
+      divide (statify), conquer, unite, rule,
+      execute,parse,run,analyze, trace,inspect,visualize,stream,
+      invoke,prove, pump, shill, promote, crow, emit and utter, search, sort  ) the
+   B (algorithms, policies, tactics, strategies, biosemiotic utterences, memes, bash,haskell,nix,rust,lattice,neural operators,
+      pattern languages, programming languages, meta memes, quasi meta memes, quasi memes,
+      quines, heideggarian-and-obtuse-self-descriptive-term-constructions, lisp-function-naming,
+      lisp-dialects, ocaml, ml, scheme, guile, guix, nix
+      dao of fp
+   )
+   C (signs, words,
+      0, 1, 2, 3, 5, 7, 11, 13, 17, 19, 23,
+      osi layers, 
+      asts, s-expressions, numbers, components, books, posts, tweets, tcpip packets, recordings, podcasts, clips, memes, images, embeddings, vectors,
+      expressions,types,functions,data,forms,morphisms) in *B
+   from 
+   D (Reimann, goedel, echer, bach, hofstadter, stallman, minsky, curry, church, turing, coqrand )
+3. 
