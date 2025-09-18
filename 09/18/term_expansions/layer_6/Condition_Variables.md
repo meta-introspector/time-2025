@@ -1,0 +1,3 @@
+# Condition Variables
+
+A condition variable is a synchronization primitive that enables threads to wait until a particular condition is true. It is typically used in conjunction with a mutex to protect the shared data that the condition depends on. When a thread needs a condition to be met, it waits on the condition variable, releasing the mutex. Another thread, after changing the shared data and making the condition true, signals the condition variable, waking up the waiting thread(s).

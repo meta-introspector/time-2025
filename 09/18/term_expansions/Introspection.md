@@ -1,0 +1,3 @@
+# Introspection
+
+Introspection is the examination of one's own conscious thoughts and feelings. It is a process of self-observation and self-analysis, often used in psychology and philosophy to understand the nature of consciousness and mental states. In programming, introspection refers to the ability of a program to determine the type or properties of an object at runtime, allowing for more dynamic and flexible code.

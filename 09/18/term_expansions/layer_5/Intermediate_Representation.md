@@ -1,0 +1,3 @@
+# Intermediate Representation
+
+In compilers, an intermediate representation (IR) is a data structure or code that represents the source code in a form between the high-level source language and the low-level target machine code. IRs are designed to facilitate various compiler optimizations and transformations, making the compilation process more modular and efficient. Examples include Abstract Syntax Trees (ASTs), three-address code, and control flow graphs.

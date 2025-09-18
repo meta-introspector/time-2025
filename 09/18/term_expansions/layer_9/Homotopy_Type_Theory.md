@@ -1,0 +1,3 @@
+# Homotopy Type Theory
+
+Homotopy Type Theory (HoTT) is a modern field of mathematics that unifies homotopy theory (a branch of topology) with type theory (Layer 2, as in type system). It proposes a radical reinterpretation where types are seen as spaces, terms as points within those spaces, and equality (Layer 6, as in equations) as paths between points. This framework provides a powerful foundation for formalizing mathematics and reasoning about computation (Layer 9). HoTT emphasizes the notion of equivalence (Layer 6, as in equations) and provides a rich language for describing and verifying complex structures (Layer 9) and their relationships.

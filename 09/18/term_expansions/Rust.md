@@ -1,0 +1,3 @@
+# Rust
+
+Rust is a multi-paradigm, high-performance systems programming language focused on safety, especially safe concurrency. It is known for its strong memory safety guarantees without the need for a garbage collector, achieved through its ownership system and borrow checker. Rust is often used for performance-critical applications, embedded systems, web assembly, and command-line tools, offering a compelling alternative to C++ with improved safety and modern language features.

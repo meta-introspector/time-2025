@@ -1,0 +1,3 @@
+# Mutex
+
+A mutex (short for mutual exclusion) is a synchronization primitive that prevents multiple threads from simultaneously accessing a shared resource. It ensures that only one thread can acquire the mutex at a time, thereby protecting critical sections of code from race conditions and data corruption. When a thread acquires a mutex, other threads attempting to acquire it are blocked until the mutex is released.

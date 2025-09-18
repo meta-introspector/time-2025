@@ -1,0 +1,3 @@
+# Constants
+
+In computer programming, a constant is an identifier whose associated value cannot be altered by the program during its normal execution. This contrasts with a variable, which can be changed. Constants are used to store fixed values that are known at compile time or initialization and remain unchanged, improving code readability and preventing accidental modification of important values.

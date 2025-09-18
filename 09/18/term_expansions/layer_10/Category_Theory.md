@@ -1,0 +1,3 @@
+# Category Theory
+
+Category Theory (Layer 9, as in Homotopy Type Theory) is a branch of mathematics that studies abstract structures (Layer 9) and the relationships (Layer 6) between them. It defines categories, which consist of objects (Layer 9) and morphisms (Layer 1) (arrows) between those objects. It provides a powerful language for describing mathematical concepts in a unified way, emphasizing composition (Layer 1) and universal properties. In computer science (Layer 4), category theory provides a foundational framework for understanding programming languages (Layer 2), type systems (Layer 2), and data structures (Layer 6), often revealing deep connections between seemingly disparate areas.

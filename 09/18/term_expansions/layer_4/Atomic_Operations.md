@@ -1,0 +1,3 @@
+# Atomic Operations
+
+Atomic operations are operations that are guaranteed to be performed completely and indivisibly. This means that either the operation completes entirely, or it has no effect at all; there is no intermediate state where the operation is partially done. In concurrent programming, atomic operations are crucial for ensuring data integrity and thread safety, as they prevent other threads from observing or interfering with a partial update to shared data.

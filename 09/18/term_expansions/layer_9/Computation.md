@@ -1,0 +1,3 @@
+# Computation
+
+Computation (Layer 7, as in the dynamic aspect of computation) is the process (Layer 9) of performing calculations (Layer 6) or solving problems (Layer 6) using an algorithm (Layer 8) or a computational model (Layer 8). It involves the manipulation of data (Layer 8) and instructions (Layer 5) by a computer (Layer 7) or abstract machine (Layer 4). Computation is fundamental to computer science (Layer 4) and underlies all software (Layer 8) and hardware (Layer 8) operations.

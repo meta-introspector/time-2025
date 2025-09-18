@@ -1,0 +1,3 @@
+# Equations
+
+In mathematics, an equation is a statement that asserts the equality of two expressions. It is typically written as two expressions separated by an equals sign (=). Equations are used to represent relationships between variables and constants, and solving an equation involves finding the values of the variables that make the equality true. They are fundamental tools in mathematical modeling and problem-solving.

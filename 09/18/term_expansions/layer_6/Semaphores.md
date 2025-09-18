@@ -1,0 +1,3 @@
+# Semaphores
+
+A semaphore is a synchronization primitive used in concurrent programming to control access to a common resource in a parallel programming environment. It is a variable or abstract data type used to control access to a common resource by multiple processes and avoid critical section problems in a concurrent system. Semaphores can be binary (like a mutex) or counting (allowing a certain number of concurrent accesses).

@@ -1,0 +1,3 @@
+# Quasi-memes
+
+Quasi-memes are concepts that resemble memes but may not fully fit the established definition or are in an emergent, less-defined state. They might be ideas or cultural units that are beginning to spread but haven't yet achieved the widespread recognition, replication fidelity, or evolutionary stability typically associated with full-fledged memes. They represent nascent or incomplete memetic phenomena.

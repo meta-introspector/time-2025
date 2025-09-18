@@ -1,0 +1,3 @@
+# Abstract Syntax Tree
+
+An Abstract Syntax Tree (AST) is a tree representation of the abstract syntactic structure of source code written in a programming language. Each node in the tree denotes a construct occurring in the source code. The abstract nature means that it does not represent every detail appearing in the real syntax, but rather the structural or content-related details. ASTs are fundamental in compilers and interpreters for analyzing and transforming code.

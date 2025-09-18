@@ -1,0 +1,3 @@
+# Policies
+
+Policies are a set of principles, rules, and guidelines formulated or adopted by an organization, government, or individual to reach long-term goals and typically published in a booklet or other official document. They serve as a framework for decision-making and action, ensuring consistency and alignment with strategic objectives. Policies often define acceptable and unacceptable behaviors or practices within a given context.

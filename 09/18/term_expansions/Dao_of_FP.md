@@ -1,0 +1,3 @@
+# Dao of FP
+
+The "Dao of FP" (Dao of Functional Programming) refers to a philosophical approach to functional programming (Layer 2), often implying elegance, simplicity, and harmony in code design (Layer 9). It suggests that by adhering to functional principles—such as immutability (Layer 2), pure functions (Layer 3), and avoiding side effects (Layer 2)—programmers can achieve a more natural, understandable, and robust way of building software (Layer 8). This approach contributes to the construction of a coherent and interconnected lattice of ideas (Layer 1), where the relationships (Layer 6) and transformations (Layer 5) between computational elements (Layer 7) are clear and harmonious, akin to the philosophical concept of the Dao (the Way) in Taoism.

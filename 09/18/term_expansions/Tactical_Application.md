@@ -1,0 +1,3 @@
+# Tactical Application
+
+Tactical application refers to the use of specific, short-term actions or strategies designed to achieve a particular objective within a broader strategic framework. It focuses on the immediate execution of plans and the deployment of resources to address current challenges or opportunities. Unlike long-term strategy, tactics are often flexible and responsive to changing circumstances on the ground.

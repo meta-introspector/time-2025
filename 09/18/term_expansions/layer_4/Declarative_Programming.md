@@ -1,0 +1,3 @@
+# Declarative Programming
+
+Declarative programming is a programming paradigm that expresses the logic of a computation without describing its control flow. It focuses on *what* the program should accomplish, rather than *how* to achieve it. This contrasts with imperative programming, which specifies the exact steps to be taken. Examples include SQL, HTML, and functional programming languages, where the desired result is declared, and the system figures out the execution details.

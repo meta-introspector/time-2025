@@ -1,0 +1,3 @@
+# Computational Model
+
+A computational model is an abstract model that describes how a computation is performed. It defines the set of operations that can be performed and their respective costs. Examples include the Turing machine (Layer 3), lambda calculus (Layer 2), and finite automata. Computational models are fundamental to the theory of computability (Layer 4) and help us understand the limits and capabilities of algorithms (Layer 1) and computer programs (Layer 3).

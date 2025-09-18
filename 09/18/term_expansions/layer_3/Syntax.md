@@ -1,0 +1,3 @@
+# Syntax
+
+Syntax refers to the set of rules that defines the combinations of symbols that are considered to be correctly structured statements or expressions in a particular language. In programming languages, syntax dictates how code must be written to be grammatically correct and understandable by a compiler or interpreter. Errors in syntax (syntax errors) prevent a program from being successfully processed.

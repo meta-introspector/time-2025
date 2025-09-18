@@ -1,0 +1,3 @@
+# Race Conditions
+
+A race condition is a phenomenon that occurs in concurrent programming when the behavior of a program depends on the relative timing or interleaving of operations by multiple threads or processes. If the outcome of the program is incorrect for some interleavings, a race condition exists. They are a common source of bugs in multithreaded applications and are often prevented using synchronization primitives.

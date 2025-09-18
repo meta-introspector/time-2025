@@ -1,0 +1,3 @@
+# Topology
+
+Topology (Layer 9, as in Homotopy Type Theory) is a branch of mathematics concerned with the properties of geometric objects that are preserved under continuous deformations, such as stretching, twisting, crumpling, and bending, but not tearing or gluing. It studies properties like connectedness, compactness, and the number of "holes" (Layer 1, as in Abstract Algebraic Topology Meta Meme). In our lattice of ideas (Layer 1), topology provides a framework for understanding the fundamental structure (Layer 9) and relationships (Layer 6) between concepts, independent of their specific form or representation.

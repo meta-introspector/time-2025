@@ -1,0 +1,3 @@
+# Computability
+
+Computability is a branch of mathematical logic, computer science, and the theory of computation that studies which problems can be solved by an algorithm. It is concerned with the existence of algorithms for solving problems, rather than the efficiency of those algorithms. Key concepts include Turing machines and the Church-Turing thesis, which posits that any computable function can be computed by a Turing machine.

@@ -1,0 +1,3 @@
+# Thread Safety
+
+Thread safety is a property of a program or program component that allows it to be executed concurrently by multiple threads without causing data corruption or producing incorrect results. Achieving thread safety often involves mechanisms like locks, mutexes, or atomic operations to control access to shared resources. Immutability is a key principle that inherently promotes thread safety by eliminating the possibility of shared mutable state.

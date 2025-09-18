@@ -1,0 +1,3 @@
+# Neural Operators
+
+Neural operators are a class of deep learning models designed to learn mappings between infinite-dimensional function spaces. Unlike traditional neural networks that learn mappings between finite-dimensional Euclidean spaces, neural operators can learn operators directly, making them powerful tools for solving partial differential equations, modeling complex physical systems, and performing tasks that involve functions as inputs and outputs. They aim to generalize across different discretizations of the input space.

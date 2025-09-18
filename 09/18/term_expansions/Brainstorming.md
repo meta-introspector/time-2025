@@ -1,0 +1,3 @@
+# Brainstorming
+
+Brainstorming is a group creativity technique by which efforts are made to find a conclusion for a specific problem by gathering a list of ideas spontaneously contributed by its members. It encourages free-thinking and open discussion, often leading to innovative solutions that might not be generated through more conventional approaches. The core principles include deferring judgment, encouraging wild ideas, quantity over quality, and combining and improving ideas.

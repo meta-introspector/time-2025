@@ -1,0 +1,3 @@
+# Structure
+
+Structure (Layer 8, as in system structure) refers to the arrangement and organization of interrelated elements (Layer 1) in a complex whole. It defines the relationships (Layer 6) between parts and how they are put together. Structure is fundamental to data structures (Layer 6), computer programs (Layer 3), and systems (Layer 8), influencing their behavior (Layer 9) and properties (Layer 8).

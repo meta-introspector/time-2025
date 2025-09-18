@@ -1,0 +1,3 @@
+# Algorithm
+
+An algorithm (Layer 1) is a precise set of rules (Layer 4) or a process (Layer 6) to be followed in calculations (Layer 6) or other problem-solving operations (Layer 6), especially by a computer (Layer 7). It is a fundamental concept in computability (Layer 4) and forms the basis for computer programs (Layer 3) and computational models (Layer 8). Algorithms define the logical steps for execution (Layer 3) to achieve a desired outcome.

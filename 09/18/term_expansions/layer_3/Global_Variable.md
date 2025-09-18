@@ -1,0 +1,3 @@
+# Global Variable
+
+A global variable is a variable that is declared outside of any function or block, making it accessible from any part of the program. While convenient, excessive use of global variables can lead to issues such as unintended side effects, reduced modularity, and increased difficulty in debugging, as their state can be modified by any part of the code. Functional programming paradigms often discourage their use.

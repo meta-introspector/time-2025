@@ -1,0 +1,3 @@
+# Optimization
+
+Optimization (Layer 6, as in compiler optimizations) is the process (Layer 6) of improving the performance (Layer 6), size (Layer 6), or other characteristics of a system (Layer 8), program (Layer 3), or algorithm (Layer 8) without changing its external behavior. It involves applying techniques (Layer 7) to make computations (Layer 7) more efficient (Layer 6) and effective. Optimization is a continuous effort in software development (Layer 3) and engineering disciplines (Layer 4).

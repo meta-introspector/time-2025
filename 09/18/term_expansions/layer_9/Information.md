@@ -1,0 +1,3 @@
+# Information
+
+Information (Layer 7, as in the quantity of information in a variable) refers to facts (Layer 8) and statistics (Layer 8) collected together for reference or analysis (Layer 3). It is the fundamental raw material (Layer 8) that variables (Layer 7) store, that data structures (Layer 6) organize, and that computer programs (Layer 3) process. Information is central to communication (Layer 5) and knowledge (Layer 9) acquisition.

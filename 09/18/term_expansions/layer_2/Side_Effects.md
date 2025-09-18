@@ -1,0 +1,3 @@
+# Side Effects
+
+In computer science, a side effect is a change of state that is observable outside of the called function. This includes modifying a global variable, changing the state of an object passed by reference, performing I/O operations (like writing to a file or console), or throwing an exception. Functional programming aims to minimize or eliminate side effects to make programs more predictable and easier to test.

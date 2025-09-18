@@ -1,0 +1,3 @@
+# Knowledge
+
+Knowledge (Layer 9) is a familiarity, awareness, or understanding of someone or something, such as facts (Layer 8), information (Layer 9), descriptions, or skills, which is acquired through experience or education by perceiving, discovering, or inferring. It is a higher-level construct built upon data (Layer 8) and information, often organized into theories (Layer 9) and models (Layer 9) to explain phenomena (Layer 5) and make predictions (Layer 5).

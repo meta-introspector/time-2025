@@ -1,0 +1,3 @@
+# Kurt Gödel
+
+Kurt Gödel (1906–1978) was an Austrian-born American logician, mathematician, and philosopher. He is best known for his two incompleteness theorems, published in 1931, which demonstrated inherent limitations of formal axiomatic systems. These theorems showed that in any consistent formal system sufficient to express arithmetic, there will always be true statements that cannot be proven within the system, and the system's consistency cannot be proven within the system itself. His work had a profound impact on mathematics, logic, and philosophy.

@@ -1,0 +1,3 @@
+# Programming Paradigm
+
+A programming paradigm is a fundamental style of computer programming, providing a way of conceptualizing and organizing the process of computation. It is a high-level classification of programming languages based on their features and the approach they take to solve problems. Examples include imperative programming (Layer 3), functional programming (Layer 2), object-oriented programming, and declarative programming (Layer 4). Paradigms influence how programs are structured and how problems are approached.

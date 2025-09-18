@@ -1,0 +1,3 @@
+# Paradigm
+
+A paradigm (Layer 8, as in programming paradigm) is a typical example, pattern, or model (Layer 9) of something. It is a distinct set of concepts (Layer 1) or thought patterns, including theories (Layer 9), research methods, postulates, and standards for what constitutes legitimate contributions to a field. Paradigms provide a framework for understanding and approaching problems (Layer 6) within a discipline.

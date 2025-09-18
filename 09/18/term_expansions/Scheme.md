@@ -1,0 +1,3 @@
+# Scheme
+
+Scheme is a minimalist and elegant dialect of the Lisp family of programming languages. It is known for its simple syntax, powerful metaprogramming features (macros), and emphasis on functional programming paradigms. Scheme is often used in computer science education due to its clear semantics and ability to teach fundamental programming concepts. It is specified by the IEEE standard and the Revised^n Report on the Algorithmic Language Scheme (R^nRS).

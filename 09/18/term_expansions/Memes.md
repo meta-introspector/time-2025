@@ -1,0 +1,3 @@
+# Memes
+
+A meme (pronounced 'meem') is an idea, behavior, or style that spreads by means of imitation from person to person within a culture and often carries symbolic meaning representing a particular phenomenon or theme. Coined by Richard Dawkins, the concept of a meme is analogous to a gene, in that it is a unit of cultural information that can be transmitted, replicated, and evolve. In the digital age, internet memes have become a prevalent form of cultural transmission.

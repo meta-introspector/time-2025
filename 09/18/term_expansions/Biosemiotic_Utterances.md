@@ -1,0 +1,3 @@
+# Biosemiotic Utterances
+
+Biosemiotic utterances refer to communication or expression within biological systems, often involving signs and symbols. Biosemiotics is the study of sign processes (semiosis) in living systems, exploring how organisms create, interpret, and respond to signs in their environment and within themselves. These utterances can range from genetic codes and cellular signaling to animal communication and human language.

@@ -1,0 +1,3 @@
+# Concurrent Programming
+
+Concurrent programming is a programming paradigm that deals with the execution of multiple computations or processes at the same time, either truly simultaneously (parallelism) or interleaved (concurrency). It focuses on managing shared resources and coordinating the interactions between these computations to ensure correctness and efficiency. Challenges include race conditions, deadlocks, and ensuring thread safety.

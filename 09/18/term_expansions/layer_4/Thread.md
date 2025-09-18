@@ -1,0 +1,3 @@
+# Thread
+
+In computer science, a thread (or thread of execution) is the smallest sequence of programmed instructions that can be managed independently by a scheduler, which is typically a part of the operating system. Threads are a way for a program to divide itself into two or more simultaneously (or pseudo-simultaneously) running tasks. Multiple threads within the same process share the same memory space, which can lead to concurrency issues if not managed carefully (e.g., with thread safety mechanisms).

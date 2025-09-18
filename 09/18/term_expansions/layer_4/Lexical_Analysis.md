@@ -1,0 +1,3 @@
+# Lexical Analysis
+
+Lexical analysis, also known as scanning, is the first phase of a compiler or interpreter. It takes the source code as a sequence of characters and converts it into a sequence of tokens. A token is a string of characters, categorized according to the rules of the programming language, such as keywords, identifiers, operators, and literals. The component that performs lexical analysis is called a lexer or scanner.

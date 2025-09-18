@@ -1,0 +1,3 @@
+# Bernhard Riemann
+
+Bernhard Riemann (1826–1866) was a German mathematician who made groundbreaking contributions to analysis, number theory, and differential geometry. His work on Riemannian geometry laid the foundation for Einstein's theory of general relativity. In number theory, the Riemann hypothesis, concerning the distribution of prime numbers, remains one of the most important unsolved problems in mathematics. His innovative ideas profoundly influenced the development of modern mathematics.

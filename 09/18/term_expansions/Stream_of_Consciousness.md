@@ -1,0 +1,3 @@
+# Stream of Consciousness
+
+Stream of consciousness is a narrative mode or method that attempts to depict the multitudinous thoughts and feelings which pass through the mind of a narrator. It is a literary device that gives the impression of an unfiltered, continuous flow of thoughts, memories, and associations, often without conventional grammatical structure or logical sequence. This technique aims to provide a direct and intimate portrayal of a character's inner life.

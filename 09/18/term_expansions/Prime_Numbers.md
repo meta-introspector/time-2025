@@ -1,0 +1,3 @@
+# Prime Numbers
+
+Prime numbers are natural numbers greater than 1 that have no positive divisors other than 1 and themselves. They are fundamental building blocks in number theory and play a crucial role in cryptography and other areas of mathematics and computer science. The sequence of prime numbers begins with 2, 3, 5, 7, 11, 13, 17, 19, 23, and continues infinitely. The distribution of prime numbers is a complex and active area of mathematical research.

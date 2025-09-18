@@ -1,0 +1,3 @@
+# Binary Instructions
+
+Binary instructions are the fundamental commands that a computer's central processing unit (CPU) can directly understand and execute. They are represented as sequences of binary digits (bits), typically 0s and 1s, and form the lowest level of programming language, known as machine code. Each instruction corresponds to a specific operation the CPU can perform, such as adding numbers, moving data, or making decisions.

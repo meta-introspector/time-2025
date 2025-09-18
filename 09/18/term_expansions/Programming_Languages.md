@@ -1,0 +1,3 @@
+# Programming Languages
+
+A programming language is a formal language comprising a set of instructions that produce various kinds of output. Programming languages are used in computer programming to implement algorithms. They are characterized by their syntax (the form of the language) and semantics (the meaning of the language). Examples include Python, Java, C++, JavaScript, and Rust, each designed for different purposes and paradigms.

@@ -1,0 +1,3 @@
+# Imperative Programming
+
+Imperative programming is a programming paradigm that uses statements that change a program's state. It focuses on describing *how* a program operates step by step, with explicit instructions that modify the program's state. This contrasts with declarative programming, which focuses on *what* the program should accomplish without explicitly describing how. Many traditional programming languages like C, Java, and Python (when not used functionally) are primarily imperative.

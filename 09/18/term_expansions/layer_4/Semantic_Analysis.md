@@ -1,0 +1,3 @@
+# Semantic Analysis
+
+Semantic analysis is a phase in the compilation process that adds semantic information to the parse tree and performs semantic checks. It ensures that the program's components are logically consistent and meaningful according to the language's rules. This includes type checking (ensuring operations are performed on compatible data types), checking for variable declarations, and verifying function call arguments. Errors detected at this stage are semantic errors.

@@ -1,0 +1,3 @@
+# Type System
+
+A type system is a set of rules that assigns a property called a type to the various constructs of a computer program, such as variables, expressions, functions, or modules. The main purpose of a type system is to reduce bugs in computer programs by defining interfaces between different parts of a program and then checking that the parts are connected in a consistent way. It helps ensure that operations are performed on data of the correct kind.

@@ -1,0 +1,3 @@
+# Abstract Data Type
+
+An Abstract Data Type (ADT) is a mathematical model for data types, where a data type is defined by its behavior (semantics) from the point of view of a user of the data, specifically in terms of possible values, possible operations on data of this type, and the behavior of these operations. It specifies *what* operations can be performed, but not *how* they are implemented. Examples include stacks, queues, and lists.

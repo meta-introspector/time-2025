@@ -1,0 +1,3 @@
+# Hardware
+
+Hardware refers to the physical components of a computer system (Layer 7) or any electronic system (Layer 7). These are the tangible elements that execute instructions (Layer 5) and store data (Layer 1). Examples include physical devices (Layer 7) like the central processing unit (CPU) (Layer 3), memory (Layer 6), and storage drives. Hardware provides the physical foundation upon which software (Layer 8) operates.

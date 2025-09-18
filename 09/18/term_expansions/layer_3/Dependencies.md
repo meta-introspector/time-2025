@@ -1,0 +1,3 @@
+# Dependencies
+
+In software development, dependencies refer to the external components, libraries, or modules that a particular piece of software relies on to function correctly. When a program or library needs another piece of software to run, the latter is considered a dependency of the former. Managing dependencies is a crucial task for package managers, ensuring that all required components are available and compatible.

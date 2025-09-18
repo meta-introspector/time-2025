@@ -1,0 +1,3 @@
+# Lisp Function Naming
+
+Lisp function naming refers to the distinctive and often descriptive conventions used for naming functions in Lisp programming languages. Lisp's flexible syntax and powerful macro system allow for highly expressive and sometimes unconventional naming patterns, often using hyphens to separate words (e.g., `make-list`, `mapcar`). These naming conventions contribute to Lisp's unique aesthetic and its emphasis on symbolic manipulation.

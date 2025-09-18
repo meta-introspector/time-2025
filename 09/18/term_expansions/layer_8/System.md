@@ -1,0 +1,3 @@
+# System
+
+A system (Layer 4, as in mathematical model of a system) is a set of interacting or interdependent components (Layer 1) forming an integrated whole. It can be a computer system (Layer 7), a real-world system (Layer 5), or an abstract model (Layer 4). Systems are characterized by their structure, behavior, and interconnectedness, and their properties often emerge from the interactions of their parts.

@@ -1,0 +1,3 @@
+# Theory
+
+A theory (Layer 9) is a well-substantiated explanation of some aspect of the natural or social world, based on a body of facts (Layer 8) that have been repeatedly confirmed through observation (Layer 1) and experiment. It is a structured set of ideas (Layer 1) and principles (Layer 4) that explain a phenomenon (Layer 5) and can be used to make predictions (Layer 5). Theories are fundamental to scientific understanding and the development of models (Layer 9).

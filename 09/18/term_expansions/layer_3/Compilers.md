@@ -1,0 +1,3 @@
+# Compilers
+
+A compiler is a special program that translates source code written in a high-level programming language (like C++, Java, or Rust) into machine code or another lower-level programming language that a computer's processor can understand and execute. The process of compilation involves several stages, including lexical analysis, parsing (often using Abstract Syntax Trees), semantic analysis, and code generation. Compilers are essential tools for software development.

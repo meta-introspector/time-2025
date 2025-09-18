@@ -1,0 +1,3 @@
+# State
+
+State (Layer 3, as in program's state) refers to the current condition or configuration of a system (Layer 8) or program (Layer 3) at a particular moment in time. It encompasses the values of all relevant variables (Layer 7) and the status of its components (Layer 1). Changes in state are central to imperative programming (Layer 3) and are carefully managed in concurrent programming (Layer 7) to avoid concurrency issues (Layer 5).

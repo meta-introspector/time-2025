@@ -1,0 +1,3 @@
+# Deadlocks
+
+A deadlock is a state in concurrent programming where two or more competing actions are each waiting for the other to finish, and thus neither ever finishes. It typically occurs when multiple processes or threads need exclusive access to multiple resources, and each holds one resource while waiting for another that is held by another process. Deadlocks can halt system progress and are a significant challenge in operating system design and concurrent application development.

@@ -1,0 +1,3 @@
+# Mindfulness
+
+Mindfulness is a mental state achieved by focusing one's awareness on the present moment, while calmly acknowledging and accepting one's feelings, thoughts, and bodily sensations. It is often cultivated through meditation practices and has been shown to reduce stress, improve emotional regulation, and enhance overall well-being. The practice involves paying attention to the breath, bodily sensations, and thoughts without judgment.

@@ -1,0 +1,3 @@
+# Compiler Optimizations
+
+Compiler optimizations are techniques used by compilers to improve the performance, size, or other characteristics of the executable code they produce. These techniques aim to make programs run faster, use less memory, or consume less power without changing their external behavior. Examples include dead code elimination, constant folding, loop optimizations, and register allocation.

@@ -1,0 +1,3 @@
+# Lisp Dialects
+
+Lisp dialects are various implementations and variations of the Lisp family of programming languages. Lisp, being one of the oldest high-level programming languages, has spawned numerous dialects over its history, each with its own unique features, libraries, and communities. Prominent examples include Common Lisp, Scheme, Clojure, and Emacs Lisp. These dialects share core Lisp principles like S-expressions and powerful metaprogramming capabilities but differ in their specifics and target applications.

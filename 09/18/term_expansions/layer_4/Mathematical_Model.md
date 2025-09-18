@@ -1,0 +1,3 @@
+# Mathematical Model
+
+A mathematical model is a description of a system using mathematical concepts and language. The process of developing a mathematical model is termed mathematical modeling. Mathematical models are used in all sciences and engineering disciplines, and also in economics, computer science, and medicine. They can be used to explain a system, study the effects of different components, and to make predictions about behavior.

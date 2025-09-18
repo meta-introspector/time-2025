@@ -1,0 +1,3 @@
+# Machine Code
+
+Machine code is a computer programming language consisting of binary or hexadecimal instructions that a computer's central processing unit (CPU) can directly understand and execute. It is the lowest-level programming language, representing the fundamental operations of a computer. All high-level programming languages must ultimately be translated into machine code by compilers or interpreters before they can be run.

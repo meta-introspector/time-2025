@@ -1,0 +1,3 @@
+# OSI Layers
+
+The Open Systems Interconnection (OSI) model is a conceptual framework used to describe the functions of a networking system. It divides network communication into seven distinct layers, each responsible for a specific set of tasks. These layers are: Physical, Data Link, Network, Transport, Session, Presentation, and Application. The OSI model helps in understanding how different network protocols interact and provides a standardized way to troubleshoot network issues, even though the TCP/IP model is more commonly implemented in practice.

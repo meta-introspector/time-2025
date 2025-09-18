@@ -1,0 +1,3 @@
+# Church-Turing Thesis
+
+The Church-Turing thesis is a fundamental hypothesis in the theory of computation. It states that a function is computable by an algorithm if and only if it is computable by a Turing machine. Essentially, it posits that any computation that can be performed by any conceivable computing device can also be performed by a Turing machine. It serves as a foundational concept for defining what is effectively computable.

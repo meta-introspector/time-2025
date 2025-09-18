@@ -1,0 +1,3 @@
+# ML
+
+ML (Meta Language) is a general-purpose functional programming language that originated in the 1970s. It is known for its strong static type system, type inference, and pattern matching capabilities. ML has influenced many other programming languages, including Haskell and OCaml. It is often used in research, teaching, and for developing compilers and theorem provers due to its rigorous mathematical foundations.

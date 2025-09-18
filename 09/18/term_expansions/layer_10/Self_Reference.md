@@ -1,0 +1,3 @@
+# Self-Reference
+
+Self-reference (Layer 8, as in Gödel's work) is a phenomenon in which a statement, idea, or entity refers to itself. It is a concept that appears across various fields, including logic, mathematics, computer science (Layer 4), and philosophy. In formal systems (Layer 10), self-reference can lead to paradoxes (Layer 8, as in Chronos Code Paradox) or profound insights, as demonstrated by Gödel's incompleteness theorems. In our self-descriptive lattice of ideas (Layer 1), self-reference is a key property, where terms (Layer 9) define themselves or other terms within the same system (Layer 8), contributing to the notion of a fixed point (Layer 10).

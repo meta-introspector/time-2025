@@ -1,0 +1,3 @@
+# Execution
+
+Execution (Layer 3, as in computer program execution) is the process (Layer 6) of carrying out or putting into effect instructions (Layer 5) or a computer program (Layer 3). It involves the active performance of operations (Layer 6) by a computer's hardware (Layer 8) under the control of its software (Layer 8). Execution is the dynamic aspect of computation (Layer 7), where algorithms (Layer 8) are brought to life.

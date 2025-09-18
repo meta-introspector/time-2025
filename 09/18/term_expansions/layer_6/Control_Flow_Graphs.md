@@ -1,0 +1,3 @@
+# Control Flow Graphs
+
+A control flow graph (CFG) is a representation, using graph notation, of all paths that might be traversed through a program during its execution. It is a directed graph where nodes represent basic blocks (sequences of instructions with a single entry and exit point) and edges represent possible transfers of control between basic blocks. CFGs are fundamental in compilers for program analysis and optimization.

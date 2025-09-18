@@ -1,0 +1,3 @@
+# Variables
+
+In computer programming, a variable is a storage location paired with an associated symbolic name, which contains some known or unknown quantity of information referred to as a value. The variable name is the usual way to reference the stored value; this separation of name and content allows the name to be used independently of the exact information it represents. Variables are fundamental for storing and manipulating data within a program.

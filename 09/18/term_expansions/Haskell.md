@@ -1,0 +1,3 @@
+# Haskell
+
+Haskell is a purely functional programming language known for its strong static typing, lazy evaluation, and elegant syntax. It is based on lambda calculus and offers powerful abstractions for writing concise, correct, and maintainable code. Haskell is often used in academia for research in programming language theory, but also finds applications in industry for areas like financial analysis, web development, and concurrent systems.

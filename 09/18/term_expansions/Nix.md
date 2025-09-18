@@ -1,0 +1,3 @@
+# Nix
+
+Nix is a powerful, purely functional package manager for Linux and other Unix systems. It emphasizes reproducible, declarative, and reliable system configurations. Unlike traditional package managers, Nix builds packages in isolation, ensuring that dependencies do not conflict and that builds are always consistent. This approach makes it ideal for development environments, continuous integration, and deploying applications reliably across different machines. Nix also forms the basis of the NixOS operating system.

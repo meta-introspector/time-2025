@@ -1,0 +1,3 @@
+# Package Manager
+
+A package manager is a collection of software tools that automates the process of installing, upgrading, configuring, and removing computer programs for a computer's operating system in a consistent manner. It handles dependencies, ensuring that all necessary components for a program to run are present and correctly configured. Examples include `apt` (Debian/Ubuntu), `npm` (Node.js), `Cargo` (Rust), and `Nix`.

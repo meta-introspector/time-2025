@@ -1,0 +1,3 @@
+# Turing Machine
+
+A Turing machine is a mathematical model of computation that defines an abstract machine which manipulates symbols on a strip of tape according to a table of rules. Despite its simplicity, a Turing machine can be adapted to simulate any computer algorithm, no matter how complicated it is. It is a fundamental concept in theoretical computer science, used to explore the limits of computability and the nature of algorithms. Developed by Alan Turing.

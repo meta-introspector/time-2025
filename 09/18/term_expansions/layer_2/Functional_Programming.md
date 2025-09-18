@@ -1,0 +1,3 @@
+# Functional Programming
+
+Functional programming is a programming paradigm that treats computation as the evaluation of mathematical functions and avoids changing state and mutable data. It emphasizes the application of functions, in contrast to the imperative programming style that emphasizes changes in state. Key concepts include pure functions, immutability, and higher-order functions. Functional programming aims to create more predictable, testable, and maintainable code.

@@ -1,0 +1,3 @@
+# OCaml
+
+OCaml (Objective Caml) is a general-purpose, industrial-strength programming language with an emphasis on expressiveness and safety. It is a functional, imperative, and object-oriented language that supports strong static typing and type inference. OCaml is known for its speed, robust type system, and use in areas like compiler construction, financial applications, and scientific computing.

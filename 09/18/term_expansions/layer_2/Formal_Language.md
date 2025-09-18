@@ -1,0 +1,3 @@
+# Formal Language
+
+A formal language is a set of strings of symbols that may be constrained by rules that are specific to it. These languages are precisely defined by mathematical or logical rules, in contrast to natural languages (like English) which are developed through usage. In computer science, formal languages are used to define the syntax of programming languages, data formats, and communication protocols.

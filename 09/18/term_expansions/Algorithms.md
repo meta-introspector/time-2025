@@ -1,0 +1,3 @@
+# Algorithms
+
+An algorithm is a finite sequence of well-defined, computer-implementable instructions, typically to solve a class of specific problems or to perform a computation. Algorithms are the backbone of computer programming and data processing, providing a step-by-step procedure for achieving a desired outcome. They are characterized by their precision, determinism, and ability to terminate after a finite number of steps.
