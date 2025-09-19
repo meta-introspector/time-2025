@@ -46,3 +46,9 @@ We have the following goals:
    from 
    D (Reimann, goedel, echer, bach, hofstadter, stallman, minsky, curry, church, turing, coqrand )
 3. 
+
+
+* idea
+if our symbolic ideas as programs are emedded or grounded in primes twisted and combined in strange shapes for understanding
+then that makes them abstract descriptive logics that are encoded in recursive nested layers, slowly reaching into reality
+via the kernel. like a quasi meta mycelium.

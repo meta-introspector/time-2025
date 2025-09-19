@@ -1,0 +1,16 @@
+todays ideas from reviewing feedback from people and ai.
+
+1. inconsisitency and chaos towards consisitency
+2. unconventional, niche, meme of one to be made more popular or launch more popular projects.
+3. battle of memes, the whats the new meta meme, the whats the new quasi meta meta meme 
+4. find and review best practices from github
+https://github.com/Cloudef/nix-autoenv
+https://github.com/rusty-cluster/rust-boilerplate
+https://github.com/deephack1982/rust-test
+https://github.com/RobertMenke/nix-direnv-rust-example
+
+collect submodules :
+git submodule foreach --recursive git status > submodules.txt
+
+5. usability,usability
+   local onclick installer for android and windows.
