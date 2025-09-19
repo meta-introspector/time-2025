@@ -1,0 +1,4 @@
+#
+[package]
+name="fixed_point_enum"
+[lib]
