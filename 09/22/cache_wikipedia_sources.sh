@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
 
+# Exit immediately if a command exits with a non-zero status.
+set -e
+
+# Source the lib_exec.sh library for execute_cmd
+source "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/lib/lib_exec.sh"
+
 # Ensure the cache directory exists
-./setup_wikipedia_cache.sh
+execute_cmd ./setup_wikipedia_cache.sh
 
 # Clear or create the articles list file
-> wikipedia_articles.md
+execute_cmd bash -c "> wikipedia_articles.md"
 
 # List of Wikipedia URLs to cache (manually cleaned)
 WIKI_URLS=(
@@ -44,13 +50,13 @@ for url in "${WIKI_URLS[@]}"; do
     filename=$(echo "$url" | sed -e 's/https:\/\/en.wikipedia.org\/wiki\///g' -e 's/[^a-zA-Z0-9_.-]/_/g')
     filepath="wikipedia_cache/${filename}.html"
 
-    echo "Caching: $url to $filepath"
+    execute_cmd echo "Caching: $url to $filepath"
     # Use curl to get content and save it
-    echo "Fetching content for $url using curl..."
-    curl -sL "$url" > "$filepath"
+    execute_cmd echo "Fetching content for $url using curl..."
+    execute_cmd curl -sL "$url" -o "$filepath"
 
     # Add to articles list
-    echo "- [$url]($url) -> $filepath" >> wikipedia_articles.md
+    execute_cmd bash -c "echo \"- [$url]($url) -> $filepath\" >> wikipedia_articles.md"
 done
 
-echo "Wikipedia caching process simulated. Review wikipedia_articles.md and wikipedia_cache/ directory."
+execute_cmd echo "Wikipedia caching process simulated. Review wikipedia_articles.md and wikipedia_cache/ directory."

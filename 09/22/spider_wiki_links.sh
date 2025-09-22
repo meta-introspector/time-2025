@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 
+# Exit immediately if a command exits with a non-zero status.
+set -e
+
+# Source the lib_exec.sh library for execute_cmd
+source "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/lib/lib_exec.sh"
+
 # Get the list of cached HTML files
-HTML_FILES=$(ls wikipedia_cache/*.html)
+HTML_FILES=$(execute_cmd ls wikipedia_cache/*.html)
 
 NEW_URLS=()
 
@@ -10,11 +16,11 @@ for file in $HTML_FILES; do
     # Filter out links containing ':' (e.g., File:, Category:) and anchors (#)
     # Prepend the base Wikipedia URL
     # Use sort -u to get unique URLs
-    extracted_links=$(cat "$file" | \
+    extracted_links=$(execute_cmd bash -c "cat \"$file\" | \
         grep -oE 'href="/wiki/[^"#:]+"' | \
-        sed -E 's/href="//;s/"$//' | \
-        sed -E 's/^/https:\/\/en.wikipedia.org/' | \
-        sort -u)
+        sed -E 's/href=\"//;s/\"$//' | \
+        sed -E 's/^/https:\/\/en.wikipedia.org\/' | \
+        sort -u")
 
     # Add to NEW_URLS array
     while IFS= read -r line; do
@@ -23,7 +29,7 @@ for file in $HTML_FILES; do
 done
 
 # Get unique URLs from the collected list
-UNIQUE_NEW_URLS=$(printf "%s\n" "${NEW_URLS[@]}" | sort -u)
+UNIQUE_NEW_URLS=$(execute_cmd bash -c "printf \"%s\\n\" \"${NEW_URLS[@]}\" | sort -u")
 
 # Output the unique new URLs
-echo "$UNIQUE_NEW_NEW_URLS"
+execute_cmd echo "$UNIQUE_NEW_URLS"
