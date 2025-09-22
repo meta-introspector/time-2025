@@ -145,7 +145,7 @@ git_tag_and_push() {
   local tag_name="$1"
   local branch_name="$2"
   execute_cmd git tag -f "$tag_name" # -f to force overwrite if tag exists
-  execute_cmd git push origin "$branch_name" --tags # Push the tag to remote
+  execute_cmd git push origin "refs/heads/$branch_name" --tags # Push the tag to remote
 }
 
 # Function to process a single repository: checkout, pull, commit, push, and tag.
