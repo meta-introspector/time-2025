@@ -26,6 +26,8 @@
             pkgs.jq
             pkgs.gh
             pkgs.shellcheck
+            pkgs.curl
+            pkgs.pandoc
           ];
         };
 

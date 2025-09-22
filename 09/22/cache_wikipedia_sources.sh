@@ -45,13 +45,9 @@ for url in "${WIKI_URLS[@]}"; do
     filepath="wikipedia_cache/${filename}.html"
 
     echo "Caching: $url to $filepath"
-    # Use web_fetch to get content and save it
-    # Note: web_fetch output needs to be captured and written to file
-    # This is a placeholder for the actual web_fetch call and saving logic
-    # In a real scenario, I'd need to parse the tool output and extract the content field.
-    # For now, I'll simulate the saving.
-    echo "Simulating web_fetch for $url"
-    echo "<!-- Content for $url -->" > "$filepath" # Placeholder content
+    # Use curl to get content and save it
+    echo "Fetching content for $url using curl..."
+    curl -sL "$url" > "$filepath"
 
     # Add to articles list
     echo "- [$url]($url) -> $filepath" >> wikipedia_articles.md
