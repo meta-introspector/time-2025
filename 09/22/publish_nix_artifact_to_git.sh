@@ -56,7 +56,7 @@ execute_cmd echo "Adding, committing, and pushing '$NAR_FILE_NAME' to '$REPO_URL
 execute_cmd pushd "$REPO_DIR_NAME" > /dev/null
 execute_cmd git add "$NAR_FILE_NAME"
 execute_cmd git commit -m "feat: Add Nix artifact: $NAR_FILE_NAME (from $FLAKE_ATTR_PATH)"
-execute_cmd git push origin main
+execute_cmd push_to_origin_branch main
 execute_cmd popd > /dev/null
 
 execute_cmd echo "Successfully published Nix artifact '$NAR_FILE_NAME' to '$REPO_URL'."
