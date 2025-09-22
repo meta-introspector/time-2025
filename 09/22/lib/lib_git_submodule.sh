@@ -50,7 +50,7 @@ ensure_meta_introspector_remote_and_fork() {
 push_to_origin_branch() {
   local branch_name="$1"
   echo "Pushing branch $branch_name to origin"
-  git push -u origin "$branch_name"
+  git push -u origin "refs/heads/$branch_name"
 }
 
 # Function to get git status of superproject, ignoring submodules.
