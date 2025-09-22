@@ -63,11 +63,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1758569719,
+        "lastModified": 1758570436,
         "narHash": "sha256-HRfdHmqce/J3y+ItyfXCuE+TOeoYTHzAFktzTD0COYc=",
         "ref": "feature/808017424794512875886459904961710757005754368000000000",
-        "rev": "bf0efd9986f522fb8c151825e4fca6f9de125fa6",
-        "revCount": 244,
+        "rev": "8efab4c4ae1755651880e20a1d8155c9fbfc0943",
+        "revCount": 245,
         "type": "git",
         "url": "https://github.com/meta-introspector/pick-up-nix"
       },
