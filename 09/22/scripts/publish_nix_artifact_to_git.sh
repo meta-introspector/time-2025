@@ -29,13 +29,20 @@ if [ ! -L result ]; then
 fi
 
 # 2. Get the resolved path of the result symlink
-NIX_STORE_PATH=$(execute_cmd readlink result)
+NIX_STORE_PATH=$(readlink result)
 execute_cmd echo "Nix store path for artifact: $NIX_STORE_PATH"
 
-# 3. Export the derivation's output to a .nar file
+# 3. Ensure the Git repository is cloned and up-to-date
+execute_cmd echo "Ensuring local Git repository '$REPO_DIR_NAME' is ready."
+git_ensure_repo_cloned_and_updated "$REPO_URL" "$REPO_DIR_NAME" main
+
+# Change into the repository directory to create the .nar file directly there
+execute_cmd pushd "$REPO_DIR_NAME" > /dev/null
+
+# 4. Export the derivation's output to a .nar file directly into the repo
 NAR_FILE_NAME=$(basename "$NIX_STORE_PATH").nar
 execute_cmd echo "Exporting Nix store path to .nar file: $NAR_FILE_NAME"
-execute_cmd nix-store --export "$NIX_STORE_PATH" > "$NAR_FILE_NAME"
+execute_cmd bash -c "nix-store --export \"$NIX_STORE_PATH\" > \"$NAR_FILE_NAME\""
 
 # Check if the .nar file was created
 if [ ! -f "$NAR_FILE_NAME" ]; then
@@ -43,13 +50,9 @@ if [ ! -f "$NAR_FILE_NAME" ]; then
     exit 1
 fi
 
-# 4. Ensure the Git repository is cloned and up-to-date
-execute_cmd echo "Ensuring local Git repository '$REPO_DIR_NAME' is ready."
-git_ensure_repo_cloned_and_updated "$REPO_URL" "$REPO_DIR_NAME" main
+# Change back to the original directory
+execute_cmd popd > /dev/null
 
-# 5. Copy the .nar file into the Git repository
-execute_cmd echo "Copying '$NAR_FILE_NAME' into local repository."
-execute_cmd cp "../$NAR_FILE_NAME" "$REPO_DIR_NAME/"
 
 # 6. Add, commit, and push the .nar file
 execute_cmd echo "Adding, committing, and pushing '$NAR_FILE_NAME' to '$REPO_URL'."
