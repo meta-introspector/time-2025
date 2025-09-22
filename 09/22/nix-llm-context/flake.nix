@@ -19,10 +19,10 @@
           (pkgs.runCommand "llm-context-${symbol}" {} ''
             "${self}/${generatorScript}" \
               --symbol="${symbol}" \
-              --html-file-name="${htmlFileName}" \
-              --keywords-script="${keywordsScriptFileName}" \
-              --links-file-name="${linksFileName}" \
-              --tutorials-pattern="${tutorialsPattern}" \
+              --html-file-name="${mainProject}/wikipedia_cache/${htmlFileName}" \
+              --keywords-script="${mainProject}/docs/memes/${keywordsScriptFileName}" \
+              --links-file-name="${mainProject}/docs/memes/${linksFileName}" \
+              --tutorials-pattern="${mainProject}/docs/memes/${tutorialsPattern}" \
               --output-dir="$out" \
               --main-project="${mainProject}"
           '');
