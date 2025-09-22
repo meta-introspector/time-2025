@@ -1,46 +1,45 @@
 #!/usr/bin/env bash
 #
-# Script to generate the "LLM.txt" for the "Monster Group" symbol.
+# Script to generate the "LLM.txt" for a given symbol.
+# Arguments:
+#   $1: SYMBOL_NAME (e.g., "Monster Group")
+#   $2: HTML_FILE_PATH (e.g., "wikipedia_cache/Monster_group.html")
+#   $3: KEYWORDS_SCRIPT_PATH (e.g., "./extract_meaningful_keywords.sh")
+#   $4: LINKS_FILE_PATH (e.g., "all_extracted_links.md")
+#   $5: TUTORIALS_PATTERN (e.g., "*monster_group*_tiktok_tutorial.md")
+#   $6: OUTPUT_FILE_PATH (e.g., "$out/llm-context-Monster Group.txt")
 
 set -euo pipefail
 
-SYMBOL_NAME="Monster Group"
-HTML_FILE="wikipedia_cache/Monster_group.html"
-KEYWORDS_SCRIPT="./extract_meaningful_keywords.sh"
-LINKS_FILE="all_extracted_links.md"
-TUTORIALS_PATTERN="*monster_group*_tiktok_tutorial.md"
-OUTPUT_FILE="monster_group_llm.txt"
+SYMBOL_NAME="$1"
+HTML_FILE="$2"
+KEYWORDS_SCRIPT="$3"
+LINKS_FILE="$4"
+TUTORIALS_PATTERN="$5"
+OUTPUT_FILE="$6"
 
 {
 echo "# $SYMBOL_NAME - LLM Context"
 echo ""
-} > "$OUTPUT_FILE"
 
-{
 echo "## Wikipedia Content"
-# Include raw HTML content
 cat "$HTML_FILE"
 echo ""
-} >> "$OUTPUT_FILE"
 
-{
 echo "## Extracted Keywords"
 "$KEYWORDS_SCRIPT" "$HTML_FILE" 10 | sed 's/^[ ]*[0-9]* //g'
 echo ""
-} >> "$OUTPUT_FILE"
 
-{
 echo "## Related Links"
-grep -i "Monster_group" "$LINKS_FILE"
+grep -i "${SYMBOL_NAME// /_}" "$LINKS_FILE"
 echo ""
-} >> "$OUTPUT_FILE"
 
-{
 echo "## Related TikTok Tutorials"
-find . -maxdepth 1 -type f -name "$TUTORIALS_PATTERN" | sed 's#./##' | while read -r tutorial; do
+# Find tutorials relative to the current directory (which is $src in the Nix build)
+find . -maxdepth 2 -type f -name "$TUTORIALS_PATTERN" | sed 's#./##' | while read -r tutorial; do
     echo "- $tutorial"
 done
 echo ""
-} >> "$OUTPUT_FILE"
+} > "$OUTPUT_FILE"
 
 echo "Generated $OUTPUT_FILE for $SYMBOL_NAME."
