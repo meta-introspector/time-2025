@@ -148,15 +148,17 @@ git_tag_and_push() {
   execute_cmd git push origin "refs/heads/$branch_name" --tags # Push the tag to remote
 }
 
-# Function to process a single repository: checkout, pull, commit, push, and tag.
+# Function to process a single repository: checkout, pull, commit, push, and optionally tag.
 # Arguments:
 #   $1: The absolute path to the repository.
 #   $2: The branch name to use.
 #   $3: The commit message.
+#   $4: Boolean (true/false) indicating if tagging should be performed.
 process_single_repo() {
   local repo_path="$1"
   local branch_name="$2"
   local commit_message="$3"
+  local tags_enabled="$4" # New argument
   local repo_name=$(basename "$repo_path")
 
   execute_cmd echo "----------------------------------------------------"
@@ -203,11 +205,27 @@ process_single_repo() {
     execute_cmd echo "No changes to commit in $repo_name."
   fi
 
-  execute_cmd echo "Tagging current commit with branch name: $branch_name"
-  git_tag_and_push "$branch_name" "$branch_name"
+  if [ "$tags_enabled" = true ]; then # Conditional tagging
+    execute_cmd echo "Tagging current commit with branch name: $branch_name"
+    git_tag_and_push "$branch_name" "$branch_name" --force # Pass --force to git_tag_and_push
+  fi
 
   execute_cmd popd > /dev/null
   execute_cmd echo ""
+}
+
+# Function to tag the current commit and push the tag.
+# Arguments:
+#   $1: The tag name.
+#   $2: The branch name to push the tag to.
+#   $3: Optional: --force to force push tags.
+git_tag_and_push() {
+  local tag_name="$1"
+  local branch_name="$2"
+  local force_push="$3" # New argument
+
+  execute_cmd git tag -f "$tag_name" # -f to force overwrite if tag exists
+  execute_cmd git push origin "refs/heads/$branch_name" --tags "$force_push" # Push the tag to remote
 }
 
 # Function to ensure a Git repository is cloned and up-to-date.
