@@ -83,7 +83,7 @@ echo "# $SYMBOL_NAME - LLM Context"
 echo ""
 
 echo "## Source Information"
-echo "- Main Project Path: $7"
+echo "- Main Project Path: $MAIN_PROJECT_PATH"
 echo ""
 
 echo "## Wikipedia Content"
