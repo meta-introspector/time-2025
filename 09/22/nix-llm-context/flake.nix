@@ -19,7 +19,7 @@
           (pkgs.runCommand "llm-context-${symbol}" {
             # Use mainProject as the primary source for all data files
             src = mainProject;
-            generatorScriptPath = "${self}/nix-llm-context/${generatorScript}";
+            generatorScriptPath = "${self}/${generatorScript}";
 
             buildInputs = [ pkgs.bash pkgs.coreutils pkgs.gnugrep pkgs.gnused pkgs.findutils ];
           } ''
@@ -29,12 +29,11 @@
             "$generatorScriptPath" 
               "${symbol}" 
               "${mainProject}/wikipedia_cache/${htmlFileName}" 
-              "${mainProject}/${keywordsScriptFileName}" 
-              "${mainProject}/${linksFileName}" 
-              "${tutorialsPattern}" 
+              "${mainProject}/docs/memes/${keywordsScriptFileName}" 
+              "${mainProject}/docs/memes/${linksFileName}" 
+              "${mainProject}/docs/memes/${tutorialsPattern}" 
               "$out/llm-context-${symbol}.txt" 
-              "${mainProject.url}" 
-              "${mainProject.rev}"
+              "${mainProject}" # Pass the path to the main project
           '');
       in
       rec {

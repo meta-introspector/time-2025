@@ -12,11 +12,6 @@ LINKS_FILE="$4"
 TUTORIALS_PATTERN="$5"
 OUTPUT_FILE_PATH="$6" # This is the final output path in $out
 
-MAIN_PROJECT_URL="$7"
-MAIN_PROJECT_REV="$8"
-# CRQ_BINSTORE_URL="$9" # Removed
-# CRQ_BINSTORE_REV="${10}" # Removed
-
 # Create a temporary file to build the content
 TEMP_OUTPUT_FILE=$(mktemp)
 
@@ -25,8 +20,7 @@ echo "# $SYMBOL_NAME - LLM Context"
 echo ""
 
 echo "## Source Information"
-echo "- Main Project Repository: $MAIN_PROJECT_URL (Commit: $MAIN_PROJECT_REV)"
-# echo "- CRQ Binstore Repository: $CRQ_BINSTORE_URL (Commit: $CRQ_BINSTORE_REV)" # Removed
+echo "- Main Project Path: $7"
 echo ""
 
 echo "## Wikipedia Content"
@@ -38,7 +32,7 @@ echo "## Extracted Keywords"
 echo ""
 
 echo "## Related Links"
-grep -i "${SYMBOL_NAME// /_}" "$LINKS_FILE"
+grep -i "${SYMBOL_NAME// /_}" "$LINKS_FILE" || true
 echo ""
 
 echo "## Related TikTok Tutorials"

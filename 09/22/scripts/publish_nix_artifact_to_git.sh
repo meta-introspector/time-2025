@@ -42,13 +42,28 @@ execute_cmd pushd "$REPO_DIR_NAME" > /dev/null
 # 4. Export the derivation's output to a .nar file directly into the repo
 NAR_FILE_NAME=$(basename "$NIX_STORE_PATH").nar
 execute_cmd echo "Exporting Nix store path to .nar file: $NAR_FILE_NAME"
-execute_cmd bash -c "nix-store --export \"$NIX_STORE_PATH\" > \"$NAR_FILE_NAME\""
+execute_cmd echo "NIX_STORE_PATH being exported: $NIX_STORE_PATH"
 
-# Check if the .nar file was created
-if [ ! -f "$NAR_FILE_NAME" ]; then
-    execute_cmd echo "Error: Failed to create .nar file: $NAR_FILE_NAME"
+# Execute nix-store --export and capture its exit code
+if execute_cmd bash -c "nix-store --export \"$NIX_STORE_PATH\" > \"$NAR_FILE_NAME\"" ; then
+    execute_cmd echo "nix-store --export succeeded."
+else
+    execute_cmd echo "Error: nix-store --export failed with exit code $?."
     exit 1
 fi
+
+# Check if the .nar file was created and its size
+if [ ! -f "$NAR_FILE_NAME" ]; then
+    execute_cmd echo "Error: .nar file was not created: $NAR_FILE_NAME"
+    exit 1
+else
+    FILE_SIZE=$(stat -c%s "$NAR_FILE_NAME")
+    execute_cmd echo "Created .nar file: $NAR_FILE_NAME (Size: $FILE_SIZE bytes)"
+    if [ "$FILE_SIZE" -eq 0 ]; then
+        execute_cmd echo "Warning: .nar file is empty!"
+    fi
+fi
+
 
 # Change back to the original directory
 execute_cmd popd > /dev/null
