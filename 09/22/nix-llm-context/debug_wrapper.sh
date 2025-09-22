@@ -4,20 +4,6 @@
 
 set -euo pipefail
 
-DEBUG_LOG_FILE=$(mktemp)
-echo "--- Debug Wrapper: Arguments Received ---" > "$DEBUG_LOG_FILE"
-echo "Number of arguments: $#" >> "$DEBUG_LOG_FILE"
-for i in "$@"; do
-  echo "Argument $i: $i" >> "$DEBUG_LOG_FILE"
-done
-echo "-----------------------------------------" >> "$DEBUG_LOG_FILE"
-echo "Debug log written to: $DEBUG_LOG_FILE"
-
-# Now execute the actual script
-# Assuming generate_monster_group_llm_txt.sh is in the same directory
-# and its path is passed as the first argument to this wrapper.
-# We need to shift the arguments to pass them correctly to the original script.
-
 # Parse named arguments
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
@@ -46,12 +32,22 @@ while [[ "$#" -gt 0 ]]; do
       MAIN_PROJECT="${1#*=}"
       ;;
     *)
-      echo "Unknown parameter passed: $1" >> "$DEBUG_LOG_FILE"
+      echo "Unknown parameter passed: $1" # Log to stderr for now
       exit 1
       ;;
   esac
   shift
 done
+
+mkdir -p "$OUTPUT_DIR"
+DEBUG_LOG_FILE="$OUTPUT_DIR/debug_log.txt"
+echo "--- Debug Wrapper: Arguments Received ---" > "$DEBUG_LOG_FILE"
+echo "Number of arguments: $#" >> "$DEBUG_LOG_FILE"
+for i in "$@"; do
+  echo "Argument $i: $i" >> "$DEBUG_LOG_FILE"
+done
+echo "-----------------------------------------" >> "$DEBUG_LOG_FILE"
+echo "Debug log written to: $DEBUG_LOG_FILE"
 
 # Construct the arguments for the original script
 # These must match the positional arguments expected by generate_monster_group_llm_txt.sh
