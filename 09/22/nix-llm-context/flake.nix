@@ -16,14 +16,7 @@
 
         # Function to generate LLM context for a given symbol
         generateLlmContext = { symbol, htmlFileName, keywordsScriptFileName, linksFileName, tutorialsPattern, generatorScript }:
-          (pkgs.runCommand "llm-context-${symbol}" {
-            # Use mainProject as the primary source for all data files
-            generatorScriptPath = "${self}/${generatorScript}";
-
-            buildInputs = [ pkgs.bash pkgs.coreutils pkgs.gnugrep pkgs.gnused pkgs.findutils ];
-          } ''
-            # Original buildCommand (commented out for debugging)
-            # "${self}/debug_wrapper.sh" "$generatorScriptPath" "${symbol}" "${mainProject}/wikipedia_cache/${htmlFileName}" "${mainProject}/docs/memes/${keywordsScriptFileName}" "${mainProject}/docs/memes/${linksFileName}" "${mainProject}/docs/memes/${tutorialsPattern}" "$out/llm-context-${symbol// /-}.txt" "${mainProject}"
+          (pkgs.runCommand "llm-context-${symbol}" {} ''
             echo "Hello from Nix build!"
           '');
       in
