@@ -18,7 +18,6 @@
         generateLlmContext = { symbol, htmlFileName, keywordsScriptFileName, linksFileName, tutorialsPattern, generatorScript }:
           (pkgs.runCommand "llm-context-${symbol}" {
             # Use mainProject as the primary source for all data files
-            src = mainProject;
             generatorScriptPath = "${self}/${generatorScript}";
 
             buildInputs = [ pkgs.bash pkgs.coreutils pkgs.gnugrep pkgs.gnused pkgs.findutils ];
