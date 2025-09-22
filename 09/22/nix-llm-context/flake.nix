@@ -1,5 +1,5 @@
 {
-  description = "Nix flake for generating LLM context for symbols.";
+  description = "Nix flake for generating LLM context for symbols. (Updated for OEIS)";
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
@@ -13,6 +13,8 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
+        lib = pkgs.lib;
+        primeSieve = import ./lib/prime-sieve.nix { inherit lib; };
 
         # Function to generate LLM context for a given symbol
         generateLlmContext = { symbol, htmlFileName, keywordsScriptFileName, linksFileName, tutorialsPattern, generatorScript }:
@@ -30,6 +32,23 @@
           tutorialsPattern = "*monster_group*_tiktok_tutorial.md";
           generatorScript = "generate_monster_group_llm_txt.sh";
         };
+
+        packages.oeisLlmContext = generateLlmContext {
+          symbol = "OEIS";
+          htmlFileName = "Online_Encyclopedia_of_Integer_Sequences.html";
+          keywordsScriptFileName = "extract_meaningful_keywords.sh";
+          linksFileName = "all_extracted_links.md";
+          tutorialsPattern = ""; # No specific tutorial pattern for now
+          generatorScript = "generate_oeis_llm_txt.sh";
+        };
+
+        # New output for zos sequence for a given prime
+        packages.zosSequence = prime: pkgs.runCommand "zos-sequence-${toString prime}" {
+          buildInputs = [ pkgs.bash ];
+          buildCommand = ''
+            echo "${lib.concatStringsSep "\n" (primeSieve prime)}" > $out/primes.txt
+          '';
+        } {};
       }
     );
 }

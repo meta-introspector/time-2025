@@ -14,6 +14,18 @@
 set -x
 set -euo pipefail
 
+GENERATOR_SCRIPT=""
+SYMBOL=""
+HTML_FILE_NAME=""
+KEYWORDS_SCRIPT=""
+LINKS_FILE_NAME=""
+TUTORIALS_PATTERN=""
+OUTPUT_DIR=""
+MAIN_PROJECT=""
+
+echo "DEBUG: Current working directory: $(pwd)"
+echo "DEBUG: GENERATOR_SCRIPT value: $GENERATOR_SCRIPT"
+
 # Parse named arguments
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
