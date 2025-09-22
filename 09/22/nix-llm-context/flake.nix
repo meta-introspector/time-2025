@@ -17,8 +17,15 @@
         # Function to generate LLM context for a given symbol
         generateLlmContext = { symbol, htmlFileName, keywordsScriptFileName, linksFileName, tutorialsPattern, generatorScript }:
           (pkgs.runCommand "llm-context-${symbol}" {} ''
-            mkdir -p $out && echo "Hello from Nix build!" > $out/dummy.txt
-          '');
+            "${self}/${generatorScript}" \
+              --symbol="${symbol}" \
+              --html-file-name="${htmlFileName}" \
+              --keywords-script="${keywordsScriptFileName}" \
+              --links-file-name="${linksFileName}" \
+              --tutorials-pattern="${tutorialsPattern}" \
+              --output-dir="$out" \
+              --main-project="${mainProject}"
+          '')
       in
       rec {
         packages.monsterGroupLlmContext = generateLlmContext {
