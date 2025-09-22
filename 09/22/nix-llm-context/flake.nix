@@ -23,17 +23,7 @@
 
             buildInputs = [ pkgs.bash pkgs.coreutils pkgs.gnugrep pkgs.gnused pkgs.findutils ];
           } ''
-            # Execute the generator script with necessary arguments
-            # The script will read arguments from environment variables
-            # and use the paths provided by Nix.
-            "$generatorScriptPath" 
-              "${symbol}" 
-              "${mainProject}/wikipedia_cache/${htmlFileName}" 
-              "${mainProject}/docs/memes/${keywordsScriptFileName}" 
-              "${mainProject}/docs/memes/${linksFileName}" 
-              "${mainProject}/docs/memes/${tutorialsPattern}" 
-              "$out/llm-context-${symbol}.txt" 
-              "${mainProject}" # Pass the path to the main project
+            "$generatorScriptPath" "${symbol}" "${mainProject}/wikipedia_cache/${htmlFileName}" "${mainProject}/docs/memes/${keywordsScriptFileName}" "${mainProject}/docs/memes/${linksFileName}" "${mainProject}/docs/memes/${tutorialsPattern}" "$out/llm-context-${symbol}.txt" "${mainProject}"
           '');
       in
       rec {
