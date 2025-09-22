@@ -32,7 +32,16 @@ grep -i "${SYMBOL_NAME// /_}" "$LINKS_FILE"
 echo ""
 
 echo "## Related TikTok Tutorials"
-find "$(dirname "$HTML_FILE")/.." -maxdepth 2 -type f -name "$TUTORIALS_PATTERN" -printf "- %P\n"
+# The find command needs to search within the source directory passed as $src
+# from the Nix derivation.
+# The HTML_FILE variable contains the absolute path to the HTML file within the Nix store.
+# We need to find the base source directory from HTML_FILE.
+# Example: HTML_FILE = /nix/store/.../wikipedia_cache/Monster_group.html
+# Source directory = /nix/store/.../
+# So, we need to go up two levels from HTML_FILE to get to the source root.
+SOURCE_ROOT=$(dirname "$(dirname "$HTML_FILE")")
+
+find "$SOURCE_ROOT" -maxdepth 2 -type f -name "$TUTORIALS_PATTERN" -printf "- %P\n"
 echo ""
 } > "$TEMP_OUTPUT_FILE"
 
