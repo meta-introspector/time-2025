@@ -4,12 +4,13 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    # Reference the current repository itself as a source
-    # This allows other flakes within this repo to reference it
-    selfRef = "path:.";
+    # Reference parent repositories for flake integration
+    nix2 = "git+https://github.com/meta-introspector/pick-up-nix?ref=feature/808017424794512875886459904961710757005754368000000000";
+    streamofrandom = "git+https://github.com/meta-introspector/streamofrandom?ref=feature/808017424794512875886459904961710757005754368000000000";
+    # time2025 = "git+https://github.com/meta-introspector/time-2025?ref=feature/808017424794512875886459904961710757005754368000000000";
   };
 
-  outputs = { self, nixpkgs, flake-utils, selfRef }:
+  outputs = { self, nixpkgs, flake-utils, nix2, streamofrandom }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
