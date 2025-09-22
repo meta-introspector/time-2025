@@ -1,45 +1,47 @@
 #!/usr/bin/env bash
 
-# Script to simulate a Nix build environment and call debug_wrapper.sh
-
 set -euo pipefail
 
-PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)"
+# Define dummy paths and values
+MAIN_PROJECT_DUMMY="$(pwd)"
+HTML_FILE_NAME_DUMMY="Monster_group.html"
+KEYWORDS_SCRIPT_FILE_NAME_DUMMY="extract_meaningful_keywords.sh"
+LINKS_FILE_NAME_DUMMY="all_extracted_links.md"
+TUTORIALS_PATTERN_DUMMY="*monster_group*_tiktok_tutorial.md"
+OUTPUT_DIR_DUMMY="$(pwd)/nix-simulated-output"
+SYMBOL_DUMMY="Monster Group"
+GENERATOR_SCRIPT_DUMMY="nix-llm-context/generate_monster_group_llm_txt.sh"
 
-# Source lib_utils.sh for log functions
-source "${PROJECT_ROOT}/lib/lib_utils.sh"
+# Create dummy files and directories
+mkdir -p "${MAIN_PROJECT_DUMMY}/wikipedia_cache"
+mkdir -p "${MAIN_PROJECT_DUMMY}/docs/memes"
+mkdir -p "${OUTPUT_DIR_DUMMY}"
 
-# Define dummy arguments for debug_wrapper.sh
-GENERATOR_SCRIPT_PATH="${PROJECT_ROOT}/nix-llm-context/generate_monster_group_llm_txt.sh"
-SYMBOL="Test Symbol"
-HTML_FILE_NAME="Monster_group.html"
-KEYWORDS_SCRIPT_FILE_NAME="extract_meaningful_keywords.sh"
-LINKS_FILE_NAME="all_extracted_links.md"
-TUTORIALS_PATTERN="*monster_group*_tiktok_tutorial.md"
-OUTPUT_DIR="${PROJECT_ROOT}/scripts/nix-simulated-output"
-MAIN_PROJECT_PATH="${PROJECT_ROOT}"
+echo "<html><body><h1>Monster Group</h1><p>This is a dummy HTML content for Monster Group.</p></body></html>" > "${MAIN_PROJECT_DUMMY}/wikipedia_cache/${HTML_FILE_NAME_DUMMY}"
+echo "#!/usr/bin/env bash
+echo 'dummy keyword'" > "${MAIN_PROJECT_DUMMY}/docs/memes/${KEYWORDS_SCRIPT_FILE_NAME_DUMMY}"
+chmod +x "${MAIN_PROJECT_DUMMY}/docs/memes/${KEYWORDS_SCRIPT_FILE_NAME_DUMMY}"
+echo "https://example.com/monster_group_link" > "${MAIN_PROJECT_DUMMY}/docs/memes/${LINKS_FILE_NAME_DUMMY}"
+echo "This is a dummy TikTok tutorial for monster_group." > "${MAIN_PROJECT_DUMMY}/docs/memes/${TUTORIALS_PATTERN_DUMMY}"
 
-# Create dummy output directory
-mkdir -p "$OUTPUT_DIR"
+cleanup() {
+  echo "Cleaning up dummy files and directories..."
+  # rm -rf "${MAIN_PROJECT_DUMMY}/wikipedia_cache"
+  # rm -rf "${MAIN_PROJECT_DUMMY}/docs/memes"
+  # rm -rf "${OUTPUT_DIR_DUMMY}"
+}
 
-log "Calling debug_wrapper.sh with simulated Nix arguments..."
+trap cleanup EXIT
 
-# Call debug_wrapper.sh with named arguments
-ARGS=(
-  "--generator-script" "$GENERATOR_SCRIPT_PATH"
-  "--symbol" "$SYMBOL"
-  "--html-file-name" "$HTML_FILE_NAME"
-  "--keywords-script" "$KEYWORDS_SCRIPT_FILE_NAME"
-  "--links-file-name" "$LINKS_FILE_NAME"
-  "--tutorials-pattern" "$TUTORIALS_PATTERN"
-  "--output-dir" "$OUTPUT_DIR"
-  "--main-project" "$MAIN_PROJECT_PATH"
-)
+# Run debug_wrapper.sh with dummy arguments
+./nix-llm-context/debug_wrapper.sh \
+  --generator-script="${GENERATOR_SCRIPT_DUMMY}" \
+  --symbol="${SYMBOL_DUMMY}" \
+  --html-file-name="${HTML_FILE_NAME_DUMMY}" \
+  --keywords-script="${KEYWORDS_SCRIPT_FILE_NAME_DUMMY}" \
+  --links-file-name="${LINKS_FILE_NAME_DUMMY}" \
+  --tutorials-pattern="${TUTORIALS_PATTERN_DUMMY}" \
+  --output-dir="${OUTPUT_DIR_DUMMY}" \
+  --main-project="${MAIN_PROJECT_DUMMY}"
 
-echo "${PROJECT_ROOT}/nix-llm-context/debug_wrapper.sh" "${ARGS[@]}"
-"${PROJECT_ROOT}/nix-llm-context/debug_wrapper.sh" "${ARGS[@]}"
-
-log "Debug log from debug_wrapper.sh:"
-cat "${OUTPUT_DIR}/debug_log.txt"
-
-log "Simulated run finished. Check $OUTPUT_DIR for generated files."
+echo "Simulation complete. Check ${OUTPUT_DIR_DUMMY}/llm-context-Monster-Group.txt for output."

@@ -16,16 +16,7 @@
 
         # Function to generate LLM context for a given symbol
         generateLlmContext = { symbol, htmlFileName, keywordsScriptFileName, linksFileName, tutorialsPattern, generatorScript }:
-          (pkgs.runCommand "llm-context-${symbol}" {} ''
-            "${self}/${generatorScript}" \
-              --symbol="${symbol}" \
-              --html-file-name="${mainProject}/wikipedia_cache/${htmlFileName}" \
-              --keywords-script="${mainProject}/docs/memes/${keywordsScriptFileName}" \
-              --links-file-name="${mainProject}/docs/memes/${linksFileName}" \
-              --tutorials-pattern="${mainProject}/docs/memes/${tutorialsPattern}" \
-              --output-dir="$out" \
-              --main-project="${mainProject}"
-          '');
+          (pkgs.runCommand "llm-context-${symbol}" {} ''"${self}/debug_wrapper.sh" --generator-script="${self}/${generatorScript}" --symbol="${symbol}" --html-file-name="${htmlFileName}" --keywords-script="${keywordsScriptFileName}" --links-file-name="${linksFileName}" --tutorials-pattern="${tutorialsPattern}" --output-dir="$out" --main-project="${mainProject}"'');
       in
       rec {
         packages.monsterGroupLlmContext = generateLlmContext {

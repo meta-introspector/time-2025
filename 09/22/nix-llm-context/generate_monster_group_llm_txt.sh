@@ -43,19 +43,19 @@ while [[ "$#" -gt 0 ]]; do
     --tutorials-pattern=*)
       TUTORIALS_PATTERN="${1#*=}"
       ;;
-    --output-dir)
-      OUTPUT_DIR="$2"
-      shift
-      ;;
-    --output-dir=*)
-      OUTPUT_DIR="${1#*=}"
-      ;;
     --main-project)
       MAIN_PROJECT="$2"
       shift
       ;;
     --main-project=*)
       MAIN_PROJECT="${1#*=}"
+      ;;
+    --output-dir)
+      OUTPUT_DIR="$2"
+      shift
+      ;;
+    --output-dir=*)
+      OUTPUT_DIR="${1#*=}"
       ;;
     *)
       echo "Unknown parameter passed: $1" >&2
@@ -66,11 +66,11 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 # Assign parsed values to original script variables
-OUTPUT_FILE_PATH="${OUTPUT_DIR}/llm-context-${SYMBOL_NAME// /-}.txt" # Construct output file path
-MAIN_PROJECT_PATH="$MAIN_PROJECT"
+OUTPUT_FILE_NAME="llm-context-${SYMBOL_NAME// /-}.txt" # Construct output file name
+OUTPUT_FILE_PATH="${OUTPUT_DIR}/${OUTPUT_FILE_NAME}"
 
 # Ensure all required variables are set
-if [ -z "$SYMBOL_NAME" ] || [ -z "$HTML_FILE" ] || [ -z "$KEYWORDS_SCRIPT" ] || [ -z "$LINKS_FILE" ] || [ -z "$TUTORIALS_PATTERN" ] || [ -z "$OUTPUT_FILE_PATH" ] || [ -z "$MAIN_PROJECT_PATH" ]; then
+if [ -z "$SYMBOL_NAME" ] || [ -z "$HTML_FILE" ] || [ -z "$KEYWORDS_SCRIPT" ] || [ -z "$LINKS_FILE" ] || [ -z "$TUTORIALS_PATTERN" ] || [ -z "$OUTPUT_DIR" ] || [ -z "$MAIN_PROJECT" ]; then
   echo "Error: Missing required arguments." >&2
   exit 1
 fi
@@ -83,7 +83,7 @@ echo "# $SYMBOL_NAME - LLM Context"
 echo ""
 
 echo "## Source Information"
-echo "- Main Project Path: $MAIN_PROJECT_PATH"
+echo "- Main Project Path: $MAIN_PROJECT"
 echo ""
 
 echo "## Wikipedia Content"
@@ -108,14 +108,19 @@ echo "## Related TikTok Tutorials"
 # So, we need to go up two levels from HTML_FILE to get to the source root.
 SOURCE_ROOT=$(dirname "$(dirname "$HTML_FILE")")
 
-find "$SOURCE_ROOT" -maxdepth 2 -type f -name "$TUTORIALS_PATTERN" -printf "- %P\n"
+# Extract just the filename pattern from TUTORIALS_PATTERN
+FILENAME_TUTORIALS_PATTERN=$(basename "$TUTORIALS_PATTERN")
+
+find "$SOURCE_ROOT" -maxdepth 2 -type f -name "$FILENAME_TUTORIALS_PATTERN" -printf "- %P\n"
+
 echo ""
 } > "$TEMP_OUTPUT_FILE"
 
 # Copy the generated content to the final output path
+mkdir -p "$(dirname "$OUTPUT_FILE_PATH")"
 cp "$TEMP_OUTPUT_FILE" "$OUTPUT_FILE_PATH"
 
 # Clean up the temporary file
-rm "$TEMP_OUTPUT_FILE"
+# rm "$TEMP_OUTPUT_FILE"
 
 echo "Generated $OUTPUT_FILE_PATH for $SYMBOL_NAME."

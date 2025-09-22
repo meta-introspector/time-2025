@@ -81,4 +81,4 @@ execute_cmd echo "Successfully published Nix artifact '$NAR_FILE_NAME' to '$REPO
 
 # Clean up the .nar file from the original directory
 execute_cmd echo "Cleaning up local .nar file."
-execute_cmd rm "$NAR_FILE_NAME"
+# execute_cmd rm "$NAR_FILE_NAME"

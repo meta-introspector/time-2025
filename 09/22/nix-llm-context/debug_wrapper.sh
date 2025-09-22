@@ -86,13 +86,13 @@ set
 # Construct the arguments for the original script
 # These must match the positional arguments expected by generate_monster_group_llm_txt.sh
 ARGS=(
-  "$SYMBOL"
-  "${MAIN_PROJECT}/wikipedia_cache/${HTML_FILE_NAME}"
-  "${MAIN_PROJECT}/docs/memes/${KEYWORDS_SCRIPT}"
-  "${MAIN_PROJECT}/docs/memes/${LINKS_FILE_NAME}"
-  "${MAIN_PROJECT}/docs/memes/${TUTORIALS_PATTERN}"
-  "${OUTPUT_DIR}/llm-context-${SYMBOL// /-}.txt" # Construct output file path
-  "${MAIN_PROJECT}"
+  --symbol="$SYMBOL"
+  --html-file-name="${MAIN_PROJECT}/wikipedia_cache/${HTML_FILE_NAME}"
+  --keywords-script="${MAIN_PROJECT}/docs/memes/${KEYWORDS_SCRIPT}"
+  --links-file-name="${MAIN_PROJECT}/docs/memes/${LINKS_FILE_NAME}"
+  --tutorials-pattern="${MAIN_PROJECT}/docs/memes/${TUTORIALS_PATTERN}"
+  --output-dir="${OUTPUT_DIR}"
+  --main-project="${MAIN_PROJECT}"
 )
 
 echo DEBUG "$GENERATOR_SCRIPT" "${ARGS[@]}"
