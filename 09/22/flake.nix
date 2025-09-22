@@ -35,6 +35,11 @@
           ];
         };
 
+        # Define a default package for the main project
+        packages.default = pkgs.writeShellScriptBin "hello-nix" ''
+          echo "Hello from Nix!"
+        '';
+
         # You can add other packages, apps, etc. here for the main project
         # For example, to expose the LLM context builder:
         # packages.llmContextBuilder = self.nix-llm-context.packages.${system}.monsterGroupLlmContext;
