@@ -1,0 +1,15 @@
+/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/analysis/oeis_rosetta_stone_meme_analysis.md
+/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/analysis/oeis_dna_world_meme_analysis.md
+/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/oeis_dna_world_meme.md
+/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/oeis_selfish_meta_meme.md
+/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/oeis_rosetta_stone_meme.md
+/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/reflection_of_oeis_dna_world_meme.md
+/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/reflection_of_oeis_selfish_meta_meme.md
+/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/reflection_of_oeis_rosetta_stone_meme.md
+/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./source/github/meta-introspector/lattice-introspector/docs/crq/CRQ_INTROSPECTION_SEQUENCES_OEIS_20250903.md
+/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./source/github/meta-introspector/neo/neo/quasi_meta_oeis.md
+/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_rs.txt:./vendor/external/bootstrap/src/oeis.rs
+/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_rs.txt:./vendor/external/bootstrap/src/oeis_quasifibers.rs
+/data/data/com.termux.nix/files/home/pick-up-nix2/index/art/artistic_references.md:/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/reflection_of_oeis_dna_world_meme.md
+/data/data/com.termux.nix/files/home/pick-up-nix2/index/art/artistic_references.md:/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/reflection_of_oeis_selfish_meta_meme.md
+/data/data/com.termux.nix/files/home/pick-up-nix2/index/art/artistic_references.md:/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/reflection_of_oeis_rosetta_stone_meme.md
