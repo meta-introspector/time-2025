@@ -7,26 +7,58 @@ set -euo pipefail
 # Parse named arguments
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
+    --generator-script)
+      GENERATOR_SCRIPT="$2"
+      shift
+      ;;
     --generator-script=*)
       GENERATOR_SCRIPT="${1#*=}"
+      ;;
+    --symbol)
+      SYMBOL="$2"
+      shift
       ;;
     --symbol=*)
       SYMBOL="${1#*=}"
       ;;
+    --html-file-name)
+      HTML_FILE_NAME="$2"
+      shift
+      ;;
     --html-file-name=*)
       HTML_FILE_NAME="${1#*=}"
+      ;;
+    --keywords-script)
+      KEYWORDS_SCRIPT="$2"
+      shift
       ;;
     --keywords-script=*)
       KEYWORDS_SCRIPT="${1#*=}"
       ;;
+    --links-file-name)
+      LINKS_FILE_NAME="$2"
+      shift
+      ;;
     --links-file-name=*)
       LINKS_FILE_NAME="${1#*=}"
+      ;;
+    --tutorials-pattern)
+      TUTORIALS_PATTERN="$2"
+      shift
       ;;
     --tutorials-pattern=*)
       TUTORIALS_PATTERN="${1#*=}"
       ;;
+    --output-dir)
+      OUTPUT_DIR="$2"
+      shift
+      ;;
     --output-dir=*)
       OUTPUT_DIR="${1#*=}"
+      ;;
+    --main-project)
+      MAIN_PROJECT="$2"
+      shift
       ;;
     --main-project=*)
       MAIN_PROJECT="${1#*=}"
