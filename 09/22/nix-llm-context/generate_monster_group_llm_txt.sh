@@ -1,22 +1,16 @@
 #!/usr/bin/env bash
 #
 # Script to generate the "LLM.txt" for a given symbol.
-# Arguments:
-#   $1: SYMBOL_NAME (e.g., "Monster Group")
-#   $2: HTML_FILE_PATH (e.g., "../wikipedia_cache/Monster_group.html")
-#   $3: KEYWORDS_SCRIPT_PATH (e.g., "../extract_meaningful_keywords.sh")
-#   $4: LINKS_FILE_PATH (e.g., "../all_extracted_links.md")
-#   $5: TUTORIALS_PATTERN (e.g., "*monster_group*_tiktok_tutorial.md")
-#   $6: OUTPUT_FILE_PATH (e.g., "$out/llm-context-Monster Group.txt")
+# Arguments are now read from environment variables.
 
 set -euo pipefail
 
-SYMBOL_NAME="$1"
-HTML_FILE="$2"
-KEYWORDS_SCRIPT="$3"
-LINKS_FILE="$4"
-TUTORIALS_PATTERN="$5"
-OUTPUT_FILE="$6"
+SYMBOL_NAME="${LLM_SYMBOL_NAME}"
+HTML_FILE="${LLM_HTML_FILE_NAME}"
+KEYWORDS_SCRIPT="${LLM_KEYWORDS_SCRIPT_FILE_NAME}"
+LINKS_FILE="${LLM_LINKS_FILE_NAME}"
+TUTORIALS_PATTERN="${LLM_TUTORIALS_PATTERN}"
+OUTPUT_FILE="${LLM_OUTPUT_FILE}"
 
 {
 echo "# $SYMBOL_NAME - LLM Context"
@@ -38,9 +32,7 @@ echo "## Related TikTok Tutorials"
 # Find tutorials relative to the current directory (which is $src in the Nix build)
 # The find command needs to search within the source directory passed as $src
 # from the Nix derivation.
-find .. -maxdepth 2 -type f -name "$TUTORIALS_PATTERN" | sed 's#../##' | while read -r tutorial; do
-    echo "- $tutorial"
-done
+find "$(dirname "$HTML_FILE")"/.. -maxdepth 2 -type f -name "$TUTORIALS_PATTERN" -printf "- %P\n"
 echo ""
 } > "$OUTPUT_FILE"
 
