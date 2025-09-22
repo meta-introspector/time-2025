@@ -4,9 +4,12 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    # Add the main project repository as an input
+    # This refers to the repository where this flake.nix resides
+    mainProject.url = "path:../"; # Path to the parent directory (the main project root)
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, mainProject }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
@@ -14,21 +17,24 @@
         # Function to generate LLM context for a given symbol
         generateLlmContext = { symbol, htmlFileName, keywordsScriptFileName, linksFileName, tutorialsPattern, generatorScript }:
           (pkgs.runCommand "llm-context-${symbol}" {
-            src = self;
-            LLM_SYMBOL_NAME = symbol;
-            LLM_HTML_FILE_NAME = "${self}/wikipedia_cache/${htmlFileName}";
-            LLM_KEYWORDS_SCRIPT_FILE_NAME = "${self}/${keywordsScriptFileName}";
-            LLM_LINKS_FILE_NAME = "${self}/${linksFileName}";
-            LLM_TUTORIALS_PATTERN = tutorialsPattern;
-            LLM_OUTPUT_FILE = "$out/llm-context-${symbol}.txt";
+            # Use mainProject as the primary source for all data files
+            src = mainProject;
+            generatorScriptPath = "${self}/nix-llm-context/${generatorScript}";
+
             buildInputs = [ pkgs.bash pkgs.coreutils pkgs.gnugrep pkgs.gnused pkgs.findutils ];
           } ''
-            # Copy the generator script to a temporary location and make it executable
-            cp "$src/${generatorScript}" ./generator_script.sh
-            chmod +x ./generator_script.sh
-
-            # Execute the generator script, which will read arguments from environment variables
-            ./generator_script.sh
+            # Execute the generator script with necessary arguments
+            # The script will read arguments from environment variables
+            # and use the paths provided by Nix.
+            "$generatorScriptPath" 
+              "${symbol}" 
+              "${mainProject}/wikipedia_cache/${htmlFileName}" 
+              "${mainProject}/${keywordsScriptFileName}" 
+              "${mainProject}/${linksFileName}" 
+              "${tutorialsPattern}" 
+              "$out/llm-context-${symbol}.txt" 
+              "${mainProject.url}" 
+              "${mainProject.rev}"
           '');
       in
       rec {
