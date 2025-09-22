@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 
-# Debug wrapper for generate_monster_group_llm_txt.sh
+# mkdir -p "$OUTPUT_DIR"
+# DEBUG_LOG_FILE="$OUTPUT_DIR/debug_log.txt"
+# echo "--- Debug Wrapper: Arguments Received ---" > "$DEBUG_LOG_FILE"
+# echo "Number of arguments: $#" >> "$DEBUG_LOG_FILE"
+# for i in "$@"; do
+#   echo "Argument $i: $i" >> "$DEBUG_LOG_FILE"
+# done
+# echo "-----------------------------------------" >> "$DEBUG_LOG_FILE"
+# echo "Debug log written to: $DEBUG_LOG_FILE"
 
+# Debug wrapper for generate_monster_group_llm_txt.sh
+set -x
 set -euo pipefail
 
 # Parse named arguments
@@ -71,15 +81,7 @@ while [[ "$#" -gt 0 ]]; do
   shift
 done
 
-mkdir -p "$OUTPUT_DIR"
-DEBUG_LOG_FILE="$OUTPUT_DIR/debug_log.txt"
-echo "--- Debug Wrapper: Arguments Received ---" > "$DEBUG_LOG_FILE"
-echo "Number of arguments: $#" >> "$DEBUG_LOG_FILE"
-for i in "$@"; do
-  echo "Argument $i: $i" >> "$DEBUG_LOG_FILE"
-done
-echo "-----------------------------------------" >> "$DEBUG_LOG_FILE"
-echo "Debug log written to: $DEBUG_LOG_FILE"
+set 
 
 # Construct the arguments for the original script
 # These must match the positional arguments expected by generate_monster_group_llm_txt.sh
@@ -93,5 +95,6 @@ ARGS=(
   "${MAIN_PROJECT}"
 )
 
+echo DEBUG "$GENERATOR_SCRIPT" "${ARGS[@]}"
 # Execute the original script with the constructed arguments
 exec "$GENERATOR_SCRIPT" "${ARGS[@]}"

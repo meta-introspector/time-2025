@@ -5,12 +5,75 @@
 
 set -euo pipefail
 
-SYMBOL_NAME="$1"
-HTML_FILE="$2"
-KEYWORDS_SCRIPT="$3"
-LINKS_FILE="$4"
-TUTORIALS_PATTERN="$5"
-OUTPUT_FILE_PATH="$6" # This is the final output path in $out
+# Parse named arguments
+while [[ "$#" -gt 0 ]]; do
+  case "$1" in
+    --symbol)
+      SYMBOL_NAME="$2"
+      shift
+      ;;
+    --symbol=*)
+      SYMBOL_NAME="${1#*=}"
+      ;;
+    --html-file-name)
+      HTML_FILE="$2"
+      shift
+      ;;
+    --html-file-name=*)
+      HTML_FILE="${1#*=}"
+      ;;
+    --keywords-script)
+      KEYWORDS_SCRIPT="$2"
+      shift
+      ;;
+    --keywords-script=*)
+      KEYWORDS_SCRIPT="${1#*=}"
+      ;;
+    --links-file-name)
+      LINKS_FILE="$2"
+      shift
+      ;;
+    --links-file-name=*)
+      LINKS_FILE="${1#*=}"
+      ;;
+    --tutorials-pattern)
+      TUTORIALS_PATTERN="$2"
+      shift
+      ;;
+    --tutorials-pattern=*)
+      TUTORIALS_PATTERN="${1#*=}"
+      ;;
+    --output-dir)
+      OUTPUT_DIR="$2"
+      shift
+      ;;
+    --output-dir=*)
+      OUTPUT_DIR="${1#*=}"
+      ;;
+    --main-project)
+      MAIN_PROJECT="$2"
+      shift
+      ;;
+    --main-project=*)
+      MAIN_PROJECT="${1#*=}"
+      ;;
+    *)
+      echo "Unknown parameter passed: $1" >&2
+      exit 1
+      ;;
+  esac
+  shift
+done
+
+# Assign parsed values to original script variables
+OUTPUT_FILE_PATH="${OUTPUT_DIR}/llm-context-${SYMBOL_NAME// /-}.txt" # Construct output file path
+MAIN_PROJECT_PATH="$MAIN_PROJECT"
+
+# Ensure all required variables are set
+if [ -z "$SYMBOL_NAME" ] || [ -z "$HTML_FILE" ] || [ -z "$KEYWORDS_SCRIPT" ] || [ -z "$LINKS_FILE" ] || [ -z "$TUTORIALS_PATTERN" ] || [ -z "$OUTPUT_FILE_PATH" ] || [ -z "$MAIN_PROJECT_PATH" ]; then
+  echo "Error: Missing required arguments." >&2
+  exit 1
+fi
 
 # Create a temporary file to build the content
 TEMP_OUTPUT_FILE=$(mktemp)

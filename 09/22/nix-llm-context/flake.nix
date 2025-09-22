@@ -25,7 +25,7 @@
               --tutorials-pattern="${tutorialsPattern}" \
               --output-dir="$out" \
               --main-project="${mainProject}"
-          '')
+          '');
       in
       rec {
         packages.monsterGroupLlmContext = generateLlmContext {
