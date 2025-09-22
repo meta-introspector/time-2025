@@ -1,22 +1,32 @@
 #!/usr/bin/env bash
 #
 # Script to generate the "LLM.txt" for a given symbol.
-# Arguments are now read from environment variables.
+# Arguments are now read from positional arguments.
 
 set -euo pipefail
 
-SYMBOL_NAME="${LLM_SYMBOL_NAME}"
-HTML_FILE="${LLM_HTML_FILE_NAME}"
-KEYWORDS_SCRIPT="${LLM_KEYWORDS_SCRIPT_FILE_NAME}"
-LINKS_FILE="${LLM_LINKS_FILE_NAME}"
-TUTORIALS_PATTERN="${LLM_TUTORIALS_PATTERN}"
-OUTPUT_FILE_PATH="${LLM_OUTPUT_FILE}" # This is the final output path in $out
+SYMBOL_NAME="$1"
+HTML_FILE="$2"
+KEYWORDS_SCRIPT="$3"
+LINKS_FILE="$4"
+TUTORIALS_PATTERN="$5"
+OUTPUT_FILE_PATH="$6" # This is the final output path in $out
+
+MAIN_PROJECT_URL="$7"
+MAIN_PROJECT_REV="$8"
+# CRQ_BINSTORE_URL="$9" # Removed
+# CRQ_BINSTORE_REV="${10}" # Removed
 
 # Create a temporary file to build the content
 TEMP_OUTPUT_FILE=$(mktemp)
 
 {
 echo "# $SYMBOL_NAME - LLM Context"
+echo ""
+
+echo "## Source Information"
+echo "- Main Project Repository: $MAIN_PROJECT_URL (Commit: $MAIN_PROJECT_REV)"
+# echo "- CRQ Binstore Repository: $CRQ_BINSTORE_URL (Commit: $CRQ_BINSTORE_REV)" # Removed
 echo ""
 
 echo "## Wikipedia Content"
