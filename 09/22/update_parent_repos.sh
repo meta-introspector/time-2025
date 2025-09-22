@@ -6,37 +6,8 @@ set -e
 # Source the lib_git_submodule.sh library
 source "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/lib/lib_git_submodule.sh"
 
-# Helper function to execute commands or just print them in dry-run mode
-execute_cmd() {
-  if "$DRY_RUN"; then
-    echo "DRY RUN: $@"
-  else
-    "$@"
-  fi
-}
-
-BRANCH_NAME="crq-808017424794512875886459904961710757005754368000000000"
+BRANCH_NAME="feature/808017424794512875886459904961710757005754368000000000"
 DRY_RUN=false
-
-# Process the current repository first
-echo "----------------------------------------------------"
-echo "Processing current repository: $(pwd)"
-echo "----------------------------------------------------"
-
-execute_cmd git_add_all
-
-if ! git diff-index --quiet HEAD; then
-  echo "Committing changes in current repository..."
-  execute_cmd git_commit_message "CRQ-808017424794512875886459904961710757005754368000000000: Commit changes in current repository before updating parents"
-  echo "Pushing changes in current repository to origin/$BRANCH_NAME..."
-  execute_cmd push_to_origin_branch "$BRANCH_NAME"
-else
-  echo "No changes to commit in current repository."
-fi
-
-echo "Tagging current commit in current repository with branch name: $BRANCH_NAME"
-execute_cmd git tag -f "$BRANCH_NAME" # -f to force overwrite if tag exists
-execute_cmd git push origin "$BRANCH_NAME" --tags # Push the tag to remote
 
 # Parse arguments
 for arg in "$@"; do
@@ -51,6 +22,35 @@ for arg in "$@"; do
       ;;
   esac
 done
+
+# Helper function to execute commands or just print them in dry-run mode
+execute_cmd() {
+  if "$DRY_RUN"; then
+    echo "DRY RUN: $@"
+  else
+    "$@"
+  fi
+}
+
+# Process the current repository first
+echo "----------------------------------------------------"
+echo "Processing current repository: $(pwd)"
+echo "----------------------------------------------------"
+
+execute_cmd git_add_all
+
+if ! git diff-index --quiet HEAD; then
+  echo "Committing changes in current repository..."
+  execute_cmd git_commit_message "CRQ-808017424794512875886459904961710757005754368000000000: Commit changes in current repository before updating parents"
+  echo "Pushing changes in current repository to origin/crq-808017424794512875886459904961710757005754368000000000..."
+  execute_cmd push_to_origin_branch "crq-808017424794512875886459904961710757005754368000000000"
+else
+  echo "No changes to commit in current repository."
+fi
+
+echo "Tagging current commit in current repository with branch name: crq-808017424794512875886459904961710757005754368000000000"
+execute_cmd git tag -f "crq-808017424794512875886459904961710757005754368000000000" # -f to force overwrite if tag exists
+execute_cmd git push origin "crq-808017424794512875886459904961710757005754368000000000" --tags # Push the tag to remote
 
 # Define the repositories and their absolute paths
 declare -A REPOS
