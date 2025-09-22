@@ -17,7 +17,7 @@
         # Function to generate LLM context for a given symbol
         generateLlmContext = { symbol, htmlFileName, keywordsScriptFileName, linksFileName, tutorialsPattern, generatorScript }:
           (pkgs.runCommand "llm-context-${symbol}" {} ''
-            echo "Hello from Nix build!"
+            echo "Hello from Nix build!" > $out/dummy.txt
           '');
       in
       rec {
