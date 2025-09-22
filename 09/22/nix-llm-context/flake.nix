@@ -23,7 +23,7 @@
 
             buildInputs = [ pkgs.bash pkgs.coreutils pkgs.gnugrep pkgs.gnused pkgs.findutils ];
           } ''
-            "$generatorScriptPath" "${symbol}" "${mainProject}/wikipedia_cache/${htmlFileName}" "${mainProject}/docs/memes/${keywordsScriptFileName}" "${mainProject}/docs/memes/${linksFileName}" "${mainProject}/docs/memes/${tutorialsPattern}" "$out/llm-context-${symbol// /-}.txt" "${mainProject}"
+            "$generatorScriptPath"
           '');
       in
       rec {
