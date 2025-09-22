@@ -37,10 +37,7 @@ fi
 
 # Restore the NAR file to the Nix store
 log "Restoring NAR file '$NAR_FILE_PATH' to Nix store..."
-# Use a temporary file to pipe to nix-store --restore to avoid issues with bash -c and pipes
-TEMP_NAR_INPUT=$(mktemp)
-execute_cmd cp "$NAR_FILE_PATH" "$TEMP_NAR_INPUT"
-NIX_STORE_RESTORED_PATH=$(nix-store --restore < "$TEMP_NAR_INPUT") # Execute directly without execute_cmd
+NIX_STORE_RESTORED_PATH=$(nix-store --restore < "$NAR_FILE_PATH") # Execute directly without execute_cmd
 log "NAR restored to: $NIX_STORE_RESTORED_PATH"
 
 # Process the extracted files to generate a wordlist
