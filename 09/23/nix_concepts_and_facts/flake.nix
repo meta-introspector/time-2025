@@ -27,7 +27,7 @@
         packages.default = aiContext; # Make aiContext the default package
         defaultPackage = aiContext; # Explicitly define default package
         number-23 = concepts.mkNumber 23;
-        inherit (concepts) is-prime-23 fact-23-oracle; # Expose individual concepts
+        inherit (concepts) is-prime-23 fact-23-oracle;
       }
     );
 }

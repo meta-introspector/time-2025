@@ -18,10 +18,22 @@
         packages.default = day_23_concepts.packages.${system}.default; # Expose ai-context-23 as default
         inherit (day_23_concepts.packages.${system}) number-23 is-prime-23 fact-23-oracle; # Expose individual concepts
 
+        packages.analyze-ngrams = pkgs.writeShellApplication {
+          name = "analyze-ngrams";
+          runtimeInputs = with pkgs; [ jq gawk coreutils ];
+          text = builtins.readFile ./analyze_ngrams.sh;
+        };
+
+        apps.analyze-ngrams = {
+          type = "app";
+          program = "${self.packages.${system}.analyze-ngrams}/bin/analyze-ngrams";
+        };
+
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             bash
             nix-info
+            self.packages.${system}.analyze-ngrams
           ];
         };
       }

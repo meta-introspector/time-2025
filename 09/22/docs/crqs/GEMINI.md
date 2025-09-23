@@ -15,5 +15,6 @@ This directory serves as the repository for Change ReQuest (CRQ) documents, whic
 *   **CRQ-029: Muse-Specific SOPs for Task Composition**: This document (`CRQ_029_Muse_Specific_SOPs_for_Task_Composition.md`) formalizes the individual contributions of each Muse to the task composition process.
 *   **CRQ-030: Repository Placement Guidelines**: This document (`CRQ_030_Repository_Placement_Guidelines.md`) establishes clear guidelines for the placement of new and existing repositories.
 *   **CRQ-031: Experimental Project Creation and Auditing**: This document (`CRQ_031_Experimental_Project_Creation_and_Auditing.md`) defines a standardized and auditable process for creating experimental projects.
+*   **CRQ-032: Dynamic Nix Artifact Publishing**: This document (`CRQ_032_Dynamic_Nix_Artifact_Publishing.md`) documents the process of publishing Nix artifacts in a dynamic and centralized manner.
 *   **Shell Script Refactoring**: A key ongoing initiative is the refactoring of shell scripts (`*.sh` and `scripts/*.sh`) into reusable functions and libraries to promote the Don't Repeat Yourself (DRY) principle and improve maintainability.
 *   **Change Management**: CRQ documents in this directory are essential for understanding the rationale, impact, and implementation details of major project changes.

@@ -29,15 +29,21 @@ let
   '';
 
   is-prime-23 = pkgs.runCommand "is-prime-23" {
-    script = ./scripts/is-prime-check.sh;
+    script = pkgs.runCommand "is-prime-check-script" { } ''
+      cp ${flakeSelf}/scripts/is-prime-check.sh $out
+      chmod +x $out
+    '';
   } ''
     $script $out ${is-prime-script} "23"
   '';
 
-  fact-23-oracle = pkgs.runCommand "fact-23-oracle" { }''
-    set -x
-    mkdir -p $out
-    cp ${flakeSelf}/facts/fact_about_23.txt $out/fact
+  fact-23-oracle = pkgs.runCommand "fact-23-oracle" {
+    script = pkgs.runCommand "fact-oracle-script" { } ''
+      cp ${flakeSelf}/scripts/fact-oracle.sh $out
+      chmod +x $out
+    '';
+  } ''
+    $script $out ${flakeSelf}/facts/fact_about_23.txt
   '';
 in
 {

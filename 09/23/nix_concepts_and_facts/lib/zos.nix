@@ -10,7 +10,7 @@ let
       narPath = "${crqBinstore}/${narFileName}"; # Path to the NAR file within the input
     in
     pkgs.runCommand "unpacked-zos-sequence-${builtins.toString prime}" {
-      nativeBuildInputs = [ pkgs.nixUnpack ]; # nixUnpack is needed to unpack .nar files
+      # No specific buildInputs needed for nix-store --restore as it's part of core Nix
       script = ./scripts/unpack-zos-sequence.sh;
     } ''
       $script ${narPath} $out
