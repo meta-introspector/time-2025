@@ -2,7 +2,7 @@
 
 # This script checks if a given Git repository URL is already listed in .gitmodules.
 
-source "$(dirname "$0")/lib_url_normalization.sh"
+source "$(dirname "$0")/../lib/lib_url_normalization.sh"
 
 REPO_URL="$1"
 

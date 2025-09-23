@@ -16,10 +16,10 @@ for file in $HTML_FILES; do
     # Filter out links containing ':' (e.g., File:, Category:) and anchors (#)
     # Prepend the base Wikipedia URL
     # Use sort -u to get unique URLs
-    extracted_links=$(execute_cmd bash -c "cat \"$file\" | \
-        grep -oE 'href="/wiki/[^"#:]+"' | \
-        sed -E 's/href=\"//;s/\"$//' | \
-        sed -E 's/^/https:\/\/en.wikipedia.org\/' | \
+    extracted_links=$(execute_cmd bash -c "< \"$file\" |
+        grep -oE 'href=\"/wiki/[^"#:]+\"' |
+        sed -E \"s/href=\\\"//;s/\\\"$//\" |
+        sed -E \"s/^/https:\/\/en.wikipedia.org\//\" |
         sort -u")
 
     # Add to NEW_URLS array

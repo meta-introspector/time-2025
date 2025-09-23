@@ -4,7 +4,7 @@
 # It now uses the sed-based template generator script to create the project structure.
 
 # Source the time utility library
-source "/data/data/com.termux.nix/files/home/pick-up-nix2/lib/lib_time.sh"
+source "$(dirname "$0")/../lib/lib_time.sh"
 
 MUSE_NAME="$2"
 TASK_TITLE="$1"

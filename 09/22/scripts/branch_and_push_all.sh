@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$0")"/lib_git_submodule.sh
-source "$(dirname "$0")"/lib_github_parsing.sh
+source "$(dirname "$0")/../lib/lib_git_submodule.sh"
+source "$(dirname "$0")/../lib/lib_github_parsing.sh
 
 set -e
 

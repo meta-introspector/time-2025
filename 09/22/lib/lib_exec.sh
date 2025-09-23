@@ -11,9 +11,9 @@ DRY_RUN=false
 #   $@: The command and its arguments to execute.
 execute_cmd() {
   if [ "$DRY_RUN" = true ]; then
-    echo "[DRY RUN] Would execute: $@"
+    echo "[DRY RUN] Would execute: \"$@\""
   else
-    echo "[EXEC] $@"
+    echo "[EXEC] \"$@\""
     "$@"
   fi
 }
