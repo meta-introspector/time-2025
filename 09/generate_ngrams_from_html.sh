@@ -18,7 +18,7 @@ add_ngrams_to_json() {
   local ngram_type="${n}-gram"
 
   # Generate n-grams, count, and format for jq
-  ngrams=$(cat "$text_file" | tr -s '[:space:]' '\n' | grep -v '^$' \
+  ngrams=$(<"$text_file" tr -s '[:space:]' '\n' | grep -v '^$' \
     | awk -v n="$n" '{ 
       words[NR] = $0
     }
@@ -38,7 +38,7 @@ add_ngrams_to_json() {
   }' | jq -s .)
 
   # Add to the main JSON output
-  JSON_OUTPUT=$(echo "$JSON_OUTPUT" | jq '. + { "'"$ngram_type"'": '$json_ngrams' }')
+  JSON_OUTPUT=$(echo "$JSON_OUTPUT" | jq --argjson jn "$json_ngrams" '. + { "'"$ngram_type"'": $jn }')
 }
 
 # Generate 1-grams, 2-grams, and 3-grams
