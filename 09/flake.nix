@@ -2,13 +2,12 @@
   description = "September 2025 concepts and AI context.";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     day_23_concepts.url = "./23/nix_concepts_and_facts"; # Import the daily flake
   };
 
-  outputs = { self, nixpkgs, day_23_concepts } :
+  outputs = { self, day_23_concepts, ... } : # Removed nixpkgs from direct inputs, assuming it's passed from parent
     let
-      pkgs = import nixpkgs {
+      pkgs = import self.inputs.nixpkgs { # Access nixpkgs from self.inputs
         system = builtins.currentSystem;
       };
     in
