@@ -18,17 +18,16 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
-        monsterGroupFiles = pkgs.lib.cleanSourceWith {
-          src = ./.;
-          filter = name: type:
-            let baseName = baseNameOf (toString name); in
-            pkgs.lib.any (s: pkgs.lib.hasInfix s baseName) [
-              "monster_group"
-              "monster_godel_trace"
-              "monstrous_moonshine"
-              "crq_introspection_monster_group"
-            ];
-        };
+
+        mkWikidataPackage = { name, article }:
+          pkgs.runCommand name {
+            src = ./wikipedia_cache/${article};
+            buildInputs = [ pkgs.coreutils ];
+          } ''
+            mkdir -p $out
+            cp $src $out/${article}
+          '';
+
       in
       {
         # Define a devShell for the main project
@@ -51,14 +50,26 @@
           echo "Hello from Nix!"
         '';
 
-        # Package for Monster Group Wikidata
-        packages.monsterGroupWikidata = pkgs.runCommand "monster-group-wikidata" {
-          inherit monsterGroupFiles;
-          buildInputs = [ pkgs.coreutils ]; # For cp
-        } ''
-          mkdir -p $out
-          cp -r $monsterGroupFiles/* $out/
-        '';
+        # Wikidata Packages
+        packages.monsterGroupWikidata = mkWikidataPackage {
+          name = "monster-group-wikidata";
+          article = "Monster_group.html";
+        };
+
+        packages.steinerSystemWikidata = mkWikidataPackage {
+          name = "steiner-system-wikidata";
+          article = "Steiner_system.html";
+        };
+
+        packages.mathieuGroupM12Wikidata = mkWikidataPackage {
+          name = "mathieu-group-m12-wikidata";
+          article = "Mathieu_group_M12.html";
+        };
+
+        packages.sporadicGroupWikidata = mkWikidataPackage {
+          name = "sporadic-group-wikidata";
+          article = "Sporadic_group.html";
+        };
 
         # You can add other packages, apps, etc. here for the main project
         # For example, to expose the LLM context builder:

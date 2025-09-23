@@ -58,6 +58,16 @@ The dynamic artifact publishing process is centered around the `scripts/publish_
 *   **Action:**
     1.  Check the script's output for any errors.
     2.  Navigate to the target Git repository and verify that a new commit has been pushed containing the `.nar` file for your artifact.
+    3.  Verify that the commit message includes the name of the artifact.
+
+### 3.5. Step 5: Update the README
+
+*   **Objective:** Update the `README.md` file in the binary store repository with a link to the newly published artifact.
+*   **Action:**
+    1.  Clone the binary store repository locally if you haven't already.
+    2.  Open the `README.md` file in a text editor.
+    3.  Add a new entry to the index of artifacts, including the name of the artifact and a link to the `.nar` file in the repository.
+    4.  Commit and push the changes to the `README.md` file.
 
 ## 4. Related Documents
 
