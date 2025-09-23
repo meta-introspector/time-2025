@@ -1,0 +1,5 @@
+{
+  "1-gram": "$json_ngrams",
+  "2-gram": "$json_ngrams",
+  "3-gram": "$json_ngrams"
+}
