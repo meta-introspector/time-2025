@@ -7,7 +7,7 @@ set -e
 source "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/lib/lib_exec.sh"
 
 # Ensure the cache directory exists
-execute_cmd ./setup_wikipedia_cache.sh
+execute_cmd /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/scripts/setup_wikipedia_cache.sh
 
 # Clear or create the articles list file
 execute_cmd bash -c "> wikipedia_articles.md"
@@ -53,7 +53,12 @@ for url in "${WIKI_URLS[@]}"; do
     execute_cmd echo "Caching: $url to $filepath"
     # Use curl to get content and save it
     execute_cmd echo "Fetching content for $url using curl..."
-    execute_cmd curl -sL "$url" -o "$filepath"
+    execute_cmd curl -sL -A "solfunmeme.com" "$url" -o "$filepath"
+
+    # Check if the file is empty
+    if [ ! -s "$filepath" ]; then
+        execute_cmd echo "Warning: Fetched file is empty: $filepath. This might indicate a block or an empty page."
+    fi
 
     # Add to articles list
     execute_cmd bash -c "echo \"- [$url]($url) -> $filepath\" >> wikipedia_articles.md"

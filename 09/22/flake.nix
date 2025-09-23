@@ -71,6 +71,11 @@
           article = "Sporadic_group.html";
         };
 
+        packages.ontologyWikidata = mkWikidataPackage {
+          name = "ontology-wikidata";
+          article = "Ontology.html";
+        };
+
         # You can add other packages, apps, etc. here for the main project
         # For example, to expose the LLM context builder:
         # packages.llmContextBuilder = self.nix-llm-context.packages.${system}.monsterGroupLlmContext;
