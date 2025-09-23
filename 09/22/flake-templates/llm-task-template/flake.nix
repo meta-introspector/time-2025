@@ -31,7 +31,7 @@
             version = "0.1.0";
 
             # Pass arguments as environment variables to the build script
-            buildInputs = [ pkgs.nix pkgs.bash ]; # Ensure bash is available
+            buildInputs = [ pkgs.nix pkgs.bash pkgs.jq ]; # Added pkgs.jq
             GEMINI_CLI = "${geminiCliFlake.packages.${system}.gemini-cli}/bin/gemini-cli"; # Path to the actual gemini-cli executable
             CRQ_BINSTORE_PATH = crq-binstore;
             NAR_FILE_NAME = narFileName;
@@ -111,7 +111,7 @@ echo "\${LLM_CONTEXT:0:100}..."
 
 # Step 4: Construct a prompt for Gemini
 # Replace {LLM_CONTEXT} in the template
-GENERATED_PROMPT=\$(echo "$PROMPT_TEMPLATE" | sed "s/{LLM_CONTEXT}/\${LLM_CONTEXT}/g")
+GENERATED_PROMPT=\$(echo "$PROMPT_TEMPLATE" | ${pkgs.jq}/bin/jq -r . | sed "s/{LLM_CONTEXT}/\${LLM_CONTEXT}/g")
 
 echo "Generated Gemini Prompt (first 200 chars):"
 echo "\${GENERATED_PROMPT:0:200}..."
