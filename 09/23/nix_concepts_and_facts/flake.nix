@@ -4,68 +4,30 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; # Use a stable nixpkgs for this flake
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    crqBinstore = {
+      url = "github:meta-introspector/crq-binstore"; # Input for the CRQ binstore
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, crqBinstore } @ inputs:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
           inherit system;
         };
+        nixLib = pkgs.lib; # Make lib available as nixLib
 
-        # Define concepts locally within this flake
-        concepts = {
-          number-23 = pkgs.runCommand "number-23" {} ''
-            set -x
-            mkdir -p $out
-            echo "23" > $out/number
-          '';
-
-          is-prime-script = pkgs.writeText "is-prime-script" ''
-            #!/usr/bin/env bash
-            set -euo pipefail
-
-            number="$1"
-            if (( number < 2 )); then
-              echo "false"
-              exit 0
-            fi
-            for ((i=2; i*i<=number; i++)); do
-              if (( number % i == 0 )); then
-                echo "false"
-                exit 0
-              fi
-            done
-            echo "true"
-          '';
-
-          is-prime-23 = pkgs.runCommand "is-prime-23" { } ''
-            set -x
-            mkdir -p $out
-            chmod +x ${concepts.is-prime-script}
-            ${concepts.is-prime-script} 23 > $out/result
-          '';
-
-          fact-23-oracle = pkgs.runCommand "fact-23-oracle" { }''
-            set -x
-            mkdir -p $out
-            cp ${self}/facts/fact_about_23.txt $out/fact
-          '';
-        };
-
-        # Aggregate AI context
-        ai-context-23 = pkgs.runCommand "ai-context-23" { }''
-          mkdir -p $out/concepts
-          ln -s ${concepts.number-23}/number $out/concepts/number_23
-          ln -s ${concepts.is-prime-23}/result $out/concepts/is_prime_23
-          ln -s ${concepts.fact-23-oracle}/fact $out/concepts/fact_23
-        '';
+        zos = import ./lib/zos.nix { pkgs = pkgs; crqBinstore = crqBinstore; nixLib = nixLib; };
+        concepts = import ./lib/concepts.nix { pkgs = pkgs; flakeSelf = self; nixLib = nixLib; };
+        aiContext = import ./lib/ai-context.nix { pkgs = pkgs; concepts = concepts; zos = zos; nixLib = nixLib; };
 
       in
       {
-        packages.default = ai-context-23; # Make ai-context-23 the default package
-        defaultPackage = ai-context-23; # Explicitly define default package
-        inherit (concepts) number-23 is-prime-23 fact-23-oracle; # Expose individual concepts
+        packages.default = aiContext; # Make aiContext the default package
+        defaultPackage = aiContext; # Explicitly define default package
+        number-23 = concepts.mkNumber 23;
+        inherit (concepts) is-prime-23 fact-23-oracle; # Expose individual concepts
       }
     );
 }
