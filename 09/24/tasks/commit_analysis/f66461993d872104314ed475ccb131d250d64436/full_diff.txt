@@ -1,0 +1,159 @@
+commit f66461993d872104314ed475ccb131d250d64436
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 21:58:06 2025 +0000
+
+    feat(nix): Update SOP and publishing script
+    
+    This commit updates the SOP for dynamic Nix artifact publishing to
+    include instructions for updating the README and formatting the commit
+    message. It also updates the publishing script to format the commit
+    message as requested.
+
+diff --git a/09/22/docs/sops/SOP_Dynamic_Nix_Artifact_Publishing.md b/09/22/docs/sops/SOP_Dynamic_Nix_Artifact_Publishing.md
+index 01e0e25..e8b068b 100644
+--- a/09/22/docs/sops/SOP_Dynamic_Nix_Artifact_Publishing.md
++++ b/09/22/docs/sops/SOP_Dynamic_Nix_Artifact_Publishing.md
+@@ -58,6 +58,16 @@ The dynamic artifact publishing process is centered around the `scripts/publish_
+ *   **Action:**
+     1.  Check the script's output for any errors.
+     2.  Navigate to the target Git repository and verify that a new commit has been pushed containing the `.nar` file for your artifact.
++    3.  Verify that the commit message includes the name of the artifact.
++
++### 3.5. Step 5: Update the README
++
++*   **Objective:** Update the `README.md` file in the binary store repository with a link to the newly published artifact.
++*   **Action:**
++    1.  Clone the binary store repository locally if you haven't already.
++    2.  Open the `README.md` file in a text editor.
++    3.  Add a new entry to the index of artifacts, including the name of the artifact and a link to the `.nar` file in the repository.
++    4.  Commit and push the changes to the `README.md` file.
+ 
+ ## 4. Related Documents
+ 
+diff --git a/09/22/flake.nix b/09/22/flake.nix
+index 033a0da..1f396a4 100644
+--- a/09/22/flake.nix
++++ b/09/22/flake.nix
+@@ -18,17 +18,16 @@
+     flake-utils.lib.eachDefaultSystem (system:
+       let
+         pkgs = import nixpkgs { inherit system; };
+-        monsterGroupFiles = pkgs.lib.cleanSourceWith {
+-          src = ./.;
+-          filter = name: type:
+-            let baseName = baseNameOf (toString name); in
+-            pkgs.lib.any (s: pkgs.lib.hasInfix s baseName) [
+-              "monster_group"
+-              "monster_godel_trace"
+-              "monstrous_moonshine"
+-              "crq_introspection_monster_group"
+-            ];
+-        };
++
++        mkWikidataPackage = { name, article }:
++          pkgs.runCommand name {
++            src = ./wikipedia_cache/${article};
++            buildInputs = [ pkgs.coreutils ];
++          } ''
++            mkdir -p $out
++            cp $src $out/${article}
++          '';
++
+       in
+       {
+         # Define a devShell for the main project
+@@ -51,14 +50,26 @@
+           echo "Hello from Nix!"
+         '';
+ 
+-        # Package for Monster Group Wikidata
+-        packages.monsterGroupWikidata = pkgs.runCommand "monster-group-wikidata" {
+-          inherit monsterGroupFiles;
+-          buildInputs = [ pkgs.coreutils ]; # For cp
+-        } ''
+-          mkdir -p $out
+-          cp -r $monsterGroupFiles/* $out/
+-        '';
++        # Wikidata Packages
++        packages.monsterGroupWikidata = mkWikidataPackage {
++          name = "monster-group-wikidata";
++          article = "Monster_group.html";
++        };
++
++        packages.steinerSystemWikidata = mkWikidataPackage {
++          name = "steiner-system-wikidata";
++          article = "Steiner_system.html";
++        };
++
++        packages.mathieuGroupM12Wikidata = mkWikidataPackage {
++          name = "mathieu-group-m12-wikidata";
++          article = "Mathieu_group_M12.html";
++        };
++
++        packages.sporadicGroupWikidata = mkWikidataPackage {
++          name = "sporadic-group-wikidata";
++          article = "Sporadic_group.html";
++        };
+ 
+         # You can add other packages, apps, etc. here for the main project
+         # For example, to expose the LLM context builder:
+diff --git a/09/22/scripts/package_all_articles.sh b/09/22/scripts/package_all_articles.sh
+new file mode 100755
+index 0000000..c89a53f
+--- /dev/null
++++ b/09/22/scripts/package_all_articles.sh
+@@ -0,0 +1,13 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++rm -rf ./test_output
++
++for article in /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/wikipedia_cache/*; do
++  if [ -f "$article" ]; then
++    article_name=$(basename "$article")
++    echo "Packaging $article_name..."
++    /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/scripts/test_packaging.sh "$article_name"
++  fi
++done
+diff --git a/09/22/scripts/publish_nix_artifact_to_git.sh b/09/22/scripts/publish_nix_artifact_to_git.sh
+index d794c1b..6aea0c9 100755
+--- a/09/22/scripts/publish_nix_artifact_to_git.sh
++++ b/09/22/scripts/publish_nix_artifact_to_git.sh
+@@ -73,7 +73,9 @@ execute_cmd popd > /dev/null
+ execute_cmd echo "Adding, committing, and pushing '$NAR_FILE_NAME' to '$REPO_URL'."
+ execute_cmd pushd "$REPO_DIR_NAME" > /dev/null
+ execute_cmd git add "$NAR_FILE_NAME"
+-execute_cmd git commit -m "feat: Add Nix artifact: $NAR_FILE_NAME (from $FLAKE_ATTR_PATH)"
++ARTICLE_NAME=$(echo "$FLAKE_ATTR_PATH" | sed -e 's/.*#//' -e 's/Wikidata//')
++execute_cmd git commit -m "feat(nar): Add $ARTICLE_NAME $NAR_FILE_NAME"
++
+ execute_cmd push_to_origin_branch main
+ execute_cmd popd > /dev/null
+ 
+diff --git a/09/22/scripts/test_packaging.sh b/09/22/scripts/test_packaging.sh
+new file mode 100755
+index 0000000..d321823
+--- /dev/null
++++ b/09/22/scripts/test_packaging.sh
+@@ -0,0 +1,20 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++if [ -z "$1" ]; then
++  echo "Usage: $0 <article_name>"
++  exit 1
++fi
++
++ARTICLE_NAME="$1"
++OUTPUT_DIR="./test_output/$ARTICLE_NAME"
++
++echo "Creating output directory..."
++mkdir -p "$OUTPUT_DIR"
++
++echo "Copying article to output directory..."
++cp "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/wikipedia_cache/$ARTICLE_NAME" "$OUTPUT_DIR/"
++
++echo "Listing contents of output directory..."
++ls -l "$OUTPUT_DIR"

@@ -1,0 +1,787 @@
+commit 57202356a04fe4ecdb6d86b616a49136a92106f0
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:12:45 2025 +0000
+
+    moving files
+
+diff --git a/09/22/crq-binstore b/09/22/crq-binstore
+index 39282d6..600edc0 160000
+--- a/09/22/crq-binstore
++++ b/09/22/crq-binstore
+@@ -1 +1 @@
+-Subproject commit 39282d6da48661fd5609d79e42ade64810698468
++Subproject commit 600edc097b55634ca23381b975eb4ed5d01b4594
+diff --git a/09/22/17_tiktok_tutorial.md b/09/22/docs/memes/17_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/17_tiktok_tutorial.md
+rename to 09/22/docs/memes/17_tiktok_tutorial.md
+diff --git a/09/22/19_tiktok_tutorial.md b/09/22/docs/memes/19_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/19_tiktok_tutorial.md
+rename to 09/22/docs/memes/19_tiktok_tutorial.md
+diff --git a/09/22/23_tiktok_tutorial.md b/09/22/docs/memes/23_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/23_tiktok_tutorial.md
+rename to 09/22/docs/memes/23_tiktok_tutorial.md
+diff --git a/09/22/29_tiktok_tutorial.md b/09/22/docs/memes/29_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/29_tiktok_tutorial.md
+rename to 09/22/docs/memes/29_tiktok_tutorial.md
+diff --git a/09/22/2_tiktok_tutorial.md b/09/22/docs/memes/2_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/2_tiktok_tutorial.md
+rename to 09/22/docs/memes/2_tiktok_tutorial.md
+diff --git a/09/22/31_tiktok_tutorial.md b/09/22/docs/memes/31_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/31_tiktok_tutorial.md
+rename to 09/22/docs/memes/31_tiktok_tutorial.md
+diff --git a/09/22/3_tiktok_tutorial.md b/09/22/docs/memes/3_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/3_tiktok_tutorial.md
+rename to 09/22/docs/memes/3_tiktok_tutorial.md
+diff --git a/09/22/41_tiktok_tutorial.md b/09/22/docs/memes/41_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/41_tiktok_tutorial.md
+rename to 09/22/docs/memes/41_tiktok_tutorial.md
+diff --git a/09/22/47_tiktok_tutorial.md b/09/22/docs/memes/47_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/47_tiktok_tutorial.md
+rename to 09/22/docs/memes/47_tiktok_tutorial.md
+diff --git a/09/22/59_tiktok_tutorial.md b/09/22/docs/memes/59_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/59_tiktok_tutorial.md
+rename to 09/22/docs/memes/59_tiktok_tutorial.md
+diff --git a/09/22/5_tiktok_tutorial.md b/09/22/docs/memes/5_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/5_tiktok_tutorial.md
+rename to 09/22/docs/memes/5_tiktok_tutorial.md
+diff --git a/09/22/71_tiktok_tutorial.md b/09/22/docs/memes/71_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/71_tiktok_tutorial.md
+rename to 09/22/docs/memes/71_tiktok_tutorial.md
+diff --git a/09/22/all_extracted_links.md b/09/22/docs/memes/all_extracted_links.md
+similarity index 100%
+rename from 09/22/all_extracted_links.md
+rename to 09/22/docs/memes/all_extracted_links.md
+diff --git a/09/22/bezouts_identity_tiktok_tutorial.md b/09/22/docs/memes/bezouts_identity_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/bezouts_identity_tiktok_tutorial.md
+rename to 09/22/docs/memes/bezouts_identity_tiktok_tutorial.md
+diff --git a/09/22/bott_periodicity_tiktok_tutorial.md b/09/22/docs/memes/bott_periodicity_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/bott_periodicity_tiktok_tutorial.md
+rename to 09/22/docs/memes/bott_periodicity_tiktok_tutorial.md
+diff --git a/09/22/cached_wikipedia_articles.md b/09/22/docs/memes/cached_wikipedia_articles.md
+similarity index 100%
+rename from 09/22/cached_wikipedia_articles.md
+rename to 09/22/docs/memes/cached_wikipedia_articles.md
+diff --git a/09/22/centered_hexagonal_number_tiktok_tutorial.md b/09/22/docs/memes/centered_hexagonal_number_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/centered_hexagonal_number_tiktok_tutorial.md
+rename to 09/22/docs/memes/centered_hexagonal_number_tiktok_tutorial.md
+diff --git a/09/22/centered_triangular_number_tiktok_tutorial.md b/09/22/docs/memes/centered_triangular_number_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/centered_triangular_number_tiktok_tutorial.md
+rename to 09/22/docs/memes/centered_triangular_number_tiktok_tutorial.md
+diff --git a/09/22/coprime_tiktok_tutorial.md b/09/22/docs/memes/coprime_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/coprime_tiktok_tutorial.md
+rename to 09/22/docs/memes/coprime_tiktok_tutorial.md
+diff --git a/09/22/crq_808017424794512875886459904961710757005754368000000000.md b/09/22/docs/memes/crq_808017424794512875886459904961710757005754368000000000.md
+similarity index 100%
+rename from 09/22/crq_808017424794512875886459904961710757005754368000000000.md
+rename to 09/22/docs/memes/crq_808017424794512875886459904961710757005754368000000000.md
+diff --git a/09/22/crq_introspection_monster_group_tiktok_tutorial.md b/09/22/docs/memes/crq_introspection_monster_group_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/crq_introspection_monster_group_tiktok_tutorial.md
+rename to 09/22/docs/memes/crq_introspection_monster_group_tiktok_tutorial.md
+diff --git a/09/22/crq_number_as_group_order_tiktok_meme.md b/09/22/docs/memes/crq_number_as_group_order_tiktok_meme.md
+similarity index 100%
+rename from 09/22/crq_number_as_group_order_tiktok_meme.md
+rename to 09/22/docs/memes/crq_number_as_group_order_tiktok_meme.md
+diff --git a/09/22/eigenvectors_eigenvalues_tiktok_tutorial.md b/09/22/docs/memes/eigenvectors_eigenvalues_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/eigenvectors_eigenvalues_tiktok_tutorial.md
+rename to 09/22/docs/memes/eigenvectors_eigenvalues_tiktok_tutorial.md
+diff --git a/09/22/euclidean_algorithm_tiktok_tutorial.md b/09/22/docs/memes/euclidean_algorithm_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/euclidean_algorithm_tiktok_tutorial.md
+rename to 09/22/docs/memes/euclidean_algorithm_tiktok_tutorial.md
+diff --git a/09/22/fermat_prime_tiktok_tutorial.md b/09/22/docs/memes/fermat_prime_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/fermat_prime_tiktok_tutorial.md
+rename to 09/22/docs/memes/fermat_prime_tiktok_tutorial.md
+diff --git a/09/22/gematria_numerical_patterns_tiktok_tutorial.md b/09/22/docs/memes/gematria_numerical_patterns_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/gematria_numerical_patterns_tiktok_tutorial.md
+rename to 09/22/docs/memes/gematria_numerical_patterns_tiktok_tutorial.md
+diff --git a/09/22/glossary.md b/09/22/docs/memes/glossary.md
+similarity index 100%
+rename from 09/22/glossary.md
+rename to 09/22/docs/memes/glossary.md
+diff --git a/09/22/griess_algebra_tiktok_tutorial.md b/09/22/docs/memes/griess_algebra_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/griess_algebra_tiktok_tutorial.md
+rename to 09/22/docs/memes/griess_algebra_tiktok_tutorial.md
+diff --git a/09/22/group_structure_elements_tiktok_tutorial.md b/09/22/docs/memes/group_structure_elements_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/group_structure_elements_tiktok_tutorial.md
+rename to 09/22/docs/memes/group_structure_elements_tiktok_tutorial.md
+diff --git a/09/22/heptadecagon_tiktok_tutorial.md b/09/22/docs/memes/heptadecagon_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/heptadecagon_tiktok_tutorial.md
+rename to 09/22/docs/memes/heptadecagon_tiktok_tutorial.md
+diff --git a/09/22/keith_number_tiktok_tutorial.md b/09/22/docs/memes/keith_number_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/keith_number_tiktok_tutorial.md
+rename to 09/22/docs/memes/keith_number_tiktok_tutorial.md
+diff --git a/09/22/lattices_tiktok_tutorial.md b/09/22/docs/memes/lattices_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/lattices_tiktok_tutorial.md
+rename to 09/22/docs/memes/lattices_tiktok_tutorial.md
+diff --git a/09/22/learning_path.md b/09/22/docs/memes/learning_path.md
+similarity index 100%
+rename from 09/22/learning_path.md
+rename to 09/22/docs/memes/learning_path.md
+diff --git a/09/22/mathieu_group_m11_tiktok_tutorial.md b/09/22/docs/memes/mathieu_group_m11_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/mathieu_group_m11_tiktok_tutorial.md
+rename to 09/22/docs/memes/mathieu_group_m11_tiktok_tutorial.md
+diff --git a/09/22/mathieu_group_m12_tiktok_tutorial.md b/09/22/docs/memes/mathieu_group_m12_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/mathieu_group_m12_tiktok_tutorial.md
+rename to 09/22/docs/memes/mathieu_group_m12_tiktok_tutorial.md
+diff --git a/09/22/mathieu_group_m22_tiktok_tutorial.md b/09/22/docs/memes/mathieu_group_m22_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/mathieu_group_m22_tiktok_tutorial.md
+rename to 09/22/docs/memes/mathieu_group_m22_tiktok_tutorial.md
+diff --git a/09/22/mathieu_group_m23_tiktok_tutorial.md b/09/22/docs/memes/mathieu_group_m23_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/mathieu_group_m23_tiktok_tutorial.md
+rename to 09/22/docs/memes/mathieu_group_m23_tiktok_tutorial.md
+diff --git a/09/22/mathieu_group_m24_tiktok_tutorial.md b/09/22/docs/memes/mathieu_group_m24_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/mathieu_group_m24_tiktok_tutorial.md
+rename to 09/22/docs/memes/mathieu_group_m24_tiktok_tutorial.md
+diff --git a/09/22/memo_usr_bin_env_bash.md b/09/22/docs/memes/memo_usr_bin_env_bash.md
+similarity index 100%
+rename from 09/22/memo_usr_bin_env_bash.md
+rename to 09/22/docs/memes/memo_usr_bin_env_bash.md
+diff --git a/09/22/metonic_cycle_tiktok_tutorial.md b/09/22/docs/memes/metonic_cycle_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/metonic_cycle_tiktok_tutorial.md
+rename to 09/22/docs/memes/metonic_cycle_tiktok_tutorial.md
+diff --git a/09/22/monster_godel_trace_llm_monster_group_meme_analysis_tiktok_tutorial.md b/09/22/docs/memes/monster_godel_trace_llm_monster_group_meme_analysis_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/monster_godel_trace_llm_monster_group_meme_analysis_tiktok_tutorial.md
+rename to 09/22/docs/memes/monster_godel_trace_llm_monster_group_meme_analysis_tiktok_tutorial.md
+diff --git a/09/22/monster_godel_trace_llm_monster_group_meme_tiktok_tutorial.md b/09/22/docs/memes/monster_godel_trace_llm_monster_group_meme_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/monster_godel_trace_llm_monster_group_meme_tiktok_tutorial.md
+rename to 09/22/docs/memes/monster_godel_trace_llm_monster_group_meme_tiktok_tutorial.md
+diff --git a/09/22/monster_group2_tiktok_tutorial.md b/09/22/docs/memes/monster_group2_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/monster_group2_tiktok_tutorial.md
+rename to 09/22/docs/memes/monster_group2_tiktok_tutorial.md
+diff --git a/09/22/monster_group_alignment_tiktok_tutorial.md b/09/22/docs/memes/monster_group_alignment_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/monster_group_alignment_tiktok_tutorial.md
+rename to 09/22/docs/memes/monster_group_alignment_tiktok_tutorial.md
+diff --git a/09/22/monster_group_element_orders_tiktok_tutorial.md b/09/22/docs/memes/monster_group_element_orders_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/monster_group_element_orders_tiktok_tutorial.md
+rename to 09/22/docs/memes/monster_group_element_orders_tiktok_tutorial.md
+diff --git a/09/22/monster_group_numbers_fundamental_constants_meme_analysis_tiktok_tutorial.md b/09/22/docs/memes/monster_group_numbers_fundamental_constants_meme_analysis_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/monster_group_numbers_fundamental_constants_meme_analysis_tiktok_tutorial.md
+rename to 09/22/docs/memes/monster_group_numbers_fundamental_constants_meme_analysis_tiktok_tutorial.md
+diff --git a/09/22/monster_group_numbers_fundamental_constants_meme_tiktok_tutorial.md b/09/22/docs/memes/monster_group_numbers_fundamental_constants_meme_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/monster_group_numbers_fundamental_constants_meme_tiktok_tutorial.md
+rename to 09/22/docs/memes/monster_group_numbers_fundamental_constants_meme_tiktok_tutorial.md
+diff --git a/09/22/monster_group_prime_factorization_tiktok_tutorial.md b/09/22/docs/memes/monster_group_prime_factorization_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/monster_group_prime_factorization_tiktok_tutorial.md
+rename to 09/22/docs/memes/monster_group_prime_factorization_tiktok_tutorial.md
+diff --git a/09/22/monster_group_tiktok_tutorial.md b/09/22/docs/memes/monster_group_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/monster_group_tiktok_tutorial.md
+rename to 09/22/docs/memes/monster_group_tiktok_tutorial.md
+diff --git a/09/22/monstrous_moonshine_tiktok_tutorial.md b/09/22/docs/memes/monstrous_moonshine_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/monstrous_moonshine_tiktok_tutorial.md
+rename to 09/22/docs/memes/monstrous_moonshine_tiktok_tutorial.md
+diff --git a/09/22/n_parameters_homotopy_tiktok_tutorial.md b/09/22/docs/memes/n_parameters_homotopy_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/n_parameters_homotopy_tiktok_tutorial.md
+rename to 09/22/docs/memes/n_parameters_homotopy_tiktok_tutorial.md
+diff --git a/09/22/nix_flake_ode.md b/09/22/docs/memes/nix_flake_ode.md
+similarity index 100%
+rename from 09/22/nix_flake_ode.md
+rename to 09/22/docs/memes/nix_flake_ode.md
+diff --git a/09/22/oeis_tiktok_tutorial.md b/09/22/docs/memes/oeis_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/oeis_tiktok_tutorial.md
+rename to 09/22/docs/memes/oeis_tiktok_tutorial.md
+diff --git a/09/22/ontology_tiktok_tutorial.md b/09/22/docs/memes/ontology_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/ontology_tiktok_tutorial.md
+rename to 09/22/docs/memes/ontology_tiktok_tutorial.md
+diff --git a/09/22/original_wiki_urls.md b/09/22/docs/memes/original_wiki_urls.md
+similarity index 100%
+rename from 09/22/original_wiki_urls.md
+rename to 09/22/docs/memes/original_wiki_urls.md
+diff --git a/09/22/reflection_of_monster_godel_trace_llm_monster_group_meme_tiktok_tutorial.md b/09/22/docs/memes/reflection_of_monster_godel_trace_llm_monster_group_meme_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/reflection_of_monster_godel_trace_llm_monster_group_meme_tiktok_tutorial.md
+rename to 09/22/docs/memes/reflection_of_monster_godel_trace_llm_monster_group_meme_tiktok_tutorial.md
+diff --git a/09/22/reflection_of_monster_group_numbers_fundamental_constants_meme_tiktok_tutorial.md b/09/22/docs/memes/reflection_of_monster_group_numbers_fundamental_constants_meme_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/reflection_of_monster_group_numbers_fundamental_constants_meme_tiktok_tutorial.md
+rename to 09/22/docs/memes/reflection_of_monster_group_numbers_fundamental_constants_meme_tiktok_tutorial.md
+diff --git a/09/22/riemann_zeta_function_tiktok_tutorial.md b/09/22/docs/memes/riemann_zeta_function_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/riemann_zeta_function_tiktok_tutorial.md
+rename to 09/22/docs/memes/riemann_zeta_function_tiktok_tutorial.md
+diff --git a/09/22/sharply_4_transitive_tiktok_tutorial.md b/09/22/docs/memes/sharply_4_transitive_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/sharply_4_transitive_tiktok_tutorial.md
+rename to 09/22/docs/memes/sharply_4_transitive_tiktok_tutorial.md
+diff --git a/09/22/sporadic_simple_group_tiktok_tutorial.md b/09/22/docs/memes/sporadic_simple_group_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/sporadic_simple_group_tiktok_tutorial.md
+rename to 09/22/docs/memes/sporadic_simple_group_tiktok_tutorial.md
+diff --git a/09/22/steiner_system_tiktok_tutorial.md b/09/22/docs/memes/steiner_system_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/steiner_system_tiktok_tutorial.md
+rename to 09/22/docs/memes/steiner_system_tiktok_tutorial.md
+diff --git a/09/22/tiktok_tutorial_template.md b/09/22/docs/memes/tiktok_tutorial_template.md
+similarity index 100%
+rename from 09/22/tiktok_tutorial_template.md
+rename to 09/22/docs/memes/tiktok_tutorial_template.md
+diff --git a/09/22/vertex_operator_algebra_tiktok_tutorial.md b/09/22/docs/memes/vertex_operator_algebra_tiktok_tutorial.md
+similarity index 100%
+rename from 09/22/vertex_operator_algebra_tiktok_tutorial.md
+rename to 09/22/docs/memes/vertex_operator_algebra_tiktok_tutorial.md
+diff --git a/09/22/wikipedia_articles.md b/09/22/docs/memes/wikipedia_articles.md
+similarity index 100%
+rename from 09/22/wikipedia_articles.md
+rename to 09/22/docs/memes/wikipedia_articles.md
+diff --git a/09/22/flake.lock b/09/22/flake.lock
+new file mode 100644
+index 0000000..9495953
+--- /dev/null
++++ b/09/22/flake.lock
+@@ -0,0 +1,239 @@
++{
++  "nodes": {
++    "flake-utils": {
++      "inputs": {
++        "systems": "systems"
++      },
++      "locked": {
++        "lastModified": 1731533236,
++        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
++        "owner": "meta-introspector",
++        "repo": "flake-utils",
++        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
++        "type": "github"
++      },
++      "original": {
++        "owner": "meta-introspector",
++        "ref": "feature/CRQ-016-nixify",
++        "repo": "flake-utils",
++        "type": "github"
++      }
++    },
++    "flake-utils_2": {
++      "inputs": {
++        "systems": "systems_2"
++      },
++      "locked": {
++        "lastModified": 1731533236,
++        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
++        "owner": "meta-introspector",
++        "repo": "flake-utils",
++        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
++        "type": "github"
++      },
++      "original": {
++        "owner": "meta-introspector",
++        "ref": "feature/CRQ-016-nixify",
++        "repo": "flake-utils",
++        "type": "github"
++      }
++    },
++    "flake-utils_3": {
++      "inputs": {
++        "systems": "systems_3"
++      },
++      "locked": {
++        "lastModified": 1731533236,
++        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
++        "owner": "numtide",
++        "repo": "flake-utils",
++        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
++        "type": "github"
++      },
++      "original": {
++        "owner": "numtide",
++        "repo": "flake-utils",
++        "type": "github"
++      }
++    },
++    "nix2": {
++      "inputs": {
++        "flake-utils": "flake-utils_2",
++        "nixpkgs": "nixpkgs",
++        "rust-overlay": "rust-overlay"
++      },
++      "locked": {
++        "lastModified": 1758569719,
++        "narHash": "sha256-HRfdHmqce/J3y+ItyfXCuE+TOeoYTHzAFktzTD0COYc=",
++        "ref": "feature/808017424794512875886459904961710757005754368000000000",
++        "rev": "bf0efd9986f522fb8c151825e4fca6f9de125fa6",
++        "revCount": 244,
++        "type": "git",
++        "url": "https://github.com/meta-introspector/pick-up-nix"
++      },
++      "original": {
++        "ref": "feature/808017424794512875886459904961710757005754368000000000",
++        "type": "git",
++        "url": "https://github.com/meta-introspector/pick-up-nix"
++      }
++    },
++    "nixpkgs": {
++      "locked": {
++        "lastModified": 1757898380,
++        "narHash": "sha256-1Z0KAfbySsHu/IoZbBJLrPgs3IqQGup0T8J9S1ffAkE=",
++        "owner": "meta-introspector",
++        "repo": "nixpkgs",
++        "rev": "26833ad1dad83826ef7cc52e0009ca9b7097c79f",
++        "type": "github"
++      },
++      "original": {
++        "owner": "meta-introspector",
++        "ref": "feature/CRQ-016-nixify",
++        "repo": "nixpkgs",
++        "type": "github"
++      }
++    },
++    "nixpkgs_2": {
++      "locked": {
++        "lastModified": 1744536153,
++        "narHash": "sha256-awS2zRgF4uTwrOKwwiJcByDzDOdo3Q1rPZbiHQg/N38=",
++        "owner": "NixOS",
++        "repo": "nixpkgs",
++        "rev": "18dd725c29603f582cf1900e0d25f9f1063dbf11",
++        "type": "github"
++      },
++      "original": {
++        "owner": "NixOS",
++        "ref": "nixpkgs-unstable",
++        "repo": "nixpkgs",
++        "type": "github"
++      }
++    },
++    "nixpkgs_3": {
++      "locked": {
++        "lastModified": 1757898380,
++        "narHash": "sha256-1Z0KAfbySsHu/IoZbBJLrPgs3IqQGup0T8J9S1ffAkE=",
++        "owner": "meta-introspector",
++        "repo": "nixpkgs",
++        "rev": "26833ad1dad83826ef7cc52e0009ca9b7097c79f",
++        "type": "github"
++      },
++      "original": {
++        "owner": "meta-introspector",
++        "ref": "feature/CRQ-016-nixify",
++        "repo": "nixpkgs",
++        "type": "github"
++      }
++    },
++    "nixpkgs_4": {
++      "locked": {
++        "lastModified": 1758277210,
++        "narHash": "sha256-iCGWf/LTy+aY0zFu8q12lK8KuZp7yvdhStehhyX1v8w=",
++        "owner": "NixOS",
++        "repo": "nixpkgs",
++        "rev": "8eaee110344796db060382e15d3af0a9fc396e0e",
++        "type": "github"
++      },
++      "original": {
++        "owner": "NixOS",
++        "ref": "nixos-unstable",
++        "repo": "nixpkgs",
++        "type": "github"
++      }
++    },
++    "root": {
++      "inputs": {
++        "flake-utils": "flake-utils",
++        "nix2": "nix2",
++        "nixpkgs": "nixpkgs_3",
++        "streamofrandom": "streamofrandom"
++      }
++    },
++    "rust-overlay": {
++      "inputs": {
++        "nixpkgs": "nixpkgs_2"
++      },
++      "locked": {
++        "lastModified": 1758335443,
++        "narHash": "sha256-2jaGMj32IckpZgBjn7kG4zyJl66T+2A1Fn2ppkHh91o=",
++        "owner": "meta-introspector",
++        "repo": "rust-overlay",
++        "rev": "f1ccb14649cf87e48051a6ac3a571b4a57d84ff3",
++        "type": "github"
++      },
++      "original": {
++        "owner": "meta-introspector",
++        "ref": "feature/CRQ-016-nixify",
++        "repo": "rust-overlay",
++        "type": "github"
++      }
++    },
++    "streamofrandom": {
++      "inputs": {
++        "flake-utils": "flake-utils_3",
++        "nixpkgs": "nixpkgs_4"
++      },
++      "locked": {
++        "lastModified": 1758570115,
++        "narHash": "sha256-GIpWOUTfKK8agB40Dd/bmQLCDZLggZbDKUnJddPP9vQ=",
++        "ref": "feature/808017424794512875886459904961710757005754368000000000",
++        "rev": "6bf92c9e0d59d6b77a29a0f1ae4f73093228ddf5",
++        "revCount": 25,
++        "type": "git",
++        "url": "https://github.com/meta-introspector/streamofrandom"
++      },
++      "original": {
++        "ref": "feature/808017424794512875886459904961710757005754368000000000",
++        "type": "git",
++        "url": "https://github.com/meta-introspector/streamofrandom"
++      }
++    },
++    "systems": {
++      "locked": {
++        "lastModified": 1681028828,
++        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
++        "owner": "nix-systems",
++        "repo": "default",
++        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
++        "type": "github"
++      },
++      "original": {
++        "owner": "nix-systems",
++        "repo": "default",
++        "type": "github"
++      }
++    },
++    "systems_2": {
++      "locked": {
++        "lastModified": 1681028828,
++        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
++        "owner": "nix-systems",
++        "repo": "default",
++        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
++        "type": "github"
++      },
++      "original": {
++        "owner": "nix-systems",
++        "repo": "default",
++        "type": "github"
++      }
++    },
++    "systems_3": {
++      "locked": {
++        "lastModified": 1681028828,
++        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
++        "owner": "nix-systems",
++        "repo": "default",
++        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
++        "type": "github"
++      },
++      "original": {
++        "owner": "nix-systems",
++        "repo": "default",
++        "type": "github"
++      }
++    }
++  },
++  "root": "root",
++  "version": 7
++}
+diff --git a/09/22/flake.nix b/09/22/flake.nix
+index e019bdd..033a0da 100644
+--- a/09/22/flake.nix
++++ b/09/22/flake.nix
+@@ -18,6 +18,17 @@
+     flake-utils.lib.eachDefaultSystem (system:
+       let
+         pkgs = import nixpkgs { inherit system; };
++        monsterGroupFiles = pkgs.lib.cleanSourceWith {
++          src = ./.;
++          filter = name: type:
++            let baseName = baseNameOf (toString name); in
++            pkgs.lib.any (s: pkgs.lib.hasInfix s baseName) [
++              "monster_group"
++              "monster_godel_trace"
++              "monstrous_moonshine"
++              "crq_introspection_monster_group"
++            ];
++        };
+       in
+       {
+         # Define a devShell for the main project
+@@ -40,6 +51,15 @@
+           echo "Hello from Nix!"
+         '';
+ 
++        # Package for Monster Group Wikidata
++        packages.monsterGroupWikidata = pkgs.runCommand "monster-group-wikidata" {
++          inherit monsterGroupFiles;
++          buildInputs = [ pkgs.coreutils ]; # For cp
++        } ''
++          mkdir -p $out
++          cp -r $monsterGroupFiles/* $out/
++        '';
++
+         # You can add other packages, apps, etc. here for the main project
+         # For example, to expose the LLM context builder:
+         # packages.llmContextBuilder = self.nix-llm-context.packages.${system}.monsterGroupLlmContext;
+diff --git a/09/22/result b/09/22/result
+index 02a13b1..64bf998 120000
+--- a/09/22/result
++++ b/09/22/result
+@@ -1 +1 @@
+-/nix/store/34hvdgdjsal76gffl77prfv0d8y1g5l3-crq-number-derivation
+\ No newline at end of file
++/nix/store/0wdqp67d69l33yj2rmj68x61220rqh7n-monster-group-wikidata
+\ No newline at end of file
+diff --git a/09/22/cache_wikipedia_sources.sh b/09/22/scripts/cache_wikipedia_sources.sh
+similarity index 100%
+rename from 09/22/cache_wikipedia_sources.sh
+rename to 09/22/scripts/cache_wikipedia_sources.sh
+diff --git a/09/22/check_file_size.sh b/09/22/scripts/check_file_size.sh
+similarity index 100%
+rename from 09/22/check_file_size.sh
+rename to 09/22/scripts/check_file_size.sh
+diff --git a/09/22/extract_all_links.sh b/09/22/scripts/extract_all_links.sh
+similarity index 100%
+rename from 09/22/extract_all_links.sh
+rename to 09/22/scripts/extract_all_links.sh
+diff --git a/09/22/extract_keywords.sh b/09/22/scripts/extract_keywords.sh
+similarity index 100%
+rename from 09/22/extract_keywords.sh
+rename to 09/22/scripts/extract_keywords.sh
+diff --git a/09/22/extract_keywords_from_wiki_cache.sh b/09/22/scripts/extract_keywords_from_wiki_cache.sh
+similarity index 100%
+rename from 09/22/extract_keywords_from_wiki_cache.sh
+rename to 09/22/scripts/extract_keywords_from_wiki_cache.sh
+diff --git a/09/22/extract_meaningful_keywords.sh b/09/22/scripts/extract_meaningful_keywords.sh
+similarity index 100%
+rename from 09/22/extract_meaningful_keywords.sh
+rename to 09/22/scripts/extract_meaningful_keywords.sh
+diff --git a/09/22/scripts/extract_nar_wordlist.sh b/09/22/scripts/extract_nar_wordlist.sh
+new file mode 100755
+index 0000000..5fc83fb
+--- /dev/null
++++ b/09/22/scripts/extract_nar_wordlist.sh
+@@ -0,0 +1,68 @@
++#!/usr/bin/env bash
++
++# Script to extract text content from a NAR file and generate a wordlist.
++
++set -euo pipefail
++
++PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)"
++
++# Source lib_exec.sh for execute_cmd function
++source "${PROJECT_ROOT}/lib/lib_exec.sh"
++# Source lib_utils.sh for log functions
++source "${PROJECT_ROOT}/lib/lib_utils.sh"
++
++CLEAN_AFTER_RUN=false
++
++# Parse arguments
++while [[ "$#" -gt 0 ]]; do
++  case "$1" in
++    --clean)
++      CLEAN_AFTER_RUN=true
++      shift
++      ;;
++    *)
++      NAR_FILE_PATH="$1"
++      shift
++      ;;
++  esac
++done
++
++if [ -z "$NAR_FILE_PATH" ]; then
++  log_error "Usage: $0 <absolute_path_to_nar_file> [--clean]"
++fi
++
++if [ ! -f "$NAR_FILE_PATH" ]; then
++  log_error "NAR file not found: $NAR_FILE_PATH"
++fi
++
++# Restore the NAR file to the Nix store
++log "Restoring NAR file '$NAR_FILE_PATH' to Nix store..."
++# Use a temporary file to pipe to nix-store --restore to avoid issues with bash -c and pipes
++TEMP_NAR_INPUT=$(mktemp)
++execute_cmd cp "$NAR_FILE_PATH" "$TEMP_NAR_INPUT"
++NIX_STORE_RESTORED_PATH=$(nix-store --restore < "$TEMP_NAR_INPUT") # Execute directly without execute_cmd
++log "NAR restored to: $NIX_STORE_RESTORED_PATH"
++
++# Process the extracted files to generate a wordlist
++WORDLIST_FILE="$(basename "$NAR_FILE_PATH" .nar)_wordlist.txt"
++log "Generating wordlist from restored content..."
++
++# Find all text-like files (e.g., .txt, .md, .html) and concatenate their content
++# Then process for wordlist generation
++execute_cmd bash -c "find \"$NIX_STORE_RESTORED_PATH\" -type f \( -name '*.txt' -o -name '*.md' -o -name '*.html' \) -print0 | \
++    xargs -0 cat | \
++    sed -E 's/<[^>]*>//g' | \
++    grep -o -E \'\\w+\' | \
++    tr '[:upper:]' '[:lower:]' | \
++    sort | uniq -c | sort -nr > \"$WORDLIST_FILE\""
++
++
++log "Wordlist generated: $WORDLIST_FILE"
++
++if [ "$CLEAN_AFTER_RUN" = true ]; then
++  log "Cleaning up temporary files and directories."
++  execute_cmd rm "$TEMP_NAR_INPUT" # Clean up temporary file
++  # Note: NIX_STORE_RESTORED_PATH is in the Nix store, not a temporary directory, so it's not removed here.
++fi
++
++log "Script finished."
+diff --git a/09/22/extract_wiki_urls.sh b/09/22/scripts/extract_wiki_urls.sh
+similarity index 100%
+rename from 09/22/extract_wiki_urls.sh
+rename to 09/22/scripts/extract_wiki_urls.sh
+diff --git a/09/22/init_nix_binstore_repo.sh b/09/22/scripts/init_nix_binstore_repo.sh
+similarity index 100%
+rename from 09/22/init_nix_binstore_repo.sh
+rename to 09/22/scripts/init_nix_binstore_repo.sh
+diff --git a/09/22/publish_nix_artifact_to_git.sh b/09/22/scripts/publish_nix_artifact_to_git.sh
+similarity index 84%
+rename from 09/22/publish_nix_artifact_to_git.sh
+rename to 09/22/scripts/publish_nix_artifact_to_git.sh
+index 0112ae7..1af3297 100755
+--- a/09/22/publish_nix_artifact_to_git.sh
++++ b/09/22/scripts/publish_nix_artifact_to_git.sh
+@@ -29,13 +29,20 @@ if [ ! -L result ]; then
+ fi
+ 
+ # 2. Get the resolved path of the result symlink
+-NIX_STORE_PATH=$(execute_cmd readlink result)
++NIX_STORE_PATH=$(readlink result)
+ execute_cmd echo "Nix store path for artifact: $NIX_STORE_PATH"
+ 
+-# 3. Export the derivation's output to a .nar file
++# 3. Ensure the Git repository is cloned and up-to-date
++execute_cmd echo "Ensuring local Git repository '$REPO_DIR_NAME' is ready."
++git_ensure_repo_cloned_and_updated "$REPO_URL" "$REPO_DIR_NAME" main
++
++# Change into the repository directory to create the .nar file directly there
++execute_cmd pushd "$REPO_DIR_NAME" > /dev/null
++
++# 4. Export the derivation's output to a .nar file directly into the repo
+ NAR_FILE_NAME=$(basename "$NIX_STORE_PATH").nar
+ execute_cmd echo "Exporting Nix store path to .nar file: $NAR_FILE_NAME"
+-execute_cmd nix-store --export "$NIX_STORE_PATH" > "$NAR_FILE_NAME"
++execute_cmd bash -c "nix-store --export \"$NIX_STORE_PATH\" > \"$NAR_FILE_NAME\""
+ 
+ # Check if the .nar file was created
+ if [ ! -f "$NAR_FILE_NAME" ]; then
+@@ -43,13 +50,9 @@ if [ ! -f "$NAR_FILE_NAME" ]; then
+     exit 1
+ fi
+ 
+-# 4. Ensure the Git repository is cloned and up-to-date
+-execute_cmd echo "Ensuring local Git repository '$REPO_DIR_NAME' is ready."
+-git_ensure_repo_cloned_and_updated "$REPO_URL" "$REPO_DIR_NAME" main
++# Change back to the original directory
++execute_cmd popd > /dev/null
+ 
+-# 5. Copy the .nar file into the Git repository
+-execute_cmd echo "Copying '$NAR_FILE_NAME' into local repository."
+-execute_cmd cp "../$NAR_FILE_NAME" "$REPO_DIR_NAME/"
+ 
+ # 6. Add, commit, and push the .nar file
+ execute_cmd echo "Adding, committing, and pushing '$NAR_FILE_NAME' to '$REPO_URL'."
+diff --git a/09/22/setup_wikipedia_cache.sh b/09/22/scripts/setup_wikipedia_cache.sh
+similarity index 100%
+rename from 09/22/setup_wikipedia_cache.sh
+rename to 09/22/scripts/setup_wikipedia_cache.sh
+diff --git a/09/22/spider_wiki_links.sh b/09/22/scripts/spider_wiki_links.sh
+similarity index 100%
+rename from 09/22/spider_wiki_links.sh
+rename to 09/22/scripts/spider_wiki_links.sh
+diff --git a/09/22/scripts/test_nix_store_restore.sh b/09/22/scripts/test_nix_store_restore.sh
+new file mode 100755
+index 0000000..063e09b
+--- /dev/null
++++ b/09/22/scripts/test_nix_store_restore.sh
+@@ -0,0 +1,55 @@
++#!/usr/bin/env bash
++
++# Script to test the behavior of nix-store --restore
++
++set -euo pipefail
++
++PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)"
++
++# Source lib_exec.sh for execute_cmd function
++source "${PROJECT_ROOT}/lib/lib_exec.sh"
++# Source lib_utils.sh for log functions
++source "${PROJECT_ROOT}/lib/lib_utils.sh"
++
++NAR_FILE_PATH="$1"
++
++if [ -z "$NAR_FILE_PATH" ]; then
++  log_error "Usage: $0 <absolute_path_to_nar_file>"
++fi
++
++if [ ! -f "$NAR_FILE_PATH" ]; then
++  log_error "NAR file not found: $NAR_FILE_PATH"
++fi
++
++log "Testing nix-store --restore behavior with NAR file: $NAR_FILE_PATH"
++
++log "Which nix-store: $(which nix-store)"
++log "Nix-store version: $(nix-store --version)"
++
++# Use a temporary file to pipe to nix-store --restore to avoid issues with bash -c and pipes
++TEMP_NAR_INPUT=$(mktemp)
++execute_cmd cp "$NAR_FILE_PATH" "$TEMP_NAR_INPUT"
++
++# Test with /dev/null
++log "Testing nix-store --restore with /dev/null as input..."
++if nix-store --restore < /dev/null; then
++  log "nix-store --restore with /dev/null succeeded (unexpected for empty input). Output: $(nix-store --restore < /dev/null)"
++else
++  log "nix-store --restore with /dev/null failed as expected. Exit Code: $?"
++fi
++
++# Attempt to restore the actual NAR file without capturing output
++log "Attempting to restore actual NAR file to a temporary directory..."
++RESTORE_DEST_DIR=$(mktemp -d)
++if nix-store --restore "$RESTORE_DEST_DIR" < "$TEMP_NAR_INPUT"; then
++  log "Successfully restored NAR to: $RESTORE_DEST_DIR"
++  log "Contents of restored directory:"
++  ls -F "$RESTORE_DEST_DIR"
++else
++  log_error "Failed to restore NAR file."
++fi
++
++log "Cleaning up temporary files and directories."
++execute_cmd rm -rf "$TEMP_NAR_INPUT" "$RESTORE_DEST_DIR"
++
++log "Test script finished."
+diff --git a/09/22/update_parent_repos.sh b/09/22/scripts/update_parent_repos.sh
+similarity index 100%
+rename from 09/22/update_parent_repos.sh
+rename to 09/22/scripts/update_parent_repos.sh

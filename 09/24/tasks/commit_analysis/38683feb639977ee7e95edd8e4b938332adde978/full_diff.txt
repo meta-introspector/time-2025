@@ -1,0 +1,14 @@
+commit 38683feb639977ee7e95edd8e4b938332adde978
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 22:21:12 2025 +0000
+
+    remove result
+
+diff --git a/09/22/result b/09/22/result
+deleted file mode 120000
+index 0e032a2..0000000
+--- a/09/22/result
++++ /dev/null
+@@ -1 +0,0 @@
+-/nix/store/mh3fw1685yrjzdqzhvn1nxvw5h09mpvh-llm-context-Monster-Group
+\ No newline at end of file

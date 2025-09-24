@@ -1,0 +1,13 @@
+be7da6e7e3e09c585da3e21d3d51c89b778766c8
+5	4	09/22/flake.nix
+122	0	09/22/lib/lib_git_submodule.sh
+27	0	09/22/lib/lib_github.sh
+63	0	09/22/lib/lib_github_fork.sh
+31	0	09/22/lib/lib_github_search.sh
+19	0	09/22/lib/lib_search_utils.sh
+35	0	09/22/lib/lib_time.sh
+46	0	09/22/lib/lib_url_normalization.sh
+16	0	09/22/lib/lib_utils.sh
+1	0	09/22/memo_usr_bin_env_bash.md
+26	0	09/22/nix_flake_ode.md
+126	0	09/22/update_parent_repos.sh

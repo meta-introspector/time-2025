@@ -1,0 +1,161 @@
+commit 7976753890b7786fa3516bcc605724f597307c90
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 21:17:06 2025 +0000
+
+    fix syntax
+
+diff --git a/09/22/nix-llm-context/debug_wrapper.sh b/09/22/nix-llm-context/debug_wrapper.sh
+index 1c28306..a6f1214 100755
+--- a/09/22/nix-llm-context/debug_wrapper.sh
++++ b/09/22/nix-llm-context/debug_wrapper.sh
+@@ -1,7 +1,17 @@
+ #!/usr/bin/env bash
+ 
+-# Debug wrapper for generate_monster_group_llm_txt.sh
++# mkdir -p "$OUTPUT_DIR"
++# DEBUG_LOG_FILE="$OUTPUT_DIR/debug_log.txt"
++# echo "--- Debug Wrapper: Arguments Received ---" > "$DEBUG_LOG_FILE"
++# echo "Number of arguments: $#" >> "$DEBUG_LOG_FILE"
++# for i in "$@"; do
++#   echo "Argument $i: $i" >> "$DEBUG_LOG_FILE"
++# done
++# echo "-----------------------------------------" >> "$DEBUG_LOG_FILE"
++# echo "Debug log written to: $DEBUG_LOG_FILE"
+ 
++# Debug wrapper for generate_monster_group_llm_txt.sh
++set -x
+ set -euo pipefail
+ 
+ # Parse named arguments
+@@ -71,15 +81,7 @@ while [[ "$#" -gt 0 ]]; do
+   shift
+ done
+ 
+-mkdir -p "$OUTPUT_DIR"
+-DEBUG_LOG_FILE="$OUTPUT_DIR/debug_log.txt"
+-echo "--- Debug Wrapper: Arguments Received ---" > "$DEBUG_LOG_FILE"
+-echo "Number of arguments: $#" >> "$DEBUG_LOG_FILE"
+-for i in "$@"; do
+-  echo "Argument $i: $i" >> "$DEBUG_LOG_FILE"
+-done
+-echo "-----------------------------------------" >> "$DEBUG_LOG_FILE"
+-echo "Debug log written to: $DEBUG_LOG_FILE"
++set 
+ 
+ # Construct the arguments for the original script
+ # These must match the positional arguments expected by generate_monster_group_llm_txt.sh
+@@ -93,5 +95,6 @@ ARGS=(
+   "${MAIN_PROJECT}"
+ )
+ 
++echo DEBUG "$GENERATOR_SCRIPT" "${ARGS[@]}"
+ # Execute the original script with the constructed arguments
+ exec "$GENERATOR_SCRIPT" "${ARGS[@]}"
+diff --git a/09/22/nix-llm-context/flake.nix b/09/22/nix-llm-context/flake.nix
+index 73e8457..de4c9b1 100644
+--- a/09/22/nix-llm-context/flake.nix
++++ b/09/22/nix-llm-context/flake.nix
+@@ -25,7 +25,7 @@
+               --tutorials-pattern="${tutorialsPattern}" \
+               --output-dir="$out" \
+               --main-project="${mainProject}"
+-          '')
++          '');
+       in
+       rec {
+         packages.monsterGroupLlmContext = generateLlmContext {
+diff --git a/09/22/nix-llm-context/generate_monster_group_llm_txt.sh b/09/22/nix-llm-context/generate_monster_group_llm_txt.sh
+index 81bf449..ca4dce5 100755
+--- a/09/22/nix-llm-context/generate_monster_group_llm_txt.sh
++++ b/09/22/nix-llm-context/generate_monster_group_llm_txt.sh
+@@ -5,12 +5,75 @@
+ 
+ set -euo pipefail
+ 
+-SYMBOL_NAME="$1"
+-HTML_FILE="$2"
+-KEYWORDS_SCRIPT="$3"
+-LINKS_FILE="$4"
+-TUTORIALS_PATTERN="$5"
+-OUTPUT_FILE_PATH="$6" # This is the final output path in $out
++# Parse named arguments
++while [[ "$#" -gt 0 ]]; do
++  case "$1" in
++    --symbol)
++      SYMBOL_NAME="$2"
++      shift
++      ;;
++    --symbol=*)
++      SYMBOL_NAME="${1#*=}"
++      ;;
++    --html-file-name)
++      HTML_FILE="$2"
++      shift
++      ;;
++    --html-file-name=*)
++      HTML_FILE="${1#*=}"
++      ;;
++    --keywords-script)
++      KEYWORDS_SCRIPT="$2"
++      shift
++      ;;
++    --keywords-script=*)
++      KEYWORDS_SCRIPT="${1#*=}"
++      ;;
++    --links-file-name)
++      LINKS_FILE="$2"
++      shift
++      ;;
++    --links-file-name=*)
++      LINKS_FILE="${1#*=}"
++      ;;
++    --tutorials-pattern)
++      TUTORIALS_PATTERN="$2"
++      shift
++      ;;
++    --tutorials-pattern=*)
++      TUTORIALS_PATTERN="${1#*=}"
++      ;;
++    --output-dir)
++      OUTPUT_DIR="$2"
++      shift
++      ;;
++    --output-dir=*)
++      OUTPUT_DIR="${1#*=}"
++      ;;
++    --main-project)
++      MAIN_PROJECT="$2"
++      shift
++      ;;
++    --main-project=*)
++      MAIN_PROJECT="${1#*=}"
++      ;;
++    *)
++      echo "Unknown parameter passed: $1" >&2
++      exit 1
++      ;;
++  esac
++  shift
++done
++
++# Assign parsed values to original script variables
++OUTPUT_FILE_PATH="${OUTPUT_DIR}/llm-context-${SYMBOL_NAME// /-}.txt" # Construct output file path
++MAIN_PROJECT_PATH="$MAIN_PROJECT"
++
++# Ensure all required variables are set
++if [ -z "$SYMBOL_NAME" ] || [ -z "$HTML_FILE" ] || [ -z "$KEYWORDS_SCRIPT" ] || [ -z "$LINKS_FILE" ] || [ -z "$TUTORIALS_PATTERN" ] || [ -z "$OUTPUT_FILE_PATH" ] || [ -z "$MAIN_PROJECT_PATH" ]; then
++  echo "Error: Missing required arguments." >&2
++  exit 1
++fi
+ 
+ # Create a temporary file to build the content
+ TEMP_OUTPUT_FILE=$(mktemp)
+diff --git a/09/22/result b/09/22/result
+index 64bf998..615cb70 120000
+--- a/09/22/result
++++ b/09/22/result
+@@ -1 +1 @@
+-/nix/store/0wdqp67d69l33yj2rmj68x61220rqh7n-monster-group-wikidata
+\ No newline at end of file
++/nix/store/vpmali0zpx44w0ryvnkf4n27b45i85x6-llm-context-Monster-Group
+\ No newline at end of file

@@ -1,0 +1,2 @@
+fix: Use named argument for main project path in generate_monster_group_llm_txt.sh
+

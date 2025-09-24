@@ -1,0 +1,2 @@
+docs: Add SOPs for workflow scripts and new template generator
+

@@ -1,0 +1,2 @@
+feat: Add generate_oeis_llm_txt.sh and update flake.nix for OEIS context
+

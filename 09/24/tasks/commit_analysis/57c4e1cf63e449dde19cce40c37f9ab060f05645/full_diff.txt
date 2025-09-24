@@ -1,0 +1,19 @@
+commit 57c4e1cf63e449dde19cce40c37f9ab060f05645
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 21:18:19 2025 +0000
+
+    fix: Use named argument for main project path in generate_monster_group_llm_txt.sh
+
+diff --git a/09/22/nix-llm-context/generate_monster_group_llm_txt.sh b/09/22/nix-llm-context/generate_monster_group_llm_txt.sh
+index ca4dce5..1513e76 100755
+--- a/09/22/nix-llm-context/generate_monster_group_llm_txt.sh
++++ b/09/22/nix-llm-context/generate_monster_group_llm_txt.sh
+@@ -83,7 +83,7 @@ echo "# $SYMBOL_NAME - LLM Context"
+ echo ""
+ 
+ echo "## Source Information"
+-echo "- Main Project Path: $7"
++echo "- Main Project Path: $MAIN_PROJECT_PATH"
+ echo ""
+ 
+ echo "## Wikipedia Content"

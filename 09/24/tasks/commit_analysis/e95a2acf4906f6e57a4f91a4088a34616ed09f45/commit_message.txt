@@ -1,0 +1,4 @@
+feat: Add root flake.nix for main project
+
+This commit introduces a flake.nix file at the root of the repository, defining the main project as a Nix flake. This is necessary for other flakes within the repository to correctly reference it as a source.
+

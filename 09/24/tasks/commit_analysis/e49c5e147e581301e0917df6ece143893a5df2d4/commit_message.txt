@@ -1,0 +1,4 @@
+fix: Adjust generate_monster_group_llm_txt.sh paths after move
+
+Updated relative paths within generate_monster_group_llm_txt.sh to correctly reference files after the script was moved into the nix-llm-context/ directory.
+

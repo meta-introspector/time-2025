@@ -1,0 +1,4 @@
+0e45db5dfa03e7d3416fc3a5333c8c9459d7410d
+12	0	09/22/nix-llm-context/debug_wrapper.sh
+20	1	09/22/nix-llm-context/flake.nix
+130	0	09/22/nix-llm-context/generate_oeis_llm_txt.sh

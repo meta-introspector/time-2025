@@ -1,0 +1,2 @@
+feat: Add OEIS wiki exploration memo, index file, nix-llm-context lib, build script, and update crq-binstore submodule
+

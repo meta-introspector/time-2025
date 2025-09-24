@@ -1,0 +1,2 @@
+feat: Update nix-llm-context flake, add NAR inspection scripts, and update crq-binstore submodule
+

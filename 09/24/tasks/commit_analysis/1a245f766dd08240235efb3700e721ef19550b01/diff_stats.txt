@@ -1,0 +1,15 @@
+1a245f766dd08240235efb3700e721ef19550b01
+79	0	09/23/nix_concepts_and_facts/flake.lock
+14	52	09/23/nix_concepts_and_facts/flake.nix
+18	0	09/23/nix_concepts_and_facts/lib/ai-context.nix
+46	0	09/23/nix_concepts_and_facts/lib/concepts.nix
+1	0	09/23/nix_concepts_and_facts/lib/primes.nix
+26	0	09/23/nix_concepts_and_facts/lib/zos.nix
+16	0	09/23/nix_concepts_and_facts/scripts/ai-context-builder.sh
+8	0	09/23/nix_concepts_and_facts/scripts/fact-oracle.sh
+10	0	09/23/nix_concepts_and_facts/scripts/is-prime-check.sh
+8	0	09/23/nix_concepts_and_facts/scripts/number.sh
+9	0	09/23/nix_concepts_and_facts/scripts/unpack-zos-sequence.sh
+10	0	09/23/nix_concepts_and_facts/test-ai-context.nix
+12	0	09/23/nix_concepts_and_facts/test-zos-primes-links.nix
+20	3	09/flake.lock

@@ -1,0 +1,2 @@
+fix: Pass full paths for files to generate_monster_group_llm_txt.sh in flake.nix
+

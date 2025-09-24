@@ -1,0 +1,5 @@
+7976753890b7786fa3516bcc605724f597307c90
+13	10	09/22/nix-llm-context/debug_wrapper.sh
+1	1	09/22/nix-llm-context/flake.nix
+69	6	09/22/nix-llm-context/generate_monster_group_llm_txt.sh
+1	1	09/22/result

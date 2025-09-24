@@ -1,0 +1,448 @@
+commit 6ed7925a0c318e753bfa34cabf229da7e95ca495
+Author: mike <h@solfunmeme.com>
+Date:   Wed Sep 24 11:41:37 2025 +0000
+
+    wip
+
+commit 4f06a50de8b287bbe77fbe38c403df83e13cabab
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 23:01:27 2025 +0000
+
+    refactor(scripts): Remove temporary delete_blocked_html_files.sh script
+
+commit bd12e480d47bb36d5e86527f0b9b63d41d7da27a
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 23:01:06 2025 +0000
+
+    fix(scripts): Fix shellcheck issues and improve ngram generation
+
+commit 14ea46d94522c9615a0a1fa4905ea2991782210d
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 22:59:42 2025 +0000
+
+    wipa
+
+commit 6ecb1ee013bd4bd36d2289a41a19ca72a2a356ea
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 22:58:46 2025 +0000
+
+    wipa
+
+commit f66461993d872104314ed475ccb131d250d64436
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 21:58:06 2025 +0000
+
+    feat(nix): Update SOP and publishing script
+    
+    This commit updates the SOP for dynamic Nix artifact publishing to
+    include instructions for updating the README and formatting the commit
+    message. It also updates the publishing script to format the commit
+    message as requested.
+
+commit e03a1a127f94c3734ffffa1e4219e6b8dce76978
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 21:48:33 2025 +0000
+
+    wip
+
+commit 1a245f766dd08240235efb3700e721ef19550b01
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 16:31:25 2025 +0000
+
+    wip
+
+commit d20c98e2a750a406c5abe93299510b06cd9421b9
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 14:40:30 2025 +0000
+
+    feat: Fix nix build errors and adopt meta-introspector nixpkgs
+    
+    This commit resolves several issues encountered during nix build:
+    
+    - Updated flake.nix in the current directory to use meta-introspector/nixpkgs and flake-utils.
+    
+    - Updated flake.nix in day_23_concepts to use flake-utils and corrected its outputs structure.
+    
+    - Changed pkgs.fetchGit to pkgs.fetchgit and removed the redundant ref argument in day_23_concepts/flake.nix.
+    
+    - Ensured proper directory creation (mkdir -p /data/data/com.termux.nix/files/home/pick-up-nix2/outputs/out) and script executability (chmod +x) in number-23, is-prime-23, and fact-23-oracle derivations.
+
+commit ab52a4cff98f655b873e10c6e210aac4d36b7396
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 14:05:26 2025 +0000
+
+    feat: Remove direct nixpkgs input from September flake
+
+commit ae14bd2708794e21eefa9ad145fce973896e99aa
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 13:37:45 2025 +0000
+
+    chore: Auto-commit changes before Nix build
+
+commit e6d48ba47e724613c8a8239d306295bf440b1946
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 13:21:29 2025 +0000
+
+    feat: Add standalone Nix concepts flake and facts
+
+commit ffdba4f5dc590ab0a314e86c64ab2919233b35d5
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 02:32:37 2025 +0000
+
+    wip
+
+commit 478dd831ee5722b18376137d1d98fa8aeac9cf07
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 23:56:28 2025 +0000
+
+    feat: Add OEIS wiki exploration memo, index file, nix-llm-context lib, build script, and update crq-binstore submodule
+
+commit 305ea6a0404f4507c51294b825f7dcbe82d1206c
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 23:56:14 2025 +0000
+
+    docs: Add SOPs for workflow scripts and new template generator
+
+commit 0e45db5dfa03e7d3416fc3a5333c8c9459d7410d
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 23:43:29 2025 +0000
+
+    feat: Add generate_oeis_llm_txt.sh and update flake.nix for OEIS context
+
+commit 38683feb639977ee7e95edd8e4b938332adde978
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 22:21:12 2025 +0000
+
+    remove result
+
+commit fe4b3f6d55a4066122e0112ed70922d42d89ff42
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 22:20:01 2025 +0000
+
+    feat: Update nix-llm-context flake, add NAR inspection scripts, and update crq-binstore submodule
+
+commit cc53f0c5e0f52e339edcec9a18b4c298934e8057
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 22:02:56 2025 +0000
+
+    feat: Update crq-binstore submodule and test_tiktok_tutorial.md
+
+commit 033e964aca962a345b03309a6831e0e627a59675
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 22:00:51 2025 +0000
+
+    feat: Nixify monster group LLM context and add testing infrastructure
+
+commit 84fc17bd2e18b66d6df2e649e09bfc90617d31d3
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 21:18:49 2025 +0000
+
+    fix: Pass full paths for files to generate_monster_group_llm_txt.sh in flake.nix
+
+commit 57c4e1cf63e449dde19cce40c37f9ab060f05645
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 21:18:19 2025 +0000
+
+    fix: Use named argument for main project path in generate_monster_group_llm_txt.sh
+
+commit 27d4a3dd35fe21208f49006267f3597e4f78cbdc
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 21:17:21 2025 +0000
+
+    fix syntax
+
+commit 7976753890b7786fa3516bcc605724f597307c90
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 21:17:06 2025 +0000
+
+    fix syntax
+
+commit 6e04914c9e9c636e8c094fd0eac798d837790e7d
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 21:07:56 2025 +0000
+
+    feat: Directly call generate_monster_group_llm_txt.sh with named args in flake.nix
+
+commit ce51dd719df9d7dffbe01497ffc59ecaf6f9a9cd
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:54:49 2025 +0000
+
+    feat: debug_wrapper.sh now handles --key value arguments
+
+commit 81daf16db3ec162e3d6529963277d22d4a52ff4e
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:51:12 2025 +0000
+
+    feat: debug_wrapper.sh now logs to OUTPUT_DIR
+
+commit c241285ef98bf210bdb55dd01019f958d25d46f2
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:49:15 2025 +0000
+
+    feat: debug_wrapper.sh now parses named arguments
+
+commit 214337ad15501bc060a96bf2571f6b89afae4fe1
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:44:05 2025 +0000
+
+    fix: Make buildCommand explicitly create  directory and write to it
+
+commit f8c3d691627a3ca1f06f3808c92e407a2755deea
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:43:28 2025 +0000
+
+    fix: Correct buildCommand to write to current directory in nix-llm-context/flake.nix
+
+commit 4a87b6ff84122b626624af09f800dd0ed3863edb
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:42:31 2025 +0000
+
+    fix: Make buildCommand produce output in nix-llm-context/flake.nix
+
+commit 2489a615743d9beaa91b31c661b08b1f24d0e695
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:41:10 2025 +0000
+
+    fix: Simplify pkgs.runCommand to minimum for debugging 'value is a string while a set was expected'
+
+commit 0ed49415bc5f77a462c634fc20ed63913a7a2bde
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:40:21 2025 +0000
+
+    fix: Correct buildCommand syntax in nix-llm-context/flake.nix
+
+commit 2c4ae37fccf1d64c606bdaf19f1f9fb47944cafd
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:39:33 2025 +0000
+
+    fix: Remove src = mainProject from runCommand in nix-llm-context/flake.nix for debugging
+
+commit 992d109511d9848848e90995f4c9cf48f790dc18
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:38:48 2025 +0000
+
+    fix: Comment out original buildCommand and replace with echo for debugging
+
+commit 55c09bb586407e570fdae683c402a09daaa3d54e
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:36:51 2025 +0000
+
+    feat: debug_wrapper.sh now logs arguments to a file
+
+commit 62b84a4bd51e8e087b652b16bd01cd7170151adf
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:34:47 2025 +0000
+
+    feat: Use debug_wrapper.sh in nix-llm-context/flake.nix
+
+commit fe8e291562ee0cf1d19e1d889782e38351f50cfd
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:29:37 2025 +0000
+
+    fix: Simplify buildCommand in nix-llm-context/flake.nix for debugging
+
+commit 8562d5294a455c40abbaf93e69818935d13bbafe
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:27:39 2025 +0000
+
+    fix: Replace spaces with hyphens in output file name in nix-llm-context/flake.nix
+
+commit 091f3fd922dbdac400e272e021e5f70355466344
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:26:28 2025 +0000
+
+    fix: Condense buildCommand in nix-llm-context/flake.nix to single line
+
+commit f7df89a49b272d4e3fb414a9c397d1a43d9a3a53
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:25:49 2025 +0000
+
+    chore: Update flake.lock files after Nix flake updates
+
+commit 13de21f2a58c981c3652f7f307e5ef964e4d2799
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:24:01 2025 +0000
+
+    feat: Move extract_meaningful_keywords.sh and test_tiktok_tutorial.md to docs/memes
+
+commit f55b2324889375a4a669b00450bae81804c93551
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:23:54 2025 +0000
+
+    feat: Fix Nix build for monsterGroupLlmContext and update publish script
+
+commit 57202356a04fe4ecdb6d86b616a49136a92106f0
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:12:45 2025 +0000
+
+    moving files
+
+commit 2b4022f1386ec39707e3edb735d206883d39c55b
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 19:44:50 2025 +0000
+
+    feat: Add default package to flake.nix
+
+commit 3fac8e3d28c4ca2aa11c6896a35753919860a51f
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 19:41:53 2025 +0000
+
+    CRQ-016: Update for flake.nix integration and submodule consistency
+
+commit 412b65a76417ebd768d236697396da157a803357
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 19:40:04 2025 +0000
+
+    CRQ-016: Update for flake.nix integration and submodule consistency
+
+commit 599390747e0fdff28b03a77a88af127d5f6f3c15
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 19:36:01 2025 +0000
+
+    Fix: Corrected flake.nix input syntax
+
+commit 966dd0cc4d63dd320259a0ab09ff95b3a738b608
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 19:32:15 2025 +0000
+
+    CRQ-016: Update for flake.nix integration and submodule consistency
+
+commit 513d0c48267c51352ffe9329cebefaa5344ef9fd
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 19:31:57 2025 +0000
+
+    CRQ-016: Update for flake.nix integration and submodule consistency
+
+commit e7f1b272e17e0bf09f2f811dfc8469aa0626d626
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 19:31:26 2025 +0000
+
+    CRQ-016: Update for flake.nix integration and submodule consistency
+
+commit 09909a810c5a5f6ad4e8f4f8582dc0d0b71343e1
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 19:29:26 2025 +0000
+
+    CRQ-016: Update for flake.nix integration and submodule consistency
+
+commit d12bb60b564a47790304c43eaa087e474f9e661d
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 18:43:41 2025 +0000
+
+    CRQ-808017424794512875886459904961710757005754368000000000: Commit changes in current repository before updating parents
+
+commit 517ac0f13ecf9504b604e56d97f969c7397b5f1a
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 18:42:38 2025 +0000
+
+    CRQ-808017424794512875886459904961710757005754368000000000: Commit changes in current repository before updating parents
+
+commit be7da6e7e3e09c585da3e21d3d51c89b778766c8
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 18:39:50 2025 +0000
+
+    CRQ-808017424794512875886459904961710757005754368000000000: Commit changes in current repository before updating parents
+
+commit 36773a77534a43d6d6ea17cdab771456becd0f21
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 16:45:14 2025 +0000
+
+    update
+
+commit e95a2acf4906f6e57a4f91a4088a34616ed09f45
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 16:37:02 2025 +0000
+
+    feat: Add root flake.nix for main project
+    
+    This commit introduces a flake.nix file at the root of the repository, defining the main project as a Nix flake. This is necessary for other flakes within the repository to correctly reference it as a source.
+
+commit 9c251fd5865492b25c11db993f284bca2e9670c1
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 16:35:24 2025 +0000
+
+    fix: Remove crq-binstore references from generate_monster_group_llm_txt.sh
+    
+    Modified generate_monster_group_llm_txt.sh to remove references to crq-binstore URL and revision, as this information is no longer passed from the Nix flake.
+
+commit 8cb38c21b6f116c37db337c2661de68c606f9d33
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 16:27:13 2025 +0000
+
+    feat: Add crq-binstore as Git submodule. This commit adds the crq-binstore repository as a Git submodule to manage Nix artifact storage.
+
+commit b787c3e7db77486c1f3a5f5c426f32670580b19d
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 16:15:19 2025 +0000
+
+    fix: Adjust generate_monster_group_llm_txt.sh find command for absolute paths
+    
+    Modified generate_monster_group_llm_txt.sh to correctly use absolute paths for the find command, ensuring it searches within the Nix store source directory.
+
+commit 6b8e19d604c9050409734bfb3f7e8ac00240bd2a
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 16:10:37 2025 +0000
+
+    fix: Adjust generate_monster_group_llm_txt.sh for Nix build output
+    
+    Modified generate_monster_group_llm_txt.sh to write to a temporary file and then copy to the final  path, resolving issues with direct output redirection in Nix build environments.
+
+commit c9a4016d8a28fc3cb76b6f634b706eda68d162f6
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 16:09:50 2025 +0000
+
+    fix: Refine generate_monster_group_llm_txt.sh find/sed for robustness
+    
+    Simplified the find and sed command in generate_monster_group_llm_txt.sh to use find's -printf action for more robust path handling and cleaner output.
+
+commit e49c5e147e581301e0917df6ece143893a5df2d4
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 16:06:42 2025 +0000
+
+    fix: Adjust generate_monster_group_llm_txt.sh paths after move
+    
+    Updated relative paths within generate_monster_group_llm_txt.sh to correctly reference files after the script was moved into the nix-llm-context/ directory.
+
+commit aef1f9beabbd326cf1cc7b379c73c6e6a54a635d
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 16:04:13 2025 +0000
+
+    fix: Update generate_monster_group_llm_txt.sh for Nix build environment
+    
+    Adjusted script to accept file paths as arguments and use them correctly within the Nix build environment, including proper handling of the source directory for find commands.
+
+commit 19f2eb0561d100db44ce9d30f3157c6939f3e298
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 16:01:31 2025 +0000
+
+    feat: Add Nix LLM context flake, updated caching, and keyword extraction scripts. Includes new flake for LLM context, updated Wikipedia caching with curl, new meaningful keyword extraction script, LLM context generation script, updated devShell with curl and pandoc, binstore repo init script, artifact publishing script, updated Wikipedia cache, and extracted links.
+
+commit 738043ce72bd5a32ed1b8d3d47e71d234cf0e27a
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 15:37:39 2025 +0000
+
+    feat: Add CRQ number derivation to flake
+    
+    This commit introduces a new derivation crqNumber to the flake-reconstruction-lattice/flake.nix that outputs the CRQ number 808017424794512875886459904961710757005754368000000000. This allows the CRQ number to be programmatically accessed and used within the Nix ecosystem.
+
+commit 51c40b3be7420c46b25c253e177aa70ee933bd2b
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 15:29:07 2025 +0000
+
+    feat: Add TikTok meme for CRQ number as group order
+    
+    This commit introduces a new TikTok meme markdown file that waxes poetic on the idea of CRQ numbers defining the order of a group, connecting it to the Monster Group and the 'tiktokification' initiative.
+
+commit f8aa1d15204f5f72c65539ccb51692a64f62fa12
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 14:21:11 2025 +0000
+
+    feat: CRQ-021 TikTokification of the Monster Group (submodule specific)
+    
+    This commit introduces the CRQ for the 'TikTokification of the Monster Group' within this submodule. It includes all the markdown files for the TikTok tutorials, the associated scripts, and the newly created CRQ document itself.
+
+commit 17da216649bf33d890a939ff20b12b2e5c40b845
+Author: mike <h@solfunmeme.com>
+Date:   Sat Sep 20 13:20:56 2025 +0000
+
+    feat(2025): CRQ-016 - Automated commit for CRQ-016 changes

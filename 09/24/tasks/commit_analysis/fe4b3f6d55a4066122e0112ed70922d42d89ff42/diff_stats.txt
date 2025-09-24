@@ -1,0 +1,6 @@
+fe4b3f6d55a4066122e0112ed70922d42d89ff42
+1	1	09/22/crq-binstore
+4	1	09/22/nix-llm-context/flake.nix
+1	4	09/22/scripts/extract_nar_wordlist.sh
+42	0	09/22/scripts/inspect_nar_content.sh
+47	0	09/22/scripts/restore_nar_and_report.sh

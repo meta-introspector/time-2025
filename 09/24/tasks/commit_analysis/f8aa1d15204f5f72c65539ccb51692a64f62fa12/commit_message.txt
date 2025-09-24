@@ -1,0 +1,4 @@
+feat: CRQ-021 TikTokification of the Monster Group (submodule specific)
+
+This commit introduces the CRQ for the 'TikTokification of the Monster Group' within this submodule. It includes all the markdown files for the TikTok tutorials, the associated scripts, and the newly created CRQ document itself.
+

@@ -1,0 +1,182 @@
+commit 36773a77534a43d6d6ea17cdab771456becd0f21
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 16:45:14 2025 +0000
+
+    update
+
+diff --git a/09/22/generate_monster_group_llm_txt.sh b/09/22/generate_monster_group_llm_txt.sh
+deleted file mode 100755
+index f123d00..0000000
+--- a/09/22/generate_monster_group_llm_txt.sh
++++ /dev/null
+@@ -1,45 +0,0 @@
+-#!/usr/bin/env bash
+-#
+-# Script to generate the "LLM.txt" for a given symbol.
+-# Arguments:
+-#   $1: SYMBOL_NAME (e.g., "Monster Group")
+-#   $2: HTML_FILE_PATH (e.g., "wikipedia_cache/Monster_group.html")
+-#   $3: KEYWORDS_SCRIPT_PATH (e.g., "./extract_meaningful_keywords.sh")
+-#   $4: LINKS_FILE_PATH (e.g., "all_extracted_links.md")
+-#   $5: TUTORIALS_PATTERN (e.g., "*monster_group*_tiktok_tutorial.md")
+-#   $6: OUTPUT_FILE_PATH (e.g., "$out/llm-context-Monster Group.txt")
+-
+-set -euo pipefail
+-
+-SYMBOL_NAME="$1"
+-HTML_FILE="$2"
+-KEYWORDS_SCRIPT="$3"
+-LINKS_FILE="$4"
+-TUTORIALS_PATTERN="$5"
+-OUTPUT_FILE="$6"
+-
+-{
+-echo "# $SYMBOL_NAME - LLM Context"
+-echo ""
+-
+-echo "## Wikipedia Content"
+-cat "$HTML_FILE"
+-echo ""
+-
+-echo "## Extracted Keywords"
+-"$KEYWORDS_SCRIPT" "$HTML_FILE" 10 | sed 's/^[ ]*[0-9]* //g'
+-echo ""
+-
+-echo "## Related Links"
+-grep -i "${SYMBOL_NAME// /_}" "$LINKS_FILE"
+-echo ""
+-
+-echo "## Related TikTok Tutorials"
+-# Find tutorials relative to the current directory (which is $src in the Nix build)
+-find . -maxdepth 2 -type f -name "$TUTORIALS_PATTERN" | sed 's#./##' | while read -r tutorial; do
+-    echo "- $tutorial"
+-done
+-echo ""
+-} > "$OUTPUT_FILE"
+-
+-echo "Generated $OUTPUT_FILE for $SYMBOL_NAME."
+\ No newline at end of file
+diff --git a/09/22/nix-llm-context/flake.lock b/09/22/nix-llm-context/flake.lock
+new file mode 100644
+index 0000000..d1287b8
+--- /dev/null
++++ b/09/22/nix-llm-context/flake.lock
+@@ -0,0 +1,62 @@
++{
++  "nodes": {
++    "flake-utils": {
++      "inputs": {
++        "systems": "systems"
++      },
++      "locked": {
++        "lastModified": 1731533236,
++        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
++        "owner": "meta-introspector",
++        "repo": "flake-utils",
++        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
++        "type": "github"
++      },
++      "original": {
++        "owner": "meta-introspector",
++        "ref": "feature/CRQ-016-nixify",
++        "repo": "flake-utils",
++        "type": "github"
++      }
++    },
++    "nixpkgs": {
++      "locked": {
++        "lastModified": 1757898380,
++        "narHash": "sha256-1Z0KAfbySsHu/IoZbBJLrPgs3IqQGup0T8J9S1ffAkE=",
++        "owner": "meta-introspector",
++        "repo": "nixpkgs",
++        "rev": "26833ad1dad83826ef7cc52e0009ca9b7097c79f",
++        "type": "github"
++      },
++      "original": {
++        "owner": "meta-introspector",
++        "ref": "feature/CRQ-016-nixify",
++        "repo": "nixpkgs",
++        "type": "github"
++      }
++    },
++    "root": {
++      "inputs": {
++        "flake-utils": "flake-utils",
++        "nixpkgs": "nixpkgs"
++      }
++    },
++    "systems": {
++      "locked": {
++        "lastModified": 1681028828,
++        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
++        "owner": "nix-systems",
++        "repo": "default",
++        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
++        "type": "github"
++      },
++      "original": {
++        "owner": "nix-systems",
++        "repo": "default",
++        "type": "github"
++      }
++    }
++  },
++  "root": "root",
++  "version": 7
++}
+diff --git a/09/22/nix-llm-context/flake.nix b/09/22/nix-llm-context/flake.nix
+index fe9492b..c5b9781 100644
+--- a/09/22/nix-llm-context/flake.nix
++++ b/09/22/nix-llm-context/flake.nix
+@@ -4,9 +4,12 @@
+   inputs = {
+     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
++    # Add the main project repository as an input
++    # This refers to the repository where this flake.nix resides
++    mainProject.url = "path:../"; # Path to the parent directory (the main project root)
+   };
+ 
+-  outputs = { self, nixpkgs, flake-utils }:
++  outputs = { self, nixpkgs, flake-utils, mainProject }:
+     flake-utils.lib.eachDefaultSystem (system:
+       let
+         pkgs = import nixpkgs { inherit system; };
+@@ -14,21 +17,24 @@
+         # Function to generate LLM context for a given symbol
+         generateLlmContext = { symbol, htmlFileName, keywordsScriptFileName, linksFileName, tutorialsPattern, generatorScript }:
+           (pkgs.runCommand "llm-context-${symbol}" {
+-            src = self;
+-            LLM_SYMBOL_NAME = symbol;
+-            LLM_HTML_FILE_NAME = "${self}/wikipedia_cache/${htmlFileName}";
+-            LLM_KEYWORDS_SCRIPT_FILE_NAME = "${self}/${keywordsScriptFileName}";
+-            LLM_LINKS_FILE_NAME = "${self}/${linksFileName}";
+-            LLM_TUTORIALS_PATTERN = tutorialsPattern;
+-            LLM_OUTPUT_FILE = "$out/llm-context-${symbol}.txt";
++            # Use mainProject as the primary source for all data files
++            src = mainProject;
++            generatorScriptPath = "${self}/nix-llm-context/${generatorScript}";
++
+             buildInputs = [ pkgs.bash pkgs.coreutils pkgs.gnugrep pkgs.gnused pkgs.findutils ];
+           } ''
+-            # Copy the generator script to a temporary location and make it executable
+-            cp "$src/${generatorScript}" ./generator_script.sh
+-            chmod +x ./generator_script.sh
+-
+-            # Execute the generator script, which will read arguments from environment variables
+-            ./generator_script.sh
++            # Execute the generator script with necessary arguments
++            # The script will read arguments from environment variables
++            # and use the paths provided by Nix.
++            "$generatorScriptPath" 
++              "${symbol}" 
++              "${mainProject}/wikipedia_cache/${htmlFileName}" 
++              "${mainProject}/${keywordsScriptFileName}" 
++              "${mainProject}/${linksFileName}" 
++              "${tutorialsPattern}" 
++              "$out/llm-context-${symbol}.txt" 
++              "${mainProject.url}" 
++              "${mainProject.rev}"
+           '');
+       in
+       rec {

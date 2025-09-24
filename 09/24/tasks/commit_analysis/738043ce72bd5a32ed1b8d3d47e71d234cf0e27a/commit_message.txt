@@ -1,0 +1,4 @@
+feat: Add CRQ number derivation to flake
+
+This commit introduces a new derivation crqNumber to the flake-reconstruction-lattice/flake.nix that outputs the CRQ number 808017424794512875886459904961710757005754368000000000. This allows the CRQ number to be programmatically accessed and used within the Nix ecosystem.
+

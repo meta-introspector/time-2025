@@ -1,0 +1,2 @@
+fix: Condense buildCommand in nix-llm-context/flake.nix to single line
+

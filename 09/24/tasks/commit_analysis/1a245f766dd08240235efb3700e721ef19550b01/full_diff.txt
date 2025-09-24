@@ -1,0 +1,462 @@
+commit 1a245f766dd08240235efb3700e721ef19550b01
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 16:31:25 2025 +0000
+
+    wip
+
+diff --git a/09/23/nix_concepts_and_facts/flake.lock b/09/23/nix_concepts_and_facts/flake.lock
+new file mode 100644
+index 0000000..d38148f
+--- /dev/null
++++ b/09/23/nix_concepts_and_facts/flake.lock
+@@ -0,0 +1,79 @@
++{
++  "nodes": {
++    "crqBinstore": {
++      "flake": false,
++      "locked": {
++        "lastModified": 1758586031,
++        "narHash": "sha256-rFhFRrBogyxK7ZxxT2ajPf0OD/3Z4S15pNsGDaArooM=",
++        "owner": "meta-introspector",
++        "repo": "crq-binstore",
++        "rev": "7d22c24539b6279a5872de3bd3e0943899b1a01e",
++        "type": "github"
++      },
++      "original": {
++        "owner": "meta-introspector",
++        "repo": "crq-binstore",
++        "type": "github"
++      }
++    },
++    "flake-utils": {
++      "inputs": {
++        "systems": "systems"
++      },
++      "locked": {
++        "lastModified": 1731533236,
++        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
++        "owner": "meta-introspector",
++        "repo": "flake-utils",
++        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
++        "type": "github"
++      },
++      "original": {
++        "owner": "meta-introspector",
++        "ref": "feature/CRQ-016-nixify",
++        "repo": "flake-utils",
++        "type": "github"
++      }
++    },
++    "nixpkgs": {
++      "locked": {
++        "lastModified": 1758427187,
++        "narHash": "sha256-pHpxZ/IyCwoTQPtFIAG2QaxuSm8jWzrzBGjwQZIttJc=",
++        "owner": "NixOS",
++        "repo": "nixpkgs",
++        "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
++        "type": "github"
++      },
++      "original": {
++        "owner": "NixOS",
++        "ref": "nixos-unstable",
++        "repo": "nixpkgs",
++        "type": "github"
++      }
++    },
++    "root": {
++      "inputs": {
++        "crqBinstore": "crqBinstore",
++        "flake-utils": "flake-utils",
++        "nixpkgs": "nixpkgs"
++      }
++    },
++    "systems": {
++      "locked": {
++        "lastModified": 1681028828,
++        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
++        "owner": "nix-systems",
++        "repo": "default",
++        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
++        "type": "github"
++      },
++      "original": {
++        "owner": "nix-systems",
++        "repo": "default",
++        "type": "github"
++      }
++    }
++  },
++  "root": "root",
++  "version": 7
++}
+diff --git a/09/23/nix_concepts_and_facts/flake.nix b/09/23/nix_concepts_and_facts/flake.nix
+index 3a03482..b5606ed 100644
+--- a/09/23/nix_concepts_and_facts/flake.nix
++++ b/09/23/nix_concepts_and_facts/flake.nix
+@@ -4,68 +4,30 @@
+   inputs = {
+     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; # Use a stable nixpkgs for this flake
+     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
++    crqBinstore = {
++      url = "github:meta-introspector/crq-binstore"; # Input for the CRQ binstore
++      flake = false;
++    };
+   };
+ 
+-  outputs = { self, nixpkgs, flake-utils }:
++  outputs = { self, nixpkgs, flake-utils, crqBinstore } @ inputs:
+     flake-utils.lib.eachDefaultSystem (system:
+       let
+         pkgs = import nixpkgs {
+           inherit system;
+         };
++        nixLib = pkgs.lib; # Make lib available as nixLib
+ 
+-        # Define concepts locally within this flake
+-        concepts = {
+-          number-23 = pkgs.runCommand "number-23" {} ''
+-            set -x
+-            mkdir -p $out
+-            echo "23" > $out/number
+-          '';
+-
+-          is-prime-script = pkgs.writeText "is-prime-script" ''
+-            #!/usr/bin/env bash
+-            set -euo pipefail
+-
+-            number="$1"
+-            if (( number < 2 )); then
+-              echo "false"
+-              exit 0
+-            fi
+-            for ((i=2; i*i<=number; i++)); do
+-              if (( number % i == 0 )); then
+-                echo "false"
+-                exit 0
+-              fi
+-            done
+-            echo "true"
+-          '';
+-
+-          is-prime-23 = pkgs.runCommand "is-prime-23" { } ''
+-            set -x
+-            mkdir -p $out
+-            chmod +x ${concepts.is-prime-script}
+-            ${concepts.is-prime-script} 23 > $out/result
+-          '';
+-
+-          fact-23-oracle = pkgs.runCommand "fact-23-oracle" { }''
+-            set -x
+-            mkdir -p $out
+-            cp ${self}/facts/fact_about_23.txt $out/fact
+-          '';
+-        };
+-
+-        # Aggregate AI context
+-        ai-context-23 = pkgs.runCommand "ai-context-23" { }''
+-          mkdir -p $out/concepts
+-          ln -s ${concepts.number-23}/number $out/concepts/number_23
+-          ln -s ${concepts.is-prime-23}/result $out/concepts/is_prime_23
+-          ln -s ${concepts.fact-23-oracle}/fact $out/concepts/fact_23
+-        '';
++        zos = import ./lib/zos.nix { pkgs = pkgs; crqBinstore = crqBinstore; nixLib = nixLib; };
++        concepts = import ./lib/concepts.nix { pkgs = pkgs; flakeSelf = self; nixLib = nixLib; };
++        aiContext = import ./lib/ai-context.nix { pkgs = pkgs; concepts = concepts; zos = zos; nixLib = nixLib; };
+ 
+       in
+       {
+-        packages.default = ai-context-23; # Make ai-context-23 the default package
+-        defaultPackage = ai-context-23; # Explicitly define default package
+-        inherit (concepts) number-23 is-prime-23 fact-23-oracle; # Expose individual concepts
++        packages.default = aiContext; # Make aiContext the default package
++        defaultPackage = aiContext; # Explicitly define default package
++        number-23 = concepts.mkNumber 23;
++        inherit (concepts) is-prime-23 fact-23-oracle; # Expose individual concepts
+       }
+     );
+-}
++}
+\ No newline at end of file
+diff --git a/09/23/nix_concepts_and_facts/lib/ai-context.nix b/09/23/nix_concepts_and_facts/lib/ai-context.nix
+new file mode 100644
+index 0000000..a698b11
+--- /dev/null
++++ b/09/23/nix_concepts_and_facts/lib/ai-context.nix
+@@ -0,0 +1,18 @@
++{ pkgs, concepts, zos, nixLib } @ args:
++
++let
++  # Construct the list of ln -s commands for zosPrimes
++  zosPrimesLinks = pkgs.lib.concatStringsSep "\n" (builtins.map (prime:
++    ''ln -s ${zos.zosPrimes."prime-${builtins.toString prime}"}/primes.txt $out/concepts/zos_primes_${builtins.toString prime}.txt''
++  ) (import ./primes.nix));
++in
++pkgs.runCommand "ai-context-23" {
++  script = ./scripts/ai-context-builder.sh;
++} ''
++  $script $out \
++    ${concepts.number-23}/number \
++    ${concepts.is-prime-23}/result \
++    ${concepts.fact-23-oracle}/fact \
++    "${zosPrimesLinks}"
++''
++)
+\ No newline at end of file
+diff --git a/09/23/nix_concepts_and_facts/lib/concepts.nix b/09/23/nix_concepts_and_facts/lib/concepts.nix
+new file mode 100644
+index 0000000..e08e35b
+--- /dev/null
++++ b/09/23/nix_concepts_and_facts/lib/concepts.nix
+@@ -0,0 +1,46 @@
++{ pkgs, flakeSelf, nixLib } @ args:
++
++let
++  mkNumber = num: pkgs.runCommand "number-${builtins.toString num}" {
++    script = pkgs.runCommand "number-script" { } ''
++      cp ${flakeSelf}/scripts/number.sh $out
++      chmod +x $out
++    '';
++  } ''
++    $script $out "${builtins.toString num}"
++  '';
++
++  is-prime-script = pkgs.writeText "is-prime.sh" ''
++    #!/usr/bin/env bash
++    set -euo pipefail
++
++    number="$1"
++    if (( number < 2 )); then
++      echo "false"
++      exit 0
++    fi
++    for ((i=2; i*i<=number; i++)); do
++      if (( number % i == 0 )); then
++        echo "false"
++        exit 0
++      fi
++    done
++    echo "true"
++  '';
++
++  is-prime-23 = pkgs.runCommand "is-prime-23" {
++    script = ./scripts/is-prime-check.sh;
++  } ''
++    $script $out ${is-prime-script} "23"
++  '';
++
++  fact-23-oracle = pkgs.runCommand "fact-23-oracle" { }''
++    set -x
++    mkdir -p $out
++    cp ${flakeSelf}/facts/fact_about_23.txt $out/fact
++  '';
++in
++{
++  inherit mkNumber is-prime-23 fact-23-oracle;
++  inherit is-prime-script; # Also expose the script if needed elsewhere
++}
+\ No newline at end of file
+diff --git a/09/23/nix_concepts_and_facts/lib/primes.nix b/09/23/nix_concepts_and_facts/lib/primes.nix
+new file mode 100644
+index 0000000..8f2852c
+--- /dev/null
++++ b/09/23/nix_concepts_and_facts/lib/primes.nix
+@@ -0,0 +1 @@
++[ 2 3 5 7 11 13 17 19 23 29 31 41 47 59 71 ]
+\ No newline at end of file
+diff --git a/09/23/nix_concepts_and_facts/lib/zos.nix b/09/23/nix_concepts_and_facts/lib/zos.nix
+new file mode 100644
+index 0000000..c92da95
+--- /dev/null
++++ b/09/23/nix_concepts_and_facts/lib/zos.nix
+@@ -0,0 +1,26 @@
++{ pkgs, crqBinstore, nixLib } @ args:
++
++let
++  primesList = import ./primes.nix;
++
++  # Function to unpack a NAR file and extract primes.txt
++  unpackZosNar = prime:
++    let
++      narFileName = "zos-sequence-${builtins.toString prime}.nar";
++      narPath = "${crqBinstore}/${narFileName}"; # Path to the NAR file within the input
++    in
++    pkgs.runCommand "unpacked-zos-sequence-${builtins.toString prime}" {
++      nativeBuildInputs = [ pkgs.nixUnpack ]; # nixUnpack is needed to unpack .nar files
++      script = ./scripts/unpack-zos-sequence.sh;
++    } ''
++      $script ${narPath} $out
++    '';
++
++  zosPrimes = builtins.listToAttrs (builtins.map (prime: {
++    name = "prime-${builtins.toString prime}";
++    value = unpackZosNar prime;
++  }) primesList);
++in
++{
++  inherit unpackZosNar zosPrimes;
++}
+\ No newline at end of file
+diff --git a/09/23/nix_concepts_and_facts/scripts/ai-context-builder.sh b/09/23/nix_concepts_and_facts/scripts/ai-context-builder.sh
+new file mode 100755
+index 0000000..b0457d5
+--- /dev/null
++++ b/09/23/nix_concepts_and_facts/scripts/ai-context-builder.sh
+@@ -0,0 +1,16 @@
++#!/usr/bin/env bash
++set -euo pipefail
++
++OUT_DIR="$1"
++NUMBER_23_PATH="$2"
++IS_PRIME_23_PATH="$3"
++FACT_23_ORACLE_PATH="$4"
++ZOS_PRIMES_LINKS="$5" # This will be a multi-line string of ln -s commands
++
++mkdir -p "$OUT_DIR/concepts"
++ln -s "$NUMBER_23_PATH" "$OUT_DIR/concepts/number_23"
++ln -s "$IS_PRIME_23_PATH" "$OUT_DIR/concepts/is_prime_23"
++ln -s "$FACT_23_ORACLE_PATH" "$OUT_DIR/concepts/fact_23"
++
++# Execute the zosPrimesLinks
++eval "$ZOS_PRIMES_LINKS"
+\ No newline at end of file
+diff --git a/09/23/nix_concepts_and_facts/scripts/fact-oracle.sh b/09/23/nix_concepts_and_facts/scripts/fact-oracle.sh
+new file mode 100755
+index 0000000..6d29dca
+--- /dev/null
++++ b/09/23/nix_concepts_and_facts/scripts/fact-oracle.sh
+@@ -0,0 +1,8 @@
++#!/usr/bin/env bash
++set -euo pipefail
++
++OUT_DIR="$1"
++FACT_FILE="$2"
++
++mkdir -p "$OUT_DIR"
++cp "$FACT_FILE" "$OUT_DIR/fact"
+\ No newline at end of file
+diff --git a/09/23/nix_concepts_and_facts/scripts/is-prime-check.sh b/09/23/nix_concepts_and_facts/scripts/is-prime-check.sh
+new file mode 100755
+index 0000000..13303bf
+--- /dev/null
++++ b/09/23/nix_concepts_and_facts/scripts/is-prime-check.sh
+@@ -0,0 +1,10 @@
++#!/usr/bin/env bash
++set -euo pipefail
++
++OUT_DIR="$1"
++IS_PRIME_SCRIPT="$2"
++NUMBER="$3"
++
++mkdir -p "$OUT_DIR"
++chmod +x "$IS_PRIME_SCRIPT"
++"$IS_PRIME_SCRIPT" "$NUMBER" > "$OUT_DIR/result"
+\ No newline at end of file
+diff --git a/09/23/nix_concepts_and_facts/scripts/number.sh b/09/23/nix_concepts_and_facts/scripts/number.sh
+new file mode 100755
+index 0000000..08c53be
+--- /dev/null
++++ b/09/23/nix_concepts_and_facts/scripts/number.sh
+@@ -0,0 +1,8 @@
++#!/usr/bin/env bash
++set -euo pipefail
++
++OUT_DIR="$1"
++NUMBER="$2" # New parameter for the number
++
++mkdir -p "$OUT_DIR"
++echo "$NUMBER" > "$OUT_DIR/number"
+\ No newline at end of file
+diff --git a/09/23/nix_concepts_and_facts/scripts/unpack-zos-sequence.sh b/09/23/nix_concepts_and_facts/scripts/unpack-zos-sequence.sh
+new file mode 100755
+index 0000000..9b123c8
+--- /dev/null
++++ b/09/23/nix_concepts_and_facts/scripts/unpack-zos-sequence.sh
+@@ -0,0 +1,9 @@
++#!/usr/bin/env bash
++set -euo pipefail
++
++NAR_PATH="$1"
++OUT_DIR="$2"
++
++mkdir -p "$OUT_DIR"
++nix-unpack "$NAR_PATH" "$OUT_DIR/unpacked_nar"
++cp "$OUT_DIR/unpacked_nar/primes.txt" "$OUT_DIR/primes.txt"
+\ No newline at end of file
+diff --git a/09/23/nix_concepts_and_facts/test-ai-context.nix b/09/23/nix_concepts_and_facts/test-ai-context.nix
+new file mode 100644
+index 0000000..6cb91df
+--- /dev/null
++++ b/09/23/nix_concepts_and_facts/test-ai-context.nix
+@@ -0,0 +1,10 @@
++{ pkgs ? import <nixpkgs> {},
++  concepts ? { number-23 = pkgs.writeText "dummy-number-23" "23"; is-prime-23 = pkgs.writeText "dummy-is-prime-23" "true"; fact-23-oracle = pkgs.writeText "dummy-fact-23-oracle" "fact"; },
++  zos ? { zosPrimes = { "prime-2" = pkgs.writeText "dummy-prime-2" "2"; }; },
++  nixLib ? pkgs.lib
++}:
++
++let
++  aiContext = import ./lib/ai-context.nix { inherit pkgs concepts zos nixLib; };
++in
++aiContext
+\ No newline at end of file
+diff --git a/09/23/nix_concepts_and_facts/test-zos-primes-links.nix b/09/23/nix_concepts_and_facts/test-zos-primes-links.nix
+new file mode 100644
+index 0000000..6a5d6e4
+--- /dev/null
++++ b/09/23/nix_concepts_and_facts/test-zos-primes-links.nix
+@@ -0,0 +1,12 @@
++{ pkgs ? import <nixpkgs> {}, 
++  zos ? { zosPrimes = { "prime-2" = pkgs.writeText "dummy-prime-2" "2"; }; }, 
++  nixLib ? pkgs.lib 
++}:
++
++let
++  primesList = [ 2 3 5 7 11 13 17 19 23 29 31 41 47 59 71 ]; # Use the actual list of primes
++  zosPrimesLinks = pkgs.lib.concatStringsSep "\n" (builtins.map (prime: 
++    ''ln -s ${zos.zosPrimes."prime-${builtins.toString prime}"}/primes.txt /tmp/concepts/zos_primes_${builtins.toString prime}.txt''
++  ) primesList);
++in
++zosPrimesLinks
+diff --git a/09/flake.lock b/09/flake.lock
+index 42cd412..2ed5354 100644
+--- a/09/flake.lock
++++ b/09/flake.lock
+@@ -1,18 +1,35 @@
+ {
+   "nodes": {
++    "crqBinstore": {
++      "flake": false,
++      "locked": {
++        "lastModified": 1758586031,
++        "narHash": "sha256-rFhFRrBogyxK7ZxxT2ajPf0OD/3Z4S15pNsGDaArooM=",
++        "owner": "meta-introspector",
++        "repo": "crq-binstore",
++        "rev": "7d22c24539b6279a5872de3bd3e0943899b1a01e",
++        "type": "github"
++      },
++      "original": {
++        "owner": "meta-introspector",
++        "repo": "crq-binstore",
++        "type": "github"
++      }
++    },
+     "day_23_concepts": {
+       "inputs": {
++        "crqBinstore": "crqBinstore",
+         "flake-utils": "flake-utils",
+         "nixpkgs": "nixpkgs"
+       },
+       "locked": {
+         "lastModified": 1,
+-        "narHash": "sha256-JRY26AQ7oQdlv/7oeNBgWj+QgvIo6jpnHhC9I8ToJMI=",
+-        "path": "/nix/store/5mxff8hjn2qp5prmn0br1la7jmw8b2x4-source/09/23/nix_concepts_and_facts",
++        "narHash": "sha256-qqV9VbGD/SDa0NzdI8ZgBCS2WafwO3bun5dxy5ck7rI=",
++        "path": "/nix/store/qlp7x85lwgvi3y6m2w27mbhhg96zl053-source/09/23/nix_concepts_and_facts",
+         "type": "path"
+       },
+       "original": {
+-        "path": "/nix/store/5mxff8hjn2qp5prmn0br1la7jmw8b2x4-source/09/23/nix_concepts_and_facts",
++        "path": "/nix/store/qlp7x85lwgvi3y6m2w27mbhhg96zl053-source/09/23/nix_concepts_and_facts",
+         "type": "path"
+       }
+     },

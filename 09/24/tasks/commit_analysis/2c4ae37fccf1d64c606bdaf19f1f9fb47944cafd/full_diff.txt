@@ -1,0 +1,18 @@
+commit 2c4ae37fccf1d64c606bdaf19f1f9fb47944cafd
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:39:33 2025 +0000
+
+    fix: Remove src = mainProject from runCommand in nix-llm-context/flake.nix for debugging
+
+diff --git a/09/22/nix-llm-context/flake.nix b/09/22/nix-llm-context/flake.nix
+index 6a8231a..0d90d77 100644
+--- a/09/22/nix-llm-context/flake.nix
++++ b/09/22/nix-llm-context/flake.nix
+@@ -18,7 +18,6 @@
+         generateLlmContext = { symbol, htmlFileName, keywordsScriptFileName, linksFileName, tutorialsPattern, generatorScript }:
+           (pkgs.runCommand "llm-context-${symbol}" {
+             # Use mainProject as the primary source for all data files
+-            src = mainProject;
+             generatorScriptPath = "${self}/${generatorScript}";
+ 
+             buildInputs = [ pkgs.bash pkgs.coreutils pkgs.gnugrep pkgs.gnused pkgs.findutils ];

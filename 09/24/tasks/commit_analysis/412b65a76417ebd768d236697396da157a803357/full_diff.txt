@@ -1,0 +1,38 @@
+commit 412b65a76417ebd768d236697396da157a803357
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 19:40:04 2025 +0000
+
+    CRQ-016: Update for flake.nix integration and submodule consistency
+
+diff --git a/09/22/simple.flake.nix b/09/22/simple.flake.nix
+new file mode 100644
+index 0000000..b525ef4
+--- /dev/null
++++ b/09/22/simple.flake.nix
+@@ -0,0 +1,25 @@
++{
++  description = "A basic flake for streamofrandom";
++
++  inputs = {
++    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
++    flake-utils.url = "github:numtide/flake-utils";
++  };
++
++  outputs = { self, nixpkgs, flake-utils }:
++    flake-utils.lib.eachDefaultSystem (system:
++      let
++        pkgs = import nixpkgs { inherit system; };
++      in
++      {
++        devShell = pkgs.mkShell {
++          buildInputs = [
++            pkgs.git
++            pkgs.nix
++            pkgs.bash
++            pkgs.coreutils
++          ];
++        };
++      }
++    );
++}
+\ No newline at end of file

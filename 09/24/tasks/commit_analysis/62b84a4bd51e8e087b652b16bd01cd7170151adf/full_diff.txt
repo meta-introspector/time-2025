@@ -1,0 +1,19 @@
+commit 62b84a4bd51e8e087b652b16bd01cd7170151adf
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:34:47 2025 +0000
+
+    feat: Use debug_wrapper.sh in nix-llm-context/flake.nix
+
+diff --git a/09/22/nix-llm-context/flake.nix b/09/22/nix-llm-context/flake.nix
+index f89dcd9..2f24ba4 100644
+--- a/09/22/nix-llm-context/flake.nix
++++ b/09/22/nix-llm-context/flake.nix
+@@ -23,7 +23,7 @@
+ 
+             buildInputs = [ pkgs.bash pkgs.coreutils pkgs.gnugrep pkgs.gnused pkgs.findutils ];
+           } ''
+-            "$generatorScriptPath"
++            "${self}/debug_wrapper.sh" "$generatorScriptPath" "${symbol}" "${mainProject}/wikipedia_cache/${htmlFileName}" "${mainProject}/docs/memes/${keywordsScriptFileName}" "${mainProject}/docs/memes/${linksFileName}" "${mainProject}/docs/memes/${tutorialsPattern}" "$out/llm-context-${symbol// /-}.txt" "${mainProject}"
+           '');
+       in
+       rec {

@@ -1,0 +1,4 @@
+fix: Adjust generate_monster_group_llm_txt.sh for Nix build output
+
+Modified generate_monster_group_llm_txt.sh to write to a temporary file and then copy to the final  path, resolving issues with direct output redirection in Nix build environments.
+

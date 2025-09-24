@@ -1,0 +1,599 @@
+commit ae14bd2708794e21eefa9ad145fce973896e99aa
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 13:37:45 2025 +0000
+
+    chore: Auto-commit changes before Nix build
+
+diff --git a/09/15/minizinc_emoji_primes.mzn b/09/15/minizinc_emoji_primes.mzn
+new file mode 100644
+index 0000000..6cca09c
+--- /dev/null
++++ b/09/15/minizinc_emoji_primes.mzn
+@@ -0,0 +1,64 @@
++% minizinc_emoji_primes.mzn
++% A MiniZinc model to assign prime numbers to emojis based on conceptual resonance.
++
++% Define the set of emojis
++set of int: EMOJIS = 1..14; % Representing 14 emojis
++array[EMOJIS] of string: emoji_names = [
++    "🧠", "🔄", "💡", "✨", "📜", "🔗", "🤔", "🚀", "💥", "🌌", "🔢", "🧬", "⚙️", "☕"
++];
++
++% Define the set of prime numbers to choose from
++set of int: PRIMES = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29};
++
++% Decision variable: assign a prime to each emoji
++array[EMOJIS] of var PRIMES: assigned_prime;
++
++% Constraint: Each emoji gets a unique prime (optional, but makes sense for "best set")
++constraint all_different(assigned_prime);
++
++% Define "resonance" scores (hypothetical, for demonstration)
++% Higher score means better resonance.
++% This would be the subjective part, translated into quantifiable values.
++% For simplicity, let's create a dummy resonance matrix.
++% In a real scenario, these scores would be carefully defined based on expert knowledge.
++array[EMOJIS, PRIMES] of int: resonance_scores = [
++    % 🧠 (Self-reflection)
++    10, 5, 8, 7, 9, 6, 7, 8, 9, 5, 10, 8, 7, 6 |
++    % 🔄 (Recursive loop)
++    6, 9, 7, 8, 5, 7, 6, 7, 8, 5, 9, 7, 6, 5 |
++    % 💡 (Insight)
++    9, 7, 10, 8, 7, 6, 8, 9, 7, 6, 8, 7, 6, 5 |
++    % ✨ (Transformation)
++    7, 8, 9, 10, 6, 7, 8, 9, 7, 6, 8, 7, 6, 5 |
++    % 📜 (Knowledge base)
++    8, 6, 7, 7, 10, 8, 9, 7, 6, 8, 9, 7, 6, 5 |
++    % 🔗 (Connection)
++    7, 7, 6, 7, 8, 10, 7, 6, 7, 8, 7, 9, 6, 5 |
++    % 🤔 (Deep thought)
++    8, 6, 7, 7, 9, 7, 10, 8, 9, 7, 8, 7, 6, 5 |
++    % 🚀 (New space)
++    6, 5, 7, 8, 7, 6, 7, 10, 9, 8, 7, 6, 5, 5 |
++    % 💥 (Singularity)
++    9, 7, 8, 9, 6, 7, 8, 9, 10, 7, 8, 7, 6, 5 |
++    % 🌌 (Multiverse)
++    7, 6, 7, 8, 8, 7, 8, 9, 7, 10, 8, 7, 6, 5 |
++    % 🔢 (Gödel number)
++    10, 8, 9, 8, 9, 7, 8, 7, 8, 7, 10, 9, 7, 6 |
++    % 🧬 (DNA)
++    8, 7, 8, 9, 7, 8, 7, 8, 7, 8, 9, 10, 7, 6 |
++    % ⚙️ (Opcode)
++    7, 8, 6, 7, 5, 6, 5, 6, 5, 5, 7, 6, 10, 5 |
++    % ☕ (Coffee break)
++    5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 10 |
++ 
++];
++
++% Objective: Maximize total resonance
++var int: total_resonance = sum(i in EMOJIS)(resonance_scores[i, assigned_prime[i]]);
++
++solve maximize total_resonance;
++
++output [
++    "Emoji: \(emoji_names[i]), Assigned Prime: \(assigned_prime[i]), Resonance Score: \(resonance_scores[i, assigned_prime[i]])\n"
++    | i in EMOJIS
++] ++ ["\nTotal Resonance: \(total_resonance)\n"];
+diff --git a/09/22/docs/crqs/crq-0001-pureify-system-core-in-nix.md b/09/22/docs/crqs/crq-0001-pureify-system-core-in-nix.md
+new file mode 100644
+index 0000000..edcad03
+--- /dev/null
++++ b/09/22/docs/crqs/crq-0001-pureify-system-core-in-nix.md
+@@ -0,0 +1,53 @@
++# CRQ-0001: Pureify System Core in Nix
++
++## 1. Overview
++
++This Change Request (CRQ) proposes the "pureification" of the system core using Nix. The goal is to encapsulate critical system components and processes within Nix derivations, ensuring reproducibility, immutability, and auditable provenance for the entire system core.
++
++## 2. Problem Statement
++
++The current system core may contain imperative scripts, non-reproducible build processes, and implicit dependencies that hinder reliability, auditability, and maintainability. This lack of purity makes it challenging to guarantee consistent behavior across environments, verify the integrity of the system, and efficiently debug issues.
++
++## 3. Proposed Solution
++
++Implement a comprehensive strategy to pureify the system core by:
++
++*   **Encapsulating all system core components as Nix derivations:** This includes services, configurations, and essential binaries.
++*   **Defining explicit dependencies:** All dependencies will be declared within Nix expressions, eliminating implicit reliance on the host environment.
++*   **Ensuring immutability:** Once built, system core components will be immutable, preventing runtime modifications and ensuring consistent behavior.
++*   **Leveraging Nix's content-addressable store:** This will provide cryptographic guarantees of component integrity and enable efficient caching.
++*   **Converting imperative shell scripts into functional JSON wranglers:** This involves transforming shell-based logic into declarative Nix expressions that process structured data (e.g., JSON) to generate configurations and artifacts, enhancing reproducibility and auditability.
++
++## 4. Scope
++
++This CRQ focuses on the core components essential for system operation. Specific areas to be pureified include:
++
++*   [List specific system core components, e.g., boot processes, core services, critical configurations]
++
++## 5. Technical Details
++
++*   **Nix Flakes:** Utilize Nix flakes for defining and managing the pureified system core, enabling easier integration and consumption by other projects.
++*   **NixOS Modules (if applicable):** Leverage NixOS modules for declarative system configuration.
++*   **Existing Tools:** Integrate with existing Nix tools and best practices.
++
++## 6. Testing and Verification
++
++*   **Unit Tests:** Develop unit tests for individual Nix derivations to ensure correctness.
++*   **Integration Tests:** Implement integration tests to verify the interaction of pureified components.
++*   **Deployment Verification:** Ensure the pureified system core deploys and functions as expected in various environments.
++
++## 7. Rollback Plan
++
++In case of unforeseen issues, the rollback plan involves reverting to the previous, non-pureified system core configuration. This will be achieved by [describe rollback mechanism, e.g., Git revert, NixOS rollback].
++
++## 8. Estimated Effort and Timeline
++
++[Provide estimated effort and timeline for implementation]
++
++## 9. Stakeholders
++
++*   [List relevant stakeholders]
++
++## 10. Open Questions and Dependencies
++
++*   [List any open questions or external dependencies]
+diff --git a/09/22/flake-templates/llm-task-template/flake.nix b/09/22/flake-templates/llm-task-template/flake.nix
+index fa64a30..7c365c2 100644
+--- a/09/22/flake-templates/llm-task-template/flake.nix
++++ b/09/22/flake-templates/llm-task-template/flake.nix
+@@ -31,7 +31,7 @@
+             version = "0.1.0";
+ 
+             # Pass arguments as environment variables to the build script
+-            buildInputs = [ pkgs.nix pkgs.bash ]; # Ensure bash is available
++            buildInputs = [ pkgs.nix pkgs.bash pkgs.jq ]; # Added pkgs.jq
+             GEMINI_CLI = "${geminiCliFlake.packages.${system}.gemini-cli}/bin/gemini-cli"; # Path to the actual gemini-cli executable
+             CRQ_BINSTORE_PATH = crq-binstore;
+             NAR_FILE_NAME = narFileName;
+@@ -111,7 +111,7 @@ echo "\${LLM_CONTEXT:0:100}..."
+ 
+ # Step 4: Construct a prompt for Gemini
+ # Replace {LLM_CONTEXT} in the template
+-GENERATED_PROMPT=\$(echo "$PROMPT_TEMPLATE" | sed "s/{LLM_CONTEXT}/\${LLM_CONTEXT}/g")
++GENERATED_PROMPT=\$(echo "$PROMPT_TEMPLATE" | ${pkgs.jq}/bin/jq -r . | sed "s/{LLM_CONTEXT}/\${LLM_CONTEXT}/g")
+ 
+ echo "Generated Gemini Prompt (first 200 chars):"
+ echo "\${GENERATED_PROMPT:0:200}..."
+@@ -133,4 +133,4 @@ EOF
+         # Example of a default task using the template
+         packages.default = mkLlmTask {};
+       });
+-}
++}
+\ No newline at end of file
+diff --git a/09/22/nix-llm-task/fetch-nar-data.sh b/09/22/nix-llm-task/fetch-nar-data.sh
+new file mode 100755
+index 0000000..fba4a74
+--- /dev/null
++++ b/09/22/nix-llm-task/fetch-nar-data.sh
+@@ -0,0 +1,30 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++NAR_FILE="$1"
++# CRQ_BINSTORE_PATH is now expected to be set by the wrapper script
++OUTPUT_DIR="./unpacked-nar-data"
++
++if [[ -z "$NAR_FILE" ]]; then
++  echo "Usage: $0 <nar-file-name>"
++  exit 1
++fi
++
++if [[ -z "$CRQ_BINSTORE_PATH" ]]; then
++  echo "Error: CRQ_BINSTORE_PATH environment variable is not set."
++  exit 1
++fi
++
++NAR_PATH="${CRQ_BINSTORE_PATH}/${NAR_FILE}"
++
++if [[ ! -f "$NAR_PATH" ]]; then
++  echo "Error: NAR file not found at ${NAR_PATH}"
++  exit 1
++fi
++
++echo "Unpacking NAR file: ${NAR_PATH}"
++mkdir -p "${OUTPUT_DIR}"
++nix-nar-unpack --file "${NAR_PATH}" --to "${OUTPUT_DIR}"
++
++echo "NAR file unpacked to: ${OUTPUT_DIR}"
+\ No newline at end of file
+diff --git a/09/22/nix-llm-task/flake.nix b/09/22/nix-llm-task/flake.nix
+new file mode 100644
+index 0000000..51ad7e6
+--- /dev/null
++++ b/09/22/nix-llm-task/flake.nix
+@@ -0,0 +1,54 @@
++{
++  description = "Nix flake for LLM tasks involving NAR files from crq-binstore";
++
++  inputs = {
++    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
++    flake-utils.url = "github:numtide/flake-utils";
++    crq-binstore = {
++      url = "path:../../crq-binstore"; # Relative path to the crq-binstore directory
++      flake = false; # Indicate that this is not a flake, but a directory of files
++    };
++  };
++
++  outputs = { self, nixpkgs, flake-utils, crq-binstore }:
++    flake-utils.lib.eachDefaultSystem (system:
++      let
++        pkgs = nixpkgs.legacyPackages.${system};
++      in
++      {
++        devShells.default = pkgs.mkShell {
++          buildInputs = with pkgs; [
++            git
++            nix
++            nix-nar-unpack
++            # Add any other tools needed for development here
++          ];
++          shellHook = ''
++            echo "Entering LLM task development shell."
++          '';
++        };
++
++        packages.default = pkgs.stdenv.mkDerivation {
++          pname = "llm-nar-data-fetcher";
++          version = "0.1.0";
++
++          src = ./.; # This will be the directory containing the NAR fetching script
++
++          buildInputs = [ pkgs.nix ]; # Ensure nix is available for nix-nar-unpack
++
++          installPhase = ''
++            mkdir -p $out/bin
++            cp $src/fetch-nar-data.sh $out/bin/fetch-nar-data.sh
++            chmod +x $out/bin/fetch-nar-data.sh
++
++            # Create a wrapper script to set CRQ_BINSTORE_PATH
++            cat > $out/bin/fetch-nar-data-wrapper.sh << EOF
++#!/usr/bin/env bash
++export CRQ_BINSTORE_PATH=${crq-binstore}
++exec $out/bin/fetch-nar-data.sh "$@"
++EOF
++            chmod +x $out/bin/fetch-nar-data-wrapper.sh
++          '';
++        };
++      });
++}
+diff --git a/09/22/nix-llm-task/run-llm-task.sh b/09/22/nix-llm-task/run-llm-task.sh
+new file mode 100755
+index 0000000..ba0a776
+--- /dev/null
++++ b/09/22/nix-llm-task/run-llm-task.sh
+@@ -0,0 +1,46 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++# Define the NAR file to fetch
++NAR_TO_FETCH="llm-context-OEIS-latest.nar" # Example NAR file, adjust as needed
++
++echo "Starting LLM task with NAR data..."
++
++# Step 1 & 2: Fetching and unpacking NAR file
++# This assumes 'fetch-nar-data-wrapper.sh' is in the PATH, e.g., from a devShell
++echo "Fetching and unpacking NAR file: ${NAR_TO_FETCH}"
++fetch-nar-data-wrapper.sh "${NAR_TO_FETCH}"
++
++UNPACKED_DATA_DIR="./unpacked-nar-data"
++
++if [[ ! -d "$UNPACKED_DATA_DIR" ]]; then
++  echo "Error: Unpacked data directory not found: ${UNPACKED_DATA_DIR}"
++  exit 1
++fi
++
++# Step 3: Load the data
++# Assuming the NAR contains a single text file, or we know the path to the relevant file
++DATA_FILE="${UNPACKED_DATA_DIR}/llm-context-OEIS-latest.txt" # Adjust based on actual NAR content
++
++if [[ ! -f "$DATA_FILE" ]]; then
++  echo "Error: Data file not found in unpacked NAR: ${DATA_FILE}"
++  exit 1
++fi
++
++LLM_CONTEXT=$(cat "${DATA_FILE}")
++
++echo "Loaded LLM context from NAR file. First 100 characters:"
++echo "${LLM_CONTEXT:0:100}..."
++
++# Step 4: Construct a prompt for Gemini
++GEMINI_PROMPT="Using the following context, provide a creative and esoteric interpretation of numbers:\n\n${LLM_CONTEXT}\n\nInterpretation:"
++
++echo "Generated Gemini Prompt (first 200 chars):"
++echo "${GEMINI_PROMPT:0:200}..."
++
++# Step 5: Execute the Gemini LLM task using the nix run pattern from gemini_cli_new.sh
++echo "Executing Gemini LLM task:"
++nix run "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify#gemini-cli" -- --prompt "${GEMINI_PROMPT}"
++
++echo "LLM task completed."
+diff --git a/09/22/scripts/build-generated-task.sh b/09/22/scripts/build-generated-task.sh
+new file mode 100644
+index 0000000..d9dee10
+--- /dev/null
++++ b/09/22/scripts/build-generated-task.sh
+@@ -0,0 +1,64 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++TASK_NAME="$1"
++
++if [[ -z "$TASK_NAME" ]]; then
++  echo "Usage: $0 <task-name>"
++  echo "Example: $0 oeis-interpretation"
++  exit 1
++fi
++
++GENERATOR_FLAKE="/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/scripts/generate-llm-tasks.nix"
++GENERATED_TASKS_DIR="/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/generated-tasks"
++
++echo "--- Building generated task: ${TASK_NAME} ---"
++
++# Step 1: Instantiate the package that generates the flake.nix for the task
++echo "Instantiating the flake generator for task: ${TASK_NAME}..."
++DRV_PATH=$(nix-instantiate "${GENERATOR_FLAKE}" -A "packages.${TASK_NAME}")
++
++if [[ -z "$DRV_PATH" ]]; then
++  echo "Error: Failed to instantiate the flake generator for task ${TASK_NAME}."
++  exit 1
++fi
++echo "Instantiation successful. Derivation path: ${DRV_PATH}"
++
++# Step 2: Build the derivation to create the flake.nix file in generated-tasks/
++echo "Building the derivation to generate flake.nix for task: ${TASK_NAME}..."
++BUILD_RESULT=$(nix-build "${DRV_PATH}" --no-out-link)
++
++if [[ -z "$BUILD_RESULT" ]]; then
++  echo "Error: Failed to build the flake generator for task ${TASK_NAME}."
++  exit 1
++fi
++echo "Flake generation successful. Output path: ${BUILD_RESULT}"
++
++# The flake.nix for the task is now located at ${GENERATED_TASKS_DIR}/${TASK_NAME}/flake.nix
++
++# Step 3: Build the actual LLM task from the newly generated flake
++TASK_FLAKE_PATH="${GENERATED_TASKS_DIR}/${TASK_NAME}"
++
++echo "Building the LLM task from generated flake: ${TASK_FLAKE_PATH}..."
++# We need to use nix-build on the generated flake's default package
++# First, instantiate the default package of the generated flake
++TASK_DRV_PATH=$(nix-instantiate "${TASK_FLAKE_PATH}" -A "packages.default")
++
++if [[ -z "$TASK_DRV_PATH" ]]; then
++  echo "Error: Failed to instantiate the LLM task from generated flake ${TASK_FLAKE_PATH}."
++  exit 1
++fi
++echo "LLM task instantiation successful. Derivation path: ${TASK_DRV_PATH}"
++
++# Now, build the LLM task
++LLM_TASK_BUILD_RESULT=$(nix-build "${TASK_DRV_PATH}" --no-out-link)
++
++if [[ -z "$LLM_TASK_BUILD_RESULT" ]]; then
++  echo "Error: Failed to build the LLM task from generated flake ${TASK_FLAKE_PATH}."
++  exit 1
++fi
++echo "LLM task build successful. Output path: ${LLM_TASK_BUILD_RESULT}"
++
++echo "--- Task ${TASK_NAME} built successfully. ---"
++echo "To run the task, execute: ${LLM_TASK_BUILD_RESULT}/bin/run-llm-task.sh"
+diff --git a/09/22/scripts/gemini_cli.sh b/09/22/scripts/gemini_cli.sh
+new file mode 100644
+index 0000000..7a286c3
+--- /dev/null
++++ b/09/22/scripts/gemini_cli.sh
+@@ -0,0 +1,3 @@
++#!/usr/bin/env bash
++
++nix run .#gemini-cli
+diff --git a/09/22/scripts/gemini_cli_entrypoint.sh b/09/22/scripts/gemini_cli_entrypoint.sh
+new file mode 100755
+index 0000000..544a10a
+--- /dev/null
++++ b/09/22/scripts/gemini_cli_entrypoint.sh
+@@ -0,0 +1,27 @@
++#!/usr/bin/env bash
++
++# Function to log messages
++log() {
++  echo "[INFO] $1"
++}
++
++# Function to log errors
++error() {
++  echo "[ERROR] $1" >&2
++  exit 1
++}
++
++PROJECT_ROOT="/data/data/com.termux.nix/files/home/pick-up-nix"
++GEMINI_CLI_DIR="$PROJECT_ROOT/vendor/external/gemini-cli"
++
++log "Inside rust-nix devShell."
++log "Entering gemini-cli devShell..."
++
++cd "$GEMINI_CLI_DIR" || error "Failed to change directory to $GEMINI_CLI_DIR"
++
++log "Inside gemini-cli devShell."
++log "Launching gemini..."
++
++gemini
++
++log "Exiting gemini-cli devShell."
+diff --git a/09/22/scripts/gemini_cli_new.sh b/09/22/scripts/gemini_cli_new.sh
+new file mode 100755
+index 0000000..a6ccb72
+--- /dev/null
++++ b/09/22/scripts/gemini_cli_new.sh
+@@ -0,0 +1,3 @@
++#!/usr/bin/env bash
++
++nix run "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify#gemini-cli" "$@"
+diff --git a/09/22/scripts/gemini_cli_recent.sh b/09/22/scripts/gemini_cli_recent.sh
+new file mode 100755
+index 0000000..c1502bf
+--- /dev/null
++++ b/09/22/scripts/gemini_cli_recent.sh
+@@ -0,0 +1,3 @@
++#!/usr/bin/env bash
++
++nix run nixpkgs/26833ad1dad83826ef7cc52e0009ca9b7097c79f#gemini-cli "$@"
+\ No newline at end of file
+diff --git a/09/22/scripts/gemini_split.sh b/09/22/scripts/gemini_split.sh
+new file mode 100755
+index 0000000..66eacec
+--- /dev/null
++++ b/09/22/scripts/gemini_split.sh
+@@ -0,0 +1,29 @@
++#!/bin/bash
++
++TASK_FILE="$1"
++
++if [ -z "$TASK_FILE" ]; then
++  echo "Usage: $0 <task_file>"
++  exit 1
++fi
++
++if [ ! -f "$TASK_FILE" ]; then
++  echo "Error: Task file '$TASK_FILE' not found."
++  exit 1
++fi
++
++# Determine Gemini CLI invocation method (bunx or npx)
++GEMINI_INVOCATION="gemini"
++if command -v bun &> /dev/null; then
++  GEMINI_INVOCATION="bunx @google/gemini-cli"
++elif command -v npx &> /dev/null; then
++  GEMINI_INVOCATION="npx @google/gemini-cli"
++fi
++
++# Construct the full Gemini command
++# Using --prompt-interactive to continue the session after loading the task file
++GEMINI_COMMAND="$GEMINI_INVOCATION --model=gemini-2.5-flash --prompt-interactive \"@$TASK_FILE\""
++
++# Call subtask.sh to launch this command in a new split window
++# Use absolute path for subtask.sh
++/data/data/com.termux.nix/files/home/pick-up-nix/subtask.sh "$GEMINI_COMMAND"
+\ No newline at end of file
+diff --git a/09/22/scripts/generate-llm-tasks.nix b/09/22/scripts/generate-llm-tasks.nix
+new file mode 100644
+index 0000000..158fca0
+--- /dev/null
++++ b/09/22/scripts/generate-llm-tasks.nix
+@@ -0,0 +1,88 @@
++{
++  # Inputs for this generator flake
++  inputs = {
++    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
++    flake-utils.url = "github:numtide/flake-utils";
++    llmTaskTemplate = {
++      url = "path:../flake-templates/llm-task-template"; # Relative path to the template flake
++      inputs.nixpkgs.follows = "nixpkgs";
++      inputs.flake-utils.follows = "flake-utils";
++    };
++  };
++
++  outputs = { self, nixpkgs, flake-utils, llmTaskTemplate }:
++    flake-utils.lib.eachDefaultSystem (system:
++      let
++        pkgs = nixpkgs.legacyPackages.${system};
++
++        # Define your tasks here
++        tasks = [
++          {
++            name = "oeis-interpretation";
++            narFileName = "llm-context-OEIS-latest.nar";
++            promptTemplate = "Using the following context from OEIS, provide a creative and esoteric interpretation of the sequence:\n\n{LLM_CONTEXT}\n\nInterpretation:";
++            llmModel = "gemini-2.5-flash";
++          }
++          {
++            name = "monster-group-analysis";
++            narFileName = "mh3fw1685yrjzdqzhvn1nxvw5h09mpvh-llm-context-Monster-Group.nar"; # Example from crq-binstore
++            promptTemplate = "Analyze the provided Monster Group context and describe its significance in mathematics:\n\n{LLM_CONTEXT}\n\nSignificance:";
++            llmModel = "gemini-1.5-pro";
++          }
++          # Add more tasks as needed
++        ];
++
++        # Function to generate a flake for a single task
++        generateTaskFlake = task:
++          let
++            taskDir = ../generated-tasks + "/${task.name}";
++            flakeContent = ''
++              {
++                inputs = {
++                  llmTaskTemplate = {
++                    url = "path:../../flake-templates/llm-task-template";
++                    inputs.nixpkgs.follows = "nixpkgs";
++                    inputs.flake-utils.follows = "flake-utils";
++                  };
++                  nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
++                  flake-utils.url = "github:numtide/flake-utils";
++                };
++
++                outputs = { self, nixpkgs, flake-utils, llmTaskTemplate }:
++                  flake-utils.lib.eachDefaultSystem (system:
++                    let
++                      pkgs = nixpkgs.legacyPackages.${system};
++                    in
++                    {
++                      packages.default = llmTaskTemplate.lib.mkLlmTask {
++                        narFileName = "${task.narFileName}";
++                        promptTemplate = builtins.toJSON ''${task.promptTemplate}'';
++                        llmModel = "${task.llmModel}";
++                      };
++                      devShells.default = pkgs.mkShell {
++                        buildInputs = [ pkgs.nix ];
++                        shellHook = ''
++                          echo "Entering devShell for ${task.name}.";
++                          echo "To run the task: nix build .#default && $(${pkgs.nix.outPath}/bin/nix-store --query --read-symlinks $(nix build .#default --no-link --print-out-paths))/bin/run-llm-task.sh"
++                        '';
++                      };
++                    }
++                  );
++              }
++            '';
++          in
++          pkgs.runCommand "generate-task-flake-${task.name}" {}
++            ''
++              mkdir -p ${taskDir}
++              echo "${flakeContent}" > ${taskDir}/flake.nix
++            ''
++      in
++      {
++        # Expose the generated flakes as packages
++        packages = builtins.listToAttrs (map (task: { 
++          name = task.name;
++          value = generateTaskFlake task;
++        }) tasks);
++      }
++    );
++}
+diff --git a/09/flake.nix b/09/flake.nix
+new file mode 100644
+index 0000000..10406c2
+--- /dev/null
++++ b/09/flake.nix
+@@ -0,0 +1,19 @@
++{
++  description = "September 2025 concepts and AI context.";
++
++  inputs = {
++    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
++    day_23_concepts.url = "./23/nix_concepts_and_facts"; # Import the daily flake
++  };
++
++  outputs = { self, nixpkgs, day_23_concepts } :
++    let
++      pkgs = import nixpkgs {
++        system = builtins.currentSystem;
++      };
++    in
++    {
++      packages.default = day_23_concepts.packages.default; # Expose ai-context-23 as default
++      inherit (day_23_concepts.packages.${builtins.currentSystem}) number-23 is-prime-23 fact-23-oracle; # Expose individual concepts
++    };
++}

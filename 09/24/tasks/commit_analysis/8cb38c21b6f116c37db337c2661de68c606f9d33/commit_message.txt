@@ -1,0 +1,2 @@
+feat: Add crq-binstore as Git submodule. This commit adds the crq-binstore repository as a Git submodule to manage Nix artifact storage.
+

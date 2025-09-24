@@ -1,0 +1,173 @@
+commit 478dd831ee5722b18376137d1d98fa8aeac9cf07
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 23:56:28 2025 +0000
+
+    feat: Add OEIS wiki exploration memo, index file, nix-llm-context lib, build script, and update crq-binstore submodule
+
+diff --git a/09/22/crq-binstore b/09/22/crq-binstore
+index 3b3a52a..a165b5e 160000
+--- a/09/22/crq-binstore
++++ b/09/22/crq-binstore
+@@ -1 +1 @@
+-Subproject commit 3b3a52acdfb208afeac0e9d56f84a4c949b27e1f
++Subproject commit a165b5ed7ca7db21fa4429c77417a329b34ea9ae
+diff --git a/09/22/docs/memos/Manual_OEIS_Wiki_Exploration.md b/09/22/docs/memos/Manual_OEIS_Wiki_Exploration.md
+new file mode 100644
+index 0000000..798928f
+--- /dev/null
++++ b/09/22/docs/memos/Manual_OEIS_Wiki_Exploration.md
+@@ -0,0 +1,76 @@
++## Memo: Manual OEIS and Wiki Data Exploration
++
++### Date: 2025-09-22
++
++### Commands Executed:
++
++1.  **Search for OEIS references in `~/nix2/index/` and redirect to `index/oeis.txt`:**
++    ```bash
++    grep -r -i oeis ~/nix2/index/ > index/oeis.txt
++    ```
++    *   **Result:** Failed with "No such file or directory" because `index/` did not exist in the current working directory.
++    *   **Output:**
++        ```
++        WARNING: shell mode is stateless; the directory change to '/data/data/com.termux.nix/files/home/nix2/source/github/meta-introspector/streamofrandom/2025/09/22' will not persist.
++
++        Command exited with code 1.
++        bash: line 1: index/oeis.txt: No such file or directory
++        ```
++
++2.  **Create directory `oeis`:**
++    ```bash
++    mkdir oeis
++    ```
++    *   **Result:** Directory created successfully.
++    *   **Output:**
++        ```
++        WARNING: shell mode is stateless; the directory change to '/data/data/com.termux.nix/files/home/nix2/source/github/meta-introspector/streamofrandom/2025/09/22' will not persist.
++
++        (Command produced no output)
++        ```
++
++3.  **Attempt to search for OEIS references again after creating `oeis/`:**
++    ```bash
++    grep -r -i oeis ~/nix2/index/ > index/oeis.txt
++    ```
++    *   **Result:** Failed again with "No such file or directory" for `index/oeis.txt`. The `mkdir oeis` created `oeis/` in the current directory, but the redirection was still targeting `index/oeis.txt` which requires `index/` to exist.
++    *   **Output:**
++        ```
++        WARNING: shell mode is stateless; the directory change to '/data/data/com.termux.nix/files/home/nix2/source/github/meta-introspector/streamofrandom/2025/09/22' will not persist.
++
++        Command exited with code 1.
++        bash: line 1: index/oeis.txt: No such file or directory
++        ```
++
++4.  **Search for Wiki references in `~/nix2/index/` and redirect to `index/wiki.txt`:**
++    ```bash
++    grep -r -i wiki ~/nix2/index/ > index/wiki.txt
++    ```
++    *   **Result:** Failed with "No such file or directory" for `index/wiki.txt` for the same reason as above.
++    *   **Output:**
++        ```
++        WARNING: shell mode is stateless; the directory change to '/data/data/com.termux.nix/files/home/nix2/source/github/meta-introspector/streamofrandom/2025/09/22' will not persist.
++
++        Command exited with code 1.
++        bash: line 1: index/wiki.txt: No such file or directory
++        ```
++
++### Key Findings from `grep -r -i oeis ~/nix2/index/` Output (prior to redirection failure):
++
++*   **OEIS references found in Markdown files:**
++    *   `./docs/memes/analysis/oeis_rosetta_stone_meme_analysis.md`
++    *   `./docs/memes/analysis/oeis_dna_world_meme_analysis.md`
++    *   `./docs/memes/oeis_dna_world_meme.md`
++    *   `./docs/memes/oeis_selfish_meta_meme.md`
++    *   `./docs/memes/oeis_rosetta_stone_meme.md`
++    *   `./docs/memes/reflection_of_oeis_dna_world_meme.md`
++    *   `./docs/memes/reflection_of_oeis_selfish_meta_meme.md`
++    *   `./docs/memes/reflection_of_oeis_rosetta_stone_meme.md`
++    *   `./source/github/meta-introspector/lattice-introspector/docs/crq/CRQ_INTROSPECTION_SEQUENCES_OEIS_20250903.md`
++    *   `./source/github/meta-introspector/neo/neo/quasi_meta_oeis.md`
++
++*   **OEIS references found in Rust files:**
++    *   `./vendor/external/bootstrap/src/oeis.rs`
++    *   `./vendor/external/bootstrap/src/oeis_quasifibers.rs`
++
++These findings indicate existing OEIS-related content and potentially Rust code for OEIS interaction within the broader project structure.
+diff --git a/09/22/index/oeis.txt b/09/22/index/oeis.txt
+new file mode 100644
+index 0000000..9376603
+--- /dev/null
++++ b/09/22/index/oeis.txt
+@@ -0,0 +1,15 @@
++/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/analysis/oeis_rosetta_stone_meme_analysis.md
++/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/analysis/oeis_dna_world_meme_analysis.md
++/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/oeis_dna_world_meme.md
++/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/oeis_selfish_meta_meme.md
++/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/oeis_rosetta_stone_meme.md
++/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/reflection_of_oeis_dna_world_meme.md
++/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/reflection_of_oeis_selfish_meta_meme.md
++/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/reflection_of_oeis_rosetta_stone_meme.md
++/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./source/github/meta-introspector/lattice-introspector/docs/crq/CRQ_INTROSPECTION_SEQUENCES_OEIS_20250903.md
++/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./source/github/meta-introspector/neo/neo/quasi_meta_oeis.md
++/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_rs.txt:./vendor/external/bootstrap/src/oeis.rs
++/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_rs.txt:./vendor/external/bootstrap/src/oeis_quasifibers.rs
++/data/data/com.termux.nix/files/home/pick-up-nix2/index/art/artistic_references.md:/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/reflection_of_oeis_dna_world_meme.md
++/data/data/com.termux.nix/files/home/pick-up-nix2/index/art/artistic_references.md:/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/reflection_of_oeis_selfish_meta_meme.md
++/data/data/com.termux.nix/files/home/pick-up-nix2/index/art/artistic_references.md:/data/data/com.termux.nix/files/home/pick-up-nix2/index/file_md.txt:./docs/memes/reflection_of_oeis_rosetta_stone_meme.md
+diff --git a/09/22/nix-llm-context/lib/prime-sieve.nix b/09/22/nix-llm-context/lib/prime-sieve.nix
+new file mode 100644
+index 0000000..ff0aee1
+--- /dev/null
++++ b/09/22/nix-llm-context/lib/prime-sieve.nix
+@@ -0,0 +1,27 @@
++# nix-llm-context/lib/prime-sieve.nix
++# Implements a basic Sieve of Eratosthenes in Nix
++
++{ lib }:
++
++let
++  # Function to generate a list of numbers from 2 to n
++  range = n: lib.genList (i: i + 2) (n - 1);
++
++  # Sieve function
++  sieve = numbers: 
++    if lib.length numbers == 0 then []
++    else
++      let
++        p = lib.head numbers;
++        # Filter out multiples of p
++        filtered = lib.filter (n: (n % p) != 0) (lib.tail numbers);
++      in
++        [ p ] ++ (sieve filtered);
++
++  # Main prime sieve function
++  primeSieve = n: 
++    if n < 2 then []
++    else sieve (range n);
++
++in
++  primeSieve
+diff --git a/09/22/scripts/build_and_export_zos_nars.sh b/09/22/scripts/build_and_export_zos_nars.sh
+new file mode 100644
+index 0000000..5a69efd
+--- /dev/null
++++ b/09/22/scripts/build_and_export_zos_nars.sh
+@@ -0,0 +1,18 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++# List of primes from the order of the Monster Group up to 71
++PRIMES=(2 3 5 7 11 13 17 19 23 29 31 41 47 59 71)
++
++REPO_URL="https://github.com/meta-introspector/crq-binstore.git"
++
++for prime in "${PRIMES[@]}"; do
++  echo "Building and exporting zos sequence for prime: $prime"
++  FLAKE_ATTR_PATH="./nix-llm-context#packages.zosSequence.${prime}"
++  
++  scripts/publish_nix_artifact_to_git.sh "${FLAKE_ATTR_PATH}" "${REPO_URL}"
++  echo "----------------------------------------------------"
++done
++
++echo "All zos sequence NARs built and published."

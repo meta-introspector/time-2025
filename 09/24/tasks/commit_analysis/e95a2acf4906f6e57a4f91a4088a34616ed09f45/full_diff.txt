@@ -1,0 +1,52 @@
+commit e95a2acf4906f6e57a4f91a4088a34616ed09f45
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 16:37:02 2025 +0000
+
+    feat: Add root flake.nix for main project
+    
+    This commit introduces a flake.nix file at the root of the repository, defining the main project as a Nix flake. This is necessary for other flakes within the repository to correctly reference it as a source.
+
+diff --git a/09/22/flake.nix b/09/22/flake.nix
+new file mode 100644
+index 0000000..4197a46
+--- /dev/null
++++ b/09/22/flake.nix
+@@ -0,0 +1,38 @@
++{
++  description = "Main project flake for the 2025 repository.";
++
++  inputs = {
++    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
++    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
++    # Reference the current repository itself as a source
++    # This allows other flakes within this repo to reference it
++    selfRef = "path:.";
++  };
++
++  outputs = { self, nixpkgs, flake-utils, selfRef }:
++    flake-utils.lib.eachDefaultSystem (system:
++      let
++        pkgs = import nixpkgs { inherit system; };
++      in
++      {
++        # Define a devShell for the main project
++        devShell = pkgs.mkShell {
++          buildInputs = [
++            pkgs.git
++            pkgs.nix
++            pkgs.bash
++            pkgs.coreutils
++            pkgs.jq
++            pkgs.gh
++            pkgs.shellcheck
++            pkgs.curl
++            pkgs.pandoc
++          ];
++        };
++
++        # You can add other packages, apps, etc. here for the main project
++        # For example, to expose the LLM context builder:
++        # packages.llmContextBuilder = self.nix-llm-context.packages.${system}.monsterGroupLlmContext;
++      }
++    );
++}

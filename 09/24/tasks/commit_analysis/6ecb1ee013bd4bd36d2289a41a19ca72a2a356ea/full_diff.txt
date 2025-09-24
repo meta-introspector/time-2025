@@ -1,0 +1,747 @@
+commit 6ecb1ee013bd4bd36d2289a41a19ca72a2a356ea
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 22:58:46 2025 +0000
+
+    wipa
+
+diff --git a/09/22/flake.nix b/09/22/flake.nix
+index 1f396a4..b91c742 100644
+--- a/09/22/flake.nix
++++ b/09/22/flake.nix
+@@ -71,6 +71,11 @@
+           article = "Sporadic_group.html";
+         };
+ 
++        packages.ontologyWikidata = mkWikidataPackage {
++          name = "ontology-wikidata";
++          article = "Ontology.html";
++        };
++
+         # You can add other packages, apps, etc. here for the main project
+         # For example, to expose the LLM context builder:
+         # packages.llmContextBuilder = self.nix-llm-context.packages.${system}.monsterGroupLlmContext;
+diff --git a/09/22/scripts/cache_wikipedia_sources.sh b/09/22/scripts/cache_wikipedia_sources.sh
+index c1216c1..733250e 100755
+--- a/09/22/scripts/cache_wikipedia_sources.sh
++++ b/09/22/scripts/cache_wikipedia_sources.sh
+@@ -7,7 +7,7 @@ set -e
+ source "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/lib/lib_exec.sh"
+ 
+ # Ensure the cache directory exists
+-execute_cmd ./setup_wikipedia_cache.sh
++execute_cmd /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/scripts/setup_wikipedia_cache.sh
+ 
+ # Clear or create the articles list file
+ execute_cmd bash -c "> wikipedia_articles.md"
+@@ -53,7 +53,12 @@ for url in "${WIKI_URLS[@]}"; do
+     execute_cmd echo "Caching: $url to $filepath"
+     # Use curl to get content and save it
+     execute_cmd echo "Fetching content for $url using curl..."
+-    execute_cmd curl -sL "$url" -o "$filepath"
++    execute_cmd curl -sL -A "solfunmeme.com" "$url" -o "$filepath"
++
++    # Check if the file is empty
++    if [ ! -s "$filepath" ]; then
++        execute_cmd echo "Warning: Fetched file is empty: $filepath. This might indicate a block or an empty page."
++    fi
+ 
+     # Add to articles list
+     execute_cmd bash -c "echo \"- [$url]($url) -> $filepath\" >> wikipedia_articles.md"
+diff --git a/09/22/scripts/delete_blocked_html_files.sh b/09/22/scripts/delete_blocked_html_files.sh
+new file mode 100755
+index 0000000..0fa3fa4
+--- /dev/null
++++ b/09/22/scripts/delete_blocked_html_files.sh
+@@ -0,0 +1,15 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++CACHE_DIR="/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/wikipedia_cache"
++ERROR_PATTERN="Please set a proper user-agent and respect our robot policy"
++
++for file in "$CACHE_DIR"/*.html; do
++  if grep -q "$ERROR_PATTERN" "$file"; then
++    echo "Deleting blocked file: $file"
++    rm "$file"
++  fi
++done
++
++echo "Deleted HTML files containing the blocked content pattern from $CACHE_DIR."
+diff --git a/09/22/scripts/package_all_articles.sh b/09/22/scripts/package_all_articles.sh
+deleted file mode 100755
+index c89a53f..0000000
+--- a/09/22/scripts/package_all_articles.sh
++++ /dev/null
+@@ -1,13 +0,0 @@
+-#!/usr/bin/env bash
+-
+-set -euo pipefail
+-
+-rm -rf ./test_output
+-
+-for article in /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/wikipedia_cache/*; do
+-  if [ -f "$article" ]; then
+-    article_name=$(basename "$article")
+-    echo "Packaging $article_name..."
+-    /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/scripts/test_packaging.sh "$article_name"
+-  fi
+-done
+diff --git a/09/22/scripts/test_packaging.sh b/09/22/scripts/test_packaging.sh
+deleted file mode 100755
+index d321823..0000000
+--- a/09/22/scripts/test_packaging.sh
++++ /dev/null
+@@ -1,20 +0,0 @@
+-#!/usr/bin/env bash
+-
+-set -euo pipefail
+-
+-if [ -z "$1" ]; then
+-  echo "Usage: $0 <article_name>"
+-  exit 1
+-fi
+-
+-ARTICLE_NAME="$1"
+-OUTPUT_DIR="./test_output/$ARTICLE_NAME"
+-
+-echo "Creating output directory..."
+-mkdir -p "$OUTPUT_DIR"
+-
+-echo "Copying article to output directory..."
+-cp "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/wikipedia_cache/$ARTICLE_NAME" "$OUTPUT_DIR/"
+-
+-echo "Listing contents of output directory..."
+-ls -l "$OUTPUT_DIR"
+diff --git a/09/22/wikipedia_cache/Gematria.html b/09/22/wikipedia_cache/Gematria.html
+deleted file mode 100644
+index 7622a16..0000000
+--- a/09/22/wikipedia_cache/Gematria.html
++++ /dev/null
+@@ -1,41 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="en">
+-<meta charset="utf-8">
+-<title>Wikimedia Error</title>
+-<style>
+-* { margin: 0; padding: 0; }
+-body { background: #fff; font: 15px/1.6 sans-serif; color: #333; }
+-.content { margin: 7% auto 0; padding: 2em 1em 1em; max-width: 640px; }
+-.footer { clear: both; margin-top: 14%; border-top: 1px solid #e5e5e5; background: #f9f9f9; padding: 2em 0; font-size: 0.8em; text-align: center; }
+-img { float: left; margin: 0 2em 2em 0; }
+-a img { border: 0; }
+-h1 { margin-top: 1em; font-size: 1.2em; }
+-.content-text { overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+-p { margin: 0.7em 0 1em 0; }
+-a { color: #0645ad; text-decoration: none; }
+-a:hover { text-decoration: underline; }
+-code { font-family: sans-serif; }
+-summary { font-weight: bold; cursor: pointer; }
+-details[open] { background: #970302; color: #dfdedd; }
+-.text-muted { color: #777; }
+-@media (prefers-color-scheme: dark) {
+-  a { color: #9e9eff; }
+-  body { background: transparent; color: #ddd; }
+-  .footer { border-top: 1px solid #444; background: #060606; }
+-  #logo { filter: invert(1) hue-rotate(180deg); }
+-  .text-muted { color: #888; }
+-}
+-</style>
+-<meta name="color-scheme" content="light dark">
+-<div class="content" role="main">
+-<a href="https://www.wikimedia.org"><img id="logo" src="https://www.wikimedia.org/static/images/wmf-logo.png" srcset="https://www.wikimedia.org/static/images/wmf-logo-2x.png 2x" alt="Wikimedia" width="135" height="101">
+-</a>
+-<h1>Error</h1>
+-<div class="content-text">
+-
+-<p>Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119</p>
+-</div>
+-</div>
+-<div class="footer"><p>If you report this error to the Wikimedia System Administrators, please include the details below.</p><p class="text-muted"><code>Request served via cp1112 cp1112, Varnish XID 488312073<br>Upstream caches: cp1112 int<br>Error: 429, Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119 at Mon, 22 Sep 2025 15:52:16 GMT<br><details><summary>Sensitive client information</summary>IP address: 108.24.47.209</details></code></p>
+-</div>
+-</html>
+diff --git a/09/22/wikipedia_cache/Griess_algebra.html b/09/22/wikipedia_cache/Griess_algebra.html
+deleted file mode 100644
+index 4cdc194..0000000
+--- a/09/22/wikipedia_cache/Griess_algebra.html
++++ /dev/null
+@@ -1,41 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="en">
+-<meta charset="utf-8">
+-<title>Wikimedia Error</title>
+-<style>
+-* { margin: 0; padding: 0; }
+-body { background: #fff; font: 15px/1.6 sans-serif; color: #333; }
+-.content { margin: 7% auto 0; padding: 2em 1em 1em; max-width: 640px; }
+-.footer { clear: both; margin-top: 14%; border-top: 1px solid #e5e5e5; background: #f9f9f9; padding: 2em 0; font-size: 0.8em; text-align: center; }
+-img { float: left; margin: 0 2em 2em 0; }
+-a img { border: 0; }
+-h1 { margin-top: 1em; font-size: 1.2em; }
+-.content-text { overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+-p { margin: 0.7em 0 1em 0; }
+-a { color: #0645ad; text-decoration: none; }
+-a:hover { text-decoration: underline; }
+-code { font-family: sans-serif; }
+-summary { font-weight: bold; cursor: pointer; }
+-details[open] { background: #970302; color: #dfdedd; }
+-.text-muted { color: #777; }
+-@media (prefers-color-scheme: dark) {
+-  a { color: #9e9eff; }
+-  body { background: transparent; color: #ddd; }
+-  .footer { border-top: 1px solid #444; background: #060606; }
+-  #logo { filter: invert(1) hue-rotate(180deg); }
+-  .text-muted { color: #888; }
+-}
+-</style>
+-<meta name="color-scheme" content="light dark">
+-<div class="content" role="main">
+-<a href="https://www.wikimedia.org"><img id="logo" src="https://www.wikimedia.org/static/images/wmf-logo.png" srcset="https://www.wikimedia.org/static/images/wmf-logo-2x.png 2x" alt="Wikimedia" width="135" height="101">
+-</a>
+-<h1>Error</h1>
+-<div class="content-text">
+-
+-<p>Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119</p>
+-</div>
+-</div>
+-<div class="footer"><p>If you report this error to the Wikimedia System Administrators, please include the details below.</p><p class="text-muted"><code>Request served via cp1112 cp1112, Varnish XID 475970426<br>Upstream caches: cp1112 int<br>Error: 429, Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119 at Mon, 22 Sep 2025 15:52:16 GMT<br><details><summary>Sensitive client information</summary>IP address: 108.24.47.209</details></code></p>
+-</div>
+-</html>
+diff --git a/09/22/wikipedia_cache/Group__mathematics_.html b/09/22/wikipedia_cache/Group__mathematics_.html
+deleted file mode 100644
+index 789197f..0000000
+--- a/09/22/wikipedia_cache/Group__mathematics_.html
++++ /dev/null
+@@ -1,41 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="en">
+-<meta charset="utf-8">
+-<title>Wikimedia Error</title>
+-<style>
+-* { margin: 0; padding: 0; }
+-body { background: #fff; font: 15px/1.6 sans-serif; color: #333; }
+-.content { margin: 7% auto 0; padding: 2em 1em 1em; max-width: 640px; }
+-.footer { clear: both; margin-top: 14%; border-top: 1px solid #e5e5e5; background: #f9f9f9; padding: 2em 0; font-size: 0.8em; text-align: center; }
+-img { float: left; margin: 0 2em 2em 0; }
+-a img { border: 0; }
+-h1 { margin-top: 1em; font-size: 1.2em; }
+-.content-text { overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+-p { margin: 0.7em 0 1em 0; }
+-a { color: #0645ad; text-decoration: none; }
+-a:hover { text-decoration: underline; }
+-code { font-family: sans-serif; }
+-summary { font-weight: bold; cursor: pointer; }
+-details[open] { background: #970302; color: #dfdedd; }
+-.text-muted { color: #777; }
+-@media (prefers-color-scheme: dark) {
+-  a { color: #9e9eff; }
+-  body { background: transparent; color: #ddd; }
+-  .footer { border-top: 1px solid #444; background: #060606; }
+-  #logo { filter: invert(1) hue-rotate(180deg); }
+-  .text-muted { color: #888; }
+-}
+-</style>
+-<meta name="color-scheme" content="light dark">
+-<div class="content" role="main">
+-<a href="https://www.wikimedia.org"><img id="logo" src="https://www.wikimedia.org/static/images/wmf-logo.png" srcset="https://www.wikimedia.org/static/images/wmf-logo-2x.png 2x" alt="Wikimedia" width="135" height="101">
+-</a>
+-<h1>Error</h1>
+-<div class="content-text">
+-
+-<p>Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119</p>
+-</div>
+-</div>
+-<div class="footer"><p>If you report this error to the Wikimedia System Administrators, please include the details below.</p><p class="text-muted"><code>Request served via cp1112 cp1112, Varnish XID 487821849<br>Upstream caches: cp1112 int<br>Error: 429, Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119 at Mon, 22 Sep 2025 15:52:17 GMT<br><details><summary>Sensitive client information</summary>IP address: 108.24.47.209</details></code></p>
+-</div>
+-</html>
+diff --git a/09/22/wikipedia_cache/Heptadecagon.html b/09/22/wikipedia_cache/Heptadecagon.html
+deleted file mode 100644
+index d8501d4..0000000
+--- a/09/22/wikipedia_cache/Heptadecagon.html
++++ /dev/null
+@@ -1,41 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="en">
+-<meta charset="utf-8">
+-<title>Wikimedia Error</title>
+-<style>
+-* { margin: 0; padding: 0; }
+-body { background: #fff; font: 15px/1.6 sans-serif; color: #333; }
+-.content { margin: 7% auto 0; padding: 2em 1em 1em; max-width: 640px; }
+-.footer { clear: both; margin-top: 14%; border-top: 1px solid #e5e5e5; background: #f9f9f9; padding: 2em 0; font-size: 0.8em; text-align: center; }
+-img { float: left; margin: 0 2em 2em 0; }
+-a img { border: 0; }
+-h1 { margin-top: 1em; font-size: 1.2em; }
+-.content-text { overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+-p { margin: 0.7em 0 1em 0; }
+-a { color: #0645ad; text-decoration: none; }
+-a:hover { text-decoration: underline; }
+-code { font-family: sans-serif; }
+-summary { font-weight: bold; cursor: pointer; }
+-details[open] { background: #970302; color: #dfdedd; }
+-.text-muted { color: #777; }
+-@media (prefers-color-scheme: dark) {
+-  a { color: #9e9eff; }
+-  body { background: transparent; color: #ddd; }
+-  .footer { border-top: 1px solid #444; background: #060606; }
+-  #logo { filter: invert(1) hue-rotate(180deg); }
+-  .text-muted { color: #888; }
+-}
+-</style>
+-<meta name="color-scheme" content="light dark">
+-<div class="content" role="main">
+-<a href="https://www.wikimedia.org"><img id="logo" src="https://www.wikimedia.org/static/images/wmf-logo.png" srcset="https://www.wikimedia.org/static/images/wmf-logo-2x.png 2x" alt="Wikimedia" width="135" height="101">
+-</a>
+-<h1>Error</h1>
+-<div class="content-text">
+-
+-<p>Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119</p>
+-</div>
+-</div>
+-<div class="footer"><p>If you report this error to the Wikimedia System Administrators, please include the details below.</p><p class="text-muted"><code>Request served via cp1112 cp1112, Varnish XID 476658660<br>Upstream caches: cp1112 int<br>Error: 429, Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119 at Mon, 22 Sep 2025 15:52:17 GMT<br><details><summary>Sensitive client information</summary>IP address: 108.24.47.209</details></code></p>
+-</div>
+-</html>
+diff --git a/09/22/wikipedia_cache/Homotopy.html b/09/22/wikipedia_cache/Homotopy.html
+deleted file mode 100644
+index 483787d..0000000
+--- a/09/22/wikipedia_cache/Homotopy.html
++++ /dev/null
+@@ -1,41 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="en">
+-<meta charset="utf-8">
+-<title>Wikimedia Error</title>
+-<style>
+-* { margin: 0; padding: 0; }
+-body { background: #fff; font: 15px/1.6 sans-serif; color: #333; }
+-.content { margin: 7% auto 0; padding: 2em 1em 1em; max-width: 640px; }
+-.footer { clear: both; margin-top: 14%; border-top: 1px solid #e5e5e5; background: #f9f9f9; padding: 2em 0; font-size: 0.8em; text-align: center; }
+-img { float: left; margin: 0 2em 2em 0; }
+-a img { border: 0; }
+-h1 { margin-top: 1em; font-size: 1.2em; }
+-.content-text { overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+-p { margin: 0.7em 0 1em 0; }
+-a { color: #0645ad; text-decoration: none; }
+-a:hover { text-decoration: underline; }
+-code { font-family: sans-serif; }
+-summary { font-weight: bold; cursor: pointer; }
+-details[open] { background: #970302; color: #dfdedd; }
+-.text-muted { color: #777; }
+-@media (prefers-color-scheme: dark) {
+-  a { color: #9e9eff; }
+-  body { background: transparent; color: #ddd; }
+-  .footer { border-top: 1px solid #444; background: #060606; }
+-  #logo { filter: invert(1) hue-rotate(180deg); }
+-  .text-muted { color: #888; }
+-}
+-</style>
+-<meta name="color-scheme" content="light dark">
+-<div class="content" role="main">
+-<a href="https://www.wikimedia.org"><img id="logo" src="https://www.wikimedia.org/static/images/wmf-logo.png" srcset="https://www.wikimedia.org/static/images/wmf-logo-2x.png 2x" alt="Wikimedia" width="135" height="101">
+-</a>
+-<h1>Error</h1>
+-<div class="content-text">
+-
+-<p>Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119</p>
+-</div>
+-</div>
+-<div class="footer"><p>If you report this error to the Wikimedia System Administrators, please include the details below.</p><p class="text-muted"><code>Request served via cp1112 cp1112, Varnish XID 489819079<br>Upstream caches: cp1112 int<br>Error: 429, Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119 at Mon, 22 Sep 2025 15:52:17 GMT<br><details><summary>Sensitive client information</summary>IP address: 108.24.47.209</details></code></p>
+-</div>
+-</html>
+diff --git a/09/22/wikipedia_cache/Lattice__order_.html b/09/22/wikipedia_cache/Lattice__order_.html
+deleted file mode 100644
+index 7180764..0000000
+--- a/09/22/wikipedia_cache/Lattice__order_.html
++++ /dev/null
+@@ -1,41 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="en">
+-<meta charset="utf-8">
+-<title>Wikimedia Error</title>
+-<style>
+-* { margin: 0; padding: 0; }
+-body { background: #fff; font: 15px/1.6 sans-serif; color: #333; }
+-.content { margin: 7% auto 0; padding: 2em 1em 1em; max-width: 640px; }
+-.footer { clear: both; margin-top: 14%; border-top: 1px solid #e5e5e5; background: #f9f9f9; padding: 2em 0; font-size: 0.8em; text-align: center; }
+-img { float: left; margin: 0 2em 2em 0; }
+-a img { border: 0; }
+-h1 { margin-top: 1em; font-size: 1.2em; }
+-.content-text { overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+-p { margin: 0.7em 0 1em 0; }
+-a { color: #0645ad; text-decoration: none; }
+-a:hover { text-decoration: underline; }
+-code { font-family: sans-serif; }
+-summary { font-weight: bold; cursor: pointer; }
+-details[open] { background: #970302; color: #dfdedd; }
+-.text-muted { color: #777; }
+-@media (prefers-color-scheme: dark) {
+-  a { color: #9e9eff; }
+-  body { background: transparent; color: #ddd; }
+-  .footer { border-top: 1px solid #444; background: #060606; }
+-  #logo { filter: invert(1) hue-rotate(180deg); }
+-  .text-muted { color: #888; }
+-}
+-</style>
+-<meta name="color-scheme" content="light dark">
+-<div class="content" role="main">
+-<a href="https://www.wikimedia.org"><img id="logo" src="https://www.wikimedia.org/static/images/wmf-logo.png" srcset="https://www.wikimedia.org/static/images/wmf-logo-2x.png 2x" alt="Wikimedia" width="135" height="101">
+-</a>
+-<h1>Error</h1>
+-<div class="content-text">
+-
+-<p>Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119</p>
+-</div>
+-</div>
+-<div class="footer"><p>If you report this error to the Wikimedia System Administrators, please include the details below.</p><p class="text-muted"><code>Request served via cp1112 cp1112, Varnish XID 479701705<br>Upstream caches: cp1112 int<br>Error: 429, Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119 at Mon, 22 Sep 2025 15:52:17 GMT<br><details><summary>Sensitive client information</summary>IP address: 108.24.47.209</details></code></p>
+-</div>
+-</html>
+diff --git a/09/22/wikipedia_cache/Mathieu_group_M11.html b/09/22/wikipedia_cache/Mathieu_group_M11.html
+deleted file mode 100644
+index ec09eaa..0000000
+--- a/09/22/wikipedia_cache/Mathieu_group_M11.html
++++ /dev/null
+@@ -1,41 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="en">
+-<meta charset="utf-8">
+-<title>Wikimedia Error</title>
+-<style>
+-* { margin: 0; padding: 0; }
+-body { background: #fff; font: 15px/1.6 sans-serif; color: #333; }
+-.content { margin: 7% auto 0; padding: 2em 1em 1em; max-width: 640px; }
+-.footer { clear: both; margin-top: 14%; border-top: 1px solid #e5e5e5; background: #f9f9f9; padding: 2em 0; font-size: 0.8em; text-align: center; }
+-img { float: left; margin: 0 2em 2em 0; }
+-a img { border: 0; }
+-h1 { margin-top: 1em; font-size: 1.2em; }
+-.content-text { overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+-p { margin: 0.7em 0 1em 0; }
+-a { color: #0645ad; text-decoration: none; }
+-a:hover { text-decoration: underline; }
+-code { font-family: sans-serif; }
+-summary { font-weight: bold; cursor: pointer; }
+-details[open] { background: #970302; color: #dfdedd; }
+-.text-muted { color: #777; }
+-@media (prefers-color-scheme: dark) {
+-  a { color: #9e9eff; }
+-  body { background: transparent; color: #ddd; }
+-  .footer { border-top: 1px solid #444; background: #060606; }
+-  #logo { filter: invert(1) hue-rotate(180deg); }
+-  .text-muted { color: #888; }
+-}
+-</style>
+-<meta name="color-scheme" content="light dark">
+-<div class="content" role="main">
+-<a href="https://www.wikimedia.org"><img id="logo" src="https://www.wikimedia.org/static/images/wmf-logo.png" srcset="https://www.wikimedia.org/static/images/wmf-logo-2x.png 2x" alt="Wikimedia" width="135" height="101">
+-</a>
+-<h1>Error</h1>
+-<div class="content-text">
+-
+-<p>Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119</p>
+-</div>
+-</div>
+-<div class="footer"><p>If you report this error to the Wikimedia System Administrators, please include the details below.</p><p class="text-muted"><code>Request served via cp1112 cp1112, Varnish XID 469064055<br>Upstream caches: cp1112 int<br>Error: 429, Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119 at Mon, 22 Sep 2025 15:52:18 GMT<br><details><summary>Sensitive client information</summary>IP address: 108.24.47.209</details></code></p>
+-</div>
+-</html>
+diff --git a/09/22/wikipedia_cache/Monster_group.html b/09/22/wikipedia_cache/Monster_group.html
+deleted file mode 100644
+index 9610790..0000000
+--- a/09/22/wikipedia_cache/Monster_group.html
++++ /dev/null
+@@ -1 +0,0 @@
+-<html><body><h1>Monster Group</h1><p>This is a dummy HTML content for Monster Group.</p></body></html>
+diff --git a/09/22/wikipedia_cache/Parameter__mathematics_.html b/09/22/wikipedia_cache/Parameter__mathematics_.html
+deleted file mode 100644
+index 02b085e..0000000
+--- a/09/22/wikipedia_cache/Parameter__mathematics_.html
++++ /dev/null
+@@ -1,41 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="en">
+-<meta charset="utf-8">
+-<title>Wikimedia Error</title>
+-<style>
+-* { margin: 0; padding: 0; }
+-body { background: #fff; font: 15px/1.6 sans-serif; color: #333; }
+-.content { margin: 7% auto 0; padding: 2em 1em 1em; max-width: 640px; }
+-.footer { clear: both; margin-top: 14%; border-top: 1px solid #e5e5e5; background: #f9f9f9; padding: 2em 0; font-size: 0.8em; text-align: center; }
+-img { float: left; margin: 0 2em 2em 0; }
+-a img { border: 0; }
+-h1 { margin-top: 1em; font-size: 1.2em; }
+-.content-text { overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+-p { margin: 0.7em 0 1em 0; }
+-a { color: #0645ad; text-decoration: none; }
+-a:hover { text-decoration: underline; }
+-code { font-family: sans-serif; }
+-summary { font-weight: bold; cursor: pointer; }
+-details[open] { background: #970302; color: #dfdedd; }
+-.text-muted { color: #777; }
+-@media (prefers-color-scheme: dark) {
+-  a { color: #9e9eff; }
+-  body { background: transparent; color: #ddd; }
+-  .footer { border-top: 1px solid #444; background: #060606; }
+-  #logo { filter: invert(1) hue-rotate(180deg); }
+-  .text-muted { color: #888; }
+-}
+-</style>
+-<meta name="color-scheme" content="light dark">
+-<div class="content" role="main">
+-<a href="https://www.wikimedia.org"><img id="logo" src="https://www.wikimedia.org/static/images/wmf-logo.png" srcset="https://www.wikimedia.org/static/images/wmf-logo-2x.png 2x" alt="Wikimedia" width="135" height="101">
+-</a>
+-<h1>Error</h1>
+-<div class="content-text">
+-
+-<p>Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119</p>
+-</div>
+-</div>
+-<div class="footer"><p>If you report this error to the Wikimedia System Administrators, please include the details below.</p><p class="text-muted"><code>Request served via cp1112 cp1112, Varnish XID 491029895<br>Upstream caches: cp1112 int<br>Error: 429, Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119 at Mon, 22 Sep 2025 15:52:24 GMT<br><details><summary>Sensitive client information</summary>IP address: 108.24.47.209</details></code></p>
+-</div>
+-</html>
+diff --git a/09/22/wikipedia_cache/Riemann_zeta_function.html b/09/22/wikipedia_cache/Riemann_zeta_function.html
+deleted file mode 100644
+index 41045e2..0000000
+--- a/09/22/wikipedia_cache/Riemann_zeta_function.html
++++ /dev/null
+@@ -1,41 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="en">
+-<meta charset="utf-8">
+-<title>Wikimedia Error</title>
+-<style>
+-* { margin: 0; padding: 0; }
+-body { background: #fff; font: 15px/1.6 sans-serif; color: #333; }
+-.content { margin: 7% auto 0; padding: 2em 1em 1em; max-width: 640px; }
+-.footer { clear: both; margin-top: 14%; border-top: 1px solid #e5e5e5; background: #f9f9f9; padding: 2em 0; font-size: 0.8em; text-align: center; }
+-img { float: left; margin: 0 2em 2em 0; }
+-a img { border: 0; }
+-h1 { margin-top: 1em; font-size: 1.2em; }
+-.content-text { overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+-p { margin: 0.7em 0 1em 0; }
+-a { color: #0645ad; text-decoration: none; }
+-a:hover { text-decoration: underline; }
+-code { font-family: sans-serif; }
+-summary { font-weight: bold; cursor: pointer; }
+-details[open] { background: #970302; color: #dfdedd; }
+-.text-muted { color: #777; }
+-@media (prefers-color-scheme: dark) {
+-  a { color: #9e9eff; }
+-  body { background: transparent; color: #ddd; }
+-  .footer { border-top: 1px solid #444; background: #060606; }
+-  #logo { filter: invert(1) hue-rotate(180deg); }
+-  .text-muted { color: #888; }
+-}
+-</style>
+-<meta name="color-scheme" content="light dark">
+-<div class="content" role="main">
+-<a href="https://www.wikimedia.org"><img id="logo" src="https://www.wikimedia.org/static/images/wmf-logo.png" srcset="https://www.wikimedia.org/static/images/wmf-logo-2x.png 2x" alt="Wikimedia" width="135" height="101">
+-</a>
+-<h1>Error</h1>
+-<div class="content-text">
+-
+-<p>Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119</p>
+-</div>
+-</div>
+-<div class="footer"><p>If you report this error to the Wikimedia System Administrators, please include the details below.</p><p class="text-muted"><code>Request served via cp1112 cp1112, Varnish XID 479533623<br>Upstream caches: cp1112 int<br>Error: 429, Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119 at Mon, 22 Sep 2025 15:52:24 GMT<br><details><summary>Sensitive client information</summary>IP address: 108.24.47.209</details></code></p>
+-</div>
+-</html>
+diff --git a/09/22/wikipedia_cache/Sporadic_group.html b/09/22/wikipedia_cache/Sporadic_group.html
+deleted file mode 100644
+index f254076..0000000
+--- a/09/22/wikipedia_cache/Sporadic_group.html
++++ /dev/null
+@@ -1,41 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="en">
+-<meta charset="utf-8">
+-<title>Wikimedia Error</title>
+-<style>
+-* { margin: 0; padding: 0; }
+-body { background: #fff; font: 15px/1.6 sans-serif; color: #333; }
+-.content { margin: 7% auto 0; padding: 2em 1em 1em; max-width: 640px; }
+-.footer { clear: both; margin-top: 14%; border-top: 1px solid #e5e5e5; background: #f9f9f9; padding: 2em 0; font-size: 0.8em; text-align: center; }
+-img { float: left; margin: 0 2em 2em 0; }
+-a img { border: 0; }
+-h1 { margin-top: 1em; font-size: 1.2em; }
+-.content-text { overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+-p { margin: 0.7em 0 1em 0; }
+-a { color: #0645ad; text-decoration: none; }
+-a:hover { text-decoration: underline; }
+-code { font-family: sans-serif; }
+-summary { font-weight: bold; cursor: pointer; }
+-details[open] { background: #970302; color: #dfdedd; }
+-.text-muted { color: #777; }
+-@media (prefers-color-scheme: dark) {
+-  a { color: #9e9eff; }
+-  body { background: transparent; color: #ddd; }
+-  .footer { border-top: 1px solid #444; background: #060606; }
+-  #logo { filter: invert(1) hue-rotate(180deg); }
+-  .text-muted { color: #888; }
+-}
+-</style>
+-<meta name="color-scheme" content="light dark">
+-<div class="content" role="main">
+-<a href="https://www.wikimedia.org"><img id="logo" src="https://www.wikimedia.org/static/images/wmf-logo.png" srcset="https://www.wikimedia.org/static/images/wmf-logo-2x.png 2x" alt="Wikimedia" width="135" height="101">
+-</a>
+-<h1>Error</h1>
+-<div class="content-text">
+-
+-<p>Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119</p>
+-</div>
+-</div>
+-<div class="footer"><p>If you report this error to the Wikimedia System Administrators, please include the details below.</p><p class="text-muted"><code>Request served via cp1112 cp1112, Varnish XID 481302170<br>Upstream caches: cp1112 int<br>Error: 429, Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119 at Mon, 22 Sep 2025 15:52:25 GMT<br><details><summary>Sensitive client information</summary>IP address: 108.24.47.209</details></code></p>
+-</div>
+-</html>
+diff --git a/09/22/wikipedia_cache/Test_Page.html b/09/22/wikipedia_cache/Test_Page.html
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/09/22/wikipedia_cache/Transitive_group_action.html b/09/22/wikipedia_cache/Transitive_group_action.html
+deleted file mode 100644
+index 11eaf28..0000000
+--- a/09/22/wikipedia_cache/Transitive_group_action.html
++++ /dev/null
+@@ -1,41 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="en">
+-<meta charset="utf-8">
+-<title>Wikimedia Error</title>
+-<style>
+-* { margin: 0; padding: 0; }
+-body { background: #fff; font: 15px/1.6 sans-serif; color: #333; }
+-.content { margin: 7% auto 0; padding: 2em 1em 1em; max-width: 640px; }
+-.footer { clear: both; margin-top: 14%; border-top: 1px solid #e5e5e5; background: #f9f9f9; padding: 2em 0; font-size: 0.8em; text-align: center; }
+-img { float: left; margin: 0 2em 2em 0; }
+-a img { border: 0; }
+-h1 { margin-top: 1em; font-size: 1.2em; }
+-.content-text { overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+-p { margin: 0.7em 0 1em 0; }
+-a { color: #0645ad; text-decoration: none; }
+-a:hover { text-decoration: underline; }
+-code { font-family: sans-serif; }
+-summary { font-weight: bold; cursor: pointer; }
+-details[open] { background: #970302; color: #dfdedd; }
+-.text-muted { color: #777; }
+-@media (prefers-color-scheme: dark) {
+-  a { color: #9e9eff; }
+-  body { background: transparent; color: #ddd; }
+-  .footer { border-top: 1px solid #444; background: #060606; }
+-  #logo { filter: invert(1) hue-rotate(180deg); }
+-  .text-muted { color: #888; }
+-}
+-</style>
+-<meta name="color-scheme" content="light dark">
+-<div class="content" role="main">
+-<a href="https://www.wikimedia.org"><img id="logo" src="https://www.wikimedia.org/static/images/wmf-logo.png" srcset="https://www.wikimedia.org/static/images/wmf-logo-2x.png 2x" alt="Wikimedia" width="135" height="101">
+-</a>
+-<h1>Error</h1>
+-<div class="content-text">
+-
+-<p>Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119</p>
+-</div>
+-</div>
+-<div class="footer"><p>If you report this error to the Wikimedia System Administrators, please include the details below.</p><p class="text-muted"><code>Request served via cp1112 cp1112, Varnish XID 487101555<br>Upstream caches: cp1112 int<br>Error: 429, Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119 at Mon, 22 Sep 2025 15:52:25 GMT<br><details><summary>Sensitive client information</summary>IP address: 108.24.47.209</details></code></p>
+-</div>
+-</html>
+diff --git a/09/22/wikipedia_cache/Vertex_operator_algebra.html b/09/22/wikipedia_cache/Vertex_operator_algebra.html
+deleted file mode 100644
+index 23ba871..0000000
+--- a/09/22/wikipedia_cache/Vertex_operator_algebra.html
++++ /dev/null
+@@ -1,41 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="en">
+-<meta charset="utf-8">
+-<title>Wikimedia Error</title>
+-<style>
+-* { margin: 0; padding: 0; }
+-body { background: #fff; font: 15px/1.6 sans-serif; color: #333; }
+-.content { margin: 7% auto 0; padding: 2em 1em 1em; max-width: 640px; }
+-.footer { clear: both; margin-top: 14%; border-top: 1px solid #e5e5e5; background: #f9f9f9; padding: 2em 0; font-size: 0.8em; text-align: center; }
+-img { float: left; margin: 0 2em 2em 0; }
+-a img { border: 0; }
+-h1 { margin-top: 1em; font-size: 1.2em; }
+-.content-text { overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+-p { margin: 0.7em 0 1em 0; }
+-a { color: #0645ad; text-decoration: none; }
+-a:hover { text-decoration: underline; }
+-code { font-family: sans-serif; }
+-summary { font-weight: bold; cursor: pointer; }
+-details[open] { background: #970302; color: #dfdedd; }
+-.text-muted { color: #777; }
+-@media (prefers-color-scheme: dark) {
+-  a { color: #9e9eff; }
+-  body { background: transparent; color: #ddd; }
+-  .footer { border-top: 1px solid #444; background: #060606; }
+-  #logo { filter: invert(1) hue-rotate(180deg); }
+-  .text-muted { color: #888; }
+-}
+-</style>
+-<meta name="color-scheme" content="light dark">
+-<div class="content" role="main">
+-<a href="https://www.wikimedia.org"><img id="logo" src="https://www.wikimedia.org/static/images/wmf-logo.png" srcset="https://www.wikimedia.org/static/images/wmf-logo-2x.png 2x" alt="Wikimedia" width="135" height="101">
+-</a>
+-<h1>Error</h1>
+-<div class="content-text">
+-
+-<p>Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119</p>
+-</div>
+-</div>
+-<div class="footer"><p>If you report this error to the Wikimedia System Administrators, please include the details below.</p><p class="text-muted"><code>Request served via cp1112 cp1112, Varnish XID 467848021<br>Upstream caches: cp1112 int<br>Error: 429, Please set a proper user-agent and respect our robot policy https://w.wiki/4wJS. See also T400119 at Mon, 22 Sep 2025 15:52:25 GMT<br><details><summary>Sensitive client information</summary>IP address: 108.24.47.209</details></code></p>
+-</div>
+-</html>
+diff --git a/09/analyze_ngrams.nix b/09/analyze_ngrams.nix
+index be52294..fa1bda0 100644
+--- a/09/analyze_ngrams.nix
++++ b/09/analyze_ngrams.nix
+@@ -4,19 +4,19 @@ let
+   lib = pkgs.lib;
+ 
+   # Path to the JSON file.
+-  ngramFile = ./ngram_index.json;
++  ngramFile = ./ontology_ngrams.json;
+ 
+   # Read and parse the JSON file.
+   # WARNING: This will load the entire ngram_index.json file into memory.
+   ngramData = builtins.fromJSON (builtins.readFile ngramFile);
+ 
+-  # Convert the attribute set to a list of { name, value } pairs.
+-  ngramList = lib.mapAttrsToList (name: value: { inherit name value; }) ngramData;
++  # Access the "1-gram" array from the parsed JSON data.
++  ngramList = ngramData."1-gram";
+ 
+   # Sort the list by value in descending order.
+-  sortedNgrams = lib.sort (a: b: lib.higher a.value b.value) ngramList;
++  sortedNgrams = lib.sort (a: b: a.value > b.value) ngramList;
+ 
+   # Take the top 10.
+   top10Ngrams = lib.take 10 sortedNgrams;
+ in
+-top10Ngrams
++builtins.toJSON ngramList
+diff --git a/09/flake.lock b/09/flake.lock
+index 6619ec7..623b693 100644
+--- a/09/flake.lock
++++ b/09/flake.lock
+@@ -24,12 +24,12 @@
+       },
+       "locked": {
+         "lastModified": 1,
+-        "narHash": "sha256-EsiIF/91SOmhyqym1h7CSClGHevIjB8m63DHGWspJjg=",
+-        "path": "/nix/store/678d75fdgsbdzxkm3kbg5y00jxl24cdi-source/09/23/nix_concepts_and_facts",
++        "narHash": "sha256-MVdZhiwGOcZdrt2ooHGlA3V/FBeqcuWosQFJ8rxZ/38=",
++        "path": "/nix/store/7rsmql13kmhksw1gaz9smqw4aiddk1d4-source/09/23/nix_concepts_and_facts",
+         "type": "path"
+       },
+       "original": {
+-        "path": "/nix/store/678d75fdgsbdzxkm3kbg5y00jxl24cdi-source/09/23/nix_concepts_and_facts",
++        "path": "/nix/store/7rsmql13kmhksw1gaz9smqw4aiddk1d4-source/09/23/nix_concepts_and_facts",
+         "type": "path"
+       }
+     },
+diff --git a/09/result b/09/result
+index b0abd1c..4698ca3 120000
+--- a/09/result
++++ b/09/result
+@@ -1 +1 @@
+-/nix/store/8dq48qahghy5pgkzl1r6rmk72k3djx56-nix-nar-0.3.0
+\ No newline at end of file
++/nix/store/3cjka3sar7wmm1fsy04fimfp43vfl7v4-sporadic-group-wikidata
+\ No newline at end of file

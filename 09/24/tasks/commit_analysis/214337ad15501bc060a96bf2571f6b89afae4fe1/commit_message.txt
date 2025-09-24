@@ -1,0 +1,2 @@
+fix: Make buildCommand explicitly create  directory and write to it
+

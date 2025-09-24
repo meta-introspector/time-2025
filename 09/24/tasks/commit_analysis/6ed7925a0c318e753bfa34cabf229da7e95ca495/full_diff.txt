@@ -1,0 +1,1495 @@
+commit 6ed7925a0c318e753bfa34cabf229da7e95ca495
+Author: mike <h@solfunmeme.com>
+Date:   Wed Sep 24 11:41:37 2025 +0000
+
+    wip
+
+diff --git a/09/22/flake.nix b/09/22/flake.nix
+index b91c742..b545a39 100644
+--- a/09/22/flake.nix
++++ b/09/22/flake.nix
+@@ -23,11 +23,26 @@
+           pkgs.runCommand name {
+             src = ./wikipedia_cache/${article};
+             buildInputs = [ pkgs.coreutils ];
++            passthru.articleName = article;
++            passthru.wikipedia = article;
+           } ''
+             mkdir -p $out
+             cp $src $out/${article}
+           '';
+ 
++        # Wikidata Packages
++        wikidataPackages = pkgs.lib.mapAttrs (
++          name: type:
++            let
++              articleName = pkgs.lib.removeSuffix ".html" name;
++              packageName = pkgs.lib.toCamel name;
++            in
++            mkWikidataPackage {
++              name = "${articleName}-wikidata";
++              article = name;
++            }
++        ) (builtins.readDir ./wikipedia_cache);
++
+       in
+       {
+         # Define a devShell for the main project
+@@ -45,40 +60,19 @@
+           ];
+         };
+ 
+-        # Define a default package for the main project
+-        packages.default = pkgs.writeShellScriptBin "hello-nix" ''
+-          echo "Hello from Nix!"
+-        '';
+-
+-        # Wikidata Packages
+-        packages.monsterGroupWikidata = mkWikidataPackage {
+-          name = "monster-group-wikidata";
+-          article = "Monster_group.html";
+-        };
+-
+-        packages.steinerSystemWikidata = mkWikidataPackage {
+-          name = "steiner-system-wikidata";
+-          article = "Steiner_system.html";
+-        };
+-
+-        packages.mathieuGroupM12Wikidata = mkWikidataPackage {
+-          name = "mathieu-group-m12-wikidata";
+-          article = "Mathieu_group_M12.html";
+-        };
+-
+-        packages.sporadicGroupWikidata = mkWikidataPackage {
+-          name = "sporadic-group-wikidata";
+-          article = "Sporadic_group.html";
+-        };
+-
+-        packages.ontologyWikidata = mkWikidataPackage {
+-          name = "ontology-wikidata";
+-          article = "Ontology.html";
++        packages = wikidataPackages // {
++          default = pkgs.writeShellScriptBin "hello-nix" ''
++            echo "Hello from Nix!"
++          '';
+         };
+ 
+         # You can add other packages, apps, etc. here for the main project
+         # For example, to expose the LLM context builder:
+         # packages.llmContextBuilder = self.nix-llm-context.packages.${system}.monsterGroupLlmContext;
++
++        # Temporarily commented out due to missing unpack-zos-sequence.sh in dependency
++        # packages.default = day_23_concepts.packages.${system}.default; # Expose ai-context-23 as default
++        # inherit (day_23_concepts.packages.${system}) number-23 is-prime-23 fact-23-oracle; # Expose individual concepts
+       }
+     );
+ }
+diff --git a/09/22/flake22.json b/09/22/flake22.json
+new file mode 100644
+index 0000000..2064d14
+--- /dev/null
++++ b/09/22/flake22.json
+@@ -0,0 +1 @@
++{"devShell":{"aarch64-darwin":{"name":"nix-shell","type":"derivation"},"aarch64-linux":{"name":"nix-shell","type":"derivation"},"x86_64-darwin":{"name":"nix-shell","type":"derivation"},"x86_64-linux":{"name":"nix-shell","type":"derivation"}},"packages":{"aarch64-darwin":{"17__number_.html":{"name":"17__number_-wikidata","type":"derivation"},"19__number_.html":{"name":"19__number_-wikidata","type":"derivation"},"B_C3_A9zout_27s_identity.html":{"name":"B_C3_A9zout_27s_identity-wikidata","type":"derivation"},"Bott_periodicity.html":{"name":"Bott_periodicity-wikidata","type":"derivation"},"Centered_hexagonal_number.html":{"name":"Centered_hexagonal_number-wikidata","type":"derivation"},"Centered_triangular_number.html":{"name":"Centered_triangular_number-wikidata","type":"derivation"},"Coprime_integers.html":{"name":"Coprime_integers-wikidata","type":"derivation"},"Eigenvalues_and_eigenvectors.html":{"name":"Eigenvalues_and_eigenvectors-wikidata","type":"derivation"},"Euclidean_algorithm.html":{"name":"Euclidean_algorithm-wikidata","type":"derivation"},"Fermat_prime.html":{"name":"Fermat_prime-wikidata","type":"derivation"},"Keith_number.html":{"name":"Keith_number-wikidata","type":"derivation"},"Mathieu_group_M12.html":{"name":"Mathieu_group_M12-wikidata","type":"derivation"},"Metonic_cycle.html":{"name":"Metonic_cycle-wikidata","type":"derivation"},"Monstrous_moonshine.html":{"name":"Monstrous_moonshine-wikidata","type":"derivation"},"Online_Encyclopedia_of_Integer_Sequences.html":{"name":"Online_Encyclopedia_of_Integer_Sequences-wikidata","type":"derivation"},"Ontology.html":{"name":"Ontology-wikidata","type":"derivation"},"Steiner_system.html":{"name":"Steiner_system-wikidata","type":"derivation"},"default":{"name":"hello-nix","type":"derivation"}},"aarch64-linux":{"17__number_.html":{"name":"17__number_-wikidata","type":"derivation"},"19__number_.html":{"name":"19__number_-wikidata","type":"derivation"},"B_C3_A9zout_27s_identity.html":{"name":"B_C3_A9zout_27s_identity-wikidata","type":"derivation"},"Bott_periodicity.html":{"name":"Bott_periodicity-wikidata","type":"derivation"},"Centered_hexagonal_number.html":{"name":"Centered_hexagonal_number-wikidata","type":"derivation"},"Centered_triangular_number.html":{"name":"Centered_triangular_number-wikidata","type":"derivation"},"Coprime_integers.html":{"name":"Coprime_integers-wikidata","type":"derivation"},"Eigenvalues_and_eigenvectors.html":{"name":"Eigenvalues_and_eigenvectors-wikidata","type":"derivation"},"Euclidean_algorithm.html":{"name":"Euclidean_algorithm-wikidata","type":"derivation"},"Fermat_prime.html":{"name":"Fermat_prime-wikidata","type":"derivation"},"Keith_number.html":{"name":"Keith_number-wikidata","type":"derivation"},"Mathieu_group_M12.html":{"name":"Mathieu_group_M12-wikidata","type":"derivation"},"Metonic_cycle.html":{"name":"Metonic_cycle-wikidata","type":"derivation"},"Monstrous_moonshine.html":{"name":"Monstrous_moonshine-wikidata","type":"derivation"},"Online_Encyclopedia_of_Integer_Sequences.html":{"name":"Online_Encyclopedia_of_Integer_Sequences-wikidata","type":"derivation"},"Ontology.html":{"name":"Ontology-wikidata","type":"derivation"},"Steiner_system.html":{"name":"Steiner_system-wikidata","type":"derivation"},"default":{"name":"hello-nix","type":"derivation"}},"x86_64-darwin":{"17__number_.html":{"name":"17__number_-wikidata","type":"derivation"},"19__number_.html":{"name":"19__number_-wikidata","type":"derivation"},"B_C3_A9zout_27s_identity.html":{"name":"B_C3_A9zout_27s_identity-wikidata","type":"derivation"},"Bott_periodicity.html":{"name":"Bott_periodicity-wikidata","type":"derivation"},"Centered_hexagonal_number.html":{"name":"Centered_hexagonal_number-wikidata","type":"derivation"},"Centered_triangular_number.html":{"name":"Centered_triangular_number-wikidata","type":"derivation"},"Coprime_integers.html":{"name":"Coprime_integers-wikidata","type":"derivation"},"Eigenvalues_and_eigenvectors.html":{"name":"Eigenvalues_and_eigenvectors-wikidata","type":"derivation"},"Euclidean_algorithm.html":{"name":"Euclidean_algorithm-wikidata","type":"derivation"},"Fermat_prime.html":{"name":"Fermat_prime-wikidata","type":"derivation"},"Keith_number.html":{"name":"Keith_number-wikidata","type":"derivation"},"Mathieu_group_M12.html":{"name":"Mathieu_group_M12-wikidata","type":"derivation"},"Metonic_cycle.html":{"name":"Metonic_cycle-wikidata","type":"derivation"},"Monstrous_moonshine.html":{"name":"Monstrous_moonshine-wikidata","type":"derivation"},"Online_Encyclopedia_of_Integer_Sequences.html":{"name":"Online_Encyclopedia_of_Integer_Sequences-wikidata","type":"derivation"},"Ontology.html":{"name":"Ontology-wikidata","type":"derivation"},"Steiner_system.html":{"name":"Steiner_system-wikidata","type":"derivation"},"default":{"name":"hello-nix","type":"derivation"}},"x86_64-linux":{"17__number_.html":{"name":"17__number_-wikidata","type":"derivation"},"19__number_.html":{"name":"19__number_-wikidata","type":"derivation"},"B_C3_A9zout_27s_identity.html":{"name":"B_C3_A9zout_27s_identity-wikidata","type":"derivation"},"Bott_periodicity.html":{"name":"Bott_periodicity-wikidata","type":"derivation"},"Centered_hexagonal_number.html":{"name":"Centered_hexagonal_number-wikidata","type":"derivation"},"Centered_triangular_number.html":{"name":"Centered_triangular_number-wikidata","type":"derivation"},"Coprime_integers.html":{"name":"Coprime_integers-wikidata","type":"derivation"},"Eigenvalues_and_eigenvectors.html":{"name":"Eigenvalues_and_eigenvectors-wikidata","type":"derivation"},"Euclidean_algorithm.html":{"name":"Euclidean_algorithm-wikidata","type":"derivation"},"Fermat_prime.html":{"name":"Fermat_prime-wikidata","type":"derivation"},"Keith_number.html":{"name":"Keith_number-wikidata","type":"derivation"},"Mathieu_group_M12.html":{"name":"Mathieu_group_M12-wikidata","type":"derivation"},"Metonic_cycle.html":{"name":"Metonic_cycle-wikidata","type":"derivation"},"Monstrous_moonshine.html":{"name":"Monstrous_moonshine-wikidata","type":"derivation"},"Online_Encyclopedia_of_Integer_Sequences.html":{"name":"Online_Encyclopedia_of_Integer_Sequences-wikidata","type":"derivation"},"Ontology.html":{"name":"Ontology-wikidata","type":"derivation"},"Steiner_system.html":{"name":"Steiner_system-wikidata","type":"derivation"},"default":{"name":"hello-nix","type":"derivation"}}}}
+diff --git a/09/oldGEMINI.md b/09/22/oldGEMINI.md
+similarity index 100%
+rename from 09/oldGEMINI.md
+rename to 09/22/oldGEMINI.md
+diff --git a/09/22/scripts/check_and_clean_nars.sh b/09/22/scripts/check_and_clean_nars.sh
+new file mode 100755
+index 0000000..dfdde78
+--- /dev/null
++++ b/09/22/scripts/check_and_clean_nars.sh
+@@ -0,0 +1,20 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++CRQ_BINSTORE_DIR="/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/crq-binstore"
++NIX_NAR_CLI="/data/data/com.termux.nix/files/home/nix/vendor/nix/nix-nar-rs/cli"
++
++for nar_file in "$CRQ_BINSTORE_DIR"/*.nar; do
++  if [ -f "$nar_file" ]; then
++    echo "Checking NAR file: $nar_file"
++    if ! "$NIX_NAR_CLI" ls "$nar_file" > /dev/null 2>&1; then
++      echo "Invalid NAR file detected: $nar_file. Deleting..."
++      rm "$nar_file"
++    else
++      echo "NAR file is valid: $nar_file"
++    fi
++  fi
++done
++
++echo "NAR file check and cleanup complete."
+diff --git a/09/22/scripts/current_system.txt b/09/22/scripts/current_system.txt
+new file mode 100644
+index 0000000..9487bcc
+--- /dev/null
++++ b/09/22/scripts/current_system.txt
+@@ -0,0 +1 @@
++"aarch64-linux"
+diff --git a/09/22/scripts/flake22.json b/09/22/scripts/flake22.json
+new file mode 100644
+index 0000000..d762dbf
+--- /dev/null
++++ b/09/22/scripts/flake22.json
+@@ -0,0 +1 @@
++{"devShell":{"aarch64-darwin":{"description":"","name":"nix-shell","type":"derivation"},"aarch64-linux":{"description":"","name":"nix-shell","type":"derivation"},"x86_64-darwin":{"description":"","name":"nix-shell","type":"derivation"},"x86_64-linux":{"description":"","name":"nix-shell","type":"derivation"}},"packages":{"aarch64-darwin":{"17__number_.html":{"description":"","name":"17__number_-wikidata","type":"derivation"},"19__number_.html":{"description":"","name":"19__number_-wikidata","type":"derivation"},"B_C3_A9zout_27s_identity.html":{"description":"","name":"B_C3_A9zout_27s_identity-wikidata","type":"derivation"},"Bott_periodicity.html":{"description":"","name":"Bott_periodicity-wikidata","type":"derivation"},"Centered_hexagonal_number.html":{"description":"","name":"Centered_hexagonal_number-wikidata","type":"derivation"},"Centered_triangular_number.html":{"description":"","name":"Centered_triangular_number-wikidata","type":"derivation"},"Coprime_integers.html":{"description":"","name":"Coprime_integers-wikidata","type":"derivation"},"Eigenvalues_and_eigenvectors.html":{"description":"","name":"Eigenvalues_and_eigenvectors-wikidata","type":"derivation"},"Euclidean_algorithm.html":{"description":"","name":"Euclidean_algorithm-wikidata","type":"derivation"},"Fermat_prime.html":{"description":"","name":"Fermat_prime-wikidata","type":"derivation"},"Keith_number.html":{"description":"","name":"Keith_number-wikidata","type":"derivation"},"Mathieu_group_M12.html":{"description":"","name":"Mathieu_group_M12-wikidata","type":"derivation"},"Metonic_cycle.html":{"description":"","name":"Metonic_cycle-wikidata","type":"derivation"},"Monstrous_moonshine.html":{"description":"","name":"Monstrous_moonshine-wikidata","type":"derivation"},"Online_Encyclopedia_of_Integer_Sequences.html":{"description":"","name":"Online_Encyclopedia_of_Integer_Sequences-wikidata","type":"derivation"},"Ontology.html":{"description":"","name":"Ontology-wikidata","type":"derivation"},"Steiner_system.html":{"description":"","name":"Steiner_system-wikidata","type":"derivation"},"default":{"description":"","name":"hello-nix","type":"derivation"}},"aarch64-linux":{"17__number_.html":{"description":"","name":"17__number_-wikidata","type":"derivation"},"19__number_.html":{"description":"","name":"19__number_-wikidata","type":"derivation"},"B_C3_A9zout_27s_identity.html":{"description":"","name":"B_C3_A9zout_27s_identity-wikidata","type":"derivation"},"Bott_periodicity.html":{"description":"","name":"Bott_periodicity-wikidata","type":"derivation"},"Centered_hexagonal_number.html":{"description":"","name":"Centered_hexagonal_number-wikidata","type":"derivation"},"Centered_triangular_number.html":{"description":"","name":"Centered_triangular_number-wikidata","type":"derivation"},"Coprime_integers.html":{"description":"","name":"Coprime_integers-wikidata","type":"derivation"},"Eigenvalues_and_eigenvectors.html":{"description":"","name":"Eigenvalues_and_eigenvectors-wikidata","type":"derivation"},"Euclidean_algorithm.html":{"description":"","name":"Euclidean_algorithm-wikidata","type":"derivation"},"Fermat_prime.html":{"description":"","name":"Fermat_prime-wikidata","type":"derivation"},"Keith_number.html":{"description":"","name":"Keith_number-wikidata","type":"derivation"},"Mathieu_group_M12.html":{"description":"","name":"Mathieu_group_M12-wikidata","type":"derivation"},"Metonic_cycle.html":{"description":"","name":"Metonic_cycle-wikidata","type":"derivation"},"Monstrous_moonshine.html":{"description":"","name":"Monstrous_moonshine-wikidata","type":"derivation"},"Online_Encyclopedia_of_Integer_Sequences.html":{"description":"","name":"Online_Encyclopedia_of_Integer_Sequences-wikidata","type":"derivation"},"Ontology.html":{"description":"","name":"Ontology-wikidata","type":"derivation"},"Steiner_system.html":{"description":"","name":"Steiner_system-wikidata","type":"derivation"},"default":{"description":"","name":"hello-nix","type":"derivation"}},"x86_64-darwin":{"17__number_.html":{"description":"","name":"17__number_-wikidata","type":"derivation"},"19__number_.html":{"description":"","name":"19__number_-wikidata","type":"derivation"},"B_C3_A9zout_27s_identity.html":{"description":"","name":"B_C3_A9zout_27s_identity-wikidata","type":"derivation"},"Bott_periodicity.html":{"description":"","name":"Bott_periodicity-wikidata","type":"derivation"},"Centered_hexagonal_number.html":{"description":"","name":"Centered_hexagonal_number-wikidata","type":"derivation"},"Centered_triangular_number.html":{"description":"","name":"Centered_triangular_number-wikidata","type":"derivation"},"Coprime_integers.html":{"description":"","name":"Coprime_integers-wikidata","type":"derivation"},"Eigenvalues_and_eigenvectors.html":{"description":"","name":"Eigenvalues_and_eigenvectors-wikidata","type":"derivation"},"Euclidean_algorithm.html":{"description":"","name":"Euclidean_algorithm-wikidata","type":"derivation"},"Fermat_prime.html":{"description":"","name":"Fermat_prime-wikidata","type":"derivation"},"Keith_number.html":{"description":"","name":"Keith_number-wikidata","type":"derivation"},"Mathieu_group_M12.html":{"description":"","name":"Mathieu_group_M12-wikidata","type":"derivation"},"Metonic_cycle.html":{"description":"","name":"Metonic_cycle-wikidata","type":"derivation"},"Monstrous_moonshine.html":{"description":"","name":"Monstrous_moonshine-wikidata","type":"derivation"},"Online_Encyclopedia_of_Integer_Sequences.html":{"description":"","name":"Online_Encyclopedia_of_Integer_Sequences-wikidata","type":"derivation"},"Ontology.html":{"description":"","name":"Ontology-wikidata","type":"derivation"},"Steiner_system.html":{"description":"","name":"Steiner_system-wikidata","type":"derivation"},"default":{"description":"","name":"hello-nix","type":"derivation"}},"x86_64-linux":{"17__number_.html":{"description":"","name":"17__number_-wikidata","type":"derivation"},"19__number_.html":{"description":"","name":"19__number_-wikidata","type":"derivation"},"B_C3_A9zout_27s_identity.html":{"description":"","name":"B_C3_A9zout_27s_identity-wikidata","type":"derivation"},"Bott_periodicity.html":{"description":"","name":"Bott_periodicity-wikidata","type":"derivation"},"Centered_hexagonal_number.html":{"description":"","name":"Centered_hexagonal_number-wikidata","type":"derivation"},"Centered_triangular_number.html":{"description":"","name":"Centered_triangular_number-wikidata","type":"derivation"},"Coprime_integers.html":{"description":"","name":"Coprime_integers-wikidata","type":"derivation"},"Eigenvalues_and_eigenvectors.html":{"description":"","name":"Eigenvalues_and_eigenvectors-wikidata","type":"derivation"},"Euclidean_algorithm.html":{"description":"","name":"Euclidean_algorithm-wikidata","type":"derivation"},"Fermat_prime.html":{"description":"","name":"Fermat_prime-wikidata","type":"derivation"},"Keith_number.html":{"description":"","name":"Keith_number-wikidata","type":"derivation"},"Mathieu_group_M12.html":{"description":"","name":"Mathieu_group_M12-wikidata","type":"derivation"},"Metonic_cycle.html":{"description":"","name":"Metonic_cycle-wikidata","type":"derivation"},"Monstrous_moonshine.html":{"description":"","name":"Monstrous_moonshine-wikidata","type":"derivation"},"Online_Encyclopedia_of_Integer_Sequences.html":{"description":"","name":"Online_Encyclopedia_of_Integer_Sequences-wikidata","type":"derivation"},"Ontology.html":{"description":"","name":"Ontology-wikidata","type":"derivation"},"Steiner_system.html":{"description":"","name":"Steiner_system-wikidata","type":"derivation"},"default":{"description":"","name":"hello-nix","type":"derivation"}}}}
+diff --git a/09/22/scripts/get_wikidata_package_list.sh b/09/22/scripts/get_wikidata_package_list.sh
+new file mode 100755
+index 0000000..d851183
+--- /dev/null
++++ b/09/22/scripts/get_wikidata_package_list.sh
+@@ -0,0 +1,13 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++# Get the current system
++CURRENT_SYSTEM=$(nix-instantiate --eval --expr 'builtins.currentSystem' --json | jq -r .)
++
++# Extract package names using pipes
++PACKAGE_ATTRS=$(nix flake show --all-systems ./22 | grep "package '" | sed -E "s/.*: package '(.*)'.*/\1/" | sed -E "s/-wikidata$//" | grep -v "hello-nix")
++
++# Print the extracted package names
++echo "Extracted Wikidata package names:"
++echo "$PACKAGE_ATTRS"
+diff --git a/09/22/scripts/get_wikidata_package_names.sh b/09/22/scripts/get_wikidata_package_names.sh
+new file mode 100644
+index 0000000..ed3de30
+--- /dev/null
++++ b/09/22/scripts/get_wikidata_package_names.sh
+@@ -0,0 +1,10 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++# Extract package names using jq
++PACKAGE_NAMES=$(nix flake show --json ./22 | jq -r '.packages."aarch64-linux" | to_entries[] | select(.value.name | endswith("-wikidata")) | .key')
++
++# Print the extracted package names
++echo "Extracted Wikidata package names:"
++echo "$PACKAGE_NAMES"
+diff --git a/09/22/scripts/inspect_flake_output.sh b/09/22/scripts/inspect_flake_output.sh
+new file mode 100644
+index 0000000..f874492
+--- /dev/null
++++ b/09/22/scripts/inspect_flake_output.sh
+@@ -0,0 +1,10 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++OUTPUT_FILE="full_flake_output.json"
++
++echo "Dumping full flake output to $OUTPUT_FILE..."
++nix flake show --json ./22 --all-systems > "$OUTPUT_FILE"
++
++echo "Full flake output saved to $OUTPUT_FILE. Inspect this file to understand the structure."
+diff --git a/09/22/scripts/publish_all_wikidata_nars.sh b/09/22/scripts/publish_all_wikidata_nars.sh
+new file mode 100755
+index 0000000..4e7300a
+--- /dev/null
++++ b/09/22/scripts/publish_all_wikidata_nars.sh
+@@ -0,0 +1,40 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++# Source the lib_exec.sh library for execute_cmd
++source "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/lib/lib_exec.sh"
++
++# Path to the publish script
++PUBLISH_SCRIPT="/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/scripts/publish_nix_artifact_to_git.sh"
++
++# Target repository URL
++REPO_URL="https://github.com/meta-introspector/crq-binstore.git"
++
++# Get a list of all dynamically generated Wikidata packages
++# We assume the packages are named like <articleName>-wikidata
++# and are under the 'packages' attribute of the flake.
++
++# This command will list all packages in the flake and filter for wikidata packages
++# It will output something like: packages.aarch64-linux.someArticleWikidata
++# We need to extract 'someArticleWikidata'
++
++# Temporarily disable pipefail for the nix eval command as it might fail if no packages are found
++set +o pipefail
++CURRENT_SYSTEM=$(nix-instantiate --eval --expr 'builtins.currentSystem' --json | jq -r .)
++PACKAGE_ATTRS=$(cat flake22.json | jq -r --arg system "$CURRENT_SYSTEM" '.packages[$system] | to_entries[] | select(.value.name | endswith("-wikidata")) | .key')
++set -o pipefail
++
++if [ -z "$PACKAGE_ATTRS" ]; then
++  echo "No Wikidata packages found in flake.nix. Exiting."
++  exit 0
++fi
++
++for attr in $PACKAGE_ATTRS; do
++  FLAKE_ATTR_PATH=".#${attr}"
++  ARTICLE_NAME=$(nix eval --raw "${FLAKE_ATTR_PATH}.passthru.wikipedia")
++  execute_cmd echo "Publishing $ARTICLE_NAME ($FLAKE_ATTR_PATH)..."
++  "$PUBLISH_SCRIPT" "$FLAKE_ATTR_PATH" "$REPO_URL"
++done
++
++echo "All Wikidata NARs published."
+diff --git a/09/22/scripts/publish_all_wikipedia_nars_manual.sh b/09/22/scripts/publish_all_wikipedia_nars_manual.sh
+new file mode 100755
+index 0000000..9a6a5e2
+--- /dev/null
++++ b/09/22/scripts/publish_all_wikipedia_nars_manual.sh
+@@ -0,0 +1,40 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++# Source the lib_exec.sh library for execute_cmd
++source "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/lib/lib_exec.sh"
++
++# Path to the publish script
++PUBLISH_SCRIPT="/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/scripts/publish_nix_artifact_to_git.sh"
++
++# Target repository URL
++REPO_URL="https://github.com/meta-introspector/crq-binstore.git"
++
++# List of flake attribute paths for Wikipedia articles
++FLAKE_ATTR_PATHS=(
++    "./22#17NumberWikidata"
++    "./22#19NumberWikidata"
++    "./22#BézoutIdentityWikidata"
++    "./22#BottPeriodicityWikidata"
++    "./22#CenteredHexagonalNumberWikidata"
++    "./22#CenteredTriangularNumberWikidata"
++    "./22#CoprimeIntegersWikidata"
++    "./22#EigenvaluesAndEigenvectorsWikidata"
++    "./22#EuclideanAlgorithmWikidata"
++    "./22#FermatPrimeWikidata"
++    "./22#KeithNumberWikidata"
++    "./22#MathieuGroupM12Wikidata"
++    "./22#MetonicCycleWikidata"
++    "./22#MonstrousMoonshineWikidata"
++    "./22#OnlineEncyclopediaOfIntegerSequencesWikidata"
++    "./22#OntologyWikidata"
++    "./22#SteinerSystemWikidata"
++)
++
++for attr_path in "${FLAKE_ATTR_PATHS[@]}"; do
++  execute_cmd echo "Publishing $attr_path..."
++  "$PUBLISH_SCRIPT" "$attr_path" "$REPO_URL"
++done
++
++echo "All Wikipedia NARs published."
+diff --git a/09/test.sh b/09/22/scripts/step1.txt
+similarity index 100%
+rename from 09/test.sh
+rename to 09/22/scripts/step1.txt
+diff --git a/09/22/scripts/test_attribute_extraction.sh b/09/22/scripts/test_attribute_extraction.sh
+new file mode 100755
+index 0000000..39c8f4f
+--- /dev/null
++++ b/09/22/scripts/test_attribute_extraction.sh
+@@ -0,0 +1,20 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++# Get the current system
++nix-instantiate --eval --expr 'builtins.currentSystem' --json > current_system.txt
++CURRENT_SYSTEM=$(cat current_system.txt)
++
++# Get the raw output of nix flake show ./22
++#FLAKE_SHOW_OUTPUT=
++nix flake show . --json --all-systems > flake22.json
++
++# Extract attribute names
++grep  "packages.${CURRENT_SYSTEM}.*html" flake22.json > step1.txt
++
++sed -E "s/.*packages.${CURRENT_SYSTEM}\.(.*):.*/\1/" step1.txt | tr -d '"' | grep -E "-wikidata$" 
++
++# Print the extracted attribute names
++echo "Extracted Wikidata package attributes:"
++echo "$PACKAGE_ATTRS"
+diff --git a/09/22/scripts/test_attribute_extraction_v2.sh b/09/22/scripts/test_attribute_extraction_v2.sh
+new file mode 100755
+index 0000000..4d7d824
+--- /dev/null
++++ b/09/22/scripts/test_attribute_extraction_v2.sh
+@@ -0,0 +1,16 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++# Get the current system
++CURRENT_SYSTEM=$(nix-instantiate --eval --expr 'builtins.currentSystem' --json | jq -r .)
++
++# Get the raw output of nix flake show ./22
++FLAKE_SHOW_OUTPUT=$(nix flake show ./22)
++
++# Extract attribute names
++PACKAGE_ATTRS=$(echo "$FLAKE_SHOW_OUTPUT" | grep "packages.${CURRENT_SYSTEM//-/\\-}\\..*html" | sed -E "s/.*packages.${CURRENT_SYSTEM//-/\\-}\\.(.*):.*/\\1/" | tr -d '"' | grep -E "-wikidata$")
++
++# Print the extracted attribute names
++echo "Extracted Wikidata package attributes:"
++echo "$PACKAGE_ATTRS"
+diff --git a/09/.gitignore b/09/23/.gitignore
+similarity index 100%
+rename from 09/.gitignore
+rename to 09/23/.gitignore
+diff --git a/09/docs/crqs/CRQ_032_Nix_Ngram_Parsing_Challenges.md b/09/23/CRQ_032_Nix_Ngram_Parsing_Challenges.md
+similarity index 100%
+rename from 09/docs/crqs/CRQ_032_Nix_Ngram_Parsing_Challenges.md
+rename to 09/23/CRQ_032_Nix_Ngram_Parsing_Challenges.md
+diff --git a/09/analyze_ngrams.nix b/09/23/analyze_ngrams.nix
+similarity index 100%
+rename from 09/analyze_ngrams.nix
+rename to 09/23/analyze_ngrams.nix
+diff --git a/09/analyze_ngrams.sh b/09/23/analyze_ngrams.sh
+similarity index 100%
+rename from 09/analyze_ngrams.sh
+rename to 09/23/analyze_ngrams.sh
+diff --git a/09/awk_script.awk b/09/23/awk_script.awk
+similarity index 100%
+rename from 09/awk_script.awk
+rename to 09/23/awk_script.awk
+diff --git a/09/count_lines.nix b/09/23/count_lines.nix
+similarity index 100%
+rename from 09/count_lines.nix
+rename to 09/23/count_lines.nix
+diff --git a/09/debug_repair.nix b/09/23/debug_repair.nix
+similarity index 100%
+rename from 09/debug_repair.nix
+rename to 09/23/debug_repair.nix
+diff --git a/09/23/flake_output.json b/09/23/flake_output.json
+new file mode 100644
+index 0000000..5a9818d
+--- /dev/null
++++ b/09/23/flake_output.json
+@@ -0,0 +1 @@
++"/nix/store/gwzg334c3bnccy49plqlgkp28yphmj8r-hello-nix"
+diff --git a/09/23/flake_outputs_raw.json b/09/23/flake_outputs_raw.json
+new file mode 100644
+index 0000000..e69de29
+diff --git a/09/generate_ngrams_from_html.sh b/09/23/generate_ngrams_from_html.sh
+similarity index 100%
+rename from 09/generate_ngrams_from_html.sh
+rename to 09/23/generate_ngrams_from_html.sh
+diff --git a/09/23/nix_eval_output.json b/09/23/nix_eval_output.json
+new file mode 100644
+index 0000000..5a9818d
+--- /dev/null
++++ b/09/23/nix_eval_output.json
+@@ -0,0 +1 @@
++"/nix/store/gwzg334c3bnccy49plqlgkp28yphmj8r-hello-nix"
+diff --git a/09/23/nix_flake_show_output.txt b/09/23/nix_flake_show_output.txt
+new file mode 100644
+index 0000000..3e1273f
+--- /dev/null
++++ b/09/23/nix_flake_show_output.txt
+@@ -0,0 +1,83 @@
++[1mgit+file:///data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025?dir=09/22[0m
++[32;1m├───[0m[1mdevShell[0m
++[32;1m│   ├───[0m[1maarch64-darwin[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m│   ├───[0m[1maarch64-linux[0m: development environment 'nix-shell'
++[32;1m│   ├───[0m[1mx86_64-darwin[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m│   └───[0m[1mx86_64-linux[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m└───[0m[1mpackages[0m
++[32;1m    ├───[0m[1maarch64-darwin[0m
++[32;1m    │   ├───[0m[1m"17__number_.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"19__number_.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"B_C3_A9zout_27s_identity.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Bott_periodicity.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Centered_hexagonal_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Centered_triangular_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Coprime_integers.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Eigenvalues_and_eigenvectors.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Euclidean_algorithm.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Fermat_prime.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Keith_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Mathieu_group_M12.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Metonic_cycle.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Monstrous_moonshine.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Online_Encyclopedia_of_Integer_Sequences.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Ontology.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Steiner_system.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   └───[0m[1mdefault[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    ├───[0m[1maarch64-linux[0m
++[32;1m    │   ├───[0m[1m"17__number_.html"[0m: package '17__number_-wikidata'
++[32;1m    │   ├───[0m[1m"19__number_.html"[0m: package '19__number_-wikidata'
++[32;1m    │   ├───[0m[1m"B_C3_A9zout_27s_identity.html"[0m: package 'B_C3_A9zout_27s_identity-wikidata'
++[32;1m    │   ├───[0m[1m"Bott_periodicity.html"[0m: package 'Bott_periodicity-wikidata'
++[32;1m    │   ├───[0m[1m"Centered_hexagonal_number.html"[0m: package 'Centered_hexagonal_number-wikidata'
++[32;1m    │   ├───[0m[1m"Centered_triangular_number.html"[0m: package 'Centered_triangular_number-wikidata'
++[32;1m    │   ├───[0m[1m"Coprime_integers.html"[0m: package 'Coprime_integers-wikidata'
++[32;1m    │   ├───[0m[1m"Eigenvalues_and_eigenvectors.html"[0m: package 'Eigenvalues_and_eigenvectors-wikidata'
++[32;1m    │   ├───[0m[1m"Euclidean_algorithm.html"[0m: package 'Euclidean_algorithm-wikidata'
++[32;1m    │   ├───[0m[1m"Fermat_prime.html"[0m: package 'Fermat_prime-wikidata'
++[32;1m    │   ├───[0m[1m"Keith_number.html"[0m: package 'Keith_number-wikidata'
++[32;1m    │   ├───[0m[1m"Mathieu_group_M12.html"[0m: package 'Mathieu_group_M12-wikidata'
++[32;1m    │   ├───[0m[1m"Metonic_cycle.html"[0m: package 'Metonic_cycle-wikidata'
++[32;1m    │   ├───[0m[1m"Monstrous_moonshine.html"[0m: package 'Monstrous_moonshine-wikidata'
++[32;1m    │   ├───[0m[1m"Online_Encyclopedia_of_Integer_Sequences.html"[0m: package 'Online_Encyclopedia_of_Integer_Sequences-wikidata'
++[32;1m    │   ├───[0m[1m"Ontology.html"[0m: package 'Ontology-wikidata'
++[32;1m    │   ├───[0m[1m"Steiner_system.html"[0m: package 'Steiner_system-wikidata'
++[32;1m    │   └───[0m[1mdefault[0m: package 'hello-nix'
++[32;1m    ├───[0m[1mx86_64-darwin[0m
++[32;1m    │   ├───[0m[1m"17__number_.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"19__number_.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"B_C3_A9zout_27s_identity.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Bott_periodicity.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Centered_hexagonal_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Centered_triangular_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Coprime_integers.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Eigenvalues_and_eigenvectors.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Euclidean_algorithm.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Fermat_prime.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Keith_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Mathieu_group_M12.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Metonic_cycle.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Monstrous_moonshine.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Online_Encyclopedia_of_Integer_Sequences.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Ontology.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   ├───[0m[1m"Steiner_system.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    │   └───[0m[1mdefault[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m    └───[0m[1mx86_64-linux[0m
++[32;1m        ├───[0m[1m"17__number_.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        ├───[0m[1m"19__number_.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        ├───[0m[1m"B_C3_A9zout_27s_identity.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        ├───[0m[1m"Bott_periodicity.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        ├───[0m[1m"Centered_hexagonal_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        ├───[0m[1m"Centered_triangular_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        ├───[0m[1m"Coprime_integers.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        ├───[0m[1m"Eigenvalues_and_eigenvectors.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        ├───[0m[1m"Euclidean_algorithm.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        ├───[0m[1m"Fermat_prime.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        ├───[0m[1m"Keith_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        ├───[0m[1m"Mathieu_group_M12.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        ├───[0m[1m"Metonic_cycle.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        ├───[0m[1m"Monstrous_moonshine.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        ├───[0m[1m"Online_Encyclopedia_of_Integer_Sequences.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        ├───[0m[1m"Ontology.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        ├───[0m[1m"Steiner_system.html"[0m [35;1momitted[0m (use '--all-systems' to show)
++[32;1m        └───[0m[1mdefault[0m [35;1momitted[0m (use '--all-systems' to show)
+diff --git a/09/ontology_ngrams.json b/09/23/ontology_ngrams.json
+similarity index 100%
+rename from 09/ontology_ngrams.json
+rename to 09/23/ontology_ngrams.json
+diff --git a/09/preprocess.sh b/09/23/preprocess.sh
+similarity index 100%
+rename from 09/preprocess.sh
+rename to 09/23/preprocess.sh
+diff --git a/09/repair_and_parse.nix b/09/23/repair_and_parse.nix
+similarity index 100%
+rename from 09/repair_and_parse.nix
+rename to 09/23/repair_and_parse.nix
+diff --git a/09/result b/09/23/result
+similarity index 100%
+rename from 09/result
+rename to 09/23/result
+diff --git a/09/sed_script.sed b/09/23/sed_script.sed
+similarity index 100%
+rename from 09/sed_script.sed
+rename to 09/23/sed_script.sed
+diff --git a/09/23/test.sh b/09/23/test.sh
+new file mode 100644
+index 0000000..e69de29
+diff --git a/09/wikipedia_articles.md b/09/23/wikipedia_articles.md
+similarity index 100%
+rename from 09/wikipedia_articles.md
+rename to 09/23/wikipedia_articles.md
+diff --git a/09/wikipedia_cache/17__number_.html b/09/23/wikipedia_cache/17__number_.html
+similarity index 100%
+rename from 09/wikipedia_cache/17__number_.html
+rename to 09/23/wikipedia_cache/17__number_.html
+diff --git a/09/wikipedia_cache/19__number_.html b/09/23/wikipedia_cache/19__number_.html
+similarity index 100%
+rename from 09/wikipedia_cache/19__number_.html
+rename to 09/23/wikipedia_cache/19__number_.html
+diff --git a/09/wikipedia_cache/B_C3_A9zout_27s_identity.html b/09/23/wikipedia_cache/B_C3_A9zout_27s_identity.html
+similarity index 100%
+rename from 09/wikipedia_cache/B_C3_A9zout_27s_identity.html
+rename to 09/23/wikipedia_cache/B_C3_A9zout_27s_identity.html
+diff --git a/09/wikipedia_cache/Bott_periodicity.html b/09/23/wikipedia_cache/Bott_periodicity.html
+similarity index 100%
+rename from 09/wikipedia_cache/Bott_periodicity.html
+rename to 09/23/wikipedia_cache/Bott_periodicity.html
+diff --git a/09/wikipedia_cache/Centered_hexagonal_number.html b/09/23/wikipedia_cache/Centered_hexagonal_number.html
+similarity index 100%
+rename from 09/wikipedia_cache/Centered_hexagonal_number.html
+rename to 09/23/wikipedia_cache/Centered_hexagonal_number.html
+diff --git a/09/wikipedia_cache/Centered_triangular_number.html b/09/23/wikipedia_cache/Centered_triangular_number.html
+similarity index 100%
+rename from 09/wikipedia_cache/Centered_triangular_number.html
+rename to 09/23/wikipedia_cache/Centered_triangular_number.html
+diff --git a/09/wikipedia_cache/Coprime_integers.html b/09/23/wikipedia_cache/Coprime_integers.html
+similarity index 100%
+rename from 09/wikipedia_cache/Coprime_integers.html
+rename to 09/23/wikipedia_cache/Coprime_integers.html
+diff --git a/09/wikipedia_cache/Eigenvalues_and_eigenvectors.html b/09/23/wikipedia_cache/Eigenvalues_and_eigenvectors.html
+similarity index 100%
+rename from 09/wikipedia_cache/Eigenvalues_and_eigenvectors.html
+rename to 09/23/wikipedia_cache/Eigenvalues_and_eigenvectors.html
+diff --git a/09/wikipedia_cache/Euclidean_algorithm.html b/09/23/wikipedia_cache/Euclidean_algorithm.html
+similarity index 100%
+rename from 09/wikipedia_cache/Euclidean_algorithm.html
+rename to 09/23/wikipedia_cache/Euclidean_algorithm.html
+diff --git a/09/wikipedia_cache/Fermat_prime.html b/09/23/wikipedia_cache/Fermat_prime.html
+similarity index 100%
+rename from 09/wikipedia_cache/Fermat_prime.html
+rename to 09/23/wikipedia_cache/Fermat_prime.html
+diff --git a/09/wikipedia_cache/Gematria.html b/09/23/wikipedia_cache/Gematria.html
+similarity index 100%
+rename from 09/wikipedia_cache/Gematria.html
+rename to 09/23/wikipedia_cache/Gematria.html
+diff --git a/09/wikipedia_cache/Griess_algebra.html b/09/23/wikipedia_cache/Griess_algebra.html
+similarity index 100%
+rename from 09/wikipedia_cache/Griess_algebra.html
+rename to 09/23/wikipedia_cache/Griess_algebra.html
+diff --git a/09/wikipedia_cache/Group__mathematics_.html b/09/23/wikipedia_cache/Group__mathematics_.html
+similarity index 100%
+rename from 09/wikipedia_cache/Group__mathematics_.html
+rename to 09/23/wikipedia_cache/Group__mathematics_.html
+diff --git a/09/wikipedia_cache/Heptadecagon.html b/09/23/wikipedia_cache/Heptadecagon.html
+similarity index 100%
+rename from 09/wikipedia_cache/Heptadecagon.html
+rename to 09/23/wikipedia_cache/Heptadecagon.html
+diff --git a/09/wikipedia_cache/Homotopy.html b/09/23/wikipedia_cache/Homotopy.html
+similarity index 100%
+rename from 09/wikipedia_cache/Homotopy.html
+rename to 09/23/wikipedia_cache/Homotopy.html
+diff --git a/09/wikipedia_cache/Keith_number.html b/09/23/wikipedia_cache/Keith_number.html
+similarity index 100%
+rename from 09/wikipedia_cache/Keith_number.html
+rename to 09/23/wikipedia_cache/Keith_number.html
+diff --git a/09/wikipedia_cache/Lattice__order_.html b/09/23/wikipedia_cache/Lattice__order_.html
+similarity index 100%
+rename from 09/wikipedia_cache/Lattice__order_.html
+rename to 09/23/wikipedia_cache/Lattice__order_.html
+diff --git a/09/wikipedia_cache/Mathieu_group_M11.html b/09/23/wikipedia_cache/Mathieu_group_M11.html
+similarity index 100%
+rename from 09/wikipedia_cache/Mathieu_group_M11.html
+rename to 09/23/wikipedia_cache/Mathieu_group_M11.html
+diff --git a/09/wikipedia_cache/Mathieu_group_M12.html b/09/23/wikipedia_cache/Mathieu_group_M12.html
+similarity index 100%
+rename from 09/wikipedia_cache/Mathieu_group_M12.html
+rename to 09/23/wikipedia_cache/Mathieu_group_M12.html
+diff --git a/09/wikipedia_cache/Metonic_cycle.html b/09/23/wikipedia_cache/Metonic_cycle.html
+similarity index 100%
+rename from 09/wikipedia_cache/Metonic_cycle.html
+rename to 09/23/wikipedia_cache/Metonic_cycle.html
+diff --git a/09/wikipedia_cache/Monster_group.html b/09/23/wikipedia_cache/Monster_group.html
+similarity index 100%
+rename from 09/wikipedia_cache/Monster_group.html
+rename to 09/23/wikipedia_cache/Monster_group.html
+diff --git a/09/wikipedia_cache/Monstrous_moonshine.html b/09/23/wikipedia_cache/Monstrous_moonshine.html
+similarity index 100%
+rename from 09/wikipedia_cache/Monstrous_moonshine.html
+rename to 09/23/wikipedia_cache/Monstrous_moonshine.html
+diff --git a/09/wikipedia_cache/Online_Encyclopedia_of_Integer_Sequences.html b/09/23/wikipedia_cache/Online_Encyclopedia_of_Integer_Sequences.html
+similarity index 100%
+rename from 09/wikipedia_cache/Online_Encyclopedia_of_Integer_Sequences.html
+rename to 09/23/wikipedia_cache/Online_Encyclopedia_of_Integer_Sequences.html
+diff --git a/09/wikipedia_cache/Parameter__mathematics_.html b/09/23/wikipedia_cache/Parameter__mathematics_.html
+similarity index 100%
+rename from 09/wikipedia_cache/Parameter__mathematics_.html
+rename to 09/23/wikipedia_cache/Parameter__mathematics_.html
+diff --git a/09/wikipedia_cache/Riemann_zeta_function.html b/09/23/wikipedia_cache/Riemann_zeta_function.html
+similarity index 100%
+rename from 09/wikipedia_cache/Riemann_zeta_function.html
+rename to 09/23/wikipedia_cache/Riemann_zeta_function.html
+diff --git a/09/wikipedia_cache/Sporadic_group.html b/09/23/wikipedia_cache/Sporadic_group.html
+similarity index 100%
+rename from 09/wikipedia_cache/Sporadic_group.html
+rename to 09/23/wikipedia_cache/Sporadic_group.html
+diff --git a/09/wikipedia_cache/Steiner_system.html b/09/23/wikipedia_cache/Steiner_system.html
+similarity index 100%
+rename from 09/wikipedia_cache/Steiner_system.html
+rename to 09/23/wikipedia_cache/Steiner_system.html
+diff --git a/09/wikipedia_cache/Transitive_group_action.html b/09/23/wikipedia_cache/Transitive_group_action.html
+similarity index 100%
+rename from 09/wikipedia_cache/Transitive_group_action.html
+rename to 09/23/wikipedia_cache/Transitive_group_action.html
+diff --git a/09/wikipedia_cache/Vertex_operator_algebra.html b/09/23/wikipedia_cache/Vertex_operator_algebra.html
+similarity index 100%
+rename from 09/wikipedia_cache/Vertex_operator_algebra.html
+rename to 09/23/wikipedia_cache/Vertex_operator_algebra.html
+diff --git a/09/24/docs/crqs/CRQ_033_Knowledge_As_Flakes.md b/09/24/docs/crqs/CRQ_033_Knowledge_As_Flakes.md
+new file mode 100644
+index 0000000..e5cce0b
+--- /dev/null
++++ b/09/24/docs/crqs/CRQ_033_Knowledge_As_Flakes.md
+@@ -0,0 +1,48 @@
++# CRQ-033: Knowledge as Flakes: Compiling Wikipedia into Searchable Nix Attributes for AI Context Composition
++
++## 1. Goal
++
++The primary goal is to establish a "Nix Flake of Knowledge" system. This system will process unstructured information, starting with Wikipedia articles, and compile it into a structured, searchable format within the Nix ecosystem. The ultimate aim is to create composable AI contexts from this knowledge base.
++
++## 2. Problem Statement
++
++Currently, leveraging large, unstructured datasets like Wikipedia for AI model context is ad-hoc and not easily reproducible. There is no standardized way to version, search, and compose this knowledge. This leads to inconsistent results and difficulty in managing the data provenance for AI training and context generation.
++
++## 3. Proposed Solution
++
++We propose a system that:
++
++1.  Fetches and caches external knowledge sources (e.g., Wikipedia articles).
++2.  Processes these sources to extract meaningful data.
++3.  Packages the processed data into NAR (Nix Archive) files, ensuring immutability and content-addressing.
++4.  Creates a top-level Nix flake that exposes this data through a searchable, structured attribute set. For example, `knowledge.wikipedia.articles.<article-name>.text` or `knowledge.wikipedia.articles.<article-name>.metadata`.
++5.  These "knowledge flakes" can then be used as inputs for other flakes, allowing for the composition of complex, version-controlled AI contexts.
++
++## 4. Scope
++
++*   **In-Scope:**
++    *   Developing scripts to fetch and process Wikipedia articles.
++    *   Creating a Nix flake structure to represent the knowledge.
++    *   Storing article content as NAR payloads.
++    *   Defining a searchable attribute set based on article titles and metadata.
++*   **Out-of-Scope:**
++    *   The implementation of the AI models themselves.
++    *   Advanced NLP processing (e.g., entity extraction, sentiment analysis) in the initial phase.
++    *   A generalized framework for any arbitrary knowledge source (the focus is on Wikipedia first).
++
++## 5. Technical Details
++
++The implementation will involve:
++
++*   A shell script or Nix derivation to handle the fetching of Wikipedia articles.
++*   A processing script (e.g., using `jq`, `sed`, `awk`, or a more robust language like Python) to clean the HTML/text and extract basic metadata.
++*   Using `nix-store --add` or similar mechanisms to package the cleaned text into NAR files.
++*   A `flake.nix` that reads a manifest of processed articles and generates a deeply nested attribute set where paths correspond to article topics and final attributes point to the NAR store paths.
++
++## 6. Verification
++
++Success will be verified by:
++
++*   Successfully building the knowledge flake (`nix build .#knowledge.wikipedia`).
++*   Inspecting the resulting attribute set using `nix repl` to confirm it's structured as designed.
++*   Querying the path of a specific article attribute and verifying that it points to a valid store path containing the correct NAR-packaged content.
+diff --git a/09/24/docs/crqs/CRQ_034_Automated_Domain_Knowledge_Graph.md b/09/24/docs/crqs/CRQ_034_Automated_Domain_Knowledge_Graph.md
+new file mode 100644
+index 0000000..355494f
+--- /dev/null
++++ b/09/24/docs/crqs/CRQ_034_Automated_Domain_Knowledge_Graph.md
+@@ -0,0 +1,48 @@
++# CRQ-034: Automated Domain-Specific Knowledge Graph Generation for LLM Context
++
++## 1. Goal
++
++To automatically discover URLs within the project's scope, aggregate knowledge by top-level domain into size-constrained, LLM-optimized Nix Archive (NAR) files, and organize this knowledge hierarchically for efficient AI context composition.
++
++## 2. Problem Statement
++
++As the project grows, manually curating and optimizing knowledge for LLM consumption becomes unscalable. There's a need for an automated system to extract, structure, and cache domain-specific information from various sources (starting with URLs) into a format suitable for LLMs, while respecting context window limitations and enabling granular access to sub-aspects of knowledge.
++
++## 3. Proposed Solution
++
++1.  **URL Discovery:** Develop a mechanism to identify URLs from various project sources (e.g., parsing `flake.nix` inputs, `README.md` files, or a dedicated manifest).
++2.  **Knowledge Extraction & Optimization:** Implement a pipeline to fetch URL content, extract relevant text, and pre-process it for LLM consumption (e.g., summarization, cleaning, keyword identification), ensuring it fits within defined size limits.
++3.  **Nix Flake Structure:** Design a Nix flake structure that dynamically groups knowledge by Top-Level Domain (TLD). Each TLD will have a root NAR file (within size limits) and potentially nested NAR files for sub-aspects or specific paths within that domain.
++4.  **Custom Attributes:** Utilize custom attributes within Nix derivations to store rich metadata about each knowledge segment (e.g., source URL, summary, keywords, size, last updated timestamp).
++5.  **Publishing Integration:** Integrate with the `crq-binstore` for automated publishing and versioning of these domain-specific knowledge NARs.
++
++## 4. Scope
++
++*   **In-Scope:**
++    *   URL discovery from specified project files/manifests.
++    *   Text extraction and basic summarization/cleaning of web content.
++    *   NAR generation with configurable size constraints.
++    *   Hierarchical organization of knowledge by TLD and sub-paths within the Nix flake.
++    *   Custom attribute definition for metadata (source URL, summary, keywords, etc.).
++    *   Integration with `crq-binstore` for automated publishing.
++*   **Out-of-Scope (for initial phase):**
++    *   Advanced Natural Language Processing (NLP) tasks (e.g., entity linking, complex reasoning, sentiment analysis).
++    *   Real-time web crawling or continuous monitoring of external sources.
++    *   Handling of non-textual content beyond basic extraction (e.g., images, videos).
++    *   Dynamic adaptation to LLM context window changes (initial focus on static, configurable size limits).
++
++## 5. Technical Details
++
++*   **URL Discovery:** A script (e.g., Python or Bash with `grep`/`awk`) to parse relevant project files (e.g., `flake.nix`, `README.md`, `docs/`) for URLs. A dedicated `urls.json` manifest could also be introduced.
++*   **Knowledge Extraction & Pre-processing:** A Python script leveraging libraries like `requests` for fetching and `BeautifulSoup` or `lxml` for HTML parsing and text extraction. This script will also handle summarization and chunking to meet size limits.
++*   **Nix Structure:** A `flake.nix` that dynamically generates derivations. This will involve Nix built-ins like `builtins.readDir`, `builtins.fromJSON`, and `pkgs.lib.mapAttrs` to create a nested attribute set representing the domain knowledge graph. Each leaf attribute will be a derivation packaging a NAR file.
++*   **Size Management:** Logic within the Python pre-processing script to split content into multiple NARs or summarize if a single domain's knowledge exceeds a defined byte/token limit.
++*   **Publishing:** Adaptation of the `publish_knowledge_node_nar.sh` script (or a new generalized version) to iterate through the generated domain knowledge derivations and publish their NARs to `crq-binstore`.
++
++## 6. Verification
++
++*   Successful discovery and listing of URLs from test sources.
++*   Generation of TLD-specific and sub-path NAR files with correct content and metadata.
++*   Verification that all generated NAR file sizes adhere to specified limits.
++*   Successful automated publishing of generated NARs to `crq-binstore`.
++*   Ability to query and inspect the hierarchical knowledge structure using `nix repl` and `nix-nar-unpack` to confirm data integrity and accessibility.
+diff --git a/09/24/docs/sops/SOP_Publish_Knowledge_Node_NAR.md b/09/24/docs/sops/SOP_Publish_Knowledge_Node_NAR.md
+new file mode 100644
+index 0000000..76086c8
+--- /dev/null
++++ b/09/24/docs/sops/SOP_Publish_Knowledge_Node_NAR.md
+@@ -0,0 +1,54 @@
++# SOP: Publishing a Generic Knowledge Node NAR
++
++## 1. Purpose
++
++This Standard Operating Procedure (SOP) describes the process of publishing a Nix Archive (NAR) file generated from a "knowledge node" derivation to a designated Git repository (e.g., `crq-binstore`). This SOP provides a generalized approach for sharing structured knowledge defined within Nix flakes.
++
++## 2. Scope
++
++This SOP applies to anyone needing to publish or re-publish a knowledge node NAR file.
++
++## 3. Prerequisites
++
++-   A working Nix environment with flakes enabled.
++-   The knowledge node derivation must be defined within a Nix flake and accessible via a flake attribute path (e.g., `.#packages.x86_64-linux.myKnowledgeNode`).
++-   Access to the `publish_nix_artifact_to_git.sh` script (assumed to be available in the `scripts/` directory).
++-   Network connectivity to the target Git repository (e.g., `https://github.com/meta-introspector/crq-binstore.git`).
++
++## 4. Procedure
++
++The `scripts/publish_knowledge_node_nar.sh` script (to be created) acts as a convenience wrapper for `publish_nix_artifact_to_git.sh`.
++
++### 4.1. Script Location
++
++The script will be located at: `scripts/publish_knowledge_node_nar.sh` (relative to the project root).
++
++### 4.2. Usage
++
++To run the script, execute it from the project root, providing the flake attribute path of the knowledge node and the target repository URL:
++
++```bash
++scripts/publish_knowledge_node_nar.sh <FLAKE_ATTR_PATH> <REPO_URL>
++# Example: scripts/publish_knowledge_node_nar.sh .#packages.aarch64-linux.knowledge-article-monster-group https://github.com/meta-introspector/crq-binstore.git
++```
++
++### 4.3. Script Functionality
++
++This script performs the following:
++
++1.  **Receives Parameters**: It takes `FLAKE_ATTR_PATH` and `REPO_URL` as arguments.
++2.  **Calls Publishing Script**: It then calls `scripts/publish_nix_artifact_to_git.sh` with these parameters. The `publish_nix_artifact_to_git.sh` script is responsible for:
++    *   Building the specified Nix derivation.
++    *   Exporting the build result as a NAR file.
++    *   Handling Git operations (cloning, adding the NAR, committing, pushing) to the specified `REPO_URL`).
++    *   Ensuring proper error handling.
++
++## 5. Verification
++
++Refer to the verification steps outlined in `SOP_Publish_Nix_Artifact_To_Git.md` (or similar core publishing SOP) to confirm the successful publication of the knowledge node NAR file. Additionally, verify the NAR file appears in the `crq-binstore` repository.
++
++## 6. Related Files
++
++-   `scripts/publish_nix_artifact_to_git.sh`: The core script used for publishing Nix artifacts.
++-   The Nix flake defining the knowledge node (e.g., `flake.nix` and `mypackage.nix`).
++-   The `crq-binstore` Git repository.
+diff --git a/09/24/docs/tutorials/Tutorial_Using_Knowledge_Nodes.md b/09/24/docs/tutorials/Tutorial_Using_Knowledge_Nodes.md
+new file mode 100644
+index 0000000..3492140
+--- /dev/null
++++ b/09/24/docs/tutorials/Tutorial_Using_Knowledge_Nodes.md
+@@ -0,0 +1,136 @@
++# Tutorial: Using Nix-based Knowledge Nodes
++
++This tutorial guides you through defining, building, querying, and inspecting "knowledge nodes" – structured data payloads managed by Nix flakes, designed for AI context composition.
++
++## 1. Defining a Knowledge Node
++
++A knowledge node is essentially a Nix derivation that packages a data payload (e.g., a Wikipedia article's content) and annotates it with custom attributes (metadata).
++
++### Example: `mypackage.nix` (Knowledge Node Definition)
++
++Create a file `nix_custom_attrs_test/mypackage.nix`:
++
++```nix
++{ stdenv }:
++
++stdenv.mkDerivation {
++  name = "knowledge-article-monster-group";
++  src = ./some-local-file.txt; # Path to your data payload
++
++  # This phase copies the data payload into the output path in the Nix store.
++  installPhase = ''
++    cp $src $out/article.txt
++  '';
++
++  # --- Custom Attributes for Knowledge Representation ---
++  article_title = "Monster Group";
++  tags = [ "mathematics" "group-theory" "sporadic-groups" ];
++  summary = "The largest sporadic simple group.";
++  related_topics = [ "Monstrous Moonshine" "Griess Algebra" ];
++
++  # Helper attribute for easy shell parsing of tags
++  tags_string = builtins.concatStringsSep " " tags;
++}
++```
++
++### Example: `nix_custom_attrs_test/some-local-file.txt` (Data Payload)
++
++```
++This is the content of a sample article about the Monster Group.
++It is the largest sporadic simple group.
++```
++
++### Example: `nix_custom_attrs_test/default.nix` (Entry Point)
++
++```nix
++{ pkgs ? import <nixpkgs> {} }:
++
++pkgs.callPackage ./mypackage.nix {}
++```
++
++## 2. Building and Querying a Knowledge Node
++
++You can build the knowledge node and query its custom attributes using Nix commands.
++
++```bash
++# Navigate to your test directory
++cd nix_custom_attrs_test
++
++# Query a custom attribute (e.g., article_title)
++ARTICLE_TITLE=$(nix-instantiate --eval -A article_title . | xargs)
++echo "Article Title: $ARTICLE_TITLE"
++
++# Query another custom attribute (e.g., tags_string)
++TAGS=$(nix-instantiate --eval -A tags_string . | xargs)
++echo "Tags: $TAGS"
++
++# Build the knowledge node to get its store path (the NAR payload)
++RESULT_PATH=$(nix-build .)
++echo "Knowledge Node NAR Payload Path: $RESULT_PATH"
++
++# Inspect the content of the payload
++cat "$RESULT_PATH/article.txt"
++```
++
++## 3. Inspecting a Knowledge Node NAR File
++
++Once a knowledge node is built, its data payload resides in the Nix store as a NAR file. You can inspect this NAR file using `nix-nar-unpack`.
++
++Assuming you have the absolute path to a `.nar` file (e.g., one published to `crq-binstore` or exported from a build):
++
++```bash
++# Example: Let's assume you have a NAR file named 'my-knowledge-node.nar'
++# For demonstration, we'll export the one we just built:
++nix-store --export $(nix-build . --no-out-link) > /tmp/my-knowledge-node.nar
++
++NAR_FILE_PATH="/tmp/my-knowledge-node.nar"
++OUTPUT_DIR="/tmp/unpacked-knowledge-node"
++
++echo "Unpacking NAR file: $NAR_FILE_PATH"
++mkdir -p "$OUTPUT_DIR"
++nix-nar-unpack --file "$NAR_FILE_PATH" --to "$OUTPUT_DIR"
++
++echo "NAR content unpacked to: $OUTPUT_DIR"
++ls -l "$OUTPUT_DIR"
++cat "$OUTPUT_DIR/article.txt" # Assuming your article was named article.txt inside the NAR
++```
++
++## 4. Publishing a Knowledge Node NAR
++
++To share your knowledge node, you can publish its NAR file to a Git repository like `crq-binstore`. This typically involves building the derivation, exporting it as a NAR, and pushing it to the repository.
++
++The `scripts/publish_knowledge_node_nar.sh` script automates this process:
++
++```bash
++# Example: Publish the 'monster-group' knowledge node
++# (Ensure you are in the project root or adjust paths accordingly)
++scripts/publish_knowledge_node_nar.sh \
++  .#packages.aarch64-linux.knowledge-article-monster-group \
++  https://github.com/meta-introspector/crq-binstore.git
++```
++
++*Note: The exact flake attribute path (`.#packages.aarch64-linux.knowledge-article-monster-group`) depends on how your knowledge node is integrated into your main `flake.nix`.*
++
++## 5. Using Existing NAR Inspection Scripts
++
++The project includes scripts for further analysis of NAR files:
++
++*   **`fetch-nar-data.sh`**: Used to unpack a NAR file from a given path.
++    ```bash
++    # Example usage (assuming CRQ_BINSTORE_PATH is set)
++    # CRQ_BINSTORE_PATH="/path/to/cloned/crq-binstore"
++    # scripts/fetch-nar-data.sh <nar-file-name-in-binstore>
++    ```
++*   **`extract_nar_wordlist.sh`**: Extracts text content from a NAR and generates a wordlist.
++    ```bash
++    # Example usage
++    # scripts/extract_nar_wordlist.sh /tmp/my-knowledge-node.nar
++    ```
++*   **`inspect_nar_content.sh`**: Performs keyword frequency analysis on NAR content.
++    ```bash
++    # Example usage
++    # scripts/inspect_nar_content.sh /tmp/my-knowledge-node.nar
++    ```
++    *Note: Ensure these scripts are updated to use `nix-nar-unpack` or `nix-store --restore` for extraction, not `tar -xf`.*
++
++By following these steps, you can effectively manage and share structured knowledge using Nix flakes, making it composable for various applications, including AI context generation.
+diff --git a/09/24/nix_custom_attrs_test/default.nix b/09/24/nix_custom_attrs_test/default.nix
+new file mode 100644
+index 0000000..be96425
+--- /dev/null
++++ b/09/24/nix_custom_attrs_test/default.nix
+@@ -0,0 +1,3 @@
++{ pkgs ? import <nixpkgs> {} }:
++
++pkgs.callPackage ./mypackage.nix {}
+\ No newline at end of file
+diff --git a/09/24/nix_custom_attrs_test/mypackage.nix b/09/24/nix_custom_attrs_test/mypackage.nix
+new file mode 100644
+index 0000000..ef2bb7b
+--- /dev/null
++++ b/09/24/nix_custom_attrs_test/mypackage.nix
+@@ -0,0 +1,26 @@
++# mypackage.nix
++{ stdenv, fetchurl }:
++
++stdenv.mkDerivation rec {
++  pname = "hello";
++  version = "2.12";
++
++  src = fetchurl {
++    url = "mirror://gnu/hello/${pname}-${version}.tar.gz";
++    sha256 = "zwSvhtwIUmjF9EcPuuSbGK+8Iht4CWqrhC2TSna60Ks="; # Corrected hash for hello-2.12
++  };
++
++  # Custom attributes
++  myCustomTag = "experimental";
++  myVersionOverride = "2.13-custom";
++  myExtraData = ./some-local-file.txt;
++
++  preBuild = ''
++    echo "Custom tag: ${myCustomTag}"
++    if [[ "$myVersionOverride" != "" ]]; then
++      echo "Overriding version in Makefile"
++      # sed -i "s/${version}/${myVersionOverride}/" Makefile
++    fi
++    echo "Extra data path: ${myExtraData}"
++  '';
++}
+\ No newline at end of file
+diff --git a/09/24/nix_custom_attrs_test/some-local-file.txt b/09/24/nix_custom_attrs_test/some-local-file.txt
+new file mode 100644
+index 0000000..97397bf
+--- /dev/null
++++ b/09/24/nix_custom_attrs_test/some-local-file.txt
+@@ -0,0 +1 @@
++This is some local data for mypackage.
+diff --git a/09/24/nix_custom_attrs_test/test_custom_attrs.sh b/09/24/nix_custom_attrs_test/test_custom_attrs.sh
+new file mode 100755
+index 0000000..52dd12a
+--- /dev/null
++++ b/09/24/nix_custom_attrs_test/test_custom_attrs.sh
+@@ -0,0 +1,33 @@
++#!/usr/bin/env bash
++set -euo pipefail
++
++cd nix_custom_attrs_test
++
++echo "--- Testing custom attributes in mypackage.nix ---"
++
++# 1. Build the package (this will also print preBuild hook messages)
++echo "Building the package..."
++nix-build default.nix --no-out-link
++
++# 2. Query attributes using nix-instantiate and nix-show-derivation
++echo -e "\nQuerying attributes using nix-instantiate and nix-show-derivation:"
++DRV_PATH=$(nix-instantiate default.nix)
++echo "Derivation path: $DRV_PATH"
++
++echo "myCustomTag: $(nix show-derivation \"$DRV_PATH\" | jq -r '.[].env.myCustomTag')"
++echo "myVersionOverride: $(nix show-derivation \"$DRV_PATH\" | jq -r '.[].env.myVersionOverride')"
++echo "myExtraData (path): $(nix show-derivation \"$DRV_PATH\" | jq -r '.[].env.myExtraData')"
++
++# 3. Query attributes using nix eval (more direct)
++echo -e "\nQuerying attributes using nix eval:"
++echo "myCustomTag: $(nix eval --raw -f default.nix myCustomTag)"
++echo "myVersionOverride: $(nix eval --raw -f default.nix myVersionOverride)"
++echo "myExtraData (path): $(nix eval --raw -f default.nix myExtraData)"
++
++# 4. Access attributes from within a nix-shell
++echo -e "\nAccessing attributes from within a nix-shell:"
++nix-shell default.nix --run 'echo "Inside nix-shell: myCustomTag is $myCustomTag"'
++nix-shell default.nix --run 'echo "Inside nix-shell: myVersionOverride is $myVersionOverride"'
++nix-shell default.nix --run 'echo "Inside nix-shell: myExtraData is $myExtraData"'
++
++echo -e "\n--- Test complete for mypackage.nix ---"
+\ No newline at end of file
+diff --git a/09/24/rust_knowledge_extractor/Cargo.toml b/09/24/rust_knowledge_extractor/Cargo.toml
+new file mode 100644
+index 0000000..7260e3c
+--- /dev/null
++++ b/09/24/rust_knowledge_extractor/Cargo.toml
+@@ -0,0 +1,12 @@
++[package]
++name = "rust_knowledge_extractor"
++version = "0.1.0"
++edition = "2021"
++
++[dependencies]
++reqwest = { version = "0.11", features = ["json", "blocking"] }
++tokio = { version = "1", features = ["full"] }
++scraper = "0.13"
++url = "2.2"
++serde = { version = "1.0", features = ["derive"] }
++serde_json = "1.0"
+diff --git a/09/24/rust_knowledge_extractor/src/main.rs b/09/24/rust_knowledge_extractor/src/main.rs
+new file mode 100644
+index 0000000..c09dc16
+--- /dev/null
++++ b/09/24/rust_knowledge_extractor/src/main.rs
+@@ -0,0 +1,109 @@
++use reqwest::blocking::Client;
++use scraper::{Html, Selector};
++use url::Url;
++use serde::{Serialize, Deserialize};
++use serde_json;
++use std::io::{self, BufRead, Write};
++use std::time::Duration;
++
++#[derive(Serialize, Deserialize, Debug)]
++struct KnowledgeItem {
++    url: String,
++    tld: String,
++    content: String,
++    length: usize,
++}
++
++fn fetch_and_parse(client: &Client, url: &str) -> Option<String> {
++    eprintln!("Fetching {}", url);
++    match client.get(url).timeout(Duration::new(10, 0)).send() {
++        Ok(response) => {
++            if !response.status().is_success() {
++                eprintln!("Error fetching {}: HTTP status {}", url, response.status());
++                return None;
++            }
++            match response.text() {
++                Ok(html_content) => {
++                    let document = Html::parse_document(&html_content);
++                    let main_selector = Selector::parse("main, article, body").unwrap();
++
++                    let text = if let Some(main_content) = document.select(&main_selector).next() {
++                        main_content.text().collect::<Vec<_>>().join(" ")
++                    } else {
++                        document.text().collect::<Vec<_>>().join(" ")
++                    };
++
++                    // Basic cleaning: normalize whitespace
++                    Some(text.split_whitespace().collect::<Vec<_>>().join(" "))
++                }
++                Err(e) => {
++                    eprintln!("Error reading response text from {}: {}", url, e);
++                    None
++                }
++            }
++        }
++        Err(e) => {
++            eprintln!("Error sending request to {}: {}", url, e);
++            None
++        }
++    }
++}
++
++fn get_tld(url_str: &str) -> String {
++    match Url::parse(url_str) {
++        Ok(url) => {
++            if let Some(domain) = url.domain() {
++                let parts: Vec<&str> = domain.split('.').collect();
++                if parts.len() > 1 {
++                    return format!("{}.{}", parts[parts.len() - 2], parts[parts.len() - 1]);
++                }
++            }
++            "unknown".to_string()
++        }
++        Err(_) => "unknown".to_string(),
++    }
++}
++
++fn optimize_for_llm(text: Option<String>, max_chars: usize) -> Option<String> {
++    if let Some(t) = text {
++        if t.len() > max_chars {
++            Some(format!("{}...", &t[0..max_chars]))
++        } else {
++            Some(t)
++        }
++    } else {
++        None
++    }
++}
++
++fn main() -> io::Result<()> {
++    let stdin = io::stdin();
++    let client = Client::new();
++    let max_chars = 4000; // Matches Python script's default
++
++    let mut stdout = io::stdout().lock();
++
++    for line in stdin.lock().lines() {
++        let url = line?;
++        if url.is_empty() {
++            continue;
++        }
++
++        eprintln!("Processing URL: {}", url);
++        let content = fetch_and_parse(&client, &url);
++        let optimized_content = optimize_for_llm(content, max_chars);
++
++        if let Some(final_content) = optimized_content {
++            let tld = get_tld(&url);
++            let item = KnowledgeItem {
++                url: url.clone(),
++                tld,
++                content: final_content.clone(),
++                length: final_content.len(),
++            };
++            writeln!(stdout, "{}", serde_json::to_string(&item)?)?;
++        }
++    }
++
++    Ok(())
++}
+diff --git a/09/24/scripts/discover_project_urls.sh b/09/24/scripts/discover_project_urls.sh
+new file mode 100755
+index 0000000..0a5bdb9
+--- /dev/null
++++ b/09/24/scripts/discover_project_urls.sh
+@@ -0,0 +1,44 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++echo "Discovering URLs within the project..."
++
++# Define file types to search
++FILE_TYPES="md|nix|sh|json|txt|org"
++
++# Define directories to exclude
++EXCLUDE_DIRS=(
++  ".git"
++  "node_modules"
++  "vendor"
++  "result"
++  "nix/store"
++  "crq-binstore" # Exclude the binary store itself
++  "cache"
++  "generated-tasks"
++  "wikipedia_cache"
++)
++
++# Build the find command's exclude arguments as an array
++FIND_ARGS=()
++for dir in "${EXCLUDE_DIRS[@]}"; do
++  FIND_ARGS+=( "-path" "./$dir" "-prune" "-o" )
++done
++# Add a dummy -true argument at the end if FIND_ARGS is not empty,
++# to correctly terminate the -o (OR) logic for find.
++if [ ${#FIND_ARGS[@]} -gt 0 ]; then
++  FIND_ARGS+=( "-true" )
++fi
++
++# Use find to locate relevant files and grep to extract URLs
++# The regex looks for http(s):// followed by non-whitespace characters
++# It also tries to capture common URL characters like hyphens, dots, slashes, etc.
++find . -type f \
++  "${FIND_ARGS[@]}" \
++  -regex ".*\\.\(\${FILE_TYPES}\)$" -print0 \
++  | xargs -0 grep -o -E "https?://[a-zA-Z0-9./?#&=_%~-]+" \
++  | sort -u
++
++
++echo "URL discovery complete."
+diff --git a/09/24/scripts/extract_and_optimize_knowledge.py b/09/24/scripts/extract_and_optimize_knowledge.py
+new file mode 100755
+index 0000000..483b97d
+--- /dev/null
++++ b/09/24/scripts/extract_and_optimize_knowledge.py
+@@ -0,0 +1,80 @@
++import requests
++from bs4 import BeautifulSoup
++from urllib.parse import urlparse
++import json
++import sys
++import os
++
++def fetch_and_parse(url):
++    """Fetches content from a URL and extracts main text."""
++    try:
++        response = requests.get(url, timeout=10)
++        response.raise_for_status()  # Raise an exception for HTTP errors
++        soup = BeautifulSoup(response.text, 'html.parser')
++
++        # Try to find main content areas
++        main_content = soup.find('main') or soup.find('article') or soup.find('body')
++        if main_content:
++            text = main_content.get_text(separator=' ', strip=True)
++        else:
++            text = soup.get_text(separator=' ', strip=True)
++
++        # Basic cleaning
++        text = ' '.join(text.split()) # Normalize whitespace
++        return text
++    except requests.exceptions.RequestException as e:
++        print(f"Error fetching {url}: {e}", file=sys.stderr)
++        return None
++    except Exception as e:
++        print(f"Error parsing {url}: {e}", file=sys.stderr)
++        return None
++
++def get_tld(url):
++    """Extracts the top-level domain from a URL."""
++    parsed_url = urlparse(url)
++    if parsed_url.netloc:
++        parts = parsed_url.netloc.split('.')
++        if len(parts) > 1:
++            # Simple TLD extraction, might need more robust library for edge cases
++            return parts[-2] + '.' + parts[-1]
++    return "unknown"
++
++def optimize_for_llm(text, max_chars=4000):
++    """Simple optimization: truncate text to max_chars."""
++    if text is None:
++        return None
++    if len(text) > max_chars:
++        # Truncate and add an ellipsis
++        return text[:max_chars] + "..."
++    return text
++
++def main():
++    if sys.stdin.isatty():
++        print("Usage: cat urls.txt | python extract_and_optimize_knowledge.py > knowledge_data.jsonl", file=sys.stderr)
++        sys.exit(1)
++
++    knowledge_items = []
++    for line in sys.stdin:
++        url = line.strip()
++        if not url:
++            continue
++
++        print(f"Processing URL: {url}", file=sys.stderr)
++        content = fetch_and_parse(url)
++        optimized_content = optimize_for_llm(content)
++
++        if optimized_content:
++            tld = get_tld(url)
++            knowledge_items.append({
++                "url": url,
++                "tld": tld,
++                "content": optimized_content,
++                "length": len(optimized_content)
++            })
++    
++    # Output as JSON Lines (one JSON object per line)
++    for item in knowledge_items:
++        print(json.dumps(item))
++
++if __name__ == "__main__":
++    main()
+diff --git a/09/24/scripts/generate_knowledge_data_rust.sh b/09/24/scripts/generate_knowledge_data_rust.sh
+new file mode 100755
+index 0000000..c419f9f
+--- /dev/null
++++ b/09/24/scripts/generate_knowledge_data_rust.sh
+@@ -0,0 +1,11 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++echo "Building Rust knowledge extractor..."
++(cd rust_knowledge_extractor && cargo build --release)
++
++echo "Generating knowledge_data.jsonl using Rust extractor..."
++./scripts/discover_project_urls.sh | ./rust_knowledge_extractor/target/release/rust_knowledge_extractor > knowledge_data.jsonl
++
++echo "knowledge_data.jsonl generated successfully using Rust."
+diff --git a/09/24/scripts/publish_knowledge_node_nar.sh b/09/24/scripts/publish_knowledge_node_nar.sh
+new file mode 100644
+index 0000000..c690b6b
+--- /dev/null
++++ b/09/24/scripts/publish_knowledge_node_nar.sh
+@@ -0,0 +1,30 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++# This script publishes a generic knowledge node NAR to a Git repository.
++# It acts as a wrapper for the core 'publish_nix_artifact_to_git.sh' script.
++
++FLAKE_ATTR_PATH="$1"
++REPO_URL="$2"
++
++if [[ -z "$FLAKE_ATTR_PATH" || -z "$REPO_URL" ]]; then
++  echo "Usage: $0 <FLAKE_ATTR_PATH> <REPO_URL>"
++  echo "Example: $0 .#packages.aarch64-linux.knowledge-article-monster-group https://github.com/meta-introspector/crq-binstore.git"
++  exit 1
++fi
++
++# Assuming publish_nix_artifact_to_git.sh is in the same 'scripts' directory
++PUBLISH_CORE_SCRIPT="$(dirname "${BASH_SOURCE[0]}")/publish_nix_artifact_to_git.sh"
++
++if [[ ! -f "$PUBLISH_CORE_SCRIPT" ]]; then
++  echo "Error: Core publishing script not found at '$PUBLISH_CORE_SCRIPT'."
++  echo "Please ensure 'publish_nix_artifact_to_git.sh' exists in the 'scripts/' directory."
++  exit 1
++fi
++
++echo "Publishing knowledge node NAR from attribute path: $FLAKE_ATTR_PATH to $REPO_URL"
++
++"$PUBLISH_CORE_SCRIPT" "$FLAKE_ATTR_PATH" "$REPO_URL"
++
++echo "Knowledge node NAR publishing process initiated."
+diff --git a/09/crq-binstore b/09/crq-binstore
+deleted file mode 160000
+index d6bcadf..0000000
+--- a/09/crq-binstore
++++ /dev/null
+@@ -1 +0,0 @@
+-Subproject commit d6bcadfbc529e2d4822725c42f957e2b05ffea40
+diff --git a/09/flake.lock b/09/flake.lock
+index 623b693..edf354a 100644
+--- a/09/flake.lock
++++ b/09/flake.lock
+@@ -25,11 +25,11 @@
+       "locked": {
+         "lastModified": 1,
+         "narHash": "sha256-MVdZhiwGOcZdrt2ooHGlA3V/FBeqcuWosQFJ8rxZ/38=",
+-        "path": "/nix/store/7rsmql13kmhksw1gaz9smqw4aiddk1d4-source/09/23/nix_concepts_and_facts",
++        "path": "/nix/store/zi5c2klbq1sxvm1yj4mgx40cqjnf8zxz-source/09/23/nix_concepts_and_facts",
+         "type": "path"
+       },
+       "original": {
+-        "path": "/nix/store/7rsmql13kmhksw1gaz9smqw4aiddk1d4-source/09/23/nix_concepts_and_facts",
++        "path": "/nix/store/zi5c2klbq1sxvm1yj4mgx40cqjnf8zxz-source/09/23/nix_concepts_and_facts",
+         "type": "path"
+       }
+     },
+diff --git a/09/flake.nix b/09/flake.nix
+index ccdcc4d..96d43b2 100644
+--- a/09/flake.nix
++++ b/09/flake.nix
+@@ -1,41 +1,96 @@
+ {
+-  description = "September 2025 concepts and AI context.";
++  description = "A Nix flake for generating a domain-specific knowledge graph for LLM context.";
+ 
+   inputs = {
+-    day_23_concepts.url = "./23/nix_concepts_and_facts"; # Import the daily flake
+-    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify"; # Use meta-introspector nixpkgs
+-    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
++    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+   };
+ 
+-  outputs = { self, day_23_concepts, nixpkgs, flake-utils, ... } :
+-    flake-utils.lib.eachDefaultSystem (system:
+-      let
+-        pkgs = import nixpkgs {
+-          inherit system;
+-        };
+-      in
+-      {
+-        packages.default = day_23_concepts.packages.${system}.default; # Expose ai-context-23 as default
+-        inherit (day_23_concepts.packages.${system}) number-23 is-prime-23 fact-23-oracle; # Expose individual concepts
+-
+-        packages.analyze-ngrams = pkgs.writeShellApplication {
+-          name = "analyze-ngrams";
+-          runtimeInputs = with pkgs; [ jq gawk coreutils ];
+-          text = builtins.readFile ./analyze_ngrams.sh;
+-        };
++  outputs = { self, nixpkgs }:
++    let
++      systems = [ "aarch64-linux" "x86_64-linux" ];
++      forAllSystems = nixpkgs.lib.genAttrs systems;
++      pkgs = forAllSystems (system: import nixpkgs {
++        inherit system;
++      });
+ 
+-        apps.analyze-ngrams = {
+-          type = "app";
+-          program = "${self.packages.${system}.analyze-ngrams}/bin/analyze-ngrams";
+-        };
++      # Path to the generated knowledge data (JSON Lines format)
++      # This file must be generated by running:
++      # scripts/discover_project_urls.sh | scripts/extract_and_optimize_knowledge.py > knowledge_data.jsonl
++      knowledgeDataPath = ./knowledge_data.jsonl;
++
++      # Read and parse the JSON Lines data
++      # Note: For very large datasets, this might be inefficient as it reads the whole file.
++      # A more robust solution might involve a derivation that processes the JSON Lines file incrementally.
++      knowledgeItems = builtins.fromJSON (builtins.readFile knowledgeDataPath);
++
++      # Group knowledge items by TLD
++      groupedByTld = nixpkgs.lib.groupBy (item: item.tld) knowledgeItems;
++
++      # Function to create a derivation for a single knowledge item
++      mkKnowledgeItemDerivation = system: item:
++        pkgs.${system}.stdenv.mkDerivation {
++          pname = "knowledge-${nixpkgs.lib.strings.sanitizeDerivationName item.tld}-${nixpkgs.lib.strings.sanitizeDerivationName (builtins.substring 0 10 item.url)}";
++          version = "0.1";
++
++          # The content itself is the source
++          src = pkgs.${system}.writeText "content.txt" item.content;
+ 
+-        devShells.default = pkgs.mkShell {
+-          buildInputs = with pkgs; [
+-            bash
+-            nix-info
+-            self.packages.${system}.analyze-ngrams
+-          ];
++          # Install phase just copies the content to the output
++          installPhase = ''
++            mkdir -p $out
++            cp $src $out/content.txt
++          '';
++
++          # Custom attributes for metadata
++          url = item.url;
++          tld = item.tld;
++          contentLength = item.length;
++          # Add other metadata as needed (e.g., hash of content, last fetched date)
+         };
+-      }
+-    );
+-}
++
++      # Generate packages for each TLD, aggregating their individual knowledge items
++      tldPackages = forAllSystems (system:
++        nixpkgs.lib.mapAttrs (tld: items:
++          pkgs.${system}.stdenv.mkDerivation {
++            pname = "knowledge-tld-${nixpkgs.lib.strings.sanitizeDerivationName tld}";
++            version = "0.1";
++
++            # This derivation will contain a directory of all items for this TLD
++            # We'll create a simple directory structure with symlinks to individual item NARs
++            buildInputs = [ pkgs.${system}.coreutils ]; # For cp and ln
++
++            installPhase = ''
++              mkdir -p $out/${tld}
++              ${nixpkgs.lib.concatStringsSep "\n" (nixpkgs.lib.map (item: 
++                let
++                  itemDerivation = mkKnowledgeItemDerivation system item;
++                  # Sanitize URL for a valid filename, potentially hash for uniqueness
++                  sanitizedUrlFileName = nixpkgs.lib.strings.sanitizeDerivationName (builtins.substring 0 50 item.url);
++                in
++                "ln -s ${itemDerivation}/content.txt $out/${tld}/${sanitizedUrlFileName}.txt"
++              ) items)}
++            '';
++
++            # Custom attributes for the TLD package
++            domain = tld;
++            itemCount = builtins.length items;
++            # Add other TLD-level metadata (e.g., total content length, list of all URLs)
++          }
++        ) groupedByTld
++      );
++
++    in
++    {
++      packages = forAllSystems (system:
++        # Combine individual item derivations and TLD packages into the flake's packages output
++        (nixpkgs.lib.mapAttrs (tld: items:
++          nixpkgs.lib.listToAttrs (nixpkgs.lib.map (item: 
++            let
++              sanitizedUrlAttr = nixpkgs.lib.strings.sanitizeDerivationName (builtins.substring 0 50 item.url);
++            in
++            { name = sanitizedUrlAttr; value = mkKnowledgeItemDerivation system item; }
++          ) items))
++        ) groupedByTld) // tldPackages
++      );
++    };
++}
+\ No newline at end of file

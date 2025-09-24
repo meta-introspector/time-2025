@@ -1,0 +1,2 @@
+feat: Directly call generate_monster_group_llm_txt.sh with named args in flake.nix
+

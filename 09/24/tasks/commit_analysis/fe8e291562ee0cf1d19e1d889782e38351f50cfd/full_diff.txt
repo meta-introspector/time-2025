@@ -1,0 +1,19 @@
+commit fe8e291562ee0cf1d19e1d889782e38351f50cfd
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:29:37 2025 +0000
+
+    fix: Simplify buildCommand in nix-llm-context/flake.nix for debugging
+
+diff --git a/09/22/nix-llm-context/flake.nix b/09/22/nix-llm-context/flake.nix
+index 8dbb9a9..f89dcd9 100644
+--- a/09/22/nix-llm-context/flake.nix
++++ b/09/22/nix-llm-context/flake.nix
+@@ -23,7 +23,7 @@
+ 
+             buildInputs = [ pkgs.bash pkgs.coreutils pkgs.gnugrep pkgs.gnused pkgs.findutils ];
+           } ''
+-            "$generatorScriptPath" "${symbol}" "${mainProject}/wikipedia_cache/${htmlFileName}" "${mainProject}/docs/memes/${keywordsScriptFileName}" "${mainProject}/docs/memes/${linksFileName}" "${mainProject}/docs/memes/${tutorialsPattern}" "$out/llm-context-${symbol// /-}.txt" "${mainProject}"
++            "$generatorScriptPath"
+           '');
+       in
+       rec {

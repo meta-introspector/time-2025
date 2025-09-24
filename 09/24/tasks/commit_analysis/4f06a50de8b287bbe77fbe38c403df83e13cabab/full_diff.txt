@@ -1,0 +1,27 @@
+commit 4f06a50de8b287bbe77fbe38c403df83e13cabab
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 23:01:27 2025 +0000
+
+    refactor(scripts): Remove temporary delete_blocked_html_files.sh script
+
+diff --git a/09/22/scripts/delete_blocked_html_files.sh b/09/22/scripts/delete_blocked_html_files.sh
+deleted file mode 100755
+index 0fa3fa4..0000000
+--- a/09/22/scripts/delete_blocked_html_files.sh
++++ /dev/null
+@@ -1,15 +0,0 @@
+-#!/usr/bin/env bash
+-
+-set -euo pipefail
+-
+-CACHE_DIR="/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/22/wikipedia_cache"
+-ERROR_PATTERN="Please set a proper user-agent and respect our robot policy"
+-
+-for file in "$CACHE_DIR"/*.html; do
+-  if grep -q "$ERROR_PATTERN" "$file"; then
+-    echo "Deleting blocked file: $file"
+-    rm "$file"
+-  fi
+-done
+-
+-echo "Deleted HTML files containing the blocked content pattern from $CACHE_DIR."

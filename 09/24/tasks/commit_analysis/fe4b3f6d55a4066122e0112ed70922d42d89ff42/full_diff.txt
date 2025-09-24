@@ -1,0 +1,147 @@
+commit fe4b3f6d55a4066122e0112ed70922d42d89ff42
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 22:20:01 2025 +0000
+
+    feat: Update nix-llm-context flake, add NAR inspection scripts, and update crq-binstore submodule
+
+diff --git a/09/22/crq-binstore b/09/22/crq-binstore
+index c343487..3b3a52a 160000
+--- a/09/22/crq-binstore
++++ b/09/22/crq-binstore
+@@ -1 +1 @@
+-Subproject commit c34348733afb74eefbc918a50fb51736b652b5c7
++Subproject commit 3b3a52acdfb208afeac0e9d56f84a4c949b27e1f
+diff --git a/09/22/nix-llm-context/flake.nix b/09/22/nix-llm-context/flake.nix
+index e54fb5c..f5cbb1f 100644
+--- a/09/22/nix-llm-context/flake.nix
++++ b/09/22/nix-llm-context/flake.nix
+@@ -16,7 +16,10 @@
+ 
+         # Function to generate LLM context for a given symbol
+         generateLlmContext = { symbol, htmlFileName, keywordsScriptFileName, linksFileName, tutorialsPattern, generatorScript }:
+-          (pkgs.runCommand "llm-context-${symbol}" {} ''"${self}/debug_wrapper.sh" --generator-script="${self}/${generatorScript}" --symbol="${symbol}" --html-file-name="${htmlFileName}" --keywords-script="${keywordsScriptFileName}" --links-file-name="${linksFileName}" --tutorials-pattern="${tutorialsPattern}" --output-dir="$out" --main-project="${mainProject}"'');
++          (pkgs.runCommand "llm-context-${symbol}" {
++            buildInputs = [ pkgs.bash pkgs.coreutils pkgs.gnugrep pkgs.gnused pkgs.findutils pkgs.file pkgs.which ];
++            buildCommand = ''"${self}/debug_wrapper.sh" --generator-script="${self}/${generatorScript}" --symbol="${symbol}" --html-file-name="${htmlFileName}" --keywords-script="${keywordsScriptFileName}" --links-file-name="${linksFileName}" --tutorials-pattern="${tutorialsPattern}" --output-dir="$out" --main-project="${mainProject}"'';
++          } "");
+       in
+       rec {
+         packages.monsterGroupLlmContext = generateLlmContext {
+diff --git a/09/22/scripts/extract_nar_wordlist.sh b/09/22/scripts/extract_nar_wordlist.sh
+index 5fc83fb..315ae1a 100755
+--- a/09/22/scripts/extract_nar_wordlist.sh
++++ b/09/22/scripts/extract_nar_wordlist.sh
+@@ -37,10 +37,7 @@ fi
+ 
+ # Restore the NAR file to the Nix store
+ log "Restoring NAR file '$NAR_FILE_PATH' to Nix store..."
+-# Use a temporary file to pipe to nix-store --restore to avoid issues with bash -c and pipes
+-TEMP_NAR_INPUT=$(mktemp)
+-execute_cmd cp "$NAR_FILE_PATH" "$TEMP_NAR_INPUT"
+-NIX_STORE_RESTORED_PATH=$(nix-store --restore < "$TEMP_NAR_INPUT") # Execute directly without execute_cmd
++NIX_STORE_RESTORED_PATH=$(nix-store --restore < "$NAR_FILE_PATH") # Execute directly without execute_cmd
+ log "NAR restored to: $NIX_STORE_RESTORED_PATH"
+ 
+ # Process the extracted files to generate a wordlist
+diff --git a/09/22/scripts/inspect_nar_content.sh b/09/22/scripts/inspect_nar_content.sh
+new file mode 100755
+index 0000000..d807b25
+--- /dev/null
++++ b/09/22/scripts/inspect_nar_content.sh
+@@ -0,0 +1,42 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++NAR_FILE_PATH="$1"
++TEMP_EXTRACT_DIR="/tmp/nar_extracted_content_$(date +%s)"
++
++cleanup() {
++  echo "Cleaning up extracted NAR content..."
++  rm -rf "$TEMP_EXTRACT_DIR"
++}
++
++trap cleanup EXIT
++
++if [ -z "$NAR_FILE_PATH" ]; then
++  echo "Error: Usage: $0 <absolute_path_to_nar_file>"
++  exit 1
++fi
++
++if [ ! -f "$NAR_FILE_PATH" ]; then
++  echo "Error: NAR file not found: $NAR_FILE_PATH"
++  exit 1
++fi
++
++mkdir -p "$TEMP_EXTRACT_DIR"
++
++echo "Extracting NAR content to: $TEMP_EXTRACT_DIR"
++# Assuming NAR is essentially a tar archive
++tar -xf "$NAR_FILE_PATH" -C "$TEMP_EXTRACT_DIR"
++
++echo "--- Keyword Frequency Analysis of NAR Content ---"
++# Extract strings from all files, convert to lowercase, remove punctuation, split into words, count frequency
++find "$TEMP_EXTRACT_DIR" -type f -print0 | xargs -0 strings | \
++  tr '[:upper:]' '[:lower:]' | \
++  sed 's/[[:punct:]]//g' | \
++  grep -o -E '\w+' | \
++  sort | uniq -c | sort -nr | head -n 20
++
++echo "--- End of Keyword Frequency Analysis ---"
++
++echo "NAR content inspection complete."
++
+diff --git a/09/22/scripts/restore_nar_and_report.sh b/09/22/scripts/restore_nar_and_report.sh
+new file mode 100755
+index 0000000..84ed55d
+--- /dev/null
++++ b/09/22/scripts/restore_nar_and_report.sh
+@@ -0,0 +1,47 @@
++#!/usr/bin/env bash
++
++set -euo pipefail
++
++NAR_FILE_PATH="$1"
++TARGET_PATH="$2"
++TEMP_NAR_INPUT="/tmp/gemini_nar_temp.nar"
++NIX_STORE_EXECUTABLE="/nix/store/0x7s63gjcvybs6fgdq9p6z5l8svcxaav-nix-on-droid-path/bin/nix-store"
++
++cleanup() {
++  echo "Cleaning up temporary NAR file..."
++  rm -f "$TEMP_NAR_INPUT"
++  echo "Cleaning up restored NAR content..."
++  rm -rf "$TARGET_PATH"
++}
++
++trap cleanup EXIT
++
++if [ -z "$NAR_FILE_PATH" ] || [ -z "$TARGET_PATH" ]; then
++  echo "Error: Usage: $0 <absolute_path_to_nar_file> <target_restore_path>"
++  exit 1
++fi
++
++if [ ! -f "$NAR_FILE_PATH" ]; then
++  echo "Error: NAR file not found: $NAR_FILE_PATH"
++  exit 1
++fi
++
++if [ -e "$TARGET_PATH" ]; then
++  echo "Error: Target path already exists: $TARGET_PATH. Please remove it first."
++  exit 1
++fi
++
++echo "Copying NAR file to temporary location: $TEMP_NAR_INPUT"
++cp "$NAR_FILE_PATH" "$TEMP_NAR_INPUT"
++
++echo "Restoring NAR file to Nix store..."
++"$NIX_STORE_EXECUTABLE" --restore "$TARGET_PATH" < "$TEMP_NAR_INPUT"
++
++echo "NAR restored to: $TARGET_PATH"
++
++echo "--- NAR Content Report ---"
++"$NIX_STORE_EXECUTABLE" -q --tree "$TARGET_PATH"
++
++echo "--- End of NAR Content Report ---"
++
++echo "NAR inspection complete."
+\ No newline at end of file

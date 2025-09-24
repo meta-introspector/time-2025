@@ -1,0 +1,2 @@
+fix: Correct buildCommand syntax in nix-llm-context/flake.nix
+

@@ -1,0 +1,60 @@
+commit 9c251fd5865492b25c11db993f284bca2e9670c1
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 16:35:24 2025 +0000
+
+    fix: Remove crq-binstore references from generate_monster_group_llm_txt.sh
+    
+    Modified generate_monster_group_llm_txt.sh to remove references to crq-binstore URL and revision, as this information is no longer passed from the Nix flake.
+
+diff --git a/09/22/nix-llm-context/generate_monster_group_llm_txt.sh b/09/22/nix-llm-context/generate_monster_group_llm_txt.sh
+index df3c041..3bedbac 100755
+--- a/09/22/nix-llm-context/generate_monster_group_llm_txt.sh
++++ b/09/22/nix-llm-context/generate_monster_group_llm_txt.sh
+@@ -1,16 +1,21 @@
+ #!/usr/bin/env bash
+ #
+ # Script to generate the "LLM.txt" for a given symbol.
+-# Arguments are now read from environment variables.
++# Arguments are now read from positional arguments.
+ 
+ set -euo pipefail
+ 
+-SYMBOL_NAME="${LLM_SYMBOL_NAME}"
+-HTML_FILE="${LLM_HTML_FILE_NAME}"
+-KEYWORDS_SCRIPT="${LLM_KEYWORDS_SCRIPT_FILE_NAME}"
+-LINKS_FILE="${LLM_LINKS_FILE_NAME}"
+-TUTORIALS_PATTERN="${LLM_TUTORIALS_PATTERN}"
+-OUTPUT_FILE_PATH="${LLM_OUTPUT_FILE}" # This is the final output path in $out
++SYMBOL_NAME="$1"
++HTML_FILE="$2"
++KEYWORDS_SCRIPT="$3"
++LINKS_FILE="$4"
++TUTORIALS_PATTERN="$5"
++OUTPUT_FILE_PATH="$6" # This is the final output path in $out
++
++MAIN_PROJECT_URL="$7"
++MAIN_PROJECT_REV="$8"
++# CRQ_BINSTORE_URL="$9" # Removed
++# CRQ_BINSTORE_REV="${10}" # Removed
+ 
+ # Create a temporary file to build the content
+ TEMP_OUTPUT_FILE=$(mktemp)
+@@ -19,6 +24,11 @@ TEMP_OUTPUT_FILE=$(mktemp)
+ echo "# $SYMBOL_NAME - LLM Context"
+ echo ""
+ 
++echo "## Source Information"
++echo "- Main Project Repository: $MAIN_PROJECT_URL (Commit: $MAIN_PROJECT_REV)"
++# echo "- CRQ Binstore Repository: $CRQ_BINSTORE_URL (Commit: $CRQ_BINSTORE_REV)" # Removed
++echo ""
++
+ echo "## Wikipedia Content"
+ cat "$HTML_FILE"
+ echo ""
+@@ -51,4 +61,4 @@ cp "$TEMP_OUTPUT_FILE" "$OUTPUT_FILE_PATH"
+ # Clean up the temporary file
+ rm "$TEMP_OUTPUT_FILE"
+ 
+-echo "Generated $OUTPUT_FILE_PATH for $SYMBOL_NAME."
+\ No newline at end of file
++echo "Generated $OUTPUT_FILE_PATH for $SYMBOL_NAME."

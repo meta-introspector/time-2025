@@ -1,0 +1,16 @@
+commit 17da216649bf33d890a939ff20b12b2e5c40b845
+Author: mike <h@solfunmeme.com>
+Date:   Sat Sep 20 13:20:56 2025 +0000
+
+    feat(2025): CRQ-016 - Automated commit for CRQ-016 changes
+
+diff --git a/09/19/notes.org b/09/19/notes.org
+index 156c013..a20fea8 100644
+--- a/09/19/notes.org
++++ b/09/19/notes.org
+@@ -14,3 +14,5 @@ git submodule foreach --recursive git status > submodules.txt
+ 
+ 5. usability,usability
+    local onclick installer for android and windows.
++
++6. convert git history into annotated inputs to llm

@@ -1,0 +1,4 @@
+36773a77534a43d6d6ea17cdab771456becd0f21
+0	45	09/22/generate_monster_group_llm_txt.sh
+62	0	09/22/nix-llm-context/flake.lock
+20	14	09/22/nix-llm-context/flake.nix

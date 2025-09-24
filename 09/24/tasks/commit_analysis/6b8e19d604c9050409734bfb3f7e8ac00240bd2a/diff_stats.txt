@@ -1,0 +1,2 @@
+6b8e19d604c9050409734bfb3f7e8ac00240bd2a
+13	7	09/22/nix-llm-context/generate_monster_group_llm_txt.sh
