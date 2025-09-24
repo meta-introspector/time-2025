@@ -23,10 +23,25 @@
           pkgs.runCommand name {
             src = ./wikipedia_cache/${article};
             buildInputs = [ pkgs.coreutils ];
+            passthru.articleName = article;
+            passthru.wikipedia = article;
           } ''
             mkdir -p $out
             cp $src $out/${article}
           '';
+
+        # Wikidata Packages
+        wikidataPackages = pkgs.lib.mapAttrs (
+          name: type:
+            let
+              articleName = pkgs.lib.removeSuffix ".html" name;
+              packageName = pkgs.lib.toCamel name;
+            in
+            mkWikidataPackage {
+              name = "${articleName}-wikidata";
+              article = name;
+            }
+        ) (builtins.readDir ./wikipedia_cache);
 
       in
       {
@@ -45,40 +60,19 @@
           ];
         };
 
-        # Define a default package for the main project
-        packages.default = pkgs.writeShellScriptBin "hello-nix" ''
-          echo "Hello from Nix!"
-        '';
-
-        # Wikidata Packages
-        packages.monsterGroupWikidata = mkWikidataPackage {
-          name = "monster-group-wikidata";
-          article = "Monster_group.html";
-        };
-
-        packages.steinerSystemWikidata = mkWikidataPackage {
-          name = "steiner-system-wikidata";
-          article = "Steiner_system.html";
-        };
-
-        packages.mathieuGroupM12Wikidata = mkWikidataPackage {
-          name = "mathieu-group-m12-wikidata";
-          article = "Mathieu_group_M12.html";
-        };
-
-        packages.sporadicGroupWikidata = mkWikidataPackage {
-          name = "sporadic-group-wikidata";
-          article = "Sporadic_group.html";
-        };
-
-        packages.ontologyWikidata = mkWikidataPackage {
-          name = "ontology-wikidata";
-          article = "Ontology.html";
+        packages = wikidataPackages // {
+          default = pkgs.writeShellScriptBin "hello-nix" ''
+            echo "Hello from Nix!"
+          '';
         };
 
         # You can add other packages, apps, etc. here for the main project
         # For example, to expose the LLM context builder:
         # packages.llmContextBuilder = self.nix-llm-context.packages.${system}.monsterGroupLlmContext;
+
+        # Temporarily commented out due to missing unpack-zos-sequence.sh in dependency
+        # packages.default = day_23_concepts.packages.${system}.default; # Expose ai-context-23 as default
+        # inherit (day_23_concepts.packages.${system}) number-23 is-prime-23 fact-23-oracle; # Expose individual concepts
       }
     );
 }

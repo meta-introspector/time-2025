@@ -1,0 +1,83 @@
+[1mgit+file:///data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025?dir=09/22[0m
+[32;1m├───[0m[1mdevShell[0m
+[32;1m│   ├───[0m[1maarch64-darwin[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m│   ├───[0m[1maarch64-linux[0m: development environment 'nix-shell'
+[32;1m│   ├───[0m[1mx86_64-darwin[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m│   └───[0m[1mx86_64-linux[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m└───[0m[1mpackages[0m
+[32;1m    ├───[0m[1maarch64-darwin[0m
+[32;1m    │   ├───[0m[1m"17__number_.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"19__number_.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"B_C3_A9zout_27s_identity.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Bott_periodicity.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Centered_hexagonal_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Centered_triangular_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Coprime_integers.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Eigenvalues_and_eigenvectors.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Euclidean_algorithm.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Fermat_prime.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Keith_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Mathieu_group_M12.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Metonic_cycle.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Monstrous_moonshine.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Online_Encyclopedia_of_Integer_Sequences.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Ontology.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Steiner_system.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   └───[0m[1mdefault[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    ├───[0m[1maarch64-linux[0m
+[32;1m    │   ├───[0m[1m"17__number_.html"[0m: package '17__number_-wikidata'
+[32;1m    │   ├───[0m[1m"19__number_.html"[0m: package '19__number_-wikidata'
+[32;1m    │   ├───[0m[1m"B_C3_A9zout_27s_identity.html"[0m: package 'B_C3_A9zout_27s_identity-wikidata'
+[32;1m    │   ├───[0m[1m"Bott_periodicity.html"[0m: package 'Bott_periodicity-wikidata'
+[32;1m    │   ├───[0m[1m"Centered_hexagonal_number.html"[0m: package 'Centered_hexagonal_number-wikidata'
+[32;1m    │   ├───[0m[1m"Centered_triangular_number.html"[0m: package 'Centered_triangular_number-wikidata'
+[32;1m    │   ├───[0m[1m"Coprime_integers.html"[0m: package 'Coprime_integers-wikidata'
+[32;1m    │   ├───[0m[1m"Eigenvalues_and_eigenvectors.html"[0m: package 'Eigenvalues_and_eigenvectors-wikidata'
+[32;1m    │   ├───[0m[1m"Euclidean_algorithm.html"[0m: package 'Euclidean_algorithm-wikidata'
+[32;1m    │   ├───[0m[1m"Fermat_prime.html"[0m: package 'Fermat_prime-wikidata'
+[32;1m    │   ├───[0m[1m"Keith_number.html"[0m: package 'Keith_number-wikidata'
+[32;1m    │   ├───[0m[1m"Mathieu_group_M12.html"[0m: package 'Mathieu_group_M12-wikidata'
+[32;1m    │   ├───[0m[1m"Metonic_cycle.html"[0m: package 'Metonic_cycle-wikidata'
+[32;1m    │   ├───[0m[1m"Monstrous_moonshine.html"[0m: package 'Monstrous_moonshine-wikidata'
+[32;1m    │   ├───[0m[1m"Online_Encyclopedia_of_Integer_Sequences.html"[0m: package 'Online_Encyclopedia_of_Integer_Sequences-wikidata'
+[32;1m    │   ├───[0m[1m"Ontology.html"[0m: package 'Ontology-wikidata'
+[32;1m    │   ├───[0m[1m"Steiner_system.html"[0m: package 'Steiner_system-wikidata'
+[32;1m    │   └───[0m[1mdefault[0m: package 'hello-nix'
+[32;1m    ├───[0m[1mx86_64-darwin[0m
+[32;1m    │   ├───[0m[1m"17__number_.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"19__number_.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"B_C3_A9zout_27s_identity.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Bott_periodicity.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Centered_hexagonal_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Centered_triangular_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Coprime_integers.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Eigenvalues_and_eigenvectors.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Euclidean_algorithm.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Fermat_prime.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Keith_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Mathieu_group_M12.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Metonic_cycle.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Monstrous_moonshine.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Online_Encyclopedia_of_Integer_Sequences.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Ontology.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   ├───[0m[1m"Steiner_system.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    │   └───[0m[1mdefault[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m    └───[0m[1mx86_64-linux[0m
+[32;1m        ├───[0m[1m"17__number_.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        ├───[0m[1m"19__number_.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        ├───[0m[1m"B_C3_A9zout_27s_identity.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        ├───[0m[1m"Bott_periodicity.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        ├───[0m[1m"Centered_hexagonal_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        ├───[0m[1m"Centered_triangular_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        ├───[0m[1m"Coprime_integers.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        ├───[0m[1m"Eigenvalues_and_eigenvectors.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        ├───[0m[1m"Euclidean_algorithm.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        ├───[0m[1m"Fermat_prime.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        ├───[0m[1m"Keith_number.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        ├───[0m[1m"Mathieu_group_M12.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        ├───[0m[1m"Metonic_cycle.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        ├───[0m[1m"Monstrous_moonshine.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        ├───[0m[1m"Online_Encyclopedia_of_Integer_Sequences.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        ├───[0m[1m"Ontology.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        ├───[0m[1m"Steiner_system.html"[0m [35;1momitted[0m (use '--all-systems' to show)
+[32;1m        └───[0m[1mdefault[0m [35;1momitted[0m (use '--all-systems' to show)
