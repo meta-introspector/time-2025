@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LogEntrySchema",
+  "description": "Schema for a parsed log entry from the telemetry log.",
+  "type": "object",
+  "properties": {
+    "timestamp": {
+      "type": "string",
+      "description": "Timestamp of when the log entry was recorded."
+    },
+    "event": {
+      "type": "object",
+      "description": "Structured event data, if available.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "gemini_cli_tool_call",
+            "gemini_cli_chat_content_retry_failure_count",
+            "gemini_cli_api_error",
+            "unknown"
+          ],
+          "description": "The name of the event."
+        },
+        "other_attributes": {
+          "type": "object",
+          "description": "A map of other attributes associated with the event, specific to its type. Can be further structured based on 'name'."
+        }
+      },
+      "required": ["name", "other_attributes"]
+    },
+    "all_fields": {
+      "type": "object",
+      "description": "A map containing all original fields from the log entry, preserving its raw JSON structure."
+    }
+  },
+  "required": ["all_fields"],
+  "definitions": {
+    "ApiErrorDetail": {
+      "type": "object",
+      "description": "Details of a specific error within an API response.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A human-readable error message."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain of the error (e.g., 'global')."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the error (e.g., 'badRequest')."
+        }
+      },
+      "required": ["message", "domain", "reason"]
+    },
+    "ApiError": {
+      "type": "object",
+      "description": "Represents a structured API error response.",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "description": "HTTP status code or a custom error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "A general error message."
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiErrorDetail"
+          },
+          "description": "A list of detailed error messages."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the error (e.g., 'INVALID_ARGUMENT')."
+        }
+      },
+      "required": ["code", "message", "errors", "status"]
+    },
+    "LoggedErrorWrapper": {
+      "type": "object",
+      "description": "A wrapper for an API error object, typically found when an API error is embedded as a stringified JSON.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ApiError",
+          "description": "The embedded API error object."
+        }
+      },
+      "required": ["error"]
+    },
+    "ToolCallAttributes": {
+      "type": "object",
+      "description": "Attributes specific to a 'gemini_cli_tool_call' event.",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "description": "Indicates if the tool call was successful."
+        },
+        "function_name": {
+          "type": "string",
+          "description": "The name of the function that was called."
+        }
+      }
+    },
+    "GeminiCliApiErrorAttributes": {
+      "type": "object",
+      "description": "Attributes specific to a 'gemini_cli_api_error' event.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A message associated with the Gemini CLI API error."
+        },
+        "details": {
+          "type": "object",
+          "description": "Additional unstructured details about the API error."
+        }
+      }
+    }
+  }
+}
