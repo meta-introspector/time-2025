@@ -20,6 +20,7 @@
           pname = "log-analyzer";
           version = "0.1.0";
           src = lib.cleanSource ./.;
+          cargoLock = ./Cargo.lock;
           nativeBuildInputs = with pkgs; [
             pkg-config
             openssl

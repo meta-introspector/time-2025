@@ -1,79 +1,34 @@
 # Log Analyzer
 
-This Rust program analyzes log files for errors, warnings, panics, critical errors, and unfinished work indicators.
+This Rust program analyzes telemetry logs to identify errors and potentially unfinished work.
 
 ## Features
 
-- Detects various levels of issues: Critical Errors, Panics, Errors, Warnings, and Unfinished Work (TODO/FIXME).
-- Provides a summary of findings.
-- Lists detailed occurrences of each finding with line numbers.
+- Parses JSON log entries.
+- Identifies errors based on keywords (case-insensitive: "error", "fail", "exception", "denied", "refused", "timeout", "panic") in the log body or event name.
+- Detects failed tool calls (`success: false`).
+- Flags tool calls without an explicit `success` status as "unfinished work".
 
-## Building and Running with Nix
+## Build and Run
 
-To build and run this project using Nix flakes, ensure you have Nix installed and flakes enabled.
-
-1.  **Build the project:**
-
-    ```bash
-    nix build .#log-analyzer
-    ```
-
-    This will build the `log-analyzer` executable. You can find it in `result/bin/log-analyzer` after a successful build.
-
-2.  **Run the analyzer:**
-
-    You can run the analyzer directly using `nix run`:
-
-    ```bash
-    nix run .#log-analyzer -- --log-file <path/to/your/log/file.log>
-    ```
-
-    For example, to analyze a `telemetry.log` file:
-
-    ```bash
-    nix run .#log-analyzer -- --log-file ~/today/llm/logs/telemetry.log
-    ```
-
-3.  **Enter a development shell:**
-
-    To enter a development environment with the Rust toolchain and other useful tools:
-
-    ```bash
-    nix develop
-    ```
-
-    Inside the development shell, you can use `cargo build`, `cargo run`, `rustc`, `rustfmt`, `clippy`, etc.
-
-## Usage
+To build the `log_analyzer` using Nix flakes and Naersk, navigate to the project root and run:
 
 ```bash
-log_analyzer --log-file <path/to/your/log/file.log>
+nix build .#log-analyzer
 ```
 
-### Arguments
+This will create a symlink `result` in the project root pointing to the built package. You can then run the analyzer with your log file:
 
--   `--log-file <path>`: Path to the log file to analyze. (Required)
-
-## Example Output
-
+```bash
+./result/bin/log_analyzer --log-file <path/to/your/telemetry.log>
 ```
-Analyzing log file: /path/to/your/log/file.log
-------------------------------------
-[CRITICAL] Line 10: CRITICAL: System failure detected.
-[ERROR] Line 25: Error: Failed to connect to database.
-[WARNING] Line 40: Warning: Disk space low.
-[UNFINISHED WORK] Line 50: TODO: Implement retry logic.
-------------------------------------
-Analysis Summary:
-  Critical Errors found: 1
-  Panics found: 0
-  Errors found: 1
-  Warnings found: 1
-  Unfinished work found: 1
 
-Detailed Findings:
-[CRITICAL] Line 10: CRITICAL: System failure detected.
-[ERROR] Line 25: Error: Failed to connect to database.
-[WARNING] Line 40: Warning: Disk space low.
-[UNFINISHED WORK] Line 50: TODO: Implement retry logic.
+**Example:**
+
+```bash
+./result/bin/log_analyzer --log-file logs/telemetry.log
 ```
+
+## Nix Flake Details
+
+The `flake.nix` is configured to use `naersk` for Rust project building, ensuring reproducible builds. It explicitly uses `Cargo.lock` for dependency resolution.

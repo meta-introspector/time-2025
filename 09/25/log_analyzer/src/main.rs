@@ -1,12 +1,14 @@
-use std::fs::File;
-use std::io::{self, BufReader, BufRead};
+
 use clap::Parser;
 use regex::Regex;
+use serde_json::{Value, from_str};
+use std::fs::File;
+use std::io::{self, BufReader, BufRead};
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
-    /// Path to the log file to analyze
+    /// Path to the telemetry log file
     #[arg(short, long)]
     log_file: String,
 }
@@ -14,118 +16,58 @@ struct Args {
 fn main() -> io::Result<()> {
     let args = Args::parse();
 
-    let file_path = &args.log_file;
-    let file = File::open(file_path)?;
+    let file = File::open(&args.log_file)?;
     let reader = BufReader::new(file);
 
-    println!("Analyzing log file: {}", file_path);
-    println!("------------------------------------");
+    let error_keywords = Regex::new(r"(?i)error|fail|exception|denied|refused|timeout|panic").unwrap();
 
-    let error_re = Regex::new(r"(?i)error|fail|exception|denied").unwrap();
-    let warning_re = Regex::new(r"(?i)warn|warning").unwrap();
-    let critical_re = Regex::new(r"(?i)critical|fatal").unwrap();
-    let unfinished_re = Regex::new(r"(?i)unfinished work|todo|fixme").unwrap();
-    let panic_re = Regex::new(r"(?i)panic").unwrap();
+    println!("Analyzing log file: {}", args.log_file);
+    println!("--- Errors ---");
 
-    let mut findings: Vec<LogFinding> = Vec::new();
-
-    for (line_num, line_result) in reader.lines().enumerate() {
+    for line_result in reader.lines() {
         let line = line_result?;
-        let current_line_num = line_num + 1;
+        if let Ok(json_value) = from_str::<Value>(&line) {
+            // Check for errors
+            if let Some(body) = json_value.get("_body").and_then(|v| v.as_str()) {
+                if error_keywords.is_match(body) {
+                    println!("  [ERROR] Body: {}", body);
+                }
+            }
+            if let Some(event_name) = json_value.get("attributes").and_then(|v| v.get("event.name")).and_then(|v| v.as_str()) {
+                if error_keywords.is_match(event_name) {
+                    println!("  [ERROR] Event Name: {}", event_name);
+                }
+            }
+            if let Some(attributes) = json_value.get("attributes") {
+                if let Some(function_name) = attributes.get("function_name").and_then(|v| v.as_str()) {
+                    if let Some(success) = attributes.get("success").and_then(|v| v.as_bool()) {
+                        if !success {
+                            println!("  [ERROR] Tool call failed: {}", function_name);
+                        }
+                    }
+                }
+            }
 
-        if critical_re.is_match(&line) {
-            findings.push(LogFinding {
-                line_num: current_line_num,
-                line_content: line.clone(),
-                finding_type: FindingType::CriticalError,
-            });
-        } else if panic_re.is_match(&line) {
-            findings.push(LogFinding {
-                line_num: current_line_num,
-                line_content: line.clone(),
-                finding_type: FindingType::Panic,
-            });
-        } else if error_re.is_match(&line) {
-            findings.push(LogFinding {
-                line_num: current_line_num,
-                line_content: line.clone(),
-                finding_type: FindingType::Error,
-            });
-        } else if warning_re.is_match(&line) {
-            findings.push(LogFinding {
-                line_num: current_line_num,
-                line_content: line.clone(),
-                finding_type: FindingType::Warning,
-            });
-        } else if unfinished_re.is_match(&line) {
-            findings.push(LogFinding {
-                line_num: current_line_num,
-                line_content: line.clone(),
-                finding_type: FindingType::UnfinishedWork,
-            });
-        }
-    }
-
-    print_summary(&findings);
-
-    Ok(())
-}
-
-#[derive(Debug)]
-enum FindingType {
-    CriticalError,
-    Panic,
-    Error,
-    Warning,
-    UnfinishedWork,
-}
-
-#[derive(Debug)]
-struct LogFinding {
-    line_num: usize,
-    line_content: String,
-    finding_type: FindingType,
-}
-
-fn print_summary(findings: &[LogFinding]) {
-    println!("------------------------------------");
-    println!("Analysis Summary:");
-
-    let mut critical_count = 0;
-    let mut panic_count = 0;
-    let mut error_count = 0;
-    let mut warning_count = 0;
-    let mut unfinished_count = 0;
-
-    for finding in findings {
-        match finding.finding_type {
-            FindingType::CriticalError => critical_count += 1,
-            FindingType::Panic => panic_count += 1,
-            FindingType::Error => error_count += 1,
-            FindingType::Warning => warning_count += 1,
-            FindingType::UnfinishedWork => unfinished_count += 1,
-        }
-    }
-
-    println!("  Critical Errors found: {}", critical_count);
-    println!("  Panics found: {}", panic_count);
-    println!("  Errors found: {}", error_count);
-    println!("  Warnings found: {}", warning_count);
-    println!("  Unfinished work found: {}", unfinished_count);
-    println!("");
-
-    if !findings.is_empty() {
-        println!("Detailed Findings:");
-        for finding in findings {
-            match finding.finding_type {
-                FindingType::CriticalError => println!("[CRITICAL] Line {}: {}", finding.line_num, finding.line_content),
-                FindingType::Panic => println!("[PANIC] Line {}: {}", finding.line_num, finding.line_content),
-                FindingType::Error => println!("[ERROR] Line {}: {}", finding.line_num, finding.line_content),
-                FindingType::Warning => println!("[WARNING] Line {}: {}", finding.line_num, finding.line_content),
-                FindingType::UnfinishedWork => println!("[UNFINISHED WORK] Line {}: {}", finding.line_num, finding.line_content),
+            // Check for unfinished work (simple heuristic: tool calls without explicit success)
+            if let Some(event_name) = json_value.get("attributes").and_then(|v| v.get("event.name")).and_then(|v| v.as_str()) {
+                if event_name == "gemini_cli.tool_call" {
+                    if let Some(attributes) = json_value.get("attributes") {
+                        if attributes.get("success").is_none() {
+                            if let Some(function_name) = attributes.get("function_name").and_then(|v| v.as_str()) {
+                                println!("  [UNFINISHED WORK] Tool call without success status: {}", function_name);
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            // If it's not a JSON line, check for error keywords in plain text
+            if error_keywords.is_match(&line) {
+                println!("  [ERROR] Plain text line: {}", line);
             }
         }
-    } else {
-        println!("No significant findings.");
     }
+
+    println!("--- Analysis Complete ---");
+    Ok(())
 }
