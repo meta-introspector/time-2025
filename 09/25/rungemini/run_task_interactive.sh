@@ -7,5 +7,7 @@ strace_file=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
 			      --checkpointing \
 			      --debug \
      			      --include-directories ~/today/ \
+			      --include-directories ~/nix/ai-ml-zk-ops/flakes/ \
+			      --include-directories ~/nix/vendor/external/gemini-cli/
        			      --include-directories ~/nix/ \
-			      --prompt-interactive "$@" 
+			      --prompt "$@" 
