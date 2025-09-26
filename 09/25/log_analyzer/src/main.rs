@@ -34,6 +34,12 @@ enum LogError {
     AbortErrorType(String),
     GeminiCliApiEventName(String),
     GeminiCliApiError(GeminiCliApiErrorAttributes),
+    NoResponseTextErrorType(String),
+    ContentRetryFailedBody(String),
+    FinalErrorTypeNoResponseText(String),
+    GeminiCliChatContentRetryFailureEvent(String),
+    EditExpectedOccurrenceMismatchErrorType(String),
+    EditExpectedOccurrenceMismatchMessage(String),
 }
 
 // Represents a detailed error within the 'errors' array
@@ -234,14 +240,17 @@ fn main() -> io::Result<()> {
                 unclassified_errors.push(line.to_string());
             }
 
-        } else {
-            // If it's not a JSON line, check for error keywords in plain text
+        } else { // Start of else block for non-JSON lines
             if line.contains("\"failed\": false") {
                 *error_counts.entry(LogError::FalsePositiveFailedStatus).or_insert(0) += 1;
-            } else if line.contains("\"error_type\": \"Error\"") {
-                *error_counts.entry(LogError::GenericErrorType("Error".to_string())).or_insert(0) += 1;
-            } else if line.contains("\"status_code\": \"error\"") {
-                *error_counts.entry(LogError::GenericStatusCode("error".to_string())).or_insert(0) += 1;
+            } else if line.contains("\"error_type\": \"NO_RESPONSE_TEXT\",") {
+                *error_counts.entry(LogError::NoResponseTextErrorType("NO_RESPONSE_TEXT".to_string())).or_insert(0) += 1;
+            } else if line.contains("\"_body\": \"All content retries failed after 2 attempts.\",") {
+                *error_counts.entry(LogError::ContentRetryFailedBody("All content retries failed after 2 attempts.".to_string())).or_insert(0) += 1;
+            } else if line.contains("\"final_error_type\": \"NO_RESPONSE_TEXT\",") {
+                *error_counts.entry(LogError::FinalErrorTypeNoResponseText("NO_RESPONSE_TEXT".to_string())).or_insert(0) += 1;
+            } else if line.contains("\"event.name\": \"gemini_cli.chat.content_retry_failure\",") {
+                *error_counts.entry(LogError::GeminiCliChatContentRetryFailureEvent("gemini_cli.chat.content_retry_failure".to_string())).or_insert(0) += 1;
             } else if line.contains("\"error_type\": \"Error\"") {
                 *error_counts.entry(LogError::GenericErrorType("Error".to_string())).or_insert(0) += 1;
             } else if line.contains("\"status_code\": \"error\"") {
@@ -288,13 +297,14 @@ fn main() -> io::Result<()> {
                         // If end bracket not found, fall back to PlainTextError
                         *error_counts.entry(LogError::PlainTextError(line.to_string())).or_insert(0) += 1;
                     }
-                } else if error_keywords.is_match(&line) {
+                } else { // This else corresponds to `if let Some(json_array_start_idx)`
+                    // If start bracket not found, fall back to PlainTextError
                     *error_counts.entry(LogError::PlainTextError(line.to_string())).or_insert(0) += 1;
                 }
-            } else if error_keywords.is_match(&line) {
+            } else if error_keywords.is_match(&line) { // This is the final catch-all for error keywords
                 *error_counts.entry(LogError::PlainTextError(line.to_string())).or_insert(0) += 1;
             }
-        }
+        } // End of else block
     }
 
     println!("--- Top 10 Errors ---");
