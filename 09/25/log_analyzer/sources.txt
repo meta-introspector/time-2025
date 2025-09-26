@@ -1,0 +1,5 @@
+../../25/log_analyzer/logs/telemetry.log
+../../25/rungemini/logs/telemetry.log
+../../26/synapse-system/logs/telemetry.log
+../../26/jobs/logs/telemetry.log
+/data/data/com.termux.nix/files/home/gemini-cli/.gemini/telemetry.log

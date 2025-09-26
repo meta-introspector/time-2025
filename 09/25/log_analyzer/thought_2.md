@@ -1,0 +1,1 @@
+My current thought is: "The user reminded me of the 'never delete any files' rule. This is a critical mandate from `GEMINI.md`. I will strictly adhere to this rule in all my operations. If a task implies deletion, I will propose non-destructive alternatives or seek clarification. This thought will be saved to `thought_2.md`."

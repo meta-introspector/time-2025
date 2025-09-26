@@ -48,6 +48,35 @@ Here are examples of how Nix derivations can handle network access:
     };
     ```
 
+## Vendorized Projects Analysis
+
+We have vendorized the following projects as Git submodules in the `vendor/` directory to evaluate their suitability as a lightweight, pure Nix or Rust-based job scheduler with dynamic evaluation capabilities.
+
+### madjam002/nix-task (vendor/nix-task)
+
+*   **Description**: A task/action runner that allows users to write tasks and CI/CD pipelines using the Nix language. It's designed to be called by existing CI/CD runners.
+*   **Suitability for "lightweight pure Nix or Rust-based job scheduler"**: Conceptually, `nix-task` is a strong candidate. It leverages Nix for task definition and pipeline orchestration, aligning with the "pure Nix" and "dynamic eval" requirements. Its design as a runner rather than a full CI system suggests a lightweight approach.
+*   **Current Status**: **Critical Note**: The `README.md` explicitly states: "> Not ready for use yet, no usable packages are exported from this repository." This means it is not currently functional for practical use.
+*   **Relevance to Network Control**: If it were functional, its Nix-based task definition could potentially be integrated with network control mechanisms, but this would require further development.
+
+### nix-community/nix-eval-jobs (vendor/nix-eval-jobs)
+
+*   **Description**: A utility for parallel evaluation of Nix attribute sets with streamable JSON output. It's designed for time and memory intensive evaluations, particularly in CI contexts.
+*   **Suitability for "lightweight pure Nix or Rust-based job scheduler"**:
+    *   **Lightweight**: Yes, it's a focused utility for evaluation, not a full scheduler.
+    *   **Pure Nix or Rust-based**: It's implemented in Rust, making it a "Rust-based" tool that operates on Nix expressions.
+    *   **Job Scheduler**: It is *not* a general-purpose job scheduler. Its "scheduling" is limited to parallelizing Nix *evaluation*. It does not orchestrate arbitrary tasks or pipelines over time.
+    *   **Dynamic Eval**: This is its core strength. It provides efficient, parallel dynamic evaluation of Nix expressions.
+*   **Current Status**: Fully functional and actively used in various projects (e.g., Hydra).
+*   **Relevance to Network Control**: As an evaluation tool, `nix-eval-jobs` itself doesn't directly manage network access for *built* packages. However, its ability to efficiently evaluate Nix expressions is crucial for any system that needs to dynamically configure network controls within Nix derivations. It could be a component in a larger system that implements network control.
+
+**Summary of Findings:**
+
+*   `nix-task` is conceptually ideal for a pure Nix job scheduler but is not yet usable.
+*   `nix-eval-jobs` is an excellent, lightweight Rust-based tool for parallel Nix evaluation (dynamic eval), but it is not a general job scheduler.
+
+For a complete "lightweight pure Nix or Rust-based job scheduler and dynamic eval" solution, we would need either `nix-task` to become functional, or to combine `nix-eval-jobs` with another lightweight scheduler component.
+
 2.  **Fixed-Output Derivations (FODs):**
     FODs are designed for reproducibility and allow network access during the build phase if the expected output hash is specified. This is suitable for downloading external resources where integrity can be verified.
 

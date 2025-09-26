@@ -7,3 +7,9 @@
 [submodule "09/25/log_analyzer/vendor"]
 	path = 09/25/log_analyzer/vendor
 	url = /data/data/com.termux.nix/files/home/git/vendor
+[submodule "09/26/jobs/vendor/nix-task"]
+	path = 09/26/jobs/vendor/nix-task
+	url = https://github.com/madjam002/nix-task
+[submodule "09/26/jobs/vendor/nix-eval-jobs"]
+	path = 09/26/jobs/vendor/nix-eval-jobs
+	url = https://github.com/nix-community/nix-eval-jobs
