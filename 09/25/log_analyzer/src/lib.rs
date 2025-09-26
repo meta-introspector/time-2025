@@ -12,7 +12,7 @@ pub mod session_analysis;
 pub mod debug;
 
 use crate::layers::ingestion::RawDataIngestionLayer;
-use crate::layers::segmentation::JsonObjectSegmentationLayer;
+use crate::layers::segmentation::JsonExtractorLayer;
 use crate::layers::parsing::JsonParsingLayer;
 use crate::models::{LogEntry, ExprObject};
 use crate::error_analysis::{LogError, analyze_errors};
@@ -42,7 +42,9 @@ pub fn run() -> io::Result<()> {
 
     let file = std::fs::File::open(&args.log_file)?;
     let mut ingestion_layer = RawDataIngestionLayer::new(file, tracer.clone())?;
-    let mut segmentation_layer = JsonObjectSegmentationLayer::new(tracer.clone());
+    let mut buffer_management_layer = crate::layers::buffer_management::BufferManagementLayer::new();
+    let mut boundary_detector = crate::layers::json_boundary_detector::JsonBoundaryDetector::new();
+    let mut json_extractor_layer = JsonExtractorLayer::new(tracer.clone());
     let parsing_layer = JsonParsingLayer::new(tracer.clone());
 
     let mut all_log_entries: Vec<LogEntry> = Vec::new();
@@ -55,9 +57,24 @@ pub fn run() -> io::Result<()> {
     loop {
         match ingestion_layer.read_chunk()? {
             Some(chunk) => {
-                raw_json_strings.extend(segmentation_layer.process_chunk(chunk));
+                buffer_management_layer.extend_buffer(chunk);
+                let current_buffered_data = buffer_management_layer.get_buffered_data();
+                let boundaries = boundary_detector.detect_boundaries(current_buffered_data);
+                let json_objects = json_extractor_layer.extract_json_objects(current_buffered_data, &boundaries);
+                raw_json_strings.extend(json_objects);
+                // Consume data up to the end of the last detected boundary
+                if let Some((_start, end)) = boundaries.last() {
+                    buffer_management_layer.consume_data(*end);
+                }
             },
-            None => break,
+            None => {
+                // Process any remaining data in the buffer after EOF
+                let current_buffered_data = buffer_management_layer.get_buffered_data();
+                let boundaries = boundary_detector.detect_boundaries(current_buffered_data);
+                let json_objects = json_extractor_layer.extract_json_objects(current_buffered_data, &boundaries);
+                raw_json_strings.extend(json_objects);
+                break;
+            },
         }
     }
     let duration_ingestion_segmentation = start_ingestion_segmentation.elapsed();

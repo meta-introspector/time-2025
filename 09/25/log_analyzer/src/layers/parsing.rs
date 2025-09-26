@@ -1,11 +1,9 @@
-use serde_json::Value;
 use std::sync::Arc;
 use crate::debug::StepTracer;
 use crate::models::ExprObject;
 use std::collections::HashMap;
+use serde_json::Value;
 
-// The zos array as defined by the user
-const ZOS_TYPES: &[usize] = &[0, 1, 2, 3, 5, 7, 11, 13, 17, 19];
 const MAX_DEPTH: usize = 3; // Example max depth, can be configured
 
 pub struct JsonParsingLayer {
@@ -31,7 +29,7 @@ fn value_to_expr_object(value: Value, current_depth: usize) -> ExprObject {
         Value::Null | Value::Bool(_) | Value::Number(_) | Value::String(_) => ExprObject::Scalar(value),
         Value::Array(arr) => {
             // Determine the allowed size for the array from ZOS_TYPES
-            let allowed_size = ZOS_TYPES.iter().filter(|&&s| s <= arr.len()).max().unwrap_or(&0).clone();
+            let allowed_size = [0, 1, 2, 3, 5, 7, 11, 13, 17, 19].iter().filter(|&&s| s <= arr.len()).max().unwrap_or(&0).clone();
             let limited_arr: Vec<ExprObject> = arr.into_iter()
                 .take(allowed_size)
                 .map(|v| value_to_expr_object(v, current_depth + 1))
@@ -40,7 +38,7 @@ fn value_to_expr_object(value: Value, current_depth: usize) -> ExprObject {
         },
         Value::Object(obj) => {
             // Determine the allowed size for the object from ZOS_TYPES
-            let allowed_size = ZOS_TYPES.iter().filter(|&&s| s <= obj.len()).max().unwrap_or(&0).clone();
+            let allowed_size = [0, 1, 2, 3, 5, 7, 11, 13, 17, 19].iter().filter(|&&s| s <= obj.len()).max().unwrap_or(&0).clone();
             let mut expr_map = HashMap::new();
             for (key, val) in obj.into_iter().take(allowed_size) {
                 expr_map.insert(key, value_to_expr_object(val, current_depth + 1));

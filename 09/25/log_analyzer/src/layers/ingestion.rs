@@ -6,16 +6,14 @@ pub struct RawDataIngestionLayer {
     reader: BufReader<std::fs::File>,
     buffer: Vec<u8>,
     buffer_pos: usize,
-    tracer: Arc<StepTracer>,
 }
 
 impl RawDataIngestionLayer {
-    pub fn new(file: std::fs::File, tracer: Arc<StepTracer>) -> io::Result<Self> {
+    pub fn new(file: std::fs::File, _tracer: Arc<StepTracer>) -> io::Result<Self> {
         Ok(Self {
             reader: BufReader::new(file),
-            buffer: vec![0; 512 * 1024], // 0.5MB buffer
+            buffer: vec![0; 25 * 1024], // 25KB buffer (5 times average JSON object size)
             buffer_pos: 0,
-            tracer,
         })
     }
 

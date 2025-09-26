@@ -3,24 +3,28 @@
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
-    naersk.url = "github:meta-introspector/naersk?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:numtide/flake-utils";
     ai-ml-zk-ops.url = "github:meta-introspector/ai-ml-zk-ops?ref=feature/concept-to-nix-8s";
   };
 
-  outputs = { self, nixpkgs, naersk, flake-utils, ... }:
+  outputs = { self, nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
         lib = nixpkgs.lib;
-        naersk-lib = naersk.lib.${system};
+        src = lib.cleanSource ./.;
+        cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+          inherit src;
+          lockFile = ./Cargo.lock;
+          hash = "sha256-4OfBA/qEEfO/yKAUWVmKkPc2hGbi3GfTMFfyvpipBt8=";
+        };
       in
       {
-        packages.log-analyzer = naersk-lib.buildPackage {
+        packages.log-analyzer = pkgs.rustPlatform.buildRustPackage {
           pname = "log-analyzer";
           version = "0.1.0";
-          src = lib.cleanSource ./.;
-          cargoLock = ./Cargo.lock;
+          src = ./.;
+          inherit cargoDeps;
           nativeBuildInputs = with pkgs; [
             pkg-config
             openssl
@@ -29,6 +33,8 @@
             # Add any runtime dependencies here if necessary
           ];
         };
+
+        packages.default = self.packages.${system}.log-analyzer;
 
         devShells.default = pkgs.mkShell {
           inputsFrom = [ self.packages.${system}.log-analyzer ];

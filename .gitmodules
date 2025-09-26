@@ -4,3 +4,6 @@
 [submodule "09/26/synapse-system"]
 	path = 09/26/synapse-system
 	url = https://github.com/sub0xdai/synapse-system
+[submodule "09/25/log_analyzer/vendor"]
+	path = 09/25/log_analyzer/vendor
+	url = /data/data/com.termux.nix/files/home/git/vendor
