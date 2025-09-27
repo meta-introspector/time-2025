@@ -13,3 +13,6 @@
 [submodule "09/26/jobs/vendor/nix-eval-jobs"]
 	path = 09/26/jobs/vendor/nix-eval-jobs
 	url = https://github.com/nix-community/nix-eval-jobs
+[submodule "09/25/log_analyzer/osint/PHONEINFOGA"]
+	path = 09/25/log_analyzer/osint/PHONEINFOGA
+	url = https://github.com/SUNDOWNDEV/PHONEINFOGA
