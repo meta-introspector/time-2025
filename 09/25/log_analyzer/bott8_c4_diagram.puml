@@ -1,0 +1,52 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title `bott[8]` Universal Architectural Framework - Core Concepts (Updated)
+
+System_Boundary(bott8_framework, "`bott[8]` Universal Architectural Framework") {
+
+    Container(core_theory, "Core `bott[8]` Theory", "Mathematical Foundations", "Defines `bott[n]` primes, 8-fold periodicity, 8D Riemann Manifold, and the Monster Group as ultimate template.")
+    Container(unification_principle, "Unification Principle", "Meta-Process", "Folds instances into `bott[8]` ZOS for Unity at `bott[1]`. Includes 'Fat' vs. 'Sporadic' Primes, Computational Events as Monster Elements, and the Ultimate Lattice vision.")
+    Container(alife_mycology, "Alife & Virtual Mycology", "Biological Metaphors", "Architectures as living, adapting systems; virtual mycelial networks. Includes Symbiosis, Parasitism, Commensalism, Predator-Prey, Niche, Succession.")
+    Container(memetic_evolution, "Memetic Evolution", "Cultural & Computational Metaphors", "Memes as Wolfram Entities, Predator Meme Number, Dog Meme Adaptation, Smart Contracts as Lambda/Emoji Memes.")
+    Container(cosmological_metaphors, "Cosmological Metaphors", "Abstract Concepts", "`bott[0]` as Architectural Dark Matter, Event Horizon, Singularity, Quantum Foam, Hologram, Tesseract.")
+    Container(communication_dynamics, "Communication Dynamics", "Interaction Metaphors", "Architectural Dial Tone, Echo Chamber, Event Storm.")
+    Container(foundational_systems, "Foundational Systems", "Computing Pillars", "Linux, GCC, GNU, Emacs, Lisp, Gödel Numbers as Meme Meta Memes. Includes Quine-like Emergence, Strange Loops, Dragon's Egg of LLVM.")
+    Container(digital_organisms, "Digital Organisms", "Product & Implementation", "The `bott[8]` Ultimate Dog Meme, Inode as Meme Meta Meme, PID as Meme Meta Meme.")
+
+
+    Rel(core_theory, unification_principle, "Informs & is refined by")
+    Rel(core_theory, alife_mycology, "Provides foundation for")
+    Rel(core_theory, memetic_evolution, "Provides foundation for")
+    Rel(core_theory, cosmological_metaphors, "Provides foundation for")
+    Rel(core_theory, communication_dynamics, "Provides foundation for")
+    Rel(core_theory, foundational_systems, "Provides foundation for")
+    Rel(core_theory, digital_organisms, "Provides foundation for")
+
+    Rel(unification_principle, alife_mycology, "Integrates concepts from")
+    Rel(unification_principle, memetic_evolution, "Integrates concepts from")
+    Rel(unification_principle, cosmological_metaphors, "Integrates concepts from")
+    Rel(unification_principle, communication_dynamics, "Integrates concepts from")
+    Rel(unification_principle, foundational_systems, "Integrates concepts from")
+    Rel(unification_principle, digital_organisms, "Integrates concepts from")
+
+    Rel(alife_mycology, ecological_dynamics, "Informs & is informed by") ' This relationship is particularly important for understanding dynamic, living architectures.
+    Rel(alife_mycology, memetic_evolution, "Informs & is informed by")
+    Rel(alife_mycology, cosmological_metaphors, "Can manifest within")
+    Rel(alife_mycology, digital_organisms, "Provides biological model for")
+
+    Rel(memetic_evolution, digital_organisms, "Drives creation of")
+    Rel(memetic_evolution, foundational_systems, "Influences evolution of")
+
+    Rel(cosmological_metaphors, foundational_systems, "Provides abstract context for")
+    Rel(cosmological_metaphors, digital_organisms, "Provides abstract context for")
+
+    Rel(communication_dynamics, foundational_systems, "Shapes interactions within")
+    Rel(communication_dynamics, digital_organisms, "Shapes interactions within")
+
+    Rel(foundational_systems, digital_organisms, "Provides infrastructure for")
+    Rel(foundational_systems, memetic_evolution, "Are themselves memes within")
+
+}
+
+@enduml
