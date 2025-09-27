@@ -50,33 +50,35 @@
 
       # Generate packages for each TLD, aggregating their individual knowledge items
       tldPackages = forAllSystems (system:
-        nixpkgs.lib.mapAttrs (tld: items:
-          pkgs.${system}.stdenv.mkDerivation {
-            pname = "knowledge-tld-${nixpkgs.lib.strings.sanitizeDerivationName tld}";
-            version = "0.1";
+        nixpkgs.lib.mapAttrs
+          (tld: items:
+            pkgs.${system}.stdenv.mkDerivation {
+              pname = "knowledge-tld-${nixpkgs.lib.strings.sanitizeDerivationName tld}";
+              version = "0.1";
 
-            # This derivation will contain a directory of all items for this TLD
-            # We'll create a simple directory structure with symlinks to individual item NARs
-            buildInputs = [ pkgs.${system}.coreutils ]; # For cp and ln
+              # This derivation will contain a directory of all items for this TLD
+              # We'll create a simple directory structure with symlinks to individual item NARs
+              buildInputs = [ pkgs.${system}.coreutils ]; # For cp and ln
 
-            installPhase = ''
-              mkdir -p $out/${tld}
-              ${nixpkgs.lib.concatStringsSep "\n" (nixpkgs.lib.map (item: 
-                let
-                  itemDerivation = mkKnowledgeItemDerivation system item;
-                  # Sanitize URL for a valid filename, potentially hash for uniqueness
-                  sanitizedUrlFileName = nixpkgs.lib.strings.sanitizeDerivationName (builtins.substring 0 50 item.url);
-                in
-                "ln -s ${itemDerivation}/content.txt $out/${tld}/${sanitizedUrlFileName}.txt"
-              ) items)}
-            '';
+              installPhase = ''
+                mkdir -p $out/${tld}
+                ${nixpkgs.lib.concatStringsSep "\n" (nixpkgs.lib.map (item: 
+                  let
+                    itemDerivation = mkKnowledgeItemDerivation system item;
+                    # Sanitize URL for a valid filename, potentially hash for uniqueness
+                    sanitizedUrlFileName = nixpkgs.lib.strings.sanitizeDerivationName (builtins.substring 0 50 item.url);
+                  in
+                  "ln -s ${itemDerivation}/content.txt $out/${tld}/${sanitizedUrlFileName}.txt"
+                ) items)}
+              '';
 
-            # Custom attributes for the TLD package
-            domain = tld;
-            itemCount = builtins.length items;
-            # Add other TLD-level metadata (e.g., total content length, list of all URLs)
-          }
-        ) groupedByTld
+              # Custom attributes for the TLD package
+              domain = tld;
+              itemCount = builtins.length items;
+              # Add other TLD-level metadata (e.g., total content length, list of all URLs)
+            }
+          )
+          groupedByTld
       );
 
     in
@@ -84,13 +86,16 @@
       packages = forAllSystems (system:
         # Combine individual item derivations and TLD packages into the flake's packages output
         (nixpkgs.lib.mapAttrs (tld: items:
-          nixpkgs.lib.listToAttrs (nixpkgs.lib.map (item: 
-            let
-              sanitizedUrlAttr = nixpkgs.lib.strings.sanitizeDerivationName (builtins.substring 0 50 item.url);
-            in
-            { name = sanitizedUrlAttr; value = mkKnowledgeItemDerivation system item; }
-          ) items))
-        ) groupedByTld) // tldPackages
-      );
-    };
-}
+          nixpkgs.lib.listToAttrs (nixpkgs.lib.map
+            (item:
+              let
+                sanitizedUrlAttr = nixpkgs.lib.strings.sanitizeDerivationName (builtins.substring 0 50 item.url);
+              in
+              { name = sanitizedUrlAttr; value = mkKnowledgeItemDerivation system item; }
+            )
+            items))
+        ) groupedByTld);
+      // tldPackages
+	
+	
+	

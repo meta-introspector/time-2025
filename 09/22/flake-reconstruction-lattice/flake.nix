@@ -31,7 +31,7 @@
           ];
         };
 
-        packages.crqNumber = pkgs.runCommand "crq-number-derivation" {} ''
+        packages.crqNumber = pkgs.runCommand "crq-number-derivation" { } ''
           echo "808017424794512875886459904961710757005754368000000000" > $out
         '';
       }

@@ -1,0 +1,94 @@
+{
+  "sources": [
+    {
+      "Url": "https://github.com/topics/open-source-intelligence"
+    },
+    {
+      "File": "/data/data/com.termux.nix/files/home/gemini-cli/.gemini/telemetry.log"
+    },
+    {
+      "File": "../../25/log_analyzer/logs/telemetry.log"
+    },
+    {
+      "File": "../../25/rungemini/logs/telemetry.log"
+    },
+    {
+      "File": "../../26/synapse-system/logs/telemetry.log"
+    },
+    {
+      "File": "../../26/jobs/logs/telemetry.log"
+    },
+    {
+      "File": "../../26/jobs/vendor/nix-task/logs/telemetry.log"
+    },
+    {
+      "File": "../../26/jobs/vendor/nix-eval-jobs/logs/telemetry.log"
+    },
+    {
+      "File": "../../logs/telemetry.log"
+    },
+    {
+      "Url": "https://github.com/SUNDOWNDEV/PHONEINFOGA"
+    },
+    {
+      "Url": "https://github.com/MEGADOSE/HOLEHE"
+    },
+    {
+      "Url": "https://github.com/MEGADOSE/TOUTATIS"
+    },
+    {
+      "Url": "https://github.com/LUCKSI/MR.HOLMES"
+    },
+    {
+      "Url": "https://github.com/THEWHITEH4T/NEXFIL"
+    },
+    {
+      "Url": "https://github.com/MEGADOSE/ONIONSEARCH"
+    },
+    {
+      "Url": "https://github.com/DEADSHOT0X7/007-THEBOND"
+    },
+    {
+      "Url": "https://github.com/OHSHINT/OHSHINT.GITBOOK.IO"
+    },
+    {
+      "Url": "https://github.com/0X0BE/YESITSME"
+    },
+    {
+      "Url": "https://github.com/IVAN-SINCEK/PENETRATION-TESTING-CHEAT-SHEET"
+    },
+    {
+      "Url": "https://github.com/SEEKR-OSINT/SEEKR"
+    },
+    {
+      "Url": "https://github.com/MATAMORPHOSIS/SCRUMMAGE"
+    },
+    {
+      "Url": "https://github.com/MEGADOSE/NQNTNQNQMB"
+    },
+    {
+      "Url": "https://github.com/GALIHAP76/COLLECTOR"
+    },
+    {
+      "Url": "https://github.com/C3N7RAL051NT4G3NCY/MASTO"
+    },
+    {
+      "Url": "https://github.com/TIGMINT/TIGMINT"
+    },
+    {
+      "Url": "https://github.com/MEGADOSE/HOLEHE-MALTEGO"
+    },
+    {
+      "Url": "https://github.com/MEGADOSE/QUIDAM"
+    },
+    {
+      "Url": "https://github.com/NEONPANGOLIN/GEOSPATIAL-INTELLIGENCE-LIBRARY"
+    },
+    {
+      "Url": "https://github.com/topics/secret-scanning"
+    },
+    {
+      "Url": "https://github.com/topics/url-parsing"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 let
-  pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> { };
   lib = pkgs.lib;
   ngramFile = ./ngram_index.json;
   fileContent = builtins.readFile ngramFile;

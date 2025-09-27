@@ -20,28 +20,31 @@
         pkgs = import nixpkgs { inherit system; };
 
         mkWikidataPackage = { name, article }:
-          pkgs.runCommand name {
-            src = ./wikipedia_cache/${article};
-            buildInputs = [ pkgs.coreutils ];
-            passthru.articleName = article;
-            passthru.wikipedia = article;
-          } ''
+          pkgs.runCommand name
+            {
+              src = ./wikipedia_cache/${article};
+              buildInputs = [ pkgs.coreutils ];
+              passthru.articleName = article;
+              passthru.wikipedia = article;
+            } ''
             mkdir -p $out
             cp $src $out/${article}
           '';
 
         # Wikidata Packages
-        wikidataPackages = pkgs.lib.mapAttrs (
-          name: type:
-            let
-              articleName = pkgs.lib.removeSuffix ".html" name;
-              packageName = pkgs.lib.toCamel name;
-            in
-            mkWikidataPackage {
-              name = "${articleName}-wikidata";
-              article = name;
-            }
-        ) (builtins.readDir ./wikipedia_cache);
+        wikidataPackages = pkgs.lib.mapAttrs
+          (
+            name: type:
+              let
+                articleName = pkgs.lib.removeSuffix ".html" name;
+                packageName = pkgs.lib.toCamel name;
+              in
+              mkWikidataPackage {
+                name = "${articleName}-wikidata";
+                article = name;
+              }
+          )
+          (builtins.readDir ./wikipedia_cache);
 
       in
       {

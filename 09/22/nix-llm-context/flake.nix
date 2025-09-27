@@ -18,10 +18,11 @@
 
         # Function to generate LLM context for a given symbol
         generateLlmContext = { symbol, htmlFileName, keywordsScriptFileName, linksFileName, tutorialsPattern, generatorScript }:
-          (pkgs.runCommand "llm-context-${symbol}" {
-            buildInputs = [ pkgs.bash pkgs.coreutils pkgs.gnugrep pkgs.gnused pkgs.findutils pkgs.file pkgs.which ];
-            buildCommand = ''"${self}/debug_wrapper.sh" --generator-script="${self}/${generatorScript}" --symbol="${symbol}" --html-file-name="${htmlFileName}" --keywords-script="${keywordsScriptFileName}" --links-file-name="${linksFileName}" --tutorials-pattern="${tutorialsPattern}" --output-dir="$out" --main-project="${mainProject}"'';
-          } "");
+          (pkgs.runCommand "llm-context-${symbol}"
+            {
+              buildInputs = [ pkgs.bash pkgs.coreutils pkgs.gnugrep pkgs.gnused pkgs.findutils pkgs.file pkgs.which ];
+              buildCommand = ''"${self}/debug_wrapper.sh" --generator-script="${self}/${generatorScript}" --symbol="${symbol}" --html-file-name="${htmlFileName}" --keywords-script="${keywordsScriptFileName}" --links-file-name="${linksFileName}" --tutorials-pattern="${tutorialsPattern}" --output-dir="$out" --main-project="${mainProject}"'';
+            } "");
       in
       rec {
         packages.monsterGroupLlmContext = generateLlmContext {
@@ -43,12 +44,14 @@
         };
 
         # New output for zos sequence for a given prime
-        packages.zosSequence = prime: pkgs.runCommand "zos-sequence-${toString prime}" {
-          buildInputs = [ pkgs.bash ];
-          buildCommand = ''
-            echo "${lib.concatStringsSep "\n" (primeSieve prime)}" > $out/primes.txt
-          '';
-        } {};
+        packages.zosSequence = prime: pkgs.runCommand "zos-sequence-${toString prime}"
+          {
+            buildInputs = [ pkgs.bash ];
+            buildCommand = ''
+              echo "${lib.concatStringsSep "\n" (primeSieve prime)}" > $out/primes.txt
+            '';
+          }
+          { };
       }
     );
 }

@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     ai-ml-zk-ops.url = "github:meta-introspector/ai-ml-zk-ops?ref=feature/concept-to-nix-8s";
   };
 
@@ -32,6 +32,9 @@
           buildInputs = with pkgs; [
             # Add any runtime dependencies here if necessary
           ];
+          env = {
+            PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+          };
         };
 
         packages.default = self.packages.${system}.log-analyzer;
@@ -43,6 +46,7 @@
             cargo
             rustfmt
             clippy
+            openssl
             # Add any other development tools here
           ];
           RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";

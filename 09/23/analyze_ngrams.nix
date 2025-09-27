@@ -1,6 +1,6 @@
 let
   # Import nixpkgs for the "lib" functions.
-  pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> { };
   lib = pkgs.lib;
 
   # Path to the JSON file.

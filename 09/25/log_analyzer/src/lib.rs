@@ -7,9 +7,12 @@ use std::time::Instant;
 
 pub mod layers;
 pub mod models;
+pub mod debug;
 pub mod error_analysis;
 pub mod session_analysis;
-pub mod debug;
+pub mod url_extractor;
+
+pub use url_extractor::extract_urls;
 
 use crate::layers::ingestion::RawDataIngestionLayer;
 use crate::layers::segmentation::JsonExtractorLayer;

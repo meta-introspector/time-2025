@@ -44,85 +44,85 @@
             # In a more complex scenario, we might have a separate script file
             # that gets parameterized and copied.
             installPhase = ''
-              mkdir -p $out/bin
+                            mkdir -p $out/bin
 
-              # Create the fetch-nar-data.sh script within the derivation
-              cat > $out/bin/fetch-nar-data.sh << EOF
-#!/usr/bin/env bash
-set -euo pipefail
-NAR_FILE="$NAR_FILE_NAME"
-CRQ_BINSTORE_PATH="$CRQ_BINSTORE_PATH"
-OUTPUT_DIR="$out/unpacked-nar-data" # Unpack directly into the output
+                            # Create the fetch-nar-data.sh script within the derivation
+                            cat > $out/bin/fetch-nar-data.sh << EOF
+              #!/usr/bin/env bash
+              set -euo pipefail
+              NAR_FILE="$NAR_FILE_NAME"
+              CRQ_BINSTORE_PATH="$CRQ_BINSTORE_PATH"
+              OUTPUT_DIR="$out/unpacked-nar-data" # Unpack directly into the output
 
-if [[ -z "$NAR_FILE" ]]; then
-  echo "Error: NAR_FILE_NAME is not set."
-  exit 1
-fi
-if [[ -z "$CRQ_BINSTORE_PATH" ]]; then
-  echo "Error: CRQ_BINSTORE_PATH is not set."
-  exit 1
-fi
+              if [[ -z "$NAR_FILE" ]]; then
+                echo "Error: NAR_FILE_NAME is not set."
+                exit 1
+              fi
+              if [[ -z "$CRQ_BINSTORE_PATH" ]]; then
+                echo "Error: CRQ_BINSTORE_PATH is not set."
+                exit 1
+              fi
 
-NAR_PATH="${CRQ_BINSTORE_PATH}/${NAR_FILE}"
+              NAR_PATH="${CRQ_BINSTORE_PATH}/${NAR_FILE}"
 
-if [[ ! -f "$NAR_PATH" ]]; then
-  echo "Error: NAR file not found at ${NAR_PATH}"
-  exit 1
-fi
+              if [[ ! -f "$NAR_PATH" ]]; then
+                echo "Error: NAR file not found at ${NAR_PATH}"
+                exit 1
+              fi
 
-echo "Unpacking NAR file: ${NAR_PATH}"
-mkdir -p "${OUTPUT_DIR}"
-nix-nar-unpack --file "${NAR_PATH}" --to "${OUTPUT_DIR}"
+              echo "Unpacking NAR file: ${NAR_PATH}"
+              mkdir -p "${OUTPUT_DIR}"
+              nix-nar-unpack --file "${NAR_PATH}" --to "${OUTPUT_DIR}"
 
-echo "NAR file unpacked to: ${OUTPUT_DIR}"
-EOF
-              chmod +x $out/bin/fetch-nar-data.sh
+              echo "NAR file unpacked to: ${OUTPUT_DIR}"
+              EOF
+                            chmod +x $out/bin/fetch-nar-data.sh
 
-              # Create the run-llm-task.sh script within the derivation
-              cat > $out/bin/run-llm-task.sh << EOF
-#!/usr/bin/env bash
-set -euo pipefail
+                            # Create the run-llm-task.sh script within the derivation
+                            cat > $out/bin/run-llm-task.sh << EOF
+              #!/usr/bin/env bash
+              set -euo pipefail
 
-echo "Starting LLM task with NAR data..."
+              echo "Starting LLM task with NAR data..."
 
-# Step 1 & 2: Fetching and unpacking NAR file
-echo "Fetching and unpacking NAR file: $NAR_FILE_NAME"
-$out/bin/fetch-nar-data.sh
+              # Step 1 & 2: Fetching and unpacking NAR file
+              echo "Fetching and unpacking NAR file: $NAR_FILE_NAME"
+              $out/bin/fetch-nar-data.sh
 
-UNPACKED_DATA_DIR="$out/unpacked-nar-data"
+              UNPACKED_DATA_DIR="$out/unpacked-nar-data"
 
-if [[ ! -d "$UNPACKED_DATA_DIR" ]]; then
-  echo "Error: Unpacked data directory not found: ${UNPACKED_DATA_DIR}"
-  exit 1
-fi
+              if [[ ! -d "$UNPACKED_DATA_DIR" ]]; then
+                echo "Error: Unpacked data directory not found: ${UNPACKED_DATA_DIR}"
+                exit 1
+              fi
 
-# Step 3: Load the data
-DATA_FILE="${UNPACKED_DATA_DIR}/llm-context-OEIS-latest.txt" # Adjust based on actual NAR content
+              # Step 3: Load the data
+              DATA_FILE="${UNPACKED_DATA_DIR}/llm-context-OEIS-latest.txt" # Adjust based on actual NAR content
 
-if [[ ! -f "$DATA_FILE" ]]; then
-  echo "Error: Data file not found in unpacked NAR: ${DATA_FILE}"
-  exit 1
-fi
+              if [[ ! -f "$DATA_FILE" ]]; then
+                echo "Error: Data file not found in unpacked NAR: ${DATA_FILE}"
+                exit 1
+              fi
 
-LLM_CONTEXT=\$(cat "${DATA_FILE}")
+              LLM_CONTEXT=\$(cat "${DATA_FILE}")
 
-echo "Loaded LLM context from NAR file. First 100 characters:"
-echo "\${LLM_CONTEXT:0:100}..."
+              echo "Loaded LLM context from NAR file. First 100 characters:"
+              echo "\${LLM_CONTEXT:0:100}..."
 
-# Step 4: Construct a prompt for Gemini
-# Replace {LLM_CONTEXT} in the template
-GENERATED_PROMPT=\$(echo "$PROMPT_TEMPLATE" | ${pkgs.jq}/bin/jq -r . | sed "s/{LLM_CONTEXT}/\${LLM_CONTEXT}/g")
+              # Step 4: Construct a prompt for Gemini
+              # Replace {LLM_CONTEXT} in the template
+              GENERATED_PROMPT=\$(echo "$PROMPT_TEMPLATE" | ${pkgs.jq}/bin/jq -r . | sed "s/{LLM_CONTEXT}/\${LLM_CONTEXT}/g")
 
-echo "Generated Gemini Prompt (first 200 chars):"
-echo "\${GENERATED_PROMPT:0:200}..."
+              echo "Generated Gemini Prompt (first 200 chars):"
+              echo "\${GENERATED_PROMPT:0:200}..."
 
-# Step 5: Execute the Gemini LLM task
-echo "Executing Gemini LLM task with model: $LLM_MODEL"
-$GEMINI_CLI --model=$LLM_MODEL --prompt "\${GENERATED_PROMPT}"
+              # Step 5: Execute the Gemini LLM task
+              echo "Executing Gemini LLM task with model: $LLM_MODEL"
+              $GEMINI_CLI --model=$LLM_MODEL --prompt "\${GENERATED_PROMPT}"
 
-echo "LLM task completed."
-EOF
-              chmod +x $out/bin/run-llm-task.sh
+              echo "LLM task completed."
+              EOF
+                            chmod +x $out/bin/run-llm-task.sh
             '';
           };
       in
@@ -131,6 +131,6 @@ EOF
         lib.mkLlmTask = mkLlmTask;
 
         # Example of a default task using the template
-        packages.default = mkLlmTask {};
+        packages.default = mkLlmTask { };
       });
 }

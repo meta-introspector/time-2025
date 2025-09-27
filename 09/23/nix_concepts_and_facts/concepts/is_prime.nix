@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} } :
+{ pkgs ? import <nixpkgs> { } }:
 
 let
   is-prime-script = pkgs.writeText "is-prime-script" ''

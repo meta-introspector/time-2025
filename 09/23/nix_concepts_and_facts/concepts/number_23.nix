@@ -1,5 +1,5 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
-pkgs.runCommand "number-23" {} ''
+pkgs.runCommand "number-23" { } ''
   echo "23" > $out/number
 ''

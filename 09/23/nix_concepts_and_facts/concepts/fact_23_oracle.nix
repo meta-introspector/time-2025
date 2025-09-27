@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
 let
   repo = pkgs.fetchGit {
@@ -7,6 +7,6 @@ let
   };
 in
 
-pkgs.runCommand "fact-23-oracle" { }''
+pkgs.runCommand "fact-23-oracle" { } ''
   cp ${repo}/source/github/meta-introspector/streamofrandom/2025/09/23/nix_concepts_and_facts/facts/fact_about_23.txt $out/fact
 ''

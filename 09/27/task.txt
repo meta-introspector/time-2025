@@ -1,0 +1,1 @@
+~/nix/run_task_interactive.sh help me merge ~/nix/dev1.sh ~/nix/dev2.sh and ~/nix/run_task_interactive.sh and ~/current-month/today.sh into one new rust command

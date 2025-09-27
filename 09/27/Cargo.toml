@@ -1,0 +1,5 @@
+[workspace]
+resolver = "2"
+members = ["response-007-cli-nar-output/streamofrandom_cli_standalone",
+    "streamofrandom_cli",
+]

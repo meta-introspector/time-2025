@@ -37,17 +37,17 @@
           buildInputs = [ pkgs.nix ]; # Ensure nix is available for nix-nar-unpack
 
           installPhase = ''
-            mkdir -p $out/bin
-            cp $src/fetch-nar-data.sh $out/bin/fetch-nar-data.sh
-            chmod +x $out/bin/fetch-nar-data.sh
+                        mkdir -p $out/bin
+                        cp $src/fetch-nar-data.sh $out/bin/fetch-nar-data.sh
+                        chmod +x $out/bin/fetch-nar-data.sh
 
-            # Create a wrapper script to set CRQ_BINSTORE_PATH
-            cat > $out/bin/fetch-nar-data-wrapper.sh << EOF
-#!/usr/bin/env bash
-export CRQ_BINSTORE_PATH=${crq-binstore}
-exec $out/bin/fetch-nar-data.sh "$@"
-EOF
-            chmod +x $out/bin/fetch-nar-data-wrapper.sh
+                        # Create a wrapper script to set CRQ_BINSTORE_PATH
+                        cat > $out/bin/fetch-nar-data-wrapper.sh << EOF
+            #!/usr/bin/env bash
+            export CRQ_BINSTORE_PATH=${crq-binstore}
+            exec $out/bin/fetch-nar-data.sh "$@"
+            EOF
+                        chmod +x $out/bin/fetch-nar-data-wrapper.sh
           '';
         };
       });

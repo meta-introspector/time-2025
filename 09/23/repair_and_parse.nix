@@ -1,5 +1,5 @@
 let
-  pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> { };
   lib = pkgs.lib;
 
   # Read the content of the test file
@@ -13,10 +13,12 @@ let
   # Reconstruct the lines, adding a comma before each line that starts
   # a new key-value pair (which we assume is any line starting with a quote).
   # We skip adding a comma for the very first line (index 0).
-  repairedLines = lib.imap0 (i: line:
-    if lib.hasPrefix "\"" line && i > 0 then ",\n" + line
-    else line
-  ) nonEmptyLines;
+  repairedLines = lib.imap0
+    (i: line:
+      if lib.hasPrefix "\"" line && i > 0 then ",\n" + line
+      else line
+    )
+    nonEmptyLines;
 
   # Join the repaired lines back into a single string
   repairedContent = lib.concatStrings repairedLines;
