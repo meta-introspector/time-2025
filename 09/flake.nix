@@ -3,9 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    metaNixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, metaNixpkgs }:
     let
       systems = [ "aarch64-linux" "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
@@ -92,6 +93,7 @@
           buildInputs = with pkgs.${system}; [
             bash
             nixpkgs-fmt
+            metaNixpkgs.legacyPackages.${system}.lint-staged
           ];
         };
       });
