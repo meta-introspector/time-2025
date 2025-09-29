@@ -83,19 +83,20 @@
 
     in
     {
-      packages = forAllSystems (system:
-        # Combine individual item derivations and TLD packages into the flake's packages output
-        (nixpkgs.lib.mapAttrs (tld: items:
-          nixpkgs.lib.listToAttrs (nixpkgs.lib.map
-            (item:
-              let
-                sanitizedUrlAttr = nixpkgs.lib.strings.sanitizeDerivationName (builtins.substring 0 50 item.url);
-              in
-              { name = sanitizedUrlAttr; value = mkKnowledgeItemDerivation system item; }
-            )
-            items))
-        ) groupedByTld);
-      // tldPackages
+      packages = forAllSystems
+        (system:
+          # Combine individual item derivations and TLD packages into the flake's packages output
+          (nixpkgs.lib.mapAttrs (tld: items:
+            nixpkgs.lib.listToAttrs (nixpkgs.lib.map
+              (item:
+                let
+                  sanitizedUrlAttr = nixpkgs.lib.strings.sanitizeDerivationName (builtins.substring 0 50 item.url);
+                in
+                { name = sanitizedUrlAttr; value = mkKnowledgeItemDerivation system item; }
+              )
+              items))
+          ) groupedByTld) // tldPackages.${system}
+        );
 	
 	
 	

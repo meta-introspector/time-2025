@@ -1,0 +1,80 @@
+# .pre-commit-config.yaml
+# This file defines pre-commit hooks for the project.
+# It leverages the pre-commit framework to ensure code quality and consistency.
+#
+# Hooks are defined using 'language: system' to utilize tools available in the
+# Nix development environment (flake.nix).
+
+repos:
+  - repo: local
+    hooks:
+      - id: nixpkgs-fmt
+        name: nixpkgs-fmt
+        entry: nixpkgs-fmt
+        language: system
+        files: \.nix$
+        # This hook ensures Nix files are formatted consistently, embodying
+        # the bott principle of "Pattern Discernment" (bott 5).
+
+      - id: statix
+        name: statix
+        entry: bash -c "statix check || true"
+        language: system
+        files: \.nix$
+        pass_filenames: false
+        # This hook performs static analysis on Nix files, contributing to
+        # "Verification and Testing" (bott 10) and "Error Analysis" (bott 9).
+
+      - id: shellcheck
+        name: shellcheck
+        entry: shellcheck
+        language: system
+        files: \.sh$
+        # Ensures shell scripts adhere to best practices, aiding in
+        # "Verification and Testing" (bott 10).
+
+      - id: crq-commit-msg-check
+        name: CRQ Commit Message Check
+        entry: /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/27/7-concepts/5-scripts-automation/crq_commit_msg_check.sh
+        language: system
+        stages: [commit-msg]
+        # Enforces that commit messages start with a CRQ number (e.g., CRQ-123:)
+        # or a conventional commit type.
+
+      - id: crq-document-check
+        name: CRQ Document Existence Check
+        entry: /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/27/7-concepts/5-scripts-automation/crq_document_check.sh
+        language: system
+        stages: [commit-msg]
+        # Checks if a referenced CRQ document exists in docs/crqs/.
+
+      - id: script-sop-check
+        name: Script SOP Documentation Check
+        entry: /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/27/7-concepts/5-scripts-automation/script_sop_check.sh
+        language: system
+        files: \.(sh|py|rs|nix)$
+
+      # - id: cargo-check
+      #   name: cargo check
+      #   entry: cargo check -p streamofrandom_cli
+      #   language: system
+      #   files: \.(rs|toml)$
+      #   pass_filenames: false
+        always_run: true
+        # This hook runs cargo check on the standalone Rust project.
+
+  - repo: ../../../../nix/vendor/vale-precommit
+    rev: '' # Use the rev from the submodule
+    hooks:
+      - id: vale
+        # Prose linter for checking writing style, grammar, and tone.
+
+  - repo: local
+    hooks:
+      - id: lint-staged
+        name: lint-staged
+        entry: lint-staged
+        language: system
+        pass_filenames: false
+        always_run: true
+        # Runs linters on staged git files, improving commit quality.
