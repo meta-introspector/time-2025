@@ -16,6 +16,7 @@ buildNpmPackage rec {
   };
 
   npmDepsHash = "sha256-TW90pvkKEs5s2nvjkNyf5xQFmM6UueMSm8Ov03I3Nls=";
+  dontNpmBuild = true;
 
   # Add any other build phases or arguments as needed
   # For example, if it needs specific Node.js versions or other tools
