@@ -64,7 +64,7 @@ repos:
         # This hook runs cargo check on the standalone Rust project.
 
   - repo: https://github.com/meta-introspector/pre-commit-hooks-collection
-    rev: main # Placeholder: Update with the correct revision/branch from the meta-introspector repository.
+    rev: c58fa2b # Updated to the commit hash where .pre-commit-hooks.yaml was added to the meta-introspector/pre-commit-hooks-collection repository.
     hooks:
       - id: vale
         # Prose linter for checking writing style, grammar, and tone.

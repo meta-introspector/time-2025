@@ -1,21 +1,27 @@
-
-{ lib, buildNpmPackage, nodejs, ... }:
+{
+  lib,
+  buildNpmPackage,
+  fetchFromGitHub,
+  
+  # Add any other necessary build inputs here
+}:
 
 buildNpmPackage rec {
   pname = "lint-staged";
-  version = "15.2.2"; # This should match the version of the vendored lint-staged
+  version = "16.2.3";
 
-  src = src + /nix/vendor/lint-staged; # Path to the vendored submodule
+  src = ../../../../vendor/hooks/lint-staged; # Relative path to the vendored lint-staged source
 
-  buildInputs = [ nodejs ];
+  npmDepsHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Placeholder, will be filled after first build attempt
 
-  # npm install flags
-  npmBuildFlags = [ "--ignore-scripts" ]; # Ignore postinstall scripts if they cause issues
+  # Add any other build phases or arguments as needed
+  # For example, if it needs specific Node.js versions or other tools
 
   meta = with lib; {
     description = "Run linters against staged git files";
-    homepage = "https://github.com/lint-staged/lint-staged";
-    license = licenses.MIT;
-    maintainers = with maintainers; [ ]; # Add maintainers if known
+    homepage = "https://github.com/meta-introspector/lint-staged";
+    license = licenses.mit;
+    platforms = platforms.unix;
+    maintainers = [ "jmikedupont2" ];
   };
 }
