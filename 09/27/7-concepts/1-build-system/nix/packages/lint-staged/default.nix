@@ -12,7 +12,7 @@ buildNpmPackage rec {
 
   src = fetchTarball {
     url = "https://github.com/meta-introspector/lint-staged/archive/feature/CRQ-016-nixify.tar.gz";
-    sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Placeholder, will be filled after first build attempt
+    sha256 = "sha256:0vnd0731vaib2x3q2rkgj2sggqvz1m3s1swgxmqaikg65ilds7pg";
   };
 
   npmDepsHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Placeholder, will be filled after first build attempt
