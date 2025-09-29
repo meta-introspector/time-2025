@@ -10,7 +10,10 @@ buildNpmPackage rec {
   pname = "lint-staged";
   version = "16.2.3";
 
-  src = ../../../../vendor/hooks/lint-staged; # Relative path to the vendored lint-staged source
+  src = fetchTarball {
+    url = "https://github.com/meta-introspector/lint-staged/archive/feature/CRQ-016-nixify.tar.gz";
+    sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Placeholder, will be filled after first build attempt
+  };
 
   npmDepsHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Placeholder, will be filled after first build attempt
 
