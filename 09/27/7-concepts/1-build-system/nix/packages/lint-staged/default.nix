@@ -15,7 +15,7 @@ buildNpmPackage rec {
     sha256 = "sha256:0vnd0731vaib2x3q2rkgj2sggqvz1m3s1swgxmqaikg65ilds7pg";
   };
 
-  npmDepsHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Placeholder, will be filled after first build attempt
+  npmDepsHash = "sha256-TW90pvkKEs5s2nvjkNyf5xQFmM6UueMSm8Ov03I3Nls=";
 
   # Add any other build phases or arguments as needed
   # For example, if it needs specific Node.js versions or other tools
