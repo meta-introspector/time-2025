@@ -91,6 +91,7 @@
         default = pkgs.${system}.mkShell {
           buildInputs = with pkgs.${system}; [
             bash
+            nixpkgs-fmt
           ];
         };
       });
