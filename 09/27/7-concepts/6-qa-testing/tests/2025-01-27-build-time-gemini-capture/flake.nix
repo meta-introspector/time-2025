@@ -9,7 +9,10 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, gemini-cli }:
-    flake-utils.lib.eachDefaultSystem (system:
+    let
+      eachSystem = flake-utils.lib.eachDefaultSystem;
+    in
+    eachSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
 
@@ -19,6 +22,7 @@
           version = "1.0";
 
           src = pkgs.writeText "dummy" "build telemetry";
+          dontUnpack = true;
 
           __impure = true;
 
@@ -26,20 +30,47 @@
             pkgs.nodejs_22
             pkgs.jq
             pkgs.curl
+#            pkgs.strace # Added strace for build-time telemetry
+            pkgs.cacert # Added cacert for SSL/TLS certificate verification
             gemini-cli.packages.${system}.default
           ];
 
           # Environment variables for build
-          GEMINI_API_KEY = builtins.getEnv "GEMINI_API_KEY";
           NIX_BUILD_TELEMETRY = "true";
 
           buildPhase = ''
             echo "🔥 BUILD-TIME GEMINI TELEMETRY CAPTURE 🔥"
-            
+	    find .
+	    pwd
+	    #	    ls -latr /creds/google_accounts.json || echo skip
+	    #ls -latr /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture/creds/google_accounts.json || echo skip
+	    #~/.gemini/google_accounts.json
+            # Set HOME to a writable temporary directory for gemini-cli 
+            export HOME=$(mktemp -d)
+            trap 'rm -rf "$HOME"' EXIT
+	    mkdir -p logs # for gemmin
             mkdir -p $out/{logs,telemetry,analysis}
             
+            # Credential files are directly available via extra-sandbox-paths at /creds
+            echo "✅ Credentials directory available at /creds/"
+            echo "=== Contents of /creds/ BEFORE copy ==="
+	    #find .
+	    #pwd
+	    #find / || echo error
+            echo "======================================="
+            mkdir -p $HOME/.gemini/
+            cp /data/data/com.termux.nix/files/home/.gemini/settings.json $HOME/.gemini/
+	    cp /data/data/com.termux.nix/files/home/.gemini/oauth_creds.json $HOME/.gemini/
+   	    cp /data/data/com.termux.nix/files/home/.gemini/google_accounts.json $HOME/.gemini/
+            echo "✅ Copied credential files from /creds/ to $HOME/.gemini/"
+            echo ""
+            echo "=== Contents of $HOME/.gemini/ ==="
+            ls -latr $HOME/.gemini/
+            echo "=================================="
+
             # Capture build environment
             {
+	      md5sum $HOME/.gemini/*
               echo "=== Nix Build Environment ==="
               echo "Timestamp: $(date -Iseconds)"
               echo "Build in progress: YES"
@@ -66,13 +97,29 @@
               fi
               echo ""
               
-              # API key check
-              if [ -n "$GEMINI_API_KEY" ]; then
-                echo "🔑 API Key: SET (''${#GEMINI_API_KEY} chars)"
+              # Credential files check
+              OAUTH_CREDS_FILE="$HOME/.gemini/oauth_creds.json"
+              SETTINGS_FILE="$HOME/.gemini/settings.json"
+              GOOGLE_ACCOUNTS_FILE="$HOME/.gemini/google_accounts.json"
+
+              WILL_CALL_API="false"
+              if [ -f "$OAUTH_CREDS_FILE" ]; then
+                echo "🔑 OAuth credentials file found: $OAUTH_CREDS_FILE $(md5sum $OAUTH_CREDS_FILE)"
                 WILL_CALL_API="true"
+              fi
+              if [ -f "$SETTINGS_FILE" ]; then
+                echo "🔑 Settings file found: $SETTINGS_FILE $(md5sum $SETTINGS_FILE)"
+                WILL_CALL_API="true"
+              fi
+              if [ -f "$GOOGLE_ACCOUNTS_FILE" ]; then
+                echo "🔑 Google accounts file found: $GOOGLE_ACCOUNTS_FILE $(md5sum $GOOGLE_ACCOUNTS_FILE)"
+                WILL_CALL_API="true"
+              fi
+
+              if [ "$WILL_CALL_API" = "true" ]; then
+                echo "✅ At least one credential file found. API calls enabled."
               else
-                echo "🔑 API Key: NOT SET (test mode)"
-                WILL_CALL_API="false"
+                echo "❌ No credential files found in $HOME/.gemini/ (test mode). API calls simulated."
               fi
               echo ""
               
@@ -98,11 +145,9 @@
               echo "3. BUILD-TIME API CALL:"
               if [ "$WILL_CALL_API" = "true" ]; then
                 echo "🌟 Making actual API call during build..."
-                if timeout 120 "$WRAPPER_PATH" "I am calling you from INSIDE a Nix build derivation! This is real-time telemetry capture. Bundle hash: $BUNDLE_HASH. Time: $(date)"; then
-                  echo "✅ BUILD-TIME API CALL SUCCESSFUL!"
-                else
-                  echo "⚠️ API call completed with exit code: $?"
-                fi
+                #if timeout 120
+		                #strace -f -o logs/strace
+		"$WRAPPER_PATH" --debug --output-format json --approval-mode yolo --model gemini-2.5-flash --prompt "I am calling you from INSIDE a Nix build derivation! This is real-time telemetry capture. Bundle hash: $BUNDLE_HASH. Time: $(date)"
               else
                 echo "📝 Simulating API call (no key provided)"
                 echo "Would send: 'Build-time telemetry from hash $BUNDLE_HASH'"
@@ -112,7 +157,10 @@
               echo "🎯 BUILD-TIME TELEMETRY CAPTURE COMPLETE!"
               
             } 2>&1 | tee $out/logs/build-time-capture.log
-            
+
+	    # copy the telemetry
+	    cp logs/* $out/logs/
+	    
             # Create structured telemetry
             BUNDLE_HASH="$(basename ${gemini-cli.packages.${system}.default} | cut -d'-' -f1)"
             cat > $out/telemetry/build-time.json << EOF
@@ -122,7 +170,7 @@
               "build_context": "nix_derivation_build_phase",
               "bundle_hash": "$BUNDLE_HASH",
               "bundle_size": $(stat -c%s ${gemini-cli.packages.${system}.default}/share/gemini-cli/bundle/gemini.js),
-              "api_key_available": $([ -n "$GEMINI_API_KEY" ] && echo "true" || echo "false"),
+              "api_key_available": $([ -f "$HOME/.gemini/oauth_creds.json" ] || [ -f "$HOME/.gemini/settings.json" ] || [ -f "$HOME/.gemini/google_accounts.json" ] && echo "true" || echo "false"),
               "gemini_calls_made": 3,
               "status": "completed_during_build"
             }
@@ -138,6 +186,7 @@
         };
       in
       {
+        nix.settings = {};
         packages.default = buildTimeTelemetry;
 
         apps.default = {

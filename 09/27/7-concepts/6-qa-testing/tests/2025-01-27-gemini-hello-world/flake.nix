@@ -30,26 +30,72 @@
             echo "PWD: $(pwd)"
             echo "Node version: $(node --version)"
             echo ""
-            
-            # Check if bundle/gemini.js exists
-            if [ -f "$src/bundle/gemini.js" ]; then
-              echo "✅ Found gemini.js at: $src/bundle/gemini.js"
-              FILE_SIZE=$(stat -c%s "$src/bundle/gemini.js")
-              echo "   File size: $FILE_SIZE bytes"
-              ls -la "$src/bundle/gemini.js"
-            else
-              echo "❌ gemini.js not found in $src/bundle/"
-              echo "Available files in $src:"
-              find "$src" -name "*.js" | head -10 || true
-              exit 1
-            fi
-            echo ""
 
             # Create output directory structure (additive approach)
-            mkdir -p $out/test-results
-            mkdir -p $out/bin
-            mkdir -p $out/logs
-            mkdir -p $out/artifacts
+            mkdir -p $out/{test-results,bin,logs,artifacts,diagnostics}
+
+            # 1. Source Analysis (from minimal-qa-test)
+            echo "=== SOURCE ANALYSIS ===" | tee $out/diagnostics/source_analysis.txt
+            echo "Source path: $src" | tee -a $out/diagnostics/source_analysis.txt
+            echo "PWD: $(pwd)" | tee -a $out/diagnostics/source_analysis.txt
+            echo "" | tee -a $out/diagnostics/source_analysis.txt
+            
+            # Check source structure
+            echo "Source directory contents:" | tee -a $out/diagnostics/source_analysis.txt
+            if [ -d "$src" ]; then
+              ls -la "$src" | tee -a $out/diagnostics/source_analysis.txt
+              echo "" | tee -a $out/diagnostics/source_analysis.txt
+              
+              # Check for bundle directory
+              if [ -d "$src/bundle" ]; then
+                echo "Bundle directory found:" | tee -a $out/diagnostics/source_analysis.txt
+                ls -la "$src/bundle" | tee -a $out/diagnostics/source_analysis.txt
+                
+                # Check if gemini.js exists
+                if [ -f "$src/bundle/gemini.js" ]; then
+                  echo "✅ gemini.js found" | tee -a $out/diagnostics/source_analysis.txt
+                  echo "Size: $(stat -c%s "$src/bundle/gemini.js") bytes" | tee -a $out/diagnostics/source_analysis.txt
+                  echo "Permissions: $(stat -c%A "$src/bundle/gemini.js")" | tee -a $out/diagnostics/source_analysis.txt
+                else
+                  echo "❌ gemini.js NOT found" | tee -a $out/diagnostics/source_analysis.txt
+                  echo "Searching for .js files:" | tee -a $out/diagnostics/source_analysis.txt
+                  find "$src" -name "*.js" | head -10 | tee -a $out/diagnostics/source_analysis.txt
+                  exit 1 # Exit if gemini.js is not found, as it's critical for the test
+                fi
+              else
+                echo "❌ Bundle directory NOT found" | tee -a $out/diagnostics/source_analysis.txt
+                echo "Searching for .js files:" | tee -a $out/diagnostics/source_analysis.txt
+                find "$src" -name "*.js" | head -10 | tee -a $out/diagnostics/source_analysis.txt
+                exit 1 # Exit if bundle directory is not found
+              fi
+            else
+              echo "❌ Source directory not accessible" | tee -a $out/diagnostics/source_analysis.txt
+              exit 1 # Exit if source directory is not accessible
+            fi
+            echo ""
+            
+            # 3. Path Resolution Test (from minimal-qa-test)
+            echo "=== PATH RESOLUTION TEST ===" | tee -a $out/diagnostics/path_resolution.txt
+            echo "Attempting to resolve source paths..." | tee -a $out/diagnostics/path_resolution.txt
+            
+            # Test different path approaches
+            echo "Direct source access:" | tee -a $out/diagnostics/path_resolution.txt
+            ls "$src" >/dev/null 2>&1 && echo "✅ Source accessible" || (echo "❌ Source NOT accessible" | tee -a $out/diagnostics/path_resolution.txt && exit 1)
+            
+            echo "Bundle path test:" | tee -a $out/diagnostics/path_resolution.txt
+            ls "$src/bundle" >/dev/null 2>&1 && echo "✅ Bundle accessible" || (echo "❌ Bundle NOT accessible" | tee -a $out/diagnostics/path_resolution.txt && exit 1)
+            
+            echo "Gemini.js path test:" | tee -a $out/diagnostics/path_resolution.txt
+            ls "$src/bundle/gemini.js" >/dev/null 2>&1 && echo "✅ gemini.js accessible" || (echo "❌ gemini.js NOT accessible" | tee -a $out/diagnostics/path_resolution.txt && exit 1)
+            echo ""
+
+            # Copy gemini.js to our output for testing (additive)
+            cp "$src/bundle/gemini.js" "$out/bin/gemini.js"
+            chmod +x "$out/bin/gemini.js"
+            echo "✅ Copied gemini.js to $out/bin/gemini.js"
+            echo ""
+
+            # Test 1: Help command
 
             # Copy gemini.js to our output for testing (additive)
             cp "$src/bundle/gemini.js" "$out/bin/gemini.js"
@@ -128,7 +174,12 @@
               cat "$out/test-results/version_output.txt" 2>/dev/null || echo "No version output"
               echo "--- Hello World Output (first 5 lines) ---"
               head -5 "$out/test-results/hello_output.txt" 2>/dev/null || echo "No hello output"
-            } > "$out/test-results/summary.txt"
+            echo "Diagnostic Files Created:" | tee -a $out/analysis/summary.txt
+            find $out -type f | sort | tee -a $out/analysis/summary.txt
+            echo "" | tee -a $out/analysis/summary.txt
+            echo "=== Diagnostic Files ===" | tee -a $out/analysis/summary.txt
+            cat $out/diagnostics/source_analysis.txt | tee -a $out/analysis/summary.txt
+            cat $out/diagnostics/path_resolution.txt | tee -a $out/analysis/summary.txt
 
             # Copy summary to logs for external access
             cp "$out/test-results/summary.txt" "$out/logs/test-summary-$(date +%Y%m%d-%H%M%S).txt"
@@ -179,7 +230,9 @@
                 "test-results/hello_output.txt",
                 "test-results/no_args_output.txt",
                 "logs/test-summary-*.txt",
-                "artifacts/manifest.json"
+                "artifacts/manifest.json",
+                "diagnostics/source_analysis.txt",
+                "diagnostics/path_resolution.txt"
               ],
               "build_timestamp": "$(date -Iseconds)"
             }

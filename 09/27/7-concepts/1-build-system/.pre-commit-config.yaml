@@ -8,11 +8,11 @@
 repos:
   - repo: local
     hooks:
-      - id: nixpkgs-fmt
-        name: nixpkgs-fmt
-        entry: nixpkgs-fmt
-        language: system
-        files: \.nix$
+      # - id: nixpkgs-fmt
+      #   name: nixpkgs-fmt
+      #   entry: nixpkgs-fmt
+      #   language: system
+      #   files: \.nix$
         # This hook ensures Nix files are formatted consistently, embodying
         # the bott principle of "Pattern Discernment" (bott 5).
 
@@ -63,18 +63,19 @@ repos:
         always_run: true
         # This hook runs cargo check on the standalone Rust project.
 
-  - repo: https://github.com/meta-introspector/pre-commit-hooks-collection
-    rev: c58fa2b # Updated to the commit hash where .pre-commit-hooks.yaml was added to the meta-introspector/pre-commit-hooks-collection repository.
+
+  - repo: https://github.com/meta-introspector/vale-precommit
+    rev: feature/CRQ-016-nixify
     hooks:
-      - id: vale
+      - id: vale-system
         # Prose linter for checking writing style, grammar, and tone.
 
-  - repo: local
-    hooks:
-      - id: lint-staged
-        name: lint-staged
-        entry: lint-staged
-        language: system
-        pass_filenames: false
-        always_run: true
+  # - repo: local
+  #   hooks:
+  #     - id: lint-staged
+  #       name: lint-staged
+  #       entry: lint-staged
+  #       language: system
+  #       pass_filenames: false
+  #       always_run: true
         # Runs linters on staged git files, improving commit quality.

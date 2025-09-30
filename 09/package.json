@@ -1,8 +1,5 @@
 {
   "dependencies": {
     "@github/copilot": "^0.0.328"
-  },
-  "devDependencies": {
-    "lint-staged": "^16.2.3"
   }
 }

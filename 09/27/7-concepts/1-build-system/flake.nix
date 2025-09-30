@@ -12,7 +12,7 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         src = ./.;
-        vendoredLintStaged = pkgs.callPackage ./nix/packages/lint-staged { inherit src; };
+        vendoredLintStaged = pkgs.callPackage ./nix/packages/lint-staged {};
       in
       {
         devShells.default = pkgs.mkShell {
@@ -33,6 +33,13 @@
         checks = {
           simple-test = pkgs.runCommand "simple-test" {} "echo \"Test passed!\" > $out";
         };
+        packages.vendoredLintStaged = vendoredLintStaged;
+        packages.default = pkgs.runCommand "build-system-tools" { buildInputs = [ pkgs.pre-commit ]; } ''
+          mkdir -p $out/bin
+          echo "This package provides development tools and pre-commit hooks." > $out/README.md
+          echo "For the full development environment, use 'nix develop'." >> $out/README.md
+          ln -s ${pkgs.pre-commit}/bin/pre-commit $out/bin/pre-commit
+        '';
       }
     );
 }

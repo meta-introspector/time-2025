@@ -4,9 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     metaNixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    rustKnowledgeExtractor.url = "path:./30/monster_experiment/rust_knowledge_extractor";
   };
 
-  outputs = { self, nixpkgs, metaNixpkgs }:
+  outputs = { self, nixpkgs, metaNixpkgs, rustKnowledgeExtractor }:
     let
       systems = [ "aarch64-linux" "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
@@ -86,13 +87,18 @@
 
     in
     {
-      packages = forAllSystems (system: tldPackages.${system});
+      packages = forAllSystems (system:
+        tldPackages.${system} // {
+          rust-knowledge-extractor = rustKnowledgeExtractor.packages.${system}.rust-knowledge-extractor;
+        }
+      );
 
       devShells = forAllSystems (system: {
         default = pkgs.${system}.mkShell {
           buildInputs = with pkgs.${system}; [
             bash
             nixpkgs-fmt
+            vale
             metaNixpkgs.legacyPackages.${system}.lint-staged
           ];
         };
