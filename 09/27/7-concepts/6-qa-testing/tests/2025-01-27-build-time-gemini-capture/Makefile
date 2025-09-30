@@ -46,14 +46,14 @@ inspect-nar:
 	ls -lR $$RESTORED_PATH && \
 	rm -rf $$TMP_DIR
 
-publish-nar: export-nar
+publish-nar:
+#export-nar
 	@echo "Publishing NAR file to binstore Git repository..."
 	NIX_STORE_PATH=$$(nix-store --query ./result) && \
 	NIX_HASH=$$(basename $$NIX_STORE_PATH) && \
 	NAR_FILE="$$NIX_HASH.nar" && \
-	BINSTORE_PATH="~/pick-up-nix2/current-month/22/crq-binstore/" && \
-	mkdir -p $$BINSTORE_PATH && \
+	BINSTORE_PATH="/data/data/com.termux.nix/files/home/pick-up-nix2/current-month/22/crq-binstore" && \
 	mv $$NAR_FILE $$BINSTORE_PATH$$NAR_FILE && \
-	(cd $$BINSTORE_PATH && git add $$NAR_FILE) && \
+	(cd $$BINSTORE_PATH && git add *.nar) && \
 	(cd $$BINSTORE_PATH && git commit -m "feat: Add $$NAR_FILE to binstore") && \
 	(cd $$BINSTORE_PATH && git push)
