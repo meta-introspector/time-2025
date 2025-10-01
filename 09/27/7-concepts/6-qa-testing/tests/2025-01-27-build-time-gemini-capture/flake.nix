@@ -147,7 +147,7 @@
                 echo "🌟 Making actual API call during build..."
                 #if timeout 120
 		                #strace -f -o logs/strace
-		"$WRAPPER_PATH" --debug --output-format json --approval-mode yolo --model gemini-2.5-flash --prompt "I am calling you from INSIDE a Nix build derivation! This is real-time telemetry capture. Bundle hash: $BUNDLE_HASH. Time: $(date)"
+		"$WRAPPER_PATH" --debug --output-format json --approval-mode yolo --model gemini-2.5-flash --prompt "I am calling you from INSIDE a Nix build derivation! This is real-time telemetry capture. Bundle hash: $BUNDLE_HASH. Time: $(date) Please read flake.nix, and modify it to read @task.md for more instructions. If you cant read flake.nix write a nix package that adds flake.nix, task.md and mission.md to the output. then add a report of the telemetry log via another rust crate and another derivation. we want to create multiple derviations from one task, a whole lattice of them."
               else
                 echo "📝 Simulating API call (no key provided)"
                 echo "Would send: 'Build-time telemetry from hash $BUNDLE_HASH'"

@@ -5,16 +5,8 @@ all: build
 test:
 	@echo "Running nix flake check..."
 	nix flake check
-
-stracebuild:
-	@echo "Building the buildTimeTelemetry derivation (verbose output in nix_build_output.log)..."
-#	nix build .#packages.aarch64-linux.default -vvv --impure --extra-experimental-features "nix-command flakes impure-derivations ca-derivations" --extra-sandbox-paths "/creds=/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture/creds" > nix_build_output.log 2>&1
-	strace -o str.txt -s99 -f nix build --option extra-sandbox-paths  "/creds=/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture/creds" .#packages.aarch64-linux.default -vvv --impure --extra-experimental-features "nix-command flakes impure-derivations ca-derivations"   > nix_build_output.log 2>&1
-
 build:
 	@echo "Building the buildTimeTelemetry derivation (verbose output in nix_build_output.log)..."
-#	nix build .#packages.aarch64-linux.default -vvv --impure --extra-experimental-features "nix-command flakes impure-derivations ca-derivations" --extra-sandbox-paths "/creds=/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture/creds" > nix_build_output.log 2>&1
-	#nix build -v --print-build-logs --debug --log-format internal-json --print-out-paths --json  --keep-failed --extra-sandbox-paths  "/creds/google_accounts.json=./creds/google_accounts.json" .#packages.aarch64-linux.default -v --impure --extra-experimental-features "nix-command flakes impure-derivations ca-derivations"
 	nix build --print-build-logs --print-out-paths --json  --keep-failed \
 	--extra-sandbox-paths  "/creds/google_accounts.json=/data/data/com.termux.nix/files/home/.gemini/google_accounts.json" \
 	--extra-sandbox-paths  "/creds/google_accounts.json=/data/data/com.termux.nix/files/home/.gemini/oauth_creds.json" \
@@ -31,7 +23,7 @@ clean:
 	@echo "Nix garbage collection for this flake's outputs might require manual intervention."
 	@echo "Consider 'nix-collect-garbage -d' if you want to aggressively clean up."
 
-export-nar:
+export-nar: build
 	@echo "Exporting NAR file for buildTimeTelemetry..."
 	NIX_STORE_PATH=$$(nix-store --query ./result) && \
 	NIX_HASH=$$(basename $$NIX_STORE_PATH) && \
@@ -46,8 +38,7 @@ inspect-nar:
 	ls -lR $$RESTORED_PATH && \
 	rm -rf $$TMP_DIR
 
-publish-nar:
-#export-nar
+publish-nar: export-nar
 	@echo "Publishing NAR file to binstore Git repository..."
 	NIX_STORE_PATH=$$(nix-store --query ./result) && \
 	NIX_HASH=$$(basename $$NIX_STORE_PATH) && \
