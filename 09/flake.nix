@@ -21,6 +21,11 @@
             nix-prefetch-git
             pre-commit
           ];
+          shellHook = ''
+            echo "Installing pre-commit hooks..."
+            pre-commit install --config ../.pre-commit-config.yaml
+            echo "Pre-commit hooks installed."
+          '';
           # You can add environment variables or other shell configurations
         };
 

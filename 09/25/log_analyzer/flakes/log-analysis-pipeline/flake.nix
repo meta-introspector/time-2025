@@ -22,6 +22,7 @@
         }
         '''
           ${log-analyzer-flake.packages.${system}.log-analyzer}/bin/log-analyzer < ${buildTimeTelemetryOutput}/logs/build-time-capture.log > $out/analysis-result.txt
+        
         ''';
       }
     );
