@@ -9,25 +9,6 @@ let
   # Import seed FOAF data (agents and projects)
   seedFoafData = import ./seed.foaf.nix { inherit pkgs; };
 
-  # Import aggregated CRQ FOAF documents
-  allCrqs = import ./crqs.foaf.nix { inherit pkgs crq001 crq007 crq008 crq009 crq010 crq011 crq012 crq013; lib = pkgs.lib; };
-
-  # Combine all FOAF entities into a single graph
-  fullGraph = seedFoafData."@graph" ++ allCrqs;
-
-  # Helper function to find entities by type
-  findEntitiesByType = type:
-    builtins.filter (entity:
-      (builtins.isAttrs entity && entity ? "@type" && entity."@type" == type) ||
-      (builtins.isString entity."@type" && entity."@type" == type)
-    ) fullGraph;
-
-  # Helper function to find projects made by a specific owner
-  findProjectsByMaker = makerId:
-    builtins.filter (project:
-      project ? "maker" && project.maker ? "@id" && project.maker."@id" == makerId
-    ) (findEntitiesByType "Project");
-
   # Import individual CRQ FOAF documents
   crq001 = import ./crq-001.foaf.nix { inherit pkgs; lib = pkgs.lib; };
   crq007 = import ./crq-007.foaf.nix { inherit pkgs; lib = pkgs.lib; };
@@ -40,6 +21,16 @@ let
 
   # Aggregate all CRQ FOAF documents
   allCrqs = import ./crqs.foaf.nix { inherit pkgs crq001 crq007 crq008 crq009 crq010 crq011 crq012 crq013; lib = pkgs.lib; };
+
+  # Combine all FOAF entities into a single graph
+  fullGraph = seedFoafData."@graph" ++ allCrqs;
+
+  # Helper function to find entities by type
+  findEntitiesByType = type:
+    builtins.filter (entity:
+      (builtins.isAttrs entity && entity ? "@type" && entity."@type" == type) ||
+      (builtins.isString entity."@type" && entity."@type" == type)
+    ) fullGraph;
 
 in {
   # Expose the raw parsed data
