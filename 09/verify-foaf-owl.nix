@@ -13,23 +13,11 @@ let
   # Helper to get all IDs of defined properties
   propertyIds = lib.map (p: p."@id") owlProperties;
 
-  # Helper function to resolve URIs (expand prefixes)
-  resolveUri = uri:
-    let
-      parts = lib.splitString ":" uri;
-    in
-    builtins.trace "Resolving URI: ${uri}" (
-    builtins.trace "URI parts: ${builtins.toJSON parts}" (
-    if lib.length parts == 2 && lib.hasAttr parts.0 owlContext
-    then
-      builtins.trace "Type of owlContext.${parts.0}: ${builtins.typeOf owlContext.${parts.0}}" (
-      builtins.trace "Type of parts.1: ${builtins.typeOf parts.1}" (
-      owlContext.${parts.0} + parts.1
-      ))
-    else uri));
-
   # Convert owlProperties to an attribute set keyed by @id for efficient lookup
   owlPropertiesById = lib.listToAttrs (lib.map (p: { name = p."@id"; value = p; }) owlProperties);
+
+  # Trace the type of owlContext
+  _ = builtins.trace "Type of owlContext: ${builtins.typeOf owlContext}" null;
 
   # Function to check if a type is a defined OWL class
   isDefinedClass = typeId: lib.elem typeId classIds;
