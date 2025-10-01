@@ -99,6 +99,41 @@
         # Create an attribute set of search NARs, one for each keyword
         searchNars = pkgs.lib.genAttrs keywords (keyword: mkSearchNar keyword);
 
+        # Function to create a NAR of all repositories for a given owner
+        mkRepoListNar = ownerName:
+          pkgs.stdenv.mkDerivation {
+            pname = "github-repos-${ownerName}";
+            version = "0.1.0";
+
+            buildInputs = with pkgs; [
+              gh # GitHub CLI
+              jq # JSON processor
+            ];
+
+            builder = pkgs.writeShellScript "repo-list-builder" ''
+              set -euo pipefail
+
+              echo "Listing GitHub repositories for owner: ${ownerName}"
+
+              TEMP_DIR=$(mktemp -d)
+              echo "Temporary directory: $TEMP_DIR"
+
+              # gh repo list outputs JSON directly
+              gh repo list "${ownerName}" --json name,url,description,owner,isArchived,isFork,createdAt,updatedAt --limit 1000 > "$TEMP_DIR/repos.json"
+
+              echo "Repository list saved to $TEMP_DIR/repos.json"
+
+              # Create the NAR from the temporary directory
+              echo "Creating NAR from $TEMP_DIR..."
+              nix-store --dump "$TEMP_DIR" > "$out"/repos-${ownerName}.nar
+
+              echo "NAR created at $out/repos-${ownerName}.nar"
+              rm -rf "$TEMP_DIR"
+            '';
+
+            impureEnv = true;
+          };
+
         # Derivation to sample Solana block number into a NAR
         solanaBlockNar = pkgs.stdenv.mkDerivation {
           pname = "solana-block-sampler";
@@ -183,7 +218,7 @@
 
       in {
         packages = {
-          inherit searchNars solanaBlockNar url2fileLocatorScript;
+          inherit searchNars solanaBlockNar url2fileLocatorScript mkRepoListNar;
           default = searchNars; # Make all search NARs available via default
         };
 
