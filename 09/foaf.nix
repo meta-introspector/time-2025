@@ -6,20 +6,21 @@
 }:
 
 let
-  # Path to the generated foaf.jsonld file
-  # It's relative to the flake's root, which is 'self'
-  foafJsonLdFile = self + /foaf.jsonld;
+  # Import seed FOAF data (agents and projects)
+  seedFoafData = import ./seed.foaf.nix { inherit pkgs; };
 
-  # Read and parse the JSON-LD file
-  # Use builtins.path to ensure the file is in the Nix store before reading
-  foafData = builtins.fromJSON (builtins.readFile foafJsonLdFile);
+  # Import aggregated CRQ FOAF documents
+  allCrqs = import ./crqs.foaf.nix { inherit pkgs crq001 crq007 crq008 crq009 crq010 crq011 crq012 crq013; lib = pkgs.lib; };
+
+  # Combine all FOAF entities into a single graph
+  fullGraph = seedFoafData."@graph" ++ allCrqs;
 
   # Helper function to find entities by type
   findEntitiesByType = type:
     builtins.filter (entity:
       (builtins.isAttrs entity && entity ? "@type" && entity."@type" == type) ||
       (builtins.isString entity."@type" && entity."@type" == type)
-    ) foafData."@graph";
+    ) fullGraph;
 
   # Helper function to find projects made by a specific owner
   findProjectsByMaker = makerId:
