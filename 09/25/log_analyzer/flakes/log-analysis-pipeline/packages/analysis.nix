@@ -1,4 +1,4 @@
-{ lib, pkgs, self, system, helpers, meta-introspector-flake, nix2gramIndexerModule, twoGramReportGeneratorModule, ... }:
+{ lib, pkgs, self, system, helpers, time-2025-flake, nix2gramIndexerModule, twoGramReportGeneratorModule, ... }:
 
 let
   # Import helper functions from lib/helpers.nix

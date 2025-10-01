@@ -4,33 +4,40 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    meta-introspector-flake.url = "github:meta-introspector/time-2025?dir=09&ref=feature/foaf";
+    time-2025-flake.url = "github:meta-introspector/time-2025?dir=09&ref=feature/foaf";
+
     log-analyzer-flake.url = "github:meta-introspector/time-2025?dir=09/25/log_analyzer&ref=feature/foaf";
+    build-time-gemini-capture-flake.url = "github:meta-introspector/time-2025?dir=09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture&ref=feature/foaf";
   };
 
-  outputs = { self, nixpkgs, flake-utils, meta-introspector-flake, log-analyzer-flake } @ inputs:
+  outputs = { self, nixpkgs, flake-utils, time-2025-flake, log-analyzer-flake, build-time-gemini-capture-flake } @ inputs:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
         lib = nixpkgs.lib;
 
+        time-2025-src = builtins.fetchGit {
+          url = "https://github.com/meta-introspector/time-2025";
+          ref = "feature/foaf";
+        };
+
         # Import modules from meta-introspector-flake's source
-        secretScannerModule = import "${meta-introspector-flake}/2025/10/01/docs/theory/secret_scanner.nix" { inherit lib pkgs; };
-        nix2gramIndexerModule = import "${meta-introspector-flake}/2025/10/01/docs/theory/nix_2gram_indexer.nix" { inherit lib pkgs; };
-        nGramGeneratorModule = import "${meta-introspector-flake}/2025/10/01/docs/theory/n_gram_generator.nix" { inherit lib pkgs; };
-        twoGramReportGeneratorModule = import "${meta-introspector-flake}/2025/10/01/docs/theory/2gram_report_generator.nix" { inherit lib pkgs; };
+        secretScannerModule = import "${time-2025-src}/10/01/docs/theory/secret_scanner.nix" { inherit lib pkgs; };
+        nix2gramIndexerModule = import "${time-2025-src}/10/01/docs/theory/nix_2gram_indexer.nix" { inherit lib pkgs; };
+        nGramGeneratorModule = import "${time-2025-src}/10/01/docs/theory/n_gram_generator.nix" { inherit lib pkgs; };
+        twoGramReportGeneratorModule = import "${time-2025-src}/10/01/docs/theory/2gram_report_generator.nix" { inherit lib pkgs; };
 
         # Build the buildTimeTelemetry derivation to get its output
-        buildTimeTelemetryOutput = meta-introspector-flake.packages.${system}.build-telemetry-flake.packages.${system}.default;
+        buildTimeTelemetryOutput = build-time-gemini-capture-flake.packages.${system}.default;
 
         # Helper functions (now imported from ./lib/helpers.nix)
         helpers = import ./lib/helpers.nix {
-          inherit lib pkgs system meta-introspector-flake secretScannerModule log-analyzer-flake;
+          inherit lib pkgs system time-2025-flake secretScannerModule log-analyzer-flake build-time-gemini-capture-flake;
         };
 
         # Import packages definitions (now imported from ./packages/analysis.nix)
         analysisPackages = import ./packages/analysis.nix {
-          inherit lib pkgs self system helpers meta-introspector-flake nix2gramIndexerModule twoGramReportGeneratorModule;
+          inherit lib pkgs self system helpers time-2025-flake nix2gramIndexerModule twoGramReportGeneratorModule;
         };
 
       in

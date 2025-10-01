@@ -53,11 +53,17 @@ build-2gram-index:
 	nix build $(FLAKE_DIR)#build2GramIndex --out-link 2gram-index --extra-experimental-features "impure-derivations ca-derivations"
 	@echo "2-gram index built to 2gram-index/nix-2gram-index.json"
 
-generate-2gram-report: build-2gram-index
+generate-2gram-report:
 	@echo "Generating the 2-gram report..."
 	nix build $(FLAKE_DIR)#generate2GramReport --out-link 2gram-report --extra-experimental-features "impure-derivations ca-derivations"
 	@echo "2-gram report generated to 2gram-report/2gram-report.txt"
 	@cat 2gram-report/2gram-report.txt
+
+# Target to test the fix for the build-time-gemini-capture-flake bug
+test-bug-repro-build-time-gemini-capture:
+	@echo "Building minimal test case for build-time-gemini-capture-flake bug..."
+	nix build $(FLAKE_DIR)/test-cases#default -vvv --extra-experimental-features "impure-derivations ca-derivations"
+	@echo "Minimal test case build complete. Check result/logs/ for output."
 
 # ------------------------------------------------------------------------------
 # Git Check Target
@@ -80,8 +86,8 @@ git-check-staged:
 # This ensures that the flake is using the latest version of the meta-introspector-flake
 # as defined in its inputs.
 flake-update-meta-introspector:
-	@echo "Updating meta-introspector-flake input..."
-	nix flake lock --update-input meta-introspector-flake
+	@echo "Updating flake inputs..."
+	nix flake lock --update-input time-2025-flake --update-input log-analyzer-flake --update-input build-time-gemini-capture-flake
 
 # Checks the Nix flake for errors, including evaluation and build errors.
 # It enables experimental features required by some derivations in the flake.

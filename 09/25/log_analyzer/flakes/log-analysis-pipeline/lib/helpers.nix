@@ -1,8 +1,8 @@
-{ lib, pkgs, meta-introspector-flake, system, secretScannerModule, log-analyzer-flake, ... }:
+{ lib, pkgs, time-2025-flake, system, secretScannerModule, log-analyzer-flake, build-time-gemini-capture-flake, ... }:
 
 let
   # Build the buildTimeTelemetry derivation to get its output
-  buildTimeTelemetryOutput = meta-introspector-flake.packages.${system}.build-telemetry-flake.packages.${system}.default;
+  buildTimeTelemetryOutput = build-time-gemini-capture-flake.packages.${system}.default;
 
   # Helper function for pure log analysis
   analyzePureLogsToStore = {
@@ -44,7 +44,7 @@ let
           echo "WARNING: Secrets detected in ${logFilePath}. Review ${secretScanResult}/secret_report.txt" >&2
           # In a real scenario, this might exit 1 to halt the build.
         fi
-        RUST_BACKTRACE=1 ${meta-introspector-flake.packages.${system}.log-analyzer}/bin/log_analyzer --log-file ${logFilePath} > $out/analysis-result.txt
+        RUST_BACKTRACE=1 ${log-analyzer-flake.packages.${system}.default}/bin/log_analyzer --log-file ${logFilePath} > $out/analysis-result.txt
       '';
     };
 
@@ -78,7 +78,7 @@ let
           echo "Error: Log file '${logFileName}' not found in NAR." >&2
           exit 1
         fi
-        RUST_BACKTRACE=1 ${meta-introspector-flake.packages.${system}.log-analyzer}/bin/log_analyzer --log-file $LOG_FILE_PATH > $out/analysis-result.txt
+        RUST_BACKTRACE=1 ${log-analyzer-flake.packages.${system}.default}/bin/log_analyzer --log-file $LOG_FILE_PATH > $out/analysis-result.txt
       '';
     };
 

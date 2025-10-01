@@ -5,18 +5,21 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     # Use our local working gemini-cli with confirmed bundle in Nix store
-    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/working-gemini-cli-nix-store";
+
   };
 
-  outputs = { self, nixpkgs, flake-utils, gemini-cli }:
+  outputs = { self, nixpkgs, flake-utils } @ inputs:
     let
       eachSystem = flake-utils.lib.eachDefaultSystem;
     in
     eachSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        lib = nixpkgs.lib;
 
-        # Build-time telemetry capture derivation
+        flakeNixContent = builtins.readFile (self + "/flake.nix");
+
+        # Define the script that captures telemetry
         buildTimeTelemetry = pkgs.stdenv.mkDerivation {
           pname = "build-time-gemini-telemetry";
           version = "1.0";
@@ -34,6 +37,8 @@
             pkgs.cacert # Added cacert for SSL/TLS certificate verification
             gemini-cli.packages.${system}.default
           ];
+
+          FLAKE_NIX_CONTENT = flakeNixContent; # Pass the content here
 
           # Environment variables for build
           NIX_BUILD_TELEMETRY = "true";
