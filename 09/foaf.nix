@@ -34,6 +34,12 @@ let
       (builtins.isString entity."@type" && entity."@type" == type)
     ) fullGraph;
 
+  # Helper function to find projects made by a specific owner
+  findProjectsByMaker = makerId:
+    builtins.filter (project:
+      project ? "maker" && project.maker ? "@id" && project.maker."@id" == makerId
+    ) (findEntitiesByType "Project");
+
 in {
   # Expose the raw parsed data
   raw = { "@context" = foafContext; "@graph" = fullGraph; };
