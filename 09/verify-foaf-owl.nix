@@ -12,6 +12,9 @@ let
   # Helper to get all IDs of defined properties
   propertyIds = lib.map (p: p."@id") owlProperties;
 
+  # Convert owlProperties to an attribute set keyed by @id for efficient lookup
+  owlPropertiesById = lib.listToAttrs (lib.map (p: { name = p."@id"; value = p; }) owlProperties);
+
   # Function to check if a type is a defined OWL class
   isDefinedClass = typeId: lib.elem typeId classIds;
 
@@ -36,7 +39,7 @@ let
           # Skip special attributes like @id, @type, dcterms:title, etc.
           # We are focusing on properties that might have domain/range constraints
           isSpecialAttr = lib.elem attrName ["@id" "@type" "dcterms:title" "dcterms:description" "schema:solution" "schema:impact" "dcterms:identifier" "dcterms:created" "dcterms:creator"];
-          propertyDef = lib.find (p: p."@id" == attrName) owlProperties;
+          propertyDef = owlPropertiesById."${attrName}" or null;
           isPropertyDefined = propertyDef != null;
         in
           if isSpecialAttr then { status = "SKIP"; message = "Skipping special attribute '${attrName}'."; }
