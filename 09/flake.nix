@@ -33,6 +33,8 @@
           url2fileLocatorScript = search-results.packages.${system}.url2fileLocatorScript;
 
           cwm = import ./cwm.nix { inherit pkgs self; lib = flake-utils.lib; };
+
+          w3cReposNar = search-results.packages.${system}.mkRepoListNar "w3c";
         };
       });
 }
