@@ -13,23 +13,22 @@ let
     name ? "nix-file-index",
   }:
     pkgs.runCommand name {
-      inherit path;
+      inherit path projectRoot;
       __impure = true; # Scanning the filesystem is impure
-      nativeBuildInputs = [ pkgs.findutils pkgs.nix ]; # For `find` and `nix hash` commands
+      nativeBuildInputs = [ pkgs.findutils pkgs.nix pkgs.gnused ]; # For `find`, `nix hash`, and `sed` commands
     }
     ''
+      echo "DEBUG: path = ${path}" >&2
+      echo "DEBUG: projectRoot = ${projectRoot}" >&2
       echo "Indexing .nix files in ${path}..." >&2
       mkdir -p $out
       # Create a JSON array of objects { path, hash }
       echo "[" > $out/nix-files.index.json
       FIRST=true
       find "${path}" -name "*.nix" -print0 | while IFS= read -r -d $'\0' file; do
-        relative_path=$(realpath --relative-to="${path}" "$file")
-        file_hash=$(nix hash file --base32 "$file") # Get content hash
-        if [ "$FIRST" = "false" ]; then
-          echo "," >> $out/nix-files.index.json
-        fi
-        echo "  {\"path\": \"${relative_path}\", \"hash\": \"${file_hash}\"}" >> $out/nix-files.index.json
+          file_hash=$(nix hash file --sri "$file")
+          relative_path=$(echo "$file" | sed "s|^$projectRoot/||")
+          printf '  {"path": "%s", "hash": "%s"}' "$relative_path" "$file_hash" >> $out/nix-files.index.json
         FIRST=false
       done
       echo "]" >> $out/nix-files.index.json
