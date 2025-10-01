@@ -28,14 +28,14 @@ let
     ) (findEntitiesByType "Project");
 
   # Import individual CRQ FOAF documents
-  crq001 = import ./crq-001.foaf.nix { inherit pkgs lib; };
-  crq007 = import ./crq-007.foaf.nix { inherit pkgs lib; };
-  crq008 = import ./crq-008.foaf.nix { inherit pkgs lib; };
-  crq009 = import ./crq-009.foaf.nix { inherit pkgs lib; };
-  crq010 = import ./crq-010.foaf.nix { inherit pkgs lib; };
-  crq011 = import ./crq-011.foaf.nix { inherit pkgs lib; };
-  crq012 = import ./crq-012.foaf.nix { inherit pkgs lib; };
-  crq013 = import ./crq-013.foaf.nix { inherit pkgs lib; };
+  crq001 = import ./crq-001.foaf.nix { inherit pkgs; lib = pkgs.lib; };
+  crq007 = import ./crq-007.foaf.nix { inherit pkgs; lib = pkgs.lib; };
+  crq008 = import ./crq-008.foaf.nix { inherit pkgs; lib = pkgs.lib; };
+  crq009 = import ./crq-009.foaf.nix { inherit pkgs; lib = pkgs.lib; };
+  crq010 = import ./crq-010.foaf.nix { inherit pkgs; lib = pkgs.lib; };
+  crq011 = import ./crq-011.foaf.nix { inherit pkgs; lib = pkgs.lib; };
+  crq012 = import ./crq-012.foaf.nix { inherit pkgs; lib = pkgs.lib; };
+  crq013 = import ./crq-013.foaf.nix { inherit pkgs; lib = pkgs.lib; };
 
   # Aggregate all CRQ FOAF documents
   allCrqs = import ./crqs.foaf.nix { inherit pkgs lib crq001 crq007 crq008 crq009 crq010 crq011 crq012 crq013; };
