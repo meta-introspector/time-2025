@@ -19,6 +19,21 @@ let
   # Trace the type of owlContext
   _ = builtins.trace "Type of owlContext: ${builtins.typeOf owlContext}" null;
 
+  # Helper function to resolve URIs (expand prefixes)
+  resolveUri = uri:
+    let
+      parts = lib.splitString ":" uri;
+    in
+    builtins.trace "Resolving URI: ${uri}" (
+    builtins.trace "URI parts: ${builtins.toJSON parts}" (
+    if lib.length parts == 2 && lib.hasAttr parts.0 owlContext
+    then
+      builtins.trace "Type of owlContext.${parts.0}: ${builtins.typeOf owlContext.${parts.0}}" (
+      builtins.trace "Type of parts.1: ${builtins.typeOf parts.1}" (
+      owlContext.${parts.0} + parts.1
+      ))
+    else uri));
+
   # Function to check if a type is a defined OWL class
   isDefinedClass = typeId: lib.elem typeId classIds;
 
