@@ -31,6 +31,6 @@
         searchNars = search-results.packages.${system}.default;
         url2fileLocatorScript = search-results.packages.${system}.url2fileLocatorScript;
 
-        cwm = import ./cwm.nix { inherit pkgs lib self; };
+        cwm = import ./cwm.nix { inherit pkgs self; lib = flake-utils.lib; };
       });
 }
