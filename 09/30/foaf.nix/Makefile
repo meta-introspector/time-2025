@@ -3,11 +3,12 @@
 NIX_FLAKE_DIR := ../..
 NIX_BUILD_ARGS := --extra-experimental-features 'nix-command flakes'
 NIX_EVAL_ARGS := --raw --extra-experimental-features 'nix-command flakes'
+NIX_EVAL_JSON_ARGS := --json --extra-experimental-features 'nix-command flakes'
 
 # Default system for evaluation (can be overridden)
 SYSTEM ?= aarch64-linux
 
-.PHONY: all build-w3c-repos-nar eval-cwm-overall-status eval-cwm-validation-results clean
+.PHONY: all build-w3c-repos-nar eval-cwm-overall-status eval-cwm-validation-results eval-lib-attributes clean
 
 all: build-w3c-repos-nar eval-cwm-overall-status
 
@@ -22,6 +23,10 @@ eval-cwm-overall-status:
 eval-cwm-validation-results:
 	@echo "Evaluating CWM validationResults..."
 	nix eval $(NIX_EVAL_ARGS) $(NIX_FLAKE_DIR)#$(SYSTEM).lib.cwm.validationResults
+
+eval-lib-attributes:
+	@echo "Evaluating lib attributes for $(SYSTEM)..."
+	nix eval $(NIX_EVAL_JSON_ARGS) $(NIX_FLAKE_DIR)#$(SYSTEM).lib | jq
 
 clean:
 	@echo "Cleaning up Nix build results..."
