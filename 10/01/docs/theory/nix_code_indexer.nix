@@ -10,6 +10,7 @@ let
   # This would be an impure operation as it scans the filesystem.
   indexNixFiles = {
     path, # The path to scan for .nix files
+    projectRoot, # The root path to calculate relative paths against
     name ? "nix-file-index",
   }:
     pkgs.runCommand name {
