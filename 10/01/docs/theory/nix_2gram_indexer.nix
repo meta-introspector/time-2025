@@ -31,6 +31,7 @@ let
     # First, index all Nix files in the project
     nixFileIndex = nixCodeIndexerModule.indexNixFiles {
       path = projectRoot;
+      projectRoot = projectRoot; # Pass projectRoot to the indexer
       name = "${name}-nix-file-index";
     };
 

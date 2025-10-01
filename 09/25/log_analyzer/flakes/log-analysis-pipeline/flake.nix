@@ -13,13 +13,13 @@
   outputs = { self, nixpkgs, flake-utils, time-2025-flake, log-analyzer-flake, build-time-gemini-capture-flake } @ inputs:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};\
+        pkgs = nixpkgs.legacyPackages.${system};
         lib = nixpkgs.lib;
 
         time-2025-src = builtins.fetchGit {
           url = "https://github.com/meta-introspector/time-2025";
           ref = "feature/foaf";
-          rev = "77b315e2093f6ec72467617b1f0f83f168b1e7ef"; # Updated rev after committing fix to time-2025
+          rev = "8ce716fb9fa4e20d32687c9edb75adcccf501a02"; # Updated rev after committing fix to time-2025
         };
 
         # Import modules from meta-introspector-flake's source
@@ -48,4 +48,5 @@
 
         lib = helpers; # Expose helpers in lib
       }
-    );\n}
+    );
+}
