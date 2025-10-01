@@ -18,12 +18,8 @@ let
     let
       parts = lib.splitString ":" uri;
     in
-    if lib.length parts == 2 && owlContext ? ${parts.0}
-    then
-      builtins.trace "parts.0: ${parts.0}" (
-      builtins.trace "owlContext.${parts.0}: ${builtins.typeOf owlContext.${parts.0}}" (
-      owlContext.${parts.0} + parts.1
-      ))
+    if lib.length parts == 2 && lib.hasAttr parts.0 owlContext
+    then owlContext.${parts.0} + parts.1
     else uri;
 
   # Convert owlProperties to an attribute set keyed by @id for efficient lookup
