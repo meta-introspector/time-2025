@@ -12,19 +12,20 @@ let
   mkAgent = { id, name, homepage }:
     {
       "@id" = id;
-      "@type" = "Agent";
-      inherit name;
-      homepage = { "@id" = homepage; };
+      "@type" = "foaf:Agent";
+      "foaf:name" = name;
+      "foaf:homepage" = { "@id" = homepage; };
     };
 
   # Function to create a FOAF Project
   mkProject = { id, name, homepage, description, makerId }:
     {
       "@id" = id;
-      "@type" = "Project";
-      inherit name description;
-      homepage = { "@id" = homepage; };
-      maker = { "@id" = makerId; };
+      "@type" = "foaf:Project";
+      "foaf:name" = name;
+      "foaf:homepage" = { "@id" = homepage; };
+      "dcterms:description" = description;
+      "foaf:maker" = { "@id" = makerId; };
     };
 
   # Define owners
