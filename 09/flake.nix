@@ -8,7 +8,7 @@
     search-results.url = "path:./flakes/search-results"; # New input for search results flake
   };
 
-  outputs = { nixpkgs, flake-utils, search-results, ... }:
+  outputs = { nixpkgs, flake-utils, search-results, self, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
