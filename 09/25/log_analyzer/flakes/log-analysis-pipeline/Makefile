@@ -96,6 +96,36 @@ flake-check:
 	nix flake check --extra-experimental-features "impure-derivations ca-derivations"
 
 # ------------------------------------------------------------------------------
+# Git Check Target
+# ------------------------------------------------------------------------------
+
+git-check-staged:
+	@echo "Checking for uncommitted changes..."
+	@if ! git diff-index --quiet HEAD --; then \
+		echo "Error: Uncommitted changes detected. Please commit or stash your changes before building." >&2; \
+		git status --porcelain >&2; \
+		exit 1; \
+	fi
+	@echo "No uncommitted changes detected."
+
+# ------------------------------------------------------------------------------
+# Nix Flake Management Targets
+# ------------------------------------------------------------------------------
+
+# Updates the 'meta-introspector-flake' input in the flake.lock file.
+# This ensures that the flake is using the latest version of the meta-introspector-flake
+# as defined in its inputs.
+flake-update-meta-introspector:
+	@echo "Updating meta-introspector-flake input..."
+	nix flake lock --update-input meta-introspector-flake
+
+# Checks the Nix flake for errors, including evaluation and build errors.
+# It enables experimental features required by some derivations in the flake.
+flake-check:
+	@echo "Checking Nix flake for errors..."
+	nix flake check --extra-experimental-features "impure-derivations ca-derivations"
+
+# ------------------------------------------------------------------------------
 # Infrastructure as Code (IaC) & Cloud Deployment Targets
 # ------------------------------------------------------------------------------
 

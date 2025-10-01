@@ -13,19 +13,21 @@
   outputs = { self, nixpkgs, flake-utils, time-2025-flake, log-analyzer-flake, build-time-gemini-capture-flake } @ inputs:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = nixpkgs.legacyPackages.${system};\
         lib = nixpkgs.lib;
 
         time-2025-src = builtins.fetchGit {
           url = "https://github.com/meta-introspector/time-2025";
           ref = "feature/foaf";
+          rev = "77b315e2093f6ec72467617b1f0f83f168b1e7ef"; # Updated rev after committing fix to time-2025
         };
 
         # Import modules from meta-introspector-flake's source
-        secretScannerModule = import "${time-2025-src}/10/01/docs/theory/secret_scanner.nix" { inherit lib pkgs; };
-        nix2gramIndexerModule = import "${time-2025-src}/10/01/docs/theory/nix_2gram_indexer.nix" { inherit lib pkgs; };
-        nGramGeneratorModule = import "${time-2025-src}/10/01/docs/theory/n_gram_generator.nix" { inherit lib pkgs; };
-        twoGramReportGeneratorModule = import "${time-2025-src}/10/01/docs/theory/2gram_report_generator.nix" { inherit lib pkgs; };
+        secretScannerModule = import "${time-2025-src}/10/01/docs/theory/secret_scanner.nix" { inherit lib pkgs builtins; };
+        nix2gramIndexerModule = import "${time-2025-src}/10/01/docs/theory/nix_2gram_indexer.nix" { inherit lib pkgs builtins nGramGeneratorModule nixCodeIndexerModule; };
+        nGramGeneratorModule = import "${time-2025-src}/10/01/docs/theory/n_gram_generator.nix" { inherit lib pkgs builtins; };
+        nixCodeIndexerModule = import "${time-2025-src}/10/01/docs/theory/nix_code_indexer.nix" { inherit lib pkgs builtins; };
+        twoGramReportGeneratorModule = import "${time-2025-src}/10/01/docs/theory/2gram_report_generator.nix" { inherit lib pkgs builtins; };
 
         # Build the buildTimeTelemetry derivation to get its output
         buildTimeTelemetryOutput = build-time-gemini-capture-flake.packages.${system}.default;
@@ -46,5 +48,4 @@
 
         lib = helpers; # Expose helpers in lib
       }
-    );
-}
+    );\n}
