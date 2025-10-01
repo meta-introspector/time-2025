@@ -1,4 +1,4 @@
-# test.nix
+# test.nix - Temporary file for FOAF-OWL verification testing
 let
   pkgs = import <nixpkgs> {};
   lib = pkgs.lib;
