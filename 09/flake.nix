@@ -16,7 +16,6 @@
         # A devShell that includes nixpkgs and potentially other tools
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
-            # Add common development tools here
             git
             gh
             nix-prefetch-git
@@ -25,12 +24,15 @@
           # You can add environment variables or other shell configurations
         };
 
-        foaf = import ./foaf.nix { inherit pkgs; };
-        seedFoaf = import ./seed.foaf.nix { inherit pkgs; };
+        # Expose custom library attributes
+        lib = {
+          foaf = import ./foaf.nix { inherit pkgs; };
+          seedFoaf = import ./seed.foaf.nix { inherit pkgs; };
 
-        searchNars = search-results.packages.${system}.default;
-        url2fileLocatorScript = search-results.packages.${system}.url2fileLocatorScript;
+          searchNars = search-results.packages.${system}.default;
+          url2fileLocatorScript = search-results.packages.${system}.url2fileLocatorScript;
 
-        cwm = import ./cwm.nix { inherit pkgs self; lib = flake-utils.lib; };
+          cwm = import ./cwm.nix { inherit pkgs self; lib = flake-utils.lib; };
+        };
       });
 }
