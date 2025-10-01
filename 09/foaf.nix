@@ -9,7 +9,7 @@ let
   # Define the FOAF context
   foafContext = "http://xmlns.com/foaf/0.1/";
   # Import seed FOAF data (agents and projects)
-  seedFoafData = import ./seed.foaf.nix { inherit pkgs; };
+  seedFoafData = import ./seed.foaf.nix { inherit pkgs self; };
 
   # Import individual CRQ FOAF documents
   crq001 = import ./crq-001.foaf.nix { inherit pkgs; lib = pkgs.lib; };
