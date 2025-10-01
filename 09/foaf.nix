@@ -11,6 +11,9 @@ let
   # Import seed FOAF data (agents and projects)
   seedFoafData = import ./seed.foaf.nix { inherit pkgs self; };
 
+  # Import GitHub FOAF data
+  githubFoafData = import ./github.foaf.nix { inherit pkgs lib fetchGithubData githubToFoaf; };
+
   # Import individual CRQ FOAF documents
   crq001 = import ./crq-001.foaf.nix { inherit pkgs; lib = pkgs.lib; };
   crq007 = import ./crq-007.foaf.nix { inherit pkgs; lib = pkgs.lib; };
@@ -25,7 +28,7 @@ let
   allCrqs = import ./crqs.foaf.nix { inherit pkgs crq001 crq007 crq008 crq009 crq010 crq011 crq012 crq013; lib = pkgs.lib; };
 
   # Combine all FOAF entities into a single graph
-  fullGraph = seedFoafData."@graph" ++ allCrqs;
+  fullGraph = seedFoafData."@graph" ++ allCrqs ++ githubFoafData.githubEntities;
 
   # Helper function to find entities by type
   findEntitiesByType = type:
@@ -49,6 +52,7 @@ in {
   getProjects = findEntitiesByType "Project";
   getProjectsByMaker = makerId: findProjectsByMaker makerId;
   getCrqs = allCrqs; # Expose all CRQs
+  getGithubEntities = githubFoafData.githubEntities;
 
   # Example usage:
   # nix-instantiate --eval -E 'with import ./foaf.nix {}; getProjects'
