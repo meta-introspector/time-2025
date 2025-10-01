@@ -5,7 +5,7 @@ let
   mkCRQ = { id, title, problemGoal, proposedSolution, justificationImpact }:
     {
       "@id" = "urn:crq:${id}";
-      "@type" = "Document"; # Or a more specific type if defined in FOAF/schema.org
+      "@type" = "dcterms:Document"; # Or a more specific type if defined in FOAF/schema.org
       "dcterms:title" = title;
       "dcterms:description" = problemGoal; # Using dcterms:description for problem/goal
       "schema:solution" = proposedSolution; # Using schema:solution for proposed solution
