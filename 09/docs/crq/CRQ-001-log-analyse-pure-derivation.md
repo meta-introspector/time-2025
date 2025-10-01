@@ -6,13 +6,17 @@ The current log analysis process may not guarantee pure derivation, leading to p
 
 For the purpose of this CRQ, **purity** is defined as: a Nix build that reads its inputs from the store and writes its outputs to the store.
 
-**Goal:** Ensure that the log analysis pipeline operates with pure functions and deterministic outputs, making the analysis fully reproducible and verifiable. This aligns with the principles of functional programming and the capabilities offered by Nix for reproducible environments.
+**Goal:** Ensure that the log analysis pipeline operates with pure functions and deterministic outputs, making the analysis fully reproducible and verifiable. This aligns with the principles of functional programming and the capabilities offered by Nix for reproducible environments. Specifically, the goal is to create a pure functional system for the collection of Nix store artifacts from GitHub accounts associated with Solana wallets, pointing to IPFS nodes or files that contain Nix flakes of data. All data will be treated as Nix flakes.
 
 ## Proposed Solution
 
 1.  **Refactor Pipeline for Purity:**
     *   Identify all stages within the log analysis pipeline (e.g., ingestion, parsing, transformation, aggregation).
     *   Refactor each stage to adhere strictly to functional programming principles, where functions produce the same output for the same input and have no side effects.
+2.  **Nix Flake-based Data Ingestion:**
+    *   Implement a pure functional ingestion mechanism to collect Nix store artifacts. This mechanism will interface with GitHub accounts (linked via Solana wallets) to identify repositories containing Nix flakes.
+    *   Data will be sourced from IPFS nodes or files referenced within these Nix flakes, ensuring all collected data is itself a Nix flake.
+    *   All data, regardless of its origin, will be treated as a Nix flake, providing a unified and reproducible data format for the entire pipeline.
 2.  **Explicit Side-Effect Management:**
     *   Isolate and explicitly manage any necessary side-effecting operations (e.g., reading from disk, writing to a database, network calls). These operations should be clearly defined and their impact contained.
 3.  **Clear Input-Output Contracts:**
