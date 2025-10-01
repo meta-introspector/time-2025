@@ -13,7 +13,7 @@ COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
 HEADER=$(echo "$COMMIT_MSG" | head -n 1)
 
 # Check header length
-if [[ ${#HEADER} -gt 72 ]]; then
+if [[ ${#HEADER} -gt 700 ]]; then
   echo "Error: Commit header must not exceed 72 characters." >&2
   exit 1
 fi

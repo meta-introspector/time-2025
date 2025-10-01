@@ -22,6 +22,10 @@ impl JsonExtractorLayer {
         let mut json_objects = Vec::new();
 
         for &(start, end) in boundaries {
+            if start >= end || end > data.len() || start > data.len() {
+                // This boundary is invalid or out of bounds for the current data slice, skip it.
+                continue;
+            }
             if let Ok(s) = String::from_utf8(data[start..end].to_vec()) {
                 let current_len = s.len();
                 self.min_json_len = Some(self.min_json_len.map_or(current_len, |min| min.min(current_len)));

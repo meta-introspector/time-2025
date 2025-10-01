@@ -19,25 +19,23 @@ impl JsonBoundaryDetector {
     // Processes a chunk of data and updates internal state, returning new complete boundaries
     pub fn detect_boundaries(&mut self, data_chunk: &[u8]) -> Vec<(usize, usize)> {
         let mut new_boundaries = Vec::new();
-        let current_buffer_len = self.start_index + data_chunk.len();
+        let mut local_start_index = 0; // Start index relative to the current data_chunk
 
         for (i, &byte) in data_chunk.iter().enumerate() {
-            let global_index = self.start_index + i;
-
             match byte as char {
                 '{' => self.brace_count += 1,
                 '}' => self.brace_count -= 1,
                 _ => {},
             }
 
-            if self.brace_count == 0 && self.start_index < global_index + 1 {
-                // Found a complete JSON object boundary
-                new_boundaries.push((self.start_index, global_index + 1));
-                self.start_index = global_index + 1;
+            if self.brace_count == 0 && local_start_index < i + 1 {
+                // Found a complete JSON object boundary relative to data_chunk
+                new_boundaries.push((local_start_index, i + 1));
+                local_start_index = i + 1;
             }
         }
-        // Update start_index for the next chunk based on what's been processed
-        self.start_index = current_buffer_len - (self.start_index - self.detected_boundaries.front().map_or(0, |&(s, _)| s));
+        // The remaining part of the data_chunk is the start of the next potential JSON object
+        self.start_index = local_start_index;
 
         new_boundaries
     }

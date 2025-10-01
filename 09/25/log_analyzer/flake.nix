@@ -16,7 +16,7 @@
         cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
           inherit src;
           lockFile = ./Cargo.lock;
-          hash = "sha256-4OfBA/qEEfO/yKAUWVmKkPc2hGbi3GfTMFfyvpipBt8=";
+          hash = "sha256-dtmB3Ve6dMwS2XfP91U9R1E82flxSuu3ySUM33O/3zs=";
         };
       in
       {
@@ -36,6 +36,10 @@
             PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
           };
         };
+
+        packages.hello = pkgs.writeShellScriptBin "hello" ''
+          echo "hello"
+        '';
 
         packages.default = self.packages.${system}.log-analyzer;
 
