@@ -15,4 +15,4 @@ let
   # Import the verification logic
   verifyFoafOwl = import ./verify-foaf-owl.nix { inherit pkgs lib foafData owlSchema; };
 in
-verifyFoafOwl.overallStatus
+verifyFoafOwl.validationResults
