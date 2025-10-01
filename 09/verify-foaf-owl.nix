@@ -50,7 +50,7 @@ let
       propertyChecks = propertyCheckResults;
       overallStatus = if isValidType && (lib.length propertyCheckResults == 0) then "PASS" else "FAIL";
     }
-  ) foafData."@graph";
+  ) foafData.raw."@graph";
 
   # Overall validation result
   overallValidationStatus = if lib.all (r: r.overallStatus == "PASS") validateEntities
