@@ -27,7 +27,7 @@
         # Expose custom library attributes
         lib = {
           foaf = import ./foaf.nix { inherit pkgs; };
-          seedFoaf = import ./seed.foaf.nix { inherit pkgs; };
+          seedFoaf = import ./seed.foaf.nix { inherit pkgs self; };
 
           searchNars = search-results.packages.${system}.default;
           url2fileLocatorScript = search-results.packages.${system}.url2fileLocatorScript;
@@ -35,6 +35,11 @@
           cwm = import ./cwm.nix { inherit pkgs self; lib = flake-utils.lib; };
 
           w3cReposNar = search-results.packages.${system}.mkRepoListNar "w3c";
+        };
+
+        # Expose packages
+        packages = {
+          hello = pkgs.writeShellScriptBin "hello" "echo Hello from Nix flake!";
         };
       });
 }
