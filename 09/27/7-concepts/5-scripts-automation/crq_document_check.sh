@@ -7,7 +7,7 @@ set -o pipefail
 
 COMMIT_MSG_FILE="$1"
 
-CRQ_ID=$(grep -Eo "^CRQ-[0-9]+" "$COMMIT_MSG_FILE" | head -n 1)
+CRQ_ID=$(grep -Eo "CRQ-[0-9]+" "$COMMIT_MSG_FILE" | head -n 1)
 
 if [ -n "$CRQ_ID" ]; then
   CRQ_FILE="$(dirname "$0")/docs/crqs/${CRQ_ID}.md"
