@@ -18,13 +18,15 @@ let
     let
       parts = lib.splitString ":" uri;
     in
+    builtins.trace "Resolving URI: ${uri}" (
+    builtins.trace "URI parts: ${builtins.toJSON parts}" (
     if lib.length parts == 2 && lib.hasAttr parts.0 owlContext
     then
       builtins.trace "Type of owlContext.${parts.0}: ${builtins.typeOf owlContext.${parts.0}}" (
       builtins.trace "Type of parts.1: ${builtins.typeOf parts.1}" (
       owlContext.${parts.0} + parts.1
       ))
-    else uri;
+    else uri));
 
   # Convert owlProperties to an attribute set keyed by @id for efficient lookup
   owlPropertiesById = lib.listToAttrs (lib.map (p: { name = p."@id"; value = p; }) owlProperties);
