@@ -38,7 +38,7 @@ let
   crq013 = import ./crq-013.foaf.nix { inherit pkgs; lib = pkgs.lib; };
 
   # Aggregate all CRQ FOAF documents
-  allCrqs = import ./crqs.foaf.nix { inherit pkgs lib crq001 crq007 crq008 crq009 crq010 crq011 crq012 crq013; };
+  allCrqs = import ./crqs.foaf.nix { inherit pkgs crq001 crq007 crq008 crq009 crq010 crq011 crq012 crq013; lib = pkgs.lib; };
 
 in {
   # Expose the raw parsed data
