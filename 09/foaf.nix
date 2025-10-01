@@ -6,6 +6,8 @@
 }:
 
 let
+  # Define the FOAF context
+  foafContext = "http://xmlns.com/foaf/0.1/";
   # Import seed FOAF data (agents and projects)
   seedFoafData = import ./seed.foaf.nix { inherit pkgs; };
 
@@ -34,7 +36,7 @@ let
 
 in {
   # Expose the raw parsed data
-  raw = foafData;
+  raw = { "@context" = foafContext; "@graph" = fullGraph; };
 
   # Expose functions to query the data
   getAgents = findEntitiesByType "Agent";
