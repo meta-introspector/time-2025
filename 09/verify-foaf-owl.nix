@@ -3,6 +3,7 @@
 
 let
   # Extract classes and properties from the OWL schema
+  owlContext = owlSchema."@context";
   owlClasses = lib.filter (e: e."@type" == "http://www.w3.org/2002/07/owl#Class") owlSchema."@graph";
   owlProperties = lib.filter (e: lib.hasAttrByPath ["@type"] e && (e."@type" == "http://www.w3.org/2002/07/owl#ObjectProperty" || e."@type" == "http://www.w3.org/2002/07/owl#DatatypeProperty")) owlSchema."@graph";
 
@@ -11,6 +12,15 @@ let
 
   # Helper to get all IDs of defined properties
   propertyIds = lib.map (p: p."@id") owlProperties;
+
+  # Helper function to resolve URIs (expand prefixes)
+  resolveUri = uri:
+    let
+      parts = lib.splitString ":" uri;
+    in
+    if lib.length parts == 2 && owlContext ? ${parts.0}
+    then owlContext.${parts.0} + parts.1
+    else uri;
 
   # Convert owlProperties to an attribute set keyed by @id for efficient lookup
   owlPropertiesById = lib.listToAttrs (lib.map (p: { name = p."@id"; value = p; }) owlProperties);
@@ -27,7 +37,7 @@ let
   validateEntities = lib.map (entity:
     let
       entityId = entity."@id" or "unknown";
-      entityType = entity."@type" or null;
+      entityType = resolveUri (entity."@type" or null);
       isValidType = if entityType == null then false else isDefinedClass entityType;
       typeCheckResult = if isValidType
         then { status = "PASS"; message = "Type '${entityType}' is a defined OWL class."; }
@@ -39,7 +49,8 @@ let
           # Skip special attributes like @id, @type, dcterms:title, etc.
           # We are focusing on properties that might have domain/range constraints
           isSpecialAttr = lib.elem attrName ["@id" "@type" "dcterms:title" "dcterms:description" "schema:solution" "schema:impact" "dcterms:identifier" "dcterms:created" "dcterms:creator"];
-          propertyDef = owlPropertiesById."${attrName}" or null;
+          resolvedAttrName = resolveUri attrName;
+          propertyDef = owlPropertiesById."${resolvedAttrName}" or null;
           isPropertyDefined = propertyDef != null;
         in
           if isSpecialAttr then { status = "SKIP"; message = "Skipping special attribute '${attrName}'."; }
