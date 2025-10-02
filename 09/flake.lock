@@ -84,7 +84,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-PXeIbBOspyYTHts8Tt+N2nBaeo4Efd1iIqiRgF6WRGU=",
+        "narHash": "sha256-lvOiXQ5jAQtDp0sKokmWibjlgp1lbeRmU2xj0AsYehA=",
         "path": "./flakes/search-results",
         "type": "path"
       },
