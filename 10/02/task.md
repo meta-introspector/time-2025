@@ -22,6 +22,7 @@ This document outlines the immediate tasks to be addressed, prioritizing the res
     *   1.15. Examine `pkgs.lib` Usage: Confirm that `pkgs.lib` is being used correctly and not causing any unexpected behavior.
     *   1.16. Consider `nixpkgs` and `flake-utils` Versions: Although the URLs are fixed, ensure there isn't a subtle version incompatibility between `nixpkgs` and `flake-utils` that could manifest as a syntax error.
     *   1.17. Document Findings and Hypotheses: Keep a detailed log of all debugging steps, observations, and hypotheses to aid in problem-solving.
+2.  **Investigate and Resolve CRQ-042: Nix Flake Attribute Path Resolution Issue:** Address the persistent attribute path resolution error in `flakes/foaf/aggregator/flake.nix` as documented in `docs/crqs/CRQ_042_Nix_Flake_Attribute_Path_Resolution_Issue.md`.
 
 ## FOAF Refactoring
 
