@@ -4,18 +4,14 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-
-    # Reference the 09/flake.nix as a submodule for now
-    # This will be broken down into more granular flakes later
-    streamofrandom09.url = "path:./09";
   };
 
-  outputs = { self, nixpkgs, flake-utils, streamofrandom09, ... }:
+  outputs = { self, nixpkgs, flake-utils, ... }:
     let
       system = "aarch64-linux"; # Explicitly define system for debugging
       pkgs = nixpkgs.legacyPackages.${system};
-      streamofrandom09Outputs = streamofrandom09.${system};
+      streamofrandom09Outputs = (import ./09/flake.nix { inherit nixpkgs flake-utils self; }).outputs;
     in {
-      devShell = streamofrandom09Outputs.devShells.default;
+      devShell = streamofrandom09Outputs.${system}.devShells.default;
     };
 }
