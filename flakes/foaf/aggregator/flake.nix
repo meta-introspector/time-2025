@@ -14,13 +14,10 @@
 
   outputs = { self, nixpkgs, flake-utils, foafContextFlake, foafSeedDataFlake,
               foafAggregatorContextFlake, foafAggregatorSeedGraphFlake, foafAggregatorFullGraphFlake }:
-    {
-      # Wrap the eachDefaultSystem call in a set
-      perSystem = flake-utils.lib.eachDefaultSystem (system:
-        {
-          # Temporarily return a simple set to debug syntax error
-          foo = "bar";
-        }
-      );
-    };
+    flake-utils.lib.eachDefaultSystem (system:
+      {
+        # Temporarily return a simple set to debug syntax error
+        foo = "bar";
+      }
+    );
 }
