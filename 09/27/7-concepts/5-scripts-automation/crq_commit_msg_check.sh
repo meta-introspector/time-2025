@@ -23,8 +23,23 @@ fi
 HEADER_REGEX="^((CRQ-[0-9]+|feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-zA-Z0-9_-]+\))?: .*)"
 
 if ! echo "$HEADER" | grep -E "$HEADER_REGEX"; then
-  echo "Error: Commit message header must follow the conventional commit format: <type>(<scope>?): <subject>" >&2
+  echo "Error: Commit message header must follow the conventional commit format." >&2
+  echo "       Example: CRQ-041(feat): Add new feature" >&2
   echo "       Valid types include: CRQ-XXX, feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert." >&2
+
+  # Get the last 3 CRQs
+  CRQ_DIR="../../docs/crqs" # Relative path from the script's location
+  LATEST_CRQS=$(find "$CRQ_DIR" -maxdepth 1 -name "CRQ-*.md" | \
+                sort -rV | \
+                head -n 3 | \
+                sed -E 's/.*(CRQ-[0-9]+)\.md/\\1/' | \
+                tr '\\n' ' ' | \
+                sed 's/ $//')
+
+  if [[ -n "$LATEST_CRQS" ]]; then
+    echo "       Recent CRQs: $LATEST_CRQS" >&2
+  fi
+
   exit 1
 fi
 
