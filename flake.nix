@@ -11,17 +11,14 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, streamofrandom09, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in {
-        # Expose the devShell from the 09 flake for now
-        devShell = streamofrandom09.${system}.devShells.default;
+    let
+      system = "aarch64-linux"; # Explicitly define system for debugging
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      devShell = streamofrandom09.${system}.devShells.default;
 
-        # Expose packages from the 09 flake for now
-        packages = streamofrandom09.packages.${system};
+      packages = streamofrandom09.${system}.packages;
 
-        # Expose lib from the 09 flake for now
-        lib = streamofrandom09.lib;
-      });
+      lib = streamofrandom09.${system}.lib;
+    };
 }
