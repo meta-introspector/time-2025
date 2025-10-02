@@ -28,7 +28,7 @@ all: build-foaf-full-graph
 # It bypasses the root flake to ensure the error is within the aggregator itself.
 debug-aggregator-flake: pre-nix-check
 	@echo "--- Debugging Aggregator Flake Directly ---"
-	nix eval --json ./flakes/foaf/aggregator
+	nix eval --json ./flakes/foaf/aggregator#aarch64-linux.lib.fullGraph
 	@echo "--- Aggregator Flake Debug Complete ---"
 
 # Build the full FOAF graph from the aggregator flake.
