@@ -31,6 +31,13 @@ debug-aggregator-flake: pre-nix-check
 	nix eval --json ./flakes/foaf/aggregator#aarch64-linux.lib.fullGraph
 	@echo "--- Aggregator Flake Debug Complete ---"
 
+# Debugging the Aggregator Flake with Trace (TikTok Short: Advanced Nix Debugging)
+# This target directly evaluates the aggregator flake with --show-trace to get detailed error information.
+debug-aggregator-flake-trace: pre-nix-check
+	@echo "--- Debugging Aggregator Flake Directly with Trace ---"
+	nix eval --json --show-trace ./flakes/foaf/aggregator#aarch64-linux.lib.fullGraph
+	@echo "--- Aggregator Flake Debug Trace Complete ---"
+
 # Build the full FOAF graph from the aggregator flake.
 # This target evaluates the 'foaf/aggregator' flake and prints its 'fullGraph' attribute as JSON.
 build-foaf-full-graph: pre-nix-check
