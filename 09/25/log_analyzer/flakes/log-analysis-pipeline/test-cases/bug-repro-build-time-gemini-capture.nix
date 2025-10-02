@@ -10,7 +10,8 @@
   outputs = { self, nixpkgs, flake-utils, build-time-gemini-capture-flake }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        common = import ../../../../lib/common-imports.nix { inherit system; };
+        pkgs = common.pkgs;
       in
       {
         packages.default = build-time-gemini-capture-flake.packages.${system}.default;

@@ -11,7 +11,7 @@ let
   tokenizePath = path: 
     let
       # Remove leading/trailing slashes and split by slash
-      pathSegments = lib.strings.splitString "/" (lib.strings.trimLeft "/" (lib.strings.trimRight "/" path));
+      pathSegments = lib.strings.splitString "/" (lib.strings.removePrefix "/" (lib.strings.removeSuffix "/" path));
       # Split by dot for file extensions and other parts
       splitByDot = lib.flatten (lib.map (segment: lib.strings.splitString "." segment) pathSegments);
       # Filter out empty strings that might result from multiple delimiters
@@ -43,7 +43,7 @@ let
     lib.flatten (
       lib.map (n: # For each n-gram length
         # Generate n-grams of length `n`
-        lib.genList (i: lib.strings.concatStringsSep "_" (lib.slice i n tokens)) (builtins.length tokens - n + 1)
+        lib.genList (i: lib.strings.concatStringsSep "_" (lib.lists.sublist i n tokens)) (builtins.length tokens - n + 1)
       ) nGramLengths
     );
 
@@ -57,9 +57,9 @@ let
       allTokens = pathTokens ++ nixTokens;
       nGramLengths = [ 2 3 5 7 11 ];
 
-      pathNGrams = generateNGrams { inherit tokens pathTokens; inherit nGramLengths; };
-      nixNGrams = generateNGrams { inherit tokens nixTokens; inherit nGramLengths; };
-      combinedNGrams = generateNGrams { inherit tokens allTokens; inherit nGramLengths; };
+      pathNGrams = generateNGrams { tokens = pathTokens; inherit nGramLengths; };
+      nixNGrams = generateNGrams { tokens = nixTokens; inherit nGramLengths; };
+      combinedNGrams = generateNGrams { tokens = allTokens; inherit nGramLengths; };
     in
     {
       inherit pathTokens nixTokens allTokens;

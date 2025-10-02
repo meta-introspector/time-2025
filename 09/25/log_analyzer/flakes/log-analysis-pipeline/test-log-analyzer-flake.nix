@@ -8,8 +8,10 @@
   outputs = { self, nixpkgs, flake-utils, log-analyzer-flake }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        common = import ../../../../lib/common-imports.nix { inherit system; };
+        pkgs = common.pkgs;
+        lib = common.lib;
+        builtins = common.builtins;
       in
       {
         packages.test-output = pkgs.runCommand "test-log-analyzer-package" {

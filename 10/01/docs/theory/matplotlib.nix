@@ -1,12 +1,14 @@
 {
-  lib,
-  pkgs,
-  builtins,
   pandasModule,
   ...
 }:
 
 let
+  common = import ../../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
+
   # Represents a conceptual plot in Nix.
   PlotSchema = {
     type = "line"; # e.g., "line", "bar", "scatter", "histogram"

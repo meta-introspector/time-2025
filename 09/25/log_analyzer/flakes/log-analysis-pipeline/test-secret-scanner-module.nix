@@ -8,8 +8,10 @@
   outputs = { self, nixpkgs, flake-utils, meta-introspector-flake }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        common = import ../../../../lib/common-imports.nix { inherit system; };
+        pkgs = common.pkgs;
+        lib = common.lib;
+        builtins = common.builtins;
 
         secretScannerModule = import "${meta-introspector-flake}/10/01/docs/theory/secret_scanner.nix" { inherit lib pkgs; };
       in

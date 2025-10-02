@@ -1,12 +1,14 @@
 {
-  lib,
-  builtins,
   # Import the emoji OWL schema
   emojiOwlModule,
   ...
 }:
 
 let
+  common = import ../../../lib/common-imports.nix {};
+  lib = common.lib;
+  builtins = common.builtins;
+
   # Extract emojiMap from the OWL schema
   emojiMap = builtins.listToAttrs (
     builtins.map (

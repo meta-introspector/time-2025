@@ -1,7 +1,10 @@
 # test.nix - Temporary file for FOAF-OWL verification testing
 let
-  pkgs = import <nixpkgs> {};
-  lib = pkgs.lib;
+  common = import ../lib/common-imports.nix {};
+  pkgs = common.pkgs;
+  lib = common.lib;
+  builtins = common.builtins;
+
   # Mock self for foaf.nix import, as it expects self
   # This is a workaround for direct evaluation outside a flake context
   mockSelf = { outPath = "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09"; };

@@ -1,11 +1,13 @@
 {
-  lib,
-  pkgs,
-  builtins,
   verifiableFileTopologyModule,
   ...}:
 
 let
+  common = import ../../../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
+
   # The GitHub URL for the MetaCoq Haskell extraction
   metaCoqHaskellUrl = "https://github.com/meta-introspector/th-desugar/blob/b915468a8ab8510cc1e6669c8b556229cb4c934a/Server/MetaCoq/TestMeta.org";
   metaCoqHaskellGitRepo = "https://github.com/meta-introspector/th-desugar";

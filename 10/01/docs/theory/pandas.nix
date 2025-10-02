@@ -1,11 +1,13 @@
 {
-  lib,
-  pkgs,
-  builtins,
   ...
 }:
 
 let
+  common = import ../../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
+
   # Represents a conceptual DataFrame in Nix.
   # A DataFrame is essentially a list of records (attribute sets) with a defined set of columns.
   DataFrameSchema = {

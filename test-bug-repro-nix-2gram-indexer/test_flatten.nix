@@ -1,9 +1,7 @@
 let
-  nixpkgs = import (builtins.fetchTarball {
-    url = "https://github.com/meta-introspector/nixpkgs/archive/feature/CRQ-016-nixify.tar.gz";
-  }) { system = "aarch64-linux"; };
-
-  lib = nixpkgs.lib;
+  common = import ../lib/common-imports.nix {};
+  lib = common.lib;
+  builtins = common.builtins;
 
   # Static instance of data mimicking indexedFiles
   staticData = [

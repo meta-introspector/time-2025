@@ -1,8 +1,16 @@
-{ lib, pkgs, self, system, helpers, time-2025-flake, nix2gramIndexerModule, twoGramReportGeneratorModule, ... }:
+{ self, system, helpers, time-2025-flake, nix2gramIndexerModule, twoGramReportGeneratorModule, ... } @ args:
 
 let
+  common = import ../../../lib/common-imports.nix { inherit system; };
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
+
   # Import helper functions from lib/helpers.nix
-  inherit (helpers) buildTimeTelemetryOutput analyzePureLogsToStore analyzeImpureLogsToStore analyzeNarLogsToStore;
+  inherit (helpers) analyzePureLogsToStore analyzeImpureLogsToStore analyzeNarLogsToStore;
+
+  # Build the buildTimeTelemetry derivation to get its output (now directly from build-time-gemini-capture-flake)
+  buildTimeTelemetryOutput = args.build-time-gemini-capture-flake.packages.${system}.default;
 
   # Define analysis-related packages
   analyzePureLogsToStorePackage = analyzePureLogsToStore {

@@ -1,11 +1,13 @@
 {
-  lib,
-  pkgs,
-  builtins,
   ...
 }:
 
 let
+  common = import ../../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
+
   # This function conceptually maps a URL to its verifiable provenance information.
   # In a real scenario, this would be a highly impure operation, relying on external APIs
   # (e.g., GitHub API, IPFS daemon, Solana RPC) and potentially ZKNotary services.

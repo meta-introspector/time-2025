@@ -1,10 +1,11 @@
 {
-  lib,
-  pkgs,
-  builtins,
   ...}:
 
 let
+  common = import ../../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
   # A conceptual function to find and index all .md files in a given path.
   # This would be an impure operation as it scans the filesystem.
   indexMarkdownFiles = { 

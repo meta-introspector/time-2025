@@ -1,12 +1,14 @@
 {
-  lib,
-  pkgs,
-  builtins,
   nix2gramIndexerModule,
   ...
 }:
 
 let
+  common = import ../../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
+
   # The root of the project to index.
   # For this example, we'll use the current directory (the directory containing this file).
   projectRoot = pkgs.lib.cleanSource ../../../../../../../..; # Adjust path to project root

@@ -1,16 +1,10 @@
 let
-  nixpkgs = import (builtins.fetchTarball {
-    url = "https://github.com/meta-introspector/nixpkgs/archive/feature/CRQ-016-nixify.tar.gz";
-  }) { system = "aarch64-linux"; };
+  common = import ../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
 
-  lib = nixpkgs.lib;
-  pkgs = nixpkgs;
-
-  time-2025-src = builtins.fetchTarball {
-    url = "https://github.com/meta-introspector/time-2025/archive/e53d59001de6f67e513328a4602a24fa0956cf7c.tar.gz";
-  };
-
-  nGramGeneratorModule = import (time-2025-src + "/10/01/docs/theory/n_gram_generator.nix") { inherit lib pkgs builtins; };
+  nGramGeneratorModule = import ../../10/01/docs/theory/n_gram_generator.nix { inherit lib pkgs builtins; };
 
   # Test tokenizePath
   testPath = "/foo/bar/baz.nix";

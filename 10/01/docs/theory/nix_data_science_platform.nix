@@ -1,7 +1,4 @@
 {
-  lib,
-  pkgs,
-  builtins,
   pandasModule,
   jupyterModule,
   matplotlibModule,
@@ -9,6 +6,11 @@
 }:
 
 let
+  common = import ../../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
+
   # A function to run a data science workflow defined as a Jupyter notebook in Nix.
   runDataScienceWorkflow = {
     notebookDefinition, # A notebook created using jupyterModule.createNotebook

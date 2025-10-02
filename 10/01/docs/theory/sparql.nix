@@ -1,11 +1,13 @@
 {
-  lib,
-  pkgs,
-  builtins,
   ...
 }:
 
 let
+  common = import ../../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
+
   # A pure Nix function that describes a SPARQL query against an OWL ontology.
   # This function does NOT execute the query; it prepares the inputs for an external SPARQL engine.
   buildSparqlQuery = {

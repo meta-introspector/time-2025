@@ -13,8 +13,9 @@
   outputs = { self, nixpkgs, flake-utils, time-2025-flake, log-analyzer-flake, build-time-gemini-capture-flake } @ inputs:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        common = import ../../../lib/common-imports.nix { inherit system; };
+
+        builtins = common.builtins;
 
         time-2025-src = builtins.fetchGit {
           url = "https://github.com/meta-introspector/time-2025";

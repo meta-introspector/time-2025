@@ -1,11 +1,14 @@
 {
-  lib,
-  pkgs,
-  builtins,
   nixCodeIndexerModule,
-  ...}:
+  ...
+}:
 
 let
+  common = import ../../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
+
   # Define prefixes for our ontology
   nixOntologyPrefix = "http://example.org/nix-ontology#";
   owlPrefix = "http://www.w3.org/2002/07/owl#";

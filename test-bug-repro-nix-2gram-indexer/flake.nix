@@ -1,44 +1,51 @@
 {
-  description = "Minimal test case to reproduce nix_2gram_indexer.nix bug";
+  description = "Top-level flake for 2-gram indexer vibes.";
 
   inputs = {
-    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    time-2025-src = {
-      url = "github:meta-introspector/time-2025/e53d59001de6f67e513328a4602a24fa0956cf7c";
-      flake = false;
-    };
+    time2025-src.url = "github:meta-introspector/time-2025?ref=feature/foaf"; # Source for nixCodeIndexerModule and nGramGeneratorModule
   };
 
-  outputs = { self, nixpkgs, flake-utils, time-2025-src }:
+  outputs = { self, nixpkgs, flake-utils, time2025-src }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        common = import ../lib/common-imports.nix { inherit system; };
+        pkgs = common.pkgs;
+        lib = common.lib;
+        builtins = common.builtins;
 
-        generateDummyProjectScript = pkgs.writeScript "generate-dummy-project.sh" (builtins.readFile ./generate_dummy_project.sh);
+        nixCodeIndexerModule = import (time2025-src + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
+        nGramGeneratorModule = import (time2025-src + "/10/01/docs/theory/n_gram_generator.nix") { inherit lib pkgs builtins; };
 
-        # Import required modules
-        nixCodeIndexerModule = import (time-2025-src + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
-        nGramGeneratorModule = import (time-2025-src + "/10/01/docs/theory/n_gram_generator.nix") { inherit lib pkgs builtins; };
+        # Vibe 1: Raw Data Ingestion/Indexing
+        vibe1 = { projectRoot, name ? "vibe1-nix-indexer" }:
+          let
+            nixFileIndexDerivation = nixCodeIndexerModule.indexNixFiles {
+              path = projectRoot;
+              projectRoot = projectRoot;
+              name = "${name}-nix-file-index";
+            };
+          in
+          pkgs.runCommand "${name}-output" {
+            inherit nixFileIndexDerivation;
+          } "ln -s $nixFileIndexDerivation $out";
 
-        # Import the module under test
-        nix2gramIndexerModule = import (time-2025-src + "/10/01/docs/theory/nix_2gram_indexer.nix") {
-          inherit lib pkgs builtins nGramGeneratorModule nixCodeIndexerModule;
-        };
-
-
-        dummyProjectRoot = import ./lib/generate-dummy-project.nix { inherit pkgs lib builtins; };
-
-        # Attempt to evaluate the generate2GramIndex function
-        testEvaluation = nix2gramIndexerModule.generate2GramIndex {
-          projectRoot = "${dummyProjectRoot}";
-          name = "test-2gram-index";
-        };
+      # Vibe 2: Segmentation/JSON Extraction
+      vibe2 = { vibe1Output, name ? "vibe2-json-extractor" }:
+        let
+          indexedFilesJsonDerivation = pkgs.runCommand "${name}-indexed-files-json" {
+            inherit vibe1Output;
+            __impure = true;
+            passAsFile = [ "vibe1Output" ];
+          } "cat $vibe1OutputPath/nix-files.index.json > $out";
+        in
+        indexedFilesJsonDerivation;
 
       in
       {
-        packages.default = testEvaluation;
+        packages.vibe1 = vibe1;
+        packages.vibe2 = vibe2;
       }
     );
 }

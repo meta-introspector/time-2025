@@ -1,11 +1,13 @@
 {
-  lib,
-  pkgs,
-  builtins,
   ...
 }:
 
 let
+  common = import ../../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
+
   # Define the structure of the file topology
   # This serves as a schema for the output of our provenance mapping.
   FileTopologySchema = {

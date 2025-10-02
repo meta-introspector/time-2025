@@ -1,11 +1,13 @@
 {
-  lib,
-  pkgs,
-  builtins,
   ...
 }:
 
 let
+  common = import ../../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
+
   # Define common secret patterns (conceptual regexes)
   # In a real scenario, these would be more comprehensive and potentially loaded from a secure source.
   defaultSecretPatterns = [

@@ -1,10 +1,12 @@
 {
-  lib,
-  pkgs,
-  builtins,
   ...}:
 
 let
+  common = import ../../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
+
   githubApiUrl = "https://api.github.com/graphql";
 
   # A pure Nix function to construct the JSON payload for a GraphQL query.

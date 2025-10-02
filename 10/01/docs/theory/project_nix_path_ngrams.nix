@@ -1,16 +1,17 @@
 {
-  lib,
-  pkgs,
-  builtins,
   nixCodeIndexerModule,
   nGramGeneratorModule,
   ... 
-}: 
+}:
 
-let 
+let
+  common = import ../../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
+
   # Define the n-gram lengths we are interested in
   nGramLengths = [ 2 3 5 7 11 ];
-
   # A function to generate n-grams from the paths of all Nix files in the project.
   generateProjectNixPathNGrams = { 
     projectRoot, # The root path of the project to index

@@ -1,13 +1,15 @@
 {
-  lib,
-  pkgs,
-  builtins,
   # Import the url_provenance_mapper for conceptual provenance tracking
   urlProvenanceMapperModule,
   ...
 }:
 
 let
+  common = import ../../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
+
   # A conceptual function to fork and vendor a W3C specification.
   # This function describes the process of bringing an external spec under local control
   # and making it available in the Nix store.
@@ -37,7 +39,7 @@ let
       echo "Vendorized content for ${specUrl}" > $out/${name}.txt
       echo "Provenance: ${builtins.toJSON provenance}" > $out/${name}.provenance.json
       echo "Content Hash: ${contentHash}" >> $out/${name}.txt
-    '';
+    ''';
 
   # A conceptual function to add a Nix wrapper alongside a vendorized spec.
   # This wrapper provides a pure Nix interface to the spec, allowing it to be consumed

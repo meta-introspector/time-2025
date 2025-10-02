@@ -10,8 +10,10 @@
   outputs = { self, nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        common = import ../../lib/common-imports.nix { inherit system; };
+        pkgs = common.pkgs;
+        lib = common.lib;
+        builtins = common.builtins;
         src = lib.cleanSource ./.;
         cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
           inherit src;

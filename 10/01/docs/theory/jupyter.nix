@@ -1,12 +1,14 @@
 {
-  lib,
-  pkgs,
-  builtins,
   pandasModule,
   ...
 }:
 
 let
+  common = import ../../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
+
   # Represents a conceptual Jupyter Notebook/Workbook in Nix.
   # A workbook is a sequence of cells, where each cell is a Nix expression.
   NotebookSchema = {

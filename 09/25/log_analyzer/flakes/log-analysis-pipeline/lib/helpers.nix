@@ -1,8 +1,10 @@
-{ lib, pkgs, time-2025-flake, system, secretScannerModule, log-analyzer-flake, build-time-gemini-capture-flake, ... }:
+{ system, secretScannerModule, log-analyzer-flake, build-time-gemini-capture-flake, ... } @ args:
 
 let
-  # Build the buildTimeTelemetry derivation to get its output
-  buildTimeTelemetryOutput = build-time-gemini-capture-flake.packages.${system}.default;
+  common = import ../../../lib/common-imports.nix { inherit system; };
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
 
   # Helper function for pure log analysis
   analyzePureLogsToStore = {
@@ -84,6 +86,5 @@ let
 
 in
 {
-  inherit buildTimeTelemetryOutput;
   inherit analyzePureLogsToStore analyzeImpureLogsToStore analyzeNarLogsToStore;
 }

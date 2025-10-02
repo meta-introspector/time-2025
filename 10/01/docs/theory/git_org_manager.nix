@@ -1,10 +1,12 @@
 {
-  lib,
-  pkgs,
-  builtins,
   ...}:
 
 let
+  common = import ../../../lib/common-imports.nix {};
+  lib = common.lib;
+  pkgs = common.pkgs;
+  builtins = common.builtins;
+
   # A conceptual function to capture a Git organization as a Nix attribute set.
   # This function would typically be used to define the structure of an organization's
   # repositories within a larger Nix flake or a dedicated Nix expression.
@@ -64,7 +66,7 @@ let
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     # Reference to the actual Git repository
     self-repo.url = "${url}?ref=${defaultBranch}";
   };

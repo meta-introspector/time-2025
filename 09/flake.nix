@@ -11,7 +11,10 @@
   outputs = { nixpkgs, flake-utils, search-results, self, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        common = import ../lib/common-imports.nix { inherit system; };
+        pkgs = common.pkgs;
+        lib = common.lib;
+        builtins = common.builtins;
       in {
         # A devShell that includes nixpkgs and potentially other tools
         devShell = pkgs.mkShell {
@@ -31,13 +34,13 @@
 
         # Expose custom library attributes
         lib = {
-          foaf = import ./foaf.nix { inherit pkgs; };
-          seedFoaf = import ./seed.foaf.nix { inherit pkgs self; };
+          foaf = import ./foaf.nix { inherit pkgs builtins; self = mockSelf; };
+          seedFoaf = import ./seed.foaf.nix { inherit pkgs builtins self; };
 
           searchNars = search-results.packages.${system}.default;
           url2fileLocatorScript = search-results.packages.${system}.url2fileLocatorScript;
 
-          cwm = import ./cwm.nix { inherit pkgs self; lib = flake-utils.lib; };
+          cwm = import ./cwm.nix { inherit pkgs builtins self; lib = flake-utils.lib; };
 
           w3cReposNar = search-results.packages.${system}.mkRepoListNar "w3c";
         };
