@@ -26,6 +26,6 @@
         lib = {
           inherit foafContext seedGraph fullGraph;
         };
-      }
+      };
     );
 }
