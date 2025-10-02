@@ -15,6 +15,6 @@
       system = "aarch64-linux"; # Explicitly define system for debugging
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      devShell = streamofrandom09.${system}.devShells.default;
+      devShell = streamofrandom09.outputs.${system}.devShells.default;
     };
 }
