@@ -18,6 +18,9 @@
         foafContext = foafContextFlake.lib.foafContext;
         # Get the seed graph from the seed data flake
         seedGraph = foafSeedDataFlake.lib.seedGraph;
+
+        # Combine them into a full graph (initially just seed data with context)
+        fullGraph = { "@context" = foafContext; "@graph" = seedGraph; };
       in
       {
         # Temporarily return a simple set to debug syntax error
