@@ -26,11 +26,26 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-9FWfTaJiU/dF63Tj8h963MWzWjjmM/rqxQTK7PLev5k=",
-        "path": "/nix/store/va7bs0k99xbmpdb66w6dixmxlgw9nl18-source/flakes/foaf/context",
+        "path": "/nix/store/p3c7b7jyfx2f516r4i742qhspck1xgam-source/flakes/foaf/context",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/va7bs0k99xbmpdb66w6dixmxlgw9nl18-source/flakes/foaf/context",
+        "path": "/nix/store/p3c7b7jyfx2f516r4i742qhspck1xgam-source/flakes/foaf/context",
+        "type": "path"
+      }
+    },
+    "foafSeedDataFlake": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-TnR43m6GCVI2UFjQUWtEkLZaFw+99TiO23BwFvLqY90=",
+        "path": "/nix/store/p3c7b7jyfx2f516r4i742qhspck1xgam-source/flakes/foaf/seed-data",
+        "type": "path"
+      },
+      "original": {
+        "path": "/nix/store/p3c7b7jyfx2f516r4i742qhspck1xgam-source/flakes/foaf/seed-data",
         "type": "path"
       }
     },
@@ -50,6 +65,20 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1759417375,
+        "narHash": "sha256-O7eHcgkQXJNygY6AypkF9tFhsoDQjpNEojw3eFs73Ow=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "dc704e6102e76aad573f63b74c742cd96f8f1e6c",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1757898380,
         "narHash": "sha256-1Z0KAfbySsHu/IoZbBJLrPgs3IqQGup0T8J9S1ffAkE=",
         "owner": "meta-introspector",
@@ -68,7 +97,8 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "foafContextFlake": "foafContextFlake",
-        "nixpkgs": "nixpkgs_2"
+        "foafSeedDataFlake": "foafSeedDataFlake",
+        "nixpkgs": "nixpkgs_3"
       }
     },
     "systems": {
