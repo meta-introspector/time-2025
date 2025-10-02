@@ -16,9 +16,5 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in {
       devShell = streamofrandom09.${system}.devShells.default;
-
-      packages = streamofrandom09.${system}.packages;
-
-      lib = streamofrandom09.${system}.lib;
     };
 }
