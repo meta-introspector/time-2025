@@ -23,6 +23,14 @@ build-foaf-context: pre-nix-check
 
 all: build-foaf-full-graph
 
+# Debugging the Aggregator Flake (TikTok Short: Isolating Flake Errors)
+# This target directly evaluates the aggregator flake to pinpoint syntax issues.
+# It bypasses the root flake to ensure the error is within the aggregator itself.
+debug-aggregator-flake: pre-nix-check
+	@echo "--- Debugging Aggregator Flake Directly ---"
+	nix eval --json ./flakes/foaf/aggregator#lib.fullGraph
+	@echo "--- Aggregator Flake Debug Complete ---"
+
 # Build the full FOAF graph from the aggregator flake.
 # This target evaluates the 'foaf/aggregator' flake and prints its 'fullGraph' attribute as JSON.
 build-foaf-full-graph: pre-nix-check
