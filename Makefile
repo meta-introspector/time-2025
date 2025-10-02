@@ -21,7 +21,14 @@ build-foaf-context: pre-nix-check
 	nix eval --raw .#lib.foafContext
 	@echo "--- FOAF Context Flake Built ---"
 
-all: build-foaf-seed-data
+all: build-foaf-full-graph
+
+# Build the full FOAF graph from the aggregator flake.
+# This target evaluates the 'foaf/aggregator' flake and prints its 'fullGraph' attribute as JSON.
+build-foaf-full-graph: pre-nix-check
+	@echo "--- Building Full FOAF Graph ---"
+	nix eval --json .#lib.fullGraph
+	@echo "--- Full FOAF Graph Built ---"
 
 # Build the FOAF seed data flake.
 # This target evaluates the 'foaf/seed-data' flake and prints its 'seedGraph' attribute.
