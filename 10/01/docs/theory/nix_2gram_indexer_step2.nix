@@ -23,6 +23,7 @@ let
     # Read the indexed files from the JSON output
     indexedFilesJsonDerivation = pkgs.runCommand "${name}-indexed-files-json" {
       buildInputs = [ nixFileIndex ];
+      __impure = true; # Mark as impure because its input comes from an impure derivation
     } "cat ${nixFileIndex}/nix-files.index.json > $out";
   in
   indexedFilesJsonDerivation;
