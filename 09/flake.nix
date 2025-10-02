@@ -34,7 +34,7 @@
 
         # Expose custom library attributes
         lib = {
-          foaf = import ./foaf.nix { inherit pkgs builtins; self = mockSelf; };
+          foaf = import ./foaf.nix { inherit pkgs builtins self; };
           seedFoaf = import ./seed.foaf.nix { inherit pkgs builtins self; };
 
           searchNars = search-results.packages.${system}.default;
