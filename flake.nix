@@ -14,7 +14,8 @@
     let
       system = "aarch64-linux"; # Explicitly define system for debugging
       pkgs = nixpkgs.legacyPackages.${system};
+      streamofrandom09Outputs = streamofrandom09.${system};
     in {
-      devShell = streamofrandom09.outputs.${system}.devShells.default;
+      devShell = streamofrandom09Outputs.devShells.default;
     };
 }
