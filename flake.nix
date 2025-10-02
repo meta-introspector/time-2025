@@ -16,7 +16,7 @@
         pkgs = nixpkgs.legacyPackages.${system};
       in {
         # Expose the devShell from the 09 flake for now
-        devShell = streamofrandom09.devShells.default;
+        devShell = streamofrandom09.${system}.devShells.default;
 
         # Expose packages from the 09 flake for now
         packages = streamofrandom09.packages.${system};
