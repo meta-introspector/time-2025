@@ -2,12 +2,13 @@
   description = "Nix flake for LLM tasks involving NAR files from crq-binstore";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-    crq-binstore = {
-      url = "path:../../crq-binstore"; # Relative path to the crq-binstore directory
-      flake = false; # Indicate that this is not a flake, but a directory of files
-    };
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    # crq-binstore = {
+    #   url = "path:../../crq-binstore"; # Relative path to the crq-binstore directory
+    #   flake = false; # Indicate that this is not a flake, but a directory of files
+    # };
+    # TODO: Replace with github:meta-introspector URL for crq-binstore once available.
   };
 
   outputs = { self, nixpkgs, flake-utils, crq-binstore }:

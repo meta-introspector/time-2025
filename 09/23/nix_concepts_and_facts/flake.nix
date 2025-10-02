@@ -2,7 +2,7 @@
   description = "Nix derivations for numerical exploration concepts and AI context.";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; # Use a stable nixpkgs for this flake
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     crqBinstore = {
       url = "github:meta-introspector/crq-binstore"; # Input for the CRQ binstore

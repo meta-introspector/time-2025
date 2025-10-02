@@ -25,6 +25,14 @@ repos:
         # This hook performs static analysis on Nix files, contributing to
         # "Verification and Testing" (bott 10) and "Error Analysis" (bott 9).
 
+      - id: nix-url-check
+        name: Nix URL Policy Check
+        entry: bash scripts/nix_url_check.sh
+        language: system
+        files: \.nix$
+        # Ensures all Nix flake inputs (nixpkgs, flake-utils) adhere to the
+        # github:meta-introspector policy, enforcing "Integration and Session Correlation" (bott 17).
+
       - id: shellcheck
         name: shellcheck
         entry: shellcheck

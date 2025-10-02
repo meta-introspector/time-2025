@@ -65,7 +65,7 @@ let
   description = "Nix flake for ${owner}/${repoName}";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     # Reference to the actual Git repository
     self-repo.url = "${url}?ref=${defaultBranch}";

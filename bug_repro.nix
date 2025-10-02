@@ -2,8 +2,7 @@
   description = "Minimal example to reproduce nix-build assertion failure with impure derivations.";
 
   inputs = {
-    nixpkgs.url = "github:meta-introspector/nixpkgs";
-    nixpkgs.ref = "feature/CRQ-016-nixify";
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
   };
 
   outputs = { self, nixpkgs }:
