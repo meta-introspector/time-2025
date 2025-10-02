@@ -27,5 +27,5 @@
           inherit foafContext seedGraph fullGraph;
         };
       }
-    );
+    )
 };
