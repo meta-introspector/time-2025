@@ -10,7 +10,7 @@
     let
       system = "aarch64-linux"; # Explicitly define system for debugging
       pkgs = nixpkgs.legacyPackages.${system};
-      streamofrandom09Outputs = (import ./09/flake.nix { inherit nixpkgs flake-utils self; }).outputs;
+      streamofrandom09Outputs = (import ./09/flake.nix).outputs { inherit nixpkgs flake-utils self; };
     in {
       devShell = streamofrandom09Outputs.${system}.devShells.default;
     };
