@@ -4,12 +4,10 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    foafContextFlake.url = "./flakes/foaf/context";
-    foafSeedDataFlake.url = "./flakes/foaf/seed-data";
     foafAggregatorFlake.url = "./flakes/foaf/aggregator";
   };
 
-  outputs = { self, nixpkgs, flake-utils, foafContextFlake, foafSeedDataFlake, foafAggregatorFlake, ... }:
+  outputs = { self, nixpkgs, flake-utils, foafAggregatorFlake, ... }:
     let
       system = "aarch64-linux"; # Explicitly define system for debugging
       pkgs = nixpkgs.legacyPackages.${system};
@@ -17,8 +15,6 @@
     in {
       devShell = streamofrandom09Outputs.${system}.devShells.default;
       lib = {
-        inherit (foafContextFlake.lib) foafContext;
-        inherit (foafSeedDataFlake.lib) seedGraph;
-        inherit (foafAggregatorFlake.lib) fullGraph;
+        inherit (foafAggregatorFlake.lib) foafContext seedGraph fullGraph;
       };
-}
+    };
