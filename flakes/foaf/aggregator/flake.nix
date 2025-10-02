@@ -16,6 +16,8 @@
 
         # Get the FOAF context from the context flake
         foafContext = foafContextFlake.lib.foafContext;
+        # Get the seed graph from the seed data flake
+        seedGraph = foafSeedDataFlake.lib.seedGraph;
       in
       {
         # Temporarily return a simple set to debug syntax error
