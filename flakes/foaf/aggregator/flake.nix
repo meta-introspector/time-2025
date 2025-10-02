@@ -6,18 +6,26 @@
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     foafContextFlake.url = "./../context";
     foafSeedDataFlake.url = "./../seed-data";
-    # New inputs for the atomic aggregator flakes
-    foafAggregatorContextFlake.url = "./context";
-    foafAggregatorSeedGraphFlake.url = "./seed-graph";
-    foafAggregatorFullGraphFlake.url = "./full-graph";
   };
 
-  outputs = { self, nixpkgs, flake-utils, foafContextFlake, foafSeedDataFlake,
-              foafAggregatorContextFlake, foafAggregatorSeedGraphFlake, foafAggregatorFullGraphFlake }:
+  outputs = { self, nixpkgs, flake-utils, foafContextFlake, foafSeedDataFlake }:
     flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+        lib = pkgs.lib;
+
+        # Get the FOAF context from the context flake
+        foafContext = foafContextFlake.lib.foafContext;
+        # Get the seed graph from the seed data flake
+        seedGraph = foafSeedDataFlake.lib.seedGraph;
+
+        # Combine them into a full graph (initially just seed data with context)
+        fullGraph = { "@context" = foafContext; "@graph" = seedGraph; };
+      in
       {
-        # Temporarily return a simple set to debug syntax error
-        foo = "bar";
+        lib = {
+          inherit foafContext seedGraph fullGraph;
+        };
       }
     );
 }
