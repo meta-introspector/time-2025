@@ -35,7 +35,7 @@ debug-aggregator-flake: pre-nix-check
 # This target directly evaluates the aggregator flake with --show-trace to get detailed error information.
 debug-aggregator-flake-trace: pre-nix-check
 	@echo "--- Debugging Aggregator Flake Directly with Trace ---"
-	nix eval --json --show-trace ./flakes/foaf/aggregator#aarch64-linux.lib.fullGraph
+	nix eval --json --show-trace ./flakes/foaf/aggregator#foo
 	@echo "--- Aggregator Flake Debug Trace Complete ---"
 
 # Build the full FOAF graph from the aggregator flake.
