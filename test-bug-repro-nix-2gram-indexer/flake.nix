@@ -32,7 +32,7 @@
 
         # Attempt to evaluate the generate2GramIndex function
         testEvaluation = nix2gramIndexerModule.generate2GramIndex {
-          projectRoot = dummyProjectRoot;
+          projectRoot = "${dummyProjectRoot}";
           name = "test-2gram-index";
         };
 

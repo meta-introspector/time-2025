@@ -1,9 +1,16 @@
 { pkgs, lib, builtins }:
 
-let
-  generateDummyProjectScript = pkgs.writeScript "generate-dummy-project.sh" (builtins.readFile ../generate_dummy_project.sh);
-in
+{ pkgs, lib, builtins }:
 
 pkgs.runCommand "dummy-project-root" {
   buildInputs = [ pkgs.bash ];
-} "echo \"Executing script: $generateDummyProjectScript\" && $generateDummyProjectScript $out"
+} ''
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Create the output directory
+mkdir -p "$out/foo"
+
+# Create the test.nix file
+echo 'bar' > "$out/foo/test.nix"
+''

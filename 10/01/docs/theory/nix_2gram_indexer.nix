@@ -36,8 +36,11 @@ let
     };
 
     # Read the indexed files from the JSON output
-    indexedFiles = builtins.fromJSON (builtins.readFile "${nixFileIndex}/nix-files.index.json");
+    indexedFilesJsonDerivation = pkgs.runCommand "${name}-indexed-files-json" {
+      buildInputs = [ nixFileIndex ];
+    } "cat ${nixFileIndex}/nix-files.index.json > $out";
 
+    indexedFiles = builtins.fromJSON (builtins.readFile indexedFilesJsonDerivation);
     # Process each Nix file to extract 2-grams and their locations
     all2GramUsages = lib.flatten (lib.map (fileInfo: # For each indexed file
       let
@@ -78,8 +81,9 @@ let
     # Create a derivation to output the generated 2-gram index as JSON
     indexOutput = pkgs.runCommand name {
       inherit twoGramIndex;
+      buildInputs = [ nixFileIndex ]; # Ensure nixFileIndex is built
     }
-    '''
+    ''
       mkdir -p $out
       echo "${builtins.toJSON twoGramIndex}" > $out/nix-2gram-index.json
       echo "Generated 2-gram index for Nix file paths in $out/nix-2gram-index.json" >&2
