@@ -28,5 +28,5 @@ all: build-foaf-seed-data
 # It demonstrates how to build a single-concept flake and retrieve its output.
 build-foaf-seed-data: pre-nix-check
 	@echo "--- Building FOAF Seed Data Flake ---"
-	nix eval --raw .#lib.seedGraph
+	nix eval --json .#lib.seedGraph
 	@echo "--- FOAF Seed Data Flake Built ---"
