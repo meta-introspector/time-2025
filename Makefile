@@ -21,4 +21,12 @@ build-foaf-context: pre-nix-check
 	nix eval --raw .#lib.foafContext
 	@echo "--- FOAF Context Flake Built ---"
 
-all: build-foaf-context
+all: build-foaf-seed-data
+
+# Build the FOAF seed data flake.
+# This target evaluates the 'foaf/seed-data' flake and prints its 'seedGraph' attribute.
+# It demonstrates how to build a single-concept flake and retrieve its output.
+build-foaf-seed-data: pre-nix-check
+	@echo "--- Building FOAF Seed Data Flake ---"
+	nix eval --raw .#lib.seedGraph
+	@echo "--- FOAF Seed Data Flake Built ---"
