@@ -19,7 +19,36 @@
         "type": "github"
       }
     },
+    "foafContextFlake": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-9FWfTaJiU/dF63Tj8h963MWzWjjmM/rqxQTK7PLev5k=",
+        "path": "/nix/store/va7bs0k99xbmpdb66w6dixmxlgw9nl18-source/flakes/foaf/context",
+        "type": "path"
+      },
+      "original": {
+        "path": "/nix/store/va7bs0k99xbmpdb66w6dixmxlgw9nl18-source/flakes/foaf/context",
+        "type": "path"
+      }
+    },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1759417375,
+        "narHash": "sha256-O7eHcgkQXJNygY6AypkF9tFhsoDQjpNEojw3eFs73Ow=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "dc704e6102e76aad573f63b74c742cd96f8f1e6c",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1757898380,
         "narHash": "sha256-1Z0KAfbySsHu/IoZbBJLrPgs3IqQGup0T8J9S1ffAkE=",
@@ -38,7 +67,8 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
+        "foafContextFlake": "foafContextFlake",
+        "nixpkgs": "nixpkgs_2"
       }
     },
     "systems": {
