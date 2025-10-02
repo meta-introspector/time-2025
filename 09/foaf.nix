@@ -1,15 +1,9 @@
-# foaf.nix
-{
-  pkgs ? import <nixpkgs> {},
-  # The flake's self input, which points to the directory containing this file
-  self,
-}:
+{ pkgs, self, foafSeedData }:
 
 let
   # Define the FOAF context
   foafContext = "http://xmlns.com/foaf/0.1/";
-  # Import seed FOAF data (agents and projects)
-  seedFoafData = import ./seed.foaf.nix { inherit pkgs self; };
+  # Seed FOAF data (agents and projects) is now passed as an argument
 
   # Import GitHub FOAF data
   githubFoafData = import ./github.foaf.nix { inherit pkgs lib fetchGithubData githubToFoaf; };
@@ -28,7 +22,7 @@ let
   allCrqs = import ./crqs.foaf.nix { inherit pkgs crq001 crq007 crq008 crq009 crq010 crq011 crq012 crq013; lib = pkgs.lib; };
 
   # Combine all FOAF entities into a single graph
-  fullGraph = seedFoafData."@graph" ++ allCrqs ++ githubFoafData.githubEntities;
+  fullGraph = foafSeedData ++ allCrqs ++ githubFoafData.githubEntities;
 
   # Helper function to find entities by type
   findEntitiesByType = type:
