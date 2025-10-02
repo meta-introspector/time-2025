@@ -18,7 +18,7 @@ pre-nix-check:
 # It demonstrates how to build a single-concept flake and retrieve its output.
 build-foaf-context: pre-nix-check
 	@echo "--- Building FOAF Context Flake ---"
-	nix eval --raw --impure --expr 'builtins.getFlake (toString ./flakes/foaf/context).lib.foafContext'
+	nix eval --raw ./flakes/foaf/context#lib.foafContext
 	@echo "--- FOAF Context Flake Built ---"
 
 all: build-foaf-context
