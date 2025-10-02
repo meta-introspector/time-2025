@@ -15,6 +15,6 @@
     in {
       devShell = streamofrandom09Outputs.${system}.devShells.default;
       lib = {
-        inherit (foafAggregatorFlake.lib) foafContext seedGraph fullGraph;
+        inherit (foafAggregatorFlake.${system}.lib) foafContext seedGraph fullGraph;
       }
     );
