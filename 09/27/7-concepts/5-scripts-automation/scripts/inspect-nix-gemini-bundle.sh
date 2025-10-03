@@ -39,8 +39,10 @@ check_file() {
     local desc="$2"
     
     if [ -f "$file" ]; then
-        local size=$(stat -c%s "$file" 2>/dev/null || echo "unknown")
-        local readable_size=$(numfmt --to=iec "$size" 2>/dev/null || echo "$size bytes")
+        local size
+        size=$(stat -c%s "$file" 2>/dev/null || echo "unknown")
+        local readable_size
+        readable_size=$(numfmt --to=iec "$size" 2>/dev/null || echo "$size bytes")
         echo "✓ $desc found: $file ($readable_size)"
         return 0
     else
@@ -64,17 +66,18 @@ inspect_nix_result() {
     
     # Check for Nix result symlink
     if [ -L result ]; then
-        local result_path=$(readlink result)
+        local result_path
+        result_path=$(readlink result)
         echo "✓ Nix result symlink: $result_path"
         
         # Look for bundle directory in result
         if [ -d "result/bundle" ]; then
             echo "✓ Bundle directory found in result"
-            ls -la result/bundle/ | head -10
+            find result/bundle -maxdepth 1 -ls | head -10
         else
             echo "✗ No bundle directory in result"
             echo "Result contents:"
-            ls -la result/ | head -10
+            find result -maxdepth 1 -ls | head -10
         fi
         
         # Search for any gemini.js files

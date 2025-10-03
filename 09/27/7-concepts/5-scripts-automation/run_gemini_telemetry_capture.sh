@@ -165,7 +165,7 @@ if [ -n "$RESULT_PATH" ] && [ -d "$RESULT_PATH" ]; then
         if [ -f "$RESULT_PATH/MANIFEST.txt" ]; then
             echo ""
             echo "📄 Manifest Contents:" | tee -a "$ARCHIVE_LOG"
-            cat "$RESULT_PATH/MANIFEST.txt" | tee -a "$ARCHIVE_LOG"
+            tee -a "$ARCHIVE_LOG" < "$RESULT_PATH/MANIFEST.txt"
         fi
     fi
     

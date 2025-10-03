@@ -26,8 +26,8 @@ echo "myExtraData (path): $(nix eval --raw -f default.nix myExtraData)"
 
 # 4. Access attributes from within a nix-shell
 echo -e "\nAccessing attributes from within a nix-shell:"
-nix-shell default.nix --run 'echo "Inside nix-shell: myCustomTag is $myCustomTag"'
-nix-shell default.nix --run 'echo "Inside nix-shell: myVersionOverride is $myVersionOverride"'
-nix-shell default.nix --run 'echo "Inside nix-shell: myExtraData is $myExtraData"'
+nix-shell default.nix --run "echo \"Inside nix-shell: myCustomTag is $myCustomTag\""
+nix-shell default.nix --run "echo \"Inside nix-shell: myVersionOverride is $myVersionOverride\""
+nix-shell default.nix --run "echo \"Inside nix-shell: myExtraData is $myExtraData\""
 
 echo -e "\n--- Test complete for mypackage.nix ---"

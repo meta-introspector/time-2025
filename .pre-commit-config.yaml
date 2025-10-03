@@ -41,20 +41,9 @@ repos:
         # Ensures shell scripts adhere to best practices, aiding in
         # "Verification and Testing" (bott 10).
 
-      - id: crq-commit-msg-check
-        name: CRQ Commit Message Check
-        entry: 09/27/7-concepts/5-scripts-automation/crq_commit_msg_check.sh
-        language: system
-        stages: [commit-msg]
-        # Enforces that commit messages start with a CRQ number (e.g., CRQ-123:)
-        # or a conventional commit type.
 
-      - id: crq-document-check
-        name: CRQ Document Existence Check
-        entry: 09/27/7-concepts/5-scripts-automation/crq_document_check.sh
-        language: system
-        stages: [commit-msg]
-        # Checks if a referenced CRQ document exists in docs/crqs/.
+
+
 
       - id: script-sop-check
         name: Script SOP Documentation Check
@@ -62,18 +51,9 @@ repos:
         language: system
         files: \.(sh|py|rs|nix)$
 
-      # - id: cargo-check
-      #   name: cargo check
-      #   entry: cargo check -p streamofrandom_cli
-      #   language: system
-      #   files: \.(rs|toml)$
-      #   pass_filenames: false
-        always_run: true
-        # This hook runs cargo check on the standalone Rust project.
-
 
   - repo: https://github.com/meta-introspector/vale-precommit
-    rev: feature/CRQ-016-nixify
+    rev: 318812b24e90f97e458497976282014ee25a52fd
     hooks:
       - id: vale-system
         args: [--config, ./.vale.ini]

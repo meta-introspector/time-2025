@@ -67,3 +67,7 @@ build-foaf-seed-data: pre-nix-check
 	@echo "--- Building FOAF Seed Data Flake ---"
 	nix eval --json .#lib.seedGraph
 	@echo "--- FOAF Seed Data Flake Built ---"
+
+.PHONY: install_hook
+install_hook:
+	@./install_hook_script.sh "$(DRY_RUN)"
