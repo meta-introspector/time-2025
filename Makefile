@@ -38,6 +38,14 @@ debug-aggregator-flake-trace:
 	nix eval --json --show-trace ./flakes/foaf/aggregator#aarch64-linux.lib.fullGraph
 	@echo "--- Aggregator Flake Debug Trace Complete ---"
 
+# Debugging Attribute Path Issue (TikTok Short: Nix Flake Output Paths)
+# This target evaluates a minimal flake to reproduce and debug the attribute path resolution issue.
+# It helps understand how flake-utils.lib.eachDefaultSystem structures its outputs.
+debug-attribute-path-flake:
+	@echo "--- Debugging Attribute Path Flake ---"
+	nix eval --json ./bug_repro_attribute_path#aarch64-linux.lib.foo
+	@echo "--- Attribute Path Flake Debug Complete ---"
+
 # Build the full FOAF graph from the aggregator flake.
 # This target evaluates the 'foaf/aggregator' flake and prints its 'fullGraph' attribute as JSON.
 build-foaf-full-graph: pre-nix-check
