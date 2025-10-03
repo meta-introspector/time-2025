@@ -39,7 +39,7 @@ monster-group-crqs: pre-nix-check
 # Display the unique terms extracted from Nix paths and metadata.
 unique-nix-terms: pre-nix-check
 	@echo "--- Displaying Unique Nix Terms ---"
-	nix eval --impure --json --expr 'with import <nixpkgs> {}; import ./nix-indexer-pipeline.nix { inherit lib; }.uniqueTerms'
+	nix eval --impure --json --expr 'with import <nixpkgs> {}; let pipeline = import ./nix-indexer-pipeline.nix { inherit lib; }; in pipeline.uniqueTerms'
 	@echo "--- Unique Nix Terms Displayed ---"
 
 all: leech-lattice-properties leech-lattice-dimensions leech-lattice-blade-17 monster-group-crqs unique-nix-terms
