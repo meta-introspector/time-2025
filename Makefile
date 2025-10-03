@@ -33,8 +33,8 @@ debug-aggregator-flake: pre-nix-check
 
 # Debugging the Aggregator Flake with Trace (TikTok Short: Advanced Nix Debugging)
 # This target directly evaluates the aggregator flake with --show-trace to get detailed error information.
-debug-aggregator-flake-trace:
-	@echo "--- Debugging Aggregator Flake Directly with Trace (Pre-Nix Check Temporarily Disabled) ---"
+debug-aggregator-flake-trace: pre-nix-check
+	@echo "--- Debugging Aggregator Flake Directly with Trace ---"
 	nix eval --json --show-trace ./flakes/foaf/aggregator#lib.fullGraph
 	@echo "--- Aggregator Flake Debug Trace Complete ---"
 
