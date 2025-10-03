@@ -4,11 +4,7 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    # crq-binstore = {
-    #   url = "path:../../../crq-binstore"; # Relative path to the crq-binstore directory from this template
-    #   flake = false;
-    # };
-    # TODO: Replace with github:meta-introspector URL for crq-binstore once available.
+    crq-binstore.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/22/crq-binstore";
     # Assuming the gemini-cli is available from this flake
     geminiCliFlake = {
       url = "github:meta-introspector/gemini-cli?ref=feature/working-gemini-cli-nix-store";

@@ -5,7 +5,7 @@
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     rust-overlay.url = "github:meta-introspector/rust-overlay?ref=feature/CRQ-016-nixify";
-    template-generator-bin.url = "path:/nix/store/qy5zixb912wm5hc7d0vmi8k76w1zl75g-source/tools/template_generator_bin";
+    template-generator-bin.url = "github:meta-introspector/time-2025/feature/foaf?dir=tools/template_generator_bin";
   };
 
   outputs = { self, nixpkgs, flake-utils, rust-overlay, template-generator-bin }:

@@ -6,7 +6,7 @@
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     # Add the main project repository as an input
     # This refers to the repository where this flake.nix resides
-    mainProject.url = "path:../"; # Path to the parent directory (the main project root)
+    mainProject.url = "github:meta-introspector/time-2025/feature/foaf";
   };
 
   outputs = { self, nixpkgs, flake-utils, mainProject }:

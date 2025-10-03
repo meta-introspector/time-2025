@@ -39,6 +39,12 @@ check_nix_file() {
     fi
   fi
 
+  # Check for path: references
+  if grep -q "url = \"path:" "$file"; then
+    echo "ERROR: ${file}: Found 'path:' reference in a flake URL. Only github:meta-introspector URLs are allowed."
+    errors=$((errors + 1))
+  fi
+
   return $errors
 }
 

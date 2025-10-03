@@ -6,7 +6,7 @@
   };
 
   outputs = { self, nixpkgs }: {
-    self.url = "path:.";
+    self.url = "github:meta-introspector/time-2025/feature/foaf";
     packages.x86_64-linux.my-network-test-package = nixpkgs.legacyPackages.x86_64-linux.stdenv.mkDerivation {
       pname = "my-network-test-package";
       version = "0.1.0";

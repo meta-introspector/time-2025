@@ -4,8 +4,9 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    fetchGithubDataFlake.url = "github:meta-introspector/fetch-github-data?ref=feature/CRQ-016-nixify"; # Assuming this flake exists
-    githubToFoafFlake.url = "github:meta-introspector/github-to-foaf?ref=feature/CRQ-016-nixify"; # Assuming this flake exists
+    fetchGithubDataFlake.url = "github:meta-introspector/time-2025/feature/foaf?dir=10/02/fetch-github-data";
+    githubToFoafFlake.url = "github:meta-introspector/time-2025/feature/foaf?dir=10/02/github-to-foaf";
+
   };
 
   outputs = { self, nixpkgs, flake-utils, fetchGithubDataFlake, githubToFoafFlake }:
