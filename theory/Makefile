@@ -1,6 +1,6 @@
 # Makefile for Leech Lattice (Λ₂₄) model
 
-.PHONY: all leech-lattice-properties leech-lattice-dimensions leech-lattice-blade-17 pre-nix-check
+.PHONY: all leech-lattice-properties leech-lattice-dimensions leech-lattice-blade-17 monster-group-crqs pre-nix-check
 
 # Ensure no unstaged or uncommitted Nix files before running Nix commands.
 # This helps maintain purity and prevents accidental builds from dirty working directories.
@@ -31,4 +31,10 @@ leech-lattice-blade-17: pre-nix-check
 	nix eval --impure --json --expr 'with import <nixpkgs> {}; import ./leech-lattice-blade-instance.nix { inherit lib; }'
 	@echo "--- Leech Lattice Blade 17 Displayed ---"
 
-all: leech-lattice-properties leech-lattice-dimensions leech-lattice-blade-17
+# Display the Monster Group related CRQs.
+monster-group-crqs: pre-nix-check
+	@echo "--- Displaying Monster Group CRQs ---"
+	nix eval --impure --json --expr 'with import <nixpkgs> {}; import ./monster-group-crqs.nix { inherit lib; }'
+	@echo "--- Monster Group CRQs Displayed ---"
+
+all: leech-lattice-properties leech-lattice-dimensions leech-lattice-blade-17 monster-group-crqs
