@@ -1,10 +1,12 @@
 { pkgs, lib, formalTriad }:
 
 let
+  parts = import ./hackathon_71_parts.nix { inherit lib pkgs; };
+
   # Architectural Vibe Constraints based on Monster Group factors
-  RIGOR_LAYER_DESC = "Enforces GMP, ISO 9000, ITIL compliance (CRQ-010)";
-  PURE_DERIVATION_DESC = "Generates content-addressable artifacts, subject to CRQ-012 verification";
-  FORMAL_TRIAD_DESC = "Nix, Lean 4/Unimath, MiniZinc for Ultimate Verification";
+  RIGOR_LAYER_DESC = parts.rigor_desc_full;
+  PURE_DERIVATION_DESC = parts.pure_derivation_desc_full;
+  FORMAL_TRIAD_DESC = parts.formal_triad_desc_core;
   
   # UML Element Definitions as Nix Functions/Attribute Sets
   mkBoundary = { name, description }: { type = "System_Boundary"; id = lib.strings.toLower (lib.strings.replaceStrings [" "] ["_"] name); inherit name description; };
@@ -15,56 +17,56 @@ let
   # --- System Elements Defined by Nix Attribute Sets ---
   
   # 1. External/Boundary Nodes
-  agent = { id = "team_agent"; name = "Mycology Lab Team Agent"; type = "Person"; description = "foaf:Agent operating within the Ultimate Lattice"; };
-  monster = { id = "monster_group"; name = "Monster Group (F1)"; type = "External_System"; description = "Ultimate Architectural Template, defining prime influence"; };
+  agent = { id = parts.agent_id; name = parts.agent_name; type = parts.agent_type; description = "${parts.agent_name} operating within the Ultimate Lattice"; };
+  monster = { id = parts.monster_id; name = parts.monster_name; type = parts.monster_type; description = "${parts.monster_name} defining prime influence"; };
   
   # 2. Containers (Workflow Layers)
   framework = mkBoundary {
-    name = "quasi_mycology_framework";
-    description = "Quasi Meta Mycology Framework (bott Lattice on 8D Manifold)";
+    name = parts.framework_name;
+    description = parts.framework_desc;
   };
 
   rigorLayer = mkContainer {
-    name = "rigor_layer";
-    technology = "Nix Derivation (CRQ-010)";
+    name = parts.rigor_name;
+    technology = parts.rigor_tech;
     description = RIGOR_LAYER_DESC;
   };
 
   cwmVerification = mkContainer {
-    name = "cwm_verification";
-    technology = "Nix-Native CWM (cwm.nix)";
-    description = "FOAF/OWL semantic validation for Agent Identity (foaf:Agent) and compliance with OWL schema before deployment (CRQ-002, CRQ-030)";
+    name = parts.cwm_name;
+    technology = parts.cwm_tech;
+    description = parts.cwm_desc_full;
   };
 
   pureEngine = mkContainer {
-    name = "pure_derivation_engine";
-    technology = "Rust/Nix (CRQ-001/CRQ-007)";
+    name = parts.pure_engine_name;
+    technology = parts.pure_engine_tech;
     description = PURE_DERIVATION_DESC;
   };
   
   # 3. Components (Formal Triad)
   leanProof = mkComponent {
-    name = "lean4_proof_engine";
-    technology = "Lean 4 / Unimath (CRQ-011)";
-    description = "Executes proof: Derivation is a Unimath Type (CRQ-012)";
+    name = parts.lean_proof_name;
+    technology = parts.lean_proof_tech;
+    description = parts.lean_proof_desc_full;
   };
   
   minizincSolver = mkComponent {
-    name = "minizinc_solver";
-    technology = "MiniZinc";
-    description = "Solves symmetry constraints based on Monster Primes";
+    name = parts.minizinc_solver_name;
+    technology = parts.minizinc_solver_tech;
+    description = parts.minizinc_desc_full;
   };
 
   # 4. Relationships (The Flow of Formal Verification)
   relationships = [
-    (mkRel { source = agent.id; destination = cwmVerification.id; description = "Is Verified By (FOAF/OWL)"; })
-    (mkRel { source = agent.id; destination = rigorLayer.id; description = "Submits Strain Portfolio under GMP/ITIL"; })
-    (mkRel { source = rigorLayer.id; destination = pureEngine.id; description = "Mandates Purity for Artifact Generation"; })
-    (mkRel { source = pureEngine.id; destination = minizincSolver.id; description = "Inputs Complexity/Gödel Numbers"; })
-    (mkRel { source = minizincSolver.id; destination = leanProof.id; description = "Outputs Solved Constraints (Arithmetization)"; })
-    (mkRel { source = leanProof.id; destination = rigorLayer.id; description = "Provides Formal Proof (CRQ-012)"; technology = "Mathematical Guarantees"; })
-    (mkRel { source = pureEngine.id; destination = monster.id; description = "Encodes Artifact based on Monster Genome"; })
-    (mkRel { source = monster.id; destination = leanProof.id; description = "Defines Topological Equivalence (HoTT Types as Spaces)"; })
+    (mkRel { source = parts.rel1_source; destination = parts.rel1_dest; description = parts.rel1_desc; technology = parts.rel1_tech; })
+    (mkRel { source = parts.rel2_source; destination = parts.rel2_dest; description = parts.rel2_desc; technology = parts.rel2_tech; })
+    (mkRel { source = parts.rel3_source; destination = parts.rel3_dest; description = parts.rel3_desc; technology = parts.rel3_tech; })
+    (mkRel { source = parts.rel4_source; destination = parts.rel4_dest; description = parts.rel4_desc; technology = parts.rel4_tech; })
+    (mkRel { source = parts.rel5_source; destination = parts.rel5_dest; description = parts.rel5_desc; technology = parts.rel5_tech; })
+    (mkRel { source = parts.rel6_source; destination = parts.rel6_dest; description = parts.rel6_desc; technology = parts.rel6_tech; })
+    (mkRel { source = parts.rel7_source; destination = parts.rel7_dest; description = parts.rel7_desc; technology = parts.rel7_tech; })
+    (mkRel { source = parts.rel8_source; destination = parts.rel8_dest; description = parts.rel8_desc; technology = parts.rel8_tech; })
   ];
 
   # The main application object that holds all data
