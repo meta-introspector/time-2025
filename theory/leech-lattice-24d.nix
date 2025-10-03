@@ -49,4 +49,5 @@ let
     # For instance, a derivation that generates a representation of its root system,
     # or a function to compute its theta series.
   };
-inleechLattice
+in
+leechLattice
