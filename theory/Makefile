@@ -45,7 +45,7 @@ unique-nix-terms: pre-nix-check
 # Build the Hackathon Mycology Workflow C4-UML diagram.
 build-mycology-workflow-puml: pre-nix-check
 	@echo "--- Building Hackathon Mycology Workflow C4-UML Diagram ---"
-	nix build --no-link --expr 'with import <nixpkgs> {}; import ./hackathon_mycology_workflow.puml.nix { inherit pkgs; monster_genome_data = import ./monster_genome_data.nix; formal_triad_env = import ./formal_triad_env.nix { inherit pkgs; }; }'
+	nix build --no-link --impure --expr 'with import <nixpkgs> {}; import ./generate_hackathon_uml.nix { inherit pkgs lib; umlData = import ./hackathon_uml_data.nix { inherit pkgs lib; formalTriad = import ./formal_triad_env.nix { inherit pkgs; }; }; }'
 	@echo "--- Hackathon Mycology Workflow C4-UML Diagram Built ---"
 
 all: leech-lattice-properties leech-lattice-dimensions leech-lattice-blade-17 monster-group-crqs unique-nix-terms build-mycology-workflow-puml
