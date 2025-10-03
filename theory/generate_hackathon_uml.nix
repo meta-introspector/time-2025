@@ -6,26 +6,26 @@ let
     let
       type = elem.type;
       id = elem.id or (lib.strings.toLower (lib.strings.removeSuffix " " elem.name));
-      name = "\"${elem.name}\""
-      tech = if elem ? technology && elem.technology != "" then ", \"${elem.technology}\"" else "";
-      desc = if elem ? description && elem.description != "" then ", \"${elem.description}\"" else "";
+      nameStr = lib.strings.escapeNixString elem.name;
+      techStr = lib.optionalString (elem ? technology && elem.technology != "") (lib.strings.escapeNixString elem.technology);
+      descStr = lib.optionalString (elem ? description && elem.description != "") (lib.strings.escapeNixString elem.description);
     in
     if type == "Person" || type == "External_System" then
-      "${type}(${id}, ${name}${desc})"
+      "${type}(${id}, \"${nameStr}\"${lib.optionalString (descStr != "") ", \"${descStr}\""})"
     else if type == "System_Boundary" then
-      "${type}(${id}, ${name})"
+      "${type}(${id}, \"${nameStr}\")"
     else
-      "${type}(${id}, ${name}${tech}${desc})";
+      "${type}(${id}, \"${nameStr}\"${lib.optionalString (techStr != "") ", \"${techStr}\""}${lib.optionalString (descStr != "") ", \"${descStr}\""})";
 
   # Function to generate PlantUML relationship definition string
   renderRelationship = rel:
     let
       source = rel.source;
       dest = rel.destination;
-      desc = "\"${rel.description}\""
-      tech = if rel ? technology && rel.technology != "" then ", \"${rel.technology}\"" else "";
+      descStr = lib.strings.escapeNixString rel.description;
+      techStr = lib.optionalString (rel ? technology && rel.technology != "") (lib.strings.escapeNixString rel.technology);
     in
-    "Rel_R(${source}, ${dest}, ${desc}${tech})";
+    "Rel_R(${source}, ${dest}, \"${descStr}\"${lib.optionalString (techStr != "") ", \"${techStr}\"
 
   # Assemble all PUML lines
   pumlLines = [
