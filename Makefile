@@ -23,6 +23,13 @@ build-foaf-context: pre-nix-check
 
 all: build-foaf-full-graph
 
+# Build the GitHub FOAF data flake.
+# This target evaluates the 'foaf/github-data' flake and prints its 'githubEntities' attribute as JSON.
+build-github-foaf-data: pre-nix-check
+	@echo "--- Building GitHub FOAF Data Flake ---"
+	nix eval --json .#lib.githubEntities
+	@echo "--- GitHub FOAF Data Flake Built ---"
+
 # Debugging the Aggregator Flake (TikTok Short: Isolating Flake Errors)
 # This target directly evaluates the aggregator flake to pinpoint syntax issues.
 # It bypasses the root flake to ensure the error is within the aggregator itself.
