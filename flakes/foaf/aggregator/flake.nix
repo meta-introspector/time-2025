@@ -10,6 +10,13 @@
 
   outputs = { self, nixpkgs, flake-utils, foafContextFlake, foafSeedDataFlake }:
     flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+        lib = pkgs.lib;
+
+        # Get the FOAF context from the context flake
+        foafContext = foafContextFlake.lib.foafContext;
+      in
       {
         # Temporarily return a simple set to debug syntax error
         foo = "bar";
