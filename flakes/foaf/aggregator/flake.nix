@@ -23,8 +23,9 @@
         fullGraph = { "@context" = foafContext; "@graph" = seedGraph; };
       in
       {
-        # Temporarily return a simple set to debug syntax error
-        foo = "bar";
+        lib = {
+          inherit foafContext seedGraph fullGraph;
+        };
       }
     );
 }
