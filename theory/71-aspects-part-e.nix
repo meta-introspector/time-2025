@@ -54,7 +54,7 @@ let
       number = 49;
       title = "The '71' in Database IDs";
       category = "Code Occurrences & Data Management";
-      description = "Its use as a database ID would uniquely identify a record or entity, crucial for data retrieval, integrity, and relational mapping.";
+      description = "Its use as a database ID would uniquely identify a record or entity, crucial for data retrieval, integrity, and relational mapping. In the context of this system, this specifically includes Solana contract addresses, as Solana is used as our database. Other potential database IDs could include those from traditional relational databases (e.g., PostgreSQL, MySQL), NoSQL databases (e.g., MongoDB, Cassandra), or other blockchain-based identifiers.";
     }
     {
       number = 50;
