@@ -83,14 +83,20 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-lvOiXQ5jAQtDp0sKokmWibjlgp1lbeRmU2xj0AsYehA=",
-        "path": "./flakes/search-results",
-        "type": "path"
+        "dir": "flakes/search-results",
+        "lastModified": 1759458448,
+        "narHash": "sha256-LCGkctFXU1daNM8vAMEHoF4PY1SzH02iQyNqouieoOg=",
+        "owner": "meta-introspector",
+        "repo": "time-2025",
+        "rev": "09d840c4ddfa69b592ff66a2b7e43eb304f88dbb",
+        "type": "github"
       },
       "original": {
-        "path": "./flakes/search-results",
-        "type": "path"
+        "dir": "flakes/search-results",
+        "owner": "meta-introspector",
+        "ref": "feature/foaf",
+        "repo": "time-2025",
+        "type": "github"
       }
     },
     "systems": {

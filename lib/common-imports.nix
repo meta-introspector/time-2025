@@ -1,16 +1,12 @@
 
-{ system ? "aarch64-linux" }:
+{ system ? "aarch64-linux", nixpkgs }:
 
 let
-  nixpkgs = import (builtins.fetchGit {
-    url = "https://github.com/meta-introspector/nixpkgs";
-    ref = "feature/CRQ-016-nixify";
-  }) { inherit system; };
+  pkgs = nixpkgs.legacyPackages.${system};
 in
 {
-  inherit nixpkgs;
+  inherit nixpkgs pkgs;
   lib = nixpkgs.lib;
-  pkgs = nixpkgs;
   builtins = builtins;
 }
 
