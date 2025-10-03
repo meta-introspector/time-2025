@@ -9,25 +9,8 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, foafContextFlake, foafSeedDataFlake }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        # Import common pkgs and lib definitions
-        commonLib = import ./lib/default.nix { inherit nixpkgs system; };
-        pkgs = commonLib.pkgs;
-        lib = commonLib.lib;
-
-        # Get the FOAF context
-        foafContext = import ./lib/get-foaf-context.nix { inherit foafContextFlake; };
-        # Get the seed graph
-        seedGraph = import ./lib/get-seed-graph.nix { inherit foafSeedDataFlake; };
-
-        # Combine them into a full graph
-        fullGraph = import ./lib/combine-full-graph.nix { inherit foafContext seedGraph; };
-      in
-      {
-        lib = {
-          inherit foafContext seedGraph fullGraph;
-        };
-      }
-    );
+    {
+      # Temporarily return a simple set to debug syntax error
+      foo = "bar";
+    };
 }
