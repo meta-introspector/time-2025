@@ -27,6 +27,13 @@ let
       nixMapping = "Derivations for wrapping compilers/LLM executions; functions for trace analysis; data structures for Monster elements.";
       relatedPrimes = [ "Monster Group (all factors)" ];
     };
+
+    CRQ_072 = {
+      title = "Quasiquotation of System: A Meta-Protocol for Self-Referential Architectures";
+      description = "Formalizes Quasiquotation of System as a foundational meta-protocol, leveraging quasi-quotations as polynomials and Gödel numbers for self-reference, formal verification, and dynamic adaptation.";
+      nixMapping = "Enhancements to nixIntrospector for quasi-quotation extraction; formal verification procedures for quasi-quoted components; application in metaprogramming and code generation.";
+      relatedPrimes = [ "Monster Group (all factors)" ];
+    };
   };
 in
 crqs
