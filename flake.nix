@@ -11,40 +11,58 @@
     logAnalyzer.url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=09/25/log_analyzer";
   };
 
-  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, flake-utils, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        # Load core utilities
-        pkgs = import nixpkgs { inherit system; };
-        lib = pkgs.lib;
+  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, ... }:
+    let
+      system = "aarch64-linux"; # Hardcode system as per user instruction
+      # Load core utilities
+      pkgs = import nixpkgs { inherit system; };
+      lib = pkgs.lib;
 
-        # 4. Define the SELF-INGESTION & MODIFICATION derivation
+      # 4. Define the SELF-INGESTION & MODIFICATION derivation
       selfIngestionDerivation = pkgs.runCommand "self-modifying-quine" {
-        # Inputs: The flake's source code, the Nix-Introspector tool, and simulated feedback.
-        # The self input points to the store path of the source directory.
         sourcePath = self;
-
-        # We need the Nix-Introspector tool to parse Nix expressions into a universal
-        # intermediate representation like S-expressions.
-        introspector = nixIntrospector.packages.${builtins.currentSystem}.default;
-
-        # Simulate feedback from the Log Analyzer (closing the strange loop)
-        # The log_analyzer produces output (telemetry/logs) that is consumed here.
-        feedbackLog = logAnalyzer.lib.simulatedSelfEncounterLog; # Accessing the lib attribute
-
-        # Define the shell command to execute the recursion
-        # This executes the analysis and modification steps.
+        introspector = nixIntrospector.packages.${system}.default;
+        feedbackLog = logAnalyzer.lib.simulatedSelfEncounterLog;
         buildCommand = ''
+          # Step 1: Read Self Source
+          echo "Reading source code from $sourcePath"
+          SOURCE_CONTENT=$(cat $sourcePath/flake.nix)
+
+          # Step 2: Introspection (Nix-Introspector translates code to data)
+          AST=$($introspector/bin/analyze $sourcePath/flake.nix)
+
+          # Step 3: Self-Correction Logic (The Strange Loop)
+          # Based on $feedbackLog (instructions potentially as emoji sequences),
+          # a core Rust tool (the Introspective Rust Engine) determines the modification.
+
+          # Placeholder: Dynamic action to generate new code
+          MODIFIED_CONTENT=$(/usr/bin/env bash ./scripts/self-evolve.sh "$SOURCE_CONTENT" "$feedbackLog")
+
+          # Step 4: Output the New Derivation (The Recursively Expanded Artifact)
           mkdir -p $out
-          echo "Dummy output" > $out/result.txt
+          echo "$MODIFIED_CONTENT" > $out/flake.nix
+
+          echo "Self-ingestion complete. New derivation available at $out"
         '';
       } ;
     in
     {
-      # Expose the modified script as the primary output
       packages.default = selfIngestionDerivation;
 
-      # Also expose the input source path for auditing (Content-Addressability)
+      apps.default = {
+        type = "app";
+        program = "${pkgs.writeShellScript "run-quine" ''
+          echo "--- Running the Self-Ingesting Quine ---"
+          QUINE_OUTPUT=$(nix build --no-link --print-out-paths .#packages.${system}.default)
+          echo "Quine Derivation Output Path: $QUINE_OUTPUT"
+          echo "--- Content of the modified flake.nix ---"
+          cat "$QUINE_OUTPUT/flake.nix"
+          echo "--- Quine execution complete ---"
+        ''}";
+      };
+
+      defaultApp = apps.default;
+
       lib.sourcePath = self;
-    });
+    };
 }
