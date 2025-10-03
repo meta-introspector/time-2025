@@ -4,7 +4,8 @@ This document outlines the immediate tasks to be addressed, prioritizing the res
 
 ## High Priority
 
-1.  **Debug `flakes/foaf/aggregator/flake.nix` Syntax Error:** Thoroughly investigate and resolve the persistent `syntax error, unexpected end of file, expecting ';'` in `flakes/foaf/aggregator/flake.nix`. This is the highest priority.
+1.  **Investigate and Resolve CRQ-044: Recurring Nix Flake Syntax Error Pattern:** Address the persistent syntax error pattern encountered in multiple Nix flakes that utilize `flake-utils.lib.eachDefaultSystem`, as documented in `docs/crqs/CRQ_044_Recurring_Nix_Flake_Syntax_Error_Pattern.md`. This is the highest priority.
+2.  **Debug `flakes/foaf/aggregator/flake.nix` Syntax Error:** Thoroughly investigate and resolve the persistent `syntax error, unexpected end of file, expecting ';'` in `flakes/foaf/aggregator/flake.nix`. This is the highest priority.
     *   1.1. Review Nix Language Specification: Re-read relevant sections of the Nix language manual regarding flake structure, `outputs` function, `eachDefaultSystem`, and semicolon rules.
     *   1.2. Examine `flake-utils` Source Code: Inspect the `flake-utils` repository (specifically `eachDefaultSystem` implementation) to understand its expected return structure.
     *   1.3. Create Minimal Reproducible Example: Develop a bare-bones `flake.nix` that uses `flake-utils.lib.eachDefaultSystem` and exhibits the same error.
@@ -22,10 +23,10 @@ This document outlines the immediate tasks to be addressed, prioritizing the res
     *   1.15. Examine `pkgs.lib` Usage: Confirm that `pkgs.lib` is being used correctly and not causing any unexpected behavior.
     *   1.16. Consider `nixpkgs` and `flake-utils` Versions: Although the URLs are fixed, ensure there isn't a subtle version incompatibility between `nixpkgs` and `flake-utils` that could manifest as a syntax error.
     *   1.17. Document Findings and Hypotheses: Keep a detailed log of all debugging steps, observations, and hypotheses to aid in problem-solving.
-2.  **Investigate and Resolve CRQ-042: Nix Flake Attribute Path Resolution Issue:** **[RESOLVED]** The persistent attribute path resolution error in `flakes/foaf/aggregator/flake.nix` has been resolved. The issue was a misunderstanding of how `flake-utils.lib.eachDefaultSystem` structures its outputs, and how the root `flake.nix` was trying to access them. The solution involved correctly accessing `foafAggregatorFlake.${system}.lib.fullGraph` in the root flake.nix. This also confirmed that the original syntax error was transient and resolved during iterative debugging.
+3.  **Investigate and Resolve CRQ-042: Nix Flake Attribute Path Resolution Issue:** **[RESOLVED]** The persistent attribute path resolution error in `flakes/foaf/aggregator/flake.nix` has been resolved. The issue was a misunderstanding of how `flake-utils.lib.eachDefaultSystem` structures its outputs, and how the root `flake.nix` was trying to access them. The solution involved correctly accessing `foafAggregatorFlake.${system}.lib.fullGraph` in the root flake.nix. This also confirmed that the original syntax error was transient and resolved during iterative debugging.
+4.  **Investigate and Resolve CRQ-043: Extract and Shellcheck Nix Embedded Scripts:** Address the task of identifying, extracting, and `shellcheck`ing shell scripts embedded in Nix files, as documented in `docs/crqs/CRQ_043_Extract_and_Shellcheck_Nix_Embedded_Scripts.md`.
 
-3.  **Investigate and Resolve CRQ-043: Extract and Shellcheck Nix Embedded Scripts:** Address the task of identifying, extracting, and `shellcheck`ing shell scripts embedded in Nix files, as documented in `docs/crqs/CRQ_043_Extract_and_Shellcheck_Nix_Embedded_Scripts.md`.
-
+## FOAF Refactoring
 ## FOAF Refactoring
 
 2.  **Refactor `09/foaf.nix`:** Replace direct imports with references to new single-concept flakes (e.g., `github-data`, `crq-aggregator`).
