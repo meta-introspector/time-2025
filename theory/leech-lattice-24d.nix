@@ -12,6 +12,13 @@
 { lib, ... }:
 
 let
+  # Load special blade configurations from the .d/ directory
+  specialBladeConfigs = lib.mapAttrs (
+    name: path: import path { inherit lib; }
+  ) (lib.filterAttrs (
+    name: type: type == "regular"
+  ) (builtins.readDir ./leech-lattice-blades.d));
+
   leechLattice = {
     name = "Leech Lattice (Λ₂₄)";
     dimensions = 24;
@@ -23,14 +30,7 @@ let
     connectionToMonsterGroup = "The Monster Group (F₁) acts as a symmetry group of the Leech lattice.";
     dimensionsList = lib.genList (i: "d${toString (i + 1)}") 24;
 
-    # Load special blade configurations from the .d/ directory
-    specialBladeConfigs = lib.mapAttrs (
-      name: path: import path { inherit lib; }
-    ) (lib.filterAttrs (
-      name: type: type == "regular"
-    ) (builtins.readDir ./leech-lattice-blades.d));
-
-    getDimension = index: 
+    getDimension = index:
       let
         bladeName = lib.elemAt leechLattice.dimensionsList index;
         baseBlade = {
@@ -49,5 +49,4 @@ let
     # For instance, a derivation that generates a representation of its root system,
     # or a function to compute its theta series.
   };
-in
-leechLattice
+inleechLattice
