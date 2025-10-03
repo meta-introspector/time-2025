@@ -4,7 +4,11 @@
 Persistent Attribute Path Resolution Issue in `flakes/foaf/aggregator/flake.nix`
 
 ## Status
-Open
+Resolved
+
+## Resolution Summary
+
+The persistent attribute path resolution issue was resolved by correctly understanding how `flake-utils.lib.eachDefaultSystem` structures its outputs. The error message `packages.aarch64-linux.aarch64-linux.lib.fullGraph` was misleading. The correct way to access attributes from a flake using `eachDefaultSystem` is `flake.<system>.<attribute>`. The root `flake.nix` was updated to correctly access `foafAggregatorFlake.${system}.lib.fullGraph`.
 
 ## Date
 October 2, 2025
