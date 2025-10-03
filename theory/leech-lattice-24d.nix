@@ -13,11 +13,9 @@
 
 let
   # Load special blade configurations from the .d/ directory
-  specialBladeConfigs = lib.mapAttrs (
+  specialBladeConfigs = lib.mapFileAttrs (
     name: path: import path { inherit lib; }
-  ) (lib.filterAttrs (
-    name: type: type == "regular"
-  ) (builtins.readDir ./leech-lattice-blades.d));
+  ) ./leech-lattice-blades.d;
 
   leechLattice = {
     name = "Leech Lattice (Λ₂₄)";
