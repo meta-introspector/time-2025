@@ -7,9 +7,9 @@ let
   FORMAL_TRIAD_DESC = "Nix, Lean 4/Unimath, MiniZinc for Ultimate Verification";
   
   # UML Element Definitions as Nix Functions/Attribute Sets
-  mkBoundary = { name, description }: { type = "System_Boundary"; inherit name description; };
-  mkContainer = { name, technology, description }: { type = "Container"; inherit name technology description; };
-  mkComponent = { name, technology, description }: { type = "Component"; inherit name technology description; };
+  mkBoundary = { name, description }: { type = "System_Boundary"; id = lib.strings.toLower (lib.strings.replaceStrings [" "] ["_"] name); inherit name description; };
+  mkContainer = { name, technology, description }: { type = "Container"; id = lib.strings.toLower (lib.strings.replaceStrings [" "] ["_"] name); inherit name technology description; };
+  mkComponent = { name, technology, description }: { type = "Component"; id = lib.strings.toLower (lib.strings.replaceStrings [" "] ["_"] name); inherit name technology description; };
   mkRel = { source, destination, description, technology ? null }: { type = "Rel"; inherit source destination description technology; };
 
   # --- System Elements Defined by Nix Attribute Sets ---
