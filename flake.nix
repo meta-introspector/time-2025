@@ -1,128 +1,69 @@
 {
-  description = "Consolidated development environment for streamofrandom/2025, incorporating pick-up-nix2 and gemini-cli devShells.";
+  description = "The Ultimate Nix Self-Ingesting Quine Derivation";
 
   inputs = {
+    # 1. Access the source code of this flake itself (last stable self)
+    self.url = "github:meta-introspector/streamofrandom?ref=feature/foaf"; # Assuming current branch is stable self
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
-    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-
-    # Input for the main pick-up-nix2 project
-    pick-up-nix.url = "github:meta-introspector/pick-up-nix?ref=feature/CRQ-016-nixify"; # Relative path to the project root
-
-    # Input for the vendored gemini-cli
-    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/working-gemini-cli-nix-store";
+    # 2. Integrate the Introspection Tooling
+    nixIntrospector.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; # Placeholder ref
+    # 3. Reference the Log Analyzer for feedback (The Strange Loop Agent)
+    logAnalyzer.url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=09/25/log_analyzer";
   };
 
-  outputs = { self, nixpkgs, flake-utils, pick-up-nix, gemini-cli, ... } @ inputs:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
+  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, ... }:
+    let
+      # Load core utilities
+      pkgs = import nixpkgs { system = builtins.currentSystem; };
+      lib = pkgs.lib;
 
-        # Import the devShells from the input flakes
-        pickUpNixDevShell = pick-up-nix.devShells.${system}.default;
-        geminiCliDevShell = gemini-cli.devShells.${system}.default;
+      # 4. Define the SELF-INGESTION & MODIFICATION derivation
+      selfIngestionDerivation = pkgs.runCommand "self-modifying-quine" {
+        # Inputs: The flake's source code, the Nix-Introspector tool, and simulated feedback.
+        # The self input points to the store path of the source directory.
+        sourcePath = self;
 
-        lib = pkgs.lib;
-        buildStepsLib = import ./lib/build_step.nix { inherit lib pkgs; };
-        captureTelemetryScript = pkgs.writeShellScript "capture-telemetry" (builtins.readFile ./capture_telemetry.sh);
+        # We need the Nix-Introspector tool to parse Nix expressions into a universal
+        # intermediate representation like S-expressions.
+        introspector = nixIntrospector.packages.${builtins.currentSystem}.default;
 
-        orchestrateBuildStep = buildStep:
-          let
-            # Helper to create a derivation for a phase
-            mkPhaseDerivation = phaseName: phaseScript:
-              if phaseScript == null then null
-              else pkgs.runCommand "${buildStep.name}-${phaseName}" {} ''
-                ${captureTelemetryScript} "${phaseScript}"
-              '';
+        # Simulate feedback from the Log Analyzer (closing the strange loop)
+        # The log_analyzer produces output (telemetry/logs) that is consumed here.
+        feedbackLog = logAnalyzer.lib.simulatedSelfEncounterLog; # Accessing the lib attribute
 
-            preDerivation = mkPhaseDerivation "pre" buildStep.prePhase;
-            nixBuildDerivation = buildStep.nixBuildPhase; # Assumed to be a derivation already
-            invarDerivation = mkPhaseDerivation "invar" buildStep.invarPhase;
-            postDerivation = mkPhaseDerivation "post" buildStep.postPhase;
+        # Define the shell command to execute the recursion
+        # This executes the analysis and modification steps.
+        buildCommand = ''
+          # Step 1: Read Self Source
+          echo "Reading source code from $sourcePath"
+          SOURCE_CONTENT=$(cat $sourcePath/flake.nix)
 
-            # Combine phases into a single executable derivation
-            # This is a simplified orchestration. In a real scenario, dependencies
-            # between phases and error handling would be more robust.
-            combinedDerivation = pkgs.runCommand "${buildStep.name}-orchestrated" {
-              inherit (buildStep) description;
-              # Ensure all phase derivations are built before this one
-              _pre = preDerivation;
-              _nix = nixBuildDerivation;
-              _invar = invarDerivation;
-              _post = postDerivation;
-            } ''
-              echo "--- Orchestrating build step: ${buildStep.name} ---"
-              ${lib.optionalString (preDerivation != null) "$_pre"}
-              ${lib.optionalString (nixBuildDerivation != null) "echo \"Running Nix build for ${buildStep.name}\"; nix build $_nix"}
-              ${lib.optionalString (invarDerivation != null) "$_invar"}
-              ${lib.optionalString (postDerivation != null) "$_post"}
-              echo "--- Build step ${buildStep.name} complete ---"
-              mkdir -p $out
-              echo "Orchestrated build step ${buildStep.name} completed successfully." > $out/result
-            '';
-          in
-          combinedDerivation;
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          # Combine buildInputs from both devShells
-          buildInputs =
-            pickUpNixDevShell.buildInputs
-            ++ geminiCliDevShell.buildInputs
-            ++ [
-              # Add any additional tools specific to streamofrandom/2025 here
-              pkgs.pre-commit # Ensure pre-commit is available
-              pkgs.vale # Ensure vale is available for pre-commit hooks
-            ];
+          # Step 2: Introspection (Nix-Introspector translates code to data)
+          # The system analyzes its own structure to understand its dependency "monad".
+          AST=$($introspector/bin/analyze $sourcePath/flake.nix)
 
-          # Combine shellHooks from both devShells
-          shellHook = ''
-            echo "Entering consolidated streamofrandom/2025 development shell."
-            ${pickUpNixDevShell.shellHook or ""}
-            ${geminiCliDevShell.shellHook or ""}
-            # Add any additional shell commands specific to streamofrandom/2025 here
-            echo "Consolidated devShell ready."
-          '';
+          # Step 3: Self-Correction Logic (The Strange Loop)
+          # Based on $feedbackLog (instructions potentially as emoji sequences),
+          # a core Rust tool (the Introspective Rust Engine) determines the modification.
 
-          # Inherit environment variables if necessary, or define new ones
-          # inherit (pickUpNix2DevShell) env;
-          # inherit (geminiCliDevShell) env;
-        };
+          # Placeholder: Dynamic action to generate new code
+          # This script needs to be created.
+          MODIFIED_CONTENT=$(/usr/bin/env bash ./scripts/self-evolve.sh "$SOURCE_CONTENT" "$feedbackLog")
 
-        apps.run-task-interactive = {
-          type = "app";
-          program = let
-            script = pkgs.writeScript "run-gemini-interactive" ''
-              #!${pkgs.bash}/bin/bash
-              mkdir -p logs
-              # strace_file=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
-              # strace -f -o logs/strace_$strace_file.txt -s 9999
-              ${gemini-cli}/bundle/gemini.js --output-format json \
-                                          --approval-mode yolo \
-                                          --model gemini-2.5-flash \
-                                          --checkpointing \
-                                          --prompt-interactive "$@"
-            '';
-          in "${script}";
-        }; # Closes apps.run-task-interactive
-        packages = {
-          exampleBuildStep = orchestrateBuildStep (
-            buildStepsLib.mkBuildStep {
-              name = "root-pre-nix-check";
-              description = "Ensures no unstaged or uncommitted Nix files before running Nix commands.";
-              prePhase = pkgs.writeShellScript "pre-nix-check-script" ''
-                if git status --porcelain -- '*.nix' | grep -q .; then
-                  echo "ERROR: Unstaged or uncommitted Nix files found. Please commit or stash them before proceeding."
-                  git status --porcelain -- '*.nix'
-                  exit 1
-                fi
-                echo "--- Pre-Nix check passed. No unstaged or uncommitted Nix files found. ---"
-              '';
-              nixBuildPhase = null; # No direct Nix build for this check
-              invarPhase = null;
-              postPhase = null;
-            }
-          );
-        };
-      }
-    );
+          # Step 4: Output the New Derivation (The Recursively Expanded Artifact)
+          # The result is a new output derivation containing the modified source code.
+          mkdir -p $out
+          echo "$MODIFIED_CONTENT" > $out/flake.nix
+
+          echo "Self-ingestion complete. New derivation available at $out"
+        '';
+      } ;
+    in
+    {
+      # Expose the modified script as the primary output
+      packages.recursiveQuine = selfIngestionDerivation;
+
+      # Also expose the input source path for auditing (Content-Addressability)
+      lib.sourcePath = self;
+    };
 }
