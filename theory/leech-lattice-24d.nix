@@ -23,7 +23,7 @@ let
     connectionToMonsterGroup = "The Monster Group (F₁) acts as a symmetry group of the Leech lattice.";
     dimensionsList = lib.genList (i: "d${toString (i + 1)}") 24;
     getDimension = index: {
-      name = leechLattice.dimensionsList.${toString index};
+      name = lib.elemAt leechLattice.dimensionsList index;
       index = index;
       # Add more properties specific to a single dimension/blade here if needed
       # For example, its 'vibe' from the bott framework, or its role in a specific CRQ.
