@@ -3,8 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
-    foafContextFlake.url = "./../context";
-    foafSeedDataFlake.url = "./../seed-data";
+    foafContextFlake.url = "github:meta-introspector/time-2025/feature/foaf?dir=flakes/foaf/context";
+    foafSeedDataFlake.url = "github:meta-introspector/time-2025/feature/foaf?dir=flakes/foaf/seed-data";
   };
 
   outputs = { self, nixpkgs, foafContextFlake, foafSeedDataFlake }:
