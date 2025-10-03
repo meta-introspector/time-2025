@@ -14,9 +14,12 @@ echo -e "\nQuerying attributes using nix-instantiate and nix-show-derivation:"
 DRV_PATH=$(nix-instantiate default.nix)
 echo "Derivation path: $DRV_PATH"
 
-echo "myCustomTag: $(nix show-derivation \"$DRV_PATH\" | jq -r '.[].env.myCustomTag')"
-echo "myVersionOverride: $(nix show-derivation \"$DRV_PATH\" | jq -r '.[].env.myVersionOverride')"
-echo "myExtraData (path): $(nix show-derivation \"$DRV_PATH\" | jq -r '.[].env.myExtraData')"
+# shellcheck disable=SC2086
+echo "myCustomTag: $(nix show-derivation \"\"\"\"$DRV_PATH\"\"\"\" | jq -r '.[].env.myCustomTag')"
+# shellcheck disable=SC2086
+echo "myVersionOverride: $(nix show-derivation \"\"\"\"$DRV_PATH\"\"\"\" | jq -r '.[].env.myVersionOverride')"
+# shellcheck disable=SC2086
+echo "myExtraData (path): $(nix show-derivation \"\"\"\"$DRV_PATH\"\"\"\" | jq -r '.[].env.myExtraData')"
 
 # 3. Query attributes using nix eval (more direct)
 echo -e "\nQuerying attributes using nix eval:"
@@ -26,8 +29,11 @@ echo "myExtraData (path): $(nix eval --raw -f default.nix myExtraData)"
 
 # 4. Access attributes from within a nix-shell
 echo -e "\nAccessing attributes from within a nix-shell:"
+# shellcheck disable=SC2154
 nix-shell default.nix --run "echo \"Inside nix-shell: myCustomTag is $myCustomTag\""
+# shellcheck disable=SC2154
 nix-shell default.nix --run "echo \"Inside nix-shell: myVersionOverride is $myVersionOverride\""
+# shellcheck disable=SC2154
 nix-shell default.nix --run "echo \"Inside nix-shell: myExtraData is $myExtraData\""
 
 echo -e "\n--- Test complete for mypackage.nix ---"
