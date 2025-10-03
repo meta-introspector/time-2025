@@ -1,6 +1,6 @@
 # Makefile for Leech Lattice (Λ₂₄) model
 
-.PHONY: all leech-lattice-properties leech-lattice-dimensions pre-nix-check
+.PHONY: all leech-lattice-properties leech-lattice-dimensions leech-lattice-blade-17 pre-nix-check
 
 # Ensure no unstaged or uncommitted Nix files before running Nix commands.
 # This helps maintain purity and prevents accidental builds from dirty working directories.
@@ -25,4 +25,10 @@ leech-lattice-dimensions: pre-nix-check
 	nix eval --impure --raw --expr 'with import <nixpkgs> {}; let leech = import ./leech-lattice-24d.nix { inherit lib; }; in builtins.toJSON leech.dimensionsList'
 	@echo "--- Leech Lattice Dimensions Displayed ---"
 
-all: leech-lattice-properties leech-lattice-dimensions
+# Display the properties of the 17th blade (d17).
+leech-lattice-blade-17: pre-nix-check
+	@echo "--- Displaying Leech Lattice Blade 17 ---"
+	nix eval --impure --json --expr 'with import <nixpkgs> {}; import ./leech-lattice-blade-instance.nix { inherit lib; }'
+	@echo "--- Leech Lattice Blade 17 Displayed ---"
+
+all: leech-lattice-properties leech-lattice-dimensions leech-lattice-blade-17
