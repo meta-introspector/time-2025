@@ -60,18 +60,18 @@
                 exit 1
               fi
 
-              NAR_PATH="${CRQ_BINSTORE_PATH}/${NAR_FILE}"
+              NAR_PATH="''${CRQ_BINSTORE_PATH}/''${NAR_FILE}"
 
               if [[ ! -f "$NAR_PATH" ]]; then
-                echo "Error: NAR file not found at ${NAR_PATH}"
+                echo "Error: NAR file not found at ''${NAR_PATH}"
                 exit 1
               fi
 
-              echo "Unpacking NAR file: ${NAR_PATH}"
-              mkdir -p "${OUTPUT_DIR}"
-              nix-nar-unpack --file "${NAR_PATH}" --to "${OUTPUT_DIR}"
+              echo "Unpacking NAR file: ''${NAR_PATH}"
+              mkdir -p "''${OUTPUT_DIR}"
+              nix-nar-unpack --file "''${NAR_PATH}" --to "''${OUTPUT_DIR}"
 
-              echo "NAR file unpacked to: ${OUTPUT_DIR}"
+              echo "NAR file unpacked to: ''${OUTPUT_DIR}"
               EOF
                             chmod +x $out/bin/fetch-nar-data.sh
 
@@ -89,33 +89,33 @@
               UNPACKED_DATA_DIR="$out/unpacked-nar-data"
 
               if [[ ! -d "$UNPACKED_DATA_DIR" ]]; then
-                echo "Error: Unpacked data directory not found: ${UNPACKED_DATA_DIR}"
+                echo "Error: Unpacked data directory not found: ''${UNPACKED_DATA_DIR}"
                 exit 1
               fi
 
               # Step 3: Load the data
-              DATA_FILE="${UNPACKED_DATA_DIR}/llm-context-OEIS-latest.txt" # Adjust based on actual NAR content
+              DATA_FILE="''${UNPACKED_DATA_DIR}/llm-context-OEIS-latest.txt" # Adjust based on actual NAR content
 
               if [[ ! -f "$DATA_FILE" ]]; then
-                echo "Error: Data file not found in unpacked NAR: ${DATA_FILE}"
+                echo "Error: Data file not found in unpacked NAR: ''${DATA_FILE}"
                 exit 1
               fi
 
-              LLM_CONTEXT=\$(cat "${DATA_FILE}")
+              LLM_CONTEXT=$(cat "''${DATA_FILE}")
 
               echo "Loaded LLM context from NAR file. First 100 characters:"
-              echo "\${LLM_CONTEXT:0:100}..."
+              echo "''${LLM_CONTEXT:0:100}..."
 
               # Step 4: Construct a prompt for Gemini
               # Replace {LLM_CONTEXT} in the template
-              GENERATED_PROMPT=\$(echo "$PROMPT_TEMPLATE" | ${pkgs.jq}/bin/jq -r . | sed "s/{LLM_CONTEXT}/\${LLM_CONTEXT}/g")
+              GENERATED_PROMPT=$(echo "$PROMPT_TEMPLATE" | ${pkgs.jq}/bin/jq -r . | sed "s/{LLM_CONTEXT}/''${LLM_CONTEXT}/g")
 
               echo "Generated Gemini Prompt (first 200 chars):"
-              echo "\${GENERATED_PROMPT:0:200}..."
+              echo "''${GENERATED_PROMPT:0:200}..."
 
               # Step 5: Execute the Gemini LLM task
               echo "Executing Gemini LLM task with model: $LLM_MODEL"
-              $GEMINI_CLI --model=$LLM_MODEL --prompt "\${GENERATED_PROMPT}"
+              $GEMINI_CLI --model=$LLM_MODEL --prompt "''${GENERATED_PROMPT}"
 
               echo "LLM task completed."
               EOF

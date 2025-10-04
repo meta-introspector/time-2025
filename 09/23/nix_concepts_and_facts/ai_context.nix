@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { }, concepts ? import ./concepts { inherit pkgs; } }:
+{ pkgs ? import <nixpkgs> { }, lib ? pkgs.lib, concepts ? import ./concepts { inherit pkgs; } }:
 
 pkgs.runCommand "ai-context-23" { } ''
   mkdir -p $out/concepts

@@ -21,11 +21,9 @@ NIX_CHECKER_PATH="$PROJECT_ROOT/commit-msg-check.nix"
 # We use nix-build to execute the Nix expression and get its exit code.
 # The Nix expression itself is designed to exit with 0 for success and 1 for failure.
 
-NIX_PATH=$(dirname "$NIX_CHECKER_PATH")
-CHECKER_SRC=$(cat checker.nix)
 # Temporarily change directory to where commit-msg-check.nix is located for relative imports
-(cd "${NIX_PATH}" && \
-  nix-build --no-out-link --expr "${CHECKER_SRC}" > /dev/null
+(cd "$(dirname "$NIX_CHECKER_PATH")" && \
+  nix-build --no-out-link "$NIX_CHECKER_PATH" --argstr commitMsgFile "$COMMIT_MSG_FILE" > /dev/null \
 )
 
 NIX_CHECK_EXIT_CODE=$?

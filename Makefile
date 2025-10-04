@@ -68,6 +68,32 @@ build-foaf-seed-data: pre-nix-check
 	nix eval --json .#lib.seedGraph
 	@echo "--- FOAF Seed Data Flake Built ---"
 
+.PHONY: all pre-nix-check build-foaf-context install-hooks
+
+# ... existing targets ...
+
+.PHONY: all pre-nix-check build-foaf-context install-hooks git-commit
+
+# ... existing targets ...
+
 .PHONY: install_hook
 install_hook:
 	@./install_hook_script.sh "$(DRY_RUN)"
+
+# New target to install pre-commit hooks within the Nix development environment
+install-hooks:
+	@echo "--- Installing pre-commit hooks within Nix development environment ---"
+	# nix develop --command runs a command within the Nix development shell
+	# This ensures that 'pre-commit' and 'vale' (and other devShell packages) are available
+	nix develop --command bash -c "pre-commit install"
+	@echo "--- pre-commit hooks installed. You can now 'git commit'. ---"
+
+# New target to run git commit within the Nix development environment
+git-commit:
+	@echo "--- Running git commit within Nix development environment ---"
+	# Expects a commit message file named 'commit_message.txt' in the project root.
+	# nix develop --command runs a command within the Nix development shell
+	# This ensures that 'pre-commit' and 'vale' (and other devShell packages) are available
+	# We pass the commit message from the file using -F
+	nix develop --command bash -c "git commit -F commit_message.txt"
+	@echo "--- git commit complete. ---"

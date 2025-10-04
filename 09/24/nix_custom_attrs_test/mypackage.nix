@@ -1,5 +1,5 @@
 # mypackage.nix
-{ stdenv, fetchurl }:
+{ pkgs, lib, stdenv ? pkgs.stdenv, fetchurl ? pkgs.fetchurl }:
 
 stdenv.mkDerivation rec {
   pname = "hello";

@@ -35,7 +35,7 @@ repos:
 
       - id: shellcheck
         name: shellcheck
-        entry: shellcheck
+        entry: shellcheck -x
         language: system
         files: \.sh$
         # Ensures shell scripts adhere to best practices, aiding in

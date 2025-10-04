@@ -1,10 +1,10 @@
-{ system, secretScannerModule, log-analyzer-flake, build-time-gemini-capture-flake, ... } @ args:
+{ pkgs, lib, system ? builtins.currentSystem, secretScannerModule ? {}, log-analyzer-flake ? {}, build-time-gemini-capture-flake ? {} } @ args:
 
 let
-  common = import ../../../lib/common-imports.nix { inherit system; };
-  lib = common.lib;
-  pkgs = common.pkgs;
-  builtins = common.builtins;
+  # common = import ../../../lib/common-imports.nix { inherit system; };
+  # lib = common.lib;
+  # pkgs = common.pkgs;
+  # builtins = common.builtins;
 
   # Helper function for pure log analysis
   analyzePureLogsToStore = {

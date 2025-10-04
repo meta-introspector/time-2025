@@ -1,9 +1,11 @@
 # nix-llm-context/lib/prime-sieve.nix
 # Implements a basic Sieve of Eratosthenes in Nix
 
-{ lib }:
+{ pkgs, lib }:
 
 let
+  mod = a: b: a - (b * (a / b));
+
   # Function to generate a list of numbers from 2 to n
   range = n: lib.genList (i: i + 2) (n - 1);
 
@@ -14,7 +16,7 @@ let
       let
         p = lib.head numbers;
         # Filter out multiples of p
-        filtered = lib.filter (n: (n % p) != 0) (lib.tail numbers);
+        filtered = lib.filter (n: (mod n p) != 0) (lib.tail numbers);
       in
       [ p ] ++ (sieve filtered);
 

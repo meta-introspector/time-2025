@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { }
+{ pkgs ? import <nixpkgs> { }, lib ? pkgs.lib
 , concepts ? { number-23 = pkgs.writeText "dummy-number-23" "23"; is-prime-23 = pkgs.writeText "dummy-is-prime-23" "true"; fact-23-oracle = pkgs.writeText "dummy-fact-23-oracle" "fact"; }
 , zos ? let
     primesList = import ./primes.nix;
@@ -14,6 +14,6 @@
 }:
 
 let
-  aiContext = import ./lib/ai-context.nix { inherit pkgs concepts zos nixLib; };
+  aiContext = import ./lib/ai-context.nix { inherit pkgs lib concepts zos nixLib; };
 in
 aiContext

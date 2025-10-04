@@ -1,9 +1,7 @@
-CRQ-041(feat): Implement and verify Step 1 of 2-gram indexer
+feat(CRQ-041): add-colosseum-mirror-flake-and-move-hackathon-71-parts
 
-This commit implements and verifies the first step of the Nix 2-gram indexer pipeline.
-
-- Refactored `lib/common-imports.nix` to use `builtins.fetchGit` for `nixpkgs` to resolve build errors.
-- Modified `10/01/docs/theory/nix_code_indexer.nix` to filter for files only in `find` command to prevent "Is a directory" errors.
-- Updated `Makefile` to correctly handle experimental Nix features (`impure-derivations`, `ca-derivations`) and to use `nix-build` for evaluating `temp_step1_eval.nix`.
-- Created `temp_step1_eval.nix` to evaluate `nix_2gram_indexer_step1.nix` which calls `nixCodeIndexerModule.indexNixFiles`.
-- Verified that `nix_2gram_indexer_step1.nix` successfully indexes Nix files and produces `nix-files.index.json` in the Nix store.
+- Introduced a Nix flake for mirroring the Colosseum website, including a Makefile with detailed comments for building and daily archiving.
+- Moved the colosseum-mirror flake and its Makefile to 10/03/.
+- Added 10/03/README.md.
+- Moved theory/hackathon_71_parts.nix to 10/03/hackathon_71_parts.nix.
+- Converted poems to pure Nix representation in 09/poems.nix.

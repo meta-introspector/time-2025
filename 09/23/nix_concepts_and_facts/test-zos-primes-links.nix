@@ -1,5 +1,14 @@
-{ pkgs ? import <nixpkgs> { }
-, zos ? { zosPrimes = { "prime-2" = pkgs.writeText "dummy-prime-2" "2"; }; }
+{ pkgs ? import <nixpkgs> { }, lib ? pkgs.lib
+, zos ? let
+    primesList = [ 2 3 5 7 11 13 17 19 23 29 31 41 47 59 71 ];
+    dummyZosPrimes = builtins.listToAttrs (builtins.map
+      (prime: {
+        name = "prime-${builtins.toString prime}";
+        value = pkgs.writeText "dummy-prime-${builtins.toString prime}" "${builtins.toString prime}";
+      })
+      primesList);
+  in
+  { zosPrimes = dummyZosPrimes; }
 , nixLib ? pkgs.lib
 }:
 

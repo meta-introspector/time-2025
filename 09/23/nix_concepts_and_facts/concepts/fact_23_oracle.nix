@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
+{ pkgs ? import <nixpkgs> { }, lib ? pkgs.lib }:
 
 let
   repo = pkgs.fetchGit {
