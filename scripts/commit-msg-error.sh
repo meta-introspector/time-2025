@@ -5,6 +5,19 @@
 COMMIT_MSG="$1"
 REGEX="$2"
 
+# Function to convert a string to kebab-case
+to_kebab_case() {
+  echo "$1" | sed -r 's/([A-Z])/-\1/g' | tr '[:upper:]' '[:lower:]' | sed -r 's/^-//' | sed -r 's/[^a-z0-9-]+/-/g' | sed -r 's/--+/-/g'
+}
+
+# Extract the scope from the commit message using grep -P
+SCOPE=$(echo "${COMMIT_MSG}" | grep -P -o "(?<=\()[^)]*(?=\):)" || true)
+
+SUGGESTED_SCOPE=""
+if [[ -n "${SCOPE}" ]]; then
+  SUGGESTED_SCOPE=$(to_kebab_case "${SCOPE}")
+fi
+
 echo "--------------------------------------------------------------------------------" >&2
 echo "ERROR: Commit message does not follow the required format!" >&2
 echo "--------------------------------------------------------------------------------" >&2
@@ -18,6 +31,12 @@ echo "'''" >&2
 echo "${REGEX}" >&2
 echo "'''" >&2
 echo "" >&2
+
+if [[ -n "${SCOPE}" && "${SCOPE}" != "${SUGGESTED_SCOPE}" ]]; then
+  echo "Hint: Did you mean: ${SUGGESTED_SCOPE}" >&2
+  echo "" >&2
+fi
+
 echo "Allowed formats:" >&2
 echo "  - CRQ-XXX: <message>" >&2
 echo "  - <type>(<scope>): <message>" >&2

@@ -51,6 +51,15 @@ repos:
         language: system
         files: \.(sh|py|rs|nix)$
 
+      - id: crq-document-check
+        name: CRQ/Incident/Task Document Existence Check
+        entry: nix run .#crq-document-check
+        language: system
+        files: \.md$
+        pass_filenames: false
+        # This hook ensures that CRQ, Incident, or Task documents referenced in the commit message
+        # actually exist, enforcing "Verification and Testing" (bott 10).
+
 
   - repo: https://github.com/meta-introspector/vale-precommit
     rev: 318812b24e90f97e458497976282014ee25a52fd

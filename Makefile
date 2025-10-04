@@ -97,3 +97,10 @@ git-commit:
 	# We pass the commit message from the file using -F
 	nix develop --command bash -c "git commit -F commit_message.txt"
 	@echo "--- git commit complete. ---"
+
+# Target to get the commit message regex from regex-generator.nix
+# This is useful for debugging and understanding the commit message validation rules.
+get-commit-regex:
+	@echo "--- Getting Commit Message Regex ---"
+	@nix-instantiate --eval --json regex-generator.nix --arg pkgs '(import <nixpkgs> {})'
+	@echo "--- Commit Message Regex Retrieved ---"

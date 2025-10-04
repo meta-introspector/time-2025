@@ -1,7 +1,10 @@
-feat(CRQ-041): add-colosseum-mirror-flake-and-move-hackathon-71-parts
+docs(crq-065-incident-report): Document persistent Nix syntax errors and update commit checks
 
-- Introduced a Nix flake for mirroring the Colosseum website, including a Makefile with detailed comments for building and daily archiving.
-- Moved the colosseum-mirror flake and its Makefile to 10/03/.
-- Added 10/03/README.md.
-- Moved theory/hackathon_71_parts.nix to 10/03/hackathon_71_parts.nix.
-- Converted poems to pure Nix representation in 09/poems.nix.
+Created an incident report (INC-20251004-001) detailing persistent Nix syntax errors encountered during the implementation of CRQ-065.
+
+Temporarily commented out problematic code in `error-isolation.nix`, `error-constructor.nix`, and `fold-accumulator.nix` to allow script execution.
+
+Updated `regex-generator.nix` to allow `crq`, `incident`, or `task` as valid scopes.
+Modified `scripts/commit-msg-error.sh` to provide a kebab-case hint for scopes.
+
+Next task: Investigate and resolve persistent Nix syntax errors in evaluation modules.

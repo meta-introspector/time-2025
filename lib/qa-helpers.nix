@@ -4,7 +4,7 @@
 # These functions are designed to be atomic and testable, facilitating the
 # composition of comprehensive QA checks.
 
-{ pkgs, lib, ... }:
+{ pkgs, lib, nix-stdlib, ... }:
 
 let
   # Function to recursively collect all .nix file paths from a given attribute set.
@@ -12,9 +12,9 @@ let
   collectNixFilesFromAttrset = attrs:
     lib.lists.flatten (
       lib.attrsets.mapAttrsToList (name: value:
-        if lib.isAttrs value then
+        if nix-stdlib.lib.types.attrs.isType value then
           collectNixFilesFromAttrset value # Recurse into sub-attribute sets
-        else if lib.isPath value && lib.strings.hasSuffix ".nix" (builtins.toString value) then
+        else if nix-stdlib.lib.types.paths.isType value && lib.strings.hasSuffix ".nix" (builtins.toString value) then
           [ (builtins.toString value) ] # Collect .nix file paths
         else
           [] # Ignore other values
