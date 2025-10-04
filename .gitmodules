@@ -16,3 +16,6 @@
 [submodule "09/25/log_analyzer/osint/PHONEINFOGA"]
 	path = 09/25/log_analyzer/osint/PHONEINFOGA
 	url = https://github.com/SUNDOWNDEV/PHONEINFOGA
+[submodule "10/04/nix-stdlib"]
+	path = 10/04/nix-stdlib
+	url = https://github.com/meta-introspector/nix-stdlib
