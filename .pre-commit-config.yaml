@@ -53,11 +53,9 @@ repos:
 
       - id: crq-document-check
         name: CRQ/Incident/Task Document Existence Check
-        entry: nix run .#crq-document-check
+        entry: scripts/check-crq-document.sh
         language: system
-        files: \.md$
-        pass_filenames: false
-        # This hook ensures that CRQ, Incident, or Task documents referenced in the commit message
+        stages: [commit-msg]        # This hook ensures that CRQ, Incident, or Task documents referenced in the commit message
         # actually exist, enforcing "Verification and Testing" (bott 10).
 
 

@@ -16,6 +16,17 @@ let
 
 in
 if isCrqIncTsk && !documentExists then
-  false # Document not found
+  {
+    success = false;
+    message = "Error: CRQ/Incident/Task document for scope '${scope}' not found.";
+  }
+else if isCrqIncTsk && documentExists then
+  {
+    success = true;
+    message = "CRQ/Incident/Task document for scope '${scope}' found.";
+  }
 else
-  true # Valid or no CRQ/Incident/Task scope
+  {
+    success = true;
+    message = "No CRQ/Incident/Task scope found in commit message, skipping document check.";
+  }

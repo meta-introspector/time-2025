@@ -9,6 +9,7 @@
     nixIntrospector.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; # Placeholder ref, acts as LIL/QQC for Nix expressions
     # 3. Reference the Log Analyzer for feedback (The Strange Loop Agent)
     logAnalyzer.url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=09/25/log_analyzer";
+    crqDocumentCheck.url = "github:meta-introspector/streamofrandom?ref=feature/foaf&dir=flakes/crq-document-check";
   };
 
   outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, ... }:
@@ -64,7 +65,9 @@
       };
     in
     {
-      packages.${system}.default = selfIngestionDerivation;
+      packages.${system} = {
+        default = selfIngestionDerivation;
+      };
 
       apps.${system}.default = {
         type = "app";
@@ -87,6 +90,7 @@
         packages = with pkgs; [
           vale # Add vale to the development shell
           pre-commit # Add pre-commit to the development shell
+          jq # Add jq for parsing JSON output
           # Add any other development tools here
         ];
         # You can also add shell hooks or environment variables here

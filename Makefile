@@ -88,6 +88,15 @@ install-hooks:
 	nix develop --command bash -c "pre-commit install"
 	@echo "--- pre-commit hooks installed. You can now 'git commit'. ---"
 
+.PHONY: reproduce-nix-segfault
+reproduce-nix-segfault:
+	@echo "--- Reproducing Nix Segmentation Fault and Capturing Logs ---"
+	@bash -c "./scripts/reproduce_nix_build_log.sh"
+	@bash -c "./scripts/reproduce_nix_build_strace.sh"
+	@bash -c "./scripts/reproduce_nix_flake_check_log.sh"
+	@bash -c "./scripts/reproduce_nix_flake_check_strace.sh"
+	@echo "--- Nix Segmentation Fault Reproduction Complete. Check log files. ---"
+
 # New target to run git commit within the Nix development environment
 git-commit:
 	@echo "--- Running git commit within Nix development environment ---"
@@ -104,3 +113,66 @@ get-commit-regex:
 	@echo "--- Getting Commit Message Regex ---"
 	@nix-instantiate --eval --json regex-generator.nix --arg pkgs '(import <nixpkgs> {})'
 	@echo "--- Commit Message Regex Retrieved ---"
+
+# Target to check CRQ/Incident/Task document existence using the Nix flake app.
+# This is used by the pre-commit hook.
+check-crq-document:
+	@echo "--- Running CRQ/Incident/Task Document Existence Check ---"
+	@nix run .#aarch64-linux.crq-document-check -- $(COMMIT_MSG_FILE)
+	@echo "--- CRQ/Incident/Task Document Existence Check Complete ---"
+
+# Target to test the CRQ/Incident/Task document existence check script.
+# Usage: make test-crq-document-check COMMIT_MSG_FILE=path/to/commit_message.txt
+test-crq-document-check:
+	@echo "--- Running CRQ/Incident/Task Document Existence Test ---"
+	@$(NIX_BUILD_CRQ_CHECK_CMD) $(COMMIT_MSG_FILE)
+	@echo "--- CRQ/Incident/Task Document Existence Test Complete ---"
+
+NIX_BUILD_CRQ_CHECK_CMD = nix build .#aarch64-linux.crq-document-check-script --no-link --print-out-paths | xargs -I {} {}
+
+# Target to test the crq-search.nix function.
+# Usage: make test-crq-search [KEYWORD="your_keyword"]
+test-crq-search:
+	@echo "--- Testing crq-search.nix ---"
+	@nix eval --json --expr 'let pkgs = import (builtins.getFlake "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify").legacyPackages.aarch64-linux; crqSearch = import ./10/04/lib/crq-search.nix { inherit pkgs; crqDir = ./docs/crqs; }; in crqSearch { keyword = "$(KEYWORD)"; }'
+	@echo "--- crq-search.nix Test Complete ---"
+
+# Target to search CRQs by keyword or list latest suggestions.
+# Usage: make search-crqs [KEYWORD="your_keyword"]
+search-crqs:
+	@echo "--- Searching CRQs ---"
+	@nix eval --json .#crqFunctions.search --apply "f: f { system = \"aarch64-linux\"; commitMsgFile = \"$(COMMIT_MSG_FILE)\"; }"
+	@echo "--- CRQ Search Complete ---"
+
+# Target to list CRQs with optional keyword filtering and number of suggestions.
+# Usage: make list-crqs [KEYWORD="your_keyword"] [NUM_SUGGESTIONS=3]
+list-crqs:
+	@echo "--- Listing CRQs ---"
+	@nix eval --json --expr 'let
+	  flake = builtins.getFlake (toString ./.);
+	  system = builtins.currentSystem;
+	  searchCrqs = flake.inputs.flakes.crq-search.main.lib.${system}.searchCrqs;
+	  keyword = builtins.getEnv "KEYWORD";
+	  numSuggestions = builtins.fromJSON (builtins.getEnv "NUM_SUGGESTIONS" or "3");
+	  crqDir = ./docs/crqs;
+	in
+	builtins.toJSON (searchCrqs crqDir (if keyword == "" then null else keyword) numSuggestions)'
+	@echo "--- CRQ Listing Complete ---"
+
+.PHONY: debug-pkgs-writeShellScriptBin-type
+debug-pkgs-writeShellScriptBin-type:
+	@echo "--- Debugging pkgs.writeShellScriptBin type ---"
+	@nix eval --raw --impure --expr 'let pkgs = (builtins.getFlake "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify").outputs.legacyPackages.aarch64-linux; in builtins.typeOf pkgs.writeShellScriptBin'
+	@echo "--- Debugging pkgs.writeShellScriptBin type Complete ---"
+
+.PHONY: debug-nix-eval-args
+debug-nix-eval-args:
+	@echo "--- Debugging nix eval arguments ---"
+	@nix eval --json --arg pkgs '${nixpkgs}' --arg crqCheckLib '${./10/04/lib/crq-document-check.nix}' --argstr commitMsgFile "dummy_commit_msg.txt" --expr 'let pkgs = import pkgs {}; in import crqCheckLib { inherit pkgs; commitMsgFile = commitMsgFile; }'
+	@echo "--- Debugging nix eval arguments Complete ---"
+
+.PHONY: debug-crq-check-lib-eval
+debug-crq-check-lib-eval:
+	@echo "--- Debugging crq-document-check.nix evaluation ---"
+	@nix eval --json --arg pkgs '${nixpkgs}' --argstr commitMsgFile "dummy_commit_msg.txt" --expr 'import ${./10/04/lib/crq-document-check.nix} { pkgs = import pkgs {}; commitMsgFile = commitMsgFile; }'
+	@echo "--- Debugging crq-document-check.nix evaluation Complete ---"
