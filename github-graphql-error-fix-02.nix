@@ -1,4 +1,4 @@
-{ lib, pkgs, builtins, buildGraphQLQuery }:
+{ lib, buildGraphQLQuery }:
 
 let
   getRepositoryDetails = { owner, repo }:

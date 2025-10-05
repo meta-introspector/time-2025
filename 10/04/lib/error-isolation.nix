@@ -11,8 +11,8 @@ let
       if types.attrs.isType evalResult.value then
         { value = evalResult.value; errors = []; }
       else
-        { value = null; errors = (errors.typeError "attrs" (types.values.type evalResult.value)).errors; }
+        { value = null; errors = errors.typeError "attrs" (types.values.type evalResult.value); }
     else
-      { value = null; errors = (errors.evalError evalResult.error).errors; };
+      { value = null; errors = errors.evalError evalResult.error; };
 in
 finalResult

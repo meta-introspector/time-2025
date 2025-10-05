@@ -1,3 +1,6 @@
+{ buildGraphQLQuery, ... }:
+
+let
   # Conceptual examples of GitHub GraphQL queries
   exampleQueries = {
     # Query to get repository details
@@ -38,3 +41,5 @@
       }
       buildGraphQLQuery { inherit query variables; };
   };
+in
+exampleQueries
