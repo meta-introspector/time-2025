@@ -221,6 +221,9 @@ lint-nix: pre-nix-check
 	@echo "--- Linting Nix files with statix ---"
 	nix develop --command bash -c "statix check . > statix_output.txt 2>&1"
 	@echo "--- Nix linting complete. Output saved to statix_output.txt ---"
+	@echo "--- Splitting statix_output.txt into smaller files ---"
+	split -l 100 statix_output.txt statix_output_part_
+	@echo "--- statix_output.txt split into statix_output_part_aa, statix_output_part_ab, etc. ---"
 
 # Target to run statix check on hackathon_71_parts.nix
 statix-hackathon-parts: pre-nix-check
