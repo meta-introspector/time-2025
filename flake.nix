@@ -10,9 +10,14 @@
     # 3. Reference the Log Analyzer for feedback (The Strange Loop Agent)
     logAnalyzer.url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=09/25/log_analyzer";
     sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
+    # 4. Ontology repository for Nix concepts
+    nixOntologyRepo = {
+      url = "github:meta-introspector/ontology";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, ... }:
+  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, ... }:
     let
       system = "aarch64-linux"; # Hardcode system as per user instruction
       # Load core utilities
@@ -64,9 +69,16 @@
         '';
       };
     in
+    let
+      exampleUrlFetch = import (self + "/example_url_fetch.nix") {
+        inherit pkgs lib builtins nixOntologyRepo self;
+      };
+    in
     {
       packages.${system} = {
         default = selfIngestionDerivation;
+        exampleUrlFetch = exampleUrlFetch;
+        ontologyUrls = exampleUrlFetch.extractedUrls;
       };
 
       apps.${system}.default = {

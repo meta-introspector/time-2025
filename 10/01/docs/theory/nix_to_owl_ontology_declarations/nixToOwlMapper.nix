@@ -13,10 +13,10 @@
 
     # Start OWL Turtle output
     echo "@prefix : <${nixOntologyPrefix}> ." > $ONTOLOGY_FILE
-    echo "@prefix owl: <${owlPrefix}> ." >> $ONTOLOGY_FILE
-    echo "@prefix rdf: <${rdfPrefix}> ." >> $ONTOLOGY_FILE
-    echo "@prefix rdfs: <${rdfsPrefix}> ." >> $ONTOLOGY_FILE
-    echo "@prefix xsd: <${xsdPrefix}> ." >> $ONTOLOGY_FILE
+    echo "@prefix owl: <${owlPrefix.urlString}> ." >> $ONTOLOGY_FILE
+    echo "@prefix rdf: <${rdfPrefix.urlString}> ." >> $ONTOLOGY_FILE
+    echo "@prefix rdfs: <${rdfsPrefix.urlString}> ." >> $ONTOLOGY_FILE
+    echo "@prefix xsd: <${xsdPrefix.urlString}> ." >> $ONTOLOGY_FILE
     echo "" >> $ONTOLOGY_FILE
     echo "<${nixOntologyPrefix}> rdf:type owl:Ontology ;" >> $ONTOLOGY_FILE
     echo "  rdfs:comment \"Automatically generated OWL ontology from Nix code.\" ." >> $ONTOLOGY_FILE
