@@ -21,12 +21,13 @@ We are actively engaged in Nixification efforts (CRQ-016) to ensure:
 
 ## Setup
 
-To set up the project, ensure you have Nix installed. Then, clone the repository and its submodules:
+To set up the project, ensure you have Nix installed. Then, clone the repository and its submodules. For a comprehensive setup, including pre-commit hooks and Nix environment configuration, it is highly recommended to use the `onboard_project.sh` script.
 
 ```bash
 git clone https://github.com/meta-introspector/streamofrandom.git
 cd streamofrandom/2025
 git submodule update --init --recursive
+./scripts/onboard_project.sh
 ```
 
 ## Usage
@@ -48,9 +49,18 @@ make lint-nix
 
 This command will run `statix` on all Nix files, save the output to `statix_output.txt`, and then split this file into smaller, manageable parts (e.g., `statix_output_part_aa`, `statix_output_part_ab`).
 
+## Documentation
+
+Our comprehensive documentation covers various aspects of the project, including CRQs, SOPs, and tutorials.
+
+*   **CRQs (Change Request Documents):** `docs/crqs/`
+*   **SOPs (Standard Operating Procedures):** `docs/sops/`
+*   **Tutorials & Guides:** `docs/tutorials/`
+    *   `docs/tutorials/Contributing_with_CRQs_and_SOPs.md`
+    *   `docs/Nix_and_Precommit_Setup.md`
+    *   `docs/sops/SOP_Running_Nix_Tools.md`
+
 ## Contributing (CRQ-017)
 
-We welcome contributions! Please refer to our documentation (CRQ-017) for guidelines on contributing with CRQs and SOPs:
-
-*   `docs/tutorials/Contributing_with_CRQs_and_SOPs.md`
+We welcome contributions! Please refer to our [Documentation](#documentation) for guidelines on contributing with CRQs and SOPs.
 

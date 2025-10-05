@@ -227,7 +227,7 @@ develop-crq-search-lattice-layer1: pre-nix-check
 # Target to lint Nix files using statix.
 lint-nix: pre-nix-check
 	@echo "--- Linting Nix files with statix ---"
-	nix develop --command bash -c "statix check . > statix_output.txt 2>&1"
+	-nix develop --command bash -c "statix check . > statix_output.txt 2>&1" || true
 	@echo "--- Nix linting complete. Output saved to statix_output.txt ---"
 	@echo "--- Splitting statix_output.txt into smaller files ---"
 	split -l 100 statix_output.txt statix_output_part_
@@ -274,3 +274,9 @@ debug-plantuml-path:
 	@echo "--- Debugging PlantUML Generator Path ---"
 	@nix eval --raw --impure --expr '(builtins.path { path = ./.; name = "flake-root"; }) + "/lib/plantuml_generator.nix"'
 	@echo "--- PlantUML Generator Path Debug Complete ---"
+
+.PHONY: clean
+clean:
+	@echo "--- Cleaning temporary files ---"
+	rm -f error.txt statix_output.txt statix_output_part_*
+	@echo "--- Temporary files cleaned ---"
