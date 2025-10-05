@@ -29,3 +29,5 @@
         baseFlakeMetadata = base.packages.${system}.default; # Inherit metadata from base flake
       } "echo 'Flake Name: $(meta.flakeName)' > $out\n echo 'Description: $(DESCRIPTION)' >> $out\n echo 'System: $(meta.system)' >> $out\n echo 'Nixpkgs Ref: $(meta.nixpkgsRef)' >> $out\n echo 'Flake-Utils Ref: $(meta.flakeUtilsRef)' >> $out\n echo 'Base Flake Metadata: $(baseFlakeMetadata)' >> $out";
     };
+
+}
