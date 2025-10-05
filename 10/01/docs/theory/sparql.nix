@@ -1,5 +1,4 @@
 {
-  _:
 
 let
   common = import ../../../lib/common-imports.nix {};
