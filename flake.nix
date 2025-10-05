@@ -91,6 +91,7 @@
           vale # Add vale to the development shell
           pre-commit # Add pre-commit to the development shell
           jq # Add jq for parsing JSON output
+          statix # Add statix for Nix linting
           # Add any other development tools here
         ];
         # You can also add shell hooks or environment variables here
