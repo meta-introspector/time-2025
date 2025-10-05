@@ -1,7 +1,7 @@
 # lib/generate-project-nix/error-isolation.nix
 # This module isolates the problematic logic from evaluateNixFile.nix
 
-{ evalResult, file, builtins, errors, types, ... }:
+{ evalResult, file, builtins, errorHelpers, types, ... }:
 
 let
   # If evalResult indicates success, check if the value is an attribute set.
@@ -11,8 +11,8 @@ let
       if types.attrs.isType evalResult.value then
         { value = evalResult.value; errors = []; }
       else
-        { value = null; errors = errors.typeError "attrs" (types.values.type evalResult.value); }
+        { value = null; errors = errorHelpers.typeError "attrs" (types.values.type evalResult.value); }
     else
-      { value = null; errors = errors.evalError evalResult.error; };
+      { value = null; errors = errorHelpers.evalError evalResult.error; };
 in
 finalResult
