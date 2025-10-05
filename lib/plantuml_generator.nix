@@ -1,31 +1,46 @@
 { lib, umlData }:
 
 let
+  # Helper function to properly quote and escape strings for PlantUML
+  quoteString = str: "\\\"${lib.strings.escapeNixString str}\\\"";
+
+  # Helper function to construct a PlantUML entity string
+  createEntity = { type, id, name, technology ? null, description ? null }:
+    let
+      args = [ (quoteString name) ]
+             ++ (lib.optional (technology != null) (quoteString technology))
+             ++ (lib.optional (description != null) (quoteString description));
+    in
+    "${type}(${id}, ${lib.strings.concatStringsSep ", " args})";
+
+  # Helper function to construct a PlantUML relationship string
+  createRelationship = { source, destination, description, technology ? null }:
+    let
+      args = [ (quoteString description) ]
+             ++ (lib.optional (technology != null) (quoteString technology));
+    in
+    "Rel_R(${source}, ${destination}, ${lib.strings.concatStringsSep ", " args})";
+
   # Function to generate PlantUML entity definition string
   renderElement = elem:
     let
-      type = elem.type;
       id = elem.id or (lib.strings.toLower (lib.strings.removeSuffix " " elem.name));
-      nameStr = lib.strings.escapeNixString elem.name;
-      techStr = lib.optionalString (elem ? technology && elem.technology != "") (lib.strings.escapeNixString elem.technology);
-      descStr = lib.optionalString (elem ? description && elem.description != "") (lib.strings.escapeNixString elem.description);
     in
-    if type == "Person" || type == "External_System" then
-      "${type}(${id}, \"${nameStr}\"${lib.optionalString (descStr != "") ", \"${descStr}\"})"
-    else if type == "System_Boundary" then
-      "${type}(${id}, \"${nameStr}\")"
+    if elem.type == "Person" || elem.type == "External_System" then
+      createEntity { type = elem.type; id = id; name = elem.name; description = elem.description; }
+    else if elem.type == "System_Boundary" then
+      createEntity { type = elem.type; id = id; name = elem.name; }
     else
-      "${type}(${id}, \"${nameStr}\"${lib.optionalString (techStr != "") ", \"${techStr}\"${lib.optionalString (descStr != "") ", \"${descStr}\"})";
+      createEntity { type = elem.type; id = id; name = elem.name; technology = elem.technology; description = elem.description; };
 
   # Function to generate PlantUML relationship definition string
   renderRelationship = rel:
-    let
+    createRelationship {
       source = rel.source;
-      dest = rel.destination;
-      descStr = lib.strings.escapeNixString rel.description;
-      techStr = lib.optionalString (rel ? technology && rel.technology != "") (lib.strings.escapeNixString rel.technology);
-    in
-    "Rel_R(${source}, ${dest}, \"${descStr}\"${lib.optionalString (techStr != "") ", \"${techStr}\"})";
+      destination = rel.destination;
+      description = rel.description;
+      technology = rel.technology;
+    };
 
   # Assemble all PUML lines
   pumlLines = [
@@ -48,6 +63,6 @@ in
 
 {
   inherit pumlLines;
-  # Optionally, expose renderElement and renderRelationship if they might be reused
   inherit renderElement renderRelationship;
+  inherit quoteString createEntity createRelationship;
 }
