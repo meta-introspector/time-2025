@@ -278,5 +278,5 @@ debug-plantuml-path:
 .PHONY: clean
 clean:
 	@echo "--- Cleaning temporary files ---"
-	rm -f error.txt statix_output.txt statix_output_part_*
+	rm -f error.txt statix_output.txt statix_output_part_* statix_errors.txt statix_errors_part_* statix_header_errors.txt statix_header_output.txt
 	@echo "--- Temporary files cleaned ---"
