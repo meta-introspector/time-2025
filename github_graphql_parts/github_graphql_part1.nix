@@ -1,7 +1,7 @@
-{ lib, pkgs, builtins, ... }:
+{ nixpkgs, ... }:
 
 let
-  common = import ../../../lib/common-imports.nix {};
+  common = import ../../../lib/common-imports.nix { inherit nixpkgs; };
   # Inherit common libraries and builtins
   inherit (common) lib pkgs builtins;
 

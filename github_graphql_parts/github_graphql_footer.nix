@@ -1,6 +1,7 @@
-in
+{ buildGraphQLQuery, executeGraphQLQuery, exampleQueries, ... }:
+
 {
-  buildGraphQLQuery = buildGraphQLQuery;
-  executeGraphQLQuery = executeGraphQLQuery;
-  exampleQueries = exampleQueries;
+  inherit buildGraphQLQuery;
+  inherit executeGraphQLQuery;
+  inherit exampleQueries;
 }

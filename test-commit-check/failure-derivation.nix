@@ -7,6 +7,4 @@ let
   '';
 in
 
-pkgs.runCommand "commit-msg-check-failed" {} ''
-  ${runErrorScript}
-'';
+pkgs.runCommand "commit-msg-check-failed" {} "${runErrorScript}";

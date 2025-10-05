@@ -1,6 +1,9 @@
 { lib, ... }:
 
 let
+  buildDescription = { baseText, replacements ? {} }:
+    lib.foldlAttrs (text: key: value: lib.strings.replaceStrings [ "<${key}>" ] [ value ] text) baseText replacements;
+
   aspect29Imported = (import ./71-aspects-part-c-aspect-29-otel-event-trace.nix { inherit lib; }).aspect29;
 
   aspectsOf71 = [
@@ -52,12 +55,16 @@ let
       category = "Project Specifics & Documentation";
       description = "The presence of '71' in extracted ticket IDs (e.g., '867189_idea_a_proof_system...') indicates its role in project management and conceptual tracking, even in informal documentation.";
     }
+    ,
     aspect29Imported,
     {
       number = 30;
       title = "The '71' in GitHub Repository IDs";
       category = "Code Occurrences & External References";
-      description = "The appearance of '71' in GitHub repository IDs (e.g., 'id":98588021') indicates its pervasive presence in external references and metadata, linking to the broader ecosystem of open-source projects.";
+      description = buildDescription {
+        baseText = "The appearance of '71' in GitHub repository IDs (e.g., '<EXAMPLE_ID>') indicates its pervasive presence in external references and metadata, linking to the broader ecosystem of open-source projects.";
+        replacements = { EXAMPLE_ID = "id:98588021"; };
+      };
     }
   ];
 in aspectsOf71

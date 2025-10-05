@@ -1,5 +1,8 @@
+{ lib, ... }:
+
+let
   # A pure Nix function to construct the JSON payload for a GraphQL query.
-  buildGraphQLQuery = { 
+  buildGraphQLQuery = {
     query,    # The GraphQL query string
     variables ? {}, # Optional variables for the query
   }:
@@ -7,3 +10,5 @@
     inherit query;
     inherit variables;
   };
+in
+buildGraphQLQuery

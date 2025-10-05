@@ -1,7 +1,7 @@
-{ pkgs, lib, builtins, ... }:
+{ nixpkgs, ... }:
 
 let
-  common = import ../../../lib/common-imports.nix {};
+  common = import ../../../lib/common-imports.nix { inherit nixpkgs; };
   lib = common.lib;
   pkgs = common.pkgs;
   builtins = common.builtins;
@@ -81,12 +81,6 @@ let
           version = "0.1.0";
           src = self-repo; # The fetched Git repository
           # ... conceptual build instructions ...
-          # For example, if it's a Rust project:
-          # cargoDeps = pkgs.rustPlatform.fetchCargoVendor { inherit src; lockFile = ./Cargo.lock; hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; };
-          # nativeBuildInputs = with pkgs; [ pkg-config openssl ];
-          # buildInputs = with pkgs; [ ];
-          # buildPhase = "cargo build --release";
-          # installPhase = "mkdir -p \$out/bin; cp target/release/${repoName} \$out/bin/";
         };
         # ... other outputs like devShells, checks, etc. ...
       }

@@ -102,6 +102,10 @@ in
   "28-SumOfThreePrimes" = "31 = 3 + 5 + 23 or 3 + 11 + 17 or 5 + 7 + 19 or 5 + 13 + 13";
   "29-SumOfDistinctPrimes" = "31 = 2 + 3 + 7 + 19";
   "30-NumberInSomeMonths" = "31 is the number of days in January, March, May, July, August, October, December.";
-  "31-TheNthPrime" = "The " + (toString n) + "th prime number is " + (toString (getNthPrime n primesUpTo130)) + "."; # The 31st prime is 127
+  "31-TheNthPrime" =
+    let
+      nthPrime = getNthPrime n primesUpTo130;
+    in
+    "The " + (toString n) + "th prime number is " + (toString nthPrime) + "."; # The 31st prime is 127
   "32-FixForCubeNumberCheck" = (import ./31-mathematical-forms-cube-number-check-fix.nix { inherit lib; }).fixedLine;
 }

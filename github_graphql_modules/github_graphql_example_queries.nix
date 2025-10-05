@@ -1,4 +1,4 @@
-{ lib, pkgs, builtins, buildGraphQLQuery, ... }:
+{ lib, buildGraphQLQuery, ... }:
 
 let
   # Conceptual examples of GitHub GraphQL queries
