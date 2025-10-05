@@ -19,10 +19,14 @@ let
 
 
 
-  nixToOwlMapper = (import ./nix_to_owl_ontology_declarations/nixToOwlMapper.nix) {
-    inherit lib pkgs builtins nixCodeIndexerModule nixOntologyPrefix;
-    owlPrefix = owlPrefix;
-    rdfPrefix = rdfPrefix;
-    rdfsPrefix = rdfsPrefix;
-    xsdPrefix = xsdPrefix;
+  nixToOwlMapper = nixFileIndex: (import ./nix_to_owl_ontology_declarations/nixToOwlMapper.nix) {
+    inherit lib pkgs builtins nixCodeIndexerModule nixOntologyPrefix nixFileIndex;
+    owlPrefix = owlPrefix; # Pass the attribute set
+    rdfPrefix = rdfPrefix; # Pass the attribute set
+    rdfsPrefix = rdfsPrefix; # Pass the attribute set
+    xsdPrefix = xsdPrefix; # Pass the attribute set
   };
+in
+{
+  inherit nixToOwlMapper;
+}

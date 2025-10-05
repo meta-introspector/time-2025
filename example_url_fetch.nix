@@ -9,11 +9,14 @@ let
     name = "example-spec-website";
   };
 
-  # Import nix_to_owl_ontology.nix and pass nixOntologyRepo
-  nixToOwlOntology = import (self + "/10/01/docs/theory/nix_to_owl_ontology.nix") {
+  nixToOwlOntologyModule = import (self + "/10/01/docs/theory/nix_to_owl_ontology.nix") {
     inherit lib pkgs builtins nixOntologyRepo;
     nixCodeIndexerModule = null; # Placeholder, as it's not defined here
   };
+
+  # Call nixToOwlMapper with a dummy nixFileIndex for now
+  # In a real scenario, nixFileIndex would come from nixCodeIndexerModule
+  nixToOwlOntology = nixToOwlOntologyModule.nixToOwlMapper "/path/to/dummy/nix-files.index.json";
 
   # Extract URLs from the nixOntologyRepo
   extractedUrls = urlExtractor.extractUrls {

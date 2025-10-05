@@ -79,6 +79,8 @@
         default = selfIngestionDerivation;
         exampleUrlFetch = exampleUrlFetch;
         ontologyUrls = exampleUrlFetch.extractedUrls;
+        nixOwlOntology = exampleUrlFetch.nixToOwlOntology.nixToOwlMapper;
+        # nixOntologyRepoPath = pkgs.runCommand "nix-ontology-repo-path" {} "ln -s ${nixOntologyRepo} $out"; # Expose nixOntologyRepo as a derivation
       };
 
       apps.${system}.default = {
