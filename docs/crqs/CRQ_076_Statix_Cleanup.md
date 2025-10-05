@@ -50,4 +50,5 @@ During a recent `statix` linting run, numerous warnings and critical syntax erro
 *   Adherence to project-wide Nix coding standards.
 
 ## Related CRQs:
-*   CRQ-044: Recurring Nix Flake Syntax Error Pattern (This CRQ is a direct follow-up to address these patterns systematically).
+*   [CRQ-044: Recurring Nix Flake Syntax Error Pattern](CRQ_044_Recurring_Nix_Flake_Syntax_Error_Pattern.md) (This CRQ is a direct follow-up to address these patterns systematically).
+*   [SOP-Statix-Nix-Code-Cleanup](../sops/SOP_Statix_Nix_Code_Cleanup.md) (Standard Operating Procedure for Statix Nix Code Cleanup).
