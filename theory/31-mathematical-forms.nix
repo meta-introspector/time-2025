@@ -41,7 +41,7 @@ let
       let
         iter = n: acc:
           if n == 0 then acc
-          else iter (n / 10) ([ (n % 10) ] ++ acc);
+          else iter (n div 10) ([ (n % 10) ] ++ acc);
       in
       iter num [];
 
