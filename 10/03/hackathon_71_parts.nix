@@ -110,5 +110,23 @@ let
   part70_mycelial_strain_storage_name = "mycelial_strain_storage";
   part71_mycelial_strain_storage_desc = "Stores artifact portfolios and gene codes as Content-Addressable Spore Vials (Nix flakes/derivations)";
 
+  # Import PlantUML generation logic
+  plantumlGenerator = import ./lib/plantuml_generator.nix { inherit lib umlData; };
+
 in
-  allParts
+  allParts // {
+    plantUML = ''
+      @startuml
+      !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+      
+      ' Define custom stereotypes for vibes
+      ' Example: stereotype "Refinement/Communication" as RefinementCommunication
+      ' For now, we'll just use the vibe name directly as a stereotype
+      
+      ${plantumlGenerator.allPartsUML}
+      
+      ${plantumlGenerator.allRelationshipsUML}
+      
+      @enduml
+    '';
+  }
