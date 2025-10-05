@@ -33,18 +33,24 @@ git submodule update --init --recursive
 
 (Further usage instructions will be added here as the project evolves.)
 
+pre-commit install
+```
+
+## Code Quality
+
+We use `statix` for linting and static analysis of Nix expressions to ensure code quality and adherence to our architectural principles.
+
+To run the Nix linter and generate a detailed report:
+
+```bash
+make lint-nix
+```
+
+This command will run `statix` on all Nix files, save the output to `statix_output.txt`, and then split this file into smaller, manageable parts (e.g., `statix_output_part_aa`, `statix_output_part_ab`).
+
 ## Contributing (CRQ-017)
 
 We welcome contributions! Please refer to our documentation (CRQ-017) for guidelines on contributing with CRQs and SOPs:
 
 *   `docs/tutorials/Contributing_with_CRQs_and_SOPs.md`
-
-## Pre-commit Hooks
-
-This project utilizes pre-commit hooks to maintain code quality and ensure adherence to project standards. These hooks automatically run checks (e.g., linting, formatting, commit message validation) before each commit. Ensure they are installed:
-
-```bash
-pre-commit install
-```
-
 

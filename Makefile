@@ -216,6 +216,14 @@ develop-crq-search-lattice-layer1: pre-nix-check
 	@echo "--- Exited Development Shell for Layer 1 CRQ Search Lattice Flake ---"
 
 
+# Nix Code Quality and Static Analysis with Statix
+# Statix is a linter and static analysis tool for Nix expressions. It helps enforce
+# coding standards, identify potential issues, and improve the overall quality
+# and maintainability of Nix code. In the context of the 'bott' framework,
+# Statix contributes to the 'Refinement/Communication' (bott 17) and
+# 'Verification and Testing' (bott 13) aspects by ensuring the structural
+# integrity and adherence to best practices in our Nix architectural genome.
+
 # Target to lint Nix files using statix.
 lint-nix: pre-nix-check
 	@echo "--- Linting Nix files with statix ---"
@@ -225,13 +233,20 @@ lint-nix: pre-nix-check
 	split -l 100 statix_output.txt statix_output_part_
 	@echo "--- statix_output.txt split into statix_output_part_aa, statix_output_part_ab, etc. ---"
 
+# Target to run statix check on all Nix files in the project.
+# This provides a comprehensive overview of code quality across the entire Nix codebase.
+statix-all: pre-nix-check
+	@echo "--- Running statix check on all Nix files in the project ---"
+	nix develop --command bash -c "statix check ."
+	@echo "--- Statix check on all Nix files complete ---"
+
 # Target to run statix check on hackathon_71_parts.nix
 statix-hackathon-parts: pre-nix-check
 	@echo "--- Running statix check on 10/03/hackathon_71_parts.nix ---"
 	nix run github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify#statix -- check 10/03/hackathon_71_parts.nix
 	@echo "--- statix check on hackathon_71_parts.nix complete ---"
 
-.PHONY: debug-pkgs-writeShellScriptBin-type
+.PHONY: debug-pkgs-writeShellScriptBin-type statix-all
 debug-pkgs-writeShellScriptBin-type:
 	@echo "--- Debugging pkgs.writeShellScriptBin type ---"
 	@nix eval --raw --impure --expr 'let pkgs = (builtins.getFlake "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify").outputs.legacyPackages.aarch64-linux; in builtins.typeOf pkgs.writeShellScriptBin'
@@ -245,7 +260,13 @@ debug-nix-eval-args:
 
 .PHONY: debug-crq-check-lib-eval
 debug-crq-check-lib-eval:
-	@echo "--- Debugging crq-document-check.nix evaluation ---"
+
+# Perform a comprehensive check of the flake, enabling impure-derivations and ca-derivations.
+flake-check-impure:
+	@echo "--- Running Nix Flake Check with Impure and CA Derivations ---"
+	@nix flake check --extra-experimental-features "impure-derivations ca-derivations"
+	@echo "--- Nix Flake Check Complete ---"
+
 	@nix eval --json --arg pkgs '${nixpkgs}' --argstr commitMsgFile "dummy_commit_msg.txt" --expr 'import ${./10/04/lib/crq-document-check.nix} { pkgs = import pkgs {}; commitMsgFile = commitMsgFile; }'
 
 # Debugging the absolute path to plantuml_generator.nix within the flake context.

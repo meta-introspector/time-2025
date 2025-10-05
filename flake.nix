@@ -77,7 +77,7 @@
     {
       packages.${system} = {
         default = selfIngestionDerivation;
-        exampleUrlFetch = exampleUrlFetch;
+        exampleUrlFetch = exampleUrlFetch.fetchedWebsite;
         ontologyUrls = exampleUrlFetch.extractedUrls;
         nixOwlOntology = exampleUrlFetch.nixToOwlOntology.nixToOwlMapper;
         generateHackathonUml = import ./theory/generate_hackathon_uml.nix { inherit pkgs lib self; };

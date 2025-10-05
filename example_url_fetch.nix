@@ -16,7 +16,7 @@ let
 
   # Call nixToOwlMapper with a dummy nixFileIndex for now
   # In a real scenario, nixFileIndex would come from nixCodeIndexerModule
-  nixToOwlOntology = nixToOwlOntologyModule.nixToOwlMapper "/path/to/dummy/nix-files.index.json";
+  nixToOwlOntology = pkgs.writeText "nix-owl-ontology.owl" (nixToOwlOntologyModule.nixToOwlMapper "/path/to/dummy/nix-files.index.json");
 
   # Extract URLs from the nixOntologyRepo
   extractedUrls = urlExtractor.extractUrls {
