@@ -19,11 +19,5 @@ let
       projectRoot = projectRoot;
       name = name;
     };
-
-    indexedFilesJsonDerivation;
-
-
-in
-{
-  generate2GramIndexStep3 = generate2GramIndexStep3;
-}
+  in
+  indexedFilesJsonDerivation
