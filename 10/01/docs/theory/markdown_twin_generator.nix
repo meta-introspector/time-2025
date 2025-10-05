@@ -67,10 +67,12 @@ let
   };
   # Conceptual: Function to render Markdown to HTML
   renderToHtml = pkgs.runCommand "render-${name}-html" {
-    inherit markdownContent;
+    # Pass markdownContent as an environment variable or a file
+    # For simplicity, we'll pass it as a file.
+    markdownContentFile = pkgs.writeText "markdown-content.md" markdownContent;
     nativeBuildInputs = [ pkgs.pandoc ]; # Example: use pandoc
   } ''
-    echo "$markdownContent" | pandoc -f markdown -t html > $out/index.html
+    cat ${markdownContentFile} | pandoc -f markdown -t html > $out/index.html
   '';
 in
 {
