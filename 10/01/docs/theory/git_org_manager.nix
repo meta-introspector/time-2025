@@ -80,7 +80,7 @@ let
           pname = "${repoName}";
           version = "0.1.0";
           src = self-repo; # The fetched Git repository
-          # ... conceptual build instructions ...
+          # build instructions
         };
         # ... other outputs like devShells, checks, etc. ...
       }
