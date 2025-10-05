@@ -72,7 +72,7 @@ build-foaf-seed-data: pre-nix-check
 
 # ... existing targets ...
 
-.PHONY: all pre-nix-check build-foaf-context install-hooks git-commit
+.PHONY: all pre-nix-check build-foaf-context install-hooks uninstall-pre-commit gc-pre-commit clean-pre-commit git-commit
 
 # ... existing targets ...
 
@@ -87,6 +87,24 @@ install-hooks:
 	# This ensures that 'pre-commit' and 'vale' (and other devShell packages) are available
 	nix develop --command bash -c "pre-commit install"
 	@echo "--- pre-commit hooks installed. You can now 'git commit'. ---"
+
+# Target to uninstall pre-commit hooks
+uninstall-pre-commit:
+	@echo "--- Uninstalling pre-commit hooks ---"
+	nix develop --command bash -c "pre-commit uninstall"
+	@echo "--- pre-commit hooks uninstalled. ---"
+
+# Target to run pre-commit garbage collection
+gc-pre-commit:
+	@echo "--- Running pre-commit garbage collection ---"
+	nix develop --command bash -c "pre-commit gc"
+	@echo "--- pre-commit garbage collection complete. ---"
+
+# Target to clean pre-commit cache
+clean-pre-commit:
+	@echo "--- Cleaning pre-commit cache ---"
+	nix develop --command bash -c "pre-commit clean"
+	@echo "--- pre-commit cache cleaned. ---"
 
 .PHONY: reproduce-nix-segfault
 reproduce-nix-segfault:
