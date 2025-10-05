@@ -1,5 +1,5 @@
 # owl.nix
-{ pkgs, lib, ... }:
+{ pkgs, lib, builtins, ... }:
 
 let
   # OWL namespace
@@ -9,6 +9,8 @@ let
   foaf = "http://xmlns.com/foaf/0.1/";
   dcterms = "http://purl.org/dc/terms/";
   schema = "http://schema.org/";
+
+  fetchUrlImpure = (import ../fetch-url-impure.nix { inherit builtins; }).fetchUrlImpure;
 
   # Helper function to create an OWL Class
   mkClass = { id, label, comment ? null, subClassOf ? null } :
@@ -40,12 +42,13 @@ let
       // (lib.optionalAttrs (range != null) { "${rdfs}range" = range; });
 
 in {
+  fetchUrlImpure = fetchUrlImpure;
   "@context" = {
     "owl" = owl;
     "rdf" = rdf;
     "rdfs" = rdfs;
     "foaf" = foaf;
-    "dcterms" = dcterms;
+    "dcterms" = "http://purl.org/dc/terms/";
     "schema" = schema;
     "github" = "https://github.com/ontology/";
   };
