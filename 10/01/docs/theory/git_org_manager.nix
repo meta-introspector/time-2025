@@ -1,5 +1,5 @@
 {
-  ...}:
+  { pkgs, lib, builtins, ... }:
 
 let
   common = import ../../../lib/common-imports.nix {};
@@ -60,7 +60,7 @@ let
     }
     '''
       mkdir -p $out/${repoName}
-      cat > $out/${repoName}/flake.nix << EOF
+      cat > $out/${repoName}/flake.nix << ''EOF''
 {
   description = "Nix flake for ${owner}/${repoName}";
 
@@ -74,7 +74,7 @@ let
   outputs = { self, nixpkgs, flake-utils, self-repo }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.\${system};
+        pkgs = nixpkgs.legacyPackages.${system};
       in
       {
         packages.default = pkgs.stdenv.mkDerivation {
@@ -93,7 +93,7 @@ let
       }
     );
 }
-EOF
+''EOF''
       echo "Nix flake created for ${owner}/${repoName} at $out/${repoName}/flake.nix" >&2
     ''';
 

@@ -37,19 +37,19 @@ let
       __impure = true; # Invoking external plotting tool is impure
       nativeBuildInputs = [ pkgs.python3 pkgs.python3Packages.matplotlib pkgs.python3Packages.pandas ]; # Conceptual: Python with Matplotlib and Pandas
     }
-    '''
+    ''shellContent''
       echo "Conceptually rendering plot: ${plotDefinition.title} (Type: ${plotDefinition.type})..." >&2
       mkdir -p $out
       # In a real implementation, this would involve:
       # 1. Generating a Python script from plotDefinition.
       # 2. Running the Python script to generate the plot image.
-      cat > plot_script.py << EOF
+      cat > plot_script.py << \EOF
 import matplotlib.pyplot as plt
 import pandas as pd
 import json
 import os
 
-plot_def = json.loads('''${builtins.toJSON plotDefinition}''')
+plot_def = json.loads("""${builtins.toJSON plotDefinition}""")
 
 # Conceptual data loading from plot_def['data']
 # The data is expected to be a list of dicts (rows) from the pandasModule.DataFrameSchema
@@ -74,12 +74,12 @@ plt.title(plot_def.get('title', ''))
 plt.xlabel(plot_def.get('xlabel', ''))
 plt.ylabel(plot_def.get('ylabel', ''))
 
-output_path = os.path.join('$out', plot_def.get('outputFileName', 'plot.png'))
+output_path = os.path.join("''\$out''", plot_def.get('\'outputFileName\'', '\'plot.png\''))
 plt.savefig(output_path)
-print(f"Plot saved to {output_path}")
+print("Plot saved to " + output_path)
 EOF
       python plot_script.py
-    '';
+    ''shellContent'';
 
   # Conceptual usage example with pandas.nix
   examplePlot = 

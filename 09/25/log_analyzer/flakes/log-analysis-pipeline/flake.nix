@@ -15,7 +15,7 @@
       let
         common = import ../../../lib/common-imports.nix { inherit system; };
 
-        builtins = common.builtins;
+        inherit (common) builtins;
 
         time-2025-src = builtins.fetchGit {
           url = "https://github.com/meta-introspector/time-2025";

@@ -93,4 +93,5 @@ in {
     (mkDatatypeProperty { id = "${github}issueBody"; label = "issue body"; domain = "${github}Issue"; range = "${rdfs}Literal"; })
     (mkDatatypeProperty { id = "${github}issueState"; label = "issue state"; domain = "${github}Issue"; range = "${rdfs}Literal"; })
     (mkDatatypeProperty { id = "${github}eventTimestamp"; label = "event timestamp"; domain = "${github}Event"; range = "${rdfs}Literal"; })
+  ]
 }

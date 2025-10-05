@@ -4,22 +4,22 @@
 
 let
   # Mutually recursive definitions for processEntry and generate
-  rec {
+  recursiveDefinitions = rec {
     processEntry = path: name: type:
       let
         fullPath = "${path}/${name}";
       in
       if type == "directory" then
-        generate fullPath # Recursive call
+        recursiveDefinitions.generate fullPath # Recursive call
       else if nix-stdlib.lib.types.strings.hasSuffix ".nix" name then
         safeEval fullPath # Use the safe-eval template
       else
-        { value = {}; errors = []; }; # Ignore other files
+        { value = {}; errors = []; }; # Ignore other files;
 
     generate = path:
       let
         getDirectoryEntries = builtins.readDir path;
-        processedEntries = lib.mapAttrs (name: type: processEntry path name type) getDirectoryEntries;
+        processedEntries = lib.mapAttrs (name: type: recursiveDefinitions.processEntry path name type) getDirectoryEntries;
         aggregatedResult = lib.foldlAttrs
           foldAccumulator
           { result = {}; errors = []; } processedEntries;
@@ -27,4 +27,4 @@ let
       aggregatedResult;
   };
 in
-generate
+recursiveDefinitions.generate

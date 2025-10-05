@@ -9,8 +9,8 @@ let
   SPORADIC_71 = "Singular influence of Prime 71 (Gandalf) for CRQ-007/CRQ-002";
 
   # Formal Verification Tooling Derivations (The Formal Triad):
-  lean4_verifier = formal_triad_env.lean4_verifier; # CRQ-011 setup
-  minizinc_solver = formal_triad_env.minizinc_solver;
+  inherit (formal_triad_env) lean4_verifier; # CRQ-011 setup
+  inherit (formal_triad_env) minizinc_solver;
   
 in
 pkgs.writeText "mycology-workflow.puml" ''
@@ -73,7 +73,7 @@ Rel_R(minizinc_constraints, lean4_proof, "Outputs solved constraints (Arithmetiz
 
 Rel_R(lean4_proof, rigor_layer, "Provides formal proof of correctness (CRQ-012)", "Mathematical Guarantees").
 
-Rel_U(pure_derivation_engine, monster_group_f1, "Encodes output based on Monster Genome ($2^{46}, 3^{20}, 71^1$)").
+Rel_U(pure_derivation_engine, monster_group_f1, "Encodes output based on Monster Genome (\$2^{46}, \$3^{20}, \$71^1$)").
 
 Rel_U(monster_group_f1, lean4_proof, "Defines topological equivalence (Unimath/HoTT Types as Spaces)").
 
