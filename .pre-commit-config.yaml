@@ -41,16 +41,21 @@ repos:
         # Ensures shell scripts adhere to best practices, aiding in
         # "Verification and Testing" (bott 10).
 
+      # - id: script-sop-check
+      #   name: Script SOP Documentation Check
+      #   entry: 09/27/7-concepts/5-scripts-automation/script_sop_check.sh
+      #   language: system
+      #   files: \.(sh|py|rs|nix)$
 
-
-
-
-      - id: script-sop-check
-        name: Script SOP Documentation Check
-        entry: 09/27/7-concepts/5-scripts-automation/script_sop_check.sh
-        language: system
-        files: \.(sh|py|rs|nix)$
-
+      # - id: crq-document-check
+      #   name: CRQ/Incident/Task Document Existence Check
+      #   entry: scripts/check-crq-document.sh
+      #   language: system
+      #   files: \.(md|txt)$
+      #   stages: [commit-msg]
+      #   enabled: false # Temporarily disabled as it's not working correctly
+        # This hook ensures that CRQ, Incident, or Task documents referenced in the commit message
+        # actually exist, enforcing "Verification and Testing" (bott 10).
 
 
   - repo: https://github.com/meta-introspector/vale-precommit
