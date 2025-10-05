@@ -225,7 +225,7 @@ develop-crq-search-lattice-layer1: pre-nix-check
 # integrity and adherence to best practices in our Nix architectural genome.
 
 # Target to lint Nix files using statix.
-lint-nix: pre-nix-check
+lint-nix: clean pre-nix-check
 	@echo "--- Linting Nix files with statix ---"
 	-nix develop --command bash -c "statix check . > statix_output.txt 2>&1" || true
 	@echo "--- Nix linting complete. Output saved to statix_output.txt ---"
