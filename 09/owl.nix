@@ -64,14 +64,14 @@ in {
     "github" = github;
   };
 
-  "@graph" = 
-    foafCoreClasses.foafClasses
-    ++ schemaCoreClasses.schemaClasses
-    ++ dctermsCoreClasses.dctermsClasses
-    ++ githubOwlModule.githubClasses
-    ++ foafCoreProperties.foafProperties
-    ++ dctermsCoreProperties.dctermsProperties
-    ++ schemaCoreProperties.schemaProperties
-    ++ githubOwlModule.githubProperties
-  ;
-};
+    "@graph" =
+      foafCoreClasses.foafClasses
+      # ++ schemaCoreClasses.schemaClasses
+      # ++ dctermsCoreClasses.dctermsClasses
+      # ++ githubOwlModule.githubClasses
+      # ++ foafCoreProperties.foafProperties
+      # ++ dctermsCoreProperties.dctermsProperties
+      # ++ schemaCoreProperties.schemaProperties
+      # ++ githubOwlModule.githubProperties
+    ;
+  };
