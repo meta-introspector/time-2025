@@ -247,4 +247,9 @@ debug-nix-eval-args:
 debug-crq-check-lib-eval:
 	@echo "--- Debugging crq-document-check.nix evaluation ---"
 	@nix eval --json --arg pkgs '${nixpkgs}' --argstr commitMsgFile "dummy_commit_msg.txt" --expr 'import ${./10/04/lib/crq-document-check.nix} { pkgs = import pkgs {}; commitMsgFile = commitMsgFile; }'
-	@echo "--- Debugging crq-document-check.nix evaluation Complete ---"
+
+# Debugging the absolute path to plantuml_generator.nix within the flake context.
+debug-plantuml-path:
+	@echo "--- Debugging PlantUML Generator Path ---"
+	@nix eval --raw --impure --expr '(builtins.path { path = ./.; name = "flake-root"; }) + "/lib/plantuml_generator.nix"'
+	@echo "--- PlantUML Generator Path Debug Complete ---"

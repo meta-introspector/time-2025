@@ -1,11 +1,9 @@
 {
-  ...}:
+  _:
 
 let
   common = import ../../../lib/common-imports.nix {};
-  lib = common.lib;
-  pkgs = common.pkgs;
-  builtins = common.builtins;
+  inherit (common) lib pkgs builtins;
   # A conceptual function to find and index all .md files in a given path.
   # This would be an impure operation as it scans the filesystem.
   indexMarkdownFiles = { 
@@ -39,51 +37,19 @@ let
   # A conceptual function to generate a Nix "twin" for a Markdown file.
   # This twin would be a Nix expression that represents the Markdown file
   # and potentially provides functions to process it.
-  generateMarkdownTwin = { 
+  generateMarkdownTwin = {
     markdownFilePath, # Path to the Markdown file in the Nix store
     name ? (builtins.baseNameOf markdownFilePath),
   }:
-    pkgs.runCommand "${name}-md-twin" {
+    pkgs.runCommand "markdown-twin-${name}" {
       inherit markdownFilePath;
+      nativeBuildInputs = [ pkgs.pandoc ];
     }
     ''
-      echo "Generating Nix twin for ${markdownFilePath}..." >&2
+      echo "Generating HTML for ${markdownFilePath}..." >&2
       mkdir -p $out
-      # Create a Nix file that exposes the Markdown content and metadata.
-      cat > $out/default.nix << EOF
-{
-  lib,
-  pkgs,
-  builtins,
-  ... 
-}:
-
-let
-  markdownContent = builtins.readFile ${markdownFilePath};
-  # Conceptual: Extract metadata from Markdown front matter (e.g., using a parser)
-  metadata = {
-    title = "Title from ${name}";
-    tags = [ "markdown" "documentation" ];
-  };
-  # Conceptual: Function to render Markdown to HTML
-  renderToHtml = pkgs.runCommand "render-${name}-html" {
-    # Pass markdownContent as an environment variable or a file
-    # For simplicity, we'll pass it as a file.
-    markdownContentFile = pkgs.writeText "markdown-content.md" markdownContent;
-    nativeBuildInputs = [ pkgs.pandoc ]; # Example: use pandoc
-  } ''
-    cat ${markdownContentFile} | pandoc -f markdown -t html > $out/index.html
-  '';
-in
-{
-  path = ${markdownFilePath};
-  content = markdownContent;
-  metadata = metadata;
-  html = renderToHtml;
-  # You could add more functions here, e.g., to extract code blocks, etc.
-}
-EOF
-      echo "Nix twin generated for ${markdownFilePath} at $out/default.nix" >&2
+      pandoc -f markdown -t html ${markdownFilePath} > $out/index.html
+      echo "HTML generated for ${markdownFilePath} at $out/index.html" >&2
     '';
 
   # Conceptual usage example
@@ -118,7 +84,7 @@ EOF
 
 in
 {
-  indexMarkdownFiles = indexMarkdownFiles;
+  inherit indexMarkdownFiles;
   generateMarkdownTwin = generateMarkdownTwin;
   exampleMarkdownIndexingAndTwinning = exampleMarkdownIndexingAndTwinning;
 }

@@ -49,5 +49,5 @@ let
 
 in
 {
-  generate2GramIndexStep7 = generate2GramIndexStep7;
+  inherit generate2GramIndexStep7;
 }

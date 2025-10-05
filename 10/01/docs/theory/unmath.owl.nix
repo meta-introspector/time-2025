@@ -56,21 +56,9 @@
 
     # Axioms / Assertions
     axioms = [
-      # Assertion: Homotopies of degree higher than 4 are Turing complete.
-      {
-        type = "SubClassOf";
-        subClass = "Homotopy";
-        superClass = {
-          type = "Restriction";
-          onProperty = "hasDegree";
-          someValuesFrom = {
-            type = "Datatype";
-            onDatatype = "xsd:integer";
             withRestrictions = [
-              { xsd:minInclusive = 5; }
+              { "xsd:minInclusive" = 5; }
             ];
-          };
-        };
         # This part is a bit tricky to represent directly as a simple OWL restriction in Nix
         # It implies: if hasDegree >= 5, then hasComputationalProperty some TuringComplete
         # For now, we'll represent the restriction on hasDegree, and conceptually link it.
@@ -88,7 +76,7 @@
             type = "Datatype";
             onDatatype = "xsd:integer";
             withRestrictions = [
-              { xsd:minInclusive = 5; }
+              { "xsd:minInclusive" = 5; }
             ];
           };
         };

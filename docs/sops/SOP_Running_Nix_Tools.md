@@ -37,6 +37,16 @@ nix run github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify#statix -- ch
     nix run github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify#statix -- check 10/03/hackathon_71_parts.nix
     ```
 
+### 3.3. Shell Script Linting with `shellcheck`
+
+While `statix` focuses on Nix expressions, `shellcheck` is crucial for maintaining the quality and correctness of our shell scripts. It helps identify common pitfalls, syntax errors, and stylistic issues in `bash`, `sh`, and other shell scripts.
+
+*   **Action:** Always run `shellcheck` on any shell script you create or modify.
+*   **Tool:** `shellcheck`
+*   **Frequency:** As part of pre-commit hooks, and whenever shell scripts are modified.
+*   **Expected Result:** No errors or warnings reported by `shellcheck`.
+*   **Reference:** For a detailed reminder on why and when to run `shellcheck`, please refer to the memo: `docs/memos/Shellcheck_Always_After_Changes.md` (located in the main `pick-up-nix2` project).
+
 ## 4. Using `make` for Project Tasks
 
 The project's `Makefile` defines various targets to automate common development and build tasks.

@@ -80,6 +80,7 @@
         exampleUrlFetch = exampleUrlFetch;
         ontologyUrls = exampleUrlFetch.extractedUrls;
         nixOwlOntology = exampleUrlFetch.nixToOwlOntology.nixToOwlMapper;
+        generateHackathonUml = import ./theory/generate_hackathon_uml.nix { inherit pkgs lib self; };
         # nixOntologyRepoPath = pkgs.runCommand "nix-ontology-repo-path" {} "ln -s ${nixOntologyRepo} $out"; # Expose nixOntologyRepo as a derivation
       };
 

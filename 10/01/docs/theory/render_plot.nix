@@ -57,4 +57,5 @@
       mkdir -p $out
       python ${pythonScript}
     ''
+  ;
 }

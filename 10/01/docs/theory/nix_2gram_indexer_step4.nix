@@ -16,8 +16,8 @@ let
   }:
   let
     readIndexedFilesJson = generate2GramIndexStep3Module.generate2GramIndexStep3 {
-      projectRoot = projectRoot;
-      name = name;
+      inherit projectRoot;
+      inherit name;
     };
 
     indexedFiles = builtins.fromJSON (builtins.readFile readIndexedFilesJson);
@@ -26,5 +26,5 @@ let
 
 in
 {
-  generate2GramIndexStep4 = generate2GramIndexStep4;
+  inherit generate2GramIndexStep4;
 }

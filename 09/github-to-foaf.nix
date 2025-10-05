@@ -31,6 +31,6 @@ let
     };
 
 in {
-  repoToFoaf = repoToFoaf;
-  userToFoaf = userToFoaf;
+  inherit repoToFoaf;
+  inherit userToFoaf;
 }

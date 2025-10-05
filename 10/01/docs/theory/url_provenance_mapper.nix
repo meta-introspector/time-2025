@@ -1,12 +1,10 @@
 {
-  ...
-}:
+  _:
+
 
 let
   common = import ../../../lib/common-imports.nix {};
-  lib = common.lib;
-  pkgs = common.pkgs;
-  builtins = common.builtins;
+  inherit (common) lib pkgs builtins;
 
   # This function conceptually maps a URL to its verifiable provenance information.
   # In a real scenario, this would be a highly impure operation, relying on external APIs
@@ -27,8 +25,8 @@ let
           in
           {
             type = "github";
-            owner = owner;
-            repo = repo;
+            inherit owner;
+            inherit repo;
             version = commit; # Commit hash
             resolvedUrl = "https://github.com/${owner}/${repo}/commit/${commit}";
           }
@@ -85,5 +83,5 @@ let
 
 in
 {
-  mapUrlToProvenance = mapUrlToProvenance;
+  inherit mapUrlToProvenance;
 }

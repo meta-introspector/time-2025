@@ -72,5 +72,6 @@ in {
     ++ foafCoreProperties.foafProperties
     ++ dctermsCoreProperties.dctermsProperties
     ++ schemaCoreProperties.schemaProperties
-    ++ githubOwlModule.githubProperties;
+    ++ githubOwlModule.githubProperties
+  ;
 };

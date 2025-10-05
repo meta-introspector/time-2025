@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {}, commitMsgFile ? null }:
 
 let
-  regex = import ./regex-generator.nix { pkgs = pkgs; };
+  regex = import ./regex-generator.nix { inherit pkgs; };
   # Use the provided commitMsgFile argument, or fall back to pkgs.lib.elemAt (builtins.attrValues pkgs.stdenv.args) 0
   actualCommitMsgFile = if commitMsgFile != null then commitMsgFile else pkgs.lib.elemAt (builtins.attrValues pkgs.stdenv.args) 0;
   commitMsg = builtins.readFile actualCommitMsgFile;

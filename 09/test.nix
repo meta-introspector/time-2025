@@ -1,9 +1,7 @@
 # test.nix - Temporary file for FOAF-OWL verification testing
 let
   common = import ../lib/common-imports.nix {};
-  pkgs = common.pkgs;
-  lib = common.lib;
-  builtins = common.builtins;
+  inherit (common) pkgs lib builtins;
 
   # Mock self for foaf.nix import, as it expects self
   # This is a workaround for direct evaluation outside a flake context

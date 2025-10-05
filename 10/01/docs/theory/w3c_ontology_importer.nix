@@ -1,15 +1,8 @@
-{
-  # Import our local ontologies for mapping
-  unmathOwlModule,
-  emojiOwlModule,
-  ...
-}@args:
+args@{ unmathOwlModule, emojiOwlModule, _ }:
 
 let
   common = import ../../../lib/common-imports.nix {};
-  lib = common.lib;
-  pkgs = common.pkgs;
-  builtins = common.builtins;
+  inherit (common) lib pkgs builtins;
 
   # Function to conceptually fetch a W3C ontology (impure operation)
   # In a real scenario, this would use pkgs.fetchurl or similar, possibly with ZKNotary.
