@@ -1,6 +1,8 @@
 { lib, ... }:
 
 let
+  aspect29Imported = (import ./71-aspects-part-c-aspect-29-otel-event-trace.nix { inherit lib; }).aspect29;
+
   aspectsOf71 = [
     {
       number = 21;
@@ -50,12 +52,7 @@ let
       category = "Project Specifics & Documentation";
       description = "The presence of '71' in extracted ticket IDs (e.g., '867189_idea_a_proof_system...') indicates its role in project management and conceptual tracking, even in informal documentation.";
     }
-    {
-      number = 29;
-      title = "The '71' in JSON Event Traces";
-      category = "Code Occurrences & Observability";
-      description = "Occurrences in JSON lattice event traces (e.g., 'trace_event_trace_event_ff51f91b-0271-4b6a-bb19-ad77203baf9f.json') suggest its presence in system observability data, potentially marking specific events or identifiers within complex system interactions.";
-    },
+    aspect29Imported,
     {
       number = 30;
       title = "The '71' in GitHub Repository IDs";

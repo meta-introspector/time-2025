@@ -1,4 +1,3 @@
-
 { pkgs ? import <nixpkgs> {} }:
 
 pkgs.runCommand "nixpkgs-fmt-test" {} ''
@@ -21,3 +20,4 @@ pkgs.runCommand "nixpkgs-fmt-test" {} ''
   # For simplicity, we'll just check if the command ran without error.
   # In a real test, you'd compare the output with an expected string.
   echo "Nixpkgs-fmt test passed!" > $out
+''
