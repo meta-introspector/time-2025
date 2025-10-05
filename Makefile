@@ -72,7 +72,7 @@ build-foaf-seed-data: pre-nix-check
 
 # ... existing targets ...
 
-.PHONY: all pre-nix-check build-foaf-context install-hooks uninstall-pre-commit gc-pre-commit clean-pre-commit git-commit
+.PHONY: all pre-nix-check build-foaf-context install-hooks uninstall-pre-commit gc-pre-commit clean-pre-commit git-commit strace-git-commit
 
 # ... existing targets ...
 
@@ -124,6 +124,13 @@ git-commit:
 	# We pass the commit message from the file using -F
 	nix develop --command bash -c "git commit -F commit_message.txt"
 	@echo "--- git commit complete. ---"
+
+# Target to run git commit with strace to debug pre-commit hook issues
+strace-git-commit:
+	@echo "--- Running git commit with strace ---"
+	# We use a dummy commit message here, as the focus is on stracing the pre-commit hooks.
+	nix develop --command bash -c "strace -o strace.txt -s 99 -f git commit -m 'strace test commit'"
+	@echo "--- strace-git-commit complete. Check strace.txt for output. ---"
 
 # Target to get the commit message regex from regex-generator.nix
 # This is useful for debugging and understanding the commit message validation rules.
