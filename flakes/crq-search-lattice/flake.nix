@@ -16,9 +16,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
+    layer1 = {
+      url = "./layer1"; # Reference the local layer1 flake
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.base.follows = "base"; # Ensure base is followed
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, parser, base }:
+  outputs = { self, nixpkgs, flake-utils, parser, base, layer1 }:
     let
       system = "aarch64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -32,5 +38,7 @@
       packages.${system}.default = pkgs.runCommand "crq-search-lattice-success" {
         meta.description = "Root flake for the CRQ search lattice, aggregating sub-flakes for testing.";
       } "echo 'CRQ Search Lattice flake built successfully!' > $out";
+
+      packages.${system}.layer1 = layer1.packages.${system}.default; # Expose layer1's default package
     };
 }
