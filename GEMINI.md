@@ -14,3 +14,6 @@ This document provides context for the current task being performed by the Gemin
 ### Relevant GitHub Remotes
 - `https://github.com/meta-introspector/streamofrandom?ref=feature/foaf`
 - `https://github.com/meta-introspector/pick-up-nix?ref=feature/CRQ-016-nixify`
+
+### Documentation Updates
+- Created `docs/sops/SOP_Running_Nix_Tools.md` which details how to run `statix`, `make`, and CRQ-related Nix tools.

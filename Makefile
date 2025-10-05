@@ -72,7 +72,7 @@ build-foaf-seed-data: pre-nix-check
 
 # ... existing targets ...
 
-.PHONY: all pre-nix-check build-foaf-context install-hooks strace-install-hooks uninstall-pre-commit gc-pre-commit clean-pre-commit git-commit strace-git-commit
+.PHONY: all pre-nix-check build-foaf-context install-hooks strace-install-hooks uninstall-pre-commit gc-pre-commit clean-pre-commit git-commit strace-git-commit statix-hackathon-parts
 
 # ... existing targets ...
 
@@ -189,6 +189,44 @@ list-crqs:
 	in
 	builtins.toJSON (searchCrqs crqDir (if keyword == "" then null else keyword) numSuggestions)'
 	@echo "--- CRQ Listing Complete ---"
+
+# Target to build the base CRQ search lattice flake.
+build-crq-search-lattice-base: pre-nix-check
+	@echo "--- Building Base CRQ Search Lattice Flake ---"
+	@cd flakes/crq-search-lattice/base && nix build .#packages.aarch64-linux.default
+	@echo "--- Base CRQ Search Lattice Flake Built ---"
+
+# Target to enter a development shell for the base CRQ search lattice flake.
+develop-crq-search-lattice-base: pre-nix-check
+	@echo "--- Entering Development Shell for Base CRQ Search Lattice Flake ---"
+	@cd flakes/crq-search-lattice/base && nix develop
+	@echo "--- Exited Development Shell for Base CRQ Search Lattice Flake ---"
+
+
+# Target to build the layer1 CRQ search lattice flake.
+build-crq-search-lattice-layer1: pre-nix-check
+	@echo "--- Building Layer 1 CRQ Search Lattice Flake ---"
+	@cd flakes/crq-search-lattice/layer1 && nix build .#packages.aarch64-linux.default
+	@echo "--- Layer 1 CRQ Search Lattice Flake Built ---"
+
+# Target to enter a development shell for the layer1 CRQ search lattice flake.
+develop-crq-search-lattice-layer1: pre-nix-check
+	@echo "--- Entering Development Shell for Layer 1 CRQ Search Lattice Flake ---"
+	@cd flakes/crq-search-lattice/layer1 && nix develop
+	@echo "--- Exited Development Shell for Layer 1 CRQ Search Lattice Flake ---"
+
+
+# Target to lint Nix files using statix.
+lint-nix: pre-nix-check
+	@echo "--- Linting Nix files with statix ---"
+	nix develop --command bash -c "statix check . > statix_output.txt 2>&1"
+	@echo "--- Nix linting complete. Output saved to statix_output.txt ---"
+
+# Target to run statix check on hackathon_71_parts.nix
+statix-hackathon-parts: pre-nix-check
+	@echo "--- Running statix check on 10/03/hackathon_71_parts.nix ---"
+	nix run github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify#statix -- check 10/03/hackathon_71_parts.nix
+	@echo "--- statix check on hackathon_71_parts.nix complete ---"
 
 .PHONY: debug-pkgs-writeShellScriptBin-type
 debug-pkgs-writeShellScriptBin-type:
