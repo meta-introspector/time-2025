@@ -2,7 +2,7 @@
 
 {
   listRepositoryIssues = { owner, repo, first ? 10 }:
-    let
+    (let
       query = ''
         query ($owner: String!, $repo: String!, $first: Int!) {
           repository(owner: $owner, name: $repo) {
@@ -18,5 +18,5 @@
       '';
       variables = { inherit owner repo first; };
     }
-    in buildGraphQLQuery { inherit query variables; };
+    in buildGraphQLQuery { inherit query variables; });
 }

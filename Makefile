@@ -275,8 +275,58 @@ debug-plantuml-path:
 	@nix eval --raw --impure --expr '(builtins.path { path = ./.; name = "flake-root"; }) + "/lib/plantuml_generator.nix"'
 	@echo "--- PlantUML Generator Path Debug Complete ---"
 
-.PHONY: clean
-clean:
-	@echo "--- Cleaning temporary files ---"
-	rm -f error.txt statix_output.txt statix_output_part_* statix_errors.txt statix_errors_part_* statix_header_errors.txt statix_header_output.txt
-	@echo "--- Temporary files cleaned ---"
+# Nix File Evaluation Targets
+
+.PHONY: eval-github-graphql-example-queries
+eval-github-graphql-example-queries:
+	@echo "--- Evaluating github_graphql_parts/github_graphql_example_queries.nix ---"
+	@nix eval --impure --expr 'let buildGraphQLQuery = {}; in import ./github_graphql_parts/github_graphql_example_queries.nix { inherit buildGraphQLQuery; }'
+	@echo "--- Evaluation Complete ---"
+
+.PHONY: eval-unmath-owl
+eval-unmath-owl:
+	@echo "--- Evaluating 10/01/docs/theory/unmath.owl.nix ---"
+	@nix eval --impure --expr 'import ./10/01/docs/theory/unmath.owl.nix'
+	@echo "--- Evaluation Complete ---"
+
+.PHONY: eval-github-graphql-part1
+eval-github-graphql-part1:
+	@echo "--- Evaluating github_graphql_parts/github_graphql_part1.nix ---"
+	@nix eval --impure --expr 'let nixpkgsFlake = builtins.getFlake "nixpkgs"; in import ./github_graphql_parts/github_graphql_part1.nix { nixpkgs = nixpkgsFlake; }'
+	@echo "--- Evaluation Complete ---"
+
+.PHONY: eval-failure-derivation
+eval-failure-derivation:
+	@echo "--- Evaluating test-commit-check/failure-derivation.nix ---"
+	@nix eval --impure --expr 'let pkgs = import <nixpkgs> {}; in import ./test-commit-check/failure-derivation.nix { inherit pkgs; commitMsg = "test"; regex = ".*"; }'
+	@echo "--- Evaluation Complete ---"
+
+.PHONY: eval-31-mathematical-forms-prime-03
+eval-31-mathematical-forms-prime-03:
+	@echo "--- Evaluating theory/31-mathematical-forms-prime-03.nix ---"
+	@nix eval --impure --expr 'let lib = import <nixpkgs> {}.lib; n = 31; in import ./theory/31-mathematical-forms-prime-03.nix { inherit lib n; }'
+	@echo "--- Evaluation Complete ---"
+
+.PHONY: eval-31-mathematical-forms
+eval-31-mathematical-forms:
+	@echo "--- Evaluating theory/31-mathematical-forms.nix ---"
+	@nix eval --impure --expr 'let lib = import <nixpkgs> {}.lib; in import ./theory/31-mathematical-forms.nix { inherit lib; }'
+	@echo "--- Evaluation Complete ---"
+
+.PHONY: eval-71-aspects-part-c
+eval-71-aspects-part-c:
+	@echo "--- Evaluating theory/71-aspects-part-c.nix ---"
+	@nix eval --impure --expr 'let lib = import <nixpkgs> {}.lib; in import ./theory/71-aspects-part-c.nix { inherit lib; }'
+	@echo "--- Evaluation Complete ---"
+
+.PHONY: eval-github-graphql-get-repository-details
+eval-github-graphql-get-repository-details:
+	@echo "--- Evaluating github_graphql_modules/github_graphql_get_repository_details.nix ---"
+	@nix eval --impure --expr 'let lib = import <nixpkgs> {}.lib; buildGraphQLQuery = {}; in import ./github_graphql_modules/github_graphql_get_repository_details.nix { inherit lib buildGraphQLQuery; }'
+	@echo "--- Evaluation Complete ---"
+
+.PHONY: eval-github-graphql-list-repository-issues
+eval-github-graphql-list-repository-issues:
+	@echo "--- Evaluating github_graphql_modules/github_graphql_list_repository_issues.nix ---"
+	@nix eval --impure --expr 'let lib = import <nixpkgs> {}.lib; buildGraphQLQuery = {}; in import ./github_graphql_modules/github_graphql_list_repository_issues.nix { inherit lib buildGraphQLQuery; }'
+	@echo "--- Evaluation Complete ---"
