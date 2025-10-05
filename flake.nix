@@ -9,7 +9,7 @@
     nixIntrospector.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; # Placeholder ref, acts as LIL/QQC for Nix expressions
     # 3. Reference the Log Analyzer for feedback (The Strange Loop Agent)
     logAnalyzer.url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=09/25/log_analyzer";
-    crqDocumentCheck.url = "github:meta-introspector/streamofrandom?ref=feature/foaf&dir=flakes/crq-document-check";
+    sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
   };
 
   outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, ... }:
