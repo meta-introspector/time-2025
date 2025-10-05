@@ -55,7 +55,8 @@ let
       title = "The '71' in Array/List Indices";
       category = "Code Occurrences & Data Access";
       description = "Its use as an array or list index would point to a specific element within a data structure, highlighting its role in data access patterns or the organization of sequential information.";
-    }{
+    }
+    {
       number = 40;
       title = "The '71' in Bitmasks or Flags";
       category = "Code Occurrences & Low-Level Control";
