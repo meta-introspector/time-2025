@@ -3,7 +3,7 @@
 
 pkgs.runCommand "nixpkgs-fmt-test" {} ''
   # Create a dummy Nix file
-  cat > dummy.nix << EOF
+  cat > dummy.nix << '_NIX_EOF_'
   {   pkgs, ... }:
 
   {
@@ -12,7 +12,7 @@ pkgs.runCommand "nixpkgs-fmt-test" {} ''
       pkgs.vim
     ];
   }
-  EOF
+  _NIX_EOF_
 
   # Format the dummy Nix file
   ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt dummy.nix

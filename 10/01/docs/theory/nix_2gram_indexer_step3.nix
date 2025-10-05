@@ -20,4 +20,9 @@ let
       name = name;
     };
   in
-  indexedFilesJsonDerivation
+  indexedFilesJsonDerivation;
+
+in
+{
+  inherit generate2GramIndexStep3;
+}

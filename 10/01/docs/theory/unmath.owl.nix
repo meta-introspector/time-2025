@@ -56,14 +56,6 @@
 
     # Axioms / Assertions
     axioms = [
-            withRestrictions = [
-              { "xsd:minInclusive" = 5; }
-            ];
-        # This part is a bit tricky to represent directly as a simple OWL restriction in Nix
-        # It implies: if hasDegree >= 5, then hasComputationalProperty some TuringComplete
-        # For now, we'll represent the restriction on hasDegree, and conceptually link it.
-        # A more advanced OWL reasoner would infer the TuringComplete property.
-      };
 
       # Assertion: If a Homotopy has a degree >= 5, then it hasComputationalProperty TuringComplete
       # This is a more direct representation of the implication.

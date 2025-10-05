@@ -8,7 +8,7 @@ let
   isPrim' = num:
     if num <= 1 then false
     else if num == 2 then true
-    else if num % 2 == 0 then false
+    else if num mod 2 == 0 then false
     else
       let
         # Check divisibility by odd numbers up to sqrt(num)
@@ -16,7 +16,7 @@ let
         # For 31, sqrt(31) is approx 5.5. So we check 3, 5.
         checkDivisor = currentDivisor:
           if currentDivisor * currentDivisor > num then true # Optimization: only check up to sqrt(num)
-          else if num % currentDivisor == 0 then false
+          else if num mod currentDivisor == 0 then false
           else checkDivisor (currentDivisor + 2);
       in
       checkDivisor 3;
@@ -41,7 +41,7 @@ let
       let
         iter = n: acc:
           if n == 0 then acc
-          else iter (n div 10) ([ (n % 10) ] ++ acc);
+          else iter (n div 10) ([ (n mod 10) ] ++ acc);
       in
       iter num [];
 
@@ -92,12 +92,12 @@ in
   "18-SmallestPrimeGreaterThan29" = (lib.head (lib.filter (p: p > 29) primesUpTo31) == n);
   "19-LargestPrimeLessThan37" = (lib.last (lib.filter (p: p < 37) primesUpTo31) == n);
   "20-ConsecutivePrimeGap" = (n - 29 == 2);
-  "21-NotAFibonacciNumber" = (lib.elem n [ 1 2 3 5 8 13 21 34 ]) == false;
-  "22-NotACatalanNumber" = (lib.elem n [ 1 2 5 14 42 ]) == false;
-  "23-NotAFactorial" = (lib.elem n [ 1 2 6 24 120 ]) == false;
-  "24-NotATriangularNumber" = (lib.elem n (lib.map (i: i * (i + 1) / 2) (lib.range 1 10))) == false;
-  "25-NotASquareNumber" = (lib.elem n (lib.map (i: i * i) (lib.range 1 10))) == false;
-  "26-NotACubeNumber" = (lib.elem n (lib.map (i: i * i * i) (lib.range 1 10))) == false;
+  "21-NotAFibonacciNumber" = ! (lib.elem n [ 1 2 3 5 8 13 21 34 ]);
+  "22-NotACatalanNumber" = ! (lib.elem n [ 1 2 5 14 42 ]);
+  "23-NotAFactorial" = ! (lib.elem n [ 1 2 6 24 120 ]);
+  "24-NotATriangularNumber" = ! (lib.elem n (lib.map (i: i * (i + 1) / 2) (lib.range 1 10)));
+  "25-NotASquareNumber" = ! (lib.elem n (lib.map (i: i * i) (lib.range 1 10)));
+  "26-NotACubeNumber" = ! (lib.elem n (lib.map (i: i * i * i) (lib.range 1 10)));
   "27-SumOfTwoPrimes" = "31 = 2 + 29";
   "28-SumOfThreePrimes" = "31 = 3 + 5 + 23 or 3 + 11 + 17 or 5 + 7 + 19 or 5 + 13 + 13";
   "29-SumOfDistinctPrimes" = "31 = 2 + 3 + 7 + 19";

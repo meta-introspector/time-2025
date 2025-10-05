@@ -8,13 +8,11 @@
 
 let
   plotSchemaModule = import ./plot_schema.nix { inherit lib; };
-  createPlotModule = import ./create_plot.nix { inherit lib; PlotSchema = plotSchemaModule.PlotSchema; };
-  renderPlotModule = import ./render_plot.nix { inherit lib pkgs builtins plotSchemaModule.PlotSchema; };
-  examplePlotModule = import ./example_plot.nix { inherit pandasModule createPlotModule.createPlot renderPlotModule.renderPlot pkgs builtins lib; };
+  createPlot = (import ./create_plot.nix { inherit lib; PlotSchema = plotSchemaModule.PlotSchema; }).createPlot;
+  renderPlot = (import ./render_plot.nix { inherit lib pkgs builtins; PlotSchema = plotSchemaModule.PlotSchema; }).renderPlot;
+  PlotSchema = plotSchemaModule.PlotSchema;
+  examplePlot = (import ./example_plot.nix { inherit pandasModule pkgs builtins lib; inherit createPlot renderPlot; }).examplePlot;
 in
 {
-  createPlot = createPlotModule.createPlot;
-  renderPlot = renderPlotModule.renderPlot;
-  PlotSchema = plotSchemaModule.PlotSchema; # Export the type definition
-  examplePlot = examplePlotModule.examplePlot;
+  inherit createPlot renderPlot PlotSchema examplePlot;
 }

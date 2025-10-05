@@ -60,7 +60,7 @@ let
       number = 30;
       title = "The '71' in GitHub Repository IDs";
       category = "Code Occurrences & External References";
-      description = ''The appearance of '71' in GitHub repository IDs (e.g., 'id":98588021') indicates its pervasive presence in external references and metadata, linking to the broader ecosystem of open-source projects.'';
+      description = "The appearance of '71' in GitHub repository IDs (e.g., 'id":98588021') indicates its pervasive presence in external references and metadata, linking to the broader ecosystem of open-source projects.";
     }
   ];
 in aspectsOf71

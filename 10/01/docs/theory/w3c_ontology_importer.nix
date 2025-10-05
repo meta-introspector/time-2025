@@ -39,8 +39,7 @@ let
     # This is highly conceptual and would require a sophisticated mapping logic.
     # For instance, if W3C has a 'Person' class, we might map it to our 'Agent' class.
     conceptualMappings = {
-      "http://www.w3.org/2000/01/rdf-schema#Class" = "Concept"; # Example mapping
-      # ... more complex mappings based on rdfs:subClassOf, owl:equivalentClass, etc.
+      "http://www.w3.org/2000/01/rdf-schema#Class" = "Concept";
     };
 
     # A function to apply these conceptual mappings

@@ -1,5 +1,4 @@
-{
-  { pkgs, lib, builtins, ... }:
+{ pkgs, lib, builtins, ... }:
 
 let
   common = import ../../../lib/common-imports.nix {};
