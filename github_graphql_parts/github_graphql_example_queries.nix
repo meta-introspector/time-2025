@@ -18,8 +18,8 @@ let
           }
         '';
         variables = { inherit owner repo; };
-      }
-      (buildGraphQLQuery { inherit query variables; });
+      in
+      buildGraphQLQuery { inherit query variables; };
 
     # Query to list issues for a repository
     listRepositoryIssues = { owner, repo, first ? 10 }:
@@ -39,7 +39,7 @@ let
         '';
         variables = { inherit owner repo first; };
       in
-      (buildGraphQLQuery { inherit query variables; });
+      buildGraphQLQuery { inherit query variables; };
   };
 in
 exampleQueries

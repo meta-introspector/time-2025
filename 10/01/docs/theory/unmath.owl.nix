@@ -57,42 +57,39 @@
     # Axioms / Assertions
     axioms = [
 
-      # Assertion: If a Homotopy has a degree >= 5, then it hasComputationalProperty TuringComplete
-      # This is a more direct representation of the implication.
-      # {
-      #   type = "SubClassOf";
-      #   subClass = {
-      #     type = "Restriction";
-      #     onProperty = "hasDegree";
-      #     someValuesFrom = {
-      #       type = "Datatype";
-      #       onDatatype = "xsd:integer";
-      #       withRestrictions = [
-      #         { "xsd:minInclusive" = 5; }
-      #       ];
-      #     };
-      #   };
-      #   superClass = {
-      #     type = "Restriction";
-      #     onProperty = "hasComputationalProperty";
-      #     someValuesFrom = "TuringComplete";
-      #   };
-      # };
+      {
+        type = "SubClassOf";
+        subClass = {
+          type = "Restriction";
+          onProperty = "hasDegree";
+          someValuesFrom = {
+            type = "Datatype";
+            onDatatype = "xsd:integer";
+            withRestrictions = [
+              { "xsd:minInclusive" = 5; }
+            ];
+          };
+        };
+        superClass = {
+          type = "Restriction";
+          onProperty = "hasComputationalProperty";
+          someValuesFrom = "TuringComplete";
+        };
+      };
 
-      # Assertion: If a Homotopy is Turing complete, then it is undecidable in finite time.
-      # {
-      #   type = "SubClassOf";
-      #   subClass = {
-      #     type = "Restriction";
-      #     onProperty = "hasComputationalProperty";
-      #     someValuesFrom = "TuringComplete";
-      #   };
-      #   superClass = {
-      #     type = "Restriction";
-      #     onProperty = "hasComputationalProperty";
-      #     someValuesFrom = "UndecidableInFiniteTime";
-      #   };
-      # };
+      {
+        type = "SubClassOf";
+        subClass = {
+          type = "Restriction";
+          onProperty = "hasComputationalProperty";
+          someValuesFrom = "TuringComplete";
+        };
+        superClass = {
+          type = "Restriction";
+          onProperty = "hasComputationalProperty";
+          someValuesFrom = "UndecidableInFiniteTime";
+        };
+      };
     ];
   };
 }

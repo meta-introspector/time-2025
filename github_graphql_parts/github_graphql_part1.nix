@@ -1,4 +1,4 @@
-{ nixpkgs, ... }:
+{ nixpkgs }:
 
 let
   common = import ../../../lib/common-imports.nix { inherit nixpkgs; };
