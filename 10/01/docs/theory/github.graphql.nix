@@ -1,11 +1,9 @@
-{
-  ...}:
+{ lib, pkgs, builtins, ... }:
 
 let
   common = import ../../../lib/common-imports.nix {};
-  lib = common.lib;
-  pkgs = common.pkgs;
-  builtins = common.builtins;
+  # Inherit common libraries and builtins
+  inherit (common) lib pkgs builtins;
 
   githubApiUrl = "https://api.github.com/graphql";
 
