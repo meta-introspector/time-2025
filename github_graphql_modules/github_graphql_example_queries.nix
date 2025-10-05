@@ -5,7 +5,7 @@ let
   exampleQueries = {
     # Query to get repository details
     getRepositoryDetails = { owner, repo }:
-      let
+      (let
         query = ''
           query ($owner: String!, $repo: String!) {
             repository(owner: $owner, name: $repo) {
@@ -18,12 +18,12 @@ let
           }
         '';
         variables = { inherit owner repo; };
-      }
-      in buildGraphQLQuery { inherit query variables; };
+      in
+      buildGraphQLQuery { inherit query variables; });
 
     # Query to list issues for a repository
     listRepositoryIssues = { owner, repo, first ? 10 }:
-      let
+      (let
         query = ''
           query ($owner: String!, $repo: String!, $first: Int!) {
             repository(owner: $owner, name: $repo) {
@@ -38,8 +38,8 @@ let
           }
         '';
         variables = { inherit owner repo first; };
-      }
-      in buildGraphQLQuery { inherit query variables; };
+      in
+      buildGraphQLQuery { inherit query variables; });
   };
 
 in
