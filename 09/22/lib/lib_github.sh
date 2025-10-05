@@ -3,6 +3,7 @@
 # lib_github.sh: Common GitHub-related functions for shell scripts
 
 # Ensure lib_utils.sh is sourced for logging functions
+# shellcheck disable=SC1091
 . "$(dirname "${BASH_SOURCE[0]}")/lib_utils.sh"
 
 # Function to list repositories in a GitHub organization and save to a JSON file
