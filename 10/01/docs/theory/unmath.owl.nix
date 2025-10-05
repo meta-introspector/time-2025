@@ -63,7 +63,7 @@
         type = "SubClassOf";
         subClass = {
           type = "Restriction";
-          onProperty = hasDegree;
+          onProperty = 'hasDegree';
           someValuesFrom = {
             type = "Datatype";
             onDatatype = "xsd:integer";
@@ -74,7 +74,7 @@
         };
         superClass = {
           type = "Restriction";
-          onProperty = hasComputationalProperty;
+          onProperty = 'hasComputationalProperty';
           someValuesFrom = "TuringComplete";
         };
       };

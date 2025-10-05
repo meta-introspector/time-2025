@@ -106,6 +106,6 @@ in
     let
       nthPrime = getNthPrime n primesUpTo130;
     in
-    "The " + (toString n) + "th prime number is " + (toString nthPrime) + "."; # The 31st prime is 127
+    "The ${toString n}th prime number is ${toString nthPrime}."; # The 31st prime is 127
   "32-FixForCubeNumberCheck" = (import ./31-mathematical-forms-cube-number-check-fix.nix { inherit lib; }).fixedLine;
 }

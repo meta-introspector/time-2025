@@ -1,4 +1,4 @@
-{ lib, n, ... }:
+{ lib, n }:
 {
   # Properties related to Prime 3 (Structure/Form)
   # Helper to get digits of a number
@@ -33,6 +33,6 @@
     iter num {};
 
   "05-IsHappyNumber" = isHappy n;
-  "06-PermutablePrime" = '31 is a permutable prime because 13 (its digit permutation) is also prime.';
-  "07-Emirp" = '31 is an emirp because 13 (its digit reversal) is prime and 13 != 31.';
+  "06-PermutablePrime" = "31 is a permutable prime because 13 (its digit permutation) is also prime.";
+  "07-Emirp" = "31 is an emirp because 13 (its digit reversal) is prime and 13 != 31.";
 }

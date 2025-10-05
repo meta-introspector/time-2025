@@ -55,8 +55,7 @@ let
       category = "Project Specifics & Documentation";
       description = "The presence of '71' in extracted ticket IDs (e.g., '867189_idea_a_proof_system...') indicates its role in project management and conceptual tracking, even in informal documentation.";
     }
-    ,
-    aspect29Imported,
+    aspect29Imported
     {
       number = 30;
       title = "The '71' in GitHub Repository IDs";

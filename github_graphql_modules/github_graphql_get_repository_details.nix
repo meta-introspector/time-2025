@@ -1,7 +1,7 @@
 { lib, buildGraphQLQuery }:
 
-let
-  getRepositoryDetailsFunction = { owner, repo }:
+{
+  getRepositoryDetails = { owner, repo }:
     let
       query = ''
         query ($owner: String!, $repo: String!) {
@@ -16,8 +16,5 @@ let
       '';
       variables = { inherit owner repo; };
     }
-    in buildGraphQLQuery { inherit query variables; };
-in
-{
-  getRepositoryDetails = getRepositoryDetailsFunction;
+    in (buildGraphQLQuery { inherit query variables; });
 }
