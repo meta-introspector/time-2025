@@ -2,7 +2,7 @@
 
 {
   getRepositoryDetails = { owner, repo }:
-    let
+    (let
       query = ''
         query ($owner: String!, $repo: String!) {
           repository(owner: $owner, name: $repo) {
@@ -16,5 +16,5 @@
       '';
       variables = { inherit owner repo; };
     }
-    in buildGraphQLQuery { inherit query variables; };
+    in buildGraphQLQuery { inherit query variables; });
 }

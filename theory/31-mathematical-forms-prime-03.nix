@@ -33,6 +33,6 @@
     iter num {};
 
   "05-IsHappyNumber" = isHappy n;
-  "06-PermutablePrime" = null;
-  "07-Emirp" = null;
+  # "06-PermutablePrime" = null;
+  # "07-Emirp" = null;
 }

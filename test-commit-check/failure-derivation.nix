@@ -8,6 +8,4 @@ let
 
 in
 
-pkgs.runCommand "commit-msg-check-failed" {} ''
-  echo "Error script executed"
-'';
+pkgs.runCommand "commit-msg-check-failed" {} "echo \"Error script executed\"";
