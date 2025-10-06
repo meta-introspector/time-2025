@@ -307,7 +307,7 @@ eval-failure-derivation:
 .PHONY: eval-31-mathematical-forms-prime-03
 eval-31-mathematical-forms-prime-03:
 	@echo "--- Evaluating theory/31-mathematical-forms-prime-03.nix ---"
-	@nix eval --impure --expr 'let lib = import <nixpkgs> {}.lib; n = 31; in import ./theory/31-mathematical-forms-prime-03.nix { inherit lib n; }'
+	@nix eval --raw --impure --expr 'let pkgs = import (builtins.getFlake "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify").legacyPackages.aarch64-linux; lib = pkgs.lib; n = 31; in toString (import ./theory/31-mathematical-forms-prime-03.nix { inherit lib n; })."05-IsHappyNumber"'
 	@echo "--- Evaluation Complete ---"
 
 .PHONY: eval-31-mathematical-forms
