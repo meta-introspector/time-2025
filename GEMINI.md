@@ -17,6 +17,7 @@ This document provides context for the current task being performed by the Gemin
 
 ### Documentation Updates
 - Created `docs/sops/SOP_Running_Nix_Tools.md` which details how to run `statix`, `make`, and CRQ-related Nix tools.
+- Created `docs/sops/SOP_Secure_Credential_Handling_in_Nix_Scripts.md` outlining the `sops-nix` workflow for managing credentials in Nix flakes.
 
 ### External Dependency Integration Policy
 

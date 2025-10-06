@@ -5,14 +5,31 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     naersk.url = "github:nix-community/naersk/master"; # Using standard naersk for now
+    sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
   };
 
-  outputs = { self, nixpkgs, flake-utils, naersk, ... }:
+  outputs = { self, nixpkgs, flake-utils, naersk, sops-nix, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
         inherit (nixpkgs) lib;
         src = builtins.path { path = ./.; };
+
+        # Import the secrets definition
+        secretsConfig = import ./secrets.nix { inherit pkgs lib; };
+
+        # Derivation to decrypt sops secrets
+        decryptedSopsSecrets = pkgs.stdenv.mkDerivation {
+          pname = "decrypted-sops-secrets";
+          version = "1.0";
+          
+          buildPhase = ''
+            mkdir -p $out/creds
+            ${pkgs.sops}/bin/sops -d ./sops-secrets/google_accounts.json > $out/creds/google_accounts.json
+          '';
+          
+          buildInputs = [ pkgs.sops ];
+        };
       in
       {
         packages = {
@@ -36,10 +53,10 @@
           default = self.packages.${system}.rust-knowledge-extractor;
 
           creds-test = pkgs.runCommand "creds-test" {
-            extra-sandbox-paths = [ "/creds=/data/data/com.termux.nix/files/home/current-month/27/7-concepts/creds/live" ];
+            buildInputs = [ decryptedSopsSecrets ];
           } ''
             mkdir -p $out
-            cat /creds/google_accounts.json > $out/google_accounts.json
+            cp ${decryptedSopsSecrets}/creds/google_accounts.json $out/google_accounts.json
             echo "Credentials accessed successfully!" > $out/result.txt
           '';
         };

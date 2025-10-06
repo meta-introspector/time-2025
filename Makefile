@@ -232,6 +232,7 @@ lint-nix: clean pre-nix-check
 	@echo "--- Linting Nix files with statix ---"
 	-nix develop --command bash -c "statix check . > statix_output.txt 2>&1" || true
 	@echo "--- Nix linting complete. Output saved to statix_output.txt ---"
+	@nix develop --command bash -c "$(PROJECT_ROOT)/scripts/generate_statix_report_v3.sh"
 	@echo "--- Splitting statix_output.txt into smaller files ---"
 	split -l 100 statix_output.txt statix_output_part_
 	@echo "--- statix_output.txt split into statix_output_part_aa, statix_output_part_ab, etc. ---"
@@ -354,3 +355,27 @@ recover-synapse-work:
 	@echo "[INFO] Recovery process requires manual inspection of Git history and telemetry logs."
 
 .PHONY: recover-synapse-work
+
+.PHONY: setup-sops
+setup-sops:
+	@echo "--- Setting up SOPS for Secure Credential Handling ---"
+	@echo "Step 1: Generate a GPG Key (if you don't have one)"
+	@echo "  Run: gpg --full-generate-key"
+	@echo "  Follow the prompts. Note down your GPG key ID (e.g., from 'gpg --list-secret-keys --keyid-format LONG')."
+	@echo ""
+	@echo "Step 2: Create a .sops.yaml Configuration File"
+	@echo "  Create a file named .sops.yaml in the project root: $(PROJECT_ROOT)/.sops.yaml"
+	@echo "  Add the following content, replacing YOUR_GPG_KEY_ID with your actual GPG key ID:"
+	@echo ""
+	@echo "    keys:"
+	@echo "      - &main_key 0xYOUR_GPG_KEY_ID"
+	@echo "    creation_rules:"
+	@echo "      - path_regex: .*/sops-secrets/.*\\.json$$"
+	@echo "        pgp: *main_key"
+	@echo ""
+	@echo "Step 3: Run the script to encrypt your Gemini CLI credentials"
+	@echo "  This will read your ~/.gemini files, encrypt them, and generate secrets.nix."
+	@echo "  Ensure you are in the directory where you want sops-secrets/ and secrets.nix to be created."
+	@echo "  Running: $(PROJECT_ROOT)/scripts/create_gemini_sops_secrets.sh"
+	@$(PROJECT_ROOT)/scripts/create_gemini_sops_secrets.sh
+	@echo "--- SOPS Setup Complete (Manual GPG key creation/config required) ---"
