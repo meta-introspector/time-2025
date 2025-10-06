@@ -333,3 +333,24 @@ eval-github-graphql-list-repository-issues:
 	@echo "--- Evaluating github_graphql_modules/github_graphql_list_repository_issues.nix ---"
 	@nix eval --impure --expr 'let lib = import <nixpkgs> {}.lib; buildGraphQLQuery = {}; in import ./github_graphql_modules/github_graphql_list_repository_issues.nix { inherit lib buildGraphQLQuery; }'
 	@echo "--- Evaluation Complete ---"
+
+# Define PROJECT_ROOT relative to this Makefile's location
+PROJECT_ROOT := $(shell pwd)
+
+# Define SYNAPSE_SUBMODULE_PATH relative to PROJECT_ROOT
+SYNAPSE_SUBMODULE_PATH := $(PROJECT_ROOT)/09/26/synapse-system
+
+# Target to recover lost work in the synapse submodule
+recover-synapse-work:
+	@echo "[INFO] Attempting to recover lost work in the synapse submodule..."
+	@echo "[INFO] Synapse Submodule Path: $(SYNAPSE_SUBMODULE_PATH)"
+	@echo "[INFO] Reviewing Git history for potential lost commits in $(SYNAPSE_SUBMODULE_PATH)..."
+	@echo "--------------------------------------------------------------------------------"
+	@git -C $(SYNAPSE_SUBMODULE_PATH) log --oneline --graph --all --decorate
+	@echo "--------------------------------------------------------------------------------"
+	@echo "[INFO] To identify specific file changes, you can use 'git -C $(SYNAPSE_SUBMODULE_PATH) show <commit-hash>'."
+	@echo "[INFO] Once filenames are identified, search telemetry logs for their content:"
+	@echo "[INFO] Example: grep -F '<filename>' $(PROJECT_ROOT)/logs/telemetry.log"
+	@echo "[INFO] Recovery process requires manual inspection of Git history and telemetry logs."
+
+.PHONY: recover-synapse-work

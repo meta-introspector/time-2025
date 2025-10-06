@@ -16,6 +16,12 @@ The "twin" handles indexing by treating the source file's location as a reproduc
 
 *   **Source Access:** A Nix flake can access its own source code directory as an input (via the **`self`** variable) once it is deposited in the Nix store. This access is crucial for **meta-introspection** (the system analyzing its own structure).
 *   **Indexing Pipeline (CRQ-041):** The project formalizes the process of system-wide indexing under **CRQ-041**. This typically starts with an **impure step** (`indexNixFiles` in `nix_code_indexer.nix`) that uses shell commands (`find`, `nix hash`) to **scan the filesystem** for files (like `.nix` files) and generate an index containing file paths and **content hashes**.
+*   **Advanced Metadata Fetchers and Execution Filters:** To enrich the indexing process and provide deeper introspection, the system incorporates a range of advanced metadata fetchers and execution filters. These tools provide granular insights into the execution environment, compiler internals, and network activity:
+    *   **Introspection and Execution Filters:** `strace`, `ldd`, `ebpf`, `perf`, `qemu`, `chroot`, `docker`, `virtualbox`.
+    *   **Compiler and Runtime Analysis:** Compiler AST dump, LLVM IR, internal stack decoding.
+    *   **Network Analysis:** Deep packet inspection.
+    *   **Memory Introspection:** MIMP (Memory Introspection and Monitoring Platform).
+    *   **Operational Concerns:** Caching, security scanning, exfiltration prevention.
 *   **Nix Code Parsing:** For files that are Nix expressions themselves, the project defines the **Nix-Introspector** tool, designed to parse these expressions into a universal, intermediate representation (like S-expressions) for a deeper understanding of the dependency "monad".
 *   **Advanced Analysis:** Indexed file paths are tokenized and used for complex data analysis, such as generating **n-gram usages** for provenance and similarity searches.
 
