@@ -7,20 +7,26 @@
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     parser = {
       url = "./parser"; # Reference the local parser flake
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.base.follows = "base"; # Ensure base is followed
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+        base.follows = "base"; # Ensure base is followed
+      };
     };
     base = {
       url = "./base"; # Reference the local base flake
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
     };
     layer1 = {
       url = "./layer1"; # Reference the local layer1 flake
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.base.follows = "base"; # Ensure base is followed
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+        base.follows = "base"; # Ensure base is followed
+      };
     };
   };
 
