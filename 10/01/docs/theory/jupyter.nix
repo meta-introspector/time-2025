@@ -1,5 +1,7 @@
 {
   pandasModule,
+  jupyterModule,
+  matplotlibModule,
   ...
 }:
 

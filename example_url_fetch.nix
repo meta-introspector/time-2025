@@ -1,7 +1,7 @@
-{ lib, builtins, nixOntologyRepo, pkgs, self, ... }:
+{ lib, builtins, nixOntologyRepo, pkgs, self, nixpkgs, nixFileIndexDerivation, ... }:
 
 let
-  urlReader = import (self + "/lib/url_reader.nix") { inherit lib pkgs builtins; };
+  urlReader = import (self + "/lib/url_url_reader.nix") { inherit lib pkgs builtins; };
   urlExtractor = import (self + "/lib/url_extractor.nix") { inherit lib pkgs builtins; };
 
   fetchedWebsite = urlReader.fetchImpureUrl {
@@ -9,14 +9,19 @@ let
     name = "example-spec-website";
   };
 
-  nixToOwlOntologyModule = import (self + "/10/01/docs/theory/nix_to_owl_ontology.nix") {
-    inherit lib pkgs builtins nixOntologyRepo;
-    nixCodeIndexerModule = null; # Placeholder, as it's not defined here
+  nixCodeIndexerModule = import (self + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
+
+  nixFileIndex = nixCodeIndexerModule.indexNixFiles {
+    path = self;
+    name = "nix-files-index";
   };
 
-  # Call nixToOwlMapper with a dummy nixFileIndex for now
-  # In a real scenario, nixFileIndex would come from nixCodeIndexerModule
-  nixToOwlOntology = pkgs.writeText "nix-owl-ontology.owl" (nixToOwlOntologyModule.nixToOwlMapper "/path/to/dummy/nix-files.index.json");
+  nixToOwlOntologyModule = import (self + "/10/01/docs/theory/nix_to_owl_ontology.nix") {
+    inherit lib pkgs builtins nixOntologyRepo nixpkgs nixCodeIndexerModule;
+  };
+
+  # Call nixToOwlMapper with the provided nixFileIndexDerivation
+  nixToOwlOntology = pkgs.writeText "nix-owl-ontology.owl" (builtins.readFile "${nixToOwlOntologyModule.nixToOwlMapper nixFileIndexDerivation}/nix-ontology.ttl");
 
   # Extract URLs from the nixOntologyRepo
   extractedUrls = urlExtractor.extractUrls {
@@ -28,4 +33,5 @@ in
   inherit fetchedWebsite;
   inherit nixToOwlOntology;
   inherit extractedUrls;
+  inherit nixToOwlOntologyModule;
 }

@@ -1,0 +1,10 @@
+feat: Add permanent test and modularization files
+
+This commit adds the permanent test and modularization files created during the debugging process:
+- `09/27/7-concepts/1-build-system/nix-tests/default-test.nix`: A working test case for `nixpkgs-fmt` heredoc functionality.
+- `github_graphql_parts/`: Directory containing modularized parts of `github.graphql.nix`.
+- `test_statix.nix`: A simple Nix file used to verify `statix` basic functionality.
+- `theory/71-aspects-part-c-error-fix-01.nix`: Atomic test case for `theory/71-aspects-part-c.nix`.
+- `theory/71-aspects-part-c-list-test-single-element.nix`: Atomic test case for list syntax in `theory/71-aspects-part-c.nix`.
+
+These files are kept as permanent artifacts, adhering to the project's rule of "no temp, all data is permanent", and serve as documented examples and test cases for complex Nix expressions.

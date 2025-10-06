@@ -25,6 +25,13 @@
       pkgs = import nixpkgs { inherit system; };
       inherit (pkgs) lib;
 
+      nixCodeIndexerModule = import (self + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
+
+      nixFileIndexDerivation = nixCodeIndexerModule.indexNixFiles {
+        path = self;
+        name = "flake-nix-files-index";
+      };
+
       # Import the QA system
       qa = import ./qa.nix { inherit pkgs self; };
 
@@ -71,7 +78,7 @@
       };
     
       exampleUrlFetch = import (self + "/example_url_fetch.nix") {
-        inherit pkgs lib builtins nixOntologyRepo self;
+        inherit pkgs lib builtins nixOntologyRepo self nixpkgs nixFileIndexDerivation;
       };
     in
     {
@@ -79,7 +86,7 @@
         default = selfIngestionDerivation;
         exampleUrlFetch = exampleUrlFetch.fetchedWebsite;
         ontologyUrls = exampleUrlFetch.extractedUrls;
-        nixOwlOntology = exampleUrlFetch.nixToOwlOntology.nixToOwlMapper;
+        nixOwlOntology = exampleUrlFetch.nixToOwlOntology;
         generateHackathonUml = import ./theory/generate_hackathon_uml.nix { inherit pkgs lib self; };
         # nixOntologyRepoPath = pkgs.runCommand "nix-ontology-repo-path" {} "ln -s ${nixOntologyRepo} $out"; # Expose nixOntologyRepo as a derivation
       };

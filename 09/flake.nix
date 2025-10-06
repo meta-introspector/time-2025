@@ -11,7 +11,7 @@
   outputs = { nixpkgs, flake-utils, search-results, self, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        common = import ../lib/common-imports.nix { inherit system nixpkgs; };
+        common = self.lib.common-imports;
         inherit (common) pkgs;
         inherit (common) lib;
         inherit (common) builtins;

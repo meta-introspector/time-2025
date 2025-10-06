@@ -1,7 +1,7 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> {}, self, month09Flake }:
 
 let
-  crqBigrams = import ./crq-bigram-generator.nix { inherit pkgs; };
+  crqBigrams = import ./crq-bigram-generator.nix { inherit pkgs self month09Flake; };
 
   jaccardSimilarity = bigrams1: bigrams2: 
     let

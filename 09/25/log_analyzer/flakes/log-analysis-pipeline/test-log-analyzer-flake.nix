@@ -3,12 +3,13 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     log-analyzer-flake.url = "github:meta-introspector/time-2025?dir=09/25/log_analyzer&ref=feature/foaf";
+    rootFlake.url = "github:meta-introspector/streamofrandom?ref=feature/foaf";
   };
 
-  outputs = { self, nixpkgs, flake-utils, log-analyzer-flake }:
+  outputs = { self, nixpkgs, flake-utils, log-analyzer-flake, rootFlake }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        common = import ../../../../lib/common-imports.nix { inherit system; };
+        common = rootFlake.lib.common-imports { inherit system; };
         inherit (common) pkgs;
         inherit (common) lib;
         inherit (common) builtins;

@@ -18,7 +18,7 @@ repos:
 
       - id: statix
         name: statix
-        entry: bash -c "statix check || true"
+        entry: bash -c "statix check"
         language: system
         files: \.nix$
         pass_filenames: false

@@ -8,12 +8,13 @@
 
     log-analyzer-flake.url = "github:meta-introspector/time-2025?dir=09/25/log_analyzer&ref=feature/foaf";
     build-time-gemini-capture-flake.url = "github:meta-introspector/time-2025?dir=09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture&ref=feature/foaf";
+    rootLib.follows = "rootFlake/lib";
   };
 
-  outputs = { self, nixpkgs, flake-utils, time-2025-flake, log-analyzer-flake, build-time-gemini-capture-flake } @ inputs:
+  outputs = { self, nixpkgs, flake-utils, time-2025-flake, log-analyzer-flake, build-time-gemini-capture-flake, rootLib } @ inputs:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        common = import ../../../lib/common-imports.nix { inherit system; };
+        common = rootLib.common-imports { inherit system; };
 
         inherit (common) builtins;
 

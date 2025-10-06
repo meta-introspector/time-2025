@@ -5,12 +5,13 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     time2025-src.url = "github:meta-introspector/time-2025?ref=feature/foaf"; # Source for nixCodeIndexerModule and nGramGeneratorModule
+    rootFlake.url = "github:meta-introspector/streamofrandom?ref=feature/foaf";
   };
 
-  outputs = { self, nixpkgs, flake-utils, time2025-src }:
+  outputs = { self, nixpkgs, flake-utils, time2025-src, rootFlake }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        common = import ../lib/common-imports.nix { inherit system; };
+        common = rootFlake.lib.common-imports { inherit system; };
         inherit (common) pkgs;
         inherit (common) lib;
         inherit (common) builtins;

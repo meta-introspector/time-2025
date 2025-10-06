@@ -1,6 +1,7 @@
 {
   verifiableFileTopologyModule,
-  ...}:
+  ...
+}:
 
 let
   common = import ../../../../lib/common-imports.nix {};

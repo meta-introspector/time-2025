@@ -1,11 +1,13 @@
 {
   nixCodeIndexerModule,
   nixOntologyRepo,
+  pkgs,
+  nixpkgs,
   ...
 }:
 
 let
-  common = import ../../../lib/common-imports.nix {};
+  common = import ../../../../lib/common-imports.nix { inherit nixpkgs; };
   inherit (common) lib;
   inherit (common) pkgs;
   inherit (common) builtins;

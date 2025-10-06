@@ -10,7 +10,7 @@ let
   inherit (pkgs) lib; # Define lib here
 
   # Import nix-stdlib for error handling and type checking utilities
-  nix-stdlib = import ../../vendor/nix/nix-stdlib { inherit pkgs lib; };
+  nix-stdlib = (import github:meta-introspector/nix-stdlib?ref=feature/CRQ-016-nixify).lib { inherit pkgs lib; };
   inherit (nix-stdlib) errors;
   inherit (nix-stdlib) types;
 

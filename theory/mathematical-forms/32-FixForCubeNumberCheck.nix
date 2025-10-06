@@ -1,6 +1,6 @@
-{ lib, ... }:
+{ lib, self, ... }:
 let
   common = import ./_common.nix { inherit lib; };
   inherit (common) n;
 in
-(import ../31-mathematical-forms-cube-number-check-fix.nix { inherit lib; }).fixedLine
+(self.lib.mathematical-forms-cube-number-check-fix { inherit lib; }).fixedLine

@@ -1,8 +1,8 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> {}, month09Flake, self }:
 
 let
-  crqTexts = import ./crq-text-extractor.nix { inherit pkgs; };
-  nGramGenerator = import ../10/01/docs/theory/n_gram_generator.nix { inherit (pkgs) lib; inherit pkgs; inherit builtins; };
+  crqTexts = import ./crq-text-extractor.nix { inherit pkgs month09Flake; };
+  nGramGenerator = self.lib.nGramGenerator { inherit (pkgs) lib; inherit pkgs; inherit builtins; };
 
   # Simple tokenizer
   tokenize = text:

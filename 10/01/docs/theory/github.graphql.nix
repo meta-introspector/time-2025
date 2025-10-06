@@ -1,3 +1,3 @@
-{ lib, pkgs, builtins, ... }:
+{ lib, pkgs, builtins, self, ... }:
 
-(import ../../../../github_graphql_modules/github_graphql_main.nix { inherit lib pkgs builtins; }).buildGraphQLQuery
+(self.lib.github_graphql_modules.github_graphql_main { inherit lib pkgs builtins; }).buildGraphQLQuery
