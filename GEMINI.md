@@ -17,3 +17,9 @@ This document provides context for the current task being performed by the Gemin
 
 ### Documentation Updates
 - Created `docs/sops/SOP_Running_Nix_Tools.md` which details how to run `statix`, `make`, and CRQ-related Nix tools.
+
+### External Dependency Integration Policy
+
+- **Integration Method:** All external dependencies are to be integrated via `github:meta-introspector` URLs.
+- **Submodule Usage:** Submodules are *not* to be used for general integration of external dependencies. Their use is strictly reserved for scenarios involving *editing, pushing, and tagging* of those external repositories.
+- **Assumption:** It is expected that all necessary external dependencies are already checked in and labeled within the `github:meta-introspector` organization.
