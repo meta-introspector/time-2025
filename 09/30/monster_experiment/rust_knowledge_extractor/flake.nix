@@ -15,32 +15,34 @@
         src = builtins.path { path = ./.; };
       in
       {
-        packages.rust-knowledge-extractor = naersk.lib.${system}.buildPackage {
-          pname = "rust-knowledge-extractor";
-          version = "0.1.0";
-          inherit src;
-          # naersk handles cargoLock and cargoDeps internally
-          nativeBuildInputs = with pkgs; [
-            pkg-config
-            openssl
-          ];
-          buildInputs = with pkgs; [
-            # Add any runtime dependencies here if necessary
-          ];
-          env = {
-            # PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+        packages = {
+          rust-knowledge-extractor = naersk.lib.${system}.buildPackage {
+            pname = "rust-knowledge-extractor";
+            version = "0.1.0";
+            inherit src;
+            # naersk handles cargoLock and cargoDeps internally
+            nativeBuildInputs = with pkgs; [
+              pkg-config
+              openssl
+            ];
+            buildInputs = with pkgs; [
+              # Add any runtime dependencies here if necessary
+            ];
+            env = {
+              # PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+            };
           };
+
+          default = self.packages.${system}.rust-knowledge-extractor;
+
+          creds-test = pkgs.runCommand "creds-test" {
+            extra-sandbox-paths = [ "/creds=/data/data/com.termux.nix/files/home/current-month/27/7-concepts/creds/live" ];
+          } ''
+            mkdir -p $out
+            cat /creds/google_accounts.json > $out/google_accounts.json
+            echo "Credentials accessed successfully!" > $out/result.txt
+          '';
         };
-
-        packages.default = self.packages.${system}.rust-knowledge-extractor;
-
-        packages.creds-test = pkgs.runCommand "creds-test" {
-          extra-sandbox-paths = [ "/creds=/data/data/com.termux.nix/files/home/current-month/27/7-concepts/creds/live" ];
-        } ''
-          mkdir -p $out
-          cat /creds/google_accounts.json > $out/google_accounts.json
-          echo "Credentials accessed successfully!" > $out/result.txt
-        '';
 
         devShells.default = pkgs.mkShell {
           # This devShell will allow impure operations (like network access)

@@ -17,7 +17,7 @@
         DESCRIPTION = "Base empty flake for CRQ search lattice.";
         meta = {
           flakeName = "base";
-          system = system;
+          inherit system;
           nixpkgsRef = nixpkgs.rev or "";
           flakeUtilsRef = flake-utils.rev or "";
         };

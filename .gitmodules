@@ -19,3 +19,6 @@
 [submodule "10/05/MicroLean4"]
 	path = 10/05/MicroLean4
 	url = https://huggingface.co/datasets/introspector/MicroLean4
+[submodule "09/26/synapse-system"]
+	path = 09/26/synapse-system
+	url = https://github.com/meta-introspector/synapse-system.git
