@@ -15,4 +15,5 @@
         }
       '';
       variables = { inherit owner repo; };
-    in buildGraphQLQuery { inherit query variables; }
+    in buildGraphQLQuery { inherit query variables; };
+}

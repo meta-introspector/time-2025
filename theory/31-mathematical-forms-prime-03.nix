@@ -28,7 +28,7 @@
           let
             next = sumOfSquaresOfDigits current;
           in
-          iter next (seenSet // { (toString current) = true; });
+          iter next (seenSet // { "${toString current}" = true; });
     in
     iter num {};
 
