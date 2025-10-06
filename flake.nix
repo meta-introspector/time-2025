@@ -109,6 +109,7 @@
           statix # Add statix for Nix linting
           pkgs.nodejs_22 # Add nodejs_22 for JavaScript development
           node2nix-src.packages.${system}.default # Add node2nix for JavaScript dependency management
+          ncurses # Add ncurses for clear and reset commands
           # Add any other development tools here
         ];
         # You can also add shell hooks or environment variables here
