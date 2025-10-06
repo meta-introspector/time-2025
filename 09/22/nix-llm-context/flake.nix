@@ -13,7 +13,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
-        lib = pkgs.lib;
+        inherit (pkgs) lib;
         primeSieve = import ./lib/prime-sieve.nix { inherit lib; };
 
         # Function to generate LLM context for a given symbol

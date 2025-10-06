@@ -16,5 +16,5 @@ let
     repoJson;
 
 in {
-  fetchRepository = fetchRepository;
+  inherit fetchRepository;
 }

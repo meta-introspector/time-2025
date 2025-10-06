@@ -1,11 +1,11 @@
 let
   common = import ../../lib/common-imports.nix {};
-  pkgs = common.pkgs;
-  lib = common.lib;
-  builtins = common.builtins;
+  inherit (common) pkgs;
+  inherit (common) lib;
+  inherit (common) builtins;
 
   testUtils = import ../../lib/test-utils.nix { inherit pkgs lib builtins; };
-  dummyProjectRoot = testUtils.dummyProjectRoot;
+  inherit (testUtils) dummyProjectRoot;
 
   time-2025-src = builtins.fetchTarball {
     url = "https://github.com/meta-introspector/time-2025/archive/e53d59001de6f67e513328a4602a24fa0956cf7c.tar.gz";
@@ -30,12 +30,12 @@ let
       filePath = fileInfo.path; # Relative path of the Nix file
       tokens = nGramGeneratorModule.tokenizePath filePath;
       # Generate only 2-grams
-      twoGrams = nGramGeneratorModule.generateNGrams { tokens = tokens; nGramLengths = [ 2 ]; };
+      twoGrams = nGramGeneratorModule.generateNGrams { inherit tokens; nGramLengths = [ 2 ]; };
     in
     # For each 2-gram found in this file, create a usage entry
     lib.map (twoGram: {
       value = twoGram;
-      filePath = filePath; # Store filePath directly for grouping
+      inherit filePath; # Store filePath directly for grouping
     }) twoGrams
   ) indexedFiles);
 

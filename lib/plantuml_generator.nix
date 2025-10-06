@@ -27,19 +27,19 @@ let
       id = elem.id or (lib.strings.toLower (lib.strings.removeSuffix " " elem.name));
     in
     if elem.type == "Person" || elem.type == "External_System" then
-      createEntity { type = elem.type; id = id; name = elem.name; description = elem.description; }
+      createEntity { inherit (elem) type; inherit id; inherit (elem) name; inherit (elem) description; }
     else if elem.type == "System_Boundary" then
-      createEntity { type = elem.type; id = id; name = elem.name; }
+      createEntity { inherit (elem) type; inherit id; inherit (elem) name; }
     else
-      createEntity { type = elem.type; id = id; name = elem.name; technology = elem.technology; description = elem.description; };
+      createEntity { inherit (elem) type; inherit id; inherit (elem) name; inherit (elem) technology; inherit (elem) description; };
 
   # Function to generate PlantUML relationship definition string
   renderRelationship = rel:
     createRelationship {
-      source = rel.source;
-      destination = rel.destination;
-      description = rel.description;
-      technology = rel.technology;
+      inherit (rel) source;
+      inherit (rel) destination;
+      inherit (rel) description;
+      inherit (rel) technology;
     };
 
   # Assemble all PUML lines

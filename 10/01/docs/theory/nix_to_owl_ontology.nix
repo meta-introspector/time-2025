@@ -6,9 +6,9 @@
 
 let
   common = import ../../../lib/common-imports.nix {};
-  lib = common.lib;
-  pkgs = common.pkgs;
-  builtins = common.builtins;
+  inherit (common) lib;
+  inherit (common) pkgs;
+  inherit (common) builtins;
 
   # Import prefixes
   nixOntologyPrefix = (import ./nix_to_owl_ontology_declarations/prefixes/nixOntologyPrefix.nix) { inherit lib pkgs builtins nixOntologyRepo; };
@@ -21,10 +21,10 @@ let
 
   nixToOwlMapper = nixFileIndex: (import ./nix_to_owl_ontology_declarations/nixToOwlMapper.nix) {
     inherit lib pkgs builtins nixCodeIndexerModule nixOntologyPrefix nixFileIndex;
-    owlPrefix = owlPrefix; # Pass the attribute set
-    rdfPrefix = rdfPrefix; # Pass the attribute set
-    rdfsPrefix = rdfsPrefix; # Pass the attribute set
-    xsdPrefix = xsdPrefix; # Pass the attribute set
+    inherit owlPrefix; # Pass the attribute set
+    inherit rdfPrefix; # Pass the attribute set
+    inherit rdfsPrefix; # Pass the attribute set
+    inherit xsdPrefix; # Pass the attribute set
   };
 in
 {

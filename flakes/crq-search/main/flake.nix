@@ -26,9 +26,9 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        readCrqs = crqReader.lib.${system}.readCrqs;
-        filterCrqs = crqFilter.lib.${system}.filterCrqs;
-        sortAndSuggestCrqs = crqSorterSuggester.lib.${system}.sortAndSuggestCrqs;
+        inherit (crqReader.lib.${system}) readCrqs;
+        inherit (crqFilter.lib.${system}) filterCrqs;
+        inherit (crqSorterSuggester.lib.${system}) sortAndSuggestCrqs;
       in
       {
         # Expose the main CRQ search function

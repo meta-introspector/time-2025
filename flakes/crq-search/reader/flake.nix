@@ -16,7 +16,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        parseCrqFilename = crqParser.lib.${system}.parseCrqFilename;
+        inherit (crqParser.lib.${system}) parseCrqFilename;
       in
       {
         # Expose a function to read and parse CRQs from a given directory

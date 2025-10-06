@@ -1,6 +1,6 @@
 let
   pkgs = import <nixpkgs> { };
-  lib = pkgs.lib;
+  inherit (pkgs) lib;
 
   # Read the content of the test file
   testFile = ./ngram_index_test.json;

@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  crqBigrams = import ./crq-bigram-generator.nix { pkgs = pkgs; };
+  crqBigrams = import ./crq-bigram-generator.nix { inherit pkgs; };
 
   jaccardSimilarity = bigrams1: bigrams2: 
     let
@@ -22,12 +22,12 @@ let
     name = id1;
     value = pkgs.lib.listToAttrs (map (id2: {
       name = id2;
-      value = jaccardSimilarity (crqBigrams.${id1}) (crqBigrams.${id2});
+      value = jaccardSimilarity crqBigrams.${id1} crqBigrams.${id2};
     }) crqIds);
   }) crqIds);
 
 in
 {
   bigramIndex = crqBigrams;
-  similarityMatrix = similarityMatrix;
+  inherit similarityMatrix;
 }

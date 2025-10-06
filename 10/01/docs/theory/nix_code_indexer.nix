@@ -46,7 +46,7 @@ let
     indexedFiles = builtins.fromJSON (builtins.readFile "${nixFileIndex}/nix-files.index.json");
 
     # Group files by their hash to find duplicates
-    groupedByHash = lib.groupBy (f: f.hash) indexedFiles;
+    groupedByHash = builtins.groupBy (f: f.hash) indexedFiles;
     duplicates = lib.filter (f: builtins.length f > 1) (builtins.attrValues groupedByHash);
   in
   {
@@ -99,8 +99,8 @@ let
 
 in
 {
-  indexNixFiles = indexNixFiles;
-  detectDuplication = detectDuplication;
-  ingestNixCode = ingestNixCode;
-  generateCacheModule = generateCacheModule;
+  inherit indexNixFiles;
+  inherit detectDuplication;
+  inherit ingestNixCode;
+  inherit generateCacheModule;
 }

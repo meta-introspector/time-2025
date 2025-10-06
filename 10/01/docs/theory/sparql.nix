@@ -82,13 +82,13 @@ let
     in
     buildSparqlQuery {
       ontology = foafOntology; # Pass the path to the fetched ontology
-      query = query;
+      inherit query;
     };
 
 in
 {
-  buildSparqlQuery = buildSparqlQuery;
-  web3NarNetwork = web3NarNetwork;
-  fetchOntologyFromNar = fetchOntologyFromNar;
-  exampleWeb3Query = exampleWeb3Query;
+  inherit buildSparqlQuery;
+  inherit web3NarNetwork;
+  inherit fetchOntologyFromNar;
+  inherit exampleWeb3Query;
 }

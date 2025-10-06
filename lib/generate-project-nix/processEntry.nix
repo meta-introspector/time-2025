@@ -13,7 +13,7 @@ name: type:
     fullPath = path + "/" + name;
   in
   if type == "directory" then
-    (let res = generate fullPath; in { value = res.result; errors = res.errors; }) # Recurse for directories
+    (let res = generate fullPath; in { value = res.result; inherit (res) errors; }) # Recurse for directories
   else if type == "regular" && lib.strings.hasSuffix ".nix" name && name != "project.nix" && name != "flake.nix" then
     # Evaluate .nix files using the helper function
     let

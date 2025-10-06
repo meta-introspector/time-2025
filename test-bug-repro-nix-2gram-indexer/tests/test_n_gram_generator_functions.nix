@@ -1,8 +1,8 @@
 let
   common = import ../../lib/common-imports.nix {};
-  lib = common.lib;
-  pkgs = common.pkgs;
-  builtins = common.builtins;
+  inherit (common) lib;
+  inherit (common) pkgs;
+  inherit (common) builtins;
 
   nGramGeneratorModule = import ../../10/01/docs/theory/n_gram_generator.nix { inherit lib pkgs builtins; };
 
@@ -17,6 +17,6 @@ let
 
 in
 builtins.toJSON {
-  tokenizedPath = tokenizedPath;
-  generatedNGrams = generatedNGrams;
+  inherit tokenizedPath;
+  inherit generatedNGrams;
 }

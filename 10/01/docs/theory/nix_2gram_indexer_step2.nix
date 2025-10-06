@@ -16,8 +16,8 @@ let
   }:
   let
     nixFileIndex = generate2GramIndexStep1Module.generate2GramIndexStep1 {
-      projectRoot = projectRoot;
-      name = name;
+      inherit projectRoot;
+      inherit name;
     };
 
     # Read the indexed files from the JSON output
@@ -30,5 +30,5 @@ let
 
 in
 {
-  generate2GramIndexStep2 = generate2GramIndexStep2;
+  inherit generate2GramIndexStep2;
 }

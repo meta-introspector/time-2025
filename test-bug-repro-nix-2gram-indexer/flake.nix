@@ -11,9 +11,9 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         common = import ../lib/common-imports.nix { inherit system; };
-        pkgs = common.pkgs;
-        lib = common.lib;
-        builtins = common.builtins;
+        inherit (common) pkgs;
+        inherit (common) lib;
+        inherit (common) builtins;
 
         nixCodeIndexerModule = import (time2025-src + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
         nGramGeneratorModule = import (time2025-src + "/10/01/docs/theory/n_gram_generator.nix") { inherit lib pkgs builtins; };
@@ -23,7 +23,7 @@
           let
             nixFileIndexDerivation = nixCodeIndexerModule.indexNixFiles {
               path = projectRoot;
-              projectRoot = projectRoot;
+              inherit projectRoot;
               name = "${name}-nix-file-index";
             };
           in

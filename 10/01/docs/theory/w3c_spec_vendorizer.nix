@@ -6,9 +6,9 @@
 
 let
   common = import ../../../lib/common-imports.nix {};
-  lib = common.lib;
-  pkgs = common.pkgs;
-  builtins = common.builtins;
+  inherit (common) lib;
+  inherit (common) pkgs;
+  inherit (common) builtins;
 
   # A conceptual function to fork and vendor a W3C specification.
   # This function describes the process of bringing an external spec under local control
@@ -85,7 +85,7 @@ EOF
 
 in
 {
-  forkAndVendorSpec = forkAndVendorSpec;
-  addNixWrapper = addNixWrapper;
-  exampleVendorization = exampleVendorization;
+  inherit forkAndVendorSpec;
+  inherit addNixWrapper;
+  inherit exampleVendorization;
 }

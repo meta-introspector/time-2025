@@ -6,21 +6,21 @@ let
   sumUtil = import ./utils/sum.nix { inherit lib; }; # Import our custom sum
 
   # Helper to sum the 'size' attribute of a list of records
-  sumSizes = records: sumUtil.sum (lib.map (r: if r ? size then r.size else 0) records);
+  sumSizes = records: sumUtil.sum (lib.map (r: r.size or (0)) records);
 
   # Algebra to calculate the number of nodes in a SimpleExpr tree
   sizeAlgebra = {
-    bvar = ({ deBruijnIndex, type, depth }: 1 + type);
-    sort = ({ level, depth }: 1 + level);
-    const = ({ declName, levels, type, depth }: 1 + (sumUtil.sum levels) + type);
-    app = ({ fn, arg, depth }: 1 + fn + arg);
-    lam = ({ binderName, binderInfo, binderType, body, depth }: 1 + binderType + body);
-    forallE = ({ binderName, binderInfo, binderType, body, depth }: 1 + binderType + body);
+    bvar = { deBruijnIndex, type, depth }: 1 + type;
+    sort = { level, depth }: 1 + level;
+    const = { declName, levels, type, depth }: 1 + (sumUtil.sum levels) + type;
+    app = { fn, arg, depth }: 1 + fn + arg;
+    lam = { binderName, binderInfo, binderType, body, depth }: 1 + binderType + body;
+    forallE = { binderName, binderInfo, binderType, body, depth }: 1 + binderType + body;
 
     # Default handlers for non-SimpleExpr types
-    defaultAttr = (attrs: depth: 1 + sumUtil.sum (lib.attrValues attrs));
-    defaultList = (list: depth: sumUtil.sum list);
-    default = (value: depth: 0);
+    defaultAttr = attrs: depth: 1 + sumUtil.sum (lib.attrValues attrs);
+    defaultList = list: depth: sumUtil.sum list;
+    default = value: depth: 0;
   };
 
   # Function to calculate the size of a SimpleExpr
@@ -29,17 +29,17 @@ let
 
   # Algebra to calculate the maximum depth of a SimpleExpr tree
   depthAlgebra = {
-    bvar = ({ deBruijnIndex, type, depth }: 1 + type);
-    sort = ({ level, depth }: 1 + level);
-    const = ({ declName, levels, type, depth }: 1 + (foldl' max 0 levels) + type);
-    app = ({ fn, arg, depth }: 1 + max fn arg);
-    lam = ({ binderName, binderInfo, binderType, body, depth }: 1 + max binderType body);
-    forallE = ({ binderName, binderInfo, binderType, body, depth }: 1 + max binderType body);
+    bvar = { deBruijnIndex, type, depth }: 1 + type;
+    sort = { level, depth }: 1 + level;
+    const = { declName, levels, type, depth }: 1 + (foldl' max 0 levels) + type;
+    app = { fn, arg, depth }: 1 + max fn arg;
+    lam = { binderName, binderInfo, binderType, body, depth }: 1 + max binderType body;
+    forallE = { binderName, binderInfo, binderType, body, depth }: 1 + max binderType body;
 
     # Default handlers for non-SimpleExpr types
-    defaultAttr = (attrs: depth: 1 + foldl' max 0 (attrValues attrs));
-    defaultList = (list: depth: foldl' max 0 list);
-    default = (value: depth: 0);
+    defaultAttr = attrs: depth: 1 + foldl' max 0 (attrValues attrs);
+    defaultList = list: depth: foldl' max 0 list;
+    default = value: depth: 0;
   };
 
   # Function to calculate the depth of a SimpleExpr
@@ -157,7 +157,7 @@ let
 
     default = value: currentDepth:
       if builtins.isString value || builtins.isInt value || builtins.isFloat value || builtins.isBool value then
-        [ { kind = "literal"; value = value; inherit currentDepth; } ]
+        [ { kind = "literal"; inherit value; inherit currentDepth; } ]
       else
         []; # Other basic types (e.g., null) don't count as literals for this analysis
   };

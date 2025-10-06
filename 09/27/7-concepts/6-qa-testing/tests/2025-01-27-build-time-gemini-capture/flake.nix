@@ -15,7 +15,7 @@
     eachSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         flakeNixContent = builtins.readFile (self + "/flake.nix");
 

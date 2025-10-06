@@ -28,6 +28,6 @@ let
   ];
 in
 {
-  githubClasses = githubClasses;
-  githubProperties = githubProperties;
+  inherit githubClasses;
+  inherit githubProperties;
 }

@@ -5,9 +5,9 @@
 
 let
   common = import ../../../lib/common-imports.nix {};
-  lib = common.lib;
-  pkgs = common.pkgs;
-  builtins = common.builtins;
+  inherit (common) lib;
+  inherit (common) pkgs;
+  inherit (common) builtins;
 
   # Represents a conceptual Jupyter Notebook/Workbook in Nix.
   # A workbook is a sequence of cells, where each cell is a Nix expression.
@@ -106,9 +106,9 @@ let
 
 in
 {
-  createNotebook = createNotebook;
-  executeNotebook = executeNotebook;
-  dataAnalysisWorkflow = dataAnalysisWorkflow;
-  NotebookSchema = NotebookSchema;
-  CellSchema = CellSchema;
+  inherit createNotebook;
+  inherit executeNotebook;
+  inherit dataAnalysisWorkflow;
+  inherit NotebookSchema;
+  inherit CellSchema;
 }

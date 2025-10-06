@@ -10,10 +10,10 @@
   }:
   let
     # Extract classes, properties, and axioms for easier access
-    classes = owlSchema.classes;
-    objectProperties = owlSchema.objectProperties;
-    dataProperties = owlSchema.dataProperties;
-    axioms = owlSchema.axioms;
+    inherit (owlSchema) classes;
+    inherit (owlSchema) objectProperties;
+    inherit (owlSchema) dataProperties;
+    inherit (owlSchema) axioms;
 
     # Function to get a list of class names
     getClassNames = builtins.attrNames classes;

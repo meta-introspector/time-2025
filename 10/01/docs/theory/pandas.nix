@@ -1,12 +1,10 @@
-{
-  ...
-}:
+_:
 
 let
   common = import ../../../lib/common-imports.nix {};
-  lib = common.lib;
-  pkgs = common.pkgs;
-  builtins = common.builtins;
+  inherit (common) lib;
+  inherit (common) pkgs;
+  inherit (common) builtins;
 
   # Represents a conceptual DataFrame in Nix.
   # A DataFrame is essentially a list of records (attribute sets) with a defined set of columns.
@@ -31,7 +29,7 @@ let
   # Filters rows based on a predicate function.
   filterRows = df: predicate:
     createDataFrame {
-      columns = df.columns;
+      inherit (df) columns;
       data = lib.filter predicate df.data;
     };
 
@@ -53,10 +51,10 @@ let
 
 in
 {
-  createDataFrame = createDataFrame;
-  selectColumns = selectColumns;
-  filterRows = filterRows;
-  addColumn = addColumn;
-  groupBy = groupBy;
-  DataFrameSchema = DataFrameSchema; # Export the type definition
+  inherit createDataFrame;
+  inherit selectColumns;
+  inherit filterRows;
+  inherit addColumn;
+  inherit groupBy;
+  inherit DataFrameSchema; # Export the type definition
 }

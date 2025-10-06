@@ -34,8 +34,7 @@ let
 
   # A function to apply these conceptual mappings
   applyMappings = conceptName:
-    if conceptualMappings ? ${conceptName} then conceptualMappings.${conceptName}
-    else conceptName; # Return original if no mapping found
+    conceptualMappings.${conceptName} or conceptName; # Return original if no mapping found
 
   # Function to conceptually map concepts from a W3C ontology to our local ontologies
   # This would involve semantic alignment, potentially using a reasoner or manual mappings.
@@ -58,7 +57,7 @@ let
 
 in
 {
-  fetchW3COntology = fetchW3COntology;
-  mapOntologyConcepts = mapOntologyConcepts;
-  applyMappings = applyMappings;
+  inherit fetchW3COntology;
+  inherit mapOntologyConcepts;
+  inherit applyMappings;
 }

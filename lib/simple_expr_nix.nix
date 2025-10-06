@@ -27,7 +27,7 @@ let
       # Check if it's a SimpleExpr first
       if isBVar json then
         mkBVar {
-          deBruijnIndex = json.deBruijnIndex;
+          inherit (json) deBruijnIndex;
           type = jsonToSimpleExpr json.type;
         }
       else if isSort json then
@@ -36,8 +36,8 @@ let
         }
       else if isConst json then
         mkConst {
-          declName = json.declName;
-          levels = lib.map (level: jsonToSimpleExpr level) json.levels; # Recursively process levels
+          inherit (json) declName;
+          levels = lib.map jsonToSimpleExpr json.levels; # Recursively process levels
           type = jsonToSimpleExpr json.type;
         }
       else if isApp json then
@@ -47,24 +47,24 @@ let
         }
       else if isLam json then
         mkLam {
-          binderName = json.binderName;
-          binderInfo = json.binderInfo;
+          inherit (json) binderName;
+          inherit (json) binderInfo;
           binderType = jsonToSimpleExpr json.binderType;
           body = jsonToSimpleExpr json.body;
         }
       else if isForallE json then
         mkForallE {
-          binderName = json.binderName;
-          binderInfo = json.binderInfo;
+          inherit (json) binderName;
+          inherit (json) binderInfo;
           binderType = jsonToSimpleExpr json.binderType;
           body = jsonToSimpleExpr json.body;
         }
       else
         # If it's an attribute set but NOT a recognized SimpleExpr, just recursively process its values
-        lib.mapAttrs (name: value: jsonToSimpleExpr value) json
+        lib.mapAttrs (name: jsonToSimpleExpr) json
     else if builtins.isList json then
       # If it's a list, recursively process its elements
-      lib.map (value: jsonToSimpleExpr value) json
+      lib.map jsonToSimpleExpr json
     else
       json; # Return as is if not an attribute set or list
 

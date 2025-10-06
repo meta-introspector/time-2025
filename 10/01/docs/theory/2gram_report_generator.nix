@@ -66,5 +66,5 @@ let
 
 in
 {
-  generate2GramReport = generate2GramReport;
+  inherit generate2GramReport;
 }

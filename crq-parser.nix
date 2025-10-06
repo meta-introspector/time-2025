@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  nixFiles = import ./nix-indexer.nix { pkgs = pkgs; };
+  nixFiles = import ./nix-indexer.nix { inherit pkgs; };
 
   # Filter for CRQ .foaf.nix files
   foafCrqFiles = pkgs.lib.filter (p: pkgs.lib.hasSuffix ".foaf.nix" p && pkgs.lib.hasPrefix "09/crq-" p) nixFiles;

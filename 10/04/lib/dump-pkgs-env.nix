@@ -5,9 +5,9 @@ let
   # It attempts to convert thunks to strings and hashes them uniquely.
   processValue = value: 
     if builtins.isAttrs value then
-      builtins.mapAttrs (name: subValue: processValue subValue) value
+      builtins.mapAttrs (name: processValue) value
     else if builtins.isList value then
-      builtins.map (subValue: processValue subValue) value
+      builtins.map processValue value
     else if builtins.isFunction value then
       # Represent functions as a special string
       "<function>"

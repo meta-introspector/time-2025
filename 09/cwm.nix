@@ -14,7 +14,7 @@ let
 in {
   # Expose the verification results
   verificationResults = verifyFoafOwl.validationResults;
-  overallStatus = verifyFoafOwl.overallStatus;
+  inherit (verifyFoafOwl) overallStatus;
 
   # You can also expose a devShell to easily run the verification
   devShell = pkgs.mkShell {

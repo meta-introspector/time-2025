@@ -10,7 +10,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = pkgs.lib;
+        inherit (pkgs) lib;
 
         # Helper to represent a "computational event"
         computationalEvent = name: description: {

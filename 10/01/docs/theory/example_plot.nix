@@ -36,9 +36,9 @@ let
         outputFileName = "sample_line_plot.png";
       };
     in
-    renderPlot { plotDefinition = linePlot; outputFileName = linePlot.outputFileName; };
+    renderPlot { plotDefinition = linePlot; inherit (linePlot) outputFileName; };
 
 in
 {
-  examplePlot = examplePlot;
+  inherit examplePlot;
 }

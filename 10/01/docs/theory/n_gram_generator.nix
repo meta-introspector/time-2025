@@ -68,8 +68,8 @@ let
 
 in
 {
-  tokenizePath = tokenizePath;
-  tokenizeNixExpression = tokenizeNixExpression;
-  generateNGrams = generateNGrams;
-  exampleUsage = exampleUsage;
+  inherit tokenizePath;
+  inherit tokenizeNixExpression;
+  inherit generateNGrams;
+  inherit exampleUsage;
 }

@@ -1,8 +1,8 @@
 let
   common = import ./lib/common-imports.nix {};
-  pkgs = common.pkgs;
-  lib = common.lib;
-  builtins = common.builtins;
+  inherit (common) pkgs;
+  inherit (common) lib;
+  inherit (common) builtins;
 
   nixCodeIndexerModule = import ./10/01/docs/theory/nix_code_indexer.nix { inherit lib pkgs builtins; };
   nGramGeneratorModule = import ./10/01/docs/theory/n_gram_generator.nix { inherit lib pkgs builtins; };

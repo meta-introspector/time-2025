@@ -9,5 +9,5 @@ let
   fixedLine = ! lib.elem n (lib.map (i: i * i * i) (lib.range 1 10));
 in
 {
-  fixedLine = fixedLine;
+  inherit fixedLine;
 }

@@ -13,10 +13,10 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = pkgs.lib;
+        inherit (pkgs) lib;
 
-        fetchGithubData = fetchGithubDataFlake.lib.fetchGithubData;
-        githubToFoaf = githubToFoafFlake.lib.githubToFoaf;
+        inherit (fetchGithubDataFlake.lib) fetchGithubData;
+        inherit (githubToFoafFlake.lib) githubToFoaf;
 
         # Fetch data for a specific repository
         owner = "meta-introspector";

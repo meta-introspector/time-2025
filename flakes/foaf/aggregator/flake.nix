@@ -11,12 +11,12 @@
     let
       system = "aarch64-linux"; # Hardcoded system
       pkgs = nixpkgs.legacyPackages.${system};
-      lib = pkgs.lib;
+      inherit (pkgs) lib;
 
       # Get the FOAF context from the context flake
-      foafContext = foafContextFlake.lib.foafContext;
+      inherit (foafContextFlake.lib) foafContext;
       # Get the seed graph from the seed data flake
-      seedGraph = foafSeedDataFlake.lib.seedGraph;
+      inherit (foafSeedDataFlake.lib) seedGraph;
 
       # Combine them into a full graph (initially just seed data with context)
       fullGraph = { "@context" = foafContext; "@graph" = seedGraph; };

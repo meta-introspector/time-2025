@@ -25,7 +25,7 @@ let
   };
 in
 {
-  fetchedWebsite = fetchedWebsite;
-  nixToOwlOntology = nixToOwlOntology;
-  extractedUrls = extractedUrls;
+  inherit fetchedWebsite;
+  inherit nixToOwlOntology;
+  inherit extractedUrls;
 }

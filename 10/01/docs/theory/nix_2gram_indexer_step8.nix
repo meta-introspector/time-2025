@@ -16,8 +16,8 @@ let
   }:
   let
     twoGramIndex = generate2GramIndexStep7Module.generate2GramIndexStep7 {
-      projectRoot = projectRoot;
-      name = name;
+      inherit projectRoot;
+      inherit name;
     };
 
     # Create a derivation to output the generated 2-gram index as JSON
@@ -41,5 +41,5 @@ let
 
 in
 {
-  generate2GramIndexStep8 = generate2GramIndexStep8;
+  inherit generate2GramIndexStep8;
 }

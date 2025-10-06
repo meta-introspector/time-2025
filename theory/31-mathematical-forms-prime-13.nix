@@ -1,8 +1,8 @@
 { lib, n, ... }:
 {
   # Properties related to Prime 13 (Integration/Correlation)
-  "10-DifferenceOfSquares" = (16 * 16 - 15 * 15 == n);
-  "11-SumOfFourPrimes" = (2 + 3 + 7 + 19 == n);
+  "10-DifferenceOfSquares" = 16 * 16 - 15 * 15 == n;
+  "11-SumOfFourPrimes" = 2 + 3 + 7 + 19 == n;
   "12-NumberOfDivisors" = 2; # 1 and 31
   "13-SumOfDivisors" = 1 + n;
   "27-SumOfTwoPrimes" = "31 = 2 + 29";

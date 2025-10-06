@@ -16,7 +16,7 @@ let
     # First, index all Nix files in the project
     nixFileIndex = nixCodeIndexerModule.indexNixFiles {
       path = projectRoot;
-      projectRoot = projectRoot; # Pass projectRoot to the indexer
+      inherit projectRoot; # Pass projectRoot to the indexer
       name = "${name}-nix-file-index";
     };
   in
@@ -24,5 +24,5 @@ let
 
 in
 {
-  generate2GramIndexStep1 = generate2GramIndexStep1;
+  inherit generate2GramIndexStep1;
 }

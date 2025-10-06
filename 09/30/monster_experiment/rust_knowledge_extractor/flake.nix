@@ -11,14 +11,14 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
         src = builtins.path { path = ./.; };
       in
       {
         packages.rust-knowledge-extractor = naersk.lib.${system}.buildPackage {
           pname = "rust-knowledge-extractor";
           version = "0.1.0";
-          src = src;
+          inherit src;
           # naersk handles cargoLock and cargoDeps internally
           nativeBuildInputs = with pkgs; [
             pkg-config

@@ -7,9 +7,9 @@
 
 let
   common = import ../../../lib/common-imports.nix {};
-  lib = common.lib;
-  pkgs = common.pkgs;
-  builtins = common.builtins;
+  inherit (common) lib;
+  inherit (common) pkgs;
+  inherit (common) builtins;
 
   # A function to run a data science workflow defined as a Jupyter notebook in Nix.
   runDataScienceWorkflow = {
@@ -66,7 +66,7 @@ let
 
 in
 {
-  runDataScienceWorkflow = runDataScienceWorkflow;
+  inherit runDataScienceWorkflow;
   # Export the example workflow from jupyter.nix
   exampleDataAnalysisWorkflow = jupyterModule.dataAnalysisWorkflow;
 }

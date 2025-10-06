@@ -112,9 +112,9 @@ let
 
 in
 {
-  generateAsciiArt = generateAsciiArt;
-  convertWithPandoc = convertWithPandoc;
-  generateLlmTxt = generateLlmTxt;
-  generatePodcastOfChanges = generatePodcastOfChanges;
-  organizeAccountData = organizeAccountData;
+  inherit generateAsciiArt;
+  inherit convertWithPandoc;
+  inherit generateLlmTxt;
+  inherit generatePodcastOfChanges;
+  inherit organizeAccountData;
 }

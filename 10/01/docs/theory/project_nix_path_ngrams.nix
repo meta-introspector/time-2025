@@ -6,9 +6,9 @@
 
 let
   common = import ../../../lib/common-imports.nix {};
-  lib = common.lib;
-  pkgs = common.pkgs;
-  builtins = common.builtins;
+  inherit (common) lib;
+  inherit (common) pkgs;
+  inherit (common) builtins;
 
   # Define the n-gram lengths we are interested in
   nGramLengths = [ 2 3 5 7 11 ];
@@ -53,5 +53,5 @@ let
 
 in
 {
-  generateProjectNixPathNGrams = generateProjectNixPathNGrams;
+  inherit generateProjectNixPathNGrams;
 }

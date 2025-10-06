@@ -16,8 +16,8 @@ let
   }:
   let
     indexedFiles = generate2GramIndexStep4Module.generate2GramIndexStep4 {
-      projectRoot = projectRoot;
-      name = name;
+      inherit projectRoot;
+      inherit name;
     };
 
     all2GramUsages = lib.flatten (lib.map (fileInfo: # For each indexed file
@@ -25,12 +25,12 @@ let
         filePath = fileInfo.path; # Relative path of the Nix file
         tokens = nGramGeneratorModule.tokenizePath filePath;
         # Generate only 2-grams
-        twoGrams = nGramGeneratorModule.generateNGrams { tokens = tokens; nGramLengths = [ 2 ]; };
+        twoGrams = nGramGeneratorModule.generateNGrams { inherit tokens; nGramLengths = [ 2 ]; };
       in
       # For each 2-gram found in this file, create a usage entry
       lib.map (twoGram: {
         value = twoGram;
-        filePath = filePath; # Store filePath directly for grouping
+        inherit filePath; # Store filePath directly for grouping
       }) twoGrams
     ) indexedFiles);
   in
@@ -38,5 +38,5 @@ let
 
 in
 {
-  generate2GramIndexStep5 = generate2GramIndexStep5;
+  inherit generate2GramIndexStep5;
 }

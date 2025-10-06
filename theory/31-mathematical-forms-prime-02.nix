@@ -18,5 +18,5 @@
       checkDivisor 3;
 
   "02-IsPrime" = isPrim' n;
-  "20-ConsecutivePrimeGap" = (n - 29 == 2); # Related to prime sequence
+  "20-ConsecutivePrimeGap" = n - 29 == 2; # Related to prime sequence
 }

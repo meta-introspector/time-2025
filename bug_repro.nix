@@ -9,8 +9,8 @@
     let
       system = "aarch64-linux"; # Assuming aarch64-linux as the target system
       pkgs = nixpkgs.legacyPackages.${system};
-      lib = pkgs.lib;
-      builtins = builtins; # Use builtins directly
+      inherit (pkgs) lib;
+      inherit builtins; # Use builtins directly
 
       # Minimal indexNixFiles function, similar to nix_code_indexer.nix
       indexNixFiles = {

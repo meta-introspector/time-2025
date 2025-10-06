@@ -84,6 +84,6 @@ let
 in
 {
   inherit indexMarkdownFiles;
-  generateMarkdownTwin = generateMarkdownTwin;
-  exampleMarkdownIndexingAndTwinning = exampleMarkdownIndexingAndTwinning;
+  inherit generateMarkdownTwin;
+  inherit exampleMarkdownIndexingAndTwinning;
 }

@@ -24,7 +24,7 @@ let
   # Function to run nixpkgs-fmt --check on a list of Nix file paths.
   runNixFmtCheck = nixFiles: pkgs.runCommand "nixpkgs-fmt-check" {
     inherit nixFiles;
-    nixpkgs-fmt = pkgs.nixpkgs-fmt;
+    inherit (pkgs) nixpkgs-fmt;
   } ''
     echo "Running nixpkgs-fmt --check on Nix files..."
     for nixFile in $nixFiles; do
@@ -37,7 +37,7 @@ let
   # Function to run statix check on a list of Nix file paths.
   runStatixCheck = nixFiles: pkgs.runCommand "statix-check" {
     inherit nixFiles;
-    statix = pkgs.statix;
+    inherit (pkgs) statix;
   } ''
     echo "Running statix check on Nix files..."
     for nixFile in $nixFiles; do
@@ -50,7 +50,7 @@ let
   # Function to run shellcheck -x on a list of shell script paths.
   runShellcheckCheck = shellFiles: pkgs.runCommand "shellcheck-check" {
     inherit shellFiles;
-    shellcheck = pkgs.shellcheck;
+    inherit (pkgs) shellcheck;
   } ''
     echo "Running shellcheck -x on shell scripts..."
     for shellFile in $shellFiles; do

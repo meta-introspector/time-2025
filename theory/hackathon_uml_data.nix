@@ -74,7 +74,7 @@ let
     boundary = framework;
     elements = [ rigorLayer cwmVerification pureEngine leanProof minizincSolver ];
     externals = [ agent monster ];
-    relationships = relationships;
+    inherit relationships;
   };
 
 in

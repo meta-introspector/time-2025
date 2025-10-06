@@ -6,7 +6,7 @@ let
 in
 {
   inherit nixpkgs pkgs;
-  lib = nixpkgs.lib;
-  builtins = builtins;
+  inherit (nixpkgs) lib;
+  inherit builtins;
 }
 

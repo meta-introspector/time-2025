@@ -1,12 +1,10 @@
-{
-  ...
-}:
+_:
 
 let
   common = import ../../../lib/common-imports.nix {};
-  lib = common.lib;
-  pkgs = common.pkgs;
-  builtins = common.builtins;
+  inherit (common) lib;
+  inherit (common) pkgs;
+  inherit (common) builtins;
 
   # Define common secret patterns (conceptual regexes)
   # In a real scenario, these would be more comprehensive and potentially loaded from a secure source.
@@ -63,6 +61,6 @@ let
 
 in
 {
-  scanForSecrets = scanForSecrets;
-  defaultSecretPatterns = defaultSecretPatterns;
+  inherit scanForSecrets;
+  inherit defaultSecretPatterns;
 }

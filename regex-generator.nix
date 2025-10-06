@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  crqIds = import ./crq-parser.nix { pkgs = pkgs; };
+  crqIds = import ./crq-parser.nix { inherit pkgs; };
 
   # Also allow conventional commit types
   conventionalTypes = ["feat" "fix" "docs" "style" "refactor" "test" "chore"];

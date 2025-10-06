@@ -6,8 +6,8 @@
 
 let
   common = import ../../../lib/common-imports.nix {};
-  lib = common.lib;
-  builtins = common.builtins;
+  inherit (common) lib;
+  inherit (common) builtins;
 
   # Extract emojiMap from the OWL schema
   emojiMap = builtins.listToAttrs (
@@ -58,5 +58,5 @@ let
 in
 {
   nix2emoji = toEmoji;
-  emojiMap = emojiMap; # Export map for reference
+  inherit emojiMap; # Export map for reference
 }

@@ -1,11 +1,11 @@
 let
   common = import ../lib/common-imports.nix {};
-  pkgs = common.pkgs;
-  lib = common.lib;
-  builtins = common.builtins;
+  inherit (common) pkgs;
+  inherit (common) lib;
+  inherit (common) builtins;
 
   testUtils = import ../lib/test-utils.nix { inherit pkgs lib builtins; };
-  dummyProjectRoot = testUtils.dummyProjectRoot;
+  inherit (testUtils) dummyProjectRoot;
 
   time2025-src = builtins.fetchTarball {
     url = "https://github.com/meta-introspector/time-2025/archive/feature/foaf.tar.gz";

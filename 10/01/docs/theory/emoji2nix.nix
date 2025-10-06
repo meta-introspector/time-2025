@@ -6,8 +6,8 @@
 
 let
   common = import ../../../lib/common-imports.nix {};
-  lib = common.lib;
-  builtins = common.builtins;
+  inherit (common) lib;
+  inherit (common) builtins;
 
   # Extract emojiMap from the OWL schema
   emojiMap = builtins.listToAttrs (
@@ -28,7 +28,7 @@ let
     in
     { 
       name = individual.hasEmojiRepresentation; 
-      value = if individual ? hasNixKeyword then individual.hasNixKeyword else name; 
+      value = individual.hasNixKeyword or name; 
     }
   );
 

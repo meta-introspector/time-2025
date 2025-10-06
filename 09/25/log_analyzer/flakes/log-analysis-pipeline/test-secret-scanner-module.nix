@@ -9,9 +9,9 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         common = import ../../../../lib/common-imports.nix { inherit system; };
-        pkgs = common.pkgs;
-        lib = common.lib;
-        builtins = common.builtins;
+        inherit (common) pkgs;
+        inherit (common) lib;
+        inherit (common) builtins;
 
         secretScannerModule = import "${meta-introspector-flake}/10/01/docs/theory/secret_scanner.nix" { inherit lib pkgs; };
       in

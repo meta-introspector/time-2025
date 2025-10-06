@@ -7,12 +7,12 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  lib = pkgs.lib; # Define lib here
+  inherit (pkgs) lib; # Define lib here
 
   # Import nix-stdlib for error handling and type checking utilities
   nix-stdlib = import ../../vendor/nix/nix-stdlib { inherit pkgs lib; };
-  errors = nix-stdlib.errors;
-  types = nix-stdlib.types;
+  inherit (nix-stdlib) errors;
+  inherit (nix-stdlib) types;
 
   # Define a recursive attribute set for all helper functions
   # This allows them to refer to each other
@@ -21,12 +21,12 @@ let
     evaluateNixFile = import (builtins.fetchTarball "github:meta-introspector/time-2025?ref=feature/foaf&dir=lib/generate-project-nix/evaluateNixFile.nix") { inherit pkgs lib builtins tryEval errors types; };
     processEntry = import (builtins.fetchTarball "github:meta-introspector/time-2025?ref=feature/foaf&dir=lib/generate-project-nix/processEntry.nix") {
       inherit lib evaluateNixFile errors types;
-      generate = helpers.generate; # Explicitly pass the recursive generate
+      inherit (helpers) generate; # Explicitly pass the recursive generate
     };
     generate = import (builtins.fetchTarball "github:meta-introspector/time-2025?ref=feature/foaf&dir=lib/generate-project-nix/generate.nix") {
       inherit lib builtins evaluateNixFile errors types;
-      processEntry = helpers.processEntry; # Explicitly pass the recursive processEntry
-      generate = helpers.generate; # Explicitly pass the recursive generate to itself
+      inherit (helpers) processEntry; # Explicitly pass the recursive processEntry
+      inherit (helpers) generate; # Explicitly pass the recursive generate to itself
     };
   };
 

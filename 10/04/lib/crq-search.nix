@@ -14,7 +14,7 @@ let
       {
         id = builtins.elemAt match 0;
         title = builtins.replaceStrings [ "_" ] [ " " ] (builtins.elemAt match 1);
-        filename = filename;
+        inherit filename;
       }
     else
       null;

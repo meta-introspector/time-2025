@@ -3,10 +3,10 @@
 let
   # Import the test case data
   testCase = import ./test-commit-check/test-case-crq-041.nix {};
-  commitMsg = testCase.commitMsg;
+  inherit (testCase) commitMsg;
 
   # Import the regex generator
-  regex = import ./regex-generator.nix { pkgs = pkgs; };
+  regex = import ./regex-generator.nix { inherit pkgs; };
 
   # Import the check logic
   isValid = import ./test-commit-check/check-logic.nix { inherit pkgs commitMsg regex; };

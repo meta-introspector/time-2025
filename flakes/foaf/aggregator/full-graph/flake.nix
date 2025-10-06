@@ -12,12 +12,12 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = pkgs.lib;
+        inherit (pkgs) lib;
 
         # Get the FOAF context from the aggregator context flake
-        foafContext = foafAggregatorContextFlake.lib.foafContext;
+        inherit (foafAggregatorContextFlake.lib) foafContext;
         # Get the seed graph from the aggregator seed graph flake
-        seedGraph = foafAggregatorSeedGraphFlake.lib.seedGraph;
+        inherit (foafAggregatorSeedGraphFlake.lib) seedGraph;
 
         # Combine them into a full graph
         fullGraph = { "@context" = foafContext; "@graph" = seedGraph; };

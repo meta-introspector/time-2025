@@ -97,7 +97,7 @@
           };
 
         # Create an attribute set of search NARs, one for each keyword
-        searchNars = pkgs.lib.genAttrs keywords (keyword: mkSearchNar keyword);
+        searchNars = pkgs.lib.genAttrs keywords mkSearchNar;
 
         # Function to create a NAR of all repositories for a given owner
         mkRepoListNar = ownerName:

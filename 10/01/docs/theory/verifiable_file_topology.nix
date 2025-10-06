@@ -1,12 +1,10 @@
-{
-  ...
-}:
+_:
 
 let
   common = import ../../../lib/common-imports.nix {};
-  lib = common.lib;
-  pkgs = common.pkgs;
-  builtins = common.builtins;
+  inherit (common) lib;
+  inherit (common) pkgs;
+  inherit (common) builtins;
 
   # Define the structure of the file topology
   # This serves as a schema for the output of our provenance mapping.
@@ -97,6 +95,6 @@ let
 
 in
 {
-  buildFileTopology = buildFileTopology;
-  FileTopologySchema = FileTopologySchema; # Export the schema definition
+  inherit buildFileTopology;
+  inherit FileTopologySchema; # Export the schema definition
 }

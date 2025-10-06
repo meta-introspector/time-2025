@@ -16,15 +16,15 @@ let
   }:
   let
     all2GramUsages = generate2GramIndexStep5Module.generate2GramIndexStep5 {
-      projectRoot = projectRoot;
-      name = name;
+      inherit projectRoot;
+      inherit name;
     };
 
-    grouped2Grams = lib.groupBy (usage: usage.value) all2GramUsages;
+    grouped2Grams = builtins.groupBy (usage: usage.value) all2GramUsages;
   in
   grouped2Grams;
 
 in
 {
-  generate2GramIndexStep6 = generate2GramIndexStep6;
+  inherit generate2GramIndexStep6;
 }

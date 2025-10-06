@@ -11,7 +11,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         common = import ../../../../lib/common-imports.nix { inherit system; };
-        pkgs = common.pkgs;
+        inherit (common) pkgs;
       in
       {
         packages.default = build-time-gemini-capture-flake.packages.${system}.default;

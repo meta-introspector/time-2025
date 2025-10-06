@@ -18,9 +18,9 @@
         };
         nixLib = pkgs.lib; # Make lib available as nixLib
 
-        zos = import ./lib/zos.nix { pkgs = pkgs; crqBinstore = crqBinstore; nixLib = nixLib; };
-        concepts = import ./lib/concepts.nix { pkgs = pkgs; flakeSelf = self; nixLib = nixLib; };
-        aiContext = import ./lib/ai-context.nix { pkgs = pkgs; concepts = concepts; zos = zos; nixLib = nixLib; };
+        zos = import ./lib/zos.nix { inherit pkgs; inherit crqBinstore; inherit nixLib; };
+        concepts = import ./lib/concepts.nix { inherit pkgs; flakeSelf = self; inherit nixLib; };
+        aiContext = import ./lib/ai-context.nix { inherit pkgs; inherit concepts; inherit zos; inherit nixLib; };
 
       in
       {

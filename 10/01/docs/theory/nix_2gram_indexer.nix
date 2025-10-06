@@ -30,13 +30,13 @@ let
     name ? "nix-2gram-index",
   }:
   generate2GramIndexStep8Module.generate2GramIndexStep8 {
-    projectRoot = projectRoot;
-    name = name;
+    inherit projectRoot;
+    inherit name;
   };
 
 in
 {
-  generate2GramIndex = generate2GramIndex;
-  TwoGramInstanceSchema = TwoGramInstanceSchema; # Export the type definition
-  UsageLocationSchema = UsageLocationSchema;     # Export the type definition
+  inherit generate2GramIndex;
+  inherit TwoGramInstanceSchema; # Export the type definition
+  inherit UsageLocationSchema;     # Export the type definition
 }

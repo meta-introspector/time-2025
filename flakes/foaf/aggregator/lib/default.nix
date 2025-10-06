@@ -5,7 +5,7 @@
 
 let
   pkgs = nixpkgs.legacyPackages.${system};
-  lib = pkgs.lib;
+  inherit (pkgs) lib;
 in
 {
   inherit pkgs lib;

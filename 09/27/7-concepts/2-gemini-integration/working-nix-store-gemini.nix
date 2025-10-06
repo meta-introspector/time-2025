@@ -118,9 +118,9 @@
 
         # Expose the confirmed working paths
         lib = {
-          geminiStorePath = geminiStorePath;
-          geminiBundle = geminiBundle;
-          geminiWrapper = geminiWrapper;
+          inherit geminiStorePath;
+          inherit geminiBundle;
+          inherit geminiWrapper;
           bundleHash = "9bfmqvdsyk2br1bw5xcfy2g62axp7id7";
         };
       }

@@ -12,9 +12,9 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         common = import ../lib/common-imports.nix { inherit system nixpkgs; };
-        pkgs = common.pkgs;
-        lib = common.lib;
-        builtins = common.builtins;
+        inherit (common) pkgs;
+        inherit (common) lib;
+        inherit (common) builtins;
       in {
         # A devShell that includes nixpkgs and potentially other tools
         devShells = {
@@ -36,9 +36,9 @@
           seedFoaf = import ./seed.foaf.nix { inherit pkgs builtins self; };
 
           searchNars = search-results.packages.${system}.default;
-          url2fileLocatorScript = search-results.packages.${system}.url2fileLocatorScript;
+          inherit (search-results.packages.${system}) url2fileLocatorScript;
 
-          cwm = import ./cwm.nix { inherit pkgs builtins self; lib = flake-utils.lib; };
+          cwm = import ./cwm.nix { inherit pkgs builtins self; inherit (flake-utils) lib; };
 
           w3cReposNar = search-results.packages.${system}.mkRepoListNar "w3c";
         };

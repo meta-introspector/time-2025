@@ -23,8 +23,8 @@ let
   }:
   let
     grouped2Grams = generate2GramIndexStep6Module.generate2GramIndexStep6 {
-      projectRoot = projectRoot;
-      name = name;
+      inherit projectRoot;
+      inherit name;
     };
 
     twoGramIndex = lib.mapAttrs (twoGramValue: usages: # For each unique 2-gram
@@ -41,7 +41,7 @@ let
         value = twoGramValue;
         count = builtins.length usages;
         uniquePaths = sortedUniquePaths;
-        pathSetHash = pathSetHash;
+        inherit pathSetHash;
       }
     ) grouped2Grams;
   in

@@ -15,7 +15,7 @@ let
   traverseSimpleExpr = algebra: expr:
     if isBVar expr then
       algebra.bvar {
-        deBruijnIndex = expr.deBruijnIndex;
+        inherit (expr) deBruijnIndex;
         type = traverseSimpleExpr algebra expr.type;
       }
     else if isSort expr then
@@ -24,7 +24,7 @@ let
       }
     else if isConst expr then
       algebra.const {
-        declName = expr.declName;
+        inherit (expr) declName;
         levels = lib.map (level: traverseSimpleExpr algebra level) expr.levels;
         type = traverseSimpleExpr algebra expr.type;
       }
@@ -35,15 +35,15 @@ let
       }
     else if isLam expr then
       algebra.lam {
-        binderName = expr.binderName;
-        binderInfo = expr.binderInfo;
+        inherit (expr) binderName;
+        inherit (expr) binderInfo;
         binderType = traverseSimpleExpr algebra expr.binderType;
         body = traverseSimpleExpr algebra expr.body;
       }
     else if isForallE expr then
       algebra.forallE {
-        binderName = expr.binderName;
-        binderInfo = expr.binderInfo;
+        inherit (expr) binderName;
+        inherit (expr) binderInfo;
         binderType = traverseSimpleExpr algebra expr.binderType;
         body = traverseSimpleExpr algebra expr.body;
       }

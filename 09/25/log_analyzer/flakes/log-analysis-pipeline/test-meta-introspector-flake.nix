@@ -9,9 +9,9 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         common = import ../../../../lib/common-imports.nix { inherit system; };
-        pkgs = common.pkgs;
-        lib = common.lib;
-        builtins = common.builtins;
+        inherit (common) pkgs;
+        inherit (common) lib;
+        inherit (common) builtins;
       in
       {
         packages.meta-introspector-attrs = pkgs.runCommand "meta-introspector-attrs" {

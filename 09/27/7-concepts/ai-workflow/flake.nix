@@ -13,7 +13,7 @@
 
         # --- From impure-llm-job/flake.nix ---
         # Function to load secrets from a pre-decrypted file
-        loadImpureSecrets = {}:
+        loadImpureSecrets = _:
           let
             decryptedPath = builtins.getEnv "LLM_API_KEY_FILE" ""; # Get path from host env
             hasDecrypted = builtins.pathExists decryptedPath;

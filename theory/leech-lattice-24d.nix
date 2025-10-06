@@ -35,14 +35,14 @@ let
         bladeName = lib.elemAt leechLattice.dimensionsList index;
         baseBlade = {
           name = bladeName;
-          index = index;
+          inherit index;
           architecturalSignificance = "This blade is a fundamental component of the Leech lattice, contributing to the overall system's structural integrity.";
         };
         # Check if a special configuration exists for this blade
         specialConfig = specialBladeConfigs."${bladeName}.nix" or null;
       in
       if specialConfig != null
-      then specialConfig { inherit lib; baseBlade = baseBlade; }
+      then specialConfig { inherit lib; inherit baseBlade; }
       else baseBlade;
 
     # Further properties or constructions could be added here.

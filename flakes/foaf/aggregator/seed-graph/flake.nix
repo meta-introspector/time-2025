@@ -11,11 +11,11 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = pkgs.lib;
+        inherit (pkgs) lib;
       in
       {
         lib = {
-          seedGraph = foafSeedDataFlake.lib.seedGraph;
+          inherit (foafSeedDataFlake.lib) seedGraph;
         };
       }
     );

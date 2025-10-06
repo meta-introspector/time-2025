@@ -1,7 +1,7 @@
 let
   # Import nixpkgs for the "lib" functions.
   pkgs = import <nixpkgs> { };
-  lib = pkgs.lib;
+  inherit (pkgs) lib;
 
   # Path to the JSON file.
   ngramFile = ./ontology_ngrams.json;

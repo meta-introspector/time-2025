@@ -1,7 +1,7 @@
 let
   common = import ../lib/common-imports.nix {};
-  lib = common.lib;
-  builtins = common.builtins;
+  inherit (common) lib;
+  inherit (common) builtins;
 
   # Static instance of data mimicking indexedFiles
   staticData = [

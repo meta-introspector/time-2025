@@ -16,8 +16,8 @@ let
   }:
   let
     indexedFilesJsonDerivation = generate2GramIndexStep2Module.generate2GramIndexStep2 {
-      projectRoot = projectRoot;
-      name = name;
+      inherit projectRoot;
+      inherit name;
     };
   in
   indexedFilesJsonDerivation;

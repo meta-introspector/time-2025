@@ -10,6 +10,7 @@
     # 3. Reference the Log Analyzer for feedback (The Strange Loop Agent)
     logAnalyzer.url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=09/25/log_analyzer";
     sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
+    node2nix-src.url = "github:meta-introspector/node2nix";
     # 4. Ontology repository for Nix concepts
     nixOntologyRepo = {
       url = "github:meta-introspector/ontology";
@@ -17,12 +18,12 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, ... }:
+  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src, ... }:
     let
       system = "aarch64-linux"; # Hardcode system as per user instruction
       # Load core utilities
       pkgs = import nixpkgs { inherit system; };
-      lib = pkgs.lib;
+      inherit (pkgs) lib;
 
       # Import the QA system
       qa = import ./qa.nix { inherit pkgs self; };
@@ -68,8 +69,7 @@
           echo "hello from simple quine" > $out/hello.txt
         '';
       };
-    in
-    let
+    
       exampleUrlFetch = import (self + "/example_url_fetch.nix") {
         inherit pkgs lib builtins nixOntologyRepo self;
       };
@@ -107,6 +107,8 @@
           pre-commit # Add pre-commit to the development shell
           jq # Add jq for parsing JSON output
           statix # Add statix for Nix linting
+          pkgs.nodejs_22 # Add nodejs_22 for JavaScript development
+          node2nix-src.packages.${system}.default # Add node2nix for JavaScript dependency management
           # Add any other development tools here
         ];
         # You can also add shell hooks or environment variables here

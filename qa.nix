@@ -3,11 +3,11 @@ let
   qa-helpers = import ./lib/qa-helpers.nix { inherit pkgs lib; };
 
   # Define common tools
-  shellcheck = pkgs.shellcheck;
-  pre-commit = pkgs.pre-commit;
-  git = pkgs.git;
-  nixpkgs-fmt = pkgs.nixpkgs-fmt;
-  statix = pkgs.statix;
+  inherit (pkgs) shellcheck;
+  inherit (pkgs) pre-commit;
+  inherit (pkgs) git;
+  inherit (pkgs) nixpkgs-fmt;
+  inherit (pkgs) statix;
   # The entire project source for checks that need it
   projectSrc = self;
 

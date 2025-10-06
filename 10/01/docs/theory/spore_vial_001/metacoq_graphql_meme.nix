@@ -4,9 +4,9 @@
 
 let
   common = import ../../../../lib/common-imports.nix {};
-  lib = common.lib;
-  pkgs = common.pkgs;
-  builtins = common.builtins;
+  inherit (common) lib;
+  inherit (common) pkgs;
+  inherit (common) builtins;
 
   # The GitHub URL for the MetaCoq Haskell extraction
   metaCoqHaskellUrl = "https://github.com/meta-introspector/th-desugar/blob/b915468a8ab8510cc1e6669c8b556229cb4c934a/Server/MetaCoq/TestMeta.org";
@@ -73,7 +73,7 @@ let
 
 in
 {
-  fetchMetaCoqHaskell = fetchMetaCoqHaskell;
-  buildMetaCoqGraphQLService = buildMetaCoqGraphQLService;
-  metaMemeTopology = metaMemeTopology;
+  inherit fetchMetaCoqHaskell;
+  inherit buildMetaCoqGraphQLService;
+  inherit metaMemeTopology;
 }

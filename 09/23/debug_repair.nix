@@ -1,6 +1,6 @@
 let
   pkgs = import <nixpkgs> { };
-  lib = pkgs.lib;
+  inherit (pkgs) lib;
   testFile = ./ngram_index_test.json;
   fileContent = builtins.readFile testFile;
   lines = lib.splitString "\n" fileContent;

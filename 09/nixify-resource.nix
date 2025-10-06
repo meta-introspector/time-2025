@@ -15,7 +15,7 @@ let
       # This would involve parsing the ontology file and representing it as Nix data
       {
         type = "ontology";
-        url = url;
+        inherit url;
         path = fetchedResource;
         # Further parsing/representation logic would go here
         schema = "Nix representation of ontology schema from ${fetchedResource}";
@@ -26,7 +26,7 @@ let
       # Placeholder for code nixification logic
       {
         type = "code";
-        url = url;
+        inherit url;
         path = fetchedResource;
         code = "Nix derivation for building code from ${fetchedResource}";
       }
@@ -34,7 +34,7 @@ let
       # Placeholder for document nixification logic
       {
         type = "document";
-        url = url;
+        inherit url;
         path = fetchedResource;
         content = builtins.readFile fetchedResource;
       }
@@ -42,5 +42,5 @@ let
       throw "Unknown nixification strategy: ${strategy}";
 
 in {
-  nixifyResource = nixifyResource;
+  inherit nixifyResource;
 }

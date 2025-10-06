@@ -14,7 +14,7 @@
       {
         lib = {
           fetchGithubData = {
-            fetchRepository = { owner, repoName }: { type = "repoData"; owner = owner; name = repoName; };
+            fetchRepository = { owner, repoName }: { type = "repoData"; inherit owner; name = repoName; };
           };
         };
       }
