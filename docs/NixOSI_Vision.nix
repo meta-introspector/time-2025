@@ -183,7 +183,7 @@ in {
       };
       # Zero-Knowledge Proofs for architectural integrity
       zkpVerifier = pkgs.callPackage ./lib/zkp-verifier.nix {
-        proofs = config.architecturalIntegrity.proofs;
+        inherit (config.architecturalIntegrity) proofs;
         systemState = self;
       };
       # The system's ability to recognize itself (Strange Loop)
