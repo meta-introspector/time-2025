@@ -11,3 +11,4 @@ logs
 result/
 result
 sops-secrets/
+statix_output.txt

@@ -17,14 +17,7 @@ let
 in
 ''
 n = ${toString n};
-
 ${initialTermsDzn}
-
-${oeisConfig.recurrenceRelation}
-
-${oeisConfig.convergenceCriteria}
-
-% Community contributions
-% ${communityContributionsDzn}
+${communityContributionsDzn}
 ''
 

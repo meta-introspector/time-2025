@@ -14,8 +14,8 @@ let
   tiktokScriptFile = "script.txt";
   defaultOeisNumber = "0"; # Placeholder, will be replaced by MiniZinc output
 
-  generateTiktokPrompt = concept: 
-    "Generate a TikTok script (${lib.concatStringsSep ", " tiktokLevels} levels) for the '${concept}' concept, including a numbered challenge from a virtual OEIS sequence. Focus on explaining the concept in an engaging way for each level. The OEIS number will be provided separately.";
+  generateTiktokPrompt = concept: oeisNumber:
+    "Generate a TikTok script (${lib.concatStringsSep ", " tiktokLevels} levels) for the '${concept}' concept, including challenge #${oeisNumber} from a virtual OEIS sequence. Focus on explaining the concept in an engaging way for each level.";
 
 in
 {

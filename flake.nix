@@ -12,11 +12,6 @@
     sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
     node2nix-src.url = "github:meta-introspector/node2nix";
 
-    sops-secrets-dir = {
-      url = "path:./sops-secrets";
-      flake = false;
-    };
-
     # 4. Ontology repository for Nix concepts
     nixOntologyRepo = {
       url = "github:meta-introspector/ontology";
@@ -30,6 +25,15 @@
       # Load core utilities
       pkgs = import nixpkgs { inherit system; };
       inherit (pkgs) lib;
+
+      # Import the secrets module and get the sopsSecretsPath option
+      secretsModule = import ./lib/secrets.nix { inherit lib; };
+      sopsSecretsPath = secretsModule.options.sopsSecretsPath.default; # Access the default value
+
+      sopsSecretsDir = {
+        url = "path:${sopsSecretsPath}";
+        flake = false;
+      };
 
       nixCodeIndexerModule = import (self + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
 

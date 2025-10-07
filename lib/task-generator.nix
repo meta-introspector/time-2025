@@ -1,9 +1,15 @@
-{ lib, ... }:
+{ lib, pkgs, ... } @ args:
 
 let
   primeMappingConfig = import ./prime-mapping-config.nix { inherit lib; };
   functorMatrix = import ./code-generation/functor-matrix.nix { inherit lib; };
-  tiktokConfig = import ./tiktok-config.nix { inherit lib; };  generateTask = file_path: type: {
+  tiktokConfig = import ./tiktok-config.nix { inherit lib; };
+  nix2llm = import ./nix2llm.nix { inherit lib; };
+  oeisSolverResult = import ../solvers/run-oeis-solver.nix { inherit lib pkgs; config = {}; }; # Passed empty config
+  currentOeisNumber = builtins.readFile oeisSolverResult.solverResult;
+
+  # TODO: Make the Gemini prompts more sophisticated.
+  generateTask = file_path: type: {
     name = "${type}-${(lib.strings.removeSuffix ".nix" (lib.strings.removePrefix "lib/emoji-encoding/" file_path))}";
     inherit file_path;
     derivation_type = type;
@@ -51,8 +57,54 @@ let
     name = "tiktok-gen-${concept}";
     file_path = "${tiktokConfig.tiktokOutputPath}/${concept}${tiktokConfig.tiktokScriptExtension}"; # Markdown for TikTok script
     derivation_type = "generate-tiktok";
-    gemini_prompt = tiktokConfig.generateTiktokPrompt concept;
+    gemini_prompt = tiktokConfig.generateTiktokPrompt concept currentOeisNumber;
   }) primeMappingConfig.concepts;
 
+  dockerHubTasks = lib.map (concept: {
+    name = "dockerhub-publish-${concept}";
+    file_path = "generated/dockerhub/${concept}.json"; # Docker image config
+    derivation_type = "publish-dockerhub";
+    gemini_prompt = "Generate DockerHub publishing configuration for the '${concept}' concept.";
+  }) primeMappingConfig.concepts;
+
+  githubReleaseTasks = lib.map (concept: {
+    name = "github-release-${concept}";
+    file_path = "generated/github-release/${concept}.json"; # GitHub Release config
+    derivation_type = "create-github-release";
+    gemini_prompt = "Generate GitHub Release configuration for the '${concept}' concept.";
+  }) primeMappingConfig.concepts;
+
+  githubActionsTasks = lib.map (concept: {
+    name = "github-actions-${concept}";
+    file_path = "generated/github-actions/${concept}.yaml"; # GitHub Actions workflow
+    derivation_type = "trigger-github-actions";
+    gemini_prompt = "Generate GitHub Actions workflow for the '${concept}' concept.";
+  }) primeMappingConfig.concepts;
+
+  awsCodeBuildTasks = lib.map (concept: {
+    name = "aws-codebuild-${concept}";
+    file_path = "generated/aws-codebuild/${concept}.json"; # AWS CodeBuild config
+    derivation_type = "build-aws-codebuild";
+    gemini_prompt = "Generate AWS CodeBuild configuration for the '${concept}' concept.";
+  }) primeMappingConfig.concepts;
+
+  selfHostedHydraTasks = lib.map (concept: {
+    name = "self-hosted-hydra-${concept}";
+    file_path = "generated/self-hosted-hydra/${concept}.nix"; # Hydra jobset
+    derivation_type = "schedule-self-hosted-hydra";
+    gemini_prompt = "Generate self-hosted Nix build Hydra jobset for the '${concept}' concept.";
+  }) primeMappingConfig.concepts;
+
+  refineOeisSolverTask = {
+    name = "refine-oeis-solver";
+    file_path = "solvers/oeis-generator.mzn";
+    derivation_type = "refine-minizinc"; # New derivation type
+    gemini_prompt = nix2llm.nix2llm (builtins.readFile ../solvers/oeis-generator.mzn) {
+      purpose = "Refine the MiniZinc OEIS solver to implement recurrence relations, convergence criteria, and community contributions.";
+      context = "The MiniZinc model is currently a simplified placeholder. The task description is embedded in the file's header.";
+      expectedOutput = "A fully functional MiniZinc model that dynamically generates an OEIS sequence, proves its convergence, and integrates community input.";
+    };
+  };
+
 in
-moduleTasks ++ testTasks ++ lean4Tasks ++ rustTasks ++ tiktokTasks
+moduleTasks ++ testTasks ++ lean4Tasks ++ rustTasks ++ tiktokTasks ++ dockerHubTasks ++ githubReleaseTasks ++ githubActionsTasks ++ awsCodeBuildTasks ++ selfHostedHydraTasks ++ [refineOeisSolverTask]

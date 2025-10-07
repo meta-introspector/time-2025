@@ -237,6 +237,16 @@ lint-nix: clean pre-nix-check
 	split -l 100 statix_output.txt statix_output_part_
 	@echo "--- statix_output.txt split into statix_output_part_aa, statix_output_part_ab, etc. ---"
 
+# Target to lint unstaged Nix files using statix.
+lint-nix-unstaged: clean
+	@echo "--- Linting Nix files with statix (including unstaged) ---"
+	-nix develop --command bash -c "statix check . > statix_output.txt 2>&1" || true
+	@echo "--- Nix linting complete. Output saved to statix_output.txt ---"
+	@nix develop --command bash -c "$(PROJECT_ROOT)/scripts/generate_statix_report_v3.sh"
+	@echo "--- Splitting statix_output.txt into smaller files ---"
+	split -l 100 statix_output.txt statix_output_part_
+	@echo "--- statix_output.txt split into statix_output_part_aa, statix_output_part_ab, etc. ---"
+
 # Target to run statix check on all Nix files in the project.
 # This provides a comprehensive overview of code quality across the entire Nix codebase.
 statix-all: pre-nix-check
