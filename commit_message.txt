@@ -1,0 +1,11 @@
+fix: Exclude sops-secrets from Git tracking
+
+This commit updates the Git repository to correctly exclude sops-managed secrets
+from being tracked, even in their encrypted form.
+
+Key changes:
+- Removed `sops-secrets/google_accounts.json` and `sops-secrets/settings.json`
+  from Git tracking.
+- Modified `.gitignore` to include `sops-secrets/`, ensuring that all files
+  within this directory are ignored by Git in the future. This aligns with
+  security best practices to prevent accidental exposure of sensitive data.

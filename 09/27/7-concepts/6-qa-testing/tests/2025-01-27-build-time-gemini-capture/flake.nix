@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
     # Use our local working gemini-cli with confirmed bundle in Nix store
 
   };
@@ -16,6 +17,38 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         inherit (nixpkgs) lib;
+
+        # Import the secrets definition
+        secretsConfig = import ./secrets.nix { inherit pkgs lib; };
+
+        # Derivation to decrypt sops secrets
+        decryptedSopsSecrets = pkgs.stdenv.mkDerivation {
+          pname = "decrypted-sops-secrets";
+          version = "1.0";
+          
+          # The sops-nix module needs to be applied to a configuration
+          # For a simple derivation, we can use `pkgs.writeText` to create a dummy configuration
+          # and then use `pkgs.lib.evalModules` to evaluate it with sops-nix.
+          # However, a simpler approach for `mkDerivation` is to use `sops` directly.
+          # For now, we'll assume the secrets are already decrypted and available via `sops-nix`'s mechanism
+          # and focus on how to access them. This part will be refined.
+          
+          # For now, let's assume sops-nix provides a way to get the decrypted paths
+          # This is a placeholder and will be replaced with actual sops-nix integration
+          # once the overall structure is in place.
+          
+          # This derivation will simply create dummy files for now, to allow the flake to build.
+          # The actual decryption logic will be added later.
+          buildPhase = ''
+            mkdir -p $out/.gemini
+            ${pkgs.sops}/bin/sops -d ./sops-secrets/oauth_creds.json > $out/.gemini/oauth_creds.json
+            ${pkgs.sops}/bin/sops -d ./sops-secrets/settings.json > $out/.gemini/settings.json
+            ${pkgs.sops}/bin/sops -d ./sops-secrets/google_accounts.json > $out/.gemini/google_accounts.json
+          '';
+          
+          # Add sops as a build input if direct sops command is used
+          buildInputs = [ pkgs.sops ];
+        };
 
         flakeNixContent = builtins.readFile (self + "/flake.nix");
 
@@ -36,6 +69,7 @@
 #            pkgs.strace # Added strace for build-time telemetry
             pkgs.cacert # Added cacert for SSL/TLS certificate verification
             gemini-cli.packages.${system}.default
+            decryptedSopsSecrets # Add the derivation that decrypts sops secrets
           ];
 
           FLAKE_NIX_CONTENT = flakeNixContent; # Pass the content here
@@ -48,7 +82,7 @@
 	    find .
 	    pwd
 	    #	    ls -latr /creds/google_accounts.json || echo skip
-	    #ls -latr /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture/creds/google_accounts.json || echo skip
+
 	    #~/.gemini/google_accounts.json
             # Set HOME to a writable temporary directory for gemini-cli 
             export HOME=$(mktemp -d)
@@ -56,18 +90,18 @@
 	    mkdir -p logs # for gemmin
             mkdir -p $out/{logs,telemetry,analysis}
             
-            # Credential files are directly available via extra-sandbox-paths at /creds
-            echo "✅ Credentials directory available at /creds/"
-            echo "=== Contents of /creds/ BEFORE copy ==="
+            # Credential files are now available via decryptedSopsSecrets
+            echo "✅ Decrypted credentials available from decryptedSopsSecrets"
+            echo "=== Contents of decryptedSopsSecrets BEFORE copy ==="
 	    #find .
 	    #pwd
 	    #find / || echo error
             echo "======================================="
             mkdir -p $HOME/.gemini/
-            cp /data/data/com.termux.nix/files/home/.gemini/settings.json $HOME/.gemini/
-	    cp /data/data/com.termux.nix/files/home/.gemini/oauth_creds.json $HOME/.gemini/
-   	    cp /data/data/com.termux.nix/files/home/.gemini/google_accounts.json $HOME/.gemini/
-            echo "✅ Copied credential files from /creds/ to $HOME/.gemini/"
+            cp ${decryptedSopsSecrets}/.gemini/settings.json $HOME/.gemini/
+	    cp ${decryptedSopsSecrets}/.gemini/oauth_creds.json $HOME/.gemini/
+   	    cp ${decryptedSopsSecrets}/.gemini/google_accounts.json $HOME/.gemini/
+            echo "✅ Copied credential files from decryptedSopsSecrets to $HOME/.gemini/"
             echo ""
             echo "=== Contents of $HOME/.gemini/ ==="
             ls -latr $HOME/.gemini/

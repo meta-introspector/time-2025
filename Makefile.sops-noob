@@ -1,0 +1,89 @@
+# Makefile.sops-noob
+#
+# This Makefile provides helpful targets for beginners to set up and troubleshoot
+# their GPG keys and sops encryption for use with sops-nix.
+#
+# It aims to simplify the process of verifying GPG key availability and
+# testing sops functionality, which are common hurdles when first
+# integrating sops-nix into a Nix project.
+
+.PHONY: help list-gpg-keys test-sops-encryption clean-sops-test run-sops-script
+
+# Default target: show help message
+help:
+	@echo "Usage: make -f Makefile.sops-noob <target>"
+	@echo ""
+	@echo "Available targets:"
+	@echo "  help                 - Display this help message."
+	@echo "  list-gpg-keys        - List your available GPG secret keys to verify setup."
+	@echo "  test-sops-encryption - Create a dummy file and attempt to encrypt it with sops."
+	@echo "  clean-sops-test      - Clean up files created by 'test-sops-encryption'."
+	@echo "  run-sops-script      - Execute the 'create_gemini_sops_secrets.sh' script."
+	@echo ""
+	@echo "Before running 'run-sops-script', ensure 'list-gpg-keys' shows your key"
+	@echo "and 'test-sops-encryption' works successfully."
+
+# Target: list-gpg-keys
+# Purpose: This target helps you verify that your GPG key is correctly set up
+#          and visible to your system. sops relies on GPG to perform encryption
+#          and decryption. If your key is not listed here, sops will not be
+#          able to encrypt files.
+# Action: It runs 'gpg --list-secret-keys --keyid-format LONG' which displays
+#         your private GPG keys, including their full fingerprints.
+# Expected Output: You should see at least one secret key listed. Note down
+#                  its fingerprint if you need to specify it for sops.
+list-gpg-keys:
+	@echo "--- Listing GPG Secret Keys ---"
+	gpg --list-secret-keys --keyid-format LONG
+	@echo "-------------------------------"
+	@echo "If you don't see your key, please ensure it's imported and gpg-agent is running."
+	@echo "You might need to run 'gpg --full-generate-key' to create a new key."
+
+# Target: test-sops-encryption
+# Purpose: This target creates a temporary dummy file and attempts to encrypt it
+#          using sops. This is a crucial step to confirm that sops can
+#          successfully interact with your GPG setup.
+# Action:
+#   1. Creates a simple 'dummy.txt' file.
+#   2. Runs 'sops --encrypt --in-place dummy.txt'.
+#      - If sops prompts for a recipient, it means it couldn't automatically
+#        find a suitable key. You might need to specify your key's fingerprint
+#        using '--pgp <YOUR_GPG_FINGERPRINT>' in the sops command.
+#   3. If successful, it will show 'dummy.txt' as an encrypted sops file.
+# Expected Output: sops should encrypt 'dummy.txt' without errors.
+#                  You can then inspect 'dummy.txt' to see the encrypted content.
+test-sops-encryption: clean-sops-test
+	@echo "--- Testing sops Encryption ---"
+	echo "This is a test secret." > dummy.txt
+	@echo "Created dummy.txt. Attempting to encrypt..."
+	sops --encrypt --in-place --pgp A739DE669916CA2DAB940F112A0B0B617B5370F3 dummy.txt
+	@echo "Encryption attempt complete. Check 'dummy.txt' to see if it's encrypted."
+	@echo "If sops failed, ensure your GPG key is listed by 'make list-gpg-keys'."
+	@echo "You might need to specify your GPG key explicitly, e.g.:"
+	@echo "  sops --encrypt --in-place --pgp <YOUR_GPG_FINGERPRINT> dummy.txt"
+	@echo "-------------------------------"
+
+# Target: clean-sops-test
+# Purpose: Cleans up the temporary files created by 'test-sops-encryption'.
+# Action: Removes 'dummy.txt'.
+clean-sops-test:
+	@echo "--- Cleaning sops Test Files ---"
+	rm -f dummy.txt
+	@echo "Cleaned 'dummy.txt'."
+	@echo "--------------------------------"
+
+# Target: run-sops-script
+# Purpose: Executes the 'create_gemini_sops_secrets.sh' script. This script
+#          reads your ~/.gemini files, encrypts them, and generates secrets.nix.
+#          ONLY run this after 'list-gpg-keys' and 'test-sops-encryption'
+#          are successful.
+# Action: Runs the shell script.
+# Expected Output: The script will report on the encryption of your Gemini CLI
+#                  configuration files and the generation of 'secrets.nix'.
+run-sops-script:
+	@echo "--- Running create_gemini_sops_secrets.sh ---"
+	./scripts/create_gemini_sops_secrets.sh
+	@echo "---------------------------------------------"
+	@echo "Review the output for any warnings or errors."
+	@echo "If successful, 'sops-secrets/' directory should contain encrypted files"
+	@echo "and 'secrets.nix' should be generated."

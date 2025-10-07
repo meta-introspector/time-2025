@@ -10,3 +10,4 @@
 logs
 result/
 result
+sops-secrets/

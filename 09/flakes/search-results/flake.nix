@@ -5,9 +5,10 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    pickUpNix2.url = "github:meta-introspector/pick-up-nix2?ref=feature/CRQ-016-nixify"; # Assuming pick-up-nix2 is a flake
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }:
+  outputs = { self, nixpkgs, flake-utils, pickUpNix2, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -184,41 +185,44 @@
         };
 
         # Derivation to create a url2file locator script
-        url2fileLocatorScript = pkgs.writeShellScriptBin "url2file-locate" ''
-          #!/usr/bin/env bash
-          set -euo pipefail
+        url2fileLocatorScript = { projectRoot }:
+          pkgs.writeShellScriptBin "url2file-locate" ''
+            #!/usr/bin/env bash
+            set -euo pipefail
 
-          GITHUB_URL="$1"
+            GITHUB_URL="$1"
 
-          if [ -z "$GITHUB_URL" ]; then
-              echo "Error: GITHUB_URL is not set. Usage: url2file-locate \"https://github.com/owner/repo/blob/branch/path/to/file\"" >&2
-              exit 1
-          fi
+            if [ -z "$GITHUB_URL" ]; then
+                echo "Error: GITHUB_URL is not set. Usage: url2file-locate \"https://github.com/owner/repo/blob/branch/path/to/file\"" >&2
+                exit 1
+            fi
 
-          echo "Locating local file for URL: $GITHUB_URL..."
+            echo "Locating local file for URL: $GITHUB_URL..."
 
-          # Extract owner, repo, and path within repo
-          OWNER=$(echo "$GITHUB_URL" | awk -F'/' '{print $4}')
-          REPO=$(echo "$GITHUB_URL" | awk -F'/' '{print $5}')
-          # Remove "blob/branch/" part and get the rest of the path
-          REPO_PATH=$(echo "$GITHUB_URL" | sed -E 's|https://github.com/[^/]+/[^/]+/blob/[^/]+/||')
+            # Extract owner, repo, and path within repo
+            OWNER=$(echo "$GITHUB_URL" | awk -F'/' '{print $4}')
+            REPO=$(echo "$GITHUB_URL" | awk -F'/' '{print $5}')
+            # Remove "blob/branch/" part and get the rest of the path
+            REPO_PATH=$(echo "$GITHUB_URL" | sed -E 's|https://github.com/[^/]+/[^/]+/blob/[^/]+/||')
 
-          PROJECT_ROOT="/data/data/com.termux.nix/files/home/pick-up-nix2"
-          LOCAL_GITHUB_ROOT="$PROJECT_ROOT/source/github"
+            PROJECT_ROOT="${projectRoot}"
+            LOCAL_GITHUB_ROOT="$PROJECT_ROOT/source/github"
 
-          LOCAL_FILE_PATH="$LOCAL_GITHUB_ROOT/$OWNER/$REPO/$REPO_PATH"
+            LOCAL_FILE_PATH="$LOCAL_GITHUB_ROOT/$OWNER/$REPO/$REPO_PATH"
 
-          if [ -f "$LOCAL_FILE_PATH" ]; then
-              echo "Local file found: $LOCAL_FILE_PATH"
-          else
-              echo "Local file not found at: $LOCAL_FILE_PATH"
-          fi
-          echo "Location attempt complete."
-        '';
+            if [ -f "$LOCAL_FILE_PATH" ]; then
+                echo "Local file found: $LOCAL_FILE_PATH"
+            else
+                echo "Local file not found at: $LOCAL_FILE_PATH"
+            fi
+            echo "Location attempt complete."
+          '';
 
       in {
         packages = {
-          inherit searchNars solanaBlockNar url2fileLocatorScript mkRepoListNar;
+          inherit searchNars solanaBlockNar;
+          url2fileLocatorScript = url2fileLocatorScript { projectRoot = pickUpNix2.outPath; }; # Pass pickUpNix2.outPath as projectRoot
+          inherit mkRepoListNar;
           default = searchNars; # Make all search NARs available via default
         };
 
