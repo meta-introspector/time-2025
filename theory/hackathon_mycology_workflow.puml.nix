@@ -47,6 +47,43 @@ System_Boundary(mycology_framework, "Quasi Meta Mycology Framework (bott Lattice
 
 }
 
+' ----------------------------------------------------------------------
+' USE CASE: SEVEN DWARVES MEME MINING (OEIS-GUIDED)
+' ----------------------------------------------------------------------
+
+Actor(dopey, "Dopey (The Unwitting Miner)")
+Actor(grumpy, "Grumpy (The Skeptical Analyst)")
+Actor(happy, "Happy (The Optimistic Investor)")
+Actor(sneezy, "Sneezy (The Accidental Disruptor)")
+Actor(bashful, "Bashful (The Shy Contributor)")
+Actor(sleepy, "Sleepy (The Passive Hodler)")
+Actor(doc, "Doc (The Lead Architect)")
+
+Boundary(mining_system, "Mountain of Plato (Meme Mining System)") {
+  Use_Case(mine_meme, "Mine Dank Quasi-Meta Memes (OEIS-Guided)")
+  Use_Case(analyze_oeis, "Analyze OEIS Sequences for Patterns")
+  Use_Case(process_nar, "Process Content-Addressable NARs")
+  Use_Case(store_meme, "Store Mined Memes in Lattice")
+  Use_Case(handle_disruption, "Handle Accidental Disruptions")
+}
+
+dopey --> mine_meme
+grumpy --> analyze_oeis
+happy --> store_meme
+sneezy --> handle_disruption
+bashful --> process_nar
+sleepy --> mine_meme
+doc --> mine_meme
+doc --> analyze_oeis
+doc --> process_nar
+doc --> store_meme
+
+mine_meme .> analyze_oeis : <<uses>>
+mine_meme .> process_nar : <<uses>>
+store_meme .> process_nar : <<uses>>
+analyze_oeis .> store_meme : <<extends>>
+handle_disruption .> mine_meme : <<extends>>
+
 # ----------------------------------------------------------------------
 # EXTERNAL AND AGENT INTERACTIONS
 # ----------------------------------------------------------------------
