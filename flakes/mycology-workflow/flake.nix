@@ -13,6 +13,9 @@
         flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
       };
     };
+    topLevelSelf = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
+    };
   };
 
   outputs = { self, nixpkgs, flake-utils, sources, topLevelSelf }:
