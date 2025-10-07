@@ -22,17 +22,19 @@
     mycologyWorkflow = {
       url = "./flakes/mycology-workflow";
       inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-        sources.follows = "dataSources"; # mycologyWorkflow now depends on dataSources
+        nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+        flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+        sources.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=flakes/data-sources";
       };
     };
 
     # 6. Data Sources Flake
     dataSources = {
       url = "./flakes/data-sources";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
+      inputs = {
+        nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+        flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      };
     };
   };
 

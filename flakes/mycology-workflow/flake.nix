@@ -8,8 +8,10 @@
     # Collection of data sources (Wikidata, Wikipedia, etc.)
     sources = {
       url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=flakes/data-sources"; # Point to the data-sources flake in the current repo
-      inputs.nixpkgs.follows = "nixpkgs";
-      # flake-utils is implicitly passed from the top-level flake
+      inputs = {
+        nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+        flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      };
     };
   };
 
