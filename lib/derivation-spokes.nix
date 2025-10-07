@@ -180,4 +180,25 @@ in
       echo "Scheduling ${taskName} on self-hosted Nix build Hydra with config: ${hydraConfig}" > $out
     '';
   };
+
+  mkLLMCodeSpoke = taskName: llmProvider: llmCode: pkgs.stdenv.mkDerivation {
+    name = "${llmProvider}-code-${taskName}";
+    buildCommand = ''
+      mkdir -p $out/src
+      echo "${llmCode}" > $out/src/${taskName}.txt
+    '';
+  };
+
+  mkMiniZincOptimizationSpoke = taskName: mznModel: dznData: pkgs.stdenv.mkDerivation {
+    name = "minizinc-optimization-${taskName}";
+    buildInputs = [ pkgs.minizinc ];
+    buildCommand = ''
+      mkdir -p $out/src
+      echo "${mznModel}" > $out/src/${taskName}.mzn
+      echo "${dznData}" > $out/src/${taskName}.dzn
+      ${pkgs.minizinc}/bin/minizinc --solver Gecode $out/src/${taskName}.mzn $out/src/${taskName}.dzn > $out/solution.txt
+    '';
+  };
+
+  mkBootstrapSpoke = taskName: bootstrapNixExpression: pkgs.stdenv.mkDerivation {\n    name = \"bootstrap-${taskName}\";\n    buildInputs = [ pkgs.nix ]; # Need Nix to evaluate expressions\n    buildCommand = \'\'\n      mkdir -p $out/bootstrap-plan\n\n      # Save the bootstrap plan and executor for later use\n      echo \"${bootstrapNixExpression}\" > $out/bootstrap-plan/bootstrap-plan.nix\n      cp ${../../10/04/bootstrap/bootstrap-executor.nix} $out/bootstrap-plan/bootstrap-executor.nix\n\n      # Create a script to run the next step\n      cat > $out/bootstrap-plan/run-next-step.sh << EOF\n      #!/bin/sh\n      set -eu\n\n      # Usage: ./run-next-step.sh [current_global_state_json_path]\n      # If no current_global_state_json_path is provided, it starts with an empty state.\n\n      current_state_path=\"\$1\"\n      if [ -z \"\$current_state_path\" ]; then\n        current_state=\'{}\'\n      else\n        current_state=\"$(cat \"\$current_state_path\")\"\n      fi\n\n      bootstrap_plan_path=\"$out/bootstrap-plan/bootstrap-plan.nix\"\n      executor_path=\"$out/bootstrap-plan/bootstrap-executor.nix\"\n\n      # Evaluate the executor with current state and plan\n      # This will produce the new global state after executing one step\n      ${pkgs.nix}/bin/nix-instantiate \\\n        --eval --json \\\n        --arg pkgs ${pkgs} \\\n        --arg lib ${lib} \\\n        --argstr bootstrapPlanExpression \"$(cat \"\$bootstrap_plan_path\")\" \\\n        --argstr globalState \"\$current_state\" \\\n        \"\$executor_path\" > \$out/bootstrap-plan/next-global-state.json\n\n      echo \"Executed one bootstrap step. New state in \$out/bootstrap-plan/next-global-state.json\"\n      EOF\n      chmod +x $out/bootstrap-plan/run-next-step.sh\n\n      echo \"Bootstrap plan and executor prepared in $out/bootstrap-plan/\"\n      echo \"To run the first step: $out/bootstrap-plan/run-next-step.sh\"\n      echo \"To run subsequent steps: $out/bootstrap-plan/run-next-step.sh $out/bootstrap-plan/next-global-state.json\"\n    \'\';\n  };
 }

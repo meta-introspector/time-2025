@@ -1,0 +1,20 @@
+num_llm_providers = 3;
+num_tasks = 5;
+
+total_requests = [10000, 5000, 2000];
+remaining_requests = [9900, 4950, 1980];
+requests_per_minute = [60, 30, 10];
+requests_per_hour = [3600, 1800, 600];
+requests_per_day = [86400, 43200, 14400];
+requests_per_week = [604800, 302400, 100800];
+
+total_tokens = [1000000, 500000, 200000];
+remaining_tokens = [990000, 490000, 195000];
+tokens_per_minute = [10000, 5000, 2000];
+tokens_per_hour = [600000, 300000, 120000];
+tokens_per_day = [14400000, 7200000, 2880000];
+tokens_per_week = [100800000, 50400000, 20160000];
+
+estimated_task_requests = [10, 20, 5, 15, 25];
+estimated_task_tokens = [1000, 2000, 500, 1500, 2500];
+task_priority = [5, 3, 8, 2, 7];

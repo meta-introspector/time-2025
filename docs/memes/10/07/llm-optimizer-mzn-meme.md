@@ -1,0 +1,1 @@
+MiniZinc to the rescue! 🦸‍♀️ Our `llm-optimizer.mzn` solves the puzzle of LLM resource allocation. Get the most out of your AI budget! #Optimization #MiniZinc #AIStrategy

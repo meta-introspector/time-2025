@@ -1,0 +1,1 @@
+One `make` command to rule them all! 👑 `make run-orchestrator` kicks off our autonomous AI. Simple, powerful, and ready to go! #Makefile #Automation #NixOps

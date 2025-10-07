@@ -101,16 +101,27 @@
         # nixOntologyRepoPath = pkgs.runCommand "nix-ontology-repo-path" {} "ln -s ${nixOntologyRepo} $out"; # Expose nixOntologyRepo as a derivation
       };
 
-      apps.${system}.default = {
-        type = "app";
-        program = "${pkgs.writeShellScript "run-quine" ''
-          echo "--- Running the Self-Ingesting Quine ---"
-          QUINE_OUTPUT=$(nix build --no-link --print-out-paths .#packages.${system}.default)
-          echo "Quine Derivation Output Path: $QUINE_OUTPUT"
-          echo "--- Content of the modified flake.nix ---"
-          cat "$QUINE_OUTPUT/flake.nix"
-          echo "--- Quine execution complete ---"
-        ''}";
+      apps.${system} = {
+        default = {
+          type = "app";
+          program = "${pkgs.writeShellScript "run-quine" ''
+            echo "--- Running the Self-Ingesting Quine ---"
+            QUINE_OUTPUT=$(nix build --no-link --print-out-paths .#packages.${system}.default)
+            echo "Quine Derivation Output Path: $QUINE_OUTPUT"
+            echo "--- Content of the modified flake.nix ---"
+            cat "$QUINE_OUTPUT/flake.nix"
+            echo "--- Quine execution complete ---"
+          ''}";
+        };
+
+        orchestrator = {
+          type = "app";
+          program = "${pkgs.writeShellScript "run-orchestrator-app" ''
+            echo "--- Starting the Orchestrator ---"
+            nix run .#orchestrator
+            echo "--- Orchestrator Finished ---"
+          ''}";
+        };
       };
 
       #defaultApp = apps.default;

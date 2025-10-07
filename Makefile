@@ -260,7 +260,7 @@ statix-hackathon-parts: pre-nix-check
 	nix run github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify#statix -- check 10/03/hackathon_71_parts.nix
 	@echo "--- statix check on hackathon_71_parts.nix complete ---"
 
-.PHONY: debug-pkgs-writeShellScriptBin-type statix-all
+.PHONY: debug-pkgs-writeShellScriptBin-type statix-all run-orchestrator
 debug-pkgs-writeShellScriptBin-type:
 	@echo "--- Debugging pkgs.writeShellScriptBin type ---"
 	@nix eval --raw --impure --expr 'let pkgs = (builtins.getFlake "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify").outputs.legacyPackages.aarch64-linux; in builtins.typeOf pkgs.writeShellScriptBin'
@@ -344,6 +344,12 @@ eval-github-graphql-list-repository-issues:
 	@echo "--- Evaluating github_graphql_modules/github_graphql_list_repository_issues.nix ---"
 	@nix eval --impure --expr 'let lib = import <nixpkgs> {}.lib; buildGraphQLQuery = {}; in import ./github_graphql_modules/github_graphql_list_repository_issues.nix { inherit lib buildGraphQLQuery; }'
 	@echo "--- Evaluation Complete ---"
+
+.PHONY: run-orchestrator
+run-orchestrator:
+	@echo "--- Running the Orchestrator (Eternal For Loop) ---"
+	@nix run .#orchestrator
+	@echo "--- Orchestrator Run Complete ---"
 
 # Define PROJECT_ROOT relative to this Makefile's location
 PROJECT_ROOT := $(shell pwd)
