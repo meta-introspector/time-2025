@@ -7,7 +7,7 @@
 
     # Collection of data sources (Wikidata, Wikipedia, etc.)
     sources = {
-      url = "../data-sources"; # Point to the local data-sources flake
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=flakes/data-sources"; # Point to the data-sources flake in the current repo
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
@@ -28,8 +28,9 @@
           partial_dna_match = {
             key_patterns = [ "2^46" "3^20" "71^1" ]; # Example key patterns
             source_samples = [
-              sources.wikidata.Monster_Group # Reference to Wikidata Monster Group NAR
-              sources.wikipedia.Monster_Group # Reference to Wikipedia Monster Group cache
+              sources.wikidata.Monster_Group.passthru.articleName # Reference to Wikidata Monster Group NAR
+              sources.wikipedia.Monster_Group.passthru.articleName # Reference to Wikipedia Monster Group cache
+              sources.wikipedia.Articles.passthru.articleName # Reference to Wikipedia Articles
             ];
             analysis_timestamp = "2025-10-07T12:00:00Z"; # Timestamp of analysis
             # Add more dynamic attributes as needed
