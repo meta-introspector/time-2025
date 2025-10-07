@@ -9,7 +9,10 @@ let
 
   # Convert the list of strings to a single string with newlines
   tasksString = pkgs.lib.concatStringsSep "\n" taskStrings;
+
+  # Write the tasks string to a temporary file
+  tasksFile = pkgs.writeText "tasks-list.txt" tasksString;
 in
 pkgs.runCommand "generated-tasks" {} ''
-  echo "${tasksString}" > "$out"
+  cat ${tasksFile} > "$out"
 ''
