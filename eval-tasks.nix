@@ -1,17 +1,15 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  monadContext = import ./lib/monad-context.nix { inherit pkgs lib; geminiApi = {}; };
+  monadContext = import ./lib/monad-context.nix { inherit pkgs; inherit (pkgs) lib; geminiApi = {}; };
   # Import the list of task attribute sets
   tasks = monadContext.generateTasks;
 
   # Process each task and collect the derivation paths
-  generatedDerivations = lib.map monadContext.processTask tasks;
+  generatedDerivations = pkgs.lib.map monadContext.processTask tasks;
+
+  # Convert the list of derivation paths to a list of strings
+  generatedDerivationStrings = pkgs.lib.map toString generatedDerivations;
+
 in
-pkgs.runCommand "generated-derivations-output" {
-  buildInputs = [ pkgs.coreutils ];
-} ''
-  for drvPath in ${lib.concatStringsSep " " generatedDerivations}; do
-    echo "$drvPath" >> $out
-  done
-''
+generatedDerivations # Return the list of derivations directly

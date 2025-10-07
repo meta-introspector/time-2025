@@ -2,7 +2,7 @@
 
 let
   # The context monad constructor
-  makeContext = {
+  makeContext = rec {
     # Functions that operate within this context
     generateTasks = import ../lib/task-generator.nix { inherit lib; };
 

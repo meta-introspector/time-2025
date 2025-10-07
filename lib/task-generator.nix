@@ -47,4 +47,4 @@ let
   }) primeMappingConfig.concepts;
 
 in
-moduleTasks + testTasks + lean4Tasks + rustTasks
+moduleTasks ++ testTasks ++ lean4Tasks ++ rustTasks
