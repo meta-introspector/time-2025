@@ -27,6 +27,7 @@
         sources.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=flakes/data-sources";
         hackathonPuml = {
           url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/hackathon-mycology-workflow-puml";
+          flake = true; # Explicitly declare it as a flake
         };
       };
     };
