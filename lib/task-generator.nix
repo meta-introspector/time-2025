@@ -1,7 +1,8 @@
 { lib, ... }:
 
 let
-  generateTask = file_path: type: {
+  primeMappingConfig = import ./prime-mapping-config.nix { inherit lib; };
+  functorMatrix = import ./code-generation/functor-matrix.nix { inherit lib; };  generateTask = file_path: type: {
     name = "${type}-${(lib.strings.removeSuffix ".nix" (lib.strings.removePrefix "lib/emoji-encoding/" file_path))}";
     inherit file_path;
     derivation_type = type;
@@ -31,5 +32,19 @@ let
   moduleTasks = lib.map (path: generateTask path "build") emojiEncodingModules;
   testTasks = lib.map (path: generateTask path "test") emojiEncodingTests;
 
+  lean4Tasks = lib.map (concept: {
+    name = "lean4-gen-${concept}";
+    file_path = "generated/lean4/${concept}.lean";
+    derivation_type = "generate-lean4";
+    gemini_prompt = "Generate Lean4 code for the '${concept}' concept using the functorMatrix.lean4Generators.${concept} function.";
+  }) primeMappingConfig.concepts;
+
+  rustTasks = lib.map (concept: {
+    name = "rust-gen-${concept}";
+    file_path = "generated/rust/${concept}.rs";
+    derivation_type = "generate-rust";
+    gemini_prompt = "Generate Rust code for the '${concept}' concept using the functorMatrix.rustGenerators.${concept} function.";
+  }) primeMappingConfig.concepts;
+
 in
-moduleTasks ++ testTasks
+moduleTasks + testTasks + lean4Tasks + rustTasks
