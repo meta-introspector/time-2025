@@ -5,22 +5,16 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
 
-    # Collection of data sources (Wikidata, Wikipedia, etc.)
-    sources = {
-      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=flakes/data-sources"; # Point to the data-sources flake in the current repo
-      inputs = {
-        nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
-        flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-      };
+    dataSources = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=flakes/data-sources";
     };
 
-    hackathonPuml = {
+    hackathonPumlFlake = {
       url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/hackathon-mycology-workflow-puml";
-      flake = true; # Explicitly declare it as a flake
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, sources, hackathonPumlFlake }:
+  outputs = { self, nixpkgs, flake-utils, dataSources, hackathonPumlFlake }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -35,9 +29,9 @@
           partial_dna_match = {
             key_patterns = [ "2^46" "3^20" "71^1" ]; # Example key patterns
             source_samples = [
-              sources.wikidata.Monster_Group.passthru.articleName # Reference to Wikidata Monster Group NAR
-              sources.wikipedia.Monster_Group.passthru.articleName # Reference to Wikipedia Monster Group cache
-              sources.wikipedia.Articles.passthru.articleName # Reference to Wikipedia Articles
+              dataSources.wikidata.Monster_Group.passthru.articleName # Reference to Wikidata Monster Group NAR
+              dataSources.wikipedia.Monster_Group.passthru.articleName # Reference to Wikipedia Monster Group cache
+              dataSources.wikipedia.Articles.passthru.articleName # Reference to Wikipedia Articles
             ];
             analysis_timestamp = "2025-10-07T12:00:00Z"; # Timestamp of analysis
             # Add more dynamic attributes as needed
