@@ -9,7 +9,7 @@
     sources = {
       url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=flakes/data-sources"; # Point to the data-sources flake in the current repo
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
+      # flake-utils is implicitly passed from the top-level flake
     };
   };
 
