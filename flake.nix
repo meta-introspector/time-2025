@@ -17,6 +17,15 @@
       url = "github:meta-introspector/ontology";
       flake = false;
     };
+
+    # 5. Data Sources Flake (as a path input)
+    dataSources = {
+      url = "./flakes/data-sources";
+      inputs = {
+        nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+        flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      };
+    };
   };
 
   outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src, mycologyWorkflow, dataSources, hackathonPumlFlake, ... }:
@@ -101,7 +110,7 @@
         mycologyWorkflowPuml = (import ./flakes/mycology-workflow {
           nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
           flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-          sources.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=flakes/data-sources";
+          inherit dataSources; # Pass the dataSources path input
           hackathonPumlFlake.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/hackathon-mycology-workflow-puml";
         }).packages.${system}.default;
         # nixOntologyRepoPath = pkgs.runCommand "nix-ontology-repo-path" {} "ln -s ${nixOntologyRepo} $out"; # Expose nixOntologyRepo as a derivation
