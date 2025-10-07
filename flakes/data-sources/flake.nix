@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
-    flake-utils = { }; # Declare flake-utils input to receive it from parent
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
   };
 
   outputs = { self, nixpkgs, flake-utils }:

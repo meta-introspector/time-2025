@@ -15,7 +15,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, sources }:
+  outputs = { self, nixpkgs, flake-utils, sources, topLevelSelf }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -43,7 +43,7 @@
           minizinc_solver = pkgs.writeText "minizinc-solver" "minizinc solver placeholder";
         };
 
-        mycologyWorkflowPuml = import ../../theory/hackathon_mycology_workflow.puml.nix {
+        mycologyWorkflowPuml = import (topLevelSelf + "/theory/hackathon_mycology_workflow.puml.nix") {
           inherit pkgs lib monster_genome_data formal_triad_env;
         };
       in
