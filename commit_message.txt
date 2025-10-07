@@ -1,45 +1,8 @@
-feat: Implement Nix Flake Feature Lattice and Refine Gemini CLI Integration
+feat: Scaffold Lean4 and Rust code generation functors
 
-This commit introduces a foundational "lattice of flakes" architecture,
-abstracting common features into composable Nix flakes, and refines the
-integration of Gemini CLI with credential management.
-
-Key changes include:
-- **Nix Flake Feature Lattice:**
-    - Created atomic feature flakes (feature-2-nix-base, feature-3-home-dir-creds,
-      feature-5-oauth-creds, feature-7-telemetry-capture,
-      feature-11-llm-output-capture, feature-13-makefile-input,
-      feature-17-yolo-approval, feature-19-self-source-input), each encapsulating
-      a distinct functionality.
-    - Constructed composite flakes (e.g., composite-2-3-nix-base-home-creds)
-      by combining these atomic features, demonstrating composability and
-      building a lattice structure.
-    - Fixed `statix` warnings (W04) in all new feature flakes by changing
-      `lib = pkgs.lib;` to `inherit lib;`.
-- **Gemini CLI Integration Refinement:**
-    - **`gemini-cli.url` Updates:** All references to `gemini-cli.url` across various
-      Nix files have been updated to `github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06`
-      to ensure consistency and resolve flake fetching issues.
-    - **`09/25/NixTikTok.Makefile` Restoration:** The `make_make_prompt_prompt` target
-      has been restored to its original non-sops integrated state, and the temporary
-      `make_prompt_no_sops` target has been re-added, providing both sops and non-sops
-      options for Gemini CLI interaction.
-    - **`09/25/gemini-prompt-builder.sh` Modification:** The script now copies actual
-      `~/.gemini` credential files from the host system into the Nix build sandbox,
-      allowing `gemini-cli` to find its configuration.
-    - **`shellcheck` Fix:** Corrected `SC2168` warning in `09/25/gemini-prompt-builder.sh`
-      by removing the `local` keyword from `TEMP_HOME` declaration.
-- **SOPS Integration Experiment Relocation:**
-    - The `sops`-related Gemini CLI integration experiment (including
-      `flakes/wrap-gemini-secrets`, `secrets.nix`, `sops-secrets/`, `Makefile.sops-noob`)
-      has been moved to `10/06/sops-gemini/` for later refinement.
-    - The main `Makefile`'s `run-gemini-with-sops` target has been updated to
-      reflect the new location of the `wrap-gemini-secrets` flake and to implement
-      the "decrypt outside, copy in" strategy for sops secrets.
-- **Documentation:** Created `docs/qa/Gemini_Test_Lattice.md` to provide a central
-  overview of impure Gemini-related Nix files, their purpose, impurity characteristics,
-  and integration details, including feature vector mappings.
-- **Plan Document:** Created `10/07/plan.md` outlining the strategy for developing
-  new flakes with specific feature vectors and clarifying the "YOLO Approval Model".
-- **Nix Monster Encoding:** Created `10/07/nix-monster-encoding.nix` to implement
-  the pure Nix encoding logic for mapping Nix structures to prime numbers.
+Introduced `lib/code-generation/functor-matrix.nix` to establish a
+scaffold for generating Lean4 and Rust code from Nix expressions.
+This module defines placeholder functors for each AST node type,
+enabling future development of automated code generation for formal
+verification (Lean4) and high-performance execution (Rust).
+Also includes a placeholder for emoji-to-vernacular JSON conversion.
