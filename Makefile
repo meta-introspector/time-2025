@@ -267,9 +267,45 @@ test-qa-flakes: pre-nix-check
 	@cd 09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture && make build
 	@echo "Building consolidated-impure-gemini-telemetry..."
 	@nix build 09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry/#default --extra-experimental-features "nix-command flakes impure-derivations ca-derivations"
+	@echo "Building mycology-workflow and data-sources flakes..."
+	@$(MAKE) -C flakes all
 	@echo "--- QA Flake Tests Complete ---"
 
-.PHONY: debug-pkgs-writeShellScriptBin-type statix-all run-orchestrator test-qa-flakes
+.PHONY: build-mycology-workflow-puml
+# Target to build the Mycology Workflow PlantUML diagram directly from its Nix expression.
+# This target is primarily for development and debugging the PlantUML generation.
+build-mycology-workflow-puml: pre-nix-check
+	@echo "--- Building Mycology Workflow PlantUML Diagram ---"
+	@nix build -f theory/hackathon_mycology_workflow.puml.nix --extra-experimental-features "nix-command flakes impure-derivations ca-derivations"
+	@echo "--- Mycology Workflow PlantUML Diagram Built ---"
+
+.PHONY: build-mycology-workflow-flake
+
+# Helper target to prefetch a tarball URL and get its sha256 hash.
+# Usage: make get-tarball-hash URL="https://example.com/archive.tar.gz"
+.PHONY: get-tarball-hash
+get-tarball-hash:
+	@echo "--- Prefetching Tarball and Getting SHA256 Hash ---"
+	@if [ -z "$(URL)" ]; then \
+		echo "ERROR: URL is not provided. Usage: make get-tarball-hash URL=\"https://example.com/archive.tar.gz\""; \
+		exit 1; \
+	fi
+	@nix-prefetch-url "$(URL)"
+	@echo "--- Tarball Prefetch Complete ---"
+
+# Helper target to get the sha256 hash of a local file.
+# Usage: make get-file-hash FILE="./path/to/file.nar"
+.PHONY: get-file-hash
+get-file-hash:
+	@echo "--- Getting SHA256 Hash of Local File ---"
+	@if [ -z "$(FILE)" ]; then \
+		echo "ERROR: FILE is not provided. Usage: make get-file-hash FILE=\"./path/to/file.nar\""; \
+		exit 1; \
+	fi
+	@nix-hash --flat --base32 --type sha256 "$(FILE)"
+	@echo "--- File Hash Complete ---"
+
+.PHONY: debug-pkgs-writeShellScriptBin-type statix-all run-orchestrator test-qa-flakes build-mycology-workflow-puml build-mycology-workflow-flake get-tarball-hash get-file-hash
 debug-pkgs-writeShellScriptBin-type:
 	@echo "--- Debugging pkgs.writeShellScriptBin type ---"
 	@nix eval --raw --impure --expr 'let pkgs = (builtins.getFlake "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify").outputs.legacyPackages.aarch64-linux; in builtins.typeOf pkgs.writeShellScriptBin'

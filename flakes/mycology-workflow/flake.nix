@@ -7,8 +7,9 @@
 
     # Collection of data sources (Wikidata, Wikipedia, etc.)
     sources = {
-      url = "github:meta-introspector/meta-meme?ref=feature/data-sources"; # Placeholder for a flake aggregating sources
-      # Assuming this flake provides attributes like .wikidata and .wikipedia
+      url = "../data-sources"; # Point to the local data-sources flake
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
   };
 
@@ -27,8 +28,8 @@
           partial_dna_match = {
             key_patterns = [ "2^46" "3^20" "71^1" ]; # Example key patterns
             source_samples = [
-              sources.wikidata.Q12345.path # Reference to Wikidata QID
-              sources.wikipedia.Monster_Group.path # Reference to Wikipedia article
+              sources.wikidata.Monster_Group # Reference to Wikidata Monster Group NAR
+              sources.wikipedia.Monster_Group # Reference to Wikipedia Monster Group cache
             ];
             analysis_timestamp = "2025-10-07T12:00:00Z"; # Timestamp of analysis
             # Add more dynamic attributes as needed
