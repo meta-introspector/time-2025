@@ -3,6 +3,8 @@
 let
   primeMappingConfig = import ../lib/prime-mapping-config.nix { inherit lib; };
   matrixUtils = import ../lib/matrix-utils.nix { inherit lib; };
+  vibeConstants = import ../lib/vibe-constants.nix { inherit lib; };
+  vibeMatrixGenerator = import ../lib/vibe-matrix-generator.nix { inherit lib vibeConstants primeMappingConfig; };
 
   # Generate the MiniZinc model (.mzn) content
   mznModelContent = import ./generate-mzn-model.nix {
@@ -12,11 +14,11 @@ let
 
   # Placeholder vibe data (will be replaced by LLM-generated data)
   # These should align with the dimensions and concepts defined in prime-mapping-config.nix
-  primeVibes = matrixUtils.generateIdentityMatrix (lib.length primeMappingConfig.vibeDimensions);
+  primeVibes = vibeMatrixGenerator.generatePrimeVibes;
 
-  conceptVibes = matrixUtils.generateIdentityMatrix (lib.length primeMappingConfig.concepts);
+  conceptVibes = vibeMatrixGenerator.generateConceptVibes;
 
-  vibeWeights = matrixUtils.floatsToStrings (matrixUtils.generateUniformVector (lib.length primeMappingConfig.vibeDimensions) 1.0); # Equal weight for all vibes
+  vibeWeights = matrixUtils.floatsToStrings (matrixUtils.generateUniformVector (lib.length primeMappingConfig.vibeDimensions) vibeConstants.VS_ONE); # Equal weight for all vibes
 
   # Generate the MiniZinc data (.dzn) content
   dznDataContent = import ./generate-dzn-data.nix {

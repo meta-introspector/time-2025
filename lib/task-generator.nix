@@ -2,7 +2,8 @@
 
 let
   primeMappingConfig = import ./prime-mapping-config.nix { inherit lib; };
-  functorMatrix = import ./code-generation/functor-matrix.nix { inherit lib; };  generateTask = file_path: type: {
+  functorMatrix = import ./code-generation/functor-matrix.nix { inherit lib; };
+  tiktokConfig = import ./tiktok-config.nix { inherit lib; };  generateTask = file_path: type: {
     name = "${type}-${(lib.strings.removeSuffix ".nix" (lib.strings.removePrefix "lib/emoji-encoding/" file_path))}";
     inherit file_path;
     derivation_type = type;
@@ -46,5 +47,12 @@ let
     gemini_prompt = "Generate Rust code for the '${concept}' concept using the functorMatrix.rustGenerators.${concept} function.";
   }) primeMappingConfig.concepts;
 
+  tiktokTasks = lib.map (concept: {
+    name = "tiktok-gen-${concept}";
+    file_path = "${tiktokConfig.tiktokOutputPath}/${concept}${tiktokConfig.tiktokScriptExtension}"; # Markdown for TikTok script
+    derivation_type = "generate-tiktok";
+    gemini_prompt = tiktokConfig.generateTiktokPrompt concept;
+  }) primeMappingConfig.concepts;
+
 in
-moduleTasks ++ testTasks ++ lean4Tasks ++ rustTasks
+moduleTasks ++ testTasks ++ lean4Tasks ++ rustTasks ++ tiktokTasks
