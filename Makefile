@@ -388,5 +388,5 @@ setup-sops:
 # Example: make run-gemini-with-sops -- list-models
 run-gemini-with-sops:
 	@echo "--- Running gemini-cli with sops-managed secrets ---"
-	nix run ./flakes/test-gemini-secrets -- "$(ARGS)"
+	nix run ./flakes/wrap-gemini-secrets -- "$(ARGS)"
 	@echo "--- gemini-cli execution complete ---"

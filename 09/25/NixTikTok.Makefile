@@ -47,5 +47,5 @@ make_make_prompt_prompt: ## 🤖 Make a prompt that makes prompts! (via Gemini i
 	  --argstr system "aarch64-linux" \
 	  -f /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/25/gemini-prompt-derivation.nix \
 	  --argstr prompt "$PROMPT" \
-	  --arg gemini-cli '(builtins.getFlake "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06").packages.aarch64-linux.default' ; \
+	  --arg gemini-cli '(builtins.getFlake "./flakes/wrap-gemini-secrets").packages.aarch64-linux.geminiCliWithSecrets' ; \
 	echo "👆 Gemini just made a prompt for you! Check the 'result' symlink for the output. 📝"
