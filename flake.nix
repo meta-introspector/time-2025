@@ -25,10 +25,10 @@
         nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
         flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
         sources.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=flakes/data-sources";
-        hackathonPuml = {
-          url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/hackathon-mycology-workflow-puml";
-          flake = true; # Explicitly declare it as a flake
-        };
+        inherit hackathonPumlFlake; # Pass the hackathonPumlFlake input
+      };
+      args = {
+        hackathonPumlPackage = hackathonMycologyWorkflowPumlPackage;
       };
     };
 
@@ -40,9 +40,14 @@
         flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
       };
     };
+
+    # 7. Hackathon PlantUML Flake
+    hackathonPumlFlake = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/hackathon-mycology-workflow-puml";
+    };
   };
 
-  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src, mycologyWorkflow, dataSources, ... }:
+  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src, mycologyWorkflow, dataSources, hackathonPumlFlake, ... }:
     let
       system = "aarch64-linux"; # Hardcode system as per user instruction
       # Load core utilities

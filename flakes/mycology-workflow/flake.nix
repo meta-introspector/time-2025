@@ -20,7 +20,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, sources, hackathonPuml }:
+  outputs = { self, nixpkgs, flake-utils, sources, hackathonPumlFlake }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -48,7 +48,7 @@
           minizinc_solver = pkgs.writeText "minizinc-solver" "minizinc solver placeholder";
         };
 
-        mycologyWorkflowPuml = import hackathonPuml.packages.${system}.default {
+        mycologyWorkflowPuml = import hackathonPumlFlake.packages.${system}.default {
           inherit pkgs lib monster_genome_data formal_triad_env;
         };
       in
