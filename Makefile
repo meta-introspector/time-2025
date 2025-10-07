@@ -381,12 +381,30 @@ setup-sops:
 	@echo "--- SOPS Setup Complete (Manual GPG key creation/config required) ---"
 
 .PHONY: run-gemini-with-sops
-# Target to run the gemini-cli with sops-managed secrets.
-# This target uses the 'test-gemini-secrets' flake to execute the gemini-cli
-# with decrypted credentials, ensuring secure access to your Gemini CLI.
-# Usage: make run-gemini-with-sops -- <gemini-cli-arguments>
-# Example: make run-gemini-with-sops -- list-models
 run-gemini-with-sops:
-	@echo "--- Running gemini-cli with sops-managed secrets ---"
-	nix run ./flakes/wrap-gemini-secrets -- "$(ARGS)"
-	@echo "--- gemini-cli execution complete ---"
+	@echo "--- Building geminiCliWithSecrets package ---"
+	nix build ./flakes/wrap-gemini-secrets#packages.aarch64-linux.geminiCliWithSecrets \
+	  --override-input sops-secrets-dir "path:./sops-secrets" \
+	  --print-out-paths
+	@echo "--- Build complete. Now, decrypt secrets and run manually: ---"
+	@echo "1. Ensure gpg-agent is running and passphrase is cached." \
+	       "(e.g., by running `gpg --use-agent --decrypt <any-encrypted-file>` once)"
+	@echo "2. Decrypt secrets to a temporary directory:"
+	@echo "   DECRYPTED_SECRETS_TMPDIR=$(mktemp -d)"
+	@echo "   sops -d ./sops-secrets/oauth_creds.json > $DECRYPTED_SECRETS_TMPDIR/oauth_creds.json"
+	@echo "   sops -d ./sops-secrets/settings.json > $DECRYPTED_SECRETS_TMPDIR/settings.json"
+	@echo "   sops -d ./sops-secrets/google_accounts.json > $DECRYPTED_SECRETS_TMPDIR/google_accounts.json"
+	@echo "3. Run gemini-cli-with-secrets:"
+	@echo "   result/bin/gemini-cli-with-secrets $DECRYPTED_SECRETS_TMPDIR list-models"
+	@echo "4. Clean up:"
+	@echo "   rm -rf $DECRYPTED_SECRETS_TMPDIR"
+
+.PHONY: build-gemini-with-sops-path
+build-gemini-with-sops-path:
+	@echo "--- Building geminiCliWithSecrets with explicit sops-secrets-dir path ---"
+	nix build --impure ./flakes/wrap-gemini-secrets#packages.aarch64-linux.geminiCliWithSecrets \
+	  --override-input sops-secrets-dir "path:./sops-secrets" \
+	  --extra-sandbox-paths /data/data/com.termux.nix/files/home/.gnupg \
+	  --print-out-paths
+	@echo "--- Build complete ---"
+

@@ -5,48 +5,44 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
-    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/working-gemini-cli-nix-store";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
 
     # Reference the secrets.nix from the parent directory
     secrets = {
       url = "path:../";
       flake = false;
     };
-  };
 
-  outputs = { self, nixpkgs, flake-utils, sops-nix, gemini-cli, secrets, ... }:
+    sops-secrets-dir = {
+      url = "path:../../sops-secrets"; # Path relative to the wrap-gemini-secrets flake
+      flake = false;
+    };
+  }; # Closing brace for inputs
+
+  outputs = { self, nixpkgs, flake-utils, sops-nix, gemini-cli, secrets, sops-secrets-dir, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
         inherit lib;
+        pkgs = nixpkgs.legacyPackages.${system};
 
         # Import the secrets.nix from the parent directory
         secretsConfig = import secrets { inherit pkgs lib; };
 
-        # Derivation to decrypt sops secrets
-        decryptedSopsSecrets = pkgs.stdenv.mkDerivation {
-          pname = "decrypted-gemini-sops-secrets";
-          version = "1.0";
-
-          buildPhase = ''
-            mkdir -p $out/.gemini
-            ${pkgs.sops}/bin/sops -d ../sops-secrets/oauth_creds.json > $out/.gemini/oauth_creds.json
-            ${pkgs.sops}/bin/sops -d ../sops-secrets/settings.json > $out/.gemini/settings.json
-            ${pkgs.sops}/bin/sops -d ../sops-secrets/google_accounts.json > $out/.gemini/google_accounts.json
-          '';
-
-          buildInputs = [ pkgs.sops ];
-        };
+        # This derivation is no longer needed as decryption happens outside
+        # decryptedSopsSecrets = ...
 
         # A wrapper script to run gemini-cli with decrypted secrets
+        # It now expects the path to the decrypted secrets as an argument
         geminiCliWithSecrets = pkgs.writeShellScriptBin "gemini-cli-with-secrets" ''
+          # The first argument to this script will be the path to the decrypted secrets
+          DECRYPTED_SECRETS_PATH="$1"
+          shift # Remove the first argument, so "$@" now contains gemini-cli arguments
+
           export HOME=$(mktemp -d)
           trap 'rm -rf "$HOME"' EXIT
           mkdir -p "$HOME/.gemini/"
-          cp ${decryptedSopsSecrets}/.gemini/settings.json "$HOME/.gemini/"
-          cp ${decryptedSopsSecrets}/.gemini/oauth_creds.json "$HOME/.gemini/"
-          cp ${decryptedSopsSecrets}/.gemini/google_accounts.json "$HOME/.gemini/"
-          echo "✅ Credentials copied from decryptedSopsSecrets to $HOME/.gemini/"
+          cp -r "$DECRYPTED_SECRETS_PATH"/* "$HOME/.gemini/"
+          echo "✅ Credentials copied from $DECRYPTED_SECRETS_PATH to $HOME/.gemini/"
           exec ${gemini-cli.packages.${system}.default}/bin/gemini-cli "$@"
         '';
 

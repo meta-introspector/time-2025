@@ -33,11 +33,11 @@ translate_lambda_to_emojis: ## Imagine: Turning that <LAMBDA> into a vibrant emo
 	@echo "   This will involve calling the Nix function and then mapping the resulting prime list to emojis."
 	@echo "   Stay tuned for the next episode! 🔜"
 
-make_make_prompt_prompt: ## 🤖 Make a prompt that makes prompts! (via Gemini in Nix)
-	echo "🎬 TikTok: Prompting the Prompt-Maker! 🤯" ; \
-	echo "🎵 Sound: 'Inception' by Hans Zimmer" ; \
-	echo "✨ Effect: Glitch filter on the screen!" ; \
-	echo "👇 Watch Gemini generate a new prompt within a Nix derivation:" ; \
+make_make_prompt_prompt: ## 🤖 Make a prompt that makes prompts! (via Gemini in Nix, with sops)
+	@echo "🎬 TikTok: Prompting the Prompt-Maker! 🤯 (With SOPS)" ; \
+	@echo "🎵 Sound: 'Inception' by Hans Zimmer" ; \
+	@echo "✨ Effect: Glitch filter on the screen!" ; \
+	@echo "👇 Watch Gemini generate a new prompt within a Nix derivation (using sops):" ; \
 	PROMPT="Write a short, creative haiku about Nix flakes and their purity." ; \
 	nix build \
 	  --impure \
@@ -48,4 +48,21 @@ make_make_prompt_prompt: ## 🤖 Make a prompt that makes prompts! (via Gemini i
 	  -f /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/25/gemini-prompt-derivation.nix \
 	  --argstr prompt "$PROMPT" \
 	  --arg gemini-cli '(builtins.getFlake "./flakes/wrap-gemini-secrets").packages.aarch64-linux.geminiCliWithSecrets' ; \
-	echo "👆 Gemini just made a prompt for you! Check the 'result' symlink for the output. 📝"
+	@echo "👆 Gemini just made a prompt for you! Check the 'result' symlink for the output. 📝"
+
+make_prompt_no_sops: ## 🤖 Make a prompt that makes prompts! (via Gemini in Nix, no sops)
+	@echo "🎬 TikTok: Prompting the Prompt-Maker! 🤯 (No SOPS)" ; \
+	@echo "🎵 Sound: 'Inception' by Hans Zimmer" ; \
+	@echo "✨ Effect: Glitch filter on the screen!" ; \
+	@echo "👇 Watch Gemini generate a new prompt within a Nix derivation (using ~/.gemini):" ; \
+	PROMPT="Write a short, creative haiku about Nix flakes and their purity." ; \
+	nix build \
+	  --impure \
+	  --extra-experimental-features "nix-command flakes impure-derivations" \
+	  --arg pkgs '(import <nixpkgs> {})' \
+	  --arg lib '(import <nixpkgs> {}).lib' \
+	  --argstr system "aarch64-linux" \
+	  -f /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/25/gemini-prompt-derivation.nix \
+	  --argstr prompt "$PROMPT" \
+	  --arg gemini-cli '(builtins.getFlake "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06").packages.aarch64-linux.default' ; \
+	@echo "👆 Gemini just made a prompt for you! Check the 'result' symlink for the output. 📝"

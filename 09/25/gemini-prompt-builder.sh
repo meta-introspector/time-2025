@@ -20,8 +20,21 @@ echo "${PROMPT}" > "$OUT_PATH"/original_prompt.txt
 PROMPT_FILE=$(mktemp)
 echo "${PROMPT}" > "$PROMPT_FILE"
 
-# Debugging: Print GEMINI_API_KEY
-echo "DEBUG: GEMINI_API_KEY is: $GEMINI_API_KEY"
+# Set HOME to a writable temporary directory for gemini-cli
+TEMP_HOME=$(mktemp -d)
+export HOME="$TEMP_HOME"
+trap 'rm -rf "$HOME"' EXIT # Clean up the temporary HOME directory on exit
+
+# Create ~/.gemini directory
+mkdir -p "$HOME/.gemini"
+
+# Copy actual credential files from host system
+cp /data/data/com.termux.nix/files/home/.gemini/settings.json "$HOME/.gemini/"
+cp /data/data/com.termux.nix/files/home/.gemini/oauth_creds.json "$HOME/.gemini/"
+cp /data/data/com.termux.nix/files/home/.gemini/google_accounts.json "$HOME/.gemini/"
+echo "✅ Copied credential files from host ~/.gemini/ to $HOME/.gemini/"
+
+# Run gemini with the prompt from the temporary file and capture its output
 
 # Run gemini with the prompt from the temporary file and capture its output
 # Capture stdout and stderr to gemini_output.txt
