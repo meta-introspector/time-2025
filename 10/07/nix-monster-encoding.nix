@@ -3,14 +3,14 @@
 let
   # Emoji mappings for tags (visual "primes")
   emojiForTag = {
-    int = "🔢";
-    string = "📝";
-    list = "📋";
-    attrset = "📦";
-    lambda = "λ";  # Unicode lambda as placeholder for function
-    letIn = "↩️";   # Return arrow for let-in
-    ifThenElse = "❓";  # Question mark for conditional
-    # Add more as needed, e.g., bind = "🔗";
+    list = "📋";   # 2 (Duality/Foundation)
+    ifThenElse = "❓";  # 3 (Structure/Form)
+    int = "🔢";    # 5 (Pattern/Collection)
+    attrset = "📦"; # 7 (Insight/Guidance)
+    lambda = "λ";  # 11 (Transformation/Flow)
+    letIn = "↩️";   # 13 (Challenge/Verification)
+    string = "📝"; # 17 (Refinement/Communication)
+    unsupported = "🚫"; # 19 (Manifestation/Core Being - representing the boundary)
   };
 
   # Exponent/multiplicity from value (same as prime version)
@@ -19,7 +19,7 @@ let
     else if lib.isString val then 1 + lib.stringLength val
     else if lib.isList val then lib.length val
     else if val ? type && val.type or "" == "attrs" then 1 + (builtins.length (lib.attrNames val))
-    else 1;
+    else 1; # Default for unsupported types
 
   # Repeat emoji n times (pure concat)
   repeatEmoji = emoji: n: lib.concatStrings (lib.genList (_: emoji) n);
@@ -42,7 +42,7 @@ let
     else if ast ? body && ast ? arg then lambdaEncoder.encode ast  # Simple lambda
     else if ast ? binds && ast ? body then letInEncoder.encode ast  # letIn
     else if ast ? cond && ast ? thenBranch && ast ? elseBranch then ifThenElseEncoder.encode ast  # ifThenElse
-    else throw "Unsupported AST node: ${builtins.toJSON ast}";
+    else repeatEmoji emojiForTag.unsupported (multiplicityFromVal ast);
 
   # Example AST: { a = 42; b = [ "hello" "world" ]; }
   exampleAST = {
