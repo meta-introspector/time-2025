@@ -13,12 +13,13 @@
         flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
       };
     };
-    topLevelSelf = {
-      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
+
+    hackathonPuml = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/hackathon-mycology-workflow-puml";
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, sources, topLevelSelf }:
+  outputs = { self, nixpkgs, flake-utils, sources, hackathonPuml }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -46,7 +47,7 @@
           minizinc_solver = pkgs.writeText "minizinc-solver" "minizinc solver placeholder";
         };
 
-        mycologyWorkflowPuml = import (topLevelSelf + "/theory/hackathon_mycology_workflow.puml.nix") {
+        mycologyWorkflowPuml = import hackathonPuml.packages.${system}.default {
           inherit pkgs lib monster_genome_data formal_triad_env;
         };
       in

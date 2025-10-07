@@ -1,19 +1,29 @@
-# File: hackathon_mycology_workflow.puml.nix
+{
+  description = "Nix flake for the Hackathon Mycology Workflow PlantUML diagram.";
 
-{ pkgs, monster_genome_data, formal_triad_env, ... }:
+  inputs = {
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  };
 
-let
-  # Monster Constraints derived from Architectural Genome:
-  LAYER_DUALITY_2_46 = "46 interwoven layers of binary distinctions (${monster_genome_data.Duality})"; #
-  LAYER_STRUCTURE_3_20 = "20 layers of structural integrity (${monster_genome_data.Structure})"; #
-  SPORADIC_71 = "Singular influence of Prime 71 (Gandalf) for CRQ-007/CRQ-002";
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+        inherit (pkgs) lib;
 
-  # Formal Verification Tooling Derivations (The Formal Triad):
-  inherit (formal_triad_env) lean4_verifier; # CRQ-011 setup
-  inherit (formal_triad_env) minizinc_solver;
-  
-in
-pkgs.writeText "mycology-workflow.puml" ''
+        # Monster Constraints derived from Architectural Genome:
+        LAYER_DUALITY_2_46 = "46 interwoven layers of binary distinctions (${monster_genome_data.Duality})"; #
+        LAYER_STRUCTURE_3_20 = "20 layers of structural integrity (${monster_genome_data.Structure})"; #
+        SPORADIC_71 = "Singular influence of Prime 71 (Gandalf) for CRQ-007/CRQ-012";
+
+        # Formal Verification Tooling Derivations (The Formal Triad):
+        # These would typically be inputs from other flakes, but for this puml, we'll mock them.
+        lean4_verifier = pkgs.writeText "lean4-verifier" "lean4 verifier placeholder";
+        minizinc_solver = pkgs.writeText "minizinc-solver" "minizinc solver placeholder";
+
+        # The original content of hackathon_mycology_workflow.puml.nix
+        pumlContent = pkgs.writeText "mycology-workflow.puml" ''
  @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
@@ -119,4 +129,10 @@ Rel_R(mycelial_strain_storage, team_agent, "Returns verified quasifibers (Points
 Rel(pure_derivation_engine, lean4_proof, "Computational Event is formally traced (CRQ-037)", "Element in Monster Group").
 
  @enduml
-''
+        '';
+      in
+      {
+        packages.default = pumlContent;
+      }
+    );
+}
