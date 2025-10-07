@@ -1,0 +1,2 @@
+aef1f9beabbd326cf1cc7b379c73c6e6a54a635d
+19	20	09/22/generate_monster_group_llm_txt.sh

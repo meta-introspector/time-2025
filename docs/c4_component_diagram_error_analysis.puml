@@ -1,0 +1,52 @@
+@startuml C4_Component_Diagram_Error_Analysis
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Nix 2-Gram Indexer - Error Analysis Component Diagram
+
+skinparam componentStyle rectangle
+
+Container(nix_flake_system, "Nix Flake System", "NixOS") {
+
+    Component(main_flake, "flake.nix", "Nix Flake", "Orchestrates the 2-gram indexing process")
+
+    Component(nix_2gram_indexer_nix, "nix_2gram_indexer.nix", "Nix Module", "Generates 2-gram index from Nix files")
+
+    Component(nix_code_indexer_nix, "nix_code_indexer.nix", "Nix Module", "Indexes Nix files in a project")
+
+    Component(n_gram_generator_nix, "n_gram_generator.nix", "Nix Module", "Tokenizes paths and generates N-grams")
+
+    Component(lib_nixpkgs, "lib (from nixpkgs)", "Nix Library", "Provides utility functions like map, flatten")
+
+    Component(builtins_nix, "builtins", "Nix Built-in Functions", "Provides built-in functions like fromJSON, readFile")
+
+    Database(nix_store, "Nix Store", "Content-Addressable Storage", "Stores derivations and their outputs")
+
+    Rel(main_flake, nix_2gram_indexer_nix, "Calls generate2GramIndex")
+
+    Rel(nix_2gram_indexer_nix, nix_code_indexer_nix, "Calls indexNixFiles")
+    Rel(nix_code_indexer_nix, nix_store, "Outputs nix-files.index.json derivation")
+
+    Rel(nix_2gram_indexer_nix, nix_store, "Reads nix-files.index.json from derivation output (indexedFilesJsonDerivation)")
+    Rel(nix_2gram_indexer_nix, builtins_nix, "Uses fromJSON to parse indexedFiles")
+
+    Rel(nix_2gram_indexer_nix, n_gram_generator_nix, "Calls tokenizePath and generateNGrams")
+    Rel(nix_2gram_indexer_nix, lib_nixpkgs, "Uses flatten and map")
+
+    Rel(nix_2gram_indexer_nix, nix_store, "Outputs final 2-gram index derivation")
+
+    note right of nix_2gram_indexer_nix : **Error Point:**
+    "cannot coerce a function to a string"
+    occurs during evaluation of 
+    `lib.flatten (lib.map (fileInfo: ...)) indexedFiles`
+    within `generate2GramIndex`.
+
+    note right of n_gram_generator_nix : **Hypothesis:**
+    `tokenizePath` or `generateNGrams`
+    might be returning a function instead of a list of strings,
+    leading to `fileInfo` or `twoGrams` becoming a function
+    when `lib.map` is applied.
+
+}
+
+@enduml

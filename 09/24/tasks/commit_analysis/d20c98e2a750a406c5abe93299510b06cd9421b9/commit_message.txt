@@ -1,0 +1,12 @@
+feat: Fix nix build errors and adopt meta-introspector nixpkgs
+
+This commit resolves several issues encountered during nix build:
+
+- Updated flake.nix in the current directory to use meta-introspector/nixpkgs and flake-utils.
+
+- Updated flake.nix in day_23_concepts to use flake-utils and corrected its outputs structure.
+
+- Changed pkgs.fetchGit to pkgs.fetchgit and removed the redundant ref argument in day_23_concepts/flake.nix.
+
+- Ensured proper directory creation (mkdir -p /data/data/com.termux.nix/files/home/pick-up-nix2/outputs/out) and script executability (chmod +x) in number-23, is-prime-23, and fact-23-oracle derivations.
+

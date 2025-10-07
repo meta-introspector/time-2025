@@ -1,0 +1,2 @@
+feat: Fix Nix build for monsterGroupLlmContext and update publish script
+

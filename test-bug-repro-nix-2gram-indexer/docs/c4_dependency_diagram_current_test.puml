@@ -1,0 +1,39 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Dependency Diagram for Current Test (`inspect-indexer-output`)
+
+System_Boundary(test_project, "Test Bug Repro Nix 2-Gram Indexer Project") {
+
+    Container(makefile, "Makefile", "Build Automation", "Orchestrates the build and test process.")
+    Container(inspect_output_nix, "inspect_indexer_output.nix", "Nix Expression", "Entry point for the 2-gram indexer test.")
+    Container(nix_2gram_indexer_nix, "nix_2gram_indexer.nix", "Nix Module", "Defines the 2-gram indexing logic.")
+    Container(nix_code_indexer_nix, "nix_code_indexer.nix", "Nix Module", "Indexes Nix files in a project.")
+    Container(n_gram_generator_nix, "n_gram_generator.nix", "Nix Module", "Generates n-grams from tokens.")
+
+    Rel(makefile, inspect_output_nix, "Builds/Evaluates")
+
+    Rel(inspect_output_nix, nix_2gram_indexer_nix, "Imports and calls generate2GramIndex")
+    Rel(inspect_output_nix, nix_code_indexer_nix, "Imports (indirectly via nix_2gram_indexer.nix)")
+    Rel(inspect_output_nix, n_gram_generator_nix, "Imports (indirectly via nix_2gram_indexer.nix)")
+
+    Rel(nix_2gram_indexer_nix, nix_code_indexer_nix, "Calls indexNixFiles")
+    Rel(nix_2gram_indexer_nix, n_gram_generator_nix, "Calls tokenizePath and generateNGrams")
+
+    Component(generate2GramIndex, "generate2GramIndex", "Nix Function", "Generates the 2-gram index.")
+    Component(indexNixFiles, "indexNixFiles", "Nix Function", "Indexes Nix files.")
+    Component(tokenizePath, "tokenizePath", "Nix Function", "Tokenizes file paths.")
+    Component(generateNGrams, "generateNGrams", "Nix Function", "Generates n-grams.")
+
+    Rel(nix_2gram_indexer_nix, generate2GramIndex, "Defines")
+    Rel(nix_code_indexer_nix, indexNixFiles, "Defines")
+    Rel(n_gram_generator_nix, tokenizePath, "Defines")
+    Rel(n_gram_generator_nix, generateNGrams, "Defines")
+
+    Rel(generate2GramIndex, indexNixFiles, "Uses")
+    Rel(generate2GramIndex, tokenizePath, "Uses")
+    Rel(generate2GramIndex, generateNGrams, "Uses")
+}
+@enduml

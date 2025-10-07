@@ -1,0 +1,3 @@
+so lets look at our list of logs and start with our workflow. we want to moniter multiple git repos, branchs, prs, crqs, agents,             │
+│   events, telemetery data. we parse that with regexs and simple languages. we do static secure eval. we verify zkps. some of these             │
+│   logs will contain embedded godel numbers with zkps that we can prove.

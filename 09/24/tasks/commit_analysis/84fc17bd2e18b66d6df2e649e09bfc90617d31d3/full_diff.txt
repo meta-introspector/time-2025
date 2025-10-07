@@ -1,0 +1,25 @@
+commit 84fc17bd2e18b66d6df2e649e09bfc90617d31d3
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 21:18:49 2025 +0000
+
+    fix: Pass full paths for files to generate_monster_group_llm_txt.sh in flake.nix
+
+diff --git a/09/22/nix-llm-context/flake.nix b/09/22/nix-llm-context/flake.nix
+index de4c9b1..c54b166 100644
+--- a/09/22/nix-llm-context/flake.nix
++++ b/09/22/nix-llm-context/flake.nix
+@@ -19,10 +19,10 @@
+           (pkgs.runCommand "llm-context-${symbol}" {} ''
+             "${self}/${generatorScript}" \
+               --symbol="${symbol}" \
+-              --html-file-name="${htmlFileName}" \
+-              --keywords-script="${keywordsScriptFileName}" \
+-              --links-file-name="${linksFileName}" \
+-              --tutorials-pattern="${tutorialsPattern}" \
++              --html-file-name="${mainProject}/wikipedia_cache/${htmlFileName}" \
++              --keywords-script="${mainProject}/docs/memes/${keywordsScriptFileName}" \
++              --links-file-name="${mainProject}/docs/memes/${linksFileName}" \
++              --tutorials-pattern="${mainProject}/docs/memes/${tutorialsPattern}" \
+               --output-dir="$out" \
+               --main-project="${mainProject}"
+           '');

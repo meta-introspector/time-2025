@@ -1,0 +1,38 @@
+{
+  "general": {
+    "preferredEditor": "emacs"
+  },
+  "telemetry": {
+    "enabled": true,
+    "target": "local",
+    "otlpEndpoint": "",
+    "outfile": "logs/telemetry.log",
+    "useCollector": true
+  },
+  "tools": {
+    "core": [
+      "ReadFileTool",
+      "GlobTool",
+      "ShellTool",
+      "run_shell_tool",
+      "run_shell_command",
+      "LSTool",
+      "WriteFileTool",
+      "GrepTool",
+      "EditTool",
+      "ReadManyFilesTool",
+      "WebFetchTool",
+      "WebSearchTool",
+      "MemoryTool",
+      "write_file",
+      "replace",
+      "*",
+      "all"
+    ]
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  }
+}

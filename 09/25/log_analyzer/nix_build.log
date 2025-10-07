@@ -1,0 +1,26 @@
+Starting Nix build at Sat Sep 27 04:07:11 PM UTC 2025
+warning: Git tree '/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025' is dirty
+   Compiling log_analyzer v0.1.0 (/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/25/log_analyzer)
+warning: unused import: `self`
+ --> src/bin/telemetry_manager.rs:4:15
+  |
+4 | use std::io::{self, Write, Read};
+  |               ^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `Path`
+ --> src/bin/telemetry_manager.rs:5:17
+  |
+5 | use std::path::{Path, PathBuf};
+  |                 ^^^^
+
+warning: unused import: `Read`
+ --> src/bin/telemetry_manager.rs:4:28
+  |
+4 | use std::io::{self, Write, Read};
+  |                            ^^^^
+
+warning: `log_analyzer` (bin "telemetry_manager") generated 3 warnings (run `cargo fix --bin "telemetry_manager"` to apply 2 suggestions)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 7.30s
+Nix build finished at Sat Sep 27 04:07:20 PM UTC 2025

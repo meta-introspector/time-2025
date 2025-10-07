@@ -1,0 +1,19 @@
+commit 0ed49415bc5f77a462c634fc20ed63913a7a2bde
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:40:21 2025 +0000
+
+    fix: Correct buildCommand syntax in nix-llm-context/flake.nix
+
+diff --git a/09/22/nix-llm-context/flake.nix b/09/22/nix-llm-context/flake.nix
+index 0d90d77..f62cca2 100644
+--- a/09/22/nix-llm-context/flake.nix
++++ b/09/22/nix-llm-context/flake.nix
+@@ -24,7 +24,7 @@
+           } ''
+             # Original buildCommand (commented out for debugging)
+             # "${self}/debug_wrapper.sh" "$generatorScriptPath" "${symbol}" "${mainProject}/wikipedia_cache/${htmlFileName}" "${mainProject}/docs/memes/${keywordsScriptFileName}" "${mainProject}/docs/memes/${linksFileName}" "${mainProject}/docs/memes/${tutorialsPattern}" "$out/llm-context-${symbol// /-}.txt" "${mainProject}"
+-            "echo \"Hello from Nix build!\""
++            echo "Hello from Nix build!"
+           '');
+       in
+       rec {

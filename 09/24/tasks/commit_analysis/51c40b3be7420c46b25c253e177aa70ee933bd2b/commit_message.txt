@@ -1,0 +1,4 @@
+feat: Add TikTok meme for CRQ number as group order
+
+This commit introduces a new TikTok meme markdown file that waxes poetic on the idea of CRQ numbers defining the order of a group, connecting it to the Monster Group and the 'tiktokification' initiative.
+

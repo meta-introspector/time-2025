@@ -1,0 +1,13 @@
+ffdba4f5dc590ab0a314e86c64ab2919233b35d5
+1	0	09/22/.gitignore
+1	1	09/22/crq-binstore
+57	0	09/22/docs/memes/esoteric_interpretation_of_the_grand_number_meme.md
+49	0	09/22/docs/memes/numerology_of_the_grand_number_meme.md
+112	0	09/22/docs/memes/numerology_of_the_grand_number_meme_expanded_traditions.md
+2	2	09/22/lib/lib_exec.sh
+2	2	09/22/scripts/branch_and_push_all.sh
+1	1	09/22/scripts/check_if_git_repo_is_vendorized_legacy.sh
+1	1	09/22/scripts/create_experimental_task.sh
+3	1	09/22/scripts/find_x86.sh
+4	4	09/22/scripts/spider_wiki_links.sh
+72	0	09/22/scripts/spidernar.sh

@@ -1,0 +1,19 @@
+commit 513d0c48267c51352ffe9329cebefaa5344ef9fd
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 19:31:57 2025 +0000
+
+    CRQ-016: Update for flake.nix integration and submodule consistency
+
+diff --git a/09/22/lib/lib_git_submodule.sh b/09/22/lib/lib_git_submodule.sh
+index 43643fd..31753ea 100755
+--- a/09/22/lib/lib_git_submodule.sh
++++ b/09/22/lib/lib_git_submodule.sh
+@@ -50,7 +50,7 @@ ensure_meta_introspector_remote_and_fork() {
+ push_to_origin_branch() {
+   local branch_name="$1"
+   echo "Pushing branch $branch_name to origin"
+-  git push -u origin "$branch_name"
++  git push -u origin "refs/heads/$branch_name"
+ }
+ 
+ # Function to get git status of superproject, ignoring submodules.

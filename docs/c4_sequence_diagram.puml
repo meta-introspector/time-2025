@@ -1,0 +1,76 @@
+@startuml C4_Sequence_Diagram
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Sequence.puml
+
+title Nix 2-Gram Indexer Flake - High-Level Sequence Diagram
+
+skinparam sequenceMessageAlign center
+
+Person(user, "Developer")
+
+System_Boundary(nix_flake_system, "Nix Flake System") {
+
+    Boundary(main_flake, "Main Flake (flake.nix)") {
+        Component(flake_nix, "flake.nix", "Nix Flake")
+    }
+
+    Boundary(indexer_module, "2-Gram Indexer Module (nix_2gram_indexer.nix)") {
+        Component(nix_2gram_indexer_nix, "nix_2gram_indexer.nix", "Nix Module")
+    }
+
+    Boundary(code_indexer_module, "Code Indexer Module (nix_code_indexer.nix)") {
+        Component(nix_code_indexer_nix, "nix_code_indexer.nix", "Nix Module")
+    }
+
+    Boundary(ngram_generator_module, "N-Gram Generator Module (n_gram_generator.nix)") {
+        Component(n_gram_generator_nix, "n_gram_generator.nix", "Nix Module")
+    }
+
+    Boundary(dummy_project_logic, "Dummy Project Logic (lib/generate-dummy-project.nix)") {
+        Component(generate_dummy_project_nix, "lib/generate-dummy-project.nix", "Nix Expression")
+        Component(generate_dummy_project_sh, "generate_dummy_project.sh", "Bash Script")
+    }
+
+    Boundary(test_files, "Test Files") {
+        Component(test_step1, "test_step1_nix_file_index.nix", "Nix Test")
+        Component(test_step2, "test_step2_indexed_files.nix", "Nix Test")
+        Component(test_step3, "test_step3_all2gram_usages.nix", "Nix Test")
+    }
+
+    Database(nix_store, "Nix Store", "Content-Addressable Storage")
+}
+
+Rel(user, flake_nix, "Invokes 'nix flake check' or 'nix build'")
+
+Rel(flake_nix, nix_2gram_indexer_nix, "Imports and calls generate2GramIndex")
+
+Rel(nix_2gram_indexer_nix, generate_dummy_project_nix, "Imports and calls to create dummyProjectRoot")
+Rel(generate_dummy_project_nix, generate_dummy_project_sh, "Executes via pkgs.runCommand")
+Rel(generate_dummy_project_sh, nix_store, "Writes dummy project files to $out", "Creates Derivation Output")
+
+Rel(nix_2gram_indexer_nix, nix_code_indexer_nix, "Imports and calls indexNixFiles")
+Rel(nix_code_indexer_nix, nix_store, "Reads project files from $src", "Derivation Input")
+Rel(nix_code_indexer_nix, nix_store, "Writes nix-files.index.json to $out", "Derivation Output")
+
+Rel(nix_2gram_indexer_nix, nix_store, "Reads nix-files.index.json from nixFileIndex derivation output", "builtins.readFile")
+Rel(nix_2gram_indexer_nix, nix_store, "Writes intermediate JSON to $out (indexedFilesJsonDerivation)", "Derivation Output")
+
+Rel(nix_2gram_indexer_nix, n_gram_generator_nix, "Imports and calls tokenizePath and generateNGrams")
+
+Rel(nix_2gram_indexer_nix, nix_store, "Writes final 2-gram index to $out (indexOutput)", "Derivation Output")
+
+Rel(test_step1, nix_code_indexer_nix, "Calls indexNixFiles with dummyProjectRoot")
+Rel(test_step1, nix_store, "Builds and outputs nix-files.index.json derivation")
+
+Rel(test_step2, nix_code_indexer_nix, "Calls indexNixFiles with dummyProjectRoot")
+Rel(test_step2, nix_store, "Builds nix-files.index.json derivation")
+Rel(test_step2, nix_store, "Reads nix-files.index.json from built derivation", "builtins.readFile")
+Rel(test_step2, nix_store, "Outputs parsed indexedFiles (JSON string)")
+
+Rel(test_step3, nix_code_indexer_nix, "Calls indexNixFiles with dummyProjectRoot")
+Rel(test_step3, nix_store, "Builds nix-files.index.json derivation")
+Rel(test_step3, nix_store, "Reads nix-files.index.json from built derivation", "builtins.readFile")
+Rel(test_step3, n_gram_generator_nix, "Calls tokenizePath and generateNGrams")
+Rel(test_step3, nix_store, "Outputs all2GramUsages (JSON string)")
+
+@enduml

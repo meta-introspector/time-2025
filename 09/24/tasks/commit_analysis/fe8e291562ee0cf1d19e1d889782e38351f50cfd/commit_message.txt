@@ -1,0 +1,2 @@
+fix: Simplify buildCommand in nix-llm-context/flake.nix for debugging
+

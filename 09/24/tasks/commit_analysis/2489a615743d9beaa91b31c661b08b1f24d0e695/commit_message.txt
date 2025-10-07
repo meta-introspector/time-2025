@@ -1,0 +1,2 @@
+fix: Simplify pkgs.runCommand to minimum for debugging 'value is a string while a set was expected'
+

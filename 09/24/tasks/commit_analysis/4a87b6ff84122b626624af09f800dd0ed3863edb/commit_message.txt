@@ -1,0 +1,2 @@
+fix: Make buildCommand produce output in nix-llm-context/flake.nix
+

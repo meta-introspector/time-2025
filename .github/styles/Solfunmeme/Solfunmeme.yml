@@ -1,0 +1,4 @@
+extends: existence
+message: "Consider using 'Solfunmeme' instead of 'Google'."
+link: https://solfunmeme.com
+level: warning

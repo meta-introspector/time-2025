@@ -1,0 +1,23 @@
+033e964aca962a345b03309a6831e0e627a59675
+1	1	09/22/crq-binstore
+1	74	09/22/docs/memes/all_extracted_links.md
+0	59	09/22/docs/memes/crq_808017424794512875886459904961710757005754368000000000.md
+2	0	09/22/docs/memes/extract_meaningful_keywords.sh
+28	0	09/22/docs/memos/Wrap_Parameters_in_Scripts.md
+7	7	09/22/nix-llm-context/debug_wrapper.sh
+1	10	09/22/nix-llm-context/flake.nix
+18	13	09/22/nix-llm-context/generate_monster_group_llm_txt.sh
+16	0	09/22/nix-simulated-output/llm-context-Monster-Group.txt
+1	1	09/22/result
+11	0	09/22/scripts/publish_monster_group_nar.sh
+1	1	09/22/scripts/publish_nix_artifact_to_git.sh
+43	41	09/22/scripts/simulate_nix_run.sh
+82	0	09/22/scripts/test_nix_llm_context.sh
+2	0	09/22/tests/docs/memes/test_dummy_keywords.sh
+1	0	09/22/tests/docs/memes/test_dummy_links.md
+1	0	09/22/tests/docs/memes/test_dummy_tutorial.md
+15	0	09/22/tests/expected_output.txt
+16	0	09/22/tests/llm-context-Test-Symbol.txt
+16	0	09/22/tests/test_output.txt
+1	0	09/22/tests/wikipedia_cache/test_dummy_html.html
+1	1591	09/22/wikipedia_cache/Monster_group.html

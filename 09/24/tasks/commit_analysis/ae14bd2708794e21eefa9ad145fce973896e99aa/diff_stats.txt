@@ -1,0 +1,15 @@
+ae14bd2708794e21eefa9ad145fce973896e99aa
+64	0	09/15/minizinc_emoji_primes.mzn
+53	0	09/22/docs/crqs/crq-0001-pureify-system-core-in-nix.md
+3	3	09/22/flake-templates/llm-task-template/flake.nix
+30	0	09/22/nix-llm-task/fetch-nar-data.sh
+54	0	09/22/nix-llm-task/flake.nix
+46	0	09/22/nix-llm-task/run-llm-task.sh
+64	0	09/22/scripts/build-generated-task.sh
+3	0	09/22/scripts/gemini_cli.sh
+27	0	09/22/scripts/gemini_cli_entrypoint.sh
+3	0	09/22/scripts/gemini_cli_new.sh
+3	0	09/22/scripts/gemini_cli_recent.sh
+29	0	09/22/scripts/gemini_split.sh
+88	0	09/22/scripts/generate-llm-tasks.nix
+19	0	09/flake.nix

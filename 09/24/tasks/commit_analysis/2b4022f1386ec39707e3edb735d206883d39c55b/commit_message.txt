@@ -1,0 +1,2 @@
+feat: Add default package to flake.nix
+

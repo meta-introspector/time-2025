@@ -1,0 +1,123 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+title Deployment Diagram for Meta-Introspector Platform
+
+Deployment_Node(linux_dev, "Linux Development Environment", "Local developer machines running Linux") {
+    Container(dev_cli, "Gemini CLI", "The interactive command-line interface for developers.")
+    Container(nix_env, "Nix Development Environment", "Local Nix store and build environment.")
+}
+
+Deployment_Node(github, "GitHub", "Version control and collaboration platform") {
+    Container(github_repos, "Meta-Introspector Repositories", "Source code, Nix flakes, and documentation.")
+    Container(github_actions, "GitHub Actions", "CI/CD pipelines for automated builds and tests.")
+}
+
+Deployment_Node(aws, "Amazon Web Services", "Cloud computing platform") {
+    Deployment_Node(s3, "S3 Object Storage", "Scalable object storage for artifacts and data.") {
+        Container(s3_binstore, "Nix Binary Cache (S3)", "Nix store paths and NARs.")
+        Container(s3_data_lake, "Data Lake (S3)", "Raw and processed telemetry data.")
+    }
+    Deployment_Node(ec2, "EC2 Instances", "Virtual servers for compute workloads.") {
+        Container(nix_build_agents_aws, "Nix Build Agents", "Distributed Nix build farm.")
+        Container(zknotary_service_aws, "ZKNotary Service", "Zero-Knowledge TLS notarization service.")
+    }
+}
+
+Deployment_Node(gcp, "Google Cloud Platform", "Cloud computing platform") {
+    Deployment_Node(gcs, "Cloud Storage", "Object storage for artifacts and data.") {
+        Container(gcs_binstore, "Nix Binary Cache (GCS)", "Nix store paths and NARs.")
+        Container(gcs_data_lake, "Data Lake (GCS)", "Raw and processed telemetry data.")
+    }
+    Deployment_Node(gce, "Compute Engine", "Virtual machines for compute workloads.") {
+        Container(nix_build_agents_gcp, "Nix Build Agents", "Distributed Nix build farm.")
+        Container(zknotary_service_gcp, "ZKNotary Service", "Zero-Knowledge TLS notarization service.")
+    }
+}
+
+Deployment_Node(azure, "Microsoft Azure", "Cloud computing platform") {
+    Deployment_Node(blob_storage, "Blob Storage", "Object storage for artifacts and data.") {
+        Container(azure_binstore, "Nix Binary Cache (Azure)", "Nix store paths and NARs.")
+        Container(azure_data_lake, "Data Lake (Azure)", "Raw and processed telemetry data.")
+    }
+    Deployment_Node(vm, "Virtual Machines", "Virtual machines for compute workloads.") {
+        Container(nix_build_agents_azure, "Nix Build Agents", "Distributed Nix build farm.")
+        Container(zknotary_service_azure, "ZKNotary Service", "Zero-Knowledge TLS notarization service.")
+    }
+}
+
+Deployment_Node(oci, "Oracle Cloud Infrastructure", "Cloud computing platform") {
+    Deployment_Node(object_storage_oci, "Object Storage", "Object storage for artifacts and data.") {
+        Container(oci_binstore, "Nix Binary Cache (OCI)", "Nix store paths and NARs.")
+        Container(oci_data_lake, "Data Lake (OCI)", "Raw and processed telemetry data.")
+    }
+    Deployment_Node(compute_oci, "Compute Instances", "Virtual machines for compute workloads.") {
+        Container(nix_build_agents_oci, "Nix Build Agents", "Distributed Nix build farm.")
+        Container(zknotary_service_oci, "ZKNotary Service", "Zero-Knowledge TLS notarization service.")
+    }
+}
+
+Deployment_Node(ipfs, "IPFS Network", "Decentralized storage network") {
+    Container(ipfs_gateway, "IPFS Gateway", "Access point for IPFS content.")
+    Container(ipfs_nodes, "IPFS Nodes", "Distributed storage for immutable data.")
+}
+
+Deployment_Node(solana, "Solana Blockchain", "High-performance blockchain network") {
+    Container(solana_program, "On-chain Programs", "Smart contracts for verifiable computation/attestation.")
+    Container(solana_ledger, "Solana Ledger", "Immutable record of transactions and proofs.")
+}
+
+Deployment_Node(archive_org, "Archive.org", "Digital library and archival service") {
+    Container(archive_org_storage, "Archival Storage", "Long-term storage for historical data and proofs.")
+}
+
+Deployment_Node(wikimedia, "Wikimedia Projects", "Collaborative knowledge base") {
+    Container(wikimedia_api, "Wikimedia API", "Access to public knowledge and data.")
+}
+
+Deployment_Node(openstreetmap, "OpenStreetMap", "Collaborative geographic data") {
+    Container(osm_api, "OpenStreetMap API", "Access to geographic data.")
+}
+
+Deployment_Node(fsf_fsfe, "FSF/FSFE", "Free Software Foundation / Free Software Foundation Europe") {
+    Container(fsf_resources, "Free Software Resources", "Guidelines, licenses, and advocacy.")
+}
+
+Deployment_Node(mozilla, "Mozilla", "Open-source software community") {
+    Container(mozilla_resources, "Mozilla Resources", "Web standards, security, and open-source tools.")
+}
+
+Rel(dev_cli, github_repos, "Clones/Pushes code", "HTTPS/SSH")
+Rel(nix_env, github_repos, "Fetches Nix flakes", "HTTPS")
+Rel(github_actions, github_repos, "Triggers CI/CD on code changes", "Webhook")
+Rel(github_actions, nix_build_agents_aws, "Dispatches builds to", "API")
+Rel(github_actions, nix_build_agents_gcp, "Dispatches builds to", "API")
+Rel(github_actions, nix_build_agents_azure, "Dispatches builds to", "API")
+Rel(github_actions, nix_build_agents_oci, "Dispatches builds to", "API")
+
+Rel(nix_build_agents_aws, s3_binstore, "Pushes/Fetches NARs", "HTTPS")
+Rel(nix_build_agents_gcp, gcs_binstore, "Pushes/Fetches NARs", "HTTPS")
+Rel(nix_build_agents_azure, azure_binstore, "Pushes/Fetches NARs", "HTTPS")
+Rel(nix_build_agents_oci, oci_binstore, "Pushes/Fetches NARs", "HTTPS")
+
+Rel(zknotary_service_aws, solana_program, "Submits ZK-proofs", "RPC")
+Rel(zknotary_service_gcp, solana_program, "Submits ZK-proofs", "RPC")
+Rel(zknotary_service_azure, solana_program, "Submits ZK-proofs", "RPC")
+Rel(zknotary_service_oci, solana_program, "Submits ZK-proofs", "RPC")
+
+Rel(zknotary_service_aws, github_repos, "Notarizes external fetches (e.g., flake inputs)", "HTTPS/ZK-TLS")
+Rel(zknotary_service_aws, archive_org_storage, "Notarizes archival operations", "HTTPS/ZK-TLS")
+Rel(zknotary_service_aws, wikimedia_api, "Notarizes data fetches", "HTTPS/ZK-TLS")
+Rel(zknotary_service_aws, osm_api, "Notarizes data fetches", "HTTPS/ZK-TLS")
+Rel(zknotary_service_aws, ipfs_gateway, "Notarizes IPFS content pinning/retrieval", "HTTPS/ZK-TLS")
+
+Rel(s3_data_lake, archive_org_storage, "Archives processed data", "API")
+Rel(gcs_data_lake, archive_org_storage, "Archives processed data", "API")
+Rel(azure_data_lake, archive_org_storage, "Archives processed data", "API")
+Rel(oci_data_lake, archive_org_storage, "Archives processed data", "API")
+
+Rel(ipfs_nodes, ipfs_gateway, "Serves content", "IPFS Protocol")
+
+Rel(solana_program, solana_ledger, "Records proofs", "Blockchain Protocol")
+
+@enduml

@@ -1,0 +1,19 @@
+commit e7f1b272e17e0bf09f2f811dfc8469aa0626d626
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 19:31:26 2025 +0000
+
+    CRQ-016: Update for flake.nix integration and submodule consistency
+
+diff --git a/09/22/publish_nix_artifact_to_git.sh b/09/22/publish_nix_artifact_to_git.sh
+index d08c8af..0112ae7 100755
+--- a/09/22/publish_nix_artifact_to_git.sh
++++ b/09/22/publish_nix_artifact_to_git.sh
+@@ -56,7 +56,7 @@ execute_cmd echo "Adding, committing, and pushing '$NAR_FILE_NAME' to '$REPO_URL
+ execute_cmd pushd "$REPO_DIR_NAME" > /dev/null
+ execute_cmd git add "$NAR_FILE_NAME"
+ execute_cmd git commit -m "feat: Add Nix artifact: $NAR_FILE_NAME (from $FLAKE_ATTR_PATH)"
+-execute_cmd git push origin main
++execute_cmd push_to_origin_branch main
+ execute_cmd popd > /dev/null
+ 
+ execute_cmd echo "Successfully published Nix artifact '$NAR_FILE_NAME' to '$REPO_URL'."

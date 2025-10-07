@@ -1,0 +1,7 @@
+feat(nix): Update SOP and publishing script
+
+This commit updates the SOP for dynamic Nix artifact publishing to
+include instructions for updating the README and formatting the commit
+message. It also updates the publishing script to format the commit
+message as requested.
+

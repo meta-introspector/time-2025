@@ -1,0 +1,8 @@
+{
+  "access_token": "dummy_access_token",
+  "scope": "https://www.googleapis.com/auth/userinfo.profile openid https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/userinfo.email",
+  "token_type": "Bearer",
+  "id_token": "dummy_id_token",
+  "expiry_date": 1759101700000,
+  "refresh_token": "dummy_refresh_token"
+}

@@ -1,0 +1,2 @@
+fix: Correct buildCommand to write to current directory in nix-llm-context/flake.nix
+

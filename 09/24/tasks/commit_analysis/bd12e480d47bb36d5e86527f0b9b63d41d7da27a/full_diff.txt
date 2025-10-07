@@ -1,0 +1,35 @@
+commit bd12e480d47bb36d5e86527f0b9b63d41d7da27a
+Author: mike <h@solfunmeme.com>
+Date:   Tue Sep 23 23:01:06 2025 +0000
+
+    fix(scripts): Fix shellcheck issues and improve ngram generation
+
+diff --git a/09/generate_ngrams_from_html.sh b/09/generate_ngrams_from_html.sh
+index 5c57cb8..4b23ca2 100755
+--- a/09/generate_ngrams_from_html.sh
++++ b/09/generate_ngrams_from_html.sh
+@@ -18,7 +18,7 @@ add_ngrams_to_json() {
+   local ngram_type="${n}-gram"
+ 
+   # Generate n-grams, count, and format for jq
+-  ngrams=$(cat "$text_file" | tr -s '[:space:]' '\n' | grep -v '^$' \
++  ngrams=$(<"$text_file" tr -s '[:space:]' '\n' | grep -v '^$' \
+     | awk -v n="$n" '{ 
+       words[NR] = $0
+     }
+@@ -38,7 +38,7 @@ add_ngrams_to_json() {
+   }' | jq -s .)
+ 
+   # Add to the main JSON output
+-  JSON_OUTPUT=$(echo "$JSON_OUTPUT" | jq '. + { "'"$ngram_type"'": '$json_ngrams' }')
++  JSON_OUTPUT=$(echo "$JSON_OUTPUT" | jq --argjson jn "$json_ngrams" '. + { "'"$ngram_type"'": $jn }')
+ }
+ 
+ # Generate 1-grams, 2-grams, and 3-grams
+@@ -51,4 +51,4 @@ echo "$JSON_OUTPUT" | jq . > "$OUTPUT_FILE"
+ 
+ rm ontology.txt
+ 
+-echo "N-grams generated and saved to $OUTPUT_FILE"
+\ No newline at end of file
++echo "N-grams generated and saved to $OUTPUT_FILE"

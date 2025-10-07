@@ -1,0 +1,24 @@
+[submodule "09/25/log_analyzer/vendor"]
+	path = 09/25/log_analyzer/vendor
+	url = /data/data/com.termux.nix/files/home/git/vendor
+[submodule "09/26/jobs/vendor/nix-task"]
+	path = 09/26/jobs/vendor/nix-task
+	url = https://github.com/madjam002/nix-task
+[submodule "09/26/jobs/vendor/nix-eval-jobs"]
+	path = 09/26/jobs/vendor/nix-eval-jobs
+	url = https://github.com/nix-community/nix-eval-jobs
+[submodule "09/25/log_analyzer/osint/PHONEINFOGA"]
+	path = 09/25/log_analyzer/osint/PHONEINFOGA
+	url = https://github.com/SUNDOWNDEV/PHONEINFOGA
+[submodule "10/04/nix-stdlib"]
+	path = 10/04/nix-stdlib
+	url = https://github.com/meta-introspector/nix-stdlib
+[submodule "09/22/crq-binstore"]
+	path = 09/22/crq-binstore
+	url = https://github.com/meta-introspector/crq-binstore.git
+[submodule "10/05/MicroLean4"]
+	path = 10/05/MicroLean4
+	url = https://huggingface.co/datasets/introspector/MicroLean4
+[submodule "09/26/synapse-system"]
+	path = 09/26/synapse-system
+	url = https://github.com/meta-introspector/synapse-system.git

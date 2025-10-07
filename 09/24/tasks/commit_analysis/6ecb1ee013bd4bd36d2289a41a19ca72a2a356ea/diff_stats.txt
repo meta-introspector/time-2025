@@ -1,0 +1,23 @@
+6ecb1ee013bd4bd36d2289a41a19ca72a2a356ea
+5	0	09/22/flake.nix
+7	2	09/22/scripts/cache_wikipedia_sources.sh
+15	0	09/22/scripts/delete_blocked_html_files.sh
+0	13	09/22/scripts/package_all_articles.sh
+0	20	09/22/scripts/test_packaging.sh
+0	41	09/22/wikipedia_cache/Gematria.html
+0	41	09/22/wikipedia_cache/Griess_algebra.html
+0	41	09/22/wikipedia_cache/Group__mathematics_.html
+0	41	09/22/wikipedia_cache/Heptadecagon.html
+0	41	09/22/wikipedia_cache/Homotopy.html
+0	41	09/22/wikipedia_cache/Lattice__order_.html
+0	41	09/22/wikipedia_cache/Mathieu_group_M11.html
+0	1	09/22/wikipedia_cache/Monster_group.html
+0	41	09/22/wikipedia_cache/Parameter__mathematics_.html
+0	41	09/22/wikipedia_cache/Riemann_zeta_function.html
+0	41	09/22/wikipedia_cache/Sporadic_group.html
+0	0	09/22/wikipedia_cache/Test_Page.html
+0	41	09/22/wikipedia_cache/Transitive_group_action.html
+0	41	09/22/wikipedia_cache/Vertex_operator_algebra.html
+5	5	09/analyze_ngrams.nix
+3	3	09/flake.lock
+1	1	09/result

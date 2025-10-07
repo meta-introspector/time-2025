@@ -1,0 +1,1307 @@
+execve("/data/data/com.termux.nix/files/home/.nix-profile/bin/nix-build", ["nix-build", "bug_repro.nix", "--extra-experimental-features", "impure-derivations ca-derivation"...], 0x7fffffbb48 /* 130 vars */) = 0
+brk(NULL)                               = 0x3000213000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7ffb000
+faccessat(AT_FDCWD, "/etc/ld-nix.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libsodium.so.26", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/", {st_mode=S_IFDIR|0555, st_size=3452, ...}, 0) = 0
+openat(AT_FDCWD, "/nix/store/khssbjmgc2s2kyb0jb8bwpmsjyj4yl3a-libsodium-1.0.19/lib/libsodium.so.26", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=387712, ...}) = 0
+mmap(NULL, 460384, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff7f8a000
+mmap(0x7ff7f90000, 394848, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff7f90000
+munmap(0x7ff7f8a000, 24576)             = 0
+munmap(0x7ff7ff1000, 38496)             = 0
+mprotect(0x7ff7fd7000, 98304, PROT_NONE) = 0
+mmap(0x7ff7fef000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x4f000) = 0x7ff7fef000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libeditline.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/khssbjmgc2s2kyb0jb8bwpmsjyj4yl3a-libsodium-1.0.19/lib/libeditline.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/46v8b51qfbmmbinxyh959z3rh1n0cqx5-editline-1.17.1/lib/libeditline.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=79320, ...}) = 0
+mmap(NULL, 199112, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff7f5f000
+mmap(0x7ff7f60000, 133576, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff7f60000
+munmap(0x7ff7f5f000, 4096)              = 0
+munmap(0x7ff7f81000, 59848)             = 0
+mprotect(0x7ff7f6a000, 86016, PROT_NONE) = 0
+mmap(0x7ff7f7f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff7f7f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/liblowdown.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/khssbjmgc2s2kyb0jb8bwpmsjyj4yl3a-libsodium-1.0.19/lib/liblowdown.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/46v8b51qfbmmbinxyh959z3rh1n0cqx5-editline-1.17.1/lib/liblowdown.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/3zk18yb7xamzw99v04x1hgj35914jf3j-lowdown-1.1.0-lib/lib/liblowdown.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0444, st_size=284248, ...}) = 0
+mmap(NULL, 394680, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff7eff000
+mmap(0x7ff7f00000, 329144, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff7f00000
+munmap(0x7ff7eff000, 4096)              = 0
+munmap(0x7ff7f51000, 58808)             = 0
+mprotect(0x7ff7f39000, 77824, PROT_NONE) = 0
+mmap(0x7ff7f4c000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x3c000) = 0x7ff7f4c000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libnixexpr.so", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=2096224, ...}) = 0
+mmap(NULL, 1842920, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff7d3e000
+mmap(0x7ff7d40000, 1777384, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff7d40000
+munmap(0x7ff7d3e000, 8192)              = 0
+munmap(0x7ff7ef2000, 57064)             = 0
+mprotect(0x7ff7ed7000, 81920, PROT_NONE) = 0
+mmap(0x7ff7eeb000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19b000) = 0x7ff7eeb000
+mmap(0x7ff7ef1000, 3816, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7ff7ef1000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libgc.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/khssbjmgc2s2kyb0jb8bwpmsjyj4yl3a-libsodium-1.0.19/lib/libgc.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/46v8b51qfbmmbinxyh959z3rh1n0cqx5-editline-1.17.1/lib/libgc.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/3zk18yb7xamzw99v04x1hgj35914jf3j-lowdown-1.1.0-lib/lib/libgc.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/zx05irncla5j1a7cyrqx8sk1p1j121gz-boehm-gc-8.2.6/lib/libgc.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=234184, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7ff9000
+mmap(NULL, 1459736, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff7bdb000
+mmap(0x7ff7be0000, 1394200, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff7be0000
+munmap(0x7ff7bdb000, 20480)             = 0
+munmap(0x7ff7d35000, 42520)             = 0
+mprotect(0x7ff7c0c000, 77824, PROT_NONE) = 0
+mmap(0x7ff7c1f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2f000) = 0x7ff7c1f000
+mmap(0x7ff7c21000, 1127960, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7ff7c21000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/khssbjmgc2s2kyb0jb8bwpmsjyj4yl3a-libsodium-1.0.19/lib/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/46v8b51qfbmmbinxyh959z3rh1n0cqx5-editline-1.17.1/lib/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/3zk18yb7xamzw99v04x1hgj35914jf3j-lowdown-1.1.0-lib/lib/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/zx05irncla5j1a7cyrqx8sk1p1j121gz-boehm-gc-8.2.6/lib/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/aaq36r4a49fbsh0mbwbjizv2jrh4zqzm-glibc-2.39-52/lib/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=69984, ...}) = 0
+mmap(NULL, 196624, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff7baf000
+mmap(0x7ff7bb0000, 131088, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff7bb0000
+munmap(0x7ff7baf000, 4096)              = 0
+munmap(0x7ff7bd1000, 57360)             = 0
+mprotect(0x7ff7bb1000, 122880, PROT_NONE) = 0
+mmap(0x7ff7bcf000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff7bcf000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/khssbjmgc2s2kyb0jb8bwpmsjyj4yl3a-libsodium-1.0.19/lib/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/46v8b51qfbmmbinxyh959z3rh1n0cqx5-editline-1.17.1/lib/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/3zk18yb7xamzw99v04x1hgj35914jf3j-lowdown-1.1.0-lib/lib/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/zx05irncla5j1a7cyrqx8sk1p1j121gz-boehm-gc-8.2.6/lib/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/aaq36r4a49fbsh0mbwbjizv2jrh4zqzm-glibc-2.39-52/lib/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=69608, ...}) = 0
+mmap(NULL, 196624, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff7b7f000
+mmap(0x7ff7b80000, 131088, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff7b80000
+munmap(0x7ff7b7f000, 4096)              = 0
+munmap(0x7ff7ba1000, 57360)             = 0
+mprotect(0x7ff7b81000, 122880, PROT_NONE) = 0
+mmap(0x7ff7b9f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff7b9f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libnixmain.so", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=261520, ...}) = 0
+mmap(NULL, 329016, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff7b2f000
+mmap(0x7ff7b30000, 263480, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff7b30000
+munmap(0x7ff7b2f000, 4096)              = 0
+munmap(0x7ff7b71000, 58680)             = 0
+mprotect(0x7ff7b5f000, 61440, PROT_NONE) = 0
+mmap(0x7ff7b6e000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2e000) = 0x7ff7b6e000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libnixfetchers.so", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=834328, ...}) = 0
+mmap(NULL, 792376, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff7a6e000
+mmap(0x7ff7a70000, 726840, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff7a70000
+munmap(0x7ff7a6e000, 8192)              = 0
+munmap(0x7ff7b22000, 55096)             = 0
+mprotect(0x7ff7b04000, 102400, PROT_NONE) = 0
+mmap(0x7ff7b1d000, 16384, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x9d000) = 0x7ff7b1d000
+mmap(0x7ff7b21000, 1848, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7ff7b21000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libnixstore.so", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=3251200, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7ff7000
+mmap(NULL, 2638800, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff77eb000
+mmap(0x7ff77f0000, 2573264, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff77f0000
+munmap(0x7ff77eb000, 20480)             = 0
+munmap(0x7ff7a65000, 41936)             = 0
+mprotect(0x7ff7a3e000, 40960, PROT_NONE) = 0
+mmap(0x7ff7a48000, 102400, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x258000) = 0x7ff7a48000
+mmap(0x7ff7a61000, 13264, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7ff7a61000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libnixutil.so", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=1282296, ...}) = 0
+mmap(NULL, 1053232, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff76ee000
+mmap(0x7ff76f0000, 987696, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff76f0000
+munmap(0x7ff76ee000, 8192)              = 0
+munmap(0x7ff77e2000, 53808)             = 0
+mprotect(0x7ff77d0000, 40960, PROT_NONE) = 0
+mmap(0x7ff77da000, 28672, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xea000) = 0x7ff77da000
+mmap(0x7ff77e1000, 560, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7ff77e1000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libnixcmd.so", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=674216, ...}) = 0
+mmap(NULL, 656240, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff764f000
+mmap(0x7ff7650000, 590704, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff7650000
+munmap(0x7ff764f000, 4096)              = 0
+munmap(0x7ff76e1000, 58224)             = 0
+mprotect(0x7ff76c8000, 65536, PROT_NONE) = 0
+mmap(0x7ff76d8000, 36864, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x78000) = 0x7ff76d8000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/khssbjmgc2s2kyb0jb8bwpmsjyj4yl3a-libsodium-1.0.19/lib/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/46v8b51qfbmmbinxyh959z3rh1n0cqx5-editline-1.17.1/lib/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/3zk18yb7xamzw99v04x1hgj35914jf3j-lowdown-1.1.0-lib/lib/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/zx05irncla5j1a7cyrqx8sk1p1j121gz-boehm-gc-8.2.6/lib/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/aaq36r4a49fbsh0mbwbjizv2jrh4zqzm-glibc-2.39-52/lib/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/1l7gvxga9m6zh5r5db8jq8pxizlp93z6-gcc-13.2.0-lib/lib/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=3188560, ...}) = 0
+mmap(NULL, 2509704, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff73eb000
+mmap(0x7ff73f0000, 2444168, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff73f0000
+munmap(0x7ff73eb000, 20480)             = 0
+munmap(0x7ff7645000, 43912)             = 0
+mprotect(0x7ff7624000, 61440, PROT_NONE) = 0
+mmap(0x7ff7633000, 57344, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x243000) = 0x7ff7633000
+mmap(0x7ff7641000, 15240, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7ff7641000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libm.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/khssbjmgc2s2kyb0jb8bwpmsjyj4yl3a-libsodium-1.0.19/lib/libm.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/46v8b51qfbmmbinxyh959z3rh1n0cqx5-editline-1.17.1/lib/libm.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/3zk18yb7xamzw99v04x1hgj35914jf3j-lowdown-1.1.0-lib/lib/libm.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/zx05irncla5j1a7cyrqx8sk1p1j121gz-boehm-gc-8.2.6/lib/libm.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/aaq36r4a49fbsh0mbwbjizv2jrh4zqzm-glibc-2.39-52/lib/libm.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=692232, ...}) = 0
+mmap(NULL, 720920, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff733f000
+mmap(0x7ff7340000, 655384, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff7340000
+munmap(0x7ff733f000, 4096)              = 0
+munmap(0x7ff73e1000, 57368)             = 0
+mprotect(0x7ff73c3000, 114688, PROT_NONE) = 0
+mmap(0x7ff73df000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x8f000) = 0x7ff73df000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/khssbjmgc2s2kyb0jb8bwpmsjyj4yl3a-libsodium-1.0.19/lib/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/46v8b51qfbmmbinxyh959z3rh1n0cqx5-editline-1.17.1/lib/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/3zk18yb7xamzw99v04x1hgj35914jf3j-lowdown-1.1.0-lib/lib/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/zx05irncla5j1a7cyrqx8sk1p1j121gz-boehm-gc-8.2.6/lib/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/aaq36r4a49fbsh0mbwbjizv2jrh4zqzm-glibc-2.39-52/lib/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/1l7gvxga9m6zh5r5db8jq8pxizlp93z6-gcc-13.2.0-lib/lib/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0444, st_size=150128, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7ff5000
+mmap(NULL, 262560, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff72ff000
+mmap(0x7ff7300000, 197024, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff7300000
+munmap(0x7ff72ff000, 4096)              = 0
+munmap(0x7ff7331000, 57760)             = 0
+mprotect(0x7ff7318000, 94208, PROT_NONE) = 0
+mmap(0x7ff732f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1f000) = 0x7ff732f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/khssbjmgc2s2kyb0jb8bwpmsjyj4yl3a-libsodium-1.0.19/lib/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/46v8b51qfbmmbinxyh959z3rh1n0cqx5-editline-1.17.1/lib/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/3zk18yb7xamzw99v04x1hgj35914jf3j-lowdown-1.1.0-lib/lib/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/zx05irncla5j1a7cyrqx8sk1p1j121gz-boehm-gc-8.2.6/lib/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/aaq36r4a49fbsh0mbwbjizv2jrh4zqzm-glibc-2.39-52/lib/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\360\306\2\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=2122360, ...}) = 0
+mmap(NULL, 1826688, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff7142000
+mmap(0x7ff7150000, 1761152, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff7150000
+munmap(0x7ff7142000, 57344)             = 0
+munmap(0x7ff72fe000, 8064)              = 0
+mprotect(0x7ff72e0000, 53248, PROT_NONE) = 0
+mmap(0x7ff72ed000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7ff72ed000
+mmap(0x7ff72f2000, 49024, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7ff72f2000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libboost_context.so.1.81.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=70328, ...}) = 0
+mmap(NULL, 196656, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff711f000
+mmap(0x7ff7120000, 131120, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff7120000
+munmap(0x7ff711f000, 4096)              = 0
+munmap(0x7ff7141000, 57392)             = 0
+mprotect(0x7ff7121000, 122880, PROT_NONE) = 0
+mmap(0x7ff713f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff713f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libcrypto.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libcrypto.so.3", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=5107064, ...}) = 0
+mmap(NULL, 4543144, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff6cca000
+mmap(0x7ff6cd0000, 4477608, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff6cd0000
+munmap(0x7ff6cca000, 24576)             = 0
+munmap(0x7ff7116000, 37544)             = 0
+mprotect(0x7ff70a6000, 81920, PROT_NONE) = 0
+mmap(0x7ff70ba000, 364544, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x3da000) = 0x7ff70ba000
+mmap(0x7ff7113000, 8872, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7ff7113000
+close(3)                                = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7ff3000
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libsqlite3.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/k1ymyndy35c2lnj2vpa7ib4lqx9dk65r-sqlite-3.45.3/lib/libsqlite3.so.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=1501536, ...}) = 0
+mmap(NULL, 1525904, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff6b5b000
+mmap(0x7ff6b60000, 1460368, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff6b60000
+munmap(0x7ff6b5b000, 20480)             = 0
+munmap(0x7ff6cc5000, 43152)             = 0
+mprotect(0x7ff6cac000, 65536, PROT_NONE) = 0
+mmap(0x7ff6cbc000, 36864, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x14c000) = 0x7ff6cbc000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libcurl.so.4", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/k1ymyndy35c2lnj2vpa7ib4lqx9dk65r-sqlite-3.45.3/lib/libcurl.so.4", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/7hbyhp6647fdyy9x13z3j62nvcrnzxa4-curl-8.7.1/lib/libcurl.so.4", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=900144, ...}) = 0
+mmap(NULL, 928304, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff6a7d000
+mmap(0x7ff6a80000, 862768, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff6a80000
+munmap(0x7ff6a7d000, 12288)             = 0
+munmap(0x7ff6b53000, 51760)             = 0
+mprotect(0x7ff6b35000, 94208, PROT_NONE) = 0
+mmap(0x7ff6b4c000, 28672, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xbc000) = 0x7ff6b4c000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libaws-cpp-sdk-transfer.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/k1ymyndy35c2lnj2vpa7ib4lqx9dk65r-sqlite-3.45.3/lib/libaws-cpp-sdk-transfer.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/7hbyhp6647fdyy9x13z3j62nvcrnzxa4-curl-8.7.1/lib/libaws-cpp-sdk-transfer.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/khssbjmgc2s2kyb0jb8bwpmsjyj4yl3a-libsodium-1.0.19/lib/libaws-cpp-sdk-transfer.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/hvw2h4m74d351dr1259vrdinhk1vmrw1-libseccomp-2.5.5-lib/lib/libaws-cpp-sdk-transfer.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/nix/store/hvw2h4m74d351dr1259vrdinhk1vmrw1-libseccomp-2.5.5-lib/lib/", {st_mode=S_IFDIR|0555, st_size=3452, ...}, 0) = 0
+openat(AT_FDCWD, "/nix/store/mjww7fxwnb11ygh24b4ij169fwkalgrw-aws-crt-cpp-0.26.8/lib/libaws-cpp-sdk-transfer.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/nix/store/mjww7fxwnb11ygh24b4ij169fwkalgrw-aws-crt-cpp-0.26.8/lib/", {st_mode=S_IFDIR|0555, st_size=3452, ...}, 0) = 0
+openat(AT_FDCWD, "/nix/store/fli7vwx6qiyfi0iacsi1x5m7w2rb2szf-aws-sdk-cpp-1.11.318/lib/libaws-cpp-sdk-transfer.so", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=350400, ...}) = 0
+mmap(NULL, 327696, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff6a2f000
+mmap(0x7ff6a30000, 262160, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff6a30000
+munmap(0x7ff6a2f000, 4096)              = 0
+munmap(0x7ff6a71000, 57360)             = 0
+mprotect(0x7ff6a5f000, 61440, PROT_NONE) = 0
+mmap(0x7ff6a6e000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x3e000) = 0x7ff6a6e000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libaws-cpp-sdk-s3.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/k1ymyndy35c2lnj2vpa7ib4lqx9dk65r-sqlite-3.45.3/lib/libaws-cpp-sdk-s3.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/7hbyhp6647fdyy9x13z3j62nvcrnzxa4-curl-8.7.1/lib/libaws-cpp-sdk-s3.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/khssbjmgc2s2kyb0jb8bwpmsjyj4yl3a-libsodium-1.0.19/lib/libaws-cpp-sdk-s3.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/hvw2h4m74d351dr1259vrdinhk1vmrw1-libseccomp-2.5.5-lib/lib/libaws-cpp-sdk-s3.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/mjww7fxwnb11ygh24b4ij169fwkalgrw-aws-crt-cpp-0.26.8/lib/libaws-cpp-sdk-s3.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/fli7vwx6qiyfi0iacsi1x5m7w2rb2szf-aws-sdk-cpp-1.11.318/lib/libaws-cpp-sdk-s3.so", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=2801792, ...}) = 0
+mmap(NULL, 2294736, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff67ff000
+mmap(0x7ff6800000, 2229200, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff6800000
+munmap(0x7ff67ff000, 4096)              = 0
+munmap(0x7ff6a21000, 58320)             = 0
+mprotect(0x7ff6a02000, 65536, PROT_NONE) = 0
+mmap(0x7ff6a12000, 61440, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x202000) = 0x7ff6a12000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libaws-cpp-sdk-core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/k1ymyndy35c2lnj2vpa7ib4lqx9dk65r-sqlite-3.45.3/lib/libaws-cpp-sdk-core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/7hbyhp6647fdyy9x13z3j62nvcrnzxa4-curl-8.7.1/lib/libaws-cpp-sdk-core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/khssbjmgc2s2kyb0jb8bwpmsjyj4yl3a-libsodium-1.0.19/lib/libaws-cpp-sdk-core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/hvw2h4m74d351dr1259vrdinhk1vmrw1-libseccomp-2.5.5-lib/lib/libaws-cpp-sdk-core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/mjww7fxwnb11ygh24b4ij169fwkalgrw-aws-crt-cpp-0.26.8/lib/libaws-cpp-sdk-core.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/fli7vwx6qiyfi0iacsi1x5m7w2rb2szf-aws-sdk-cpp-1.11.318/lib/libaws-cpp-sdk-core.so", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=2139536, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7ff1000
+mmap(NULL, 1709736, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff665e000
+mmap(0x7ff6660000, 1644200, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff6660000
+munmap(0x7ff665e000, 8192)              = 0
+munmap(0x7ff67f2000, 54952)             = 0
+mprotect(0x7ff67d9000, 53248, PROT_NONE) = 0
+mmap(0x7ff67e6000, 45056, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x186000) = 0x7ff67e6000
+mmap(0x7ff67f1000, 1704, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7ff67f1000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libaws-crt-cpp.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/k1ymyndy35c2lnj2vpa7ib4lqx9dk65r-sqlite-3.45.3/lib/libaws-crt-cpp.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/7hbyhp6647fdyy9x13z3j62nvcrnzxa4-curl-8.7.1/lib/libaws-crt-cpp.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/khssbjmgc2s2kyb0jb8bwpmsjyj4yl3a-libsodium-1.0.19/lib/libaws-crt-cpp.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/hvw2h4m74d351dr1259vrdinhk1vmrw1-libseccomp-2.5.5-lib/lib/libaws-crt-cpp.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/mjww7fxwnb11ygh24b4ij169fwkalgrw-aws-crt-cpp-0.26.8/lib/libaws-crt-cpp.so", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=912040, ...}) = 0
+mmap(NULL, 787168, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff659f000
+mmap(0x7ff65a0000, 721632, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff65a0000
+munmap(0x7ff659f000, 4096)              = 0
+munmap(0x7ff6651000, 58080)             = 0
+mprotect(0x7ff663d000, 61440, PROT_NONE) = 0
+mmap(0x7ff664c000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x9c000) = 0x7ff664c000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libseccomp.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/k1ymyndy35c2lnj2vpa7ib4lqx9dk65r-sqlite-3.45.3/lib/libseccomp.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/7hbyhp6647fdyy9x13z3j62nvcrnzxa4-curl-8.7.1/lib/libseccomp.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/khssbjmgc2s2kyb0jb8bwpmsjyj4yl3a-libsodium-1.0.19/lib/libseccomp.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/hvw2h4m74d351dr1259vrdinhk1vmrw1-libseccomp-2.5.5-lib/lib/libseccomp.so.2", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=146888, ...}) = 0
+mmap(NULL, 262240, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff655f000
+mmap(0x7ff6560000, 196704, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff6560000
+munmap(0x7ff655f000, 4096)              = 0
+munmap(0x7ff6591000, 57440)             = 0
+mprotect(0x7ff657c000, 77824, PROT_NONE) = 0
+mmap(0x7ff658f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1f000) = 0x7ff658f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libbrotlienc.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libbrotlienc.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5y7sqf33dxd43c8l1y4m5f3rq4s2hwwp-brotli-1.1.0-lib/lib/libbrotlienc.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=671224, ...}) = 0
+mmap(NULL, 786968, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff649f000
+mmap(0x7ff64a0000, 721432, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff64a0000
+munmap(0x7ff649f000, 4096)              = 0
+munmap(0x7ff6551000, 57880)             = 0
+mprotect(0x7ff653f000, 65536, PROT_NONE) = 0
+mmap(0x7ff654f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x9f000) = 0x7ff654f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libbrotlidec.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libbrotlidec.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5y7sqf33dxd43c8l1y4m5f3rq4s2hwwp-brotli-1.1.0-lib/lib/libbrotlidec.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=72792, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7f8e000
+mmap(NULL, 196624, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff646f000
+mmap(0x7ff6470000, 131088, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff6470000
+munmap(0x7ff646f000, 4096)              = 0
+munmap(0x7ff6491000, 57360)             = 0
+mprotect(0x7ff647b000, 81920, PROT_NONE) = 0
+mmap(0x7ff648f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff648f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libarchive.so.13", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libarchive.so.13", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5y7sqf33dxd43c8l1y4m5f3rq4s2hwwp-brotli-1.1.0-lib/lib/libarchive.so.13", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/kqzlvch5h463yhn4xqhpv545dp1nkzrh-libarchive-3.7.7-lib/lib/libarchive.so.13", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=996928, ...}) = 0
+mmap(NULL, 918776, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff638f000
+mmap(0x7ff6390000, 853240, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff6390000
+munmap(0x7ff638f000, 4096)              = 0
+munmap(0x7ff6461000, 58616)             = 0
+mprotect(0x7ff644f000, 53248, PROT_NONE) = 0
+mmap(0x7ff645c000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xcc000) = 0x7ff645c000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/aaq36r4a49fbsh0mbwbjizv2jrh4zqzm-glibc-2.39-52/lib/librt.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=70112, ...}) = 0
+mmap(NULL, 196624, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff635f000
+mmap(0x7ff6360000, 131088, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff6360000
+munmap(0x7ff635f000, 4096)              = 0
+munmap(0x7ff6381000, 57360)             = 0
+mprotect(0x7ff6361000, 122880, PROT_NONE) = 0
+mmap(0x7ff637f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff637f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/5h0aachb52mg1ijhfyq6k7c0w2mgyzxq-zlib-1.3.1/lib/libz.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=143048, ...}) = 0
+mmap(NULL, 262160, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff631f000
+mmap(0x7ff6320000, 196624, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff6320000
+munmap(0x7ff631f000, 4096)              = 0
+munmap(0x7ff6351000, 57360)             = 0
+mprotect(0x7ff6339000, 90112, PROT_NONE) = 0
+mmap(0x7ff634f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1f000) = 0x7ff634f000
+close(3)                                = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7f8c000
+openat(AT_FDCWD, "/nix/store/qncwqh2p2swj3b385gfmhfxbs63qs702-nghttp2-1.61.0-lib/lib/libnghttp2.so.14", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=233200, ...}) = 0
+mmap(NULL, 327768, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff62cf000
+mmap(0x7ff62d0000, 262232, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff62d0000
+munmap(0x7ff62cf000, 4096)              = 0
+munmap(0x7ff6311000, 57432)             = 0
+mprotect(0x7ff62fb000, 73728, PROT_NONE) = 0
+mmap(0x7ff630d000, 16384, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2d000) = 0x7ff630d000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/qncwqh2p2swj3b385gfmhfxbs63qs702-nghttp2-1.61.0-lib/lib/libidn2.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/cfg66mrl2ikfgilhg6q8z46275flacg6-libidn2-2.3.7/lib/libidn2.so.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=209016, ...}) = 0
+mmap(NULL, 327784, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff627f000
+mmap(0x7ff6280000, 262248, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff6280000
+munmap(0x7ff627f000, 4096)              = 0
+munmap(0x7ff62c1000, 57448)             = 0
+mprotect(0x7ff62ad000, 73728, PROT_NONE) = 0
+mmap(0x7ff62bf000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2f000) = 0x7ff62bf000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/qncwqh2p2swj3b385gfmhfxbs63qs702-nghttp2-1.61.0-lib/lib/libssh2.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/cfg66mrl2ikfgilhg6q8z46275flacg6-libidn2-2.3.7/lib/libssh2.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/jfx4mm7msdf373xzpyxn7clwckr4nryx-libssh2-1.11.0/lib/libssh2.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=367160, ...}) = 0
+mmap(NULL, 393776, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff621f000
+mmap(0x7ff6220000, 328240, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff6220000
+munmap(0x7ff621f000, 4096)              = 0
+munmap(0x7ff6271000, 57904)             = 0
+mprotect(0x7ff6260000, 57344, PROT_NONE) = 0
+mmap(0x7ff626e000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x4e000) = 0x7ff626e000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/qncwqh2p2swj3b385gfmhfxbs63qs702-nghttp2-1.61.0-lib/lib/libpsl.so.5", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/cfg66mrl2ikfgilhg6q8z46275flacg6-libidn2-2.3.7/lib/libpsl.so.5", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/jfx4mm7msdf373xzpyxn7clwckr4nryx-libssh2-1.11.0/lib/libpsl.so.5", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/dmzl1g82lqgif94w8rbfw0n7a5gfj0id-libpsl-0.21.5/lib/libpsl.so.5", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=137656, ...}) = 0
+mmap(NULL, 262160, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff61df000
+mmap(0x7ff61e0000, 196624, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff61e0000
+munmap(0x7ff61df000, 4096)              = 0
+munmap(0x7ff6211000, 57360)             = 0
+mprotect(0x7ff61f1000, 122880, PROT_NONE) = 0
+mmap(0x7ff620f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1f000) = 0x7ff620f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/qncwqh2p2swj3b385gfmhfxbs63qs702-nghttp2-1.61.0-lib/lib/libssl.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/cfg66mrl2ikfgilhg6q8z46275flacg6-libidn2-2.3.7/lib/libssl.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/jfx4mm7msdf373xzpyxn7clwckr4nryx-libssh2-1.11.0/lib/libssl.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/dmzl1g82lqgif94w8rbfw0n7a5gfj0id-libpsl-0.21.5/lib/libssl.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/pip3zr4v3rn2ygfqbanbcracsla0gl1f-libkrb5-1.21.3/lib/libssl.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/nix/store/pip3zr4v3rn2ygfqbanbcracsla0gl1f-libkrb5-1.21.3/lib/", {st_mode=S_IFDIR|0555, st_size=3452, ...}, 0) = 0
+openat(AT_FDCWD, "/nix/store/5h0aachb52mg1ijhfyq6k7c0w2mgyzxq-zlib-1.3.1/lib/libssl.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/nid9fsz8rg575cxyfv3rls9qrfcxsgh8-zstd-1.5.6/lib/libssl.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/nix/store/nid9fsz8rg575cxyfv3rls9qrfcxsgh8-zstd-1.5.6/lib/", {st_mode=S_IFDIR|0555, st_size=3452, ...}, 0) = 0
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libssl.so.3", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=847512, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7f8a000
+mmap(NULL, 800824, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff611c000
+mmap(0x7ff6120000, 735288, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff6120000
+munmap(0x7ff611c000, 16384)             = 0
+munmap(0x7ff61d4000, 47160)             = 0
+mprotect(0x7ff61ba000, 49152, PROT_NONE) = 0
+mmap(0x7ff61c6000, 57344, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xa6000) = 0x7ff61c6000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/qncwqh2p2swj3b385gfmhfxbs63qs702-nghttp2-1.61.0-lib/lib/libgssapi_krb5.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/cfg66mrl2ikfgilhg6q8z46275flacg6-libidn2-2.3.7/lib/libgssapi_krb5.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/jfx4mm7msdf373xzpyxn7clwckr4nryx-libssh2-1.11.0/lib/libgssapi_krb5.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/dmzl1g82lqgif94w8rbfw0n7a5gfj0id-libpsl-0.21.5/lib/libgssapi_krb5.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/pip3zr4v3rn2ygfqbanbcracsla0gl1f-libkrb5-1.21.3/lib/libgssapi_krb5.so.2", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=389336, ...}) = 0
+mmap(NULL, 461456, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff60af000
+mmap(0x7ff60b0000, 395920, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff60b0000
+munmap(0x7ff60af000, 4096)              = 0
+munmap(0x7ff6111000, 60048)             = 0
+mprotect(0x7ff60fd000, 65536, PROT_NONE) = 0
+mmap(0x7ff610d000, 16384, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x4d000) = 0x7ff610d000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/qncwqh2p2swj3b385gfmhfxbs63qs702-nghttp2-1.61.0-lib/lib/libzstd.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/cfg66mrl2ikfgilhg6q8z46275flacg6-libidn2-2.3.7/lib/libzstd.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/jfx4mm7msdf373xzpyxn7clwckr4nryx-libssh2-1.11.0/lib/libzstd.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/dmzl1g82lqgif94w8rbfw0n7a5gfj0id-libpsl-0.21.5/lib/libzstd.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/pip3zr4v3rn2ygfqbanbcracsla0gl1f-libkrb5-1.21.3/lib/libzstd.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5h0aachb52mg1ijhfyq6k7c0w2mgyzxq-zlib-1.3.1/lib/libzstd.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/nid9fsz8rg575cxyfv3rls9qrfcxsgh8-zstd-1.5.6/lib/libzstd.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=759904, ...}) = 0
+mmap(NULL, 852128, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5fdf000
+mmap(0x7ff5fe0000, 786592, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5fe0000
+munmap(0x7ff5fdf000, 4096)              = 0
+munmap(0x7ff60a1000, 57504)             = 0
+mprotect(0x7ff608b000, 81920, PROT_NONE) = 0
+mmap(0x7ff609f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xaf000) = 0x7ff609f000
+close(3)                                = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7f88000
+openat(AT_FDCWD, "/nix/store/fli7vwx6qiyfi0iacsi1x5m7w2rb2szf-aws-sdk-cpp-1.11.318/lib/libaws-c-mqtt.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libaws-c-mqtt.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5d8yhssvrfm4rw6p164mn0j84l8fzy8n-aws-c-auth-0.7.18/lib/libaws-c-mqtt.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/nix/store/5d8yhssvrfm4rw6p164mn0j84l8fzy8n-aws-c-auth-0.7.18/lib/", {st_mode=S_IFDIR|0555, st_size=3452, ...}, 0) = 0
+openat(AT_FDCWD, "/nix/store/12l07bwm2ckb226hfwfn0s9zgmm60zgp-aws-c-sdkutils-0.1.16/lib/libaws-c-mqtt.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/nix/store/12l07bwm2ckb226hfwfn0s9zgmm60zgp-aws-c-sdkutils-0.1.16/lib/", {st_mode=S_IFDIR|0555, st_size=3452, ...}, 0) = 0
+openat(AT_FDCWD, "/nix/store/bqn5fjd7kqpj69yx6qllv8wb7vgdflh3-aws-c-cal-0.6.12/lib/libaws-c-mqtt.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/nix/store/bqn5fjd7kqpj69yx6qllv8wb7vgdflh3-aws-c-cal-0.6.12/lib/", {st_mode=S_IFDIR|0555, st_size=3452, ...}, 0) = 0
+openat(AT_FDCWD, "/nix/store/jy63nslks9nkm1g7c6kyzby0y9ibrlbb-aws-c-common-0.9.17/lib/libaws-c-mqtt.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/nix/store/jy63nslks9nkm1g7c6kyzby0y9ibrlbb-aws-c-common-0.9.17/lib/", {st_mode=S_IFDIR|0555, st_size=3452, ...}, 0) = 0
+openat(AT_FDCWD, "/nix/store/7gjvz9shcq90nfx7rzjnxnw4ks0ryhh3-aws-c-compression-0.2.18/lib/libaws-c-mqtt.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/nix/store/7gjvz9shcq90nfx7rzjnxnw4ks0ryhh3-aws-c-compression-0.2.18/lib/", {st_mode=S_IFDIR|0555, st_size=3452, ...}, 0) = 0
+openat(AT_FDCWD, "/nix/store/gjf965j4pslrzri49a97x8zhnai53pjs-aws-c-event-stream-0.4.2/lib/libaws-c-mqtt.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/nix/store/gjf965j4pslrzri49a97x8zhnai53pjs-aws-c-event-stream-0.4.2/lib/", {st_mode=S_IFDIR|0555, st_size=3452, ...}, 0) = 0
+openat(AT_FDCWD, "/nix/store/q25idkcg7vcnj1wgnvf5qlkbj8k9iw9n-aws-c-http-0.8.1/lib/libaws-c-mqtt.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/nix/store/q25idkcg7vcnj1wgnvf5qlkbj8k9iw9n-aws-c-http-0.8.1/lib/", {st_mode=S_IFDIR|0555, st_size=3452, ...}, 0) = 0
+openat(AT_FDCWD, "/nix/store/ps3mr61ncw3pvymn9p09cffby503widj-aws-c-io-0.14.7/lib/libaws-c-mqtt.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/nix/store/ps3mr61ncw3pvymn9p09cffby503widj-aws-c-io-0.14.7/lib/", {st_mode=S_IFDIR|0555, st_size=3452, ...}, 0) = 0
+openat(AT_FDCWD, "/nix/store/q57dxkm5vhc8qly5cp80g5j0m09j69gg-aws-c-mqtt-0.10.4/lib/libaws-c-mqtt.so.1.0.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=380824, ...}) = 0
+mmap(NULL, 462208, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5f6f000
+mmap(0x7ff5f70000, 396672, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5f70000
+munmap(0x7ff5f6f000, 4096)              = 0
+munmap(0x7ff5fd1000, 60800)             = 0
+mprotect(0x7ff5fbc000, 77824, PROT_NONE) = 0
+mmap(0x7ff5fcf000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x4f000) = 0x7ff5fcf000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/fli7vwx6qiyfi0iacsi1x5m7w2rb2szf-aws-sdk-cpp-1.11.318/lib/libaws-c-event-stream.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libaws-c-event-stream.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5d8yhssvrfm4rw6p164mn0j84l8fzy8n-aws-c-auth-0.7.18/lib/libaws-c-event-stream.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/12l07bwm2ckb226hfwfn0s9zgmm60zgp-aws-c-sdkutils-0.1.16/lib/libaws-c-event-stream.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/bqn5fjd7kqpj69yx6qllv8wb7vgdflh3-aws-c-cal-0.6.12/lib/libaws-c-event-stream.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/jy63nslks9nkm1g7c6kyzby0y9ibrlbb-aws-c-common-0.9.17/lib/libaws-c-event-stream.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/7gjvz9shcq90nfx7rzjnxnw4ks0ryhh3-aws-c-compression-0.2.18/lib/libaws-c-event-stream.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/gjf965j4pslrzri49a97x8zhnai53pjs-aws-c-event-stream-0.4.2/lib/libaws-c-event-stream.so.1.0.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=149192, ...}) = 0
+mmap(NULL, 262848, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5f2f000
+mmap(0x7ff5f30000, 197312, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5f30000
+munmap(0x7ff5f2f000, 4096)              = 0
+munmap(0x7ff5f61000, 58048)             = 0
+mprotect(0x7ff5f46000, 102400, PROT_NONE) = 0
+mmap(0x7ff5f5f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1f000) = 0x7ff5f5f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/fli7vwx6qiyfi0iacsi1x5m7w2rb2szf-aws-sdk-cpp-1.11.318/lib/libaws-c-s3.so.0unstable", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libaws-c-s3.so.0unstable", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5d8yhssvrfm4rw6p164mn0j84l8fzy8n-aws-c-auth-0.7.18/lib/libaws-c-s3.so.0unstable", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/12l07bwm2ckb226hfwfn0s9zgmm60zgp-aws-c-sdkutils-0.1.16/lib/libaws-c-s3.so.0unstable", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/bqn5fjd7kqpj69yx6qllv8wb7vgdflh3-aws-c-cal-0.6.12/lib/libaws-c-s3.so.0unstable", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/jy63nslks9nkm1g7c6kyzby0y9ibrlbb-aws-c-common-0.9.17/lib/libaws-c-s3.so.0unstable", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/7gjvz9shcq90nfx7rzjnxnw4ks0ryhh3-aws-c-compression-0.2.18/lib/libaws-c-s3.so.0unstable", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/gjf965j4pslrzri49a97x8zhnai53pjs-aws-c-event-stream-0.4.2/lib/libaws-c-s3.so.0unstable", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/q25idkcg7vcnj1wgnvf5qlkbj8k9iw9n-aws-c-http-0.8.1/lib/libaws-c-s3.so.0unstable", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/ps3mr61ncw3pvymn9p09cffby503widj-aws-c-io-0.14.7/lib/libaws-c-s3.so.0unstable", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/q57dxkm5vhc8qly5cp80g5j0m09j69gg-aws-c-mqtt-0.10.4/lib/libaws-c-s3.so.0unstable", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/v41dymdlkad92kaplf5pavi6a5zaqijq-aws-c-s3-0.5.7/lib/libaws-c-s3.so.0unstable", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=310680, ...}) = 0
+mmap(NULL, 396544, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5ecf000
+mmap(0x7ff5ed0000, 331008, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5ed0000
+munmap(0x7ff5ecf000, 4096)              = 0
+munmap(0x7ff5f21000, 60672)             = 0
+mprotect(0x7ff5f03000, 110592, PROT_NONE) = 0
+mmap(0x7ff5f1e000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x3e000) = 0x7ff5f1e000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/fli7vwx6qiyfi0iacsi1x5m7w2rb2szf-aws-sdk-cpp-1.11.318/lib/libaws-c-auth.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libaws-c-auth.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5d8yhssvrfm4rw6p164mn0j84l8fzy8n-aws-c-auth-0.7.18/lib/libaws-c-auth.so.1.0.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=310400, ...}) = 0
+mmap(NULL, 395976, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5e6f000
+mmap(0x7ff5e70000, 330440, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5e70000
+munmap(0x7ff5e6f000, 4096)              = 0
+munmap(0x7ff5ec1000, 60104)             = 0
+mprotect(0x7ff5ea4000, 110592, PROT_NONE) = 0
+mmap(0x7ff5ebf000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x3f000) = 0x7ff5ebf000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/fli7vwx6qiyfi0iacsi1x5m7w2rb2szf-aws-sdk-cpp-1.11.318/lib/libaws-c-http.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libaws-c-http.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5d8yhssvrfm4rw6p164mn0j84l8fzy8n-aws-c-auth-0.7.18/lib/libaws-c-http.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/12l07bwm2ckb226hfwfn0s9zgmm60zgp-aws-c-sdkutils-0.1.16/lib/libaws-c-http.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/bqn5fjd7kqpj69yx6qllv8wb7vgdflh3-aws-c-cal-0.6.12/lib/libaws-c-http.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/jy63nslks9nkm1g7c6kyzby0y9ibrlbb-aws-c-common-0.9.17/lib/libaws-c-http.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/7gjvz9shcq90nfx7rzjnxnw4ks0ryhh3-aws-c-compression-0.2.18/lib/libaws-c-http.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/gjf965j4pslrzri49a97x8zhnai53pjs-aws-c-event-stream-0.4.2/lib/libaws-c-http.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/q25idkcg7vcnj1wgnvf5qlkbj8k9iw9n-aws-c-http-0.8.1/lib/libaws-c-http.so.1.0.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=458520, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7f86000
+mmap(NULL, 532192, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5dee000
+mmap(0x7ff5df0000, 466656, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5df0000
+munmap(0x7ff5dee000, 8192)              = 0
+munmap(0x7ff5e62000, 57056)             = 0
+mprotect(0x7ff5e4f000, 61440, PROT_NONE) = 0
+mmap(0x7ff5e5e000, 16384, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x5e000) = 0x7ff5e5e000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/fli7vwx6qiyfi0iacsi1x5m7w2rb2szf-aws-sdk-cpp-1.11.318/lib/libaws-c-io.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libaws-c-io.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5d8yhssvrfm4rw6p164mn0j84l8fzy8n-aws-c-auth-0.7.18/lib/libaws-c-io.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/12l07bwm2ckb226hfwfn0s9zgmm60zgp-aws-c-sdkutils-0.1.16/lib/libaws-c-io.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/bqn5fjd7kqpj69yx6qllv8wb7vgdflh3-aws-c-cal-0.6.12/lib/libaws-c-io.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/jy63nslks9nkm1g7c6kyzby0y9ibrlbb-aws-c-common-0.9.17/lib/libaws-c-io.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/7gjvz9shcq90nfx7rzjnxnw4ks0ryhh3-aws-c-compression-0.2.18/lib/libaws-c-io.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/gjf965j4pslrzri49a97x8zhnai53pjs-aws-c-event-stream-0.4.2/lib/libaws-c-io.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/q25idkcg7vcnj1wgnvf5qlkbj8k9iw9n-aws-c-http-0.8.1/lib/libaws-c-io.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/ps3mr61ncw3pvymn9p09cffby503widj-aws-c-io-0.14.7/lib/libaws-c-io.so.1.0.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=384440, ...}) = 0
+mmap(NULL, 466640, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5d7e000
+mmap(0x7ff5d80000, 401104, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5d80000
+munmap(0x7ff5d7e000, 8192)              = 0
+munmap(0x7ff5de2000, 57040)             = 0
+mprotect(0x7ff5dc7000, 94208, PROT_NONE) = 0
+mmap(0x7ff5dde000, 16384, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x4e000) = 0x7ff5dde000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/fli7vwx6qiyfi0iacsi1x5m7w2rb2szf-aws-sdk-cpp-1.11.318/lib/libs2n.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libs2n.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5d8yhssvrfm4rw6p164mn0j84l8fzy8n-aws-c-auth-0.7.18/lib/libs2n.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/12l07bwm2ckb226hfwfn0s9zgmm60zgp-aws-c-sdkutils-0.1.16/lib/libs2n.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/bqn5fjd7kqpj69yx6qllv8wb7vgdflh3-aws-c-cal-0.6.12/lib/libs2n.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/jy63nslks9nkm1g7c6kyzby0y9ibrlbb-aws-c-common-0.9.17/lib/libs2n.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/7gjvz9shcq90nfx7rzjnxnw4ks0ryhh3-aws-c-compression-0.2.18/lib/libs2n.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/gjf965j4pslrzri49a97x8zhnai53pjs-aws-c-event-stream-0.4.2/lib/libs2n.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/q25idkcg7vcnj1wgnvf5qlkbj8k9iw9n-aws-c-http-0.8.1/lib/libs2n.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/ps3mr61ncw3pvymn9p09cffby503widj-aws-c-io-0.14.7/lib/libs2n.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/q57dxkm5vhc8qly5cp80g5j0m09j69gg-aws-c-mqtt-0.10.4/lib/libs2n.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/v41dymdlkad92kaplf5pavi6a5zaqijq-aws-c-s3-0.5.7/lib/libs2n.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5r8m88qrpxmdqgnwsmr13gc5mfk17w6l-aws-checksums-0.1.18/lib/libs2n.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/nix/store/5r8m88qrpxmdqgnwsmr13gc5mfk17w6l-aws-checksums-0.1.18/lib/", {st_mode=S_IFDIR|0555, st_size=3452, ...}, 0) = 0
+openat(AT_FDCWD, "/nix/store/wn48gb5x8gcng9hcnmlrk2x9a3flx1p6-s2n-tls-1.4.12/lib/libs2n.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=1344776, ...}) = 0
+mmap(NULL, 1302824, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5c41000
+mmap(0x7ff5c50000, 1237288, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5c50000
+munmap(0x7ff5c41000, 61440)             = 0
+munmap(0x7ff5d7f000, 296)               = 0
+mprotect(0x7ff5d50000, 40960, PROT_NONE) = 0
+mmap(0x7ff5d5a000, 110592, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x10a000) = 0x7ff5d5a000
+mmap(0x7ff5d75000, 37160, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7ff5d75000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/fli7vwx6qiyfi0iacsi1x5m7w2rb2szf-aws-sdk-cpp-1.11.318/lib/libaws-c-compression.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libaws-c-compression.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5d8yhssvrfm4rw6p164mn0j84l8fzy8n-aws-c-auth-0.7.18/lib/libaws-c-compression.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/12l07bwm2ckb226hfwfn0s9zgmm60zgp-aws-c-sdkutils-0.1.16/lib/libaws-c-compression.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/bqn5fjd7kqpj69yx6qllv8wb7vgdflh3-aws-c-cal-0.6.12/lib/libaws-c-compression.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/jy63nslks9nkm1g7c6kyzby0y9ibrlbb-aws-c-common-0.9.17/lib/libaws-c-compression.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/7gjvz9shcq90nfx7rzjnxnw4ks0ryhh3-aws-c-compression-0.2.18/lib/libaws-c-compression.so.1.0.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=70992, ...}) = 0
+mmap(NULL, 196680, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5c1f000
+mmap(0x7ff5c20000, 131144, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5c20000
+munmap(0x7ff5c1f000, 4096)              = 0
+munmap(0x7ff5c41000, 57416)             = 0
+mprotect(0x7ff5c23000, 114688, PROT_NONE) = 0
+mmap(0x7ff5c3f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff5c3f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/fli7vwx6qiyfi0iacsi1x5m7w2rb2szf-aws-sdk-cpp-1.11.318/lib/libaws-c-cal.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libaws-c-cal.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5d8yhssvrfm4rw6p164mn0j84l8fzy8n-aws-c-auth-0.7.18/lib/libaws-c-cal.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/12l07bwm2ckb226hfwfn0s9zgmm60zgp-aws-c-sdkutils-0.1.16/lib/libaws-c-cal.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/bqn5fjd7kqpj69yx6qllv8wb7vgdflh3-aws-c-cal-0.6.12/lib/libaws-c-cal.so.1.0.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=153832, ...}) = 0
+mmap(NULL, 263544, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5bdf000
+mmap(0x7ff5be0000, 198008, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5be0000
+munmap(0x7ff5bdf000, 4096)              = 0
+munmap(0x7ff5c11000, 58744)             = 0
+mprotect(0x7ff5bf1000, 122880, PROT_NONE) = 0
+mmap(0x7ff5c0f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1f000) = 0x7ff5c0f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/fli7vwx6qiyfi0iacsi1x5m7w2rb2szf-aws-sdk-cpp-1.11.318/lib/libaws-c-sdkutils.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libaws-c-sdkutils.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5d8yhssvrfm4rw6p164mn0j84l8fzy8n-aws-c-auth-0.7.18/lib/libaws-c-sdkutils.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/12l07bwm2ckb226hfwfn0s9zgmm60zgp-aws-c-sdkutils-0.1.16/lib/libaws-c-sdkutils.so.1.0.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=152096, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7f84000
+mmap(NULL, 263160, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5b9f000
+mmap(0x7ff5ba0000, 197624, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5ba0000
+munmap(0x7ff5b9f000, 4096)              = 0
+munmap(0x7ff5bd1000, 58360)             = 0
+mprotect(0x7ff5bb8000, 94208, PROT_NONE) = 0
+mmap(0x7ff5bcf000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1f000) = 0x7ff5bcf000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/fli7vwx6qiyfi0iacsi1x5m7w2rb2szf-aws-sdk-cpp-1.11.318/lib/libaws-checksums.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libaws-checksums.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5d8yhssvrfm4rw6p164mn0j84l8fzy8n-aws-c-auth-0.7.18/lib/libaws-checksums.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/12l07bwm2ckb226hfwfn0s9zgmm60zgp-aws-c-sdkutils-0.1.16/lib/libaws-checksums.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/bqn5fjd7kqpj69yx6qllv8wb7vgdflh3-aws-c-cal-0.6.12/lib/libaws-checksums.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/jy63nslks9nkm1g7c6kyzby0y9ibrlbb-aws-c-common-0.9.17/lib/libaws-checksums.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/7gjvz9shcq90nfx7rzjnxnw4ks0ryhh3-aws-c-compression-0.2.18/lib/libaws-checksums.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/gjf965j4pslrzri49a97x8zhnai53pjs-aws-c-event-stream-0.4.2/lib/libaws-checksums.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/q25idkcg7vcnj1wgnvf5qlkbj8k9iw9n-aws-c-http-0.8.1/lib/libaws-checksums.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/ps3mr61ncw3pvymn9p09cffby503widj-aws-c-io-0.14.7/lib/libaws-checksums.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/q57dxkm5vhc8qly5cp80g5j0m09j69gg-aws-c-mqtt-0.10.4/lib/libaws-checksums.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/v41dymdlkad92kaplf5pavi6a5zaqijq-aws-c-s3-0.5.7/lib/libaws-checksums.so.1.0.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5r8m88qrpxmdqgnwsmr13gc5mfk17w6l-aws-checksums-0.1.18/lib/libaws-checksums.so.1.0.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=69896, ...}) = 0
+mmap(NULL, 196640, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5b6f000
+mmap(0x7ff5b70000, 131104, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5b70000
+munmap(0x7ff5b6f000, 4096)              = 0
+munmap(0x7ff5b91000, 57376)             = 0
+mprotect(0x7ff5b7a000, 86016, PROT_NONE) = 0
+mmap(0x7ff5b8f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff5b8f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/fli7vwx6qiyfi0iacsi1x5m7w2rb2szf-aws-sdk-cpp-1.11.318/lib/libaws-c-common.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/6i1ixnx5lnh3k71xddsmvr06p9zywz5s-openssl-3.0.14/lib/libaws-c-common.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/5d8yhssvrfm4rw6p164mn0j84l8fzy8n-aws-c-auth-0.7.18/lib/libaws-c-common.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/12l07bwm2ckb226hfwfn0s9zgmm60zgp-aws-c-sdkutils-0.1.16/lib/libaws-c-common.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/bqn5fjd7kqpj69yx6qllv8wb7vgdflh3-aws-c-cal-0.6.12/lib/libaws-c-common.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/jy63nslks9nkm1g7c6kyzby0y9ibrlbb-aws-c-common-0.9.17/lib/libaws-c-common.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=390464, ...}) = 0
+mmap(NULL, 397488, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5b0e000
+mmap(0x7ff5b10000, 331952, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5b10000
+munmap(0x7ff5b0e000, 8192)              = 0
+munmap(0x7ff5b62000, 53424)             = 0
+mprotect(0x7ff5b50000, 57344, PROT_NONE) = 0
+mmap(0x7ff5b5e000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x4e000) = 0x7ff5b5e000
+mmap(0x7ff5b61000, 176, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7ff5b61000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/5y7sqf33dxd43c8l1y4m5f3rq4s2hwwp-brotli-1.1.0-lib/lib/libbrotlicommon.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=201656, ...}) = 0
+mmap(NULL, 262160, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5acf000
+mmap(0x7ff5ad0000, 196624, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5ad0000
+munmap(0x7ff5acf000, 4096)              = 0
+munmap(0x7ff5b01000, 57360)             = 0
+mprotect(0x7ff5af0000, 61440, PROT_NONE) = 0
+mmap(0x7ff5aff000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2f000) = 0x7ff5aff000
+close(3)                                = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7f82000
+openat(AT_FDCWD, "/nix/store/a2fmcrbbf1iglsr5r7wi70f0gmbspi1b-acl-2.3.2/lib/libacl.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=76856, ...}) = 0
+mmap(NULL, 196656, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5a9f000
+mmap(0x7ff5aa0000, 131120, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5aa0000
+munmap(0x7ff5a9f000, 4096)              = 0
+munmap(0x7ff5ac1000, 57392)             = 0
+mprotect(0x7ff5aa8000, 94208, PROT_NONE) = 0
+mmap(0x7ff5abf000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff5abf000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/a2fmcrbbf1iglsr5r7wi70f0gmbspi1b-acl-2.3.2/lib/liblzma.so.5", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/ffz3zwklbdrkfy23w65ark6kncfjdb1d-xz-5.4.7/lib/liblzma.so.5", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=223432, ...}) = 0
+mmap(NULL, 327696, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5a4f000
+mmap(0x7ff5a50000, 262160, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5a50000
+munmap(0x7ff5a4f000, 4096)              = 0
+munmap(0x7ff5a91000, 57360)             = 0
+mprotect(0x7ff5a7b000, 81920, PROT_NONE) = 0
+mmap(0x7ff5a8f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2f000) = 0x7ff5a8f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/a2fmcrbbf1iglsr5r7wi70f0gmbspi1b-acl-2.3.2/lib/libbz2.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/ffz3zwklbdrkfy23w65ark6kncfjdb1d-xz-5.4.7/lib/libbz2.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/1a4cvna4zmy7lg8k66hvna9yxc7xzzla-bzip2-1.0.8/lib/libbz2.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=75672, ...}) = 0
+mmap(NULL, 199704, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff5a1f000
+mmap(0x7ff5a20000, 134168, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5a20000
+munmap(0x7ff5a1f000, 4096)              = 0
+munmap(0x7ff5a41000, 60440)             = 0
+mprotect(0x7ff5a30000, 61440, PROT_NONE) = 0
+mmap(0x7ff5a3f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff5a3f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/a2fmcrbbf1iglsr5r7wi70f0gmbspi1b-acl-2.3.2/lib/libxml2.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/ffz3zwklbdrkfy23w65ark6kncfjdb1d-xz-5.4.7/lib/libxml2.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/1a4cvna4zmy7lg8k66hvna9yxc7xzzla-bzip2-1.0.8/lib/libxml2.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/piy9pl6dq8aphkq8546kd4zlq0264gd9-libxml2-2.12.9/lib/libxml2.so.2", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=1582304, ...}) = 0
+mmap(NULL, 1513160, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff58ae000
+mmap(0x7ff58b0000, 1447624, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff58b0000
+munmap(0x7ff58ae000, 8192)              = 0
+munmap(0x7ff5a12000, 54984)             = 0
+mprotect(0x7ff5a00000, 20480, PROT_NONE) = 0
+mmap(0x7ff5a05000, 49152, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x155000) = 0x7ff5a05000
+mmap(0x7ff5a11000, 1736, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7ff5a11000
+close(3)                                = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7f5e000
+openat(AT_FDCWD, "/nix/store/hss8pgk6b2ivwlw2l1h1yads0b9yml4l-libunistring-1.1/lib/libunistring.so.5", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=1858232, ...}) = 0
+mmap(NULL, 1902760, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff56df000
+mmap(0x7ff56e0000, 1837224, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff56e0000
+munmap(0x7ff56df000, 4096)              = 0
+munmap(0x7ff58a1000, 59560)             = 0
+mprotect(0x7ff5886000, 90112, PROT_NONE) = 0
+mmap(0x7ff589c000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1ac000) = 0x7ff589c000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/pip3zr4v3rn2ygfqbanbcracsla0gl1f-libkrb5-1.21.3/lib/libkrb5.so.3", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=1112776, ...}) = 0
+mmap(NULL, 987568, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff55ee000
+mmap(0x7ff55f0000, 922032, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff55f0000
+munmap(0x7ff55ee000, 8192)              = 0
+munmap(0x7ff56d2000, 53680)             = 0
+mprotect(0x7ff56b5000, 61440, PROT_NONE) = 0
+mmap(0x7ff56c4000, 53248, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xd4000) = 0x7ff56c4000
+mmap(0x7ff56d1000, 432, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7ff56d1000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/pip3zr4v3rn2ygfqbanbcracsla0gl1f-libkrb5-1.21.3/lib/libk5crypto.so.3", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=220024, ...}) = 0
+mmap(NULL, 327816, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff559f000
+mmap(0x7ff55a0000, 262280, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff55a0000
+munmap(0x7ff559f000, 4096)              = 0
+munmap(0x7ff55e1000, 57480)             = 0
+mprotect(0x7ff55ca000, 81920, PROT_NONE) = 0
+mmap(0x7ff55de000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2e000) = 0x7ff55de000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/pip3zr4v3rn2ygfqbanbcracsla0gl1f-libkrb5-1.21.3/lib/libcom_err.so.3", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=72256, ...}) = 0
+mmap(NULL, 196776, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff556f000
+mmap(0x7ff5570000, 131240, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5570000
+munmap(0x7ff556f000, 4096)              = 0
+munmap(0x7ff5591000, 57512)             = 0
+mprotect(0x7ff5573000, 114688, PROT_NONE) = 0
+mmap(0x7ff558f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff558f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/pip3zr4v3rn2ygfqbanbcracsla0gl1f-libkrb5-1.21.3/lib/libkrb5support.so.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=80168, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7f5c000
+mmap(NULL, 197080, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff553f000
+mmap(0x7ff5540000, 131544, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5540000
+munmap(0x7ff553f000, 4096)              = 0
+munmap(0x7ff5561000, 57816)             = 0
+mprotect(0x7ff554b000, 81920, PROT_NONE) = 0
+mmap(0x7ff555f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff555f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/pip3zr4v3rn2ygfqbanbcracsla0gl1f-libkrb5-1.21.3/lib/libkeyutils.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/r56jdbldlz8ja7xwx3d8n8757dycxm5d-keyutils-1.6.3-lib/lib/libkeyutils.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=72568, ...}) = 0
+mmap(NULL, 196624, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff550f000
+mmap(0x7ff5510000, 131088, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5510000
+munmap(0x7ff550f000, 4096)              = 0
+munmap(0x7ff5531000, 57360)             = 0
+mprotect(0x7ff5514000, 110592, PROT_NONE) = 0
+mmap(0x7ff552f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff552f000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/pip3zr4v3rn2ygfqbanbcracsla0gl1f-libkrb5-1.21.3/lib/libresolv.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/r56jdbldlz8ja7xwx3d8n8757dycxm5d-keyutils-1.6.3-lib/lib/libresolv.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/aaq36r4a49fbsh0mbwbjizv2jrh4zqzm-glibc-2.39-52/lib/libresolv.so.2", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=79264, ...}) = 0
+mmap(NULL, 206920, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff54dd000
+mmap(0x7ff54e0000, 141384, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff54e0000
+munmap(0x7ff54dd000, 12288)             = 0
+munmap(0x7ff5503000, 51272)             = 0
+mprotect(0x7ff54ed000, 73728, PROT_NONE) = 0
+mmap(0x7ff54ff000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff54ff000
+mmap(0x7ff5501000, 6216, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7ff5501000
+close(3)                                = 0
+openat(AT_FDCWD, "/nix/store/2hidll5k551xwm7zdn6hn8c7cjdvaaiq-attr-2.5.2/lib/libattr.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=72832, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7f5a000
+mmap(NULL, 196632, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff54af000
+mmap(0x7ff54b0000, 131096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff54b0000
+munmap(0x7ff54af000, 4096)              = 0
+munmap(0x7ff54d1000, 57368)             = 0
+mprotect(0x7ff54b5000, 106496, PROT_NONE) = 0
+mmap(0x7ff54cf000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff54cf000
+close(3)                                = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7f58000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7f56000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7f54000
+mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7f51000
+set_tid_address(0x7ff7f510f0)           = 30792
+set_robust_list(0x7ff7f51100, 24)       = 549620879616
+rseq(0x7ff7f51740, 0x20, 0, 0xd428bc00) = 549620881216
+mprotect(0x7ff72ed000, 12288, PROT_READ) = 0
+mprotect(0x7ff54cf000, 4096, PROT_READ) = 0
+mprotect(0x7ff54ff000, 4096, PROT_READ) = 0
+mprotect(0x7ff552f000, 4096, PROT_READ) = 0
+mprotect(0x7ff555f000, 4096, PROT_READ) = 0
+mprotect(0x7ff558f000, 4096, PROT_READ) = 0
+mprotect(0x7ff55de000, 8192, PROT_READ) = 0
+mprotect(0x7ff56c4000, 49152, PROT_READ) = 0
+mprotect(0x7ff589c000, 16384, PROT_READ) = 0
+mprotect(0x7ff634f000, 4096, PROT_READ) = 0
+mprotect(0x7ff73df000, 4096, PROT_READ) = 0
+mprotect(0x7ff5a05000, 45056, PROT_READ) = 0
+mprotect(0x7ff5a3f000, 4096, PROT_READ) = 0
+mprotect(0x7ff7bcf000, 4096, PROT_READ) = 0
+mprotect(0x7ff5a8f000, 4096, PROT_READ) = 0
+mprotect(0x7ff5abf000, 4096, PROT_READ) = 0
+mprotect(0x7ff5aff000, 4096, PROT_READ) = 0
+mprotect(0x7ff7b9f000, 4096, PROT_READ) = 0
+mprotect(0x7ff637f000, 4096, PROT_READ) = 0
+mprotect(0x7ff5b5e000, 8192, PROT_READ) = 0
+mprotect(0x7ff5b8f000, 4096, PROT_READ) = 0
+mprotect(0x7ff5bcf000, 4096, PROT_READ) = 0
+mprotect(0x7ff70ba000, 352256, PROT_READ) = 0
+mprotect(0x7ff5c0f000, 4096, PROT_READ) = 0
+mprotect(0x7ff5c3f000, 4096, PROT_READ) = 0
+mprotect(0x7ff5d5a000, 24576, PROT_READ) = 0
+mprotect(0x7ff5dde000, 8192, PROT_READ) = 0
+mprotect(0x7ff5e5e000, 8192, PROT_READ) = 0
+mprotect(0x7ff5ebf000, 4096, PROT_READ) = 0
+mprotect(0x7ff5f1e000, 8192, PROT_READ) = 0
+mprotect(0x7ff5f5f000, 4096, PROT_READ) = 0
+mprotect(0x7ff5fcf000, 4096, PROT_READ) = 0
+mprotect(0x7ff609f000, 4096, PROT_READ) = 0
+mprotect(0x7ff610d000, 12288, PROT_READ) = 0
+mprotect(0x7ff61c6000, 40960, PROT_READ) = 0
+mprotect(0x7ff62bf000, 4096, PROT_READ) = 0
+mprotect(0x7ff620f000, 4096, PROT_READ) = 0
+mprotect(0x7ff626e000, 8192, PROT_READ) = 0
+mprotect(0x7ff630d000, 12288, PROT_READ) = 0
+mprotect(0x7ff645c000, 16384, PROT_READ) = 0
+mprotect(0x7ff648f000, 4096, PROT_READ) = 0
+mprotect(0x7ff654f000, 4096, PROT_READ) = 0
+mprotect(0x7ff658f000, 4096, PROT_READ) = 0
+mprotect(0x7ff732f000, 4096, PROT_READ) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff7efe000
+mprotect(0x7ff7633000, 53248, PROT_READ) = 0
+mprotect(0x7ff664c000, 16384, PROT_READ) = 0
+mprotect(0x7ff6b4c000, 16384, PROT_READ) = 0
+mprotect(0x7ff67e6000, 40960, PROT_READ) = 0
+mprotect(0x7ff6a12000, 57344, PROT_READ) = 0
+mprotect(0x7ff6a6e000, 8192, PROT_READ) = 0
+mprotect(0x7ff6cbc000, 16384, PROT_READ) = 0
+mprotect(0x7ff713f000, 4096, PROT_READ) = 0
+mprotect(0x7ff7f7f000, 4096, PROT_READ) = 0
+mprotect(0x7ff7f4c000, 16384, PROT_READ) = 0
+mprotect(0x7ff7fef000, 4096, PROT_READ) = 0
+mprotect(0x7ff77da000, 24576, PROT_READ) = 0
+mprotect(0x7ff7a48000, 98304, PROT_READ) = 0
+mprotect(0x7ff7c1f000, 4096, PROT_READ) = 0
+mprotect(0x7ff7b1d000, 12288, PROT_READ) = 0
+mprotect(0x7ff7eeb000, 20480, PROT_READ) = 0
+mprotect(0x7ff7b6e000, 8192, PROT_READ) = 0
+mprotect(0x7ff76d8000, 32768, PROT_READ) = 0
+mprotect(0x30001e6000, 172032, PROT_READ) = 0
+mprotect(0x3f0003e000, 8192, PROT_READ) = 0
+prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL TRAP BUS FPE SEGV RTMIN RT_1], [], 8) = 0
+rt_sigaction(SIGILL, {sa_handler=0x7ff6ec4730, sa_mask=~[ILL TRAP BUS FPE SEGV RTMIN RT_1], sa_flags=0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigaction(SIGILL, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, NULL, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+futex(0x7ff76416ec, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+getrandom("\x05\xbe\x16\xe8\xfc\x48\x2d\xaa", 8, GRND_NONBLOCK) = 8
+brk(NULL)                               = 0x3000213000
+brk(0x3000234000)                       = 0x3000234000
+ioctl(2, TCGETS, 0x7fffffb720)          = -1 ENOTTY (Inappropriate ioctl for device)
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/home", {st_mode=S_IFDIR|0700, st_size=3452, ...}, 0) = 0
+geteuid()                               = 10324
+openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 3
+read(3, "0-7\n", 1024)                  = 4
+close(3)                                = 0
+openat(AT_FDCWD, "/proc/mounts", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFREG|0444, st_size=0, ...}) = 0
+read(3, "/dev/block/dm-7 / erofs ro,secla"..., 1024) = 1024
+read(3, "id=3009,hidepid=invisible 0 0\nsy"..., 1024) = 1024
+close(3)                                = 0
+openat(AT_FDCWD, "/proc/self/cgroup", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0444, st_size=0, ...}) = 0
+brk(0x3000261000)                       = 0x3000261000
+read(3, "6:freezer:/\n5:memory:/\n4:cpuset:"..., 65536) = 112
+read(3, "", 65536)                      = 0
+close(3)                                = 0
+openat(AT_FDCWD, "/sys/fs/cgroup//uid_10324/pid_15916/cpu.max", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+futex(0x7ff73300a4, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+uname({sysname="Linux", nodename="localhost", ...}) = 0
+getuid()                                = 10324
+faccessat(AT_FDCWD, "/dev/kvm", R_OK|W_OK) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/etc/ssl/certs/ca-certificates.crt", {st_mode=S_IFLNK|0777, st_size=41, ...}, AT_SYMLINK_NOFOLLOW) = 0
+getuid()                                = 10324
+newfstatat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/bin/nix", {st_mode=S_IFREG|0555, st_size=2673528, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/home/.nix-defexpr/channels", {st_mode=S_IFLNK|0777, st_size=71, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/nix/var/nix/profiles/per-user/root/channels/nixpkgs", 0x7fffffb5f8, AT_SYMLINK_NOFOLLOW) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/nix/var/nix/profiles/per-user/root/channels", 0x7fffffb5f8, AT_SYMLINK_NOFOLLOW) = -1 ENOENT (No such file or directory)
+prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+prlimit64(0, RLIMIT_STACK, {rlim_cur=65536*1024, rlim_max=RLIM64_INFINITY}, NULL) = 0
+getrandom("\x02\xe6\x3d\xbb\x62\x25\x27\x27\xd8\x3a\xc6\x99\xd2\x3f\x11\x77", 16, 0) = 16
+getrandom("\x3d\xc2\xc5\x0b\x02\xeb\xd7\xa8\x6b\x4c\x66\x40\x6b\xf0\x71\x09", 16, 0) = 16
+openat(AT_FDCWD, "/etc/nix/nix.conf", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0444, st_size=287, ...}) = 0
+brk(0x3000286000)                       = 0x3000286000
+read(3, "sandbox = false\nsubstituters = h"..., 65536) = 287
+read(3, "", 65536)                      = 0
+brk(0x3000276000)                       = 0x3000276000
+close(3)                                = 0
+openat(AT_FDCWD, "/etc/xdg/nix/nix.conf", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/data/data/com.termux.nix/files/home/.config/nix/nix.conf", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/wqlkf6dzgd6x8kk1jb2vh1pcabg68x9s-nix-2.18.8/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/k1ymyndy35c2lnj2vpa7ib4lqx9dk65r-sqlite-3.45.3/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/7hbyhp6647fdyy9x13z3j62nvcrnzxa4-curl-8.7.1/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/khssbjmgc2s2kyb0jb8bwpmsjyj4yl3a-libsodium-1.0.19/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/hvw2h4m74d351dr1259vrdinhk1vmrw1-libseccomp-2.5.5-lib/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/mjww7fxwnb11ygh24b4ij169fwkalgrw-aws-crt-cpp-0.26.8/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/fli7vwx6qiyfi0iacsi1x5m7w2rb2szf-aws-sdk-cpp-1.11.318/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/nix/store/aaq36r4a49fbsh0mbwbjizv2jrh4zqzm-glibc-2.39-52/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0555, st_size=69456, ...}) = 0
+mmap(NULL, 196624, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0x7ff547f000
+mmap(0x7ff5480000, 131088, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7ff5480000
+munmap(0x7ff547f000, 4096)              = 0
+munmap(0x7ff54a1000, 57360)             = 0
+mprotect(0x7ff5481000, 122880, PROT_NONE) = 0
+mmap(0x7ff549f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xf000) = 0x7ff549f000
+close(3)                                = 0
+mprotect(0x7ff549f000, 4096, PROT_READ) = 0
+newfstatat(AT_FDCWD, "/etc/nsswitch.conf", 0x7fffffa530, 0) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/", {st_mode=S_IFDIR|0755, st_size=876, ...}, 0) = 0
+openat(AT_FDCWD, "/etc/nsswitch.conf", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+futex(0x7ff7a64220, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+ioctl(2, TIOCGWINSZ, 0x7fffffa830)      = -1 EACCES (Permission denied)
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, [HUP INT PIPE TERM WINCH], NULL, 8) = 0
+rt_sigaction(SIGRT_1, {sa_handler=0x7ff71d27b0, sa_mask=[], sa_flags=SA_ONSTACK|SA_RESTART|SA_SIGINFO}, NULL, 8) = 0
+rt_sigprocmask(SIG_UNBLOCK, [RTMIN RT_1], NULL, 8) = 0
+mmap(NULL, 8454144, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x7ff4c70000
+mprotect(0x7ff4c80000, 8388608, PROT_READ|PROT_WRITE) = 0
+rt_sigprocmask(SIG_BLOCK, ~[], [HUP INT PIPE TERM WINCH], 8) = 0
+clone3({flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, child_tid=0x7ff547e510, parent_tid=0x7ff547e510, exit_signal=0, stack=0x7ff4c70000, stack_size=0x80dd00, tls=0x7ff547eb80} => {parent_tid=[30858]}, 88) = 30858
+rt_sigprocmask(SIG_SETMASK, [HUP INT PIPE TERM WINCH], NULL, 8) = 0
+rt_sigaction(SIGCHLD, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, NULL, 8) = 0
+rt_sigaction(SIGUSR1, {sa_handler=0x7ff7b48a80, sa_mask=[], sa_flags=0}, NULL, 8) = 0
+sigaltstack({ss_sp=0x3000257720, ss_flags=0, ss_size=36864}, NULL) = 0
+rt_sigaction(SIGSEGV, {sa_handler=0x7ff7b49e50, sa_mask=~[RTMIN RT_1], sa_flags=SA_ONSTACK|SA_SIGINFO}, NULL, 8) = 0
+umask(022)                              = 022
+openat(AT_FDCWD, "/proc/self/maps", O_RDONLY|O_CLOEXEC) = 3
+prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=65536*1024, rlim_max=RLIM64_INFINITY}) = 0
+fstat(3, {st_mode=S_IFREG|0444, st_size=0, ...}) = 0
+read(3, "00200000-00201000 r--p 00000000 "..., 1024) = 1024
+read(3, "         /data/data/com.termux.n"..., 1024) = 1024
+read(3, "                       /data/dat"..., 1024) = 1024
+read(3, "c7cjdvaaiq-attr-2.5.2/lib/libatt"..., 1024) = 1024
+read(3, "0\n7ff5514000-7ff552f000 ---p 000"..., 1024) = 1024
+read(3, "                      /data/data"..., 1024) = 1024
+read(3, "3zr4v3rn2ygfqbanbcracsla0gl1f-li"..., 1024) = 1024
+read(3, "7ff56c4000 ---p 000c5000 fe:3b 2"..., 1024) = 1024
+read(3, "2345246                        /"..., 1024) = 1024
+read(3, "nix/store/piy9pl6dq8aphkq8546kd4"..., 1024) = 1024
+read(3, "b/liblzma.so.5.4.7\n7ff5a7b000-7f"..., 1024) = 1024
+read(3, "ermux.nix/files/usr/nix/store/a2"..., 1024) = 1024
+read(3, "wp-brotli-1.1.0-lib/lib/libbrotl"..., 1024) = 1024
+read(3, "rpxmdqgnwsmr13gc5mfk17w6l-aws-ch"..., 1024) = 1024
+read(3, "6hfwfn0s9zgmm60zgp-aws-c-sdkutil"..., 1024) = 1024
+read(3, "aws-c-cal-0.6.12/lib/libaws-c-ca"..., 1024) = 1024
+read(3, "ws-c-compression-0.2.18/lib/liba"..., 1024) = 1024
+read(3, "ibaws-c-io.so.1.0.0\n7ff5dc7000-7"..., 1024) = 1024
+read(3, "00 fe:3b 2342611                "..., 1024) = 1024
+read(3, "data/data/com.termux.nix/files/u"..., 1024) = 1024
+read(3, "i49a97x8zhnai53pjs-aws-c-event-s"..., 1024) = 1024
+read(3, "/store/q57dxkm5vhc8qly5cp80g5j0m"..., 1024) = 1024
+read(3, ".1.5.6\n7ff60a0000-7ff60a1000 rw-"..., 1024) = 1024
+read(3, "            /data/data/com.termu"..., 1024) = 1024
+read(3, "ib/libpsl.so.5.3.5\n7ff620f000-7f"..., 1024) = 1024
+read(3, "    /data/data/com.termux.nix/fi"..., 1024) = 1024
+read(3, "p2-1.61.0-lib/lib/libnghttp2.so."..., 1024) = 1024
+read(3, "f000 fe:3b 2405956              "..., 1024) = 1024
+read(3, "m-glibc-2.39-52/lib/librt.so.1\n7"..., 1024) = 1024
+read(3, "b000-7ff648f000 ---p 0000b000 fe"..., 1024) = 1024
+read(3, "                  /data/data/com"..., 1024) = 1024
+read(3, "/files/usr/nix/store/hvw2h4m74d3"..., 1024) = 1024
+read(3, "ws-sdk-cpp-1.11.318/lib/libaws-c"..., 1024) = 1024
+read(3, "acsi1x5m7w2rb2szf-aws-sdk-cpp-1."..., 1024) = 1024
+read(3, "sdk-cpp-1.11.318/lib/libaws-cpp-"..., 1024) = 1024
+read(3, "fe:3b 2410354                   "..., 1024) = 1024
+read(3, "tore/6i1ixnx5lnh3k71xddsmvr06p9z"..., 1024) = 1024
+read(3, "8x9s-nix-2.18.8/lib/libboost_con"..., 1024) = 1024
+read(3, "000 r-xp 00000000 fe:3b 2345234 "..., 1024) = 1024
+read(3, "ix/store/aaq36r4a49fbsh0mbwbjizv"..., 1024) = 1024
+read(3, " rw-p 00250000 fe:3b 2407575    "..., 1024) = 1024
+read(3, "ermux.nix/files/usr/nix/store/wq"..., 1024) = 1024
+read(3, "/lib/libnixstore.so\n7ff7a48000-7"..., 1024) = 1024
+read(3, "b 2345602                       "..., 1024) = 1024
+read(3, "ix/store/aaq36r4a49fbsh0mbwbjizv"..., 1024) = 1024
+read(3, ":3b 2364596                     "..., 1024) = 1024
+read(3, "a7cyrqx8sk1p1j121gz-boehm-gc-8.2"..., 1024) = 1024
+read(3, "x/store/3zk18yb7xamzw99v04x1hgj3"..., 1024) = 1024
+read(3, "959z3rh1n0cqx5-editline-1.17.1/l"..., 1024) = 1024
+read(3, "-libsodium-1.0.19/lib/libsodium."..., 1024) = 521
+close(3)                                = 0
+sched_getaffinity(30792, 32, [0 1 2 3 4 5 6 7]) = 8
+mmap(NULL, 262144, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff4c30000
+mmap(0x7ff4c70000, 262144, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff4bf0000
+mmap(0x7ff4c30000, 262144, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff4bb0000
+mmap(0x7ff4bf0000, 262144, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff4b70000
+mmap(0x7ff4bb0000, 262144, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff4b30000
+mmap(0x7ff4b70000, 262144, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7ff4af0000
+rt_sigaction(SIGPWR, {sa_handler=0x7ff7be99e0, sa_mask=~[INT QUIT ABRT BUS SEGV TERM RTMIN RT_1], sa_flags=SA_RESTART|SA_SIGINFO}, NULL, 8) = 0
+rt_sigaction(SIGXCPU, {sa_handler=0x7ff7be8fa0, sa_mask=~[INT QUIT ABRT BUS SEGV TERM RTMIN RT_1], sa_flags=SA_RESTART}, NULL, 8) = 0
+rt_sigprocmask(SIG_UNBLOCK, [XCPU PWR], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [HUP INT PIPE TERM WINCH], 8) = 0
+openat(AT_FDCWD, "/proc/self/maps", O_RDONLY|O_CLOEXEC) = 3
+prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=65536*1024, rlim_max=RLIM64_INFINITY}) = 0
+fstat(3, {st_mode=S_IFREG|0444, st_size=0, ...}) = 0
+read(3, "00200000-00201000 r--p 00000000 "..., 1024) = 1024
+read(3, "         /data/data/com.termux.n"..., 1024) = 1024
+read(3, "9f000-7ff54a0000 r--p 0000f000 f"..., 1024) = 1024
+read(3, "ix/files/usr/nix/store/2hidll5k5"..., 1024) = 1024
+read(3, "m5d-keyutils-1.6.3-lib/lib/libke"..., 1024) = 1024
+read(3, "f000-7ff5560000 r--p 0000f000 fe"..., 1024) = 1024
+read(3, "a/data/com.termux.nix/files/usr/"..., 1024) = 1024
+read(3, "libkrb5-1.21.3/lib/libkrb5.so.3."..., 1024) = 1024
+read(3, ".0\n7ff589c000-7ff58a0000 r--p 00"..., 1024) = 1024
+read(3, "         /data/data/com.termux.n"..., 1024) = 1024
+read(3, "/ffz3zwklbdrkfy23w65ark6kncfjdb1"..., 1024) = 1024
+read(3, "05737                        /da"..., 1024) = 1024
+read(3, "/usr/nix/store/5y7sqf33dxd43c8l1"..., 1024) = 1024
+read(3, "ta/com.termux.nix/files/usr/nix/"..., 1024) = 1024
+read(3, "termux.nix/files/usr/nix/store/1"..., 1024) = 1024
+read(3, "r/nix/store/bqn5fjd7kqpj69yx6qll"..., 1024) = 1024
+read(3, "/nix/store/7gjvz9shcq90nfx7rzjnx"..., 1024) = 1024
+read(3, "w3pvymn9p09cffby503widj-aws-c-io"..., 1024) = 1024
+read(3, "tp.so.1.0.0\n7ff5e5e000-7ff5e6000"..., 1024) = 1024
+read(3, "040000 fe:3b 2342738            "..., 1024) = 1024
+read(3, "termux.nix/files/usr/nix/store/g"..., 1024) = 1024
+read(3, "      /data/data/com.termux.nix/"..., 1024) = 1024
+read(3, "cxyfv3rls9qrfcxsgh8-zstd-1.5.6/l"..., 1024) = 1024
+read(3, "ba000 r-xp 00000000 fe:3b 234206"..., 1024) = 1024
+read(3, "l1g82lqgif94w8rbfw0n7a5gfj0id-li"..., 1024) = 1024
+read(3, "-p 00050000 fe:3b 2342434       "..., 1024) = 1024
+read(3, "/store/qncwqh2p2swj3b385gfmhfxbs"..., 1024) = 1024
+read(3, "libz.so.1.3.1\n7ff634f000-7ff6350"..., 1024) = 1024
+read(3, "usr/nix/store/aaq36r4a49fbsh0mbw"..., 1024) = 1024
+read(3, "li-1.1.0-lib/lib/libbrotlidec.so"..., 1024) = 1024
+read(3, "-7ff6550000 r--p 0009f000 fe:3b "..., 1024) = 1024
+read(3, "                    /data/data/c"..., 1024) = 1024
+read(3, "/nix/store/fli7vwx6qiyfi0iacsi1x"..., 1024) = 1024
+read(3, "ermux.nix/files/usr/nix/store/fl"..., 1024) = 1024
+read(3, "x/store/fli7vwx6qiyfi0iacsi1x5m7"..., 1024) = 1024
+read(3, "so.4.8.0\n7ff6b60000-7ff6cac000 r"..., 1024) = 1024
+read(3, "    /data/data/com.termux.nix/fi"..., 1024) = 1024
+read(3, "es/usr/nix/store/wqlkf6dzgd6x8kk"..., 1024) = 1024
+read(3, "000 rw-p 00000000 00:00 0 \n7ff73"..., 1024) = 1024
+read(3, "        /data/data/com.termux.ni"..., 1024) = 1024
+read(3, "lib/libstdc++.so.6.0.32\n7ff76400"..., 1024) = 1024
+read(3, "46182                        /da"..., 1024) = 1024
+read(3, "e/wqlkf6dzgd6x8kk1jb2vh1pcabg68x"..., 1024) = 1024
+read(3, "s.so\n7ff7b20000-7ff7b21000 rw-p "..., 1024) = 1024
+read(3, "        /data/data/com.termux.ni"..., 1024) = 1024
+read(3, "d.so.0\n7ff7bcf000-7ff7bd0000 r--"..., 1024) = 1024
+read(3, ".termux.nix/files/usr/nix/store/"..., 1024) = 1024
+read(3, "       /data/data/com.termux.nix"..., 1024) = 1024
+read(3, "ux.nix/files/usr/nix/store/46v8b"..., 1024) = 1024
+read(3, "sr/nix/store/khssbjmgc2s2kyb0jb8"..., 1024) = 566
+close(3)                                = 0
+sched_getaffinity(30792, 32, [0 1 2 3 4 5 6 7]) = 8
+sysinfo({uptime=618877, loads=[351680, 306080, 281184], totalram=11628556288, freeram=153518080, sharedram=43864064, bufferram=1757184, totalswap=8589930496, freeswap=4194258944, procs=7228, totalhigh=0, freehigh=0, mem_unit=1}) = 0
+mmap(0x7ff4b30000, 402653184, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fdcaf0000
+getuid()                                = 10324
+futex(0x7ff76416f8, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+ioctl(0, TCGETS, 0x7fffff9aa0)          = -1 ENOTTY (Inappropriate ioctl for device)
+newfstatat(AT_FDCWD, "/data", {st_mode=S_IFDIR|0771, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data", {st_mode=S_IFDIR|0771, st_size=94208, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix", {st_mode=S_IFDIR|0700, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files", {st_mode=S_IFDIR|0771, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/usr", {st_mode=S_IFDIR|0700, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/usr/tmp", {st_mode=S_IFDIR|0700, st_size=24576, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/usr/tmp/nix-shell.gwm6C3", {st_mode=S_IFDIR|0700, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/usr/tmp/nix-shell.gwm6C3/nix-shell.mIkQTQ", {st_mode=S_IFDIR|0700, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/usr/tmp/nix-shell.gwm6C3/nix-shell.mIkQTQ/nix-shell.ce8Kig", {st_mode=S_IFDIR|0700, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+getpid()                                = 30792
+mkdirat(AT_FDCWD, "/data/data/com.termux.nix/files/usr/tmp/nix-shell.gwm6C3/nix-shell.mIkQTQ/nix-shell.ce8Kig/nix-build-30792-0", 0755) = 0
+brk(0x3000297000)                       = 0x3000297000
+faccessat(AT_FDCWD, "/nix/var/nix", R_OK|W_OK) = 0
+getpid()                                = 30792
+newfstatat(AT_FDCWD, "/nix/store", {st_mode=S_IFDIR|0700, st_size=15626240, ...}, AT_SYMLINK_NOFOLLOW) = 0
+getuid()                                = 10324
+newfstatat(AT_FDCWD, "/nix/store/.links", {st_mode=S_IFDIR|0700, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/nix/var/nix/profiles", {st_mode=S_IFDIR|0700, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/nix/var/nix/temproots", {st_mode=S_IFDIR|0755, st_size=24576, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/nix/var/nix/db", {st_mode=S_IFDIR|0755, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/nix/var/nix/gcroots", {st_mode=S_IFDIR|0700, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/nix/var/nix/profiles/per-user", {st_mode=S_IFDIR|0755, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+fchmodat(AT_FDCWD, "/nix/var/nix/profiles/per-user", 0755) = 0
+newfstatat(AT_FDCWD, "/nix/var/nix/gcroots/per-user", {st_mode=S_IFDIR|0755, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+fchmodat(AT_FDCWD, "/nix/var/nix/gcroots/per-user", 0755) = 0
+getuid()                                = 10324
+newfstatat(AT_FDCWD, "/nix/store", {st_mode=S_IFDIR|0700, st_size=15626240, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/nix", {st_mode=S_IFDIR|0700, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/nix/var/nix/db/reserved", {st_mode=S_IFREG|0600, st_size=8388608, ...}, 0) = 0
+openat(AT_FDCWD, "/nix/var/nix/db/big-lock", O_RDWR|O_CREAT|O_CLOEXEC, 0600) = 3
+flock(3, LOCK_SH|LOCK_NB)               = 0
+newfstatat(AT_FDCWD, "/nix/var/nix/db/schema", {st_mode=S_IFREG|0644, st_size=2, ...}, AT_SYMLINK_NOFOLLOW) = 0
+openat(AT_FDCWD, "/nix/var/nix/db/schema", O_RDONLY|O_CLOEXEC) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=2, ...}) = 0
+brk(0x30002ba000)                       = 0x30002ba000
+read(4, "10", 65536)                    = 2
+read(4, "", 65536)                      = 0
+brk(0x30002aa000)                       = 0x30002aa000
+close(4)                                = 0
+faccessat(AT_FDCWD, "/nix/var/nix/db", R_OK|W_OK) = 0
+newfstatat(AT_FDCWD, "/nix", {st_mode=S_IFDIR|0700, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/nix/var", {st_mode=S_IFDIR|0700, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/nix/var/nix", {st_mode=S_IFDIR|0700, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/nix/var/nix/db", {st_mode=S_IFDIR|0755, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/nix/var/nix/db/db.sqlite", {st_mode=S_IFREG|0644, st_size=42737664, ...}, AT_SYMLINK_NOFOLLOW) = 0
+getpid()                                = 30792
+getpid()                                = 30792
+openat(AT_FDCWD, "/nix/var/nix/db/db.sqlite", O_RDWR|O_NOFOLLOW|O_CLOEXEC) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=42737664, ...}) = 0
+fstat(4, {st_mode=S_IFREG|0644, st_size=42737664, ...}) = 0
+newfstatat(AT_FDCWD, "/nix/var/nix/db/db.sqlite", {st_mode=S_IFREG|0644, st_size=42737664, ...}, 0) = 0
+pread64(4, "SQLite format 3\0\20\0\2\2\0@  \0\0\2\235\0\0(\302"..., 100, 0) = 100
+fcntl(4, F_SETLK, {l_type=F_RDLCK, l_whence=SEEK_SET, l_start=1073741824, l_len=1}) = 0
+fcntl(4, F_SETLK, {l_type=F_RDLCK, l_whence=SEEK_SET, l_start=1073741826, l_len=510}) = 0
+fcntl(4, F_SETLK, {l_type=F_UNLCK, l_whence=SEEK_SET, l_start=1073741824, l_len=1}) = 0
+newfstatat(AT_FDCWD, "/nix/var/nix/db/db.sqlite-journal", 0x7fffff7ef8, 0) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/nix/var/nix/db/db.sqlite-wal", 0x7fffff7ef8, 0) = -1 ENOENT (No such file or directory)
+fstat(4, {st_mode=S_IFREG|0644, st_size=42737664, ...}) = 0
+brk(0x30002cd000)                       = 0x30002cd000
+pread64(4, "SQLite format 3\0\20\0\2\2\0@  \0\0\2\235\0\0(\302"..., 4096, 0) = 4096
+getpid()                                = 30792
+newfstatat(AT_FDCWD, "/nix/var/nix/db/db.sqlite", {st_mode=S_IFREG|0644, st_size=42737664, ...}, 0) = 0
+openat(AT_FDCWD, "/nix/var/nix/db/db.sqlite-wal", O_RDWR|O_CREAT|O_NOFOLLOW|O_CLOEXEC, 0644) = 5
+fstat(5, {st_mode=S_IFREG|0644, st_size=0, ...}) = 0
+geteuid()                               = 10324
+fstat(4, {st_mode=S_IFREG|0644, st_size=42737664, ...}) = 0
+openat(AT_FDCWD, "/nix/var/nix/db/db.sqlite-shm", O_RDWR|O_CREAT|O_NOFOLLOW|O_CLOEXEC, 0644) = 6
+fstat(6, {st_mode=S_IFREG|0644, st_size=0, ...}) = 0
+geteuid()                               = 10324
+fcntl(6, F_GETLK, {l_type=F_UNLCK, l_whence=SEEK_SET, l_start=128, l_len=1, l_pid=207912627}) = 0
+fcntl(6, F_SETLK, {l_type=F_WRLCK, l_whence=SEEK_SET, l_start=128, l_len=1}) = 0
+ftruncate(6, 3)                         = 0
+fcntl(6, F_SETLK, {l_type=F_RDLCK, l_whence=SEEK_SET, l_start=128, l_len=1}) = 0
+fstat(6, {st_mode=S_IFREG|0644, st_size=3, ...}) = 0
+fcntl(6, F_SETLK, {l_type=F_WRLCK, l_whence=SEEK_SET, l_start=120, l_len=1}) = 0
+fstat(6, {st_mode=S_IFREG|0644, st_size=3, ...}) = 0
+pwrite64(6, "\0", 1, 4095)              = 1
+pwrite64(6, "\0", 1, 8191)              = 1
+pwrite64(6, "\0", 1, 12287)             = 1
+pwrite64(6, "\0", 1, 16383)             = 1
+pwrite64(6, "\0", 1, 20479)             = 1
+pwrite64(6, "\0", 1, 24575)             = 1
+pwrite64(6, "\0", 1, 28671)             = 1
+pwrite64(6, "\0", 1, 32767)             = 1
+mmap(NULL, 32768, PROT_READ|PROT_WRITE, MAP_SHARED, 6, 0) = 0x7ff7ef6000
+fcntl(6, F_SETLK, {l_type=F_WRLCK, l_whence=SEEK_SET, l_start=121, l_len=2}) = 0
+fstat(5, {st_mode=S_IFREG|0644, st_size=0, ...}) = 0
+fcntl(6, F_SETLK, {l_type=F_WRLCK, l_whence=SEEK_SET, l_start=124, l_len=1}) = 0
+fcntl(6, F_SETLK, {l_type=F_UNLCK, l_whence=SEEK_SET, l_start=124, l_len=1}) = 0
+fcntl(6, F_SETLK, {l_type=F_WRLCK, l_whence=SEEK_SET, l_start=125, l_len=1}) = 0
+fcntl(6, F_SETLK, {l_type=F_UNLCK, l_whence=SEEK_SET, l_start=125, l_len=1}) = 0
+fcntl(6, F_SETLK, {l_type=F_WRLCK, l_whence=SEEK_SET, l_start=126, l_len=1}) = 0
+fcntl(6, F_SETLK, {l_type=F_UNLCK, l_whence=SEEK_SET, l_start=126, l_len=1}) = 0
+fcntl(6, F_SETLK, {l_type=F_WRLCK, l_whence=SEEK_SET, l_start=127, l_len=1}) = 0
+fcntl(6, F_SETLK, {l_type=F_UNLCK, l_whence=SEEK_SET, l_start=127, l_len=1}) = 0
+fcntl(6, F_SETLK, {l_type=F_UNLCK, l_whence=SEEK_SET, l_start=121, l_len=2}) = 0
+fcntl(6, F_SETLK, {l_type=F_UNLCK, l_whence=SEEK_SET, l_start=120, l_len=1}) = 0
+fcntl(6, F_SETLK, {l_type=F_RDLCK, l_whence=SEEK_SET, l_start=123, l_len=1}) = 0
+fstat(4, {st_mode=S_IFREG|0644, st_size=42737664, ...}) = 0
+pread64(4, "SQLite format 3\0\20\0\2\2\0@  \0\0\2\235\0\0(\302"..., 4096, 0) = 4096
+fcntl(6, F_SETLK, {l_type=F_UNLCK, l_whence=SEEK_SET, l_start=123, l_len=1}) = 0
+newfstatat(AT_FDCWD, "/nix/var/nix/db/ca-schema", {st_mode=S_IFREG|0644, st_size=1, ...}, AT_SYMLINK_NOFOLLOW) = 0
+openat(AT_FDCWD, "/nix/var/nix/db/ca-schema", O_RDONLY|O_CLOEXEC) = 7
+fstat(7, {st_mode=S_IFREG|0644, st_size=1, ...}) = 0
+read(7, "4", 65536)                     = 1
+read(7, "", 65536)                      = 0
+close(7)                                = 0
+mmap(NULL, 266240, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fdcaaf000
+brk(0x30002ee000)                       = 0x30002ee000
+brk(0x300030f000)                       = 0x300030f000
+getcwd("/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09", 4096) = 105
+newfstatat(AT_FDCWD, "/data", {st_mode=S_IFDIR|0771, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data", {st_mode=S_IFDIR|0771, st_size=94208, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix", {st_mode=S_IFDIR|0700, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files", {st_mode=S_IFDIR|0771, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/home", {st_mode=S_IFDIR|0700, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/home/pick-up-nix2", {st_mode=S_IFDIR|0755, st_size=20480, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/home/pick-up-nix2/source", {st_mode=S_IFDIR|0755, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github", {st_mode=S_IFDIR|0755, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector", {st_mode=S_IFDIR|0755, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom", {st_mode=S_IFDIR|0755, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025", {st_mode=S_IFDIR|0700, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09", {st_mode=S_IFDIR|0755, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/bug_repro.nix", 0x7fffff9988, AT_SYMLINK_NOFOLLOW) = -1 ENOENT (No such file or directory)
+getcwd("/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09", 4096) = 105
+newfstatat(AT_FDCWD, "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/bug_repro.nix", 0x7fffff9968, AT_SYMLINK_NOFOLLOW) = -1 ENOENT (No such file or directory)
+munmap(0x7fdcaaf000, 266240)            = 0
+newfstatat(AT_FDCWD, "/nix/var/nix/db/db.sqlite", {st_mode=S_IFREG|0644, st_size=42737664, ...}, 0) = 0
+fcntl(4, F_SETLK, {l_type=F_WRLCK, l_whence=SEEK_SET, l_start=1073741826, l_len=510}) = 0
+unlinkat(AT_FDCWD, "/nix/var/nix/db/db.sqlite-shm", 0) = 0
+munmap(0x7ff7ef6000, 32768)             = 0
+close(6)                                = 0
+close(5)                                = 0
+unlinkat(AT_FDCWD, "/nix/var/nix/db/db.sqlite-wal", 0) = 0
+fcntl(4, F_SETLK, {l_type=F_UNLCK, l_whence=SEEK_SET, l_start=1073741824, l_len=2}) = 0
+fcntl(4, F_SETLK, {l_type=F_UNLCK, l_whence=SEEK_SET, l_start=0, l_len=0}) = 0
+fstat(4, {st_mode=S_IFREG|0644, st_size=42737664, ...}) = 0
+newfstatat(AT_FDCWD, "/nix/var/nix/db/db.sqlite", {st_mode=S_IFREG|0644, st_size=42737664, ...}, 0) = 0
+close(4)                                = 0
+close(3)                                = 0
+openat(AT_FDCWD, "/data/data/com.termux.nix/files/usr/tmp/nix-shell.gwm6C3/nix-shell.mIkQTQ/nix-shell.ce8Kig", O_RDONLY) = 3
+newfstatat(3, "nix-build-30792-0", {st_mode=S_IFDIR|0755, st_size=3452, ...}, AT_SYMLINK_NOFOLLOW) = 0
+openat(3, "/data/data/com.termux.nix/files/usr/tmp/nix-shell.gwm6C3/nix-shell.mIkQTQ/nix-shell.ce8Kig/nix-build-30792-0", O_RDONLY) = 4
+fstat(4, {st_mode=S_IFDIR|0755, st_size=3452, ...}) = 0
+fcntl(4, F_GETFL)                       = 0x20000 (flags O_RDONLY|O_LARGEFILE)
+fcntl(4, F_SETFD, FD_CLOEXEC)           = 0
+getdents64(4, 0x30002623f0 /* 2 entries */, 32768) = 48
+getdents64(4, 0x30002623f0 /* 0 entries */, 32768) = 0
+close(4)                                = 0
+unlinkat(3, "nix-build-30792-0", AT_REMOVEDIR) = 0
+close(3)                                = 0
+write(2, "error: getting status of '/data/"..., 173) = 173
+exit_group(1)                           = ?
++++ exited with 1 +++

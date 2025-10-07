@@ -1,0 +1,5 @@
+Flake Name: test-base
+Description: A test description for the base flake.
+System: aarch64-linux
+Nixpkgs Ref: 12345abc
+Flake-Utils Ref: 67890def

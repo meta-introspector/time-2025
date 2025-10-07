@@ -1,0 +1,28 @@
+commit 6e04914c9e9c636e8c094fd0eac798d837790e7d
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 21:07:56 2025 +0000
+
+    feat: Directly call generate_monster_group_llm_txt.sh with named args in flake.nix
+
+diff --git a/09/22/nix-llm-context/flake.nix b/09/22/nix-llm-context/flake.nix
+index 17a9845..73e8457 100644
+--- a/09/22/nix-llm-context/flake.nix
++++ b/09/22/nix-llm-context/flake.nix
+@@ -17,8 +17,15 @@
+         # Function to generate LLM context for a given symbol
+         generateLlmContext = { symbol, htmlFileName, keywordsScriptFileName, linksFileName, tutorialsPattern, generatorScript }:
+           (pkgs.runCommand "llm-context-${symbol}" {} ''
+-            mkdir -p $out && echo "Hello from Nix build!" > $out/dummy.txt
+-          '');
++            "${self}/${generatorScript}" \
++              --symbol="${symbol}" \
++              --html-file-name="${htmlFileName}" \
++              --keywords-script="${keywordsScriptFileName}" \
++              --links-file-name="${linksFileName}" \
++              --tutorials-pattern="${tutorialsPattern}" \
++              --output-dir="$out" \
++              --main-project="${mainProject}"
++          '')
+       in
+       rec {
+         packages.monsterGroupLlmContext = generateLlmContext {

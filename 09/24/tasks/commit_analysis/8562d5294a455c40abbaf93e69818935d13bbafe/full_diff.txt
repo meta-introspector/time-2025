@@ -1,0 +1,19 @@
+commit 8562d5294a455c40abbaf93e69818935d13bbafe
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:27:39 2025 +0000
+
+    fix: Replace spaces with hyphens in output file name in nix-llm-context/flake.nix
+
+diff --git a/09/22/nix-llm-context/flake.nix b/09/22/nix-llm-context/flake.nix
+index 8de9617..8dbb9a9 100644
+--- a/09/22/nix-llm-context/flake.nix
++++ b/09/22/nix-llm-context/flake.nix
+@@ -23,7 +23,7 @@
+ 
+             buildInputs = [ pkgs.bash pkgs.coreutils pkgs.gnugrep pkgs.gnused pkgs.findutils ];
+           } ''
+-            "$generatorScriptPath" "${symbol}" "${mainProject}/wikipedia_cache/${htmlFileName}" "${mainProject}/docs/memes/${keywordsScriptFileName}" "${mainProject}/docs/memes/${linksFileName}" "${mainProject}/docs/memes/${tutorialsPattern}" "$out/llm-context-${symbol}.txt" "${mainProject}"
++            "$generatorScriptPath" "${symbol}" "${mainProject}/wikipedia_cache/${htmlFileName}" "${mainProject}/docs/memes/${keywordsScriptFileName}" "${mainProject}/docs/memes/${linksFileName}" "${mainProject}/docs/memes/${tutorialsPattern}" "$out/llm-context-${symbol// /-}.txt" "${mainProject}"
+           '');
+       in
+       rec {

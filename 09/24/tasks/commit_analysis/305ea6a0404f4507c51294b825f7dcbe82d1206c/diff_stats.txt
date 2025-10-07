@@ -1,0 +1,12 @@
+305ea6a0404f4507c51294b825f7dcbe82d1206c
+66	0	09/22/docs/sops/SOP_Add_Files_To_Git.md
+61	0	09/22/docs/sops/SOP_Cache_Wikipedia_Sources.md
+54	0	09/22/docs/sops/SOP_Debug_Wrapper_Script.md
+49	0	09/22/docs/sops/SOP_Generate_OEIS_Index.md
+69	0	09/22/docs/sops/SOP_Generate_OEIS_LLM_Context.md
+48	0	09/22/docs/sops/SOP_Publish_Monster_Group_NAR.md
+65	0	09/22/docs/sops/SOP_Publish_Nix_Artifact_To_Git.md
+56	0	09/22/docs/sops/SOP_Spider_Wiki_Links.md
+69	0	09/22/docs/sops/SOP_Update_Parent_Repos.md
+200	0	09/22/scripts/create_llm_context_template.sh
+7	0	09/22/scripts/generate_oeis_index.sh

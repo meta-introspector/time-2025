@@ -1,0 +1,210 @@
+commit 0e45db5dfa03e7d3416fc3a5333c8c9459d7410d
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 23:43:29 2025 +0000
+
+    feat: Add generate_oeis_llm_txt.sh and update flake.nix for OEIS context
+
+diff --git a/09/22/nix-llm-context/debug_wrapper.sh b/09/22/nix-llm-context/debug_wrapper.sh
+index 195d8d8..96e691a 100755
+--- a/09/22/nix-llm-context/debug_wrapper.sh
++++ b/09/22/nix-llm-context/debug_wrapper.sh
+@@ -14,6 +14,18 @@
+ set -x
+ set -euo pipefail
+ 
++GENERATOR_SCRIPT=""
++SYMBOL=""
++HTML_FILE_NAME=""
++KEYWORDS_SCRIPT=""
++LINKS_FILE_NAME=""
++TUTORIALS_PATTERN=""
++OUTPUT_DIR=""
++MAIN_PROJECT=""
++
++echo "DEBUG: Current working directory: $(pwd)"
++echo "DEBUG: GENERATOR_SCRIPT value: $GENERATOR_SCRIPT"
++
+ # Parse named arguments
+ while [[ "$#" -gt 0 ]]; do
+   case "$1" in
+diff --git a/09/22/nix-llm-context/flake.nix b/09/22/nix-llm-context/flake.nix
+index f5cbb1f..7e13dc2 100644
+--- a/09/22/nix-llm-context/flake.nix
++++ b/09/22/nix-llm-context/flake.nix
+@@ -1,5 +1,5 @@
+ {
+-  description = "Nix flake for generating LLM context for symbols.";
++  description = "Nix flake for generating LLM context for symbols. (Updated for OEIS)";
+ 
+   inputs = {
+     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+@@ -13,6 +13,8 @@
+     flake-utils.lib.eachDefaultSystem (system:
+       let
+         pkgs = import nixpkgs { inherit system; };
++        lib = pkgs.lib;
++        primeSieve = import ./lib/prime-sieve.nix { inherit lib; };
+ 
+         # Function to generate LLM context for a given symbol
+         generateLlmContext = { symbol, htmlFileName, keywordsScriptFileName, linksFileName, tutorialsPattern, generatorScript }:
+@@ -30,6 +32,23 @@
+           tutorialsPattern = "*monster_group*_tiktok_tutorial.md";
+           generatorScript = "generate_monster_group_llm_txt.sh";
+         };
++
++        packages.oeisLlmContext = generateLlmContext {
++          symbol = "OEIS";
++          htmlFileName = "Online_Encyclopedia_of_Integer_Sequences.html";
++          keywordsScriptFileName = "extract_meaningful_keywords.sh";
++          linksFileName = "all_extracted_links.md";
++          tutorialsPattern = ""; # No specific tutorial pattern for now
++          generatorScript = "generate_oeis_llm_txt.sh";
++        };
++
++        # New output for zos sequence for a given prime
++        packages.zosSequence = prime: pkgs.runCommand "zos-sequence-${toString prime}" {
++          buildInputs = [ pkgs.bash ];
++          buildCommand = ''
++            echo "${lib.concatStringsSep "\n" (primeSieve prime)}" > $out/primes.txt
++          '';
++        } {};
+       }
+     );
+ }
+\ No newline at end of file
+diff --git a/09/22/nix-llm-context/generate_oeis_llm_txt.sh b/09/22/nix-llm-context/generate_oeis_llm_txt.sh
+new file mode 100755
+index 0000000..269c540
+--- /dev/null
++++ b/09/22/nix-llm-context/generate_oeis_llm_txt.sh
+@@ -0,0 +1,130 @@
++#!/usr/bin/env bash
++#
++# Script to generate the "LLM.txt" for a given symbol (OEIS).
++# Arguments are now read from positional arguments.
++
++set -euo pipefail
++
++# Parse named arguments
++while [[ "$#" -gt 0 ]]; do
++  case "$1" in
++    --symbol) 
++      SYMBOL_NAME="$2"
++      shift
++      ;; 
++    --symbol=*) 
++      SYMBOL_NAME="${1#*=}"
++      ;; 
++    --html-file-name) 
++      HTML_FILE="$2"
++      shift
++      ;; 
++    --html-file-name=*) 
++      HTML_FILE="${1#*=}"
++      ;; 
++    --keywords-script) 
++      KEYWORDS_SCRIPT="$2"
++      shift
++      ;; 
++    --keywords-script=*) 
++      KEYWORDS_SCRIPT="${1#*=}"
++      ;; 
++    --links-file-name) 
++      LINKS_FILE="$2"
++      shift
++      ;; 
++    --links-file-name=*) 
++      LINKS_FILE="${1#*=}"
++      ;; 
++    --tutorials-pattern) 
++      TUTORIALS_PATTERN="$2"
++      shift
++      ;; 
++    --tutorials-pattern=*) 
++      TUTORIALS_PATTERN="${1#*=}"
++      ;; 
++    --main-project) 
++      MAIN_PROJECT="$2"
++      shift
++      ;; 
++    --main-project=*) 
++      MAIN_PROJECT="${1#*=}"
++      ;; 
++    --output-dir) 
++      OUTPUT_DIR="$2"
++      shift
++      ;; 
++    --output-dir=*) 
++      OUTPUT_DIR="${1#*=}"
++      ;; 
++    *) 
++      echo "Unknown parameter passed: $1" >&2
++      exit 1
++      ;; 
++  esac
++  shift
++done
++
++# Assign parsed values to original script variables
++OUTPUT_FILE_NAME="llm-context-${SYMBOL_NAME// /-}.txt" # Construct output file name
++OUTPUT_FILE_PATH="${OUTPUT_DIR}/${OUTPUT_FILE_NAME}"
++
++# Ensure all required variables are set
++if [ -z "$SYMBOL_NAME" ] || [ -z "$HTML_FILE" ] || [ -z "$KEYWORDS_SCRIPT" ] || [ -z "$LINKS_FILE" ] || [ -z "$TUTORIALS_PATTERN" ] || [ -z "$OUTPUT_DIR" ] || [ -z "$MAIN_PROJECT" ]; then
++  echo "Error: Missing required arguments." >&2
++  exit 1
++fi
++
++# Create a temporary file to build the content
++TEMP_OUTPUT_FILE=$(mktemp)
++
++{
++echo "# $SYMBOL_NAME - LLM Context"
++echo ""
++
++echo "## Source Information"
++echo "- Main Project Path: $MAIN_PROJECT"
++echo ""
++
++echo "## Wikipedia Content"
++cat "$HTML_FILE"
++echo ""
++
++echo "## Extracted Keywords"
++"$KEYWORDS_SCRIPT" "$HTML_FILE" 10 | sed 's/^[ ]*[0-9]* //g'
++echo ""
++
++echo "## Related Links"
++grep -i "${SYMBOL_NAME// /_}" "$LINKS_FILE" || true
++echo ""
++
++echo "## Related Tutorials"
++# The find command needs to search within the source directory passed as $src
++# from the Nix derivation.
++# The HTML_FILE variable contains the absolute path to the HTML file within the Nix store.
++# We need to find the base source directory from HTML_FILE.
++# Example: HTML_FILE = /nix/store/.../wikipedia_cache/Monster_group.html
++# Source directory = /nix/store/.../
++# So, we need to go up two levels from HTML_FILE to get to the source root.
++SOURCE_ROOT=$(dirname "$(dirname "$HTML_FILE")")
++
++# Extract just the filename pattern from TUTORIALS_PATTERN
++FILENAME_TUTORIALS_PATTERN=$(basename "$TUTORIALS_PATTERN")
++
++# Only run find if TUTORIALS_PATTERN is not empty
++if [ -n "$FILENAME_TUTORIALS_PATTERN" ]; then
++  find "$SOURCE_ROOT" -maxdepth 2 -type f -name "$FILENAME_TUTORIALS_PATTERN" -printf "- %P\n"
++fi
++
++echo ""
++} > "$TEMP_OUTPUT_FILE"
++
++# Copy the generated content to the final output path
++mkdir -p "$(dirname "$OUTPUT_FILE_PATH")"
++cp "$TEMP_OUTPUT_FILE" "$OUTPUT_FILE_PATH"
++
++# Clean up the temporary file
++# rm "$TEMP_OUTPUT_FILE"
++
++echo "Generated $OUTPUT_FILE_PATH for $SYMBOL_NAME."
++

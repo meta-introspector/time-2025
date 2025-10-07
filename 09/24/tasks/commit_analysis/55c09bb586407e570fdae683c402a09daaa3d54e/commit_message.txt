@@ -1,0 +1,2 @@
+feat: debug_wrapper.sh now logs arguments to a file
+

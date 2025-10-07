@@ -1,0 +1,4 @@
+fix: Remove crq-binstore references from generate_monster_group_llm_txt.sh
+
+Modified generate_monster_group_llm_txt.sh to remove references to crq-binstore URL and revision, as this information is no longer passed from the Nix flake.
+

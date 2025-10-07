@@ -1,0 +1,9 @@
+e6d48ba47e724613c8a8239d306295bf440b1946
+136	0	09/22/flake-templates/llm-task-template/flake.nix
+44	0	09/23/README.md
+8	0	09/23/nix_concepts_and_facts/ai_context.nix
+12	0	09/23/nix_concepts_and_facts/concepts/fact_23_oracle.nix
+25	0	09/23/nix_concepts_and_facts/concepts/is_prime.nix
+5	0	09/23/nix_concepts_and_facts/concepts/number_23.nix
+1	0	09/23/nix_concepts_and_facts/facts/fact_about_23.txt
+67	0	09/23/nix_concepts_and_facts/flake.nix

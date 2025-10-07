@@ -1,0 +1,19 @@
+commit 214337ad15501bc060a96bf2571f6b89afae4fe1
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 20:44:05 2025 +0000
+
+    fix: Make buildCommand explicitly create  directory and write to it
+
+diff --git a/09/22/nix-llm-context/flake.nix b/09/22/nix-llm-context/flake.nix
+index c482b31..17a9845 100644
+--- a/09/22/nix-llm-context/flake.nix
++++ b/09/22/nix-llm-context/flake.nix
+@@ -17,7 +17,7 @@
+         # Function to generate LLM context for a given symbol
+         generateLlmContext = { symbol, htmlFileName, keywordsScriptFileName, linksFileName, tutorialsPattern, generatorScript }:
+           (pkgs.runCommand "llm-context-${symbol}" {} ''
+-            echo "Hello from Nix build!" > dummy.txt
++            mkdir -p $out && echo "Hello from Nix build!" > $out/dummy.txt
+           '');
+       in
+       rec {

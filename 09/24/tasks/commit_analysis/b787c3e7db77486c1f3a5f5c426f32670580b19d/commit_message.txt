@@ -1,0 +1,4 @@
+fix: Adjust generate_monster_group_llm_txt.sh find command for absolute paths
+
+Modified generate_monster_group_llm_txt.sh to correctly use absolute paths for the find command, ensuring it searches within the Nix store source directory.
+

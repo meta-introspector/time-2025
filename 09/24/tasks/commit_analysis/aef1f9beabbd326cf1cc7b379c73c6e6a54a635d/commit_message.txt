@@ -1,0 +1,4 @@
+fix: Update generate_monster_group_llm_txt.sh for Nix build environment
+
+Adjusted script to accept file paths as arguments and use them correctly within the Nix build environment, including proper handling of the source directory for find commands.
+

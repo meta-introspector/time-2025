@@ -1,0 +1,37 @@
+commit b787c3e7db77486c1f3a5f5c426f32670580b19d
+Author: mike <h@solfunmeme.com>
+Date:   Mon Sep 22 16:15:19 2025 +0000
+
+    fix: Adjust generate_monster_group_llm_txt.sh find command for absolute paths
+    
+    Modified generate_monster_group_llm_txt.sh to correctly use absolute paths for the find command, ensuring it searches within the Nix store source directory.
+
+diff --git a/09/22/nix-llm-context/generate_monster_group_llm_txt.sh b/09/22/nix-llm-context/generate_monster_group_llm_txt.sh
+index fea33ef..df3c041 100755
+--- a/09/22/nix-llm-context/generate_monster_group_llm_txt.sh
++++ b/09/22/nix-llm-context/generate_monster_group_llm_txt.sh
+@@ -32,7 +32,16 @@ grep -i "${SYMBOL_NAME// /_}" "$LINKS_FILE"
+ echo ""
+ 
+ echo "## Related TikTok Tutorials"
+-find "$(dirname "$HTML_FILE")/.." -maxdepth 2 -type f -name "$TUTORIALS_PATTERN" -printf "- %P\n"
++# The find command needs to search within the source directory passed as $src
++# from the Nix derivation.
++# The HTML_FILE variable contains the absolute path to the HTML file within the Nix store.
++# We need to find the base source directory from HTML_FILE.
++# Example: HTML_FILE = /nix/store/.../wikipedia_cache/Monster_group.html
++# Source directory = /nix/store/.../
++# So, we need to go up two levels from HTML_FILE to get to the source root.
++SOURCE_ROOT=$(dirname "$(dirname "$HTML_FILE")")
++
++find "$SOURCE_ROOT" -maxdepth 2 -type f -name "$TUTORIALS_PATTERN" -printf "- %P\n"
+ echo ""
+ } > "$TEMP_OUTPUT_FILE"
+ 
+@@ -42,4 +51,4 @@ cp "$TEMP_OUTPUT_FILE" "$OUTPUT_FILE_PATH"
+ # Clean up the temporary file
+ rm "$TEMP_OUTPUT_FILE"
+ 
+-echo "Generated $OUTPUT_FILE_PATH for $SYMBOL_NAME."
++echo "Generated $OUTPUT_FILE_PATH for $SYMBOL_NAME."
+\ No newline at end of file

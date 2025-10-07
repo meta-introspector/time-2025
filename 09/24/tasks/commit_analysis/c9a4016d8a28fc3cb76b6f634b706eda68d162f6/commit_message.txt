@@ -1,0 +1,4 @@
+fix: Refine generate_monster_group_llm_txt.sh find/sed for robustness
+
+Simplified the find and sed command in generate_monster_group_llm_txt.sh to use find's -printf action for more robust path handling and cleaner output.
+

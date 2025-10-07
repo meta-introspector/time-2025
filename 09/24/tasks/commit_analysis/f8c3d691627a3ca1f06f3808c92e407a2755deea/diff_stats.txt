@@ -1,0 +1,2 @@
+f8c3d691627a3ca1f06f3808c92e407a2755deea
+1	1	09/22/nix-llm-context/flake.nix

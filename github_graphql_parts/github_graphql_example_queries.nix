@@ -1,0 +1,44 @@
+{ buildGraphQLQuery, ... }:
+
+let
+  # Conceptual examples of GitHub GraphQL queries
+  exampleQueries = {
+    getRepositoryDetails = { owner, repo }:
+      (let
+        query = ''
+          query ($owner: String!, $repo: String!) {
+            repository(owner: $owner, name: $repo) {
+              name
+              description
+              stargazerCount
+              forkCount
+              url
+            }
+          }
+        '';
+        variables = { inherit owner repo; };
+      in
+      buildGraphQLQuery { inherit query variables; });
+
+    # Query to list issues for a repository
+    listRepositoryIssues = { owner, repo, first ? 10 }:
+      (let
+        query = ''
+          query ($owner: String!, $repo: String!, $first: Int!) {
+            repository(owner: $owner, name: $repo) {
+              issues(first: $first) {
+                nodes {
+                  title
+                  url
+                  state
+                }
+              }
+            }
+          }
+        '';
+        variables = { inherit owner repo first; };
+      in
+      buildGraphQLQuery { inherit query variables; });
+  };
+in
+exampleQueries

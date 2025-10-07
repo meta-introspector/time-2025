@@ -1,0 +1,2 @@
+feat: Add standalone Nix concepts flake and facts
+

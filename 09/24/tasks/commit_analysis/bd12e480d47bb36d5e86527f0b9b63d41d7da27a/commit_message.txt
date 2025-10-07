@@ -1,0 +1,2 @@
+fix(scripts): Fix shellcheck issues and improve ngram generation
+

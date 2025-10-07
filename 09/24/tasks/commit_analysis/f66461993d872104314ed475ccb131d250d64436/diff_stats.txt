@@ -1,0 +1,6 @@
+f66461993d872104314ed475ccb131d250d64436
+10	0	09/22/docs/sops/SOP_Dynamic_Nix_Artifact_Publishing.md
+30	19	09/22/flake.nix
+13	0	09/22/scripts/package_all_articles.sh
+3	1	09/22/scripts/publish_nix_artifact_to_git.sh
+20	0	09/22/scripts/test_packaging.sh

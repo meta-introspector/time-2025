@@ -1,0 +1,2 @@
+feat: Remove direct nixpkgs input from September flake
+

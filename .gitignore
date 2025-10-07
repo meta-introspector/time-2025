@@ -1,1 +1,13 @@
 *~
+/09/25/log_analyzer/target/
+/09/25/log_analyzer/logs/
+/09/25/log_analyzer/result
+/09/25/rungemini/logs/
+/09/25/llm
+/09/27/logs/
+/09/logs/
+09/25/logs/
+logs
+result/
+result
+sops-secrets/oauth_creds.json
