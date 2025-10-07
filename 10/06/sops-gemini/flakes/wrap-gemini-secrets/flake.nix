@@ -12,17 +12,12 @@
       url = "path:../";
       flake = false;
     };
-
-    sops-secrets-dir = {
-      url = "path:../../sops-secrets"; # Path relative to the wrap-gemini-secrets flake
-      flake = false;
-    };
   }; # Closing brace for inputs
 
-  outputs = { self, nixpkgs, flake-utils, sops-nix, gemini-cli, secrets, sops-secrets-dir, ... }:
+  outputs = { self, nixpkgs, flake-utils, sops-nix, gemini-cli, secrets, ... } @ args:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        inherit lib;
+        inherit (pkgs) lib;
         pkgs = nixpkgs.legacyPackages.${system};
 
         # Import the secrets.nix from the parent directory
@@ -39,7 +34,8 @@
           shift # Remove the first argument, so "$@" now contains gemini-cli arguments
 
           export HOME=$(mktemp -d)
-          trap 'rm -rf "$HOME"' EXIT
+          trap 'rm -rf "$HOME"' EXIT # Clean up the temporary HOME directory on exit
+
           mkdir -p "$HOME/.gemini/"
           cp -r "$DECRYPTED_SECRETS_PATH"/* "$HOME/.gemini/"
           echo "✅ Credentials copied from $DECRYPTED_SECRETS_PATH to $HOME/.gemini/"

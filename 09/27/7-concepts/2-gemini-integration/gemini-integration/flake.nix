@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/working-gemini-cli-nix-store";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
     # Input for the Python API consumer
     gemini-api-consumer-flake.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/27/7-concepts/2-gemini-integration/gemini-integration/gemini_api_consumer_flake";
   };
