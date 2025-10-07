@@ -4,6 +4,7 @@ let
   cfg = config.primeMappingConfig;
   num_primes = lib.length cfg.vibeDimensions;
   num_concepts = lib.length cfg.concepts;
+  num_vibe_dimensions = lib.length cfg.vibeDimensions;
 
   vibe_dimensions_set = lib.concatStringsSep ", " (lib.genList (i: "v" + toString i) num_primes);
 
@@ -11,10 +12,11 @@ in
 ''
 int: num_primes;
 int: num_concepts;
+int: num_vibe_dimensions;
 
 set of int: PRIMES = 1..num_primes;
 set of int: CONCEPTS = 1..num_concepts;
-set of int: VIBE_DIMENSIONS = 1..${toString num_primes};
+set of int: VIBE_DIMENSIONS = 1..num_vibe_dimensions;
 
 % Decision variable: mapping[c] = p means concept c is mapped to prime p
 array[CONCEPTS] of var PRIMES: mapping;
