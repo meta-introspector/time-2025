@@ -4,11 +4,11 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    # Use our local working gemini-cli with confirmed bundle in Nix store
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
 
   };
 
-  outputs = { self, nixpkgs, flake-utils } @ inputs:
+  outputs = { self, nixpkgs, flake-utils, gemini-cli } @ inputs:
     let
       eachSystem = flake-utils.lib.eachDefaultSystem;
     in

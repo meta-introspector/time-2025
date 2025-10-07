@@ -260,7 +260,16 @@ statix-hackathon-parts: pre-nix-check
 	nix run github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify#statix -- check 10/03/hackathon_71_parts.nix
 	@echo "--- statix check on hackathon_71_parts.nix complete ---"
 
-.PHONY: debug-pkgs-writeShellScriptBin-type statix-all run-orchestrator
+.PHONY: test-qa-flakes
+test-qa-flakes: pre-nix-check
+	@echo "--- Running QA Flake Tests ---"
+	@echo "Building 2025-01-27-build-time-gemini-capture..."
+	@cd 09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture && make build
+	@echo "Building consolidated-impure-gemini-telemetry..."
+	@nix build 09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry/#default --extra-experimental-features "nix-command flakes impure-derivations ca-derivations"
+	@echo "--- QA Flake Tests Complete ---"
+
+.PHONY: debug-pkgs-writeShellScriptBin-type statix-all run-orchestrator test-qa-flakes
 debug-pkgs-writeShellScriptBin-type:
 	@echo "--- Debugging pkgs.writeShellScriptBin type ---"
 	@nix eval --raw --impure --expr 'let pkgs = (builtins.getFlake "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify").outputs.legacyPackages.aarch64-linux; in builtins.typeOf pkgs.writeShellScriptBin'

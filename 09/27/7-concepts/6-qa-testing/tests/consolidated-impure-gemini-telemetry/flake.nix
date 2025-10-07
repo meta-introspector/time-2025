@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/working-gemini-cli-nix-store";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
   };
 
   outputs = { self, nixpkgs, flake-utils, gemini-cli }:
@@ -92,6 +92,7 @@
           version = "1.0";
 
           src = pkgs.writeText "dummy" "consolidated impure test";
+          dontUnpack = true;
 
           __impure = true;
 

@@ -4,7 +4,7 @@ all: build
 
 test:
 	@echo "Running nix flake check..."
-	nix flake check
+	nix flake check --extra-experimental-features "impure-derivations ca-derivations"
 build:
 	@echo "Building the buildTimeTelemetry derivation (verbose output in nix_build_output.log)..."
 	nix build --print-build-logs --print-out-paths --json  --keep-failed \

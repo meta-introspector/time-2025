@@ -37,6 +37,30 @@ git submodule update --init --recursive
 pre-commit install
 ```
 
+## Testing Specific Flakes
+
+To run tests for specific flakes, navigate to the flake's directory and use its `Makefile` (if available) or directly use `nix build` or `nix flake check`.
+
+For example, to test the `build-time-gemini-telemetry` flake:
+
+```bash
+cd 09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture/
+make test
+make build
+```
+
+And to test the `consolidated-impure-gemini-telemetry` flake:
+
+```bash
+nix build 09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry/#default --extra-experimental-features "nix-command flakes impure-derivations ca-derivations"
+```
+
+Alternatively, you can run all QA flake tests from the project root:
+
+```bash
+make test-qa-flakes
+```
+
 ## Code Quality
 
 We use `statix` for linting and static analysis of Nix expressions to ensure code quality and adherence to our architectural principles.
