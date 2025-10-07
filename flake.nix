@@ -17,6 +17,13 @@
       url = "github:meta-introspector/ontology";
       flake = false;
     };
+
+    # 5. Mycology Workflow Flake
+    mycologyWorkflow = {
+      url = "./flakes/mycology-workflow";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
   outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src, ... }:
@@ -98,6 +105,7 @@
         ontologyUrls = exampleUrlFetch.extractedUrls;
         nixOwlOntology = exampleUrlFetch.nixToOwlOntology;
         generateHackathonUml = import ./theory/generate_hackathon_uml.nix { inherit pkgs lib self; };
+        mycologyWorkflowPuml = mycologyWorkflow.packages.${system}.default; # Expose the mycology workflow puml
         # nixOntologyRepoPath = pkgs.runCommand "nix-ontology-repo-path" {} "ln -s ${nixOntologyRepo} $out"; # Expose nixOntologyRepo as a derivation
       };
 
