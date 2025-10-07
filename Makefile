@@ -345,11 +345,24 @@ eval-github-graphql-list-repository-issues:
 	@nix eval --impure --expr 'let lib = import <nixpkgs> {}.lib; buildGraphQLQuery = {}; in import ./github_graphql_modules/github_graphql_list_repository_issues.nix { inherit lib buildGraphQLQuery; }'
 	@echo "--- Evaluation Complete ---"
 
-.PHONY: run-orchestrator
+.PHONY: run-orchestrator simulate-orchestrator
 run-orchestrator:
 	@echo "--- Running the Orchestrator (Eternal For Loop) ---"
 	@nix run .#orchestrator
 	@echo "--- Orchestrator Run Complete ---"
+
+simulate-orchestrator:
+	@echo "--- Simulating the Top-Level Orchestrator with Gemini ---"
+	@nix-build /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/simulate-orchestrator.nix \
+		--arg pkgs '(import <nixpkgs> {})' \
+		--arg lib '(import <nixpkgs> {}.lib)' \
+		--argstr sopsSecretsPath '~/sops-secrets' \
+		--argstr hostGeminiHome '/data/data/com.termux.nix/files/home/.gemini' \
+		--argstr hostGeminiHome '/data/data/com.termux.nix/files/home/.gemini' \
+		--argstr hostGeminiHome '/data/data/com.termux.nix/files/home/.gemini' \
+		--argstr hostGeminiHome '/data/data/com.termux.nix/files/home/.gemini' \
+		--extra-experimental-features "impure-derivations ca-derivations"
+	@echo "--- Orchestrator Simulation Complete. Check ./result/bootstrap-state.nix for output. ---"
 
 # Define PROJECT_ROOT relative to this Makefile's location
 PROJECT_ROOT := $(shell pwd)

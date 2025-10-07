@@ -127,6 +127,7 @@
       #defaultApp = apps.default;
 
       lib.sourcePath = self;
+      lib.sopsSecretsPath = sopsSecretsPath;
 
       # Add a devShell to provide development tools like vale
       devShells.${system}.default = pkgs.mkShell {

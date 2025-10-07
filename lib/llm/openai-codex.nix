@@ -16,7 +16,7 @@ let
 in
 {
   callApi = prompt: {
-    derivationCode = "# OpenAI Codex generated code for: ${prompt}";
+    derivationCode = "{ pkgs, lib, ... }: { initialBootstrapState = { message = \"OpenAI Codex generated initial bootstrap state for: ${prompt}\"; }; };";
   };
 
   inherit openaiCodexApiEndpoint getOpenaiCodexApiKey;

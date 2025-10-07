@@ -2,32 +2,26 @@
 
 let
   # The context monad constructor
-  makeContext = rec {
+  makeContext = { llmProviders, ... } @ args: rec {
+    inherit llmProviders; # Make llmProviders available in this scope
     # Functions that operate within this context
     generateTasks = import ../lib/task-generator.nix { inherit lib pkgs; };
     derivationSpokes = import ../lib/derivation-spokes.nix { inherit pkgs lib; };
 
   usageTracking = import ./llm/usage-tracking.nix { inherit lib; };
 
-    # Import LLM integration modules
-    geminiLLM = import ../lib/llm/gemini.nix { inherit pkgs lib; };
-    groqLLM = import ../lib/llm/groq.nix { inherit pkgs lib; };
-    amazonqLLM = import ../lib/llm/amazonq.nix { inherit pkgs lib; };
-    githubCopilotLLM = import ../lib/llm/github-copilot.nix { inherit pkgs lib; };
-    openaiCodexLLM = import ../lib/llm/openai-codex.nix { inherit pkgs lib; };
+
 
     # Generalized function to interact with LLMs
-    callLLM = llmProvider: prompt:
-      if llmProvider == "gemini" then geminiLLM.callApi prompt
-      else if llmProvider == "groq" then groqLLM.callApi prompt
-      else if llmProvider == "amazonq" then amazonqLLM.callApi prompt
-      else if llmProvider == "github-copilot" then githubCopilotLLM.callApi prompt
-      else if llmProvider == "openai-codex" then openaiCodexLLM.callApi prompt
-      else throw "Unknown LLM provider: ${llmProvider}";
+    callLLM = llmProviderName: prompt:
+      let
+        llmModule = llmProviders.${llmProviderName} or (throw "Unknown LLM provider: ${llmProviderName}");
+      in
+      llmModule.callApi prompt;
 
     # TODO: Refactor this to be more modular, perhaps using an attribute set to map derivation types to functions.
     # Function to create a Nix derivation file
-    createDerivationFile = taskName: derivationCode: derivationType:
+    createDerivationFile = taskName: derivationCode: derivationType: llmProvider:
       if derivationType == "generate-lean4" then
         derivationSpokes.mkLean4Spoke taskName derivationCode
       else if derivationType == "generate-rust" then
@@ -67,7 +61,7 @@ let
       else if derivationType == "refine-minizinc" then
         derivationSpokes.mkMiniZincSpoke taskName derivationCode "" # This will be the refined MiniZinc model
       else if derivationType == "generate-llm-code" then
-        derivationSpokes.mkLLMCodeSpoke taskName task.llm_provider derivationCode
+        derivationSpokes.mkLLMCodeSpoke taskName llmProvider derivationCode
       else if derivationType == "generate-bootstrap-plan" then
         derivationSpokes.mkBootstrapSpoke taskName derivationCode
       else
@@ -77,13 +71,7 @@ let
     processTask = task:
       let
         # Get the specific LLM module
-        llmModule =
-          if task.llm_provider == "gemini" then geminiLLM
-          else if task.llm_provider == "groq" then groqLLM
-          else if task.llm_provider == "amazonq" then amazonqLLM
-          else if task.llm_provider == "github-copilot" then githubCopilotLLM
-          else if task.llm_provider == "openai-codex" then openaiCodexLLM
-          else throw "Unknown LLM provider: ${task.llm_provider}";
+        llmModule = llmProviders.${task.llm_provider} or (throw "Unknown LLM provider: ${task.llm_provider}");
 
         # Collect current quota information
         currentQuota = llmModule.getQuota;
@@ -94,19 +82,19 @@ let
           num_llm_providers = 5; % Gemini, Groq, AmazonQ, GitHub Copilot, OpenAI Codex
           num_tasks = 1; % Processing one task at a time for now
 
-          total_requests = [${toString geminiLLM.getQuota.totalRequests}, ${toString groqLLM.getQuota.totalRequests}, ${toString amazonqLLM.getQuota.totalRequests}, ${toString githubCopilotLLM.getQuota.totalRequests}, ${toString openaiCodexLLM.getQuota.totalRequests}];
-          remaining_requests = [${toString geminiLLM.getQuota.remainingRequests}, ${toString groqLLM.getQuota.remainingRequests}, ${toString amazonqLLM.getQuota.remainingRequests}, ${toString githubCopilotLLM.getQuota.remainingRequests}, ${toString openaiCodexLLM.getQuota.remainingRequests}];
-          requests_per_minute = [${toString geminiLLM.getQuota.requestsPerMinute}, ${toString groqLLM.getQuota.requestsPerMinute}, ${toString amazonqLLM.getQuota.requestsPerMinute}, ${toString githubCopilotLLM.getQuota.requestsPerMinute}, ${toString openaiCodexLLM.getQuota.requestsPerMinute}];
-          requests_per_hour = [${toString geminiLLM.getQuota.requestsPerHour}, ${toString groqLLM.getQuota.requestsPerHour}, ${toString amazonqLLM.getQuota.requestsPerHour}, ${toString githubCopilotLLM.getQuota.requestsPerHour}, ${toString openaiCodexLLM.getQuota.requestsPerHour}];
-          requests_per_day = [${toString geminiLLM.getQuota.requestsPerDay}, ${toString groqLLM.getQuota.requestsPerDay}, ${toString amazonqLLM.getQuota.requestsPerDay}, ${toString githubCopilotLLM.getQuota.requestsPerDay}, ${toString openaiCodexLLM.getQuota.requestsPerDay}];
-          requests_per_week = [${toString geminiLLM.getQuota.requestsPerWeek}, ${toString groqLLM.getQuota.requestsPerWeek}, ${toString amazonqLLM.getQuota.requestsPerWeek}, ${toString githubCopilotLLM.getQuota.requestsPerWeek}, ${toString openaiCodexLLM.getQuota.requestsPerWeek}];
+          total_requests = [${toString llmProviders.gemini.getQuota.totalRequests}, ${toString llmProviders.groq.getQuota.totalRequests}, ${toString llmProviders.amazonq.getQuota.totalRequests}, ${toString llmProviders.github-copilot.getQuota.totalRequests}, ${toString llmProviders.openai-codex.getQuota.totalRequests}];
+          remaining_requests = [${toString llmProviders.gemini.getQuota.remainingRequests}, ${toString llmProviders.groq.getQuota.remainingRequests}, ${toString llmProviders.amazonq.getQuota.remainingRequests}, ${toString llmProviders.github-copilot.getQuota.remainingRequests}, ${toString llmProviders.openai-codex.getQuota.remainingRequests}];
+          requests_per_minute = [${toString llmProviders.gemini.getQuota.requestsPerMinute}, ${toString llmProviders.groq.getQuota.requestsPerMinute}, ${toString llmProviders.amazonq.getQuota.requestsPerMinute}, ${toString llmProviders.github-copilot.getQuota.requestsPerMinute}, ${toString llmProviders.openai-codex.getQuota.requestsPerMinute}];
+          requests_per_hour = [${toString llmProviders.gemini.getQuota.requestsPerHour}, ${toString llmProviders.groq.getQuota.requestsPerHour}, ${toString llmProviders.amazonq.getQuota.requestsPerHour}, ${toString llmProviders.github-copilot.getQuota.requestsPerHour}, ${toString llmProviders.openai-codex.getQuota.requestsPerHour}];
+          requests_per_day = [${toString llmProviders.gemini.getQuota.requestsPerDay}, ${toString llmProviders.groq.getQuota.requestsPerDay}, ${toString llmProviders.amazonq.getQuota.requestsPerDay}, ${toString llmProviders.github-copilot.getQuota.requestsPerDay}, ${toString llmProviders.openai-codex.getQuota.requestsPerDay}];
+          requests_per_week = [${toString llmProviders.gemini.getQuota.requestsPerWeek}, ${toString llmProviders.groq.getQuota.requestsPerWeek}, ${toString llmProviders.amazonq.getQuota.requestsPerWeek}, ${toString llmProviders.github-copilot.getQuota.requestsPerWeek}, ${toString llmProviders.openai-codex.getQuota.requestsPerWeek}];
 
-          total_tokens = [${toString geminiLLM.getQuota.totalTokens}, ${toString groqLLM.getQuota.totalTokens}, ${toString amazonqLLM.getQuota.totalTokens}, ${toString githubCopilotLLM.getQuota.totalTokens}, ${toString openaiCodexLLM.getQuota.totalTokens}];
-          remaining_tokens = [${toString geminiLLM.getQuota.remainingTokens}, ${toString groqLLM.getQuota.remainingTokens}, ${toString amazonqLLM.getQuota.remainingTokens}, ${toString githubCopilotLLM.getQuota.remainingTokens}, ${toString openaiCodexLLM.getQuota.remainingTokens}];
-          tokens_per_minute = [${toString geminiLLM.getQuota.tokensPerMinute}, ${toString groqLLM.getQuota.tokensPerMinute}, ${toString amazonqLLM.getQuota.tokensPerMinute}, ${toString githubCopilotLLM.getQuota.tokensPerMinute}, ${toString openaiCodexLLM.getQuota.tokensPerMinute}];
-          tokens_per_hour = [${toString geminiLLM.getQuota.tokensPerHour}, ${toString groqLLM.getQuota.tokensPerHour}, ${toString amazonqLLM.getQuota.tokensPerHour}, ${toString githubCopilotLLM.getQuota.tokensPerHour}, ${toString openaiCodexLLM.getQuota.tokensPerHour}];
-          tokens_per_day = [${toString geminiLLM.getQuota.tokensPerDay}, ${toString groqLLM.getQuota.tokensPerDay}, ${toString amazonqLLM.getQuota.tokensPerDay}, ${toString githubCopilotLLM.getQuota.tokensPerDay}, ${toString openaiCodexLLM.getQuota.tokensPerDay}];
-          tokens_per_week = [${toString geminiLLM.getQuota.tokensPerWeek}, ${toString groqLLM.getQuota.tokensPerWeek}, ${toString amazonqLLM.getQuota.tokensPerWeek}, ${toString githubCopilotLLM.getQuota.tokensPerWeek}, ${toString openaiCodexLLM.getQuota.tokensPerWeek}];
+          total_tokens = [${toString llmProviders.gemini.getQuota.totalTokens}, ${toString llmProviders.groq.getQuota.totalTokens}, ${toString llmProviders.amazonq.getQuota.totalTokens}, ${toString llmProviders.github-copilot.getQuota.totalTokens}, ${toString llmProviders.openai-codex.getQuota.totalTokens}];
+          remaining_tokens = [${toString llmProviders.gemini.getQuota.remainingTokens}, ${toString llmProviders.groq.getQuota.remainingTokens}, ${toString llmProviders.amazonq.getQuota.remainingTokens}, ${toString llmProviders.github-copilot.getQuota.remainingTokens}, ${toString llmProviders.openai-codex.getQuota.remainingTokens}];
+          tokens_per_minute = [${toString llmProviders.gemini.getQuota.tokensPerMinute}, ${toString llmProviders.groq.getQuota.tokensPerMinute}, ${toString llmProviders.amazonq.getQuota.tokensPerMinute}, ${toString llmProviders.github-copilot.getQuota.tokensPerMinute}, ${toString llmProviders.openai-codex.getQuota.tokensPerMinute}];
+          tokens_per_hour = [${toString llmProviders.gemini.getQuota.tokensPerHour}, ${toString llmProviders.groq.getQuota.tokensPerHour}, ${toString llmProviders.amazonq.getQuota.tokensPerHour}, ${toString llmProviders.github-copilot.getQuota.tokensPerHour}, ${toString llmProviders.openai-codex.getQuota.tokensPerHour}];
+          tokens_per_day = [${toString llmProviders.gemini.getQuota.tokensPerDay}, ${toString llmProviders.groq.getQuota.tokensPerDay}, ${toString llmProviders.amazonq.getQuota.tokensPerDay}, ${toString llmProviders.github-copilot.getQuota.tokensPerDay}, ${toString llmProviders.openai-codex.getQuota.tokensPerDay}];
+          tokens_per_week = [${toString llmProviders.gemini.getQuota.tokensPerWeek}, ${toString llmProviders.groq.getQuota.tokensPerWeek}, ${toString llmProviders.amazonq.getQuota.tokensPerWeek}, ${toString llmProviders.github-copilot.getQuota.tokensPerWeek}, ${toString llmProviders.openai-codex.getQuota.tokensPerWeek}];
 
           estimated_task_requests = [${toString task.estimatedUsage.estimatedRequests}];
           estimated_task_tokens = [${toString task.estimatedUsage.estimatedTokens}];
@@ -136,7 +124,7 @@ let
         # Measure actual usage after the LLM call
         actualUsage = llmModule.measureUsage task.gemini_prompt llmResponse;
 
-        derivationPath = createDerivationFile task.name llmResponse.derivationCode task.derivation_type;
+        derivationPath = createDerivationFile task.name llmResponse.derivationCode task.derivation_type task.llm_provider;
       in
       derivationPath; # Returns the path to the generated derivation
 

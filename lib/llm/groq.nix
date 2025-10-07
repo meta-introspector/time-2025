@@ -16,7 +16,7 @@ let
 in
 {
   callApi = prompt: {
-    derivationCode = "# Groq generated code for: ${prompt}";
+    derivationCode = "{ pkgs, lib, ... }: { initialBootstrapState = { message = \"Groq generated initial bootstrap state for: ${prompt}\"; }; };";
   };
 
   inherit groqApiEndpoint getGroqApiKey;

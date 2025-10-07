@@ -16,7 +16,7 @@ let
 in
 {
   callApi = prompt: {
-    derivationCode = "# AmazonQ generated code for: ${prompt}";
+    derivationCode = "{ pkgs, lib, ... }: { initialBootstrapState = { message = \"AmazonQ generated initial bootstrap state for: ${prompt}\"; }; };";
   };
 
   inherit amazonqApiEndpoint getAmazonQCredentials;

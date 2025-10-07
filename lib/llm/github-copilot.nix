@@ -16,7 +16,7 @@ let
 in
 {
   callApi = prompt: {
-    derivationCode = "# GitHub Copilot generated code for: ${prompt}";
+    derivationCode = "{ pkgs, lib, ... }: { initialBootstrapState = { message = \"GitHub Copilot generated initial bootstrap state for: ${prompt}\"; }; };";
   };
 
   inherit githubCopilotApiEndpoint getGithubCopilotToken;

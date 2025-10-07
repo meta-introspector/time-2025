@@ -1,4 +1,4 @@
-{ pkgs, lib, sopsSecretsPath, ... }:
+{ pkgs, lib, ... }:
 
 let
   # Define the Gemini API endpoint
@@ -6,23 +6,45 @@ let
 
   usageTracking = import ./usage-tracking.nix { inherit lib; };
 
-  # Function to get Gemini API key securely using sops-nix
-  getGeminiApiKey = pkgs.runCommand "gemini-api-key" {
-    buildInputs = [ pkgs.sops ];
-    sopsFile = "${sopsSecretsPath}/gemini-api-key.json"; # Assuming key is in a JSON file
-  } ''
-    mkdir -p $out
-    sops -d $sopsFile | jq -r '.apiKey' > $out/api-key
-  '';
+  # FIXME: Credential handling needs to be properly integrated.
+  # For now, we're commenting out direct API key retrieval.
+  # getGeminiApiKey = pkgs.runCommand "gemini-api-key" {
+  #   buildInputs = [ pkgs.jq ]; # jq is needed to parse the JSON
+  #   inherit hostGeminiHome;
+  # } ''
+  #   mkdir -p $out
+  #   # Assuming oauth_credentials.json contains the API key
+  #   cat "$hostGeminiHome/oauth_credentials.json" | jq -r '.api_key' > $out/api-key
+  # '';
 
 in
 {
-  # Function to call the Gemini API
-  callApi = prompt: {
-    # For now, just return a mock response
-    # FIXME: Implement actual API call using pkgs.curl or similar
-    derivationCode = "# Gemini generated code for: ${prompt}";
-  };
+  # FIXME: The actual Gemini API call is commented out.
+  # This function should invoke the gemini-cli agent or make a direct API call.
+  # callApi = prompt: pkgs.runCommand "gemini-api-call" {
+  #   buildInputs = [ pkgs.curl pkgs.jq ];
+  #   GEMINI_API_KEY_FILE = "MOCK_API_KEY"; # FIXME: Use proper API key retrieval
+  #   GEMINI_API_ENDPOINT = geminiApiEndpoint;
+  #   PROMPT = prompt;
+  #   # Mark this derivation as impure, as it makes an external API call
+  #   # This is a placeholder for a more robust impurity management system.
+  #   __impure = true;
+  # } ''
+  #   API_KEY=$(cat $GEMINI_API_KEY_FILE)
+  #   REQUEST_BODY=$(jq -n --arg prompt "$PROMPT" '{contents: [{parts: [{text: $prompt}]}]}')
+
+  #   # Make the API call
+  #   RESPONSE=$(curl -s -X POST -H "Content-Type: application/json" \
+  #     "$GEMINI_API_ENDPOINT$API_KEY" \
+  #     -d "$REQUEST_BODY")
+
+  #   # Extract the generated text
+  #   GENERATED_TEXT=$(echo "$RESPONSE" | jq -r '.candidates[0].content.parts[0].text')
+
+  #   # Write the generated text to the output
+  #   mkdir -p $out
+  #   echo "$GENERATED_TEXT" > $out/derivation-code.nix
+  # '';
 
   # Expose the API endpoint and key getter for potential debugging or direct use
   inherit geminiApiEndpoint getGeminiApiKey;

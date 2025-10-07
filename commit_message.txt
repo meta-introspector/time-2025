@@ -1,8 +1,0 @@
-feat: Scaffold Lean4 and Rust code generation functors
-
-Introduced `lib/code-generation/functor-matrix.nix` to establish a
-scaffold for generating Lean4 and Rust code from Nix expressions.
-This module defines placeholder functors for each AST node type,
-enabling future development of automated code generation for formal
-verification (Lean4) and high-performance execution (Rust).
-Also includes a placeholder for emoji-to-vernacular JSON conversion.

@@ -44,7 +44,5 @@ let
   };
 
 in {
-  llmQuotaSchema = llmQuotaSchema;
-  llmEstimatedUsageSchema = llmEstimatedUsageSchema;
-  llmMeasuredUsageSchema = llmMeasuredUsageSchema;
+  inherit llmQuotaSchema llmEstimatedUsageSchema llmMeasuredUsageSchema;
 }
