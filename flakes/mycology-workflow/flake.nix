@@ -4,13 +4,10 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-
-    hackathonPumlFlake = {
-      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/hackathon-mycology-workflow-puml";
-    };
+    spore-vial.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/hackathon-mycology-workflow-puml";
   };
 
-  outputs = { self, nixpkgs, flake-utils, dataSources, hackathonPumlFlake }:
+  outputs = { self, nixpkgs, flake-utils, dataSources, spore-vial }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -38,7 +35,7 @@
           minizinc_solver = pkgs.writeText "minizinc-solver" "minizinc solver placeholder";
         };
 
-        mycologyWorkflowPuml = import hackathonPumlFlake.packages.${system}.default {
+        mycologyWorkflowPuml = import spore-vial.packages.${system}.default {
           inherit pkgs lib monster_genome_data formal_triad_env;
         };
       in
