@@ -3,9 +3,9 @@
 let
   # Placeholder for Lean4 code generation functors
   lean4Generators = {
-    int = ast: "-- Lean4 int code for: ${builtins.toJSON ast}";
-    string = ast: "-- Lean4 string code for: ${builtins.toJSON ast}";
-    list = ast: "-- Lean4 list code for: ${builtins.toJSON ast}";
+    int = ast: "def int_val : Nat := ${toString ast};";
+    string = ast: "def string_val : String := \"${ast}\";";
+    list = ast: "def list_val : List Nat := [${lib.concatStringsSep ", " (lib.map toString ast)}];";
     attrset = ast: "-- Lean4 attrset code for: ${builtins.toJSON ast}";
     lambda = ast: "-- Lean4 lambda code for: ${builtins.toJSON ast}";
     letIn = ast: "-- Lean4 letIn code for: ${builtins.toJSON ast}";
@@ -15,9 +15,9 @@ let
 
   # Placeholder for Rust code generation functors
   rustGenerators = {
-    int = ast: "// Rust int code for: ${builtins.toJSON ast}";
-    string = ast: "// Rust string code for: ${builtins.toJSON ast}";
-    list = ast: "// Rust list code for: ${builtins.toJSON ast}";
+    int = ast: "const INT_VAL: i32 = ${toString ast};";
+    string = ast: "const STRING_VAL: &str = \"${ast}\";";
+    list = ast: "const LIST_VAL: &[i32] = &[${lib.concatStringsSep ", " (lib.map toString ast)}];";
     attrset = ast: "// Rust attrset code for: ${builtins.toJSON ast}";
     lambda = ast: "// Rust lambda code for: ${builtins.toJSON ast}";
     letIn = ast: "// Rust letIn code for: ${builtins.toJSON ast}";
