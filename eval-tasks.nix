@@ -1,9 +1,14 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  tasks = import ./generate-derivations.nix { inherit (pkgs) lib; };
-  # Convert the Nix list of strings to a single string with newlines
-  tasksString = pkgs.lib.concatStringsSep "\n" tasks;
+  # Import the list of task attribute sets
+  taskAttributeSets = import ./generate-derivations.nix { inherit (pkgs) lib; };
+
+  # Map each task attribute set to a string representation
+  taskStrings = pkgs.lib.map (task: task.name + ": " + task.gemini_prompt) taskAttributeSets;
+
+  # Convert the list of strings to a single string with newlines
+  tasksString = pkgs.lib.concatStringsSep "\n" taskStrings;
 in
 pkgs.runCommand "generated-tasks" {} ''
   echo "${tasksString}" > "$out"
