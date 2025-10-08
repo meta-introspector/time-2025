@@ -47,9 +47,8 @@
 
         # Invoke the consolidated-impure-gemini-telemetry flake
         # This will run the telemetry script and produce logs/telemetry
-        geminiFruitingBody = consolidated-impure-gemini-telemetry.packages.${system}.default {
-          inherit (args) vial filePath; # Pass the vial input and filePath to the telemetry flake
-          inherit mycologyContext; # Pass the mycologyContext
+        geminiFruitingBody = consolidated-impure-gemini-telemetry.outputs.default { 
+          inherit (args) vial filePath mycologyContext; 
         };
       in
       {
