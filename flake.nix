@@ -3,7 +3,7 @@
 
   inputs = {
     # 1. Access the source code of this flake itself (last stable self)
-    self.url = "github:meta-introspector/streamofrandom?ref=feature/foaf"; # Assuming current branch is stable self
+    self.url = "github:meta-introspector/time-2025?ref=feature/foaf"; # Assuming current branch is stable self
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     # 2. Integrate the Introspection Tooling (Quasiquotation Extraction)
     nixIntrospector.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; # Placeholder ref, acts as LIL/QQC for Nix expressions

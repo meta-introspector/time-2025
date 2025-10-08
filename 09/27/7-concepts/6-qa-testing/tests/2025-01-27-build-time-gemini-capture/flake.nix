@@ -8,7 +8,7 @@
 
   };
 
-  outputs = { self, nixpkgs, flake-utils, gemini-cli } @ inputs:
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, geminiCredsDir ? "${geminiCredsDir}" } @ inputs:
     let
       eachSystem = flake-utils.lib.eachDefaultSystem;
     in
@@ -48,7 +48,6 @@
 	    find .
 	    pwd
 	    #	    ls -latr /creds/google_accounts.json || echo skip
-	    #ls -latr /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/time-2025/09/27/7-concepts/creds/google_accounts.json || echo skip
 	    #~/.gemini/google_accounts.json
             # Set HOME to a writable temporary directory for gemini-cli 
             export HOME=$(mktemp -d)
@@ -64,9 +63,9 @@
 	    #find / || echo error
             echo "======================================="
             mkdir -p $HOME/.gemini/
-            cp /data/data/com.termux.nix/files/home/.gemini/settings.json $HOME/.gemini/
-	    cp /data/data/com.termux.nix/files/home/.gemini/oauth_creds.json $HOME/.gemini/
-   	    cp /data/data/com.termux.nix/files/home/.gemini/google_accounts.json $HOME/.gemini/
+            cp ${geminiCredsDir}/settings.json $HOME/.gemini/
+	    cp ${geminiCredsDir}/oauth_creds.json $HOME/.gemini/
+   	    cp ${geminiCredsDir}/google_accounts.json $HOME/.gemini/
             echo "✅ Copied credential files from /creds/ to $HOME/.gemini/"
             echo ""
             echo "=== Contents of $HOME/.gemini/ ==="

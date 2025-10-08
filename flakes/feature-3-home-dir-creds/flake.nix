@@ -13,7 +13,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, gemini-cli, credentialSetup, ... }:
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, credentialSetup, hostGeminiHome ? "/data/data/com.termux.nix/files/home/.gemini", ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -21,7 +21,7 @@
 
         # The path to the user's actual ~/.gemini directory on the host
         # This makes the flake impure, but necessary for this feature
-        hostGeminiHome = "/data/data/com.termux.nix/files/home/.gemini";
+        # hostGeminiHome is now configurable via flake inputs or defaults to the hardcoded path
 
         # Use the credentialSetup module to create a derivation that sets up credentials
         geminiCredsDerivation = credentialSetup {

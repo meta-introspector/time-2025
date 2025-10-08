@@ -7,17 +7,19 @@
     gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
     vial.url = "path:./vial-placeholder"; # Placeholder for the actual vial flake
     mycologyContext = { }; # Optional input for mycology framework context
+    credsSourceDir.url = "path:./default-creds-source"; # Default placeholder for the creds source directory
   };
 
-  outputs = { self, nixpkgs, flake-utils, gemini-cli, vial } @ args: { filePath, mycologyContext }:
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, credsSourceDir ? "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/time-2025/09/27/7-concepts/creds", filePath ? null } @ inputs:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        inherit (mycologyContext) sopsSecretsPath; # Example: inherit sopsSecretsPath if provided by mycologyContext
+        # sopsSecretsPath = lib.attrByPath [ "sopsSecretsPath" ] null mycologyContext;
+
         # Read the content of the file
         fileContent = builtins.readFile filePath;
 
-        geminiPrompt = vial.lib.getPrompt { inherit pkgs fileContent; }; # Pass fileContent
+        geminiPrompt = inputs.vial.lib.getPrompt { inherit pkgs fileContent; }; # Pass fileContent
 
         # Test script for impure telemetry capture and credential handling
         impureTelemetryScript = pkgs.writeShellScript "impure-telemetry" ''
@@ -36,8 +38,8 @@
           # In a real scenario, this would need to be handled more robustly, e.g., via sops-nix or explicit passing.
           # For this test, we'll simulate its presence or assume it's copied by the build system.
           # For now, we'll just check for its existence and warn if not found.
-          if [ -d "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/time-2025/09/27/7-concepts/creds" ]; then
-            cp -r /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/time-2025/09/27/7-concepts/creds/* creds/
+          if [ -d "${credsSourceDir}" ]; then
+            cp -r ${credsSourceDir}/* creds/
             echo "Attempting to copy credential files from creds/"
             ls -la creds/ # Check if creds directory exists and its contents
             GEMINI_CONFIG_DIR="/tmp/.gemini" # Use a known writable temporary directory
@@ -94,7 +96,7 @@
         '';
 
         # Impure derivation for telemetry capture
-        impureGeminiTelemetry = pkgs.stdenv.mkDerivation {
+        impureGeminiTelemetry = { filePath, mycologyContext }: pkgs.stdenv.mkDerivation {
           pname = "consolidated-impure-gemini-telemetry";
           version = "1.0";
 
@@ -145,7 +147,7 @@
           impureGeminiTelemetry { inherit filePath mycologyContext; };
 
         packages.default = impureGeminiTelemetry {
-          filePath = "default-path.nix"; # Provide a default path for the default package
+          #filePath = "default-path.nix"; # Provide a default path for the default package
           mycologyContext = { }; # Provide a default context
         };
 

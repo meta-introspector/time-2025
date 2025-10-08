@@ -5,7 +5,7 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     time2025-src.url = "github:meta-introspector/time-2025?ref=feature/foaf"; # Source for nixCodeIndexerModule and nGramGeneratorModule
-    rootFlake.url = "github:meta-introspector/streamofrandom?ref=feature/foaf";
+    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/foaf";
   };
 
   outputs = { self, nixpkgs, flake-utils, time2025-src, rootFlake }:
