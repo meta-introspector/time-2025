@@ -12,6 +12,11 @@
     sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
     node2nix-src.url = "github:meta-introspector/node2nix";
 
+    spore-vial = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/hackathon-mycology-workflow-puml";
+      flake = false; # Since it's a directory, not a flake itself
+    };
+
     # 4. Ontology repository for Nix concepts
     nixOntologyRepo = {
       url = "github:meta-introspector/ontology";
@@ -24,6 +29,16 @@
       inputs = {
         nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
         flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      };
+    };
+
+    mycologyWorkflow = {
+      url = "./flakes/mycology-workflow";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "nixIntrospector"; # Assuming nixIntrospector provides flake-utils
+        dataSources.follows = "dataSources";
+        spore-vial.follows = "spore-vial";
       };
     };
   };
