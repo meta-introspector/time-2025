@@ -28,7 +28,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src, mycologyWorkflow, dataSources, hackathonPumlFlake, ... }:
+  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src, mycologyWorkflow, dataSources, ... }:
     let
       system = "aarch64-linux"; # Hardcode system as per user instruction
       # Load core utilities
