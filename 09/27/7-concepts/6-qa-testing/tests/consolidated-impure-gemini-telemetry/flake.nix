@@ -10,16 +10,13 @@
     credsSourceDir.url = "path:./default-creds-source"; # Default placeholder for the creds source directory
   };
 
-  outputs = { self, nixpkgs, flake-utils, gemini-cli, credsSourceDir ? "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/time-2025/09/27/7-concepts/creds", filePath ? null } @ inputs:
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, credsSourceDir ? "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/time-2025/09/27/7-concepts/creds" } @ inputs:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
         # sopsSecretsPath = lib.attrByPath [ "sopsSecretsPath" ] null mycologyContext;
 
-        # Read the content of the file
-        fileContent = builtins.readFile filePath;
 
-        geminiPrompt = inputs.vial.lib.getPrompt { inherit pkgs fileContent; }; # Pass fileContent
 
         # Test script for impure telemetry capture and credential handling
         impureTelemetryScript = pkgs.writeShellScript "impure-telemetry" ''
@@ -96,7 +93,7 @@
         '';
 
         # Impure derivation for telemetry capture
-        impureGeminiTelemetry = { filePath, mycologyContext }: pkgs.stdenv.mkDerivation {
+        impureGeminiTelemetry = {  mycologyContext }: pkgs.stdenv.mkDerivation {
           pname = "consolidated-impure-gemini-telemetry";
           version = "1.0";
 
@@ -143,11 +140,10 @@
         };
       in
       {
-        lib.runTelemetry = { filePath, mycologyContext }:
-          impureGeminiTelemetry { inherit filePath mycologyContext; };
+        lib.runTelemetry = { mycologyContext }: impureGeminiTelemetry { inherit mycologyContext; };
 
         packages.default = impureGeminiTelemetry {
-          #filePath = "default-path.nix"; # Provide a default path for the default package
+
           mycologyContext = { }; # Provide a default context
         };
 

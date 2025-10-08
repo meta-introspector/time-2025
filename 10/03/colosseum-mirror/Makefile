@@ -1,3 +1,18 @@
+include ../../../../../../../../../../../../../../scripts/nix_eval_module.mk
+
+
+include scripts/nix_eval_module.mk
+
+
+include ../../../../scripts/nix_eval_module.mk
+
+
+include 11662(python3 -c 'import os; print(os.path.relpath("/scripts", "./10/03/colosseum-mirror"))')/nix_eval_module.mk
+
+
+include /nix_eval_module.mk
+
+
 # This is a Makefile, a tool that helps automate tasks like building software.
 # It defines a set of "targets" (like 'build', 'clean', 'shell', 'archive-daily')
 # and the commands needed to achieve those targets.
@@ -102,4 +117,24 @@ develop.log: flake.nix
 	@echo "--- develop.log created for 19214(pwd) ---"
 
 # TODO: Add dependencies on flake inputs here. This might require parsing flake.lock or evaluating the flake.
+
+
+.PHONY: test-flake
+
+test-flake: flake.nix
+	@echo "--- Testing flake.nix with nix eval ---"
+	@nix eval --raw ./flake.nix > flake.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for flake.nix. Check flake.eval.log for details."
+		cat flake.eval.log; 		exit 1; 	}
+	@echo "--- flake.nix test complete. Output in flake.eval.log ---"
+
+
+
+.PHONY: test-uncommitted
+
+test-uncommitted: uncommitted.nix
+	@echo "--- Testing uncommitted.nix with nix eval ---"
+	@nix eval --raw ./uncommitted.nix > uncommitted.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for uncommitted.nix. Check uncommitted.eval.log for details."
+		cat uncommitted.eval.log; 		exit 1; 	}
+	@echo "--- uncommitted.nix test complete. Output in uncommitted.eval.log ---"
+
 

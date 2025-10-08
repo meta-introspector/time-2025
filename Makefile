@@ -1,3 +1,27 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Makefile for topological Nix builds
 
 .PHONY: all pre-nix-check build-foaf-context
@@ -410,7 +434,6 @@ simulate-orchestrator:
 	@echo "--- Orchestrator Simulation Complete. Check ./result/bootstrap-state.nix for output. ---"
 
 # Define PROJECT_ROOT relative to this Makefile's location
-PROJECT_ROOT := $(shell pwd)
 
 # Define SYNAPSE_SUBMODULE_PATH relative to PROJECT_ROOT
 SYNAPSE_SUBMODULE_PATH := $(PROJECT_ROOT)/09/26/synapse-system
@@ -485,4 +508,345 @@ run-orchestrator-with-vial: pre-nix-check
 	fi
 	@nix run .#orchestrator -- --argstr targetFilePath "$(FILE_PATH)"
 	@echo "--- Orchestrator with Vial Run Complete ---"
+
+
+.PHONY: develop.log
+
+develop.log: flake.nix
+	@echo "--- Running nix develop for 7720(pwd) and logging output to develop.log ---"
+	@nix develop --command echo "Successfully entered develop shell for 7720(pwd)" > develop.log 2>&1 || { 		echo "ERROR: nix develop failed for 7720(pwd). Check develop.log for details."
+		cat develop.log; 		exit 1; 	}
+	@echo "--- develop.log created for 7720(pwd) ---"
+
+# TODO: Add dependencies on flake inputs here. This might require parsing flake.lock or evaluating the flake.
+
+
+.PHONY: test-bug_repro
+
+test-bug_repro: bug_repro.nix
+	@echo "--- Testing bug_repro.nix with nix eval ---"
+	@nix eval --raw ./bug_repro.nix > bug_repro.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for bug_repro.nix. Check bug_repro.eval.log for details."
+		cat bug_repro.eval.log; 		exit 1; 	}
+	@echo "--- bug_repro.nix test complete. Output in bug_repro.eval.log ---"
+
+
+
+.PHONY: test-commit-msg-check
+
+test-commit-msg-check: commit-msg-check.nix
+	@echo "--- Testing commit-msg-check.nix with nix eval ---"
+	@nix eval --raw ./commit-msg-check.nix > commit-msg-check.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for commit-msg-check.nix. Check commit-msg-check.eval.log for details."
+		cat commit-msg-check.eval.log; 		exit 1; 	}
+	@echo "--- commit-msg-check.nix test complete. Output in commit-msg-check.eval.log ---"
+
+
+
+.PHONY: test-crq-parser
+
+test-crq-parser: crq-parser.nix
+	@echo "--- Testing crq-parser.nix with nix eval ---"
+	@nix eval --raw ./crq-parser.nix > crq-parser.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for crq-parser.nix. Check crq-parser.eval.log for details."
+		cat crq-parser.eval.log; 		exit 1; 	}
+	@echo "--- crq-parser.nix test complete. Output in crq-parser.eval.log ---"
+
+
+
+.PHONY: test-default
+
+test-default: default.nix
+	@echo "--- Testing default.nix with nix eval ---"
+	@nix eval --raw ./default.nix > default.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for default.nix. Check default.eval.log for details."
+		cat default.eval.log; 		exit 1; 	}
+	@echo "--- default.nix test complete. Output in default.eval.log ---"
+
+
+
+.PHONY: test-eval-output
+
+test-eval-output: eval-output.nix
+	@echo "--- Testing eval-output.nix with nix eval ---"
+	@nix eval --raw ./eval-output.nix > eval-output.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for eval-output.nix. Check eval-output.eval.log for details."
+		cat eval-output.eval.log; 		exit 1; 	}
+	@echo "--- eval-output.nix test complete. Output in eval-output.eval.log ---"
+
+
+
+.PHONY: test-eval-tasks
+
+test-eval-tasks: eval-tasks.nix
+	@echo "--- Testing eval-tasks.nix with nix eval ---"
+	@nix eval --raw ./eval-tasks.nix > eval-tasks.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for eval-tasks.nix. Check eval-tasks.eval.log for details."
+		cat eval-tasks.eval.log; 		exit 1; 	}
+	@echo "--- eval-tasks.nix test complete. Output in eval-tasks.eval.log ---"
+
+
+
+.PHONY: test-example_url_fetch
+
+test-example_url_fetch: example_url_fetch.nix
+	@echo "--- Testing example_url_fetch.nix with nix eval ---"
+	@nix eval --raw ./example_url_fetch.nix > example_url_fetch.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for example_url_fetch.nix. Check example_url_fetch.eval.log for details."
+		cat example_url_fetch.eval.log; 		exit 1; 	}
+	@echo "--- example_url_fetch.nix test complete. Output in example_url_fetch.eval.log ---"
+
+
+
+.PHONY: test-flake
+
+test-flake: flake.nix
+	@echo "--- Testing flake.nix with nix eval ---"
+	@nix eval --raw ./flake.nix > flake.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for flake.nix. Check flake.eval.log for details."
+		cat flake.eval.log; 		exit 1; 	}
+	@echo "--- flake.nix test complete. Output in flake.eval.log ---"
+
+
+
+.PHONY: test-generate-derivations
+
+test-generate-derivations: generate-derivations.nix
+	@echo "--- Testing generate-derivations.nix with nix eval ---"
+	@nix eval --raw ./generate-derivations.nix > generate-derivations.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for generate-derivations.nix. Check generate-derivations.eval.log for details."
+		cat generate-derivations.eval.log; 		exit 1; 	}
+	@echo "--- generate-derivations.nix test complete. Output in generate-derivations.eval.log ---"
+
+
+
+.PHONY: test-github-graphql-error-fix-01
+
+test-github-graphql-error-fix-01: github-graphql-error-fix-01.nix
+	@echo "--- Testing github-graphql-error-fix-01.nix with nix eval ---"
+	@nix eval --raw ./github-graphql-error-fix-01.nix > github-graphql-error-fix-01.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for github-graphql-error-fix-01.nix. Check github-graphql-error-fix-01.eval.log for details."
+		cat github-graphql-error-fix-01.eval.log; 		exit 1; 	}
+	@echo "--- github-graphql-error-fix-01.nix test complete. Output in github-graphql-error-fix-01.eval.log ---"
+
+
+
+.PHONY: test-github-graphql-error-fix-02
+
+test-github-graphql-error-fix-02: github-graphql-error-fix-02.nix
+	@echo "--- Testing github-graphql-error-fix-02.nix with nix eval ---"
+	@nix eval --raw ./github-graphql-error-fix-02.nix > github-graphql-error-fix-02.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for github-graphql-error-fix-02.nix. Check github-graphql-error-fix-02.eval.log for details."
+		cat github-graphql-error-fix-02.eval.log; 		exit 1; 	}
+	@echo "--- github-graphql-error-fix-02.nix test complete. Output in github-graphql-error-fix-02.eval.log ---"
+
+
+
+.PHONY: test-hello_world
+
+test-hello_world: hello_world.nix
+	@echo "--- Testing hello_world.nix with nix eval ---"
+	@nix eval --raw ./hello_world.nix > hello_world.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for hello_world.nix. Check hello_world.eval.log for details."
+		cat hello_world.eval.log; 		exit 1; 	}
+	@echo "--- hello_world.nix test complete. Output in hello_world.eval.log ---"
+
+
+
+.PHONY: test-nix-indexer
+
+test-nix-indexer: nix-indexer.nix
+	@echo "--- Testing nix-indexer.nix with nix eval ---"
+	@nix eval --raw ./nix-indexer.nix > nix-indexer.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for nix-indexer.nix. Check nix-indexer.eval.log for details."
+		cat nix-indexer.eval.log; 		exit 1; 	}
+	@echo "--- nix-indexer.nix test complete. Output in nix-indexer.eval.log ---"
+
+
+
+.PHONY: test-orchestrator
+
+test-orchestrator: orchestrator.nix
+	@echo "--- Testing orchestrator.nix with nix eval ---"
+	@nix eval --raw ./orchestrator.nix > orchestrator.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for orchestrator.nix. Check orchestrator.eval.log for details."
+		cat orchestrator.eval.log; 		exit 1; 	}
+	@echo "--- orchestrator.nix test complete. Output in orchestrator.eval.log ---"
+
+
+
+.PHONY: test-project
+
+test-project: project.nix
+	@echo "--- Testing project.nix with nix eval ---"
+	@nix eval --raw ./project.nix > project.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for project.nix. Check project.eval.log for details."
+		cat project.eval.log; 		exit 1; 	}
+	@echo "--- project.nix test complete. Output in project.eval.log ---"
+
+
+
+.PHONY: test-qa
+
+test-qa: qa.nix
+	@echo "--- Testing qa.nix with nix eval ---"
+	@nix eval --raw ./qa.nix > qa.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for qa.nix. Check qa.eval.log for details."
+		cat qa.eval.log; 		exit 1; 	}
+	@echo "--- qa.nix test complete. Output in qa.eval.log ---"
+
+
+
+.PHONY: test-regex-generator
+
+test-regex-generator: regex-generator.nix
+	@echo "--- Testing regex-generator.nix with nix eval ---"
+	@nix eval --raw ./regex-generator.nix > regex-generator.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for regex-generator.nix. Check regex-generator.eval.log for details."
+		cat regex-generator.eval.log; 		exit 1; 	}
+	@echo "--- regex-generator.nix test complete. Output in regex-generator.eval.log ---"
+
+
+
+.PHONY: test-temp_step1_eval
+
+test-temp_step1_eval: temp_step1_eval.nix
+	@echo "--- Testing temp_step1_eval.nix with nix eval ---"
+	@nix eval --raw ./temp_step1_eval.nix > temp_step1_eval.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for temp_step1_eval.nix. Check temp_step1_eval.eval.log for details."
+		cat temp_step1_eval.eval.log; 		exit 1; 	}
+	@echo "--- temp_step1_eval.nix test complete. Output in temp_step1_eval.eval.log ---"
+
+
+
+.PHONY: test-simulate-orchestrator
+
+test-simulate-orchestrator: simulate-orchestrator.nix
+	@echo "--- Testing simulate-orchestrator.nix with nix eval ---"
+	@nix eval --raw ./simulate-orchestrator.nix > simulate-orchestrator.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for simulate-orchestrator.nix. Check simulate-orchestrator.eval.log for details."
+		cat simulate-orchestrator.eval.log; 		exit 1; 	}
+	@echo "--- simulate-orchestrator.nix test complete. Output in simulate-orchestrator.eval.log ---"
+
+
+
+.PHONY: test-static-orchestrator-prompt
+
+test-static-orchestrator-prompt: static-orchestrator-prompt.nix
+	@echo "--- Testing static-orchestrator-prompt.nix with nix eval ---"
+	@nix eval --raw ./static-orchestrator-prompt.nix > static-orchestrator-prompt.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for static-orchestrator-prompt.nix. Check static-orchestrator-prompt.eval.log for details."
+		cat static-orchestrator-prompt.eval.log; 		exit 1; 	}
+	@echo "--- static-orchestrator-prompt.nix test complete. Output in static-orchestrator-prompt.eval.log ---"
+
+
+
+.PHONY: test-temp_step2_eval
+
+test-temp_step2_eval: temp_step2_eval.nix
+	@echo "--- Testing temp_step2_eval.nix with nix eval ---"
+	@nix eval --raw ./temp_step2_eval.nix > temp_step2_eval.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for temp_step2_eval.nix. Check temp_step2_eval.eval.log for details."
+		cat temp_step2_eval.eval.log; 		exit 1; 	}
+	@echo "--- temp_step2_eval.nix test complete. Output in temp_step2_eval.eval.log ---"
+
+
+
+.PHONY: test-test-commit-check
+
+test-test-commit-check: test-commit-check.nix
+	@echo "--- Testing test-commit-check.nix with nix eval ---"
+	@nix eval --raw ./test-commit-check.nix > test-commit-check.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for test-commit-check.nix. Check test-commit-check.eval.log for details."
+		cat test-commit-check.eval.log; 		exit 1; 	}
+	@echo "--- test-commit-check.nix test complete. Output in test-commit-check.eval.log ---"
+
+
+
+.PHONY: test-test-crq-search
+
+test-test-crq-search: test-crq-search.nix
+	@echo "--- Testing test-crq-search.nix with nix eval ---"
+	@nix eval --raw ./test-crq-search.nix > test-crq-search.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for test-crq-search.nix. Check test-crq-search.eval.log for details."
+		cat test-crq-search.eval.log; 		exit 1; 	}
+	@echo "--- test-crq-search.nix test complete. Output in test-crq-search.eval.log ---"
+
+
+
+.PHONY: test-test_depth_eval
+
+test-test_depth_eval: test_depth_eval.nix
+	@echo "--- Testing test_depth_eval.nix with nix eval ---"
+	@nix eval --raw ./test_depth_eval.nix > test_depth_eval.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for test_depth_eval.nix. Check test_depth_eval.eval.log for details."
+		cat test_depth_eval.eval.log; 		exit 1; 	}
+	@echo "--- test_depth_eval.nix test complete. Output in test_depth_eval.eval.log ---"
+
+
+
+.PHONY: test-test_detailed_analysis_eval
+
+test-test_detailed_analysis_eval: test_detailed_analysis_eval.nix
+	@echo "--- Testing test_detailed_analysis_eval.nix with nix eval ---"
+	@nix eval --raw ./test_detailed_analysis_eval.nix > test_detailed_analysis_eval.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for test_detailed_analysis_eval.nix. Check test_detailed_analysis_eval.eval.log for details."
+		cat test_detailed_analysis_eval.eval.log; 		exit 1; 	}
+	@echo "--- test_detailed_analysis_eval.nix test complete. Output in test_detailed_analysis_eval.eval.log ---"
+
+
+
+.PHONY: test-test_eval
+
+test-test_eval: test_eval.nix
+	@echo "--- Testing test_eval.nix with nix eval ---"
+	@nix eval --raw ./test_eval.nix > test_eval.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for test_eval.nix. Check test_eval.eval.log for details."
+		cat test_eval.eval.log; 		exit 1; 	}
+	@echo "--- test_eval.nix test complete. Output in test_eval.eval.log ---"
+
+
+
+.PHONY: test-test_knuthian_eval
+
+test-test_knuthian_eval: test_knuthian_eval.nix
+	@echo "--- Testing test_knuthian_eval.nix with nix eval ---"
+	@nix eval --raw ./test_knuthian_eval.nix > test_knuthian_eval.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for test_knuthian_eval.nix. Check test_knuthian_eval.eval.log for details."
+		cat test_knuthian_eval.eval.log; 		exit 1; 	}
+	@echo "--- test_knuthian_eval.nix test complete. Output in test_knuthian_eval.eval.log ---"
+
+
+
+.PHONY: test-test_literal_analysis_eval
+
+test-test_literal_analysis_eval: test_literal_analysis_eval.nix
+	@echo "--- Testing test_literal_analysis_eval.nix with nix eval ---"
+	@nix eval --raw ./test_literal_analysis_eval.nix > test_literal_analysis_eval.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for test_literal_analysis_eval.nix. Check test_literal_analysis_eval.eval.log for details."
+		cat test_literal_analysis_eval.eval.log; 		exit 1; 	}
+	@echo "--- test_literal_analysis_eval.nix test complete. Output in test_literal_analysis_eval.eval.log ---"
+
+
+
+.PHONY: test-test
+
+test-test: test.nix
+	@echo "--- Testing test.nix with nix eval ---"
+	@nix eval --raw ./test.nix > test.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for test.nix. Check test.eval.log for details."
+		cat test.eval.log; 		exit 1; 	}
+	@echo "--- test.nix test complete. Output in test.eval.log ---"
+
+
+
+.PHONY: test-test_size
+
+test-test_size: test_size.nix
+	@echo "--- Testing test_size.nix with nix eval ---"
+	@nix eval --raw ./test_size.nix > test_size.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for test_size.nix. Check test_size.eval.log for details."
+		cat test_size.eval.log; 		exit 1; 	}
+	@echo "--- test_size.nix test complete. Output in test_size.eval.log ---"
+
+
+
+.PHONY: test-test_size_eval
+
+test-test_size_eval: test_size_eval.nix
+	@echo "--- Testing test_size_eval.nix with nix eval ---"
+	@nix eval --raw ./test_size_eval.nix > test_size_eval.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for test_size_eval.nix. Check test_size_eval.eval.log for details."
+		cat test_size_eval.eval.log; 		exit 1; 	}
+	@echo "--- test_size_eval.nix test complete. Output in test_size_eval.eval.log ---"
+
+
+
+.PHONY: test-test_statix
+
+test-test_statix: test_statix.nix
+	@echo "--- Testing test_statix.nix with nix eval ---"
+	@nix eval --raw ./test_statix.nix > test_statix.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for test_statix.nix. Check test_statix.eval.log for details."
+		cat test_statix.eval.log; 		exit 1; 	}
+	@echo "--- test_statix.nix test complete. Output in test_statix.eval.log ---"
+
+
+
+.PHONY: test-uncommitted
+
+test-uncommitted: uncommitted.nix
+	@echo "--- Testing uncommitted.nix with nix eval ---"
+	@nix eval --raw ./uncommitted.nix > uncommitted.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for uncommitted.nix. Check uncommitted.eval.log for details."
+		cat uncommitted.eval.log; 		exit 1; 	}
+	@echo "--- uncommitted.nix test complete. Output in uncommitted.eval.log ---"
+
 

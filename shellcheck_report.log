@@ -1,0 +1,109 @@
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/.synapse/neo4j/activate.sh line 153:
+        source "$VENV_DIR/bin/activate"
+               ^----------------------^ SC1091 (info): Not following: ./bin/activate was not specified as input (see shellcheck -x).
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/.synapse/neo4j/activate.sh line 189:
+    source "$VENV_DIR/bin/activate"
+           ^----------------------^ SC1091 (info): Not following: ./bin/activate was not specified as input (see shellcheck -x).
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/.synapse/neo4j/activate.sh line 207:
+    source "$VENV_DIR/bin/activate"
+           ^----------------------^ SC1091 (info): Not following: ./bin/activate was not specified as input (see shellcheck -x).
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/.synapse/neo4j/activate.sh line 279:
+    source "$VENV_DIR/bin/activate"
+           ^----------------------^ SC1091 (info): Not following: ./bin/activate was not specified as input (see shellcheck -x).
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/.synapse/neo4j/activate.sh line 339:
+    source "$VENV_DIR/bin/activate"
+           ^----------------------^ SC1091 (info): Not following: ./bin/activate was not specified as input (see shellcheck -x).
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/scripts/architect.sh line 4:
+source "$(dirname "${BASH_SOURCE[0]}")"/utils.sh
+       ^-- SC1091 (info): Not following: ./utils.sh was not specified as input (see shellcheck -x).
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/scripts/utils.sh line 14:
+    echo "--- Log Start: $(date) ---" >> "$log_file"
+    ^-- SC2129 (style): Consider using { cmd1; cmd2; } >> file instead of individual redirects.
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/from-nixpkgs/auto-patchelf.sh line 223:
+      [ -n "$(echo "$segmentHeaders" | grep '^Program Headers:')" ] || continue
+        ^-- SC2143 (style): Use grep -q instead of comparing output with [ -n .. ].
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/from-nixpkgs/auto-patchelf.sh line 226:
+          [ -n "$(echo "$segmentHeaders" | grep "^ *INTERP\\>")" ] || continue
+            ^-- SC2143 (style): Use grep -q instead of comparing output with [ -n .. ].
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/from-nixpkgs/auto-patchelf.sh line 258:
+postFixupHooks+=('
+                 ^-- SC2016 (info): Expressions don't expand in single quotes, use double quotes for that.
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/vendor/nix/pip2nix/bootstrap.sh line 35:
+        echo -e '\e[1m`virtualenv` not found, restarting self in a nix-shell\e[0m'
+                ^-- SC2016 (info): Expressions don't expand in single quotes, use double quotes for that.
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/vendor/nix/pynixify/acceptance_tests/test_command.sh line 131:
+    echo flask >> requirements2.txt
+    ^-----------------------------^ SC2129 (style): Consider using { cmd1; cmd2; } >> file instead of individual redirects.
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/10/08/hackathon/comment_creds_source_dir_usage.sh line 5:
+sed -i 's@^\s*if \[ -d "\${credsSourceDir}" \]; then@        # if [ -d "${credsSourceDir}" ]; then@g' "$FILE_TELEMETRY"
+       ^-- SC2016 (info): Expressions don't expand in single quotes, use double quotes for that.
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/10/08/hackathon/comment_creds_source_dir_usage.sh line 6:
+sed -i 's@^\s*cp -r \${credsSourceDir}/\* creds/@        # cp -r ${credsSourceDir}/* creds/@g' "$FILE_TELEMETRY"
+       ^-- SC2016 (info): Expressions don't expand in single quotes, use double quotes for that.
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/10/08/hackathon/integrate_homedir_creds.sh line 10:
+sed -i '/cp /data/data/com.termux.nix/files/home/.gemini/settings.json $HOME/.gemini/,/cp /data/data/com.termux.nix/files/home/.gemini/google_accounts.json $HOME/.gemini/c\
+       ^-- SC2016 (info): Expressions don't expand in single quotes, use double quotes for that.
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/10/08/hackathon/integrate_homedir_creds.sh line 14:
+sed -i 's@exec ${gemini-cli.packages.${system}.default}/bin/gemini-cli "$@"@exec ${homeDirCreds.packages.${system}.default}/bin/gemini-cli-with-home-creds "$@"@g' "$FILE_TELEMETRY"
+       ^-- SC2016 (info): Expressions don't expand in single quotes, use double quotes for that.
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/scripts/create_develop_makefiles.sh line 124:
+  if [ $? -ne 0 ]; then
+       ^-- SC2181 (style): Check exit code directly with e.g. 'if ! mycmd;', not indirectly with $?.
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/scripts/create_develop_makefiles.sh line 132:
+  if [ $? -ne 0 ]; then
+       ^-- SC2181 (style): Check exit code directly with e.g. 'if ! mycmd;', not indirectly with $?.
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/scripts/create_develop_makefiles.sh line 141:
+    if [ $? -ne 0 ]; then
+         ^-- SC2181 (style): Check exit code directly with e.g. 'if ! mycmd;', not indirectly with $?.
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/comment_creds_source_dir_usages.sh line 9:
+sed -i 's@^\s*if \[ -d "\${credsSourceDir}" \]; then@        # if [ -d "${credsSourceDir}" ]; then@g' "$FILE_TELEMETRY"
+       ^-- SC2016 (info): Expressions don't expand in single quotes, use double quotes for that.
+
+
+In /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/comment_creds_source_dir_usages.sh line 10:
+sed -i 's@^\s*cp -r \${credsSourceDir}/\* creds/@        # cp -r ${credsSourceDir}/* creds/@g' "$FILE_TELEMETRY"
+       ^-- SC2016 (info): Expressions don't expand in single quotes, use double quotes for that.
+
+For more information:
+  https://www.shellcheck.net/wiki/SC1091 -- Not following: ./bin/activate was...
+  https://www.shellcheck.net/wiki/SC2016 -- Expressions don't expand in singl...
+  https://www.shellcheck.net/wiki/SC2129 -- Consider using { cmd1; cmd2; } >>...

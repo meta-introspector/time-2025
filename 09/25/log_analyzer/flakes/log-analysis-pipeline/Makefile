@@ -1,3 +1,18 @@
+include ../../../../../../../../../../../../../../../../scripts/nix_eval_module.mk
+
+
+include scripts/nix_eval_module.mk
+
+
+include ../../../../../../scripts/nix_eval_module.mk
+
+
+include 11662(python3 -c 'import os; print(os.path.relpath("/scripts", "./09/25/log_analyzer/flakes/log-analysis-pipeline"))')/nix_eval_module.mk
+
+
+include /nix_eval_module.mk
+
+
 # Makefile for Nix-driven DevOps Pipeline
 
 .PHONY: all build-local build-docker deploy-cloudformation deploy-aws-codebuild deploy-aarch-server deploy-laptop deploy-android ci-github-actions build-impure-logs build-nar-logs index-nix-code build-2gram-index generate-2gram-report git-check-staged flake-update-meta-introspector flake-check
@@ -182,3 +197,54 @@ clean:
 	@echo "Cleaning Nix build results..."
 	rm -f result
 	@echo "Nix build results cleaned."
+
+.PHONY: develop.log
+
+develop.log: flake.nix
+	@echo "--- Running nix develop for 7720(pwd) and logging output to develop.log ---"
+	@nix develop --command echo "Successfully entered develop shell for 7720(pwd)" > develop.log 2>&1 || { 		echo "ERROR: nix develop failed for 7720(pwd). Check develop.log for details."
+		cat develop.log; 		exit 1; 	}
+	@echo "--- develop.log created for 7720(pwd) ---"
+
+# TODO: Add dependencies on flake inputs here. This might require parsing flake.lock or evaluating the flake.
+
+
+.PHONY: test-flake
+
+test-flake: flake.nix
+	@echo "--- Testing flake.nix with nix eval ---"
+	@nix eval --raw ./flake.nix > flake.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for flake.nix. Check flake.eval.log for details."
+		cat flake.eval.log; 		exit 1; 	}
+	@echo "--- flake.nix test complete. Output in flake.eval.log ---"
+
+
+
+.PHONY: test-test-log-analyzer-flake
+
+test-test-log-analyzer-flake: test-log-analyzer-flake.nix
+	@echo "--- Testing test-log-analyzer-flake.nix with nix eval ---"
+	@nix eval --raw ./test-log-analyzer-flake.nix > test-log-analyzer-flake.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for test-log-analyzer-flake.nix. Check test-log-analyzer-flake.eval.log for details."
+		cat test-log-analyzer-flake.eval.log; 		exit 1; 	}
+	@echo "--- test-log-analyzer-flake.nix test complete. Output in test-log-analyzer-flake.eval.log ---"
+
+
+
+.PHONY: test-test-meta-introspector-flake
+
+test-test-meta-introspector-flake: test-meta-introspector-flake.nix
+	@echo "--- Testing test-meta-introspector-flake.nix with nix eval ---"
+	@nix eval --raw ./test-meta-introspector-flake.nix > test-meta-introspector-flake.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for test-meta-introspector-flake.nix. Check test-meta-introspector-flake.eval.log for details."
+		cat test-meta-introspector-flake.eval.log; 		exit 1; 	}
+	@echo "--- test-meta-introspector-flake.nix test complete. Output in test-meta-introspector-flake.eval.log ---"
+
+
+
+.PHONY: test-test-secret-scanner-module
+
+test-test-secret-scanner-module: test-secret-scanner-module.nix
+	@echo "--- Testing test-secret-scanner-module.nix with nix eval ---"
+	@nix eval --raw ./test-secret-scanner-module.nix > test-secret-scanner-module.eval.log 2>&1 || { 		echo "ERROR: nix eval failed for test-secret-scanner-module.nix. Check test-secret-scanner-module.eval.log for details."
+		cat test-secret-scanner-module.eval.log; 		exit 1; 	}
+	@echo "--- test-secret-scanner-module.nix test complete. Output in test-secret-scanner-module.eval.log ---"
+
+

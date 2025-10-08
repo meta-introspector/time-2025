@@ -1,5 +1,5 @@
 rec {
-  impureGeminiTelemetryDerivation = { filePath, mycologyContext, pkgs, gemini-cli, flakeNixContent, inputs, system }:
+  impureGeminiTelemetryDerivation = { mycologyContext, pkgs, gemini-cli, flakeNixContent, inputs, system }:
     pkgs.stdenv.mkDerivation {
       pname = "consolidated-impure-gemini-telemetry";
       version = "1.0";

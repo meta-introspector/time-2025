@@ -19,6 +19,7 @@
           pname = "colosseum-website-mirror";
           version = "2025-10-03"; # Using today's date as version
 
+          dontUnpack = true;
           nativeBuildInputs = [ pkgs.httrack ];
 
           # The buildPhase will execute httrack to download the website.

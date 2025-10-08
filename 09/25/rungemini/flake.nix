@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
-    geminiCli.url = "github:google-gemini/gemini-cli";
+    geminiCli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
   };
 
   outputs = { self, nixpkgs, geminiCli, ... }:
