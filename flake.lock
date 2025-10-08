@@ -8,11 +8,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-9fzwyuCEPK7Bm/0Hmdu+oa2IX3hqFjWROa1MTipqHKM=",
-        "path": "/nix/store/vljihmkk0vrhb64cpp9vbjrqwzdhyzc3-source/flakes/data-sources",
+        "path": "/nix/store/jiydal8ywll2spx1rg1924mi4k6vzwzj-source/flakes/data-sources",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/vljihmkk0vrhb64cpp9vbjrqwzdhyzc3-source/flakes/data-sources",
+        "path": "/nix/store/jiydal8ywll2spx1rg1924mi4k6vzwzj-source/flakes/data-sources",
         "type": "path"
       }
     },
@@ -139,19 +139,16 @@
         ],
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "spore-vial": [
-          "spore-vial"
         ]
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-wSVX+8munqQhSfEvv3lAUi+Mbl2D2EE94vnLVORVJRU=",
-        "path": "/nix/store/vljihmkk0vrhb64cpp9vbjrqwzdhyzc3-source/flakes/mycology-workflow",
+        "narHash": "sha256-zXqBI3ElDmN+OdJY+/o2O68NjauQUIXt8DRHXeYLbq8=",
+        "path": "/nix/store/jiydal8ywll2spx1rg1924mi4k6vzwzj-source/flakes/mycology-workflow",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/vljihmkk0vrhb64cpp9vbjrqwzdhyzc3-source/flakes/mycology-workflow",
+        "path": "/nix/store/jiydal8ywll2spx1rg1924mi4k6vzwzj-source/flakes/mycology-workflow",
         "type": "path"
       }
     },
