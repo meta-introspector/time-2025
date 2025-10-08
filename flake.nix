@@ -111,7 +111,7 @@
           nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
           flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
           inherit dataSources; # Pass the dataSources path input
-          hackathonPumlFlake.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/hackathon-mycology-workflow-puml";
+          spore-vial.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/hackathon-mycology-workflow-puml";
         }).packages.${system}.default;
         # nixOntologyRepoPath = pkgs.runCommand "nix-ontology-repo-path" {} "ln -s ${nixOntologyRepo} $out"; # Expose nixOntologyRepo as a derivation
       };

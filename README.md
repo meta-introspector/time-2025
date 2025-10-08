@@ -28,14 +28,13 @@ git clone https://github.com/meta-introspector/streamofrandom.git
 cd streamofrandom/2025
 git submodule update --init --recursive
 ./scripts/onboard_project.sh
+pre-commit install
 ```
 
 ## Usage
 
 (Further usage instructions will be added here as the project evolves.)
 
-pre-commit install
-```
 
 ## Testing Specific Flakes
 
@@ -80,11 +79,12 @@ Our comprehensive documentation covers various aspects of the project, including
 *   **CRQs (Change Request Documents):** `docs/crqs/`
 *   **SOPs (Standard Operating Procedures):** `docs/sops/`
 *   **Tutorials & Guides:** `docs/tutorials/`
+    *   `docs/tutorials/Onboarding_Guide_for_Nix_Newcomers.md`
     *   `docs/tutorials/Contributing_with_CRQs_and_SOPs.md`
     *   `docs/Nix_and_Precommit_Setup.md`
     *   `docs/sops/SOP_Running_Nix_Tools.md`
 
 ## Contributing (CRQ-017)
 
-We welcome contributions! Please refer to our [Documentation](#documentation) for guidelines on contributing with CRQs and SOPs.
+We welcome contributions! Please refer to our [Onboarding Guide for Nix Newcomers](docs/tutorials/Onboarding_Guide_for_Nix_Newcomers.md) and [Contributing with CRQs and SOPs](docs/tutorials/Contributing_with_CRQs_and_SOPs.md) for detailed guidelines.
 
