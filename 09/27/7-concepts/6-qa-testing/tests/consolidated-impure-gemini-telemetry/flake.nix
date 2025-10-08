@@ -14,7 +14,6 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         inherit (mycologyContext) sopsSecretsPath; # Example: inherit sopsSecretsPath if provided by mycologyContext
-
         # Read the content of the file
         fileContent = builtins.readFile filePath;
 
