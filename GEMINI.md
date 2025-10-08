@@ -2,6 +2,9 @@
 
 This document provides context for the current task being performed by the Gemini CLI.
 
+**Date:** Wednesday, October 8, 2025
+**Operating System:** linux
+
 ### Current Working Directory
 `/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/`
 
@@ -24,3 +27,6 @@ This document provides context for the current task being performed by the Gemin
 - **Integration Method:** All external dependencies are to be integrated via `github:meta-introspector` URLs.
 - **Submodule Usage:** Submodules are *not* to be used for general integration of external dependencies. Their use is strictly reserved for scenarios involving *editing, pushing, and tagging* of those external repositories.
 - **Assumption:** It is expected that all necessary external dependencies are already checked in and labeled within the `github:meta-introspector` organization.
+
+### Global Context
+For broader context and general policies, please refer to `global_gemini.md`.

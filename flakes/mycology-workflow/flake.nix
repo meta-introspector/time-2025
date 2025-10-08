@@ -7,7 +7,7 @@
     consolidated-impure-gemini-telemetry.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry";
   };
 
-  outputs = { self, nixpkgs, flake-utils, dataSources, consolidated-impure-gemini-telemetry, filePath, ... } @ args:
+  outputs = { self, nixpkgs, flake-utils, dataSources, consolidated-impure-gemini-telemetry, ... } @ args:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -48,7 +48,7 @@
         # Invoke the consolidated-impure-gemini-telemetry flake
         # This will run the telemetry script and produce logs/telemetry
                 geminiFruitingBody = consolidated-impure-gemini-telemetry.lib.runTelemetry {
-                  inherit (args) vial filePath mycologyContext;
+                  inherit (args) vial mycologyContext;
                 };      in
       {
         packages.default = geminiFruitingBody;
