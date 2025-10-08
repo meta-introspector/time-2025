@@ -1,4 +1,4 @@
-{ pkgs, lib, mycologyWorkflow, nixpkgs, nixIntrospector, dataSources, sopsSecretsPath, zosSporeVial, nixToPoemVial, readMdVial, readRsVial, ... }:
+{ pkgs, lib, mycologyWorkflow, nixpkgs, nixIntrospector, dataSources, sopsSecretsPath, zosSporeVial, nixToPoemVial, readMdVial, readRsVial, targetFilePath ? null, ... }:
 
 let
   # Import necessary modules
@@ -25,15 +25,18 @@ let
       # Get the first valid file path from the list
       firstValidFilePath = lib.head (lib.filter (f: f != "") nixFiles);
 
-      # Select the appropriate vial flake for the first valid file
-      selectedVialFlake = if firstValidFilePath != null then selectVialFlake firstValidFilePath else zosSporeVial; # Fallback
+      # Determine the file path to process
+      fileToProcess = if targetFilePath != null then targetFilePath else firstValidFilePath;
 
-      # Invoke mycologyWorkflow with the first valid file path and the selected vial flake
-      fruitingBody = if firstValidFilePath != null then mycologyWorkflow.outputs.default {
+      # Select the appropriate vial flake for the file to process
+      selectedVialFlake = if fileToProcess != null then selectVialFlake fileToProcess else zosSporeVial; # Fallback
+
+      # Invoke mycologyWorkflow with the file to process and the selected vial flake
+      fruitingBody = if fileToProcess != null then mycologyWorkflow.outputs.default {
         inherit nixpkgs dataSources;
         flake-utils = nixIntrospector;
         vial = selectedVialFlake; # Pass the selected vial flake
-        filePath = firstValidFilePath; # Pass the file path
+        filePath = fileToProcess; # Pass the file path
         mycologyContext = { inherit sopsSecretsPath; };
       } else null; # Handle case where no valid file is found
     in
