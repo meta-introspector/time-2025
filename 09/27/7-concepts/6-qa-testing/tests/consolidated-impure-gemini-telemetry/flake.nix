@@ -5,12 +5,14 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+    vial.url = "path:./vial-placeholder"; # Placeholder for the actual vial flake
   };
 
-  outputs = { self, nixpkgs, flake-utils, gemini-cli }:
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, vial }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        geminiPrompt = vial.lib.getPrompt { inherit pkgs; };
 
         # Test script for impure telemetry capture and credential handling
         impureTelemetryScript = pkgs.writeShellScript "impure-telemetry" ''
@@ -80,7 +82,7 @@
           
           echo ""
           echo "Telemetry prompt test:"
-          timeout 60 ${gemini-cli.packages.${system}.default}/bin/gemini "Hello from GitHub impure derivation! Capturing telemetry for Nix store gemini.js integration." || echo "Prompt exit: $?"
+          timeout 60 ${gemini-cli.packages.${system}.default}/bin/gemini "${geminiPrompt}" || echo "Prompt exit: $?"
           
           echo ""
           echo "=== Telemetry Capture Complete ==="
