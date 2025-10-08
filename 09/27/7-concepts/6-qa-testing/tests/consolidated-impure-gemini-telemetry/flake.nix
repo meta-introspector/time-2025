@@ -9,16 +9,14 @@
     mycologyContext = { }; # Optional input for mycology framework context
   };
 
-  outputs = { self, nixpkgs, flake-utils, gemini-cli, vial, mycologyContext }:
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, vial, mycologyContext, filePath }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
         inherit (mycologyContext) sopsSecretsPath; # Example: inherit sopsSecretsPath if provided by mycologyContext
 
-        # Read the nixFilePath from the vial
-        inherit (vial.lib) nixFilePath;
         # Read the content of the file
-        fileContent = builtins.readFile nixFilePath; # Renamed from nixFileContent
+        fileContent = builtins.readFile filePath;
 
         geminiPrompt = vial.lib.getPrompt { inherit pkgs fileContent; }; # Pass fileContent
 

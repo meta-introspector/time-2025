@@ -1,4 +1,4 @@
-{ pkgs, lib, mycologyWorkflow, nixpkgs, nixIntrospector, dataSources, sopsSecretsPath, zosSporeVial, ... }:
+{ pkgs, lib, mycologyWorkflow, nixpkgs, nixIntrospector, dataSources, sopsSecretsPath, zosSporeVial, nixToPoemVial, readMdVial, readRsVial, ... }:
 
 let
   # Import necessary modules
@@ -8,61 +8,34 @@ let
   # Read the list of Nix files from index.nix.txt
   nixFiles = pkgs.lib.splitString "\n" (builtins.readFile ./index.nix.txt);
 
-  createVialForNixFile = nixFile:
-    pkgs.nix-build {
-      name = "vial-for-${(pkgs.lib.replaceStrings ["/"] ["-"] nixFile)}";
-      builder = pkgs.writeShellScript "builder" ''
-        mkdir -p $out/flake
-        cat > $out/flake/flake.nix << EOF
-        {
-          description = "Vial for Nix file: ${nixFile}.";
-          outputs = { self, ... }: {
-            lib.nixFilePath = "${nixFile}";
-            lib.getPrompt = { pkgs, nixFileContent }: "Inspect the Nix file at path: ${nixFile}. Provide a summary of its purpose, key functions, and any potential areas for improvement or optimization. Content: ${nixFileContent}";
-          };
-        }
-        EOF
-      '';
-    };
+  # Function to select the appropriate vial flake based on file extension
+  selectVialFlake = filePath:
+    let
+      extension = pkgs.lib.last (pkgs.lib.splitString "." filePath);
+    in
+    if extension == "nix" then nixToPoemVial
+    else if extension == "md" then readMdVial
+    else if extension == "rs" then readRsVial
+    else zosSporeVial; # Default vial
 
-  vials = lib.map createVialForNixFile nixFiles;
-
-  # Function to get the current global state (placeholder for now)
-  # In a real system, this would read from a persistent store
-  getGlobalState = {
-    # Dummy global state for now
-    currentLlmUsage = {
-      gemini = { requests = 100; tokens = 10000; };
-      groq = { requests = 50; tokens = 5000; };
-      # ... other LLMs
-    };
-    # ... other global state variables
-  };
-
-  # The main orchestration loop
   orchestrate = globalState:
     let
-      # Prepare data for the MiniZinc solver
-      # This will involve iterating through allTasks and current LLM quotas
-      # For now, we'll use a simplified approach and assume the solver
-      # is called within processTask for each task.
-      # FIXME: The MiniZinc solver should be called once with all tasks
-      # to determine the globally optimal next task.
+      # ... existing let bindings ...
 
-      # Find the best next task (simplified for now)
-      # This would ideally come from the MiniZinc solver's output
-      bestNextTask = lib.head allTasks; # Just pick the first task for now
+      # Get the first valid file path from the list
+      firstValidFilePath = lib.head (lib.filter (f: f != "") nixFiles);
 
-      # Process the best next task
-      newGlobalState = makeContext.processTask bestNextTask;
+      # Select the appropriate vial flake for the first valid file
+      selectedVialFlake = if firstValidFilePath != null then selectVialFlake firstValidFilePath else zosSporeVial; # Fallback
 
-      # Invoke mycologyWorkflow with the first valid vial
-      fruitingBody = if firstValidVial != null then mycologyWorkflow.outputs.default {
+      # Invoke mycologyWorkflow with the first valid file path and the selected vial flake
+      fruitingBody = if firstValidFilePath != null then mycologyWorkflow.outputs.default {
         inherit nixpkgs dataSources;
         flake-utils = nixIntrospector;
-        vial = firstValidVial;
+        vial = selectedVialFlake; # Pass the selected vial flake
+        filePath = firstValidFilePath; # Pass the file path
         mycologyContext = { inherit sopsSecretsPath; };
-      } else null; # Handle case where no valid vial is found
+      } else null; # Handle case where no valid file is found
     in
     # For now, let's just return the fruitingBody
     fruitingBody;
