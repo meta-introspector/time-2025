@@ -4,7 +4,18 @@
 
 # .PHONY declares targets that are not actual files. This prevents Make from
 # getting confused if a file with the same name as a target exists.
-.PHONY: all build clean shell archive-daily
+.PHONY: all build clean shell archive-daily pre-nix-check
+
+# Ensure no unstaged or uncommitted Nix files before running Nix commands.
+# This helps maintain purity and prevents accidental builds from dirty working directories.
+pre-nix-check:
+	@echo "--- Running pre-Nix check: Ensuring no unstaged or uncommitted Nix files ---"
+	@if git status --porcelain -- '*.nix' | grep -q .; then \
+		echo "ERROR: Unstaged or uncommitted Nix files found. Please commit or stash them before proceeding."; \
+		git status --porcelain -- '*.nix'; \
+		exit 1; \
+	fi
+	@echo "--- Pre-Nix check passed. No unstaged or uncommitted Nix files found. ---"
 
 # FLAKE_DIR is a variable that stores the absolute path to the directory
 # where this Makefile is located. This makes the Makefile portable,
@@ -21,7 +32,7 @@ all: build
 
 # The 'build' target is responsible for building our Nix derivation.
 # A Nix derivation is like a recipe for creating a software package or a file.
-build:
+build: pre-nix-check
 	# @echo prints a message to the console. The '@' prevents Make from
 	# printing the command itself before executing it, making the output cleaner.
 	@echo "Building the Colosseum website mirror using Nix..."
@@ -83,3 +94,12 @@ archive-daily:
 	# $(MAKE) clean tells Make to run the 'clean' target.
 	# This removes the 'result' symlink, leaving only the date-stamped archive.
 	$(MAKE) clean
+.PHONY: develop.log
+
+develop.log: flake.nix
+	@echo "--- Running nix develop for 19214(pwd) and logging output to develop.log ---"
+	@nix develop --command echo "Successfully entered develop shell for 19214(pwd)" > develop.log 2>&1 || { 		echo "ERROR: nix develop failed for 19214(pwd). Check develop.log for details."; 		cat develop.log; 		exit 1; 	}
+	@echo "--- develop.log created for 19214(pwd) ---"
+
+# TODO: Add dependencies on flake inputs here. This might require parsing flake.lock or evaluating the flake.
+
