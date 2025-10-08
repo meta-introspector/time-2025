@@ -1,0 +1,28 @@
+{
+  description = "Wrapper flake to call consolidated-impure-gemini-telemetry with a filePath input.";
+
+  inputs = {
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    consolidatedTelemetry.url = "path:../../09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry";
+    filePath.url = "path:./default-test-file.txt"; # Default placeholder for the file to be processed
+  };
+
+  outputs = { self, nixpkgs, flake-utils, consolidatedTelemetry, filePath, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
+        packages.default = consolidatedTelemetry.packages.${system}.default {
+          inherit filePath;
+          mycologyContext = { }; # Pass an empty context for now
+        };
+
+        apps.default = {
+          type = "app";
+          program = "${consolidatedTelemetry.apps.${system}.default.program} --filePath ${filePath}";
+        };
+      }
+    );
+}
