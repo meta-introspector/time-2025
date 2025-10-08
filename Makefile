@@ -468,7 +468,7 @@ run-gemini-with-sops:
 	rm -rf $(DECRYPTED_SECRETS_TMPDIR)
 	@echo "--- gemini-cli execution complete ---"
 
-.PHONY: build-gemini-with-sops-path
+.PHONY: build-gemini-with-sops-path run-orchestrator-with-vial
 build-gemini-with-sops-path:
 	@echo "--- Building geminiCliWithSecrets with explicit sops-secrets-dir path ---"
 	nix build --impure ./flakes/wrap-gemini-secrets#packages.aarch64-linux.geminiCliWithSecrets \
@@ -476,4 +476,13 @@ build-gemini-with-sops-path:
 	  --extra-sandbox-paths /data/data/com.termux.nix/files/home/.gnupg \
 	  --print-out-paths
 	@echo "--- Build complete ---"
+
+run-orchestrator-with-vial: pre-nix-check
+	@echo "--- Running Orchestrator with Vial for $(FILE_PATH) ---"
+	@if [ -z "$(FILE_PATH)" ]; then \
+		echo "ERROR: FILE_PATH is not provided. Usage: make run-orchestrator-with-vial FILE_PATH=./path/to/file.nix"; \
+		exit 1; \
+	fi
+	@nix run .#orchestrator -- --argstr targetFilePath "$(FILE_PATH)"
+	@echo "--- Orchestrator with Vial Run Complete ---"
 
