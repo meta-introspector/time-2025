@@ -37,8 +37,8 @@
           # In a real scenario, this would need to be handled more robustly, e.g., via sops-nix or explicit passing.
           # For this test, we'll simulate its presence or assume it's copied by the build system.
           # For now, we'll just check for its existence and warn if not found.
-          if [ -d "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/27/7-concepts/creds" ]; then
-            cp -r /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/27/7-concepts/creds/* creds/
+          if [ -d "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/time-2025/09/27/7-concepts/creds" ]; then
+            cp -r /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/time-2025/09/27/7-concepts/creds/* creds/
             echo "Attempting to copy credential files from creds/"
             ls -la creds/ # Check if creds directory exists and its contents
             GEMINI_CONFIG_DIR="/tmp/.gemini" # Use a known writable temporary directory

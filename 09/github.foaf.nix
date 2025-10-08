@@ -4,7 +4,7 @@
 let
   # Fetch data for a specific repository
   owner = "meta-introspector";
-  repoName = "streamofrandom";
+    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
   repoJson = fetchGithubData.fetchRepository { inherit owner repoName; };
 
   # Convert repository JSON to FOAF

@@ -3,7 +3,7 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     meta-introspector-flake.url = "github:meta-introspector/time-2025?ref=feature/foaf"; # Point to root
-    rootFlake.url = "github:meta-introspector/streamofrandom?ref=feature/foaf";
+    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
   };
 
   outputs = { self, nixpkgs, flake-utils, meta-introspector-flake, rootFlake }:

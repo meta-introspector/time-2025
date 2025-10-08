@@ -5,7 +5,7 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
 
-    search-results.url = "github:meta-introspector/time-2025/feature/foaf?dir=flakes/search-results";
+    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
   };
 
   outputs = { nixpkgs, flake-utils, search-results, self, ... }:

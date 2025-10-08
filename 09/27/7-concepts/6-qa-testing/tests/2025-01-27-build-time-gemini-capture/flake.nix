@@ -48,7 +48,7 @@
 	    find .
 	    pwd
 	    #	    ls -latr /creds/google_accounts.json || echo skip
-	    #ls -latr /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture/creds/google_accounts.json || echo skip
+	    #ls -latr /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/time-2025/09/27/7-concepts/creds/google_accounts.json || echo skip
 	    #~/.gemini/google_accounts.json
             # Set HOME to a writable temporary directory for gemini-cli 
             export HOME=$(mktemp -d)
