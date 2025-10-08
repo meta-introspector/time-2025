@@ -3,8 +3,7 @@
 
   inputs = {
     # 1. Access the source code of this flake itself (last stable self)
-    self.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=."; # Assuming current branch is stable self
-    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    nixpkgs.url = "github:meta-introspector/nixpkgs/26833ad1dad83826ef7cc52e0009ca9b7097c79f";
     # 2. Integrate the Introspection Tooling (Quasiquotation Extraction)
     nixIntrospector.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; # Placeholder ref, acts as LIL/QQC for Nix expressions
     # 3. Reference the Log Analyzer for feedback (The Strange Loop Agent)
@@ -32,17 +31,12 @@
       };
     };
 
-    mycologyWorkflow = {
-      url = "./flakes/mycology-workflow";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "nixIntrospector"; # Assuming nixIntrospector provides flake-utils
-        dataSources.follows = "dataSources";
-      };
-    };
+
   };
 
-  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src, mycologyWorkflow, dataSources, spore-vial, ... } @ args:
+  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src,
+  #mycologyWorkflow,
+  dataSources, spore-vial, ... } @ args:
     let
       system = "aarch64-linux"; # Hardcode system as per user instruction
       # Load core utilities
@@ -121,10 +115,7 @@
         ontologyUrls = exampleUrlFetch.extractedUrls;
         nixOwlOntology = exampleUrlFetch.nixToOwlOntology;
         generateHackathonUml = import ./theory/generate_hackathon_uml.nix { inherit pkgs lib self; };
-        mycologyWorkflowPuml = (mycologyWorkflow.outputs.default {
-          inherit nixpkgs dataSources;
-          vial = spore-vial; # Pass spore-vial as the 'vial' argument
-        }).packages.${system}.default;
+
         # nixOntologyRepoPath = pkgs.runCommand "nix-ontology-repo-path" {} "ln -s ${nixOntologyRepo} $out"; # Expose nixOntologyRepo as a derivation
       };
 

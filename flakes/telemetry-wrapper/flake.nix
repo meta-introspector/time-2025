@@ -2,7 +2,7 @@
   description = "Wrapper flake to call consolidated-impure-gemini-telemetry with a filePath input.";
 
   inputs = {
-    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     consolidatedTelemetry.url = "path:../../09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry";
   };

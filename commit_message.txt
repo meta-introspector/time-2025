@@ -1,12 +1,3 @@
-feat: Resolve shellcheck warnings and remove flake:filePath references
+fix: Pin nixpkgs input to a specific commit hash
 
-This commit addresses several issues:
-- Fixed SC2145 errors in `architect.sh` and `bootstrap.sh`.
-- Fixed SC2314 error in `test_command.sh`.
-- Fixed SC2155 warning in `sync-global.sh`.
-- Fixed SC2046 warning in `update-deps.sh`.
-- Fixed SC2166 warnings in `bootstrap.sh`.
-- Fixed SC2164 warning in `test_command.sh`.
-- Fixed SC2086 warnings in `bootstrap.sh` and `test_command.sh`.
-- Removed unused `PROJECT_ROOT` variable from `run_make_for_nix_grep.sh`.
-- Removed all explicit and commented-out references to `flake:filePath` from `consolidated-impure-gemini-telemetry/flake.nix` and `telemetry-wrapper/flake.nix` to resolve the persistent `flake:filePath` error.
+Pinned the nixpkgs input in the main flake.nix to commit hash 26833ad1dad83826ef7cc52e0009ca9b7097c79f to ensure reproducible builds and avoid unnecessary redownloads.
