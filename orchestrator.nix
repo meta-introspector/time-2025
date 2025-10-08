@@ -17,7 +17,8 @@ let
         {
           description = "Vial for Nix file: ${nixFile}.";
           outputs = { self, ... }: {
-            lib.getPrompt = { pkgs }: "Inspect the Nix file at path: ${nixFile}. Provide a summary of its purpose, key functions, and any potential areas for improvement or optimization.";
+            lib.nixFilePath = "${nixFile}";
+            lib.getPrompt = { pkgs, nixFileContent }: "Inspect the Nix file at path: ${nixFile}. Provide a summary of its purpose, key functions, and any potential areas for improvement or optimization. Content: ${nixFileContent}";
           };
         }
         EOF
@@ -25,22 +26,6 @@ let
     };
 
   vials = lib.map createVialForNixFile nixFiles;
-
-  # A simple default vial flake for testing
-  defaultVial = pkgs.nix-build {
-    name = "default-vial";
-    builder = pkgs.writeShellScript "builder" ''
-      mkdir -p $out/flake
-      cat > $out/flake/flake.nix << EOF
-      {
-        description = "Default vial flake.";
-        outputs = { self, ... }: {
-          lib.getPrompt = { pkgs }: "Default prompt from orchestrator's default vial.";
-        };
-      }
-      EOF
-    '';
-  };
 
   # Function to get the current global state (placeholder for now)
   # In a real system, this would read from a persistent store

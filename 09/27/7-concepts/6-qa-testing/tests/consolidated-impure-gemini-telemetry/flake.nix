@@ -14,7 +14,13 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         inherit (mycologyContext) sopsSecretsPath; # Example: inherit sopsSecretsPath if provided by mycologyContext
-        geminiPrompt = vial.lib.getPrompt { inherit pkgs; };
+
+        # Read the nixFilePath from the vial
+        inherit (vial.lib) nixFilePath;
+        # Read the content of the Nix file
+        nixFileContent = builtins.readFile nixFilePath;
+
+        geminiPrompt = vial.lib.getPrompt { inherit pkgs nixFileContent; };
 
         # Test script for impure telemetry capture and credential handling
         impureTelemetryScript = pkgs.writeShellScript "impure-telemetry" ''
