@@ -1,0 +1,56 @@
+{
+	"general": {
+		"preferredEditor": "ENC[AES256_GCM,data:NGtl0oU=,iv:KyzX+sbe/eBC3RCB3H4I+SA61mnRd99XaWNvWsjdNyM=,tag:9dWtSiqRdM0kKcBC8m4D3Q==,type:str]"
+	},
+	"telemetry": {
+		"enabled": "ENC[AES256_GCM,data:8JXKmw==,iv:7IM0tscdMgjZHsDBAtorleebf7lldhDgTXrE/ep/c88=,tag:FYrW6sj1gIZTr8ovL8QKSg==,type:bool]",
+		"target": "ENC[AES256_GCM,data:805VHpc=,iv:ZY2Yjuk5lgY2dtnaVZznzgR65Zy4DFSD7OvIqAbtExY=,tag:2IrtRDC/ogPKR7U8vsFUxw==,type:str]",
+		"otlpEndpoint": "",
+		"outfile": "ENC[AES256_GCM,data:RaJp9b6tgn2GxZWzFDDVBz10,iv:9xZ7ljKZxPtEimHuq42g24H+XIEAr3rZPBhzCm8wDDI=,tag:/iq+3xwvlQfBpRNuVceczQ==,type:str]",
+		"useCollector": "ENC[AES256_GCM,data:YWeZBg==,iv:EoONW4gtwoMT+vQ/K9vrHiNDee522LcO2fMlDjKasJ8=,tag:3wFZYzv07u0ZUoKL1YS16w==,type:bool]"
+	},
+	"tools": {
+		"core": [
+			"ENC[AES256_GCM,data:371GF1Ka5FIe8o5y,iv:gyevtkIWEYBO5t9mjYKpuAUfyCLeOKz/McAMtIbfVYg=,tag:EwFYQEBqG6sjUonDKuwdjw==,type:str]",
+			"ENC[AES256_GCM,data:9nTFnXoj1AY=,iv:vhRMhfHT8dZrfL+XbhMm2oq7fnovI2wAPop4VqwP4Ac=,tag:zZr9Jq2/vk2j0kRwXpPU1w==,type:str]",
+			"ENC[AES256_GCM,data:2NuYD0jYwJ+4,iv:VuW8+ROD34pgh2SSnIKrej+oMoek08wv+bLEF9WSUoY=,tag:UfyEd9Z/HwQUEym4KNJ04Q==,type:str]",
+			"ENC[AES256_GCM,data:WOK0ZMPVR6rB+9bm44k=,iv:2atI6nexDGI+FAJYZQm7HHW3e93emR1ss06d/Ebiui4=,tag:vuzaQE15mSjJ3pGlZjOjnA==,type:str]",
+			"ENC[AES256_GCM,data:zhd3kvhFaLFFgRmmK7+NyMU=,iv:m9OkIVtEG/oSQxTSHd1eMeOmJEtCsaCzpZOUooun53c=,tag:tclEU/YJ/s4wxiP7uNSQ0g==,type:str]",
+			"ENC[AES256_GCM,data:QwzTJAgp,iv:GkasN3KZ1bhG2GRcRS2Vbv7zjpoowGlNrA4Tnb20QRM=,tag:ywxcJAKzE+3WK6bFP6dpfg==,type:str]",
+			"ENC[AES256_GCM,data:k4qfE47LyforGp8U+A==,iv:onFem5zF8XjOwQ9/bNfxPdeve8higTtPKAnXw2gAC+k=,tag:h7KRGGeeJhbYmN1fGeBBqg==,type:str]",
+			"ENC[AES256_GCM,data:X2bbLI4IE/4=,iv:nvIAs+KwT0N3R2IzUqUSA3IlNS3YNbWHzYiQxwLtG1Y=,tag:q5ZUgBW66KRHad9KPScNEg==,type:str]",
+			"ENC[AES256_GCM,data:nmjU4ZuCdhY=,iv:gleh2NLDuty+AktkeEN5/FZ23erMEvacac2pFohVVRI=,tag:Qglc9BykxRIBEPPLqZY9xA==,type:str]",
+			"ENC[AES256_GCM,data:F6PqfsfvIxlXvsvCBsMFer8=,iv:j4CMcXwLxyX4vMh+ZlWJdHZp4mPCYWJEIpdQvSy96uY=,tag:JwebXPwrxzux89DnSAEhug==,type:str]",
+			"ENC[AES256_GCM,data:NRnlnx2M8pQwQU+l,iv:mvoOiNlpays/UVMjajtiEON8R8cw1d1sREzkCYDEblI=,tag:XsK4p7Ybuuhjgrk1PcvRJw==,type:str]",
+			"ENC[AES256_GCM,data:++t3r3H2mh5EA6QE4g==,iv:Ak/Gvxcf1Sg/sAAqro4t8yk1iF23zRi4vra1/ehgsVA=,tag:fkizQ+J9S7Ly4ItnPbtP+Q==,type:str]",
+			"ENC[AES256_GCM,data:tryarFX7j4JAIA==,iv:BxsiqaqWnmr9epqOsJ60c2AIN9bNrAaOPoFWo9BehaU=,tag:kBUpuqKlnAwQlpKVaXt0eQ==,type:str]",
+			"ENC[AES256_GCM,data:XehEdcHRwZY8Qg==,iv:vmEGtM1Y17autptdA4J/eZcz6R5bTdYtui4h30b3k/Y=,tag:0x1Ec9K+LufLAmtGXM0qbQ==,type:str]",
+			"ENC[AES256_GCM,data:IC+qn8tYnQ==,iv:D4RqiJdcY+WcD3IDGXzRYkYDTrKSCK9VRfbEaQ8w6Ss=,tag:32ASOmuuCSwPyAXtpAC1pA==,type:str]",
+			"ENC[AES256_GCM,data:sw==,iv:x6rQOPWlR/uqkL85XxiD0437DLpXfF3CJ37OeTUrCZU=,tag:1eUeSLmB81gVgdccQ7CwNQ==,type:str]",
+			"ENC[AES256_GCM,data:r8Rg,iv:I3soiElNgr/Po7Ov+hrfDQXKH4rRlobBwOrWeqYiNdQ=,tag:iONHzSErHnel8oBC1C0NVg==,type:str]"
+		]
+	},
+	"security": {
+		"auth": {
+			"selectedType": "ENC[AES256_GCM,data:BgDAaagKldlPQOIsJ2A=,iv:MQ9l7XN9pml5smIFFEp2AZfSbvi+spy6cjpiO6YusqI=,tag:15VS7Xd/feqf1DfvH8PYbQ==,type:str]"
+		}
+	},
+	"sops": {
+		"kms": null,
+		"gcp_kms": null,
+		"azure_kv": null,
+		"hc_vault": null,
+		"age": null,
+		"lastmodified": "2025-10-07T01:48:27Z",
+		"mac": "ENC[AES256_GCM,data:mlCt2oCurFf+Pmr3ttJo/xGDjJ+Erg1bzfuBZh2s9AIhVycDFIGb9bFukgyg1RbY12NxXX62V9Lfw4qhSw9aUSsMMCIqgddCV8GNHRfVQ48/LoxPfGWDKzLTiPHjEQykLE2vZqzTfHlYeb/GezMkhOb10qyJvoEH+E6FnGM7nRI=,iv:4bF+KV9VmVx+8mXkr7Ei7jbI/mf/Y6G7dFrXTXRRIz4=,tag:COGHUoBo1WAK1J0cclhBUA==,type:str]",
+		"pgp": [
+			{
+				"created_at": "2025-10-07T01:48:27Z",
+				"enc": "-----BEGIN PGP MESSAGE-----\n\nhF4DqVjSTPhBtT4SAQdAnW8ZASOv5/lSDrUK/0HXy3gdUU4JjXra+Cf01Y/P4T4w\nNujpECsmY0uiOXfna/ujJXLYPubzxxcX7CPfyvegNP/c7UQu9L2bUgC7eJMsMrnQ\n0l4B27/nCEfiNATOYBMHlFWKfnVbMybccDx4uRm2GEO/oUnwuikGAQdGYATh+p+Q\n10HGuzfsK6KbPFex++B+EWniHKfB0B+d1emJPgeQfFssdVVdAHLyVMI+uut3tEk7\n=s95p\n-----END PGP MESSAGE-----",
+				"fp": "A739DE669916CA2DAB940F112A0B0B617B5370F3"
+			}
+		],
+		"unencrypted_suffix": "_unencrypted",
+		"version": "3.8.1"
+	}
+}
