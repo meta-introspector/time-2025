@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    consolidated-impure-gemini-telemetry.url = "github:meta-introspector/streamofrandom?ref=feature/lattice-30030-homedir&dir=09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry";
+    consolidated-impure-gemini-telemetry.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry";
   };
 
   outputs = { self, nixpkgs, flake-utils, dataSources, consolidated-impure-gemini-telemetry, filePath, ... } @ args:
