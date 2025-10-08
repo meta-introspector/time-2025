@@ -122,11 +122,9 @@
         ontologyUrls = exampleUrlFetch.extractedUrls;
         nixOwlOntology = exampleUrlFetch.nixToOwlOntology;
         generateHackathonUml = import ./theory/generate_hackathon_uml.nix { inherit pkgs lib self; };
-        mycologyWorkflowPuml = (import ./flakes/mycology-workflow {
-          nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
-          flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-          inherit dataSources; # Pass the dataSources path input
-          spore-vial.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/hackathon-mycology-workflow-puml";
+        mycologyWorkflowPuml = (mycologyWorkflow.outputs.default {
+          inherit nixpkgs dataSources;
+          vial = spore-vial; # Pass spore-vial as the 'vial' argument
         }).packages.${system}.default;
         # nixOntologyRepoPath = pkgs.runCommand "nix-ontology-repo-path" {} "ln -s ${nixOntologyRepo} $out"; # Expose nixOntologyRepo as a derivation
       };
