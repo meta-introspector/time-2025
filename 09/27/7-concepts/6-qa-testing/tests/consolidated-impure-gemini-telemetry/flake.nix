@@ -6,12 +6,14 @@
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
     vial.url = "path:./vial-placeholder"; # Placeholder for the actual vial flake
+    mycologyContext = { }; # Optional input for mycology framework context
   };
 
-  outputs = { self, nixpkgs, flake-utils, gemini-cli, vial }:
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, vial, mycologyContext }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        inherit (mycologyContext) sopsSecretsPath; # Example: inherit sopsSecretsPath if provided by mycologyContext
         geminiPrompt = vial.lib.getPrompt { inherit pkgs; };
 
         # Test script for impure telemetry capture and credential handling

@@ -4,9 +4,10 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    consolidated-impure-gemini-telemetry.url = "github:meta-introspector/streamofrandom?ref=feature/lattice-30030-homedir&dir=09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry";
   };
 
-  outputs = { self, nixpkgs, flake-utils, dataSources, ... } @ args:
+  outputs = { self, nixpkgs, flake-utils, dataSources, consolidated-impure-gemini-telemetry, ... } @ args:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -34,12 +35,25 @@
           minizinc_solver = pkgs.writeText "minizinc-solver" "minizinc solver placeholder";
         };
 
+        # Define mycologyContext to pass to Gemini
+        mycologyContext = {
+          inherit (args) sopsSecretsPath; # Example: pass sopsSecretsPath
+          # Add other context relevant to GMP, QA, SOPs, logs, records here
+        };
+
         mycologyWorkflowPuml = import args.vial.packages.${system}.default {
           inherit pkgs lib monster_genome_data formal_triad_env;
         };
+
+        # Invoke the consolidated-impure-gemini-telemetry flake
+        # This will run the telemetry script and produce logs/telemetry
+        geminiFruitingBody = consolidated-impure-gemini-telemetry.packages.${system}.default {
+          inherit (args) vial; # Pass the vial input to the telemetry flake
+          inherit mycologyContext; # Pass the mycologyContext
+        };
       in
       {
-        packages.default = mycologyWorkflowPuml;
+        packages.default = geminiFruitingBody;
       }
     );
 }
