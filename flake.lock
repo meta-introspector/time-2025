@@ -342,14 +342,14 @@
         "lastModified": 1759506839,
         "narHash": "sha256-TOH4TO9/97K0wC8wpv6mXw7eyKpGlZ0oenYfCkCr1J0=",
         "owner": "meta-introspector",
-        "repo": "streamofrandom",
+        "repo": "time-2025",
         "rev": "8f40e7de433d7c050d5bc2fe47f1f9eef819c886",
         "type": "github"
       },
       "original": {
         "owner": "meta-introspector",
-        "ref": "feature/foaf",
-        "repo": "streamofrandom",
+        "ref": "feature/lattice-30030-homedir",
+        "repo": "time-2025",
         "type": "github"
       }
     },
