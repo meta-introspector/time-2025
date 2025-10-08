@@ -1,9 +1,25 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, mycologyWorkflow, nixpkgs, nixIntrospector, dataSources, sopsSecretsPath, ... }:
 
 let
   # Import necessary modules
   makeContext = import ./lib/monad-context.nix { inherit pkgs lib; };
   allTasks = makeContext.generateTasks; # Get all tasks from the task generator
+
+  # A simple default vial flake for testing
+  defaultVial = pkgs.nix-build {
+    name = "default-vial";
+    builder = pkgs.writeShellScript "builder" ''
+      mkdir -p $out/flake
+      cat > $out/flake/flake.nix << EOF
+      {
+        description = "Default vial flake.";
+        outputs = { self, ... }: {
+          lib.getPrompt = { pkgs }: "Default prompt from orchestrator's default vial.";
+        };
+      }
+      EOF
+    '';
+  };
 
   # Function to get the current global state (placeholder for now)
   # In a real system, this would read from a persistent store
@@ -33,10 +49,18 @@ let
 
       # Process the best next task
       newGlobalState = makeContext.processTask bestNextTask;
+
+      # Invoke mycologyWorkflow with the default vial
+      fruitingBody = mycologyWorkflow.outputs.default {
+        inherit nixpkgs dataSources;
+        flake-utils = nixIntrospector;
+        vial = defaultVial;
+        mycologyContext = { inherit sopsSecretsPath; };
+      };
     in
     # In a real eternal loop, this would trigger the next iteration
     # For now, we just return the new state after one task
-    newGlobalState;
+    fruitingBody;
 
 in
 orchestrate getGlobalState
