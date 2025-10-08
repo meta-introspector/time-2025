@@ -1,0 +1,1 @@
+Flake it till you make it! ✨ Our `flake.nix` now includes the `orchestrator` app. Just `nix run .#orchestrator` and watch the magic happen! #NixFlakes #NixOS #AIApp

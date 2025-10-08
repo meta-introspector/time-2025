@@ -1,0 +1,15 @@
+{ lib, ... }:
+
+{
+  VS_ONE = 1.0;
+  VS_ZERO = 0.0;
+  VS_POINT_ONE = 0.1;
+  VS_POINT_TWO = 0.2;
+  VS_POINT_THREE = 0.3;
+  VS_POINT_FOUR = 0.4;
+  VS_POINT_FIVE = 0.5;
+  VS_POINT_SIX = 0.6;
+  VS_POINT_SEVEN = 0.7;
+  VS_POINT_EIGHT = 0.8;
+  VS_POINT_NINE = 0.9;
+}

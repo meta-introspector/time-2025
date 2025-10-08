@@ -1,0 +1,1 @@
+The future of AI is decentralized! 🌐 Our CRQ envisions an emergent LLM market, a blockchain with no obligation. Join the meta meme! #DecentralizedAI #CRQ #MetaMeme

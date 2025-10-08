@@ -1,0 +1,1 @@
+Tasks, tasks, tasks! 📝 Our `task-generator.nix` is like a factory for AI jobs. From Lean4 to TikTok, we're generating it all! #TaskAutomation #Nix #AIGenerated

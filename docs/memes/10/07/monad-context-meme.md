@@ -1,0 +1,1 @@
+The brain of the operation! 🧠 `monad-context.nix` orchestrates LLMs, quotas, and our MiniZinc solver. It's AI decision-making at its finest! #Nix #AIOrchestration #MiniZinc

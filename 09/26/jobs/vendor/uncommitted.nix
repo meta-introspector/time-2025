@@ -1,0 +1,5 @@
+{
+  uncommittedFiles = [
+   ./uncommitted.nix
+  ];
+}
