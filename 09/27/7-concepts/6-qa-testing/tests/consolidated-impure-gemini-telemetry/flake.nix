@@ -9,7 +9,7 @@
     mycologyContext = { }; # Optional input for mycology framework context
   };
 
-  outputs = { self, nixpkgs, flake-utils, gemini-cli, vial, mycologyContext, filePath }:
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, vial } @ args: { filePath, mycologyContext }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -141,7 +141,13 @@
         };
       in
       {
-        packages.default = impureGeminiTelemetry;
+        lib.runTelemetry = { filePath, mycologyContext }:
+          impureGeminiTelemetry { inherit filePath mycologyContext; };
+
+        packages.default = impureGeminiTelemetry {
+          filePath = "default-path.nix"; # Provide a default path for the default package
+          mycologyContext = { }; # Provide a default context
+        };
 
         apps.default = {
           type = "app";
