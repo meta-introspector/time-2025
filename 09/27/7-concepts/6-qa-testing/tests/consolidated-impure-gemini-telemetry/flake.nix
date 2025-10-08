@@ -17,10 +17,10 @@
 
         # Read the nixFilePath from the vial
         inherit (vial.lib) nixFilePath;
-        # Read the content of the Nix file
-        nixFileContent = builtins.readFile nixFilePath;
+        # Read the content of the file
+        fileContent = builtins.readFile nixFilePath; # Renamed from nixFileContent
 
-        geminiPrompt = vial.lib.getPrompt { inherit pkgs nixFileContent; };
+        geminiPrompt = vial.lib.getPrompt { inherit pkgs fileContent; }; # Pass fileContent
 
         # Test script for impure telemetry capture and credential handling
         impureTelemetryScript = pkgs.writeShellScript "impure-telemetry" ''
