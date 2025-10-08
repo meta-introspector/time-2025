@@ -38,7 +38,6 @@
         nixpkgs.follows = "nixpkgs";
         flake-utils.follows = "nixIntrospector"; # Assuming nixIntrospector provides flake-utils
         dataSources.follows = "dataSources";
-        spore-vial.follows = "spore-vial";
       };
     };
   };
