@@ -10,6 +10,7 @@
     # 3. Reference the Log Analyzer for feedback (The Strange Loop Agent)
     logAnalyzer.url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=09/25/log_analyzer";
     sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
     node2nix-src.url = "github:meta-introspector/node2nix";
 
     spore-vial = {
@@ -42,7 +43,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src, mycologyWorkflow, dataSources, spore-vial, ... } @ args:
+  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src, mycologyWorkflow, dataSources, spore-vial, gemini-cli, ... } @ args:
     let
       system = "aarch64-linux"; # Hardcode system as per user instruction
       # Load core utilities
@@ -148,6 +149,11 @@
             nix run .#orchestrator
             echo "--- Orchestrator Finished ---"
           ''}";
+        };
+
+        gemini-cli-direct = {
+          type = "app";
+          program = "${gemini-cli.packages.${system}.default}/bin/gemini-cli";
         };
       };
 
