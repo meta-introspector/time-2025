@@ -1,9 +1,30 @@
-{ pkgs, lib, mycologyWorkflow, nixpkgs, nixIntrospector, dataSources, sopsSecretsPath, ... }:
+{ pkgs, lib, mycologyWorkflow, nixpkgs, nixIntrospector, dataSources, sopsSecretsPath, zosSporeVial, ... }:
 
 let
   # Import necessary modules
   makeContext = import ./lib/monad-context.nix { inherit pkgs lib; };
   allTasks = makeContext.generateTasks; # Get all tasks from the task generator
+
+  # Read the list of Nix files from index.nix.txt
+  nixFiles = pkgs.lib.splitString "\n" (builtins.readFile ./index.nix.txt);
+
+  createVialForNixFile = nixFile:
+    pkgs.nix-build {
+      name = "vial-for-${(pkgs.lib.replaceStrings ["/"] ["-"] nixFile)}";
+      builder = pkgs.writeShellScript "builder" ''
+        mkdir -p $out/flake
+        cat > $out/flake/flake.nix << EOF
+        {
+          description = "Vial for Nix file: ${nixFile}.";
+          outputs = { self, ... }: {
+            lib.getPrompt = { pkgs }: "Inspect the Nix file at path: ${nixFile}. Provide a summary of its purpose, key functions, and any potential areas for improvement or optimization.";
+          };
+        }
+        EOF
+      '';
+    };
+
+  vials = lib.map createVialForNixFile nixFiles;
 
   # A simple default vial flake for testing
   defaultVial = pkgs.nix-build {
@@ -50,16 +71,15 @@ let
       # Process the best next task
       newGlobalState = makeContext.processTask bestNextTask;
 
-      # Invoke mycologyWorkflow with the default vial
-      fruitingBody = mycologyWorkflow.outputs.default {
+      # Invoke mycologyWorkflow with the first valid vial
+      fruitingBody = if firstValidVial != null then mycologyWorkflow.outputs.default {
         inherit nixpkgs dataSources;
         flake-utils = nixIntrospector;
-        vial = defaultVial;
+        vial = firstValidVial;
         mycologyContext = { inherit sopsSecretsPath; };
-      };
+      } else null; # Handle case where no valid vial is found
     in
-    # In a real eternal loop, this would trigger the next iteration
-    # For now, we just return the new state after one task
+    # For now, let's just return the fruitingBody
     fruitingBody;
 
 in
