@@ -3,16 +3,16 @@
     "dataSources": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-ywI4UG9fGoTkUJ8mVTANFuZrCbsdnEdgX+AS10Add7s=",
-        "path": "/nix/store/jdl9fnqljjkljdbl4r07qd8pll3asdv2-source/flakes/data-sources",
+        "path": "/nix/store/anqw53xkmsfxszd39lb9i0g2n377wz08-source/flakes/data-sources",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/jdl9fnqljjkljdbl4r07qd8pll3asdv2-source/flakes/data-sources",
+        "path": "/nix/store/anqw53xkmsfxszd39lb9i0g2n377wz08-source/flakes/data-sources",
         "type": "path"
       }
     },
@@ -72,7 +72,7 @@
     "logAnalyzer": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "dir": "09/25/log_analyzer",
@@ -169,12 +169,28 @@
       },
       "original": {
         "owner": "meta-introspector",
+        "ref": "feature/CRQ-016-nixify",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
+        "lastModified": 1757898380,
+        "narHash": "sha256-1Z0KAfbySsHu/IoZbBJLrPgs3IqQGup0T8J9S1ffAkE=",
+        "owner": "meta-introspector",
+        "repo": "nixpkgs",
+        "rev": "26833ad1dad83826ef7cc52e0009ca9b7097c79f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "meta-introspector",
         "repo": "nixpkgs",
         "rev": "26833ad1dad83826ef7cc52e0009ca9b7097c79f",
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1634782485,
         "narHash": "sha256-psfh4OQSokGXG0lpq3zKFbhOo3QfoeudRcaUnwMRkQo=",
@@ -190,7 +206,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_5": {
+    "nixpkgs_6": {
       "locked": {
         "lastModified": 1758976413,
         "narHash": "sha256-hEIDTaIqvW1NMfaNgz6pjhZPZKTmACJmXxGr/H6isIg=",
@@ -209,7 +225,7 @@
     "node2nix-src": {
       "inputs": {
         "flake-utils": "flake-utils_3",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_5"
       },
       "locked": {
         "lastModified": 1673551689,
@@ -227,19 +243,13 @@
     },
     "root": {
       "inputs": {
-        "dataSources": "dataSources",
-        "logAnalyzer": "logAnalyzer",
-        "nixIntrospector": "nixIntrospector",
-        "nixOntologyRepo": "nixOntologyRepo",
-        "nixpkgs": "nixpkgs_3",
-        "node2nix-src": "node2nix-src",
-        "sops-nix": "sops-nix",
-        "spore-vial": "spore-vial"
+        "nixpkgs": "nixpkgs",
+        "time2025": "time2025"
       }
     },
     "sops-nix": {
       "inputs": {
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": "nixpkgs_6"
       },
       "locked": {
         "lastModified": 1759030640,
@@ -317,6 +327,32 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "time2025": {
+      "inputs": {
+        "dataSources": "dataSources",
+        "logAnalyzer": "logAnalyzer",
+        "nixIntrospector": "nixIntrospector",
+        "nixOntologyRepo": "nixOntologyRepo",
+        "nixpkgs": "nixpkgs_4",
+        "node2nix-src": "node2nix-src",
+        "sops-nix": "sops-nix",
+        "spore-vial": "spore-vial"
+      },
+      "locked": {
+        "lastModified": 1760045032,
+        "narHash": "sha256-4wYEnaFr/Alvo+zyzDv8+UexURVwlxf1ovQr48T/UV8=",
+        "owner": "meta-introspector",
+        "repo": "time-2025",
+        "rev": "c43d4575e5aa90689d74630a29500baeab88944f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "meta-introspector",
+        "ref": "feature/lattice-30030-homedir",
+        "repo": "time-2025",
         "type": "github"
       }
     }
