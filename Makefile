@@ -418,9 +418,9 @@ eval-github-graphql-list-repository-issues:
 
 .PHONY: run-orchestrator simulate-orchestrator
 run-orchestrator:
-	@echo "--- Running the Orchestrator (Eternal For Loop) ---"
-	@nix run .#orchestrator
-	@echo "--- Orchestrator Run Complete ---"
+	@echo "--- Running the Orchestrator (Eternal For Loop) ---" | tee orchestrator_output.log
+	@timeout 10s nix run .#orchestrator 2>&1 | tee -a orchestrator_output.log
+	@echo "--- Orchestrator Run Complete ---" | tee -a orchestrator_output.log
 
 simulate-orchestrator:
 	@echo "--- Simulating the Top-Level Orchestrator with Gemini ---"
