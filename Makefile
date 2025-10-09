@@ -22,6 +22,8 @@
 
 
 
+PROJECT_ROOT := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+
 # Makefile for topological Nix builds
 
 .PHONY: all pre-nix-check build-foaf-context
@@ -491,15 +493,7 @@ run-gemini-with-sops:
 	rm -rf $(DECRYPTED_SECRETS_TMPDIR)
 	@echo "--- gemini-cli execution complete ---"
 
-.PHONY: build-gemini-with-sops-path run-orchestrator-with-vial
-build-gemini-with-sops-path:
-	@echo "--- Building geminiCliWithSecrets with explicit sops-secrets-dir path ---"
-	nix build --impure ./flakes/wrap-gemini-secrets#packages.aarch64-linux.geminiCliWithSecrets \
-	  --override-input sops-secrets-dir "path:./sops-secrets" \
-	  --extra-sandbox-paths /data/data/com.termux.nix/files/home/.gnupg \
-	  --print-out-paths
-	@echo "--- Build complete ---"
-
+.PHONY: run-orchestrator-with-vial analyze-nix-derivations
 run-orchestrator-with-vial: pre-nix-check
 	@echo "--- Running Orchestrator with Vial for $(FILE_PATH) ---"
 	@if [ -z "$(FILE_PATH)" ]; then \
@@ -508,6 +502,11 @@ run-orchestrator-with-vial: pre-nix-check
 	fi
 	@nix run .#orchestrator -- --argstr targetFilePath "$(FILE_PATH)"
 	@echo "--- Orchestrator with Vial Run Complete ---"
+
+analyze-nix-derivations: pre-nix-check
+	@echo "--- Analyzing Nix Derivations across all flakes ---"
+	@$(PROJECT_ROOT)/scripts/evaluate_nix.sh
+	@echo "--- Nix Derivation Analysis Complete. Check derivation_report.json for details. ---"
 
 
 .PHONY: develop.log

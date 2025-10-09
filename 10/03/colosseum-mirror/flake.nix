@@ -1,6 +1,6 @@
 
 {
-  description = "Nix derivation to mirror the Colosseum website using httrack.";
+  description = "Nix flake to mirror the Colosseum website.";
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
@@ -10,38 +10,36 @@
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+          inherit system;
+        };
         colosseumUrl = "https://colosseum.com";
-        outputDir = "colosseum-mirror";
       in
       {
-        packages.default = pkgs.stdenv.mkDerivation {
-          pname = "colosseum-website-mirror";
-          version = "2025-10-03"; # Using today's date as version
+        packages.colosseum-mirror = pkgs.stdenv.mkDerivation {
+          pname = "colosseum-mirror";
+          version = "0.1.0";
+
+          src = pkgs.fetchurl {
+            url = colosseumUrl;
+            sha256 = "cFDRewMK87as/u4zvtrKdxwEmSyaSH/M0Buq20Gb3zU=";
+          };
 
           dontUnpack = true;
-          nativeBuildInputs = [ pkgs.httrack ];
 
-          # The buildPhase will execute httrack to download the website.
-          # We use --mirror to mirror the site, --keep-links to keep original links,
-          # --robots=0 to ignore robots.txt, and -%v to show verbose output.
-          # -O specifies the output directory.
-          buildPhase = ''
-            echo "Mirroring ${colosseumUrl} using httrack..."
-            httrack "${colosseumUrl}" --mirror --keep-links --robots=0 -%v -O "${outputDir}"
-          '';
-
-          # The installPhase will copy the downloaded content to the $out path.
           installPhase = ''
-            echo "Installing mirrored content to $out..."
             mkdir -p $out
-            cp -r "${outputDir}/." $out/
+            cp $src $out/index.html
           '';
-
-          # Set a dummy hash for local testing. For production, this should be a real hash.
-          # This is a placeholder and will likely need to be updated if the content changes.
-          outputHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-          outputHashMode = "recursive";
         };
-      });
+
+        # A devShell to provide tools for working with the mirror
+        devShells.default = pkgs.mkShell {
+          packages = with pkgs; [
+            httrack # For more advanced mirroring
+            wget # Another tool for fetching
+          ];
+        };
+      }
+    );
 }

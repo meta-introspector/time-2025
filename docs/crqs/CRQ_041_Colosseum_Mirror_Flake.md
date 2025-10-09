@@ -15,8 +15,8 @@ Additionally, this CRQ covers the relocation of the `hackathon_71_parts.nix` fil
 - **Organizational Clarity**: Relocating `hackathon_71_parts.nix` improves file organization and accessibility within the project.
 
 ## Scope of Changes
-- Creation of `flakes/colosseum-mirror/flake.nix`.
-- Creation of `flakes/colosseum-mirror/Makefile` with `build`, `clean`, `shell`, and `archive-daily` targets.
+- Creation of `10/03/colosseum-mirror/flake.nix`.
+- Creation of `10/03/colosseum-mirror/Makefile` with `build`, `clean`, `shell`, and `archive-daily` targets.
 - Relocation of `theory/hackathon_71_parts.nix` to `10/03/hackathon_71_parts.nix`.
 - Addition of `10/03/README.md`.
 

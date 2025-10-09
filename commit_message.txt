@@ -1,3 +1,11 @@
-fix: Pin nixpkgs input to a specific commit hash
+feat: Implement three-flake architecture for hackathon status
 
-Pinned the nixpkgs input in the main flake.nix to commit hash 26833ad1dad83826ef7cc52e0009ca9b7097c79f to ensure reproducible builds and avoid unnecessary redownloads.
+This commit introduces a new three-flake architecture to fetch, process, and bridge hackathon status information.
+
+- **Producer Flake (`10/09/hackathon/colosseum/flake.nix`):** Fetches raw HTML pages from Colosseum websites.
+- **Consumer Flake (`10/09/hackathon/consumer/flake.nix`):** Processes the raw HTML into JSON format using Pandoc.
+- **Generic Bridge Pattern Flake (`10/09/hackathon/bridge-pattern/flake.nix`):** Provides a reusable blueprint for connecting a producer and a consumer flake.
+- **Bridge Instance (`10/09/hackathon/bridge.nix`):** Instantiates the generic bridge with the Colosseum producer and hackathon consumer.
+- **Makefile Update:** Configured to build the bridge instance.
+
+All flakes adhere to the `github:meta-introspector` URL policy for inputs.
