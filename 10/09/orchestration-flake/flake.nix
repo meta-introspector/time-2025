@@ -47,12 +47,13 @@
       # This is a placeholder for a derivation that performs a calculation involving 71 and the Monster Group
       monsterGroupCalculation = pkgs.runCommand "monster-group-calculation" {
         buildInputs = [ pkgs.bash pkgs.jq ]; # Add any necessary tools
-        inherit (zosSporeVialFlake.inputs.zosSporeFlake.lib) zosElements; # Access ZOS elements from the spore
+        # Access ZOS elements from the zosSporeFlake's lib attribute
+        ZOS_ELEMENTS_JSON = builtins.toJSON zosSporeVialFlake.inputs.zosSporeFlake.lib.zosElements;
       } ''
         mkdir -p $out
         echo "Performing calculation via 71 in the Monster Group..."
         # Placeholder logic: Check if 71 is in ZOS elements, and if so, perform a dummy calculation
-        if echo "${builtins.toJSON zosElements}" | jq -e 'any(. == 71)' > /dev/null; then
+        if echo "$ZOS_ELEMENTS_JSON" | jq -e 'any(. == 71)' > /dev/null; then
           echo "71 found in ZOS elements. Performing dummy Monster Group calculation."
           echo $(( 71 - 29 )) > $out/intermediate-result.txt # Dummy calculation to get 42
         else
