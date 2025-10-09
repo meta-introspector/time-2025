@@ -10,6 +10,7 @@ Container_Boundary(nix_system, "Nix System") {
     Container(nix_daemon, "Nix Daemon", "Process", "Manages the Nix store, builds derivations, and handles NAR operations.")
     Container(nix_store, "Nix Store", "Data Store", "Content-addressed immutable storage for all build artifacts and derivations.")
     Container(nixpkgs_repo, "Nixpkgs Repository", "Code Repository", "Collection of Nix expressions defining packages, modules, and tools.")
+    Container(nix_nar_unpack_tool, "nix-nar-unpack", "Tool", "Specialized tool for unpacking NAR files.")
 }
 
 Container_Boundary(project_repo, "Project Repository (streamofrandom/2025)") {
@@ -25,9 +26,11 @@ Rel(nix_daemon, nixpkgs_repo, "Fetches Nix expressions from")
 Rel(nar_bridge_flake, nix_daemon, "Invokes NAR operations on")
 Rel(nar_bridge_flake, nix_store, "Reads/Writes NARs to/from")
 Rel(nar_bridge_flake, nixpkgs_repo, "Uses as input")
+Rel(nar_bridge_flake, nix_nar_unpack_tool, "Uses to restore NARs")
 
 Rel(llm_task_flakes, crq_binstore, "Consumes .nar files from")
 Rel(llm_task_flakes, nix_daemon, "Invokes NAR operations on")
+Rel(llm_task_flakes, nix_nar_unpack_tool, "Uses to unpack NARs")
 
 Rel(test_nix_expr, nar_bridge_flake, "Calls functions in")
 Rel(test_nix_expr, nix_daemon, "Invokes Nix build process on")

@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { system = "aarch64-linux"; } }:
+{ pkgs, src }:
 
 let
   # Define the regexes to search for
@@ -19,12 +19,22 @@ let
   # and grep them for the defined regexes.
   grepResult = pkgs.runCommand "nix-nar-grep-results" {
     buildInputs = [ pkgs.gnugrep pkgs.findutils ];
-    # The source of the files to grep. Assuming current directory for now.
-    # In a real flake, this would be an input.
-    src = ./.;
+    inherit src; # Use the provided src
   } ''
-    echo "Searching for NAR-related patterns in Nix files..."
-    find "$src" -name "*.nix" -exec grep -E "${grepPatterns}" {} + > "$out/grep-results.txt"
+    set -euxo pipefail # Enable debugging and exit on error
+    
+    echo "DEBUG: Current directory: $(pwd)"
+    echo "DEBUG: Value of $out: $out"
+    mkdir -p $out # Create the output directory
+    echo "DEBUG: Contents of $out after mkdir:"
+    ls -la $out
+    
+    echo "Searching for NAR-related patterns in Nix files in $src..."
+    find "$src" -name "*.nix" -print0 | xargs -0 grep -E "${grepPatterns}" > "$out/grep-results.txt" || true # Allow grep to exit with 1 if no matches
+    
+    echo "DEBUG: Contents of $out after grep:"
+    ls -la $out
+    
     echo "Grep results captured in $out/grep-results.txt"
   '';
 

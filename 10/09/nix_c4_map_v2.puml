@@ -1,0 +1,66 @@
+@startuml C4_Container
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Container Diagram for Nix Environment (v2)
+
+Container_Boundary(nix_system, "Nix System") {
+    Container(nix_daemon, "Nix Daemon", "Process", "Manages the Nix store, builds derivations, and handles NAR operations.")
+    Container(nix_store, "Nix Store", "Data Store", "Content-addressed immutable storage for all build artifacts and derivations.")
+    Container(nixpkgs_repo, "Nixpkgs Repository", "Code Repository", "Collection of Nix expressions defining packages, modules, and tools.")
+    Container(nix_nar_unpack_tool, "nix-nar-unpack", "Tool", "Specialized tool for unpacking NAR files.")
+}
+
+Container_Boundary(project_repo, "Project Repository (streamofrandom/2025)") {
+    Container(nar_bridge_flake, "NAR Bridge Flake", "Nix Flake", "Provides functions to create and restore NAR files.")
+    Container(crq_binstore, "CRQ Binstore", "Binary Store", "Stores pre-built Nix artifacts (.nar files) like LLM contexts and Wikidata packages.")
+    Container(llm_task_flakes, "LLM Task Flakes", "Nix Flake", "Flakes that consume and process NAR files (e.g., for LLM context).")
+    Container(test_nix_expr, "Test Nix Expression", "Nix Expression", "Tests the functionality of the NAR Bridge Flake.")
+    Container(github_grep_flake, "GitHub Grep Flake", "Nix Flake", "Fetches a GitHub repository and greps its Nix files for NAR-related patterns.")
+    Container(colosseum_producer_flake, "Colosseum Producer Flake", "Nix Flake", "Fetches raw HTML pages from colosseum.com and arena.colosseum.org.")
+    Container(hackathon_consumer_flake, "Hackathon Consumer Flake", "Nix Flake", "Consumes raw HTML pages and converts them to JSON using pandoc.")
+    Container(bridge_pattern_flake, "Bridge Pattern Flake", "Nix Flake", "Generic implementation of the Bridge design pattern for connecting producer and consumer flakes.")
+    Container(bridge_instance_flake, "Bridge Instance Flake", "Nix Flake", "Instantiates the Bridge Pattern Flake, wiring Colosseum Producer and Hackathon Consumer.")
+    Container(nix_grep_regexes_expr, "Nix Grep Regexes Expression", "Nix Expression", "Defines regexes and a derivation to grep Nix files for NAR-related patterns.")
+}
+
+Rel(nix_daemon, nix_store, "Manages and accesses")
+Rel(nix_daemon, nixpkgs_repo, "Fetches Nix expressions from")
+
+Rel(nar_bridge_flake, nix_daemon, "Invokes NAR operations on")
+Rel(nar_bridge_flake, nix_store, "Reads/Writes NARs to/from")
+Rel(nar_bridge_flake, nixpkgs_repo, "Uses as input")
+Rel(nar_bridge_flake, nix_nar_unpack_tool, "Uses to restore NARs")
+
+Rel(llm_task_flakes, crq_binstore, "Consumes .nar files from")
+Rel(llm_task_flakes, nix_daemon, "Invokes NAR operations on")
+Rel(llm_task_flakes, nix_nar_unpack_tool, "Uses to unpack NARs")
+
+Rel(test_nix_expr, nar_bridge_flake, "Calls functions in")
+Rel(test_nix_expr, nix_daemon, "Invokes Nix build process on")
+
+Rel(github_grep_flake, nixpkgs_repo, "Uses as input")
+Rel(github_grep_flake, nix_daemon, "Invokes Nix build process on")
+Rel(github_grep_flake, nix_grep_regexes_expr, "Calls function in")
+Rel(github_grep_flake, nix_store, "Fetches target repository from")
+
+Rel(colosseum_producer_flake, nixpkgs_repo, "Uses as input")
+Rel(colosseum_producer_flake, nix_daemon, "Fetches web content via")
+Rel(colosseum_producer_flake, nix_store, "Stores fetched HTML in")
+
+Rel(hackathon_consumer_flake, nixpkgs_repo, "Uses as input")
+Rel(hackathon_consumer_flake, nix_daemon, "Processes data via")
+Rel(hackathon_consumer_flake, nix_store, "Stores JSON output in")
+
+Rel(bridge_pattern_flake, nixpkgs_repo, "Uses as input")
+
+Rel(bridge_instance_flake, bridge_pattern_flake, "Instantiates")
+Rel(bridge_instance_flake, colosseum_producer_flake, "Connects as producer")
+Rel(bridge_instance_flake, hackathon_consumer_flake, "Connects as consumer")
+Rel(bridge_instance_flake, nix_daemon, "Invokes build process on")
+
+Rel(crq_binstore, nix_store, "Stores .nar files, which represent")
+
+@enduml

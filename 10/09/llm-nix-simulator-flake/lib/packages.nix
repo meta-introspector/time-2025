@@ -1,0 +1,5 @@
+{ simulatedNixRun }:
+
+{
+  default = simulatedNixRun;
+}

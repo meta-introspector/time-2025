@@ -3,10 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
-    nixGrepRegexes = {
-      url = "path:../nix-grep-regexes.nix"; # Reference the local nix-grep-regexes.nix
-      flake = false; # It's a plain Nix expression, not a flake
-    };
     # The GitHub repository to grep
     targetRepo = {
       url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
@@ -14,11 +10,13 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixGrepRegexes, targetRepo }:
+  outputs = { self, nixpkgs, targetRepo }:
     let
       pkgs = nixpkgs.legacyPackages.aarch64-linux;
-      # Call the nix-grep-regexes.nix with the fetched targetRepo as src
-      grepResults = nixGrepRegexes {
+      # Import the local nix-grep-regexes.nix directly as a function
+      nixGrepRegexesFn = import ../nix-grep-regexes.nix;
+      # Call the nix-grep-regexes.nix function with the fetched targetRepo as src
+      grepResults = nixGrepRegexesFn {
         inherit pkgs;
         src = targetRepo;
       };
