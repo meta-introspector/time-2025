@@ -8,15 +8,17 @@
       url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
       flake = false; # We want the source, not a flake output
     };
+    nixGrepRegexes = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/nix-grep-regexes.nix";
+      flake = false; # It's a plain Nix expression, not a flake
+    };
   };
 
-  outputs = { self, nixpkgs, targetRepo }:
+  outputs = { self, nixpkgs, targetRepo, nixGrepRegexes }:
     let
       pkgs = nixpkgs.legacyPackages.aarch64-linux;
-      # Import the local nix-grep-regexes.nix directly as a function
-      nixGrepRegexesFn = import ../nix-grep-regexes.nix;
       # Call the nix-grep-regexes.nix function with the fetched targetRepo as src
-      grepResults = nixGrepRegexesFn {
+      grepResults = nixGrepRegexes {
         inherit pkgs;
         src = targetRepo;
       };

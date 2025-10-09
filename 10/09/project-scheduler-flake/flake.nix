@@ -4,11 +4,11 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     llmApiWrapper = {
-      url = "path:../llm-api-wrapper"; # Reference our local dummy llm-api-wrapper
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/llm-api-wrapper";
       flake = true;
     };
     minizinc = {
-      url = "path:../minizinc-nix"; # Reference our local dummy minizinc-nix
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/minizinc-nix";
       flake = true;
     };
     # Input for the project state (e.g., a derivation containing relevant docs/code)

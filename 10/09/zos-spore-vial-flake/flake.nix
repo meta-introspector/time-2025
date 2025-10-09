@@ -4,11 +4,11 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     zosSporeFlake = {
-      url = "path:../zos-spore-flake"; # Reference the ZOS Spore Flake
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/zos-spore-flake";
       flake = true;
     };
     narBridgeFlake = {
-      url = "path:../hackathon/nar-bridge-flake"; # Reference our nar-bridge-flake
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/nar-bridge-flake";
       flake = true;
     };
   };

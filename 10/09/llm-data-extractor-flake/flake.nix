@@ -6,12 +6,12 @@
     hackathonResults = {
       # This input will be the JSON output from the hackathon-consumer-flake
       # For testing, we can point it to a dummy JSON file or the actual build result.
-      url = "path:../hackathon/consumer"; # Assuming the consumer flake is in ../hackathon/consumer
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/consumer";
       flake = true;
     };
     # Assuming an LLM API wrapper is available as a Nix package
     llmApiWrapper = {
-      url = "github:meta-introspector/llm-api-wrapper?ref=main"; # Placeholder
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/llm-api-wrapper";
       flake = true;
     };
   };
