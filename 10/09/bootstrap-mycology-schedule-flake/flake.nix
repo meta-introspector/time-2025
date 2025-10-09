@@ -12,7 +12,8 @@
       flake = true;
     };
     bridgeInstanceFlake = {
-      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/bridge";
+      # This input will be provided by the caller (e.g., a top-level test or deployment)
+      # It should be a flake that provides the bridge instance
       flake = true;
     };
     llmDataExtractorFlake = {
