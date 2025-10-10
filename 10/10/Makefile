@@ -12,4 +12,9 @@ lint-nix-impure:
 	@echo "Running impure Nix linting with statix..."
 	@nix shell nixpkgs#statix -c statix check ../../..
 
-.PHONY: qa-llm-nix run-qa-build lint-nix-impure
+get-nix-file-list:
+	@echo "Generating list of Nix files..."
+	@nix-instantiate --eval --json ./nix2/get-nix-file-list.nix > nix-file-list.json
+	@echo "Nix file list generated: nix-file-list.json"
+
+.PHONY: qa-llm-nix run-qa-build lint-nix-impure get-nix-file-list
