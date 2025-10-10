@@ -55,5 +55,13 @@ let
     inherit lib pkgs discoveredRustProjects;
   };
 
+  # Import the crate-wrapper module
+  crateWrapper = import ./nix2/crate-wrapper.nix;
+
+  # Generate Nix derivations for extracted crates
+  crateDerivations = crateWrapper {
+    inherit lib pkgs extractedCrates;
+  };
+
 in
-extractedCrates
+crateDerivations
