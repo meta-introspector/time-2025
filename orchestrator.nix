@@ -78,7 +78,7 @@ in
   apps.default = {
     type = "app";
     program = pkgs.writeShellScript "run-orchestrator" ''
-      echo "--- Orchestrator Running ---"
+
       # The runOrchestration function returns a derivation, so we build it
       FRUITING_BODY_PATH=$(nix build --no-link --print-out-paths ${runOrchestration})
       cat "$FRUITING_BODY_PATH" # Print the content of the fruiting body
