@@ -1,6 +1,7 @@
 { lib, pkgs }:
 
 let
+  currentBranchName = "feature/lattice-30030-homedir"; # Placeholder for dynamic branch name
   # Existing helper functions
   evalToJson = expr:
     let
@@ -54,6 +55,20 @@ in
           systems = lib.map (m: m.captures.c1) systemMatches;
         in
         { inherit commands urls systems; };
+
+      extractSubmoduleUrls = gitmodulesPath:
+        let
+          gitmodulesContent = builtins.readFile gitmodulesPath;
+          urlMatches = lib.strings.match "url = ([^\n]*)" gitmodulesContent;
+        in
+        lib.map (m: m.captures.c1) urlMatches;
+
+      extractSubmoduleBranches = gitmodulesPath:
+        let
+          gitmodulesContent = builtins.readFile gitmodulesPath;
+          branchMatches = lib.strings.match "branch = ([^\n]*)" gitmodulesContent;
+        in
+        lib.map (m: m.captures.c1) branchMatches;
       # ... other extraction methods
     };
 
@@ -136,6 +151,15 @@ in
         {
           inherit invalidSystems hasInvalidSystems;
         };
+
+      validateUrlsWithPrefixes = { urls, allowedPrefixes }:
+        let
+          invalidUrls = lib.filter (url: !(lib.any (prefix: lib.strings.hasPrefix prefix url) allowedPrefixes)) urls;
+          hasInvalidUrls = (lib.length invalidUrls) > 0;
+        in
+        {
+          inherit invalidUrls hasInvalidUrls;
+        };
     };
 
     # Layer 8: Reporting and Remediation Layer
@@ -145,6 +169,47 @@ in
       generateReport = validationResults:
         # Placeholder for report generation
         "Identity Principle Report:\n  Has Duplicates: ${if validationResults.hasDuplicates then "Yes" else "No"}\n  Duplicates: ${builtins.toJSON validationResults.duplicates}";
+
+      generateQaSample = {
+        commandUniquenessReport,
+        urlPrefixValidationReport,
+        systemValidationReport,
+        submoduleUrlUniquenessReport,
+        submoduleBranchValidationReport,
+        flakeHashes,
+        # ... other intermediate results
+      }:
+        ''
+          --- LLM QA Sample ---
+
+          This is a sample of intermediate results from the Nix flake identity principle enforcement.
+          Please review for any anomalies, inconsistencies, or potential areas for improvement.
+
+          Flake Hashes (Monster Group Addresses):
+          ${builtins.toJSON flakeHashes}
+
+          Command Uniqueness:
+          Has Duplicates: ${if commandUniquenessReport.hasDuplicates then "Yes" else "No"}
+          Duplicates: ${builtins.toJSON commandUniquenessReport.duplicates}
+
+          URL Prefix Validation:
+          Has Invalid URLs: ${if urlPrefixValidationReport.hasInvalidUrls then "Yes" else "No"}
+          Invalid URLs: ${builtins.toJSON urlPrefixValidationReport.invalidUrls}
+
+          System Validation:
+          Has Invalid Systems: ${if systemValidationReport.hasInvalidSystems then "Yes" else "No"}
+          Invalid Systems: ${builtins.toJSON systemValidationReport.invalidSystems}
+
+          Submodule URL Uniqueness:
+          Has Duplicate Submodule URLs: ${if submoduleUrlUniquenessReport.hasDuplicates then "Yes" else "No"}
+          Duplicate Submodule URLs: ${builtins.toJSON submoduleUrlUniquenessReport.duplicates}
+
+          Submodule Branch Validation:
+          Has Invalid Submodule Branches: ${if submoduleBranchValidationReport.hasInvalidBranches then "Yes" else "No"}
+          Invalid Submodule Branches: ${builtins.toJSON submoduleBranchValidationReport.invalidBranches}
+
+          --- End of LLM QA Sample ---
+        '';
       # ...
     };
   };
