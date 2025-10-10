@@ -4,15 +4,18 @@
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
-    get-nix-file-list-input.url = "github:meta-introspector/time-2025?ref=${branch}&dir=10/10/nix2/get-nix-file-list";
+    # Get the root of the streamofrandom/2025 directory
+    streamofrandom-root.url = "github:meta-introspector/streamofrandom?ref=feature/foaf";
+    time-2025-root.url = 
   };
 
-  outputs = { self, nixpkgs, get-nix-file-list-input }:
+  outputs = { self, nixpkgs, streamofrandom-root, time-2025-root }:
     let
       system = "aarch64-linux";
       pkgs = import nixpkgs { inherit system; };
-      branch = "d670d37ce328808bfc0a8e8c6c7d49a61c11d843"; # feature/git-nix-file-list
-      get-nix-file-list = get-nix-file-list-input;
+      # Construct the path to nix2 relative to the streamofrandom-root
+      nix2-src = pkgs.lib.sources.cleanSource (time-2025-root + "/10/10/nix2");
+      get-nix-file-list = nix2-src + "/get-nix-file-list.nix";
     in
     {
       packages.${system}.default = pkgs.runCommand "nix-file-list-nar" {} ''

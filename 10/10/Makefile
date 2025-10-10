@@ -15,6 +15,10 @@ get-nix-file-list:
 
 build-nar-verbose:
 	@echo "Building NAR flake with verbose output to nar_build.log..."
-	@nix build -vv path:/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/10/10/lib/nar#packages.aarch64-linux.default 2>&1 | tee nar_build.log
+	@nix build -vv "github:meta-introspector/time-2025?ref=feature/git-nix-file-list&dir=10/10/lib/nar#packages.aarch64-linux.default" 2>&1 | tee nar_build.log
 
-.PHONY: qa-llm-nix run-qa-build get-nix-file-list build-nar-verbose
+build-example-verbose:
+	@echo "Building example flake with verbose output to example_build.log..."
+	@nix build -vvvvv ./nix2/examples#packages.aarch64-linux.default 2>&1 | tee example_build.log
+
+.PHONY: qa-llm-nix run-qa-build get-nix-file-list build-nar-verbose build-example-verbose

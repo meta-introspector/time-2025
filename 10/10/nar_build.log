@@ -1,0 +1,9 @@
+evaluating derivation 'github:meta-introspector/time-2025/feature/git-nix-file-list?dir=10/10/lib/nar#packages.aarch64-linux.default'...
+evaluating file '/nix/store/93a7ikyb208nh3p1kwqvn1hj2w11ikb6-source/10/10/lib/nar/flake.nix'
+downloading 'https://api.github.com/repos/meta-introspector/time-2025/commits/feature/lattice-30030-homedir'...
+error:
+       … while updating the lock file of flake 'github:meta-introspector/time-2025/d670d37ce328808bfc0a8e8c6c7d49a61c11d843?dir=10/10/lib/nar'
+
+       … while updating the flake input 'get-nix-file-list-input'
+
+       error: getting status of '/nix/store/93a7ikyb208nh3p1kwqvn1hj2w11ikb6-source/10/10/nix2/get-nix-file-list.nix/flake.nix': Not a directory

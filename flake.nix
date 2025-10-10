@@ -10,16 +10,17 @@
     logAnalyzer = { url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=09/25/log_analyzer"; };
     sops-nix = { url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store"; };
     node2nix-src = { url = "github:meta-introspector/node2nix"; };
+    nurl = { url = "github:meta-introspector/nurl"; };
 
-    nixToPoemVial = { url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/nix-to-poem-vial"; }; # Placeholder
-    readMdVial = { url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/read-md-vial"; }; # Placeholder
-    readRsVial = { url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/read-rs-vial"; }; # Placeholder
+    nixToPoemVial = { url = "github:meta-introspector/time-2025?ref=${branch}&dir=theory/nix-to-poem-vial"; }; # Placeholder
+    readMdVial = { url = "github:meta-introspector/time-2025?ref=${branch}&dir=theory/read-md-vial"; }; # Placeholder
+    readRsVial = { url = "github:meta-introspector/time-2025?ref=${branch}&dir=theory/read-rs-vial"; }; # Placeholder
 
 
-    nixTaskNew = { url = "github:meta-introspector/nix-task?ref=feature/lattice-30030-homedir"; };
+    nixTaskNew = { url = "github:meta-introspector/nix-task?ref=${branch}"; };
 
     spore-vial = {
-      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/hackathon-mycology-workflow-puml";
+      url = "github:meta-introspector/time-2025?ref=${branch}&dir=theory/hackathon-mycology-workflow-puml";
       flake = false; # Since it's a directory, not a flake itself
     };
 
@@ -41,8 +42,11 @@
 
   };
 
-  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src, dataSources, spore-vial, nixToPoemVial, readMdVial, readRsVial, nixTaskNew, ... } @ args:
+  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src, dataSources, spore-vial, nixToPoemVial, readMdVial, readRsVial, nixTaskNew, nurl, ... } @ args:
     let
+      # Define a branch variable for consistent ref usage across time-2025 inputs
+      branch = "feature/git-nix-file-list";
+
       # Define mycologyWorkflow as nixTask
       mycologyWorkflow = nixTaskNew;
 
@@ -184,6 +188,7 @@
           node2nix-src.packages.${system}.default # Add node2nix for JavaScript dependency management
           ncurses # Add ncurses for clear and reset commands
           gnupg # Add gnupg for sops encryption/decryption
+          nurl.packages.${system}.default # Add nurl to the development shell
           # Add any other development tools here
         ];
         # You can also add shell hooks or environment variables here
