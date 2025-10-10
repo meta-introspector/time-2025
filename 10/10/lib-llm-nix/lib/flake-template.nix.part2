@@ -1,0 +1,11 @@
+    // (pkgs.lib.genAttrs processFlakes (f: { url = f; }))
+    // (pkgs.lib.genAttrs outputFlakes (f: { url = f; }));
+
+  outputs = inputs@{ self, nixpkgs, ... }:
+    let
+      system = "x86_64-linux"; # Hardcode system for now
+      pkgs = import nixpkgs { inherit system; };
+      taskParameters = constants; # Use the passed constants for partial evaluation
+    in
+    {
+      defaultPackage.${system} = pkgs.runCommand "derived-llm-task" {} ''
