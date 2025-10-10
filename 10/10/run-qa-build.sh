@@ -6,7 +6,8 @@ set -euo pipefail
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 
 # Set NIX_PATH to ensure nix-build can find nixpkgs
-export NIX_PATH=nixpkgs=$(nix-instantiate --find-file nixpkgs)
+NIXPKGS_PATH=$(nix-instantiate --find-file nixpkgs)
+export NIX_PATH=nixpkgs=$NIXPKGS_PATH
 
 # Build the Nix derivation and capture its output path
 # Pass pkgs explicitly to run-qa.nix, using the specified flake input for nixpkgs

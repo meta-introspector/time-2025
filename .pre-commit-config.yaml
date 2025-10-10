@@ -21,9 +21,7 @@ repos:
         entry: bash -c "statix check"
         language: system
         files: \.nix$
-        exclude: ^10/10/lib-llm-nix/lib/flake-template.nix$
-        pass_filenames: false
-        # This hook performs static analysis on Nix files, contributing to
+        pass_filenames: false        # This hook performs static analysis on Nix files, contributing to
         # "Verification and Testing" (bott 10) and "Error Analysis" (bott 9).
 
 

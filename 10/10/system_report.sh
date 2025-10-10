@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+system=${1:-}
+
 echo "--- Report for 'system' (excluding ${system}) ---"
 find . -name "*.nix" -exec sh -c 'grep -E "system" "$0" | grep -v '\$\{system\}'' {} \; -print
 echo ""

@@ -4,6 +4,7 @@ set -euo pipefail
 
 FLAKE_SOURCE="$1"
 INITIAL_FLAKE_CONTENT_PATH="$2"
+out="${out:-/dev/stdout}"
 
 echo "--- Evaluating Derived Flake for: ${FLAKE_SOURCE} ---" > "$out"
 # Create a temporary directory for the derived flake

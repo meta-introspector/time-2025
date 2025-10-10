@@ -6,10 +6,10 @@ let
   # allTasks = makeContext.generateTasks; # Get all tasks from the task generator
 
   # Import the nix-task mkTask function
-  mkTask = mycologyWorkflow.lib.mkTask;
+  inherit (mycologyWorkflow.lib) mkTask;
 
   # Import the gemini-cli package
-  gemini-cli = pkgs.gemini-cli; # Assuming gemini-cli is available in nixpkgs
+  inherit (pkgs) gemini-cli;
 
   # Generate 100 LLM tasks
   allTasks = import ./llm-tasks.nix { inherit lib pkgs mkTask; flakeSources = [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=source/github/meta-introspector/streamofrandom/2025" ];

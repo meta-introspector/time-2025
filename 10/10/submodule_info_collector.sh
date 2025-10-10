@@ -11,7 +11,7 @@ git submodule status | while read -r line ; do
     # Extract submodule path
     submodule_path=$(echo "$line" | awk '{print $2}')
 
-    echo "\nSubmodule: $submodule_path"
+    printf "\nSubmodule: %s\n" "$submodule_path"
     echo "----------------------------------------"
 
     if [ -d "$submodule_path" ]; then
@@ -36,7 +36,7 @@ git submodule status | while read -r line ; do
         fi
 
         # Report git status
-        echo "\nGit Status:"
+        printf "\nGit Status:\n"
         git status
 
         cd "$MAIN_REPO_DIR" || exit 1
@@ -45,4 +45,4 @@ git submodule status | while read -r line ; do
     fi
 done
 
-echo "\n--- Report Complete ---"
+printf "\n--- Report Complete ---\n"

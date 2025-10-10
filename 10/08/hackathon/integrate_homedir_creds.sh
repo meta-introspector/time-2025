@@ -7,10 +7,12 @@ sed -i '/mycologyContext = { }; # Optional input for mycology framework context/
 
 # 2. Modify buildPhase to use geminiCliWithHomeCreds and remove hardcoded cp commands
 # This is a multi-line replacement. I will target the block of cp commands.
-sed -i '/cp /data/data/com.termux.nix/files/home/.gemini/settings.json $HOME/.gemini/,/cp /data/data/com.termux.nix/files/home/.gemini/google_accounts.json $HOME/.gemini/c\
-            # Credentials are now handled by homeDirCreds flake\n            # The geminiCliWithHomeCreds wrapper will set up HOME correctly\n' "$FILE_TELEMETRY"
+sed -i "/cp /data/data/com.termux.nix/files/home/.gemini/settings.json \$HOME/.gemini/,/cp /data/data/com.termux.nix/files/home/.gemini/google_accounts.json \$HOME/.gemini/c\
+            # Credentials are now handled by homeDirCreds flake\
+            # The geminiCliWithHomeCreds wrapper will set up HOME correctly\
+" "$FILE_TELEMETRY"
 
 # 3. Modify the Gemini CLI call to use the wrapper
-sed -i 's@exec ${gemini-cli.packages.${system}.default}/bin/gemini-cli "$@"@exec ${homeDirCreds.packages.${system}.default}/bin/gemini-cli-with-home-creds "$@"@g' "$FILE_TELEMETRY"
+sed -i "s@exec \${gemini-cli.packages.\${system}.default}/bin/gemini-cli \"\$@\"@exec \${homeDirCreds.packages.\${system}.default}/bin/gemini-cli-with-home-creds \"\$@\"@g" "$FILE_TELEMETRY"
 
 echo "Consolidated telemetry flake updated for homeDirCreds integration."
