@@ -18,7 +18,7 @@
 	url = https://github.com/nix-community/nix-eval-jobs
 [submodule "09/26/jobs/vendor/nix-task"]
 	path = 09/26/jobs/vendor/nix-task
-	url = https://github.com/madjam002/nix-task
+	url = https://github.com/meta-introspector/nix-task
 [submodule "09/26/synapse-system"]
 	path = 09/26/synapse-system
 	url = https://github.com/meta-introspector/synapse-system.git

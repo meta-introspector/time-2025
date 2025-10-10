@@ -11,6 +11,14 @@
     sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
     node2nix-src.url = "github:meta-introspector/node2nix";
 
+    nixToPoemVial.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/nix-to-poem-vial"; # Placeholder
+    readMdVial.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/read-md-vial"; # Placeholder
+    readRsVial.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/read-rs-vial"; # Placeholder
+
+    nixTask.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=09/26/jobs/vendor/nix-task";
+
+    nixTaskNew.url = "github:meta-introspector/nix-task?ref=feature/lattice-30030-homedir";
+
     spore-vial = {
       url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=theory/hackathon-mycology-workflow-puml";
       flake = false; # Since it's a directory, not a flake itself
@@ -35,9 +43,12 @@
   };
 
   outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src,
-  #mycologyWorkflow,
-  dataSources, spore-vial, ... } @ args:
+  mycologyWorkflow,
+  dataSources, spore-vial, nixTask, nixToPoemVial, readMdVial, readRsVial, nixTaskNew, ... } @ args:
     let
+      # Define mycologyWorkflow as nixTask
+      mycologyWorkflow = nixTask;
+
       system = "aarch64-linux"; # Hardcode system as per user instruction
       # Load core utilities
       pkgs = import nixpkgs { inherit system; };
@@ -116,6 +127,22 @@
         nixOwlOntology = exampleUrlFetch.nixToOwlOntology;
         generateHackathonUml = import ./theory/generate_hackathon_uml.nix { inherit pkgs lib self; };
 
+        # Define the orchestratorApp package
+        orchestratorApp = pkgs.runCommand "orchestrator-app" {
+          buildInputs = [ pkgs.bash ];
+        } ''
+          mkdir -p $out/bin
+          ${pkgs.writeShellScript "run-orchestrator-script" ''
+            ${(import ./orchestrator.nix {
+              inherit pkgs lib mycologyWorkflow nixpkgs nixIntrospector dataSources sopsSecretsPath;
+              zosSporeVial = spore-vial; # Assuming spore-vial is zosSporeVial
+              inherit nixToPoemVial readMdVial readRsVial;
+              targetFilePath = null; # Default to null, can be overridden
+            }).apps.default.program}
+          ''} > $out/bin/orchestrator-app
+          chmod +x $out/bin/orchestrator-app
+        '';
+
         # nixOntologyRepoPath = pkgs.runCommand "nix-ontology-repo-path" {} "ln -s ${nixOntologyRepo} $out"; # Expose nixOntologyRepo as a derivation
       };
 
@@ -134,10 +161,11 @@
 
         orchestrator = {
           type = "app";
-          program = "${pkgs.writeShellScript "run-orchestrator-app" ''
-            echo "--- Starting the Orchestrator ---"
-            nix run .#orchestrator
-            echo "--- Orchestrator Finished ---"
+          program = "${pkgs.writeShellScript "run-orchestrator-wrapper" ''
+            ${pkgs.symlinkJoin {
+              name = "orchestrator-runner";
+              paths = [ self.packages.${system}.orchestratorApp ];
+            }}/bin/orchestrator-app
           ''}";
         };
       };
