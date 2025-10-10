@@ -47,5 +47,13 @@ let
     inherit lib pkgs allRepos;
   };
 
+  # Import the crate-extractor module
+  crateExtractor = import ./nix2/crate-extractor.nix;
+
+  # Extract crate information from discovered Rust projects
+  extractedCrates = crateExtractor {
+    inherit lib pkgs discoveredRustProjects;
+  };
+
 in
-discoveredRustProjects
+extractedCrates
