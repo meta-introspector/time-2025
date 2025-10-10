@@ -14,6 +14,9 @@
       flakePaths = [
         (toString ../../.. + "/flake.nix") # Main flake
         (toString ./flake-checker.nix) # Our checker flake
+        (toString ../../../09/26/jobs/vendor/nix-task/flake.nix)
+        (toString ../grep-nar-flake/flake.nix)
+        (toString ../../09/orchestration-flake/flake.nix)
       ];
 
     in
