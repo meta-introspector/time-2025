@@ -27,8 +27,7 @@ let
 
   # Generate the repo.nix files
   generatedRepoFiles = generateRepos {
-    inherit lib pkgs;
-    inherit (extractedInfo) repoFileInstructions;
+    inherit lib pkgs repoFileInstructions;
   };
 
   # Dynamically import all generated repo.nix files
