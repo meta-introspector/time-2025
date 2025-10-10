@@ -1,4 +1,4 @@
-{ lib, pkgs, firstReflection, urlExtractor }:
+{ lib, pkgs, firstReflection, urlExtractor, monsterCode }:
 
 let
   # Step 1: Define the scope of files to analyze
@@ -14,6 +14,12 @@ let
     submoduleUrls = lib.flatten (lib.map (gitmodulesPath: firstReflection.identityPrincipleSpec.rawCommandExtraction.extractSubmoduleUrls gitmodulesPath) allGitmodulesFiles);
     submoduleBranches = lib.flatten (lib.map (gitmodulesPath: firstReflection.identityPrincipleSpec.rawCommandExtraction.extractSubmoduleBranches gitmodulesPath) allGitmodulesFiles);
   };
+
+  # Calculate canonical hashes for all flake.nix files
+  flakeHashes = lib.map (flakePath: {
+    path = flakePath;
+    hash = monsterCode.monsterGroupSpec.getNixFileCanonicalHash flakePath;
+  }) allFlakeNixFiles;
 
   # Step 3: Normalize extracted information
   normalizedCommands = lib.map firstReflection.identityPrincipleSpec.commandNormalization.normalizeShellCommand extractedInfo.flakeCommands;
@@ -41,6 +47,9 @@ let
   # Step 5: Generate a comprehensive report
   comprehensiveReport = ''
     --- First Principle of Identity Enforcement Report ---
+
+    --- Flake Hashes (Monster Group Addresses) ---
+    ${builtins.toJSON flakeHashes}
 
     Command Uniqueness:
     ${firstReflection.identityPrincipleSpec.reportingAndRemediation.generateReport commandUniquenessReport}
