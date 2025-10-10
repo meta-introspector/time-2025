@@ -33,6 +33,19 @@ in
         echo "Extracting Makefile targets from $1"
         grep -E '^[a-zA-Z0-9_-]+:' "$1" | sed 's/:.*//'
       '';
+
+      extractFlakeCommands = flakePath:
+        let
+          flakeContent = builtins.readFile flakePath;
+          # Heuristic to find pkgs.runCommand and pkgs.writeShellScript
+          # This is a very basic regex and will likely need refinement
+          runCommandMatches = lib.strings.match "pkgs\\.runCommand \"[^\"]*\" \{[^}]*\} \"([^\"]*)\"" flakeContent;
+          writeShellScriptMatches = lib.strings.match "pkgs\\.writeShellScript \"[^\"]*\" \"([^\"]*)\"" flakeContent;
+
+          # Extract the command strings from the matches
+          commands = (lib.map (m: m.captures.c1) runCommandMatches) ++ (lib.map (m: m.captures.c1) writeShellScriptMatches);
+        in
+        commands;
       # ... other extraction methods
     };
 
