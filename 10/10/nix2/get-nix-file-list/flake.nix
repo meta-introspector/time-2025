@@ -1,12 +1,13 @@
 
-(
 {
-  pkgs ? (builtins.getFlake "nixpkgs").legacyPackages.aarch64-linux,
-  lib ? pkgs.lib,
-}:
-
-let
-  miniPrelude = import ./mini-prelude.nix { inherit pkgs lib; };
-in
-miniPrelude
-) {}
+  inputs = {
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+  };
+  outputs = { self, nixpkgs, ... }:
+    let
+      pkgs = nixpkgs.legacyPackages.aarch64-linux;
+      inherit (pkgs) lib;
+      miniPrelude = import ../mini-prelude.nix { inherit pkgs lib; };
+    in
+    miniPrelude;
+}
