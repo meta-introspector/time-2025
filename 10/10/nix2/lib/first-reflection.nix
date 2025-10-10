@@ -42,10 +42,18 @@ in
           runCommandMatches = lib.strings.match "pkgs\\.runCommand \"[^\"]*\" \{[^}]*\} \"([^\"]*)\"" flakeContent;
           writeShellScriptMatches = lib.strings.match "pkgs\\.writeShellScript \"[^\"]*\" \"([^\"]*)\"" flakeContent;
 
+          # Heuristic to find flake input URLs
+          urlMatches = lib.strings.match "url = \"([^\"]*)\"" flakeContent;
+
+          # Heuristic to find system assignments
+          systemMatches = lib.strings.match "system = \"([^\"]*)\"" flakeContent;
+
           # Extract the command strings from the matches
           commands = (lib.map (m: m.captures.c1) runCommandMatches) ++ (lib.map (m: m.captures.c1) writeShellScriptMatches);
+          urls = lib.map (m: m.captures.c1) urlMatches;
+          systems = lib.map (m: m.captures.c1) systemMatches;
         in
-        commands;
+        { inherit commands urls systems; };
       # ... other extraction methods
     };
 
@@ -105,6 +113,29 @@ in
       check = checkUniqueness; # Integrate the existing checkUniqueness function
       inherit evalToJson; # Integrate the existing evalToJson function
       # ...
+    };
+
+    # New Layer: Flake Validation Layer
+    flakeValidation = {
+      description = "Validation rules specific to Nix flakes, such as URL and system constraints.";
+
+      validateFlakeUrls = urls:
+        let
+          invalidUrls = lib.filter (url: ! (lib.strings.hasPrefix "github:meta-introspector" url)) urls;
+          hasInvalidUrls = (lib.length invalidUrls) > 0;
+        in
+        {
+          inherit invalidUrls hasInvalidUrls;
+        };
+
+      validateFlakeSystems = systems:
+        let
+          invalidSystems = lib.filter (system: system != "aarch64-linux") systems;
+          hasInvalidSystems = (lib.length invalidSystems) > 0;
+        in
+        {
+          inherit invalidSystems hasInvalidSystems;
+        };
     };
 
     # Layer 8: Reporting and Remediation Layer
