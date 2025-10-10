@@ -3,12 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11"; # Or a more appropriate nixpkgs
-    flake-checker.url = "./flake-checker.nix"; # Relative path to our checker
   };
 
-  outputs = { self, nixpkgs, flake-checker, ... }:
+  outputs = { self, nixpkgs, ... }:
     let
       systems = [ "x86_64-linux" ]; # Define target systems
+      inherit (nixpkgs) lib;
 
       # For now, a simplified list of flakes to check
       flakePaths = [
@@ -19,6 +19,8 @@
         (toString ../../09/orchestration-flake/flake.nix)
       ];
 
+      flake-checker = import ./flake-checker.nix;
+
     in
     {
       # Define a check that runs our flake checker
@@ -26,9 +28,12 @@
         let
           pkgs = import nixpkgs { inherit system; };
           # Call our flake checker with the list of all flake.nix files
-          checkerResults = flake-checker.results {
+          checkerResults = flake-checker {
             inherit lib pkgs;
             inherit flakePaths;
+            firstReflection = {}; # Placeholder
+            urlExtractor = {}; # Placeholder
+            gitmodulesPaths = []; # Placeholder
           };
         in
         {

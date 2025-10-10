@@ -13,7 +13,7 @@
   outputs = { self, nixpkgs, getNixFileList }:
     let
       pkgs = nixpkgs.legacyPackages.x86_64-linux; # Assuming x86_64-linux for now
-      lib = pkgs.lib;
+      inherit (pkgs) lib;
       # Evaluate get-nix-file-list.nix to get the list of files
       nixFilesList = getNixFileList { inherit pkgs lib; };
     in

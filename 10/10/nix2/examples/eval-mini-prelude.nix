@@ -1,6 +1,6 @@
 let
   pkgs = import <nixpkgs> {};
-  lib = pkgs.lib;
+  inherit (pkgs) lib;
   miniPrelude = import ./mini-prelude.nix { inherit pkgs lib; };
 in
 # Access the 'files' attribute of each context to force evaluation
