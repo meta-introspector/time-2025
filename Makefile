@@ -848,4 +848,10 @@ test-uncommitted: uncommitted.nix
 		cat uncommitted.eval.log; 		exit 1; 	}
 	@echo "--- uncommitted.nix test complete. Output in uncommitted.eval.log ---"
 
+.PHONY: system-reports
+system-reports:
+	@echo "--- Generating System Architecture Reports ---"
+	@./10/10/system_report.sh
+	@echo "--- System Architecture Reports Complete ---"
+
 

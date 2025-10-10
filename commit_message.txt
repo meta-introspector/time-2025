@@ -1,11 +1,16 @@
-feat: Implement three-flake architecture for hackathon status
+feat: Enhance Nix flake management, reporting, and submodule branch consistency
 
-This commit introduces a new three-flake architecture to fetch, process, and bridge hackathon status information.
+This commit introduces several improvements to Nix flake management, reporting, and submodule consistency:
 
-- **Producer Flake (`10/09/hackathon/colosseum/flake.nix`):** Fetches raw HTML pages from Colosseum websites.
-- **Consumer Flake (`10/09/hackathon/consumer/flake.nix`):** Processes the raw HTML into JSON format using Pandoc.
-- **Generic Bridge Pattern Flake (`10/09/hackathon/bridge-pattern/flake.nix`):** Provides a reusable blueprint for connecting a producer and a consumer flake.
-- **Bridge Instance (`10/09/hackathon/bridge.nix`):** Instantiates the generic bridge with the Colosseum producer and hackathon consumer.
-- **Makefile Update:** Configured to build the bridge instance.
+- **System Architecture Reporting:** A new script `10/10/system_report.sh` and Makefile target `system-reports` are added to report on system architecture references in `.nix` files. The script was refined for accuracy and robustness.
+- **Nix Path Purity SOP:** A new SOP `10/10/docs/sop/nix_path_purity.md` is introduced to enforce the use of `github:meta-introspector` URLs for all submodule references, improving reproducibility and adherence to policy.
+- **Path Conversion Tools:** Scripts `10/10/path_report.sh` and `10/10/convert_paths_to_github_permalinks.sh` are added to identify and convert local path references to GitHub permalinks.
+- **Submodule Branch Consistency:** The `10/10/submodule_info_collector.sh` script is added to ensure a `feature/lattice-30030-homedir` branch exists and is pushed in relevant submodules, promoting consistent development across the project.
+- **Flake Resolution Fixes:** Resolved persistent `nix flake update` errors by:
+    - Removing the problematic `nixTask` input from the main `flake.nix`.
+    - Correcting the `base-job` input URL in the `nix-task` submodule's `flake.nix` to use a proper `github:` reference.
+    - Regenerating `flake.lock` to reflect these changes.
+- **Orchestration Updates:** `10/09/llm-tasks.nix` and `10/09/orchestrator.nix` were updated, and the old `orchestrator.nix` was deleted.
+- **Documentation:** `10/10/nix-task_changes.md` and `docs/memo_cleanup_tasks.md` were added.
 
-All flakes adhere to the `github:meta-introspector` URL policy for inputs.
+These changes collectively improve the project's Nix infrastructure, enforce best practices for dependency management, and streamline development workflows.
