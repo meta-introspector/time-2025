@@ -1,14 +1,9 @@
-{ lib, pkgs, firstReflection }:
+{ lib, pkgs, firstReflection, flakePaths }:
 
 let
   # List of all flake.nix files in the repository
-  # This needs to be dynamically generated or passed as an argument
-  # For now, we'll use a placeholder list.
-  # In a real scenario, this would come from a glob or a file index.
-  flakeFiles = [
-    ./flake.nix # Example: current flake
-    # Add other flake.nix paths here
-  ];
+  # This will be passed as an argument to the flake-checker.nix
+  flakeFiles = flakePaths;
 
   # Collect all commands from all flakes
   allCommands = lib.flatten (
