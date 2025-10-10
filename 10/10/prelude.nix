@@ -63,5 +63,13 @@ let
     inherit lib pkgs extractedCrates;
   };
 
+  # Check for duplicate crate names
+  duplicateCrateNames = lib.filter (
+    name: (lib.length (lib.filter (c: c.name == name) extractedCrates)) > 1
+  ) (lib.unique (lib.map (c: c.name) extractedCrates));
+
+  _ = lib.assertMsg (lib.length duplicateCrateNames == 0)
+    "Duplicate crate names found: ${lib.concatStringsSep ", " duplicateCrateNames}";
+
 in
 crateDerivations
