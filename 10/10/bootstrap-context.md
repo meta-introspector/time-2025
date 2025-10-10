@@ -6,7 +6,7 @@ This document outlines the plan for completing the manual conversion of `.gitmod
 
 **Current Status:**
 
-We have processed `context/pick-up-nix/.gitmodules` and the first four parts of `context/streamofrandom/.gitmodules`. This content is currently being written into `10/10/bootstrap-context.nix` as a single file, but the user has requested to break it into 7 parts.
+We have processed `context/pick-up-nix/.gitmodules` and the first four parts of `context/streamofrandom/.gitmodules`. This content is currently being written into `10/10/bootstrap-context.nix` as a single file. The user has requested to break it into 7 parts, each in its own file within `10/10/bootstrap-context/`.
 
 **Goal:**
 
@@ -16,7 +16,7 @@ To manually convert all submodule information from `context/pick-up-nix/.gitmodu
 
 1.  **Create `10/10/bootstrap-context/` directory:** (Already done)
 
-2.  **Move existing content to `part1.nix` and `part2.nix`:**
+2.  **Move existing content to `part1.nix` to `part5.nix`:**
     *   Move the content from `context/pick-up-nix/.gitmodules` into `10/10/bootstrap-context/part1.nix`.
     *   Move the first part of `context/streamofrandom/.gitmodules` into `10/10/bootstrap-context/part2.nix`.
     *   Move the second part of `context/streamofrandom/.gitmodules` into `10/10/bootstrap-context/part3.nix`.
