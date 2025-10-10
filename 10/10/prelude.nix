@@ -39,5 +39,13 @@ let
   # Combine all imported repos into a single attribute set
   allRepos = lib.foldl lib.recursiveUpdate {} importedRepos;
 
+  # Import the rust-discovery module
+  rustDiscovery = import ./nix2/rust-discovery.nix;
+
+  # Discover Rust projects
+  discoveredRustProjects = rustDiscovery {
+    inherit lib pkgs allRepos;
+  };
+
 in
-allRepos
+discoveredRustProjects
