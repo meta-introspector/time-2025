@@ -1,80 +1,25 @@
-{ lib, pkgs }:
-
 {
-  # Submodules from context/pick-up-nix/.gitmodules (Part 1)
-  "vendor-rust-index-guix" = {
-    path = "vendor/rust-index-guix";
-    url = "https://github.com/meta-introspector/rust-index-guix";
-    branch = null; # Not specified
-  };
-  "github-actions-install-nix-action" = {
-    path = ".github/actions/install-nix-action";
-    url = "https://github.com/meta-introspector/install-nix-action";
-    branch = null;
-  };
-  "github-actions-nix-github-actions" = {
-    path = ".github/actions/nix-github-actions";
-    url = "https://github.com/meta-introspector/nix-github-actions";
-    branch = null;
-  };
-  "github-actions-nix-installer-action" = {
-    path = ".github/actions/nix-installer-action";
-    url = "https://github.com/meta-introspector/nix-installer-action";
-    branch = null;
-  };
-  "github-actions-cache-nix-action" = {
-    path = ".github/actions/cache-nix-action";
-    url = "https://github.com/meta-introspector/cache-nix-action";
-    branch = null;
-  };
-  "github-actions-cache" = {
-    path = ".github/actions/cache";
-    url = "https://github.com/meta-introspector/cache";
-    branch = null;
-  };
-  "github-actions-checkout" = {
-    path = ".github/actions/checkout";
-    url = "https://github.com/meta-introspector/checkout";
-    branch = null;
-  };
-  "vendor-rnix-parser" = {
-    path = "vendor/rnix-parser";
-    url = "https://github.com/nix-community/rnix-parser";
-    branch = null;
-  };
-  "github-actions-upload-artifact" = {
-    path = ".github/actions/upload-artifact";
-    url = "https://github.com/meta-introspector/upload-artifact";
-    branch = null;
-  };
-  "vendor-nix-on-droid" = {
-    path = "vendor/nix-on-droid";
-    url = "https://github.com/nix-community/nix-on-droid";
-    branch = null;
-  };
-  "vendor-nix-nix" = {
-    path = "vendor/nix/nix";
-    url = "https://github.com/NixOS/nix";
-    branch = null;
-  };
-  "source-github-jmikedupont2-orgs-Escaped-RDFa-namespace" = {
-    path = "source/github/jmikedupont2/orgs/Escaped-RDFa/namespace";
-    url = "https://github.com/Escaped-RDFa/namespace";
-    branch = null;
-  };
-  "source-github-meta-introspector-git-submodule-tools-rs" = {
-    path = "source/github/meta-introspector/git-submodule-tools-rs";
-    url = "https://github.com/meta-introspector/git-submodule-tools-rs";
-    branch = null;
-  };
-  "vendor-external-git-submodule-tools-rs" = {
-    path = "vendor/external/git-submodule-tools-rs";
-    url = "https://github.com/meta-introspector/git-submodule-tools-rs";
-    branch = null;
-  };
-  "source-github-meta-introspector-solfunmeme" = {
-    path = "source/github/meta-introspector/solfunmeme";
-    url = "https://github.com/meta-introspector/solfunmeme";
-    branch = null;
+  bootstrapContext = {
+    inherit (
+      import ./bootstrap-context/part1.nix
+    ) "vendor/rust-index-guix" ".github/actions/install-nix-action" ".github/actions/nix-github-actions" ".github/actions/nix-installer-action" ".github/actions/cache-nix-action" ".github/actions/cache" ".github/actions/checkout" "vendor/rnix-parser" ".github/actions/upload-artifact" "vendor/nix-on-droid" "vendor/nix/nix" "source/github/jmikedupont2/orgs/Escaped-RDFa/namespace" "source/github/meta-introspector/git-submodule-tools-rs" "vendor/external/git-submodule-tools-rs" "source/github/meta-introspector/solfunmeme" "source/github/meta-introspector/lean4" "vendor/external/forgejo-python" "vendor/external/tmux" "vendor/external/minizinc-introspector" "vendor/external/tmux-interface-rs" "vendor/external/n00b" "vendor/external/monomcp-rust" "vendor/external/hugging-face-dataset-validator-rust" "vendor/external/turbomcp" "vendor/external/bitchat-solana-zos-solfunmeme" "vendor/external/trident" "vendor/external/solfunmeme-banner" "vendor/external/ragit" "vendor/external/bootstrap-meme" "vendor/external/emojis-rs" "vendor/external/introspector-llc" "vendor/external/coccinelleforrust_personal_mirror" "vendor/external/solfunmeme-model-builder-quiz" "vendor/external/solfunmeme-dioxus" "vendor/external/sophia_rs" "vendor/external/solfunmeme-metameme" "vendor/external/amazon-q-developer-cli" "vendor/external/grok-cli" "vendor/external/tclifford" "vendor/external/meta-meme" "vendor/external/gemini-cli" "source/github/meta-introspector/streamofrandom" "source/github/meta-introspector/lattice-introspector" "vendor/external/rust" "vendor/external/asciinema-scenario" "vendor/external/nix-asciinema-agg" "vendor/external/asciinema" "vendor/nix/nixtract" "vendor/nix/nixpkgs-lint" "vendor/guix/mes" "vendor/guix/guix" "vendor/lang-c" "vendor/steel" "vendor/strace/dutchcoders-trace" "vendor/strace/intentrace" "vendor/strace/lurk" "vendor/strace/rstrace" "source/github/meta-introspector/quasi-meta-meme" "source/github/meta-introspector/hackathon" "vendor/external/github-issues-export-rs" "source/github/meta-introspector/minizinc-introspector" "source/github/meta-introspector/time" "source/github/meta-introspector/neo" "source/github/meta-introspector/neo2" "vendor/nixpkgs" "vendor/plantuml-stdlib/C4-PlantUML" "vendor/ebpf/aya" "vendor/ebpf/bpfjit" "vendor/ebpf/bpfman" "vendor/ebpf/clean-dns-bpf" "vendor/ebpf/eadb" "vendor/ebpf/ebpfguard" "vendor/ebpf/libbpf-rs" "vendor/ebpf/rbpf" "source/github/meta-introspector/git-submodules-rs-nix" "vendor/mkAIDerivation" "vendor/nix/renix" "vendor/nix/nix-config-merger" "vendor/nix/nix-files-comparator" "vendor/nix/rnix-parser-tester" "source/github/meta-introspector/introspector-llc" "vendor/nix/nix-direnv" "vendor/hooks/shellcheck-precommit" "vendor/hooks/rusty-hook" "vendor/hooks/shebling" "vendor/nix/tvix" "vendor/nix/nil" "vendor/lint/shellcheck" "vendor/lint/git-hooks.nix" "vendor/lint/cachix-git-hooks.nix" "vendor/nix/nixpacks" "source/github/meta-introspector/ragit" "vendor/nix/flake-utils" "vendor/tools/detect-duplicates" "vendor/nix/fenix" "vendor/nix/nix-systems-default" "vendor/nix/nix-systems-default-fork" "vendor/nix/home-manager" "vendor/nix/nix-asciinema-agg" "vendor/external/fenix" "vendor/rust/just" "source/github/meta-introspector/bootstrap" "vendor/nix/nix-nar-rs" "source/github/meta-introspector/ai-ml-zk-ops" "vendor/nix/rust-overlay" "vendor/nix/naersk" "vendor/nix/flake-parts" "vendor/nix/treefmt-nix" "vendor/nix/yarnpnp2nix" "vendor/external/copilot-cli" "source/github/meta-introspector/solfunmeme-gitbook" "source/github/meta-introspector/solfunmeme-metameme" "vendor/nix/factorio-mods-nix" "vendor/nix/vpsfree-cz-configuration" "vendor/nix/sops-nix" "nix/vendor/nix/croissong-system" "nix/vendor/nix/bbigras-nix-config" "nix/vendor/nix/gmkonan-flake" "nix/vendor/nix/jpetrucciani-nix" "nix/vendor/nix/stites-configs-mirror" "nix/vendor/nix/privatevoid-depot" "nix/vendor/nix/catircservices-org" "nix/vendor/nix/duck1123-k3s-fleetops" "nix/vendor/nix/dominicegginton-dotfiles" "nix/vendor/nix/fort-nix-bitcoin" "nix/vendor/nix/bojeran-dotfiles" "nix/vendor/nix/sheeeng-nix" "nix/vendor/nix/fjolne-dotfiles" "nix/vendor/nix/vpsfreecz-config" "nix/vendor/nix/disassembler-network" "vendor/hooks/vale-precommit" "vendor/hooks/vale" "source/github/meta-introspector/pre-commit-hooks-collection" "vendor/nix/vale-precommit" "vendor/hooks/lint-staged" "vendor/lint/nixpkgs-lint" "vendor/nix/pre-commit-tool-hooks" "vendor/nix/nixdoc" "source/github/meta-introspector/th-desugar" "vendor/hooks/prek" "vendor/nix/felix-schausberger-nixos" "vendor/nix/nix-stdlib" "vendor/nix/nix-init" "vendor/nix/nix-prefetch" "vendor/nix/nix-prefetch-github" "vendor/nix/nurl" "vendor/nix/nix-universal-prefetch" "vendor/nix/prefetch-github" "vendor/nix/nix-upfetch" "vendor/nix/nix-prefetch-lheckemann" "vendor/external/codex";
+    inherit (
+      import ./bootstrap-context/part2.nix
+    ) "2025";
+    inherit (
+      import ./bootstrap-context/part3.nix
+    ) "vendor/livestream-tiktok-plugin";
+    inherit (
+      import ./bootstrap-context/part4.nix
+    ) "vendor/twitter-plugin";
+    inherit (
+      import ./bootstrap-context/part5.nix
+    ) "vendor/elizaos-plugins/plugin-twitter";
+    inherit (
+      import ./bootstrap-context/part6.nix
+    );
+    inherit (
+      import ./bootstrap-context/part7.nix
+    );
   };
 }
