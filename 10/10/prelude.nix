@@ -22,9 +22,23 @@ let
     inherit flakePaths gitmodulesPaths;
   };
 
-  # Convert parsed URLs to flake inputs (for now, just return parsed URLs for inspection)
-  # This will be refined later to generate repo.nix files
-  flakeInputs = extractedInfo.parsedUrls;
+  # Import the generate-repos module
+  generateRepos = import ./nix2/generate-repos.nix;
+
+  # Generate the repo.nix files
+  generatedRepoFiles = generateRepos {
+    inherit lib pkgs;
+    inherit (extractedInfo) repoFileInstructions;
+  };
+
+  # Dynamically import all generated repo.nix files
+  # This assumes that the generatedRepoFiles is a list of paths to the generated files
+  # and that each repo.nix returns an attribute set.
+  # We'll need to adjust this if the structure is different.
+  importedRepos = lib.map import generatedRepoFiles;
+
+  # Combine all imported repos into a single attribute set
+  allRepos = lib.foldl lib.recursiveUpdate {} importedRepos;
 
 in
-flakeInputs
+allRepos
