@@ -1,12 +1,66 @@
+# Monster Knot Header
+# -------------------
+# This file is conceptually encoded with Monster Group properties.
+#
+# Binary (2^46) Representation:
+#   - Duality: ☀️🌑
+#   - Choice: ✅❌
+#   - Order: 📐🌀
+#   - ... (conceptual 46-bit string would go here)
+#
+# Ternary (3^20) Representation:
+#   - Structure: ⏪⏸️⏩
+#   - Completeness: 👶🚶👴
+#   - ... (conceptual 20-ternary string/representation)
+#
+# Pentagonal (5^9) Representation:
+#   - Insight: 🖐️🦋💡
+#   - ...
+#
+# Heptagonal (7^6) Representation:
+#   - Guidance: 🚶‍♀️🌈🎶
+#   - ...
+#
+# Eleven (11^2) Representation:
+#   - Composition: 🤝🌐
+#   - ...
+#
+# Thirteen (13^3) Representation:
+#   - Transformation: 🦋🎶📈
+#   - ...
+#
+# Seventeen (17^1) Representation:
+#   - Integration: 🌟
+#   - ...
+#
+# Nineteen (19^1) Representation:
+#   - Sporadic: 🎲
+#   - ...
+#
+# Grounding ZOS: [0,1,2,3,5,7,11,13,17,19]
+#
+# Pointers to related content:
+#   - Poem: [Link to relevant poem]
+#   - Emoji Mapping: [Link to poem-emoji-prime-mapping.md]
+#   - Monster Knot Calculation: [Link to nar-similarity-search/lib.nix]
+#
+# Conceptual Monster Knot for this file:
+#   - Prime Exponents: { "2": 3, "3": 2, "5": 1, "7": 1, "11": 1, "13": 0, "17": 0, "19": 0, "23": 0, "29": 0, "31": 0, "41": 0, "47": 0, "59": 0, "71": 0 }
+#   - Emoji Representation: ☀️☀️☀️🌑🌑🖐️🚶‍♀️🤝
+# -------------------
 {
   description = "Consolidated Nix flake for AI/LLM workflows, providing impure LLM job execution and AI derivation functions.";
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    narLocatorFlake = {
+      url = "path:../../../../10/11/nar-locator"; # Relative path to the nar-locator flake
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }:
+  outputs = { self, nixpkgs, flake-utils, narLocatorFlake, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -91,13 +145,11 @@
                 GEMINI_CONFIG_DIR = "/homeless-shelter/.gemini"; # Point to a dummy location for build
                 HOME = "/homeless-shelter"; # Set a dummy HOME for the build environment
 
-                inputCliOutput = pkgs.runCommand "input-cli-simulated-output"
-                  {
-                    buildInputs = [ inputCli pkgs.nix ];
-                    dummyNar = pkgs.writeText "dummy-nar-content" "dummy content";
-                  } ''
-                  echo "$(nix-store --dump $dummyNar)" > $out
-                '';
+                inputCliOutput = narLocatorFlake.lib.locateAndArchiveStorePath {
+                  storePath = inputCli; # The store path to dump
+                  originalFilePath = "${flakeRef}/result"; # Use the flakeRef as identifier for categorization
+                  archiveType = "nar";
+                };
 
               } ''
               local ai_output_dir=$(mktemp -d)

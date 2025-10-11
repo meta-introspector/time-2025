@@ -1,3 +1,53 @@
+# Monster Knot Header
+# -------------------
+# This file is conceptually encoded with Monster Group properties.
+#
+# Binary (2^46) Representation:
+#   - Duality: ☀️🌑
+#   - Choice: ✅❌
+#   - Order: 📐🌀
+#   - ... (conceptual 46-bit string would go here)
+#
+# Ternary (3^20) Representation:
+#   - Structure: ⏪⏸️⏩
+#   - Completeness: 👶🚶👴
+#   - ... (conceptual 20-ternary string/representation)
+#
+# Pentagonal (5^9) Representation:
+#   - Insight: 🖐️🦋💡
+#   - ...
+#
+# Heptagonal (7^6) Representation:
+#   - Guidance: 🚶‍♀️🌈🎶
+#   - ...
+#
+# Eleven (11^2) Representation:
+#   - Composition: 🤝🌐
+#   - ...
+#
+# Thirteen (13^3) Representation:
+#   - Transformation: 🦋🎶📈
+#   - ...
+#
+# Seventeen (17^1) Representation:
+#   - Integration: 🌟
+#   - ...
+#
+# Nineteen (19^1) Representation:
+#   - Sporadic: 🎲
+#   - ...
+#
+# Grounding ZOS: [0,1,2,3,5,7,11,13,17,19]
+#
+# Pointers to related content:
+#   - Poem: [Link to relevant poem]
+#   - Emoji Mapping: [Link to poem-emoji-prime-mapping.md]
+#   - Monster Knot Calculation: [Link to nar-similarity-search/lib.nix]
+#
+# Conceptual Monster Knot for this file:
+#   - Prime Exponents: { "2": 5, "3": 3, "5": 2, "7": 1, "11": 2, "13": 1, "17": 1, "19": 1, "23": 0, "29": 0, "31": 0, "41": 0, "47": 0, "59": 0, "71": 0 }
+#   - Emoji Representation: ☀️☀️☀️☀️☀️🌑🌑🌑🖐️🖐️🚶‍♀️🤝🤝🦋🌟🎲
+# -------------------
 {
   description = "The Ultimate Nix Self-Ingesting Quine Derivation: Embodies Quasiquotation of System (CRQ-072) for self-referential architectural evolution.";
 
@@ -12,15 +62,15 @@
     node2nix-src = { url = "github:meta-introspector/node2nix"; };
     nurl = { url = "github:meta-introspector/nurl"; };
 
-    nixToPoemVial = { url = "github:meta-introspector/time-2025?ref=${branch}&dir=theory/nix-to-poem-vial"; }; # Placeholder
-    readMdVial = { url = "github:meta-introspector/time-2025?ref=${branch}&dir=theory/read-md-vial"; }; # Placeholder
-    readRsVial = { url = "github:meta-introspector/time-2025?ref=${branch}&dir=theory/read-rs-vial"; }; # Placeholder
+    nixToPoemVial = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=theory/nix-to-poem-vial"; }; # Placeholder
+    readMdVial = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=theory/read-md-vial"; }; # Placeholder
+    readRsVial = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=theory/read-rs-vial"; }; # Placeholder
 
 
-    nixTaskNew = { url = "github:meta-introspector/nix-task?ref=${branch}"; };
+    nixTaskNew = { url = "github:meta-introspector/nix-task?ref=feature/lattice-30030-homedir"; };
 
     spore-vial = {
-      url = "github:meta-introspector/time-2025?ref=${branch}&dir=theory/hackathon-mycology-workflow-puml";
+      url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=theory/hackathon-mycology-workflow-puml";
       flake = false; # Since it's a directory, not a flake itself
     };
 
@@ -43,10 +93,7 @@
   };
 
   outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src, dataSources, spore-vial, nixToPoemVial, readMdVial, readRsVial, nixTaskNew, nurl, ... } @ args:
-    let
-      # Define a branch variable for consistent ref usage across time-2025 inputs
-      branch = "feature/git-nix-file-list";
-
+  let
       # Define mycologyWorkflow as nixTask
       mycologyWorkflow = nixTaskNew;
 
@@ -199,4 +246,5 @@
       };
 
       checks.${system} = qa.checks;
-    };}
+    };
+}
