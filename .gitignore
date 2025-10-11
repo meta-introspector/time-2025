@@ -12,3 +12,5 @@ result/
 result
 sops-secrets/
 statix_output.txt
+/index/
+/nix-vendor/

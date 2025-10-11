@@ -18,9 +18,10 @@ in
     RDF_PREFIX_URL_STRING = rdfPrefix.urlString;
     RDFS_PREFIX_URL_STRING = rdfsPrefix.urlString;
     XSD_PREFIX_URL_STRING = xsdPrefix.urlString;
-    NIX_FILE_INDEX = nixFileIndex;
+    NIX_FILE_INDEX = "${nixFileIndex}";
     JQ_FILTER = jqFilter;
     JQ_PATH_FILTER = jqPathFilter;
     JQ_HASH_FILTER = jqHashFilter;
   } ''
-        $nixToOwlMapperScript  ''
+        $nixToOwlMapperScript > $out/nix-ontology.ttl
+  ''

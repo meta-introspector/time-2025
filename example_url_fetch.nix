@@ -1,7 +1,7 @@
 { lib, builtins, nixOntologyRepo, pkgs, self, nixpkgs, nixFileIndexDerivation, ... }:
 
 let
-  urlReader = import (self + "/lib/url_url_reader.nix") { inherit lib pkgs builtins; };
+  urlReader = import (self + "/lib/url_reader.nix") { inherit lib pkgs builtins; };
   urlExtractor = import (self + "/lib/url_extractor.nix") { inherit lib pkgs builtins; };
 
   fetchedWebsite = urlReader.fetchImpureUrl {
@@ -21,7 +21,7 @@ let
   };
 
   # Call nixToOwlMapper with the provided nixFileIndexDerivation
-  nixToOwlOntology = pkgs.writeText "nix-owl-ontology.owl" (builtins.readFile "${nixToOwlOntologyModule.nixToOwlMapper nixFileIndexDerivation}/nix-ontology.ttl");
+  nixToOwlOntology = nixToOwlOntologyModule.nixToOwlMapper nixFileIndexDerivation;
 
   # Extract URLs from the nixOntologyRepo
   extractedUrls = urlExtractor.extractUrls {

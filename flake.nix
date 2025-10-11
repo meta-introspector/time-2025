@@ -56,15 +56,22 @@
     nixpkgs = { url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify"; };
     # 2. Integrate the Introspection Tooling (Quasiquotation Extraction)
     nixIntrospector = { url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; }; # Placeholder ref, acts as LIL/QQC for Nix expressions
+    rnix-parser = {
+      url = "github:meta-introspector/rnix-parser?ref=feature/CRQ-016-nixify-workflow";
+      inputs.import-cargo.follows = "nixpkgs";
+    };
     # 3. Reference the Log Analyzer for feedback (The Strange Loop Agent)
     logAnalyzer = { url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=09/25/log_analyzer"; };
     sops-nix = { url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store"; };
     node2nix-src = { url = "github:meta-introspector/node2nix"; };
     nurl = { url = "github:meta-introspector/nurl"; };
+    nix-stdlib = { url = "github:meta-introspector/nix-stdlib"; };
 
-    nixToPoemVial = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=theory/nix-to-poem-vial"; }; # Placeholder
-    readMdVial = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=theory/read-md-vial"; }; # Placeholder
-    readRsVial = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=theory/read-rs-vial"; }; # Placeholder
+    # nix-stdlib = { url = "github:meta-introspector/nix-stdlib?ref=feature/CRQ-016-nixify-workflow"; };
+
+    nixToPoemVial = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=flakes/nix-to-poem-vial"; }; # Placeholder
+    readMdVial = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=flakes/read-md-vial"; }; # Placeholder
+    readRsVial = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=flakes/read-rs-vial"; }; # Placeholder
 
 
     nixTaskNew = { url = "github:meta-introspector/nix-task?ref=feature/lattice-30030-homedir"; };
@@ -90,9 +97,12 @@
     };
 
 
+    self = {
+      url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench";
+    };
   };
 
-  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src, dataSources, spore-vial, nixToPoemVial, readMdVial, readRsVial, nixTaskNew, nurl, ... } @ args:
+  outputs = { self, nixpkgs, flake-utils, rnix-parser, nixTaskNew, nix-stdlib, nixOntologyRepo }:
   let
       # Define mycologyWorkflow as nixTask
       mycologyWorkflow = nixTaskNew;
@@ -111,15 +121,18 @@
         flake = false;
       };
 
-      nixCodeIndexerModule = import (self + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
+      nixCodeIndexerModule = import (self.outPath + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
 
       nixFileIndexDerivation = nixCodeIndexerModule.indexNixFiles {
-        path = self;
+        path = self.outPath;
+        projectRoot = self.outPath;
         name = "flake-nix-files-index";
       };
 
       # Import the QA system
-      qa = import ./qa.nix { inherit pkgs self; };
+      nixTermExtractor = import (self.outPath + "/10/crq-text-extractor.nix") { inherit pkgs; month09Flake = self; };
+      nGramGeneratorModule = import (self.outPath + "/10/01/docs/theory/n_gram_generator.nix") { inherit lib pkgs builtins; };
+      qa = import ./qa.nix { inherit pkgs lib self nix-stdlib nixTermExtractor nGramGeneratorModule; };
 
       # 4. Define the SELF-INGESTION & MODIFICATION derivation (Quasiquoted Transformation)
       # Temporarily using pkgs.stdenv.mkDerivation as pkgs.runCommand is causing "is not a derivation" error.
@@ -172,27 +185,19 @@
         default = selfIngestionDerivation;
         exampleUrlFetch = exampleUrlFetch.fetchedWebsite;
         ontologyUrls = exampleUrlFetch.extractedUrls;
-        nixOwlOntology = exampleUrlFetch.nixToOwlOntology;
+        # nixOwlOntology = exampleUrlFetch.nixToOwlOntology;
         generateHackathonUml = import ./theory/generate_hackathon_uml.nix { inherit pkgs lib self; };
 
         # Define the orchestratorApp package
-        orchestratorApp = pkgs.runCommand "orchestrator-app" {
-          buildInputs = [ pkgs.bash ];
-        } ''
-          mkdir -p $out/bin
-          ${pkgs.writeShellScript "run-orchestrator-script" ''
-            ${(import ./orchestrator.nix {
-              inherit pkgs lib nixpkgs nixIntrospector dataSources sopsSecretsPath;
-              mycologyWorkflow = mycologyWorkflow.lib; # Pass the lib attribute of nixTaskNew
-              zosSporeVial = spore-vial; # Assuming spore-vial is zosSporeVial
-              inherit nixToPoemVial readMdVial readRsVial;
-              targetFilePath = null; # Default to null, can be overridden
-            }).apps.default.program}
-          ''} > $out/bin/orchestrator-app
-          chmod +x $out/bin/orchestrator-app
-        '';
-
-        # nixOntologyRepoPath = pkgs.runCommand "nix-ontology-repo-path" {} "ln -s ${nixOntologyRepo} $out"; # Expose nixOntologyRepo as a derivation
+        # orchestratorApp = pkgs.runCommand "orchestrator-app" {
+        #   buildInputs = [ pkgs.bash ];
+        # } ''
+        #   mkdir -p $out/bin
+        #   ${pkgs.writeShellScript "run-orchestrator-script" ''
+        #     ${orchestratorProgram}
+        #   ''} > $out/bin/orchestrator-app
+        #   chmod +x $out/bin/orchestrator-app
+        # '';
       };
 
       apps.${system} = {
@@ -208,15 +213,15 @@
           ''}";
         };
 
-        orchestrator = {
-          type = "app";
-          program = "${pkgs.writeShellScript "run-orchestrator-wrapper" ''
-            ${pkgs.symlinkJoin {
-              name = "orchestrator-runner";
-              paths = [ self.packages.${system}.orchestratorApp ];
-            }}/bin/orchestrator-app
-          ''}";
-        };
+        # orchestrator = {
+        #   type = "app";
+        #   program = "${pkgs.writeShellScript "run-orchestrator-wrapper" ''
+        #     ${pkgs.symlinkJoin {
+        #       name = "orchestrator-runner";
+        #       paths = [ self.packages.${system}.orchestratorApp ];
+        #     }}/bin/orchestrator-app
+        #   ''}";
+        # };
       };
 
       #defaultApp = apps.default;

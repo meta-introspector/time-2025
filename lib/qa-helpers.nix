@@ -4,7 +4,7 @@
 # These functions are designed to be atomic and testable, facilitating the
 # composition of comprehensive QA checks.
 
-{ pkgs, lib, nix-stdlib, ... }:
+{ pkgs, lib, nixpkgs-fmt, statix, nix-stdlib, ... }:
 
 let
   # Function to recursively collect all .nix file paths from a given attribute set.
@@ -48,9 +48,9 @@ let
   '';
 
   # Function to run shellcheck -x on a list of shell script paths.
-  runShellcheckCheck = shellFiles: pkgs.runCommand "shellcheck-check" {
-    inherit shellFiles;
-    inherit (pkgs) shellcheck;
+  runShellcheckCheck = { shellFiles, shellcheck }: pkgs.runCommand "shellcheck-check" {
+    shellFiles = lib.strings.concatStringsSep " " shellFiles;
+    inherit shellcheck;
   } ''
     echo "Running shellcheck -x on shell scripts..."
     for shellFile in $shellFiles; do

@@ -56,21 +56,32 @@
           content = builtins.readFile gitmodulesPath;
           # Regex to find submodule sections
           # This regex is basic and might need refinement for robustness
-          submoduleSections = lib.strings.match 
-            (builtins.fromJSON "[ \"^\\[submodule \\"([^\\\"]+)\\"\\]\\n\\\\s*path = ([^\\\\n]+)\\\n\\\\s*url = ([^\\\\n]+)(?:\\\\n\\\\s*branch = ([^\\\\n]+))?"]")
-            content;
+          # It matches one submodule section at a time
+          submoduleRegex = ''
+            \[submodule "([^"]+)"\]
+            \s*path = ([^\n]+)
+            \s*url = ([^\n]+)
+            (?:\s*branch = ([^\n]+))?
+          '';
+          # Use lib.strings.match to find all matches
+          # lib.strings.match returns a list of lists, where each inner list is a match
+          # and its capturing groups.
+          matches = lib.strings.match submoduleRegex content;
 
           # Function to extract info from a single match
           extractSubmoduleInfo = match:
             let
-              name = lib.elemAt match 0;
-              subPath = lib.elemAt match 1;
-              url = lib.elemAt match 2;
-              branch = if (lib.length match) > 3 then lib.elemAt match 3 else null;
+              # The first element of 'match' is the full matched string,
+              # subsequent elements are the capturing groups.
+              name = lib.elemAt match 1; # First capturing group: submodule name
+              subPath = lib.elemAt match 2; # Second capturing group: path
+              url = lib.elemAt match 3; # Third capturing group: url
+              # Check if the branch capturing group exists
+              branch = if (lib.length match) > 4 then lib.elemAt match 4 else null;
             in
             { inherit name subPath url branch; };
         in
-        lib.map extractSubmoduleInfo submoduleSections;
+        lib.map extractSubmoduleInfo matches;
 
       # Get .nix files in the current path
       nixFiles = lib.filter (

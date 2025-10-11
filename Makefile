@@ -256,7 +256,7 @@ clean :
 # Target to lint Nix files using statix.
 lint-nix: clean pre-nix-check
 	@echo "--- Linting Nix files with statix ---"
-	-nix develop --command bash -c "statix check . > statix_output.txt 2>&1" || true
+	-nix develop --command bash -c "statix check . > statix_output.txt 2>&1"
 	@echo "--- Nix linting complete. Output saved to statix_output.txt ---"
 	@nix develop --command bash -c "$(PROJECT_ROOT)/scripts/generate_statix_report_v3.sh"
 	@echo "--- Splitting statix_output.txt into smaller files ---"

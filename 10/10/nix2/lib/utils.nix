@@ -50,7 +50,7 @@
 # -------------------
 {
   lib,
-  pkgs,:
+  pkgs
 
 let
   # Function to get all .nix files in a given directory (non-recursive)

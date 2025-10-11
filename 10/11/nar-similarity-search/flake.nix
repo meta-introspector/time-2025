@@ -38,18 +38,15 @@
 
             echo "Calculating Gödel number (prime exponents) for self flake..."
             local keywords_json=$(cat $extractedKeywordsDerivation)
-            local keywords_list=($(echo "$keywords_json" | jq -r '.[]'))
-
-            # Convert keywords_list to a Nix list string for calculateGödelNumber
-            local nix_keywords_list="[$(printf '"%s" ' "${keywords_list[@]}")]"
 
             # Evaluate the Nix calculateGödelNumber function
             local prime_exponents_json=$(nix eval --json --expr \
               'let 
                  flake = builtins.getFlake "${self}";
                  calculateGödelNumber = flake.outputs.lib.${system}.calculateGödelNumber; 
+                 keywordsList = builtins.fromJSON "${keywords_json}";
                in 
-                 calculateGödelNumber { keywordsList = ${nix_keywords_list}; }')
+                 calculateGödelNumber { inherit keywordsList; }')
 
             echo "$prime_exponents_json" > $out/prime-exponents.json
           '';
