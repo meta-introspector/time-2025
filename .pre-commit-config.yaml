@@ -32,11 +32,11 @@ repos:
         pass_filenames: false
         # This hook finds unused variable bindings in Nix files, promoting code purity and cleanliness.
 
-      # - id: shellcheck
-      #   name: shellcheck
-      #   entry: shellcheck -x
-      #   language: system
-      #   files: \.sh$
+      - id: shellcheck
+        name: shellcheck
+        entry: shellcheck -x
+        language: system
+        files: \.sh$
         # Ensures shell scripts adhere to best practices, aiding in
         # "Verification and Testing" (bott 10).
 
