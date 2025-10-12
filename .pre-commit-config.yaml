@@ -8,18 +8,19 @@
 repos:
   - repo: local
     hooks:
-    - id: nixpkgs-fmt
-      name: nixpkgs-fmt
-      entry: nixpkgs-fmt
-      language: system
-      files: \.nix$
+      - id: nixpkgs-fmt
+        name: nixpkgs-fmt
+        entry: nixpkgs-fmt
+        language: system
+        files: \.nix$
 
     - id: statix
       name: statix
-      entry: bash -c "statix check --config statix.toml"
+      entry: statix check --config statix.toml
       language: system
       files: \.nix$
-      #pass_filenames: false        # This hook performs static analysis on Nix files, contributing to
+      pass_filenames: true
+      # This hook performs static analysis on Nix files, contributing to
       # "Verification and Testing" (bott 10) and "Error Analysis" (bott 9).
 
     - id: deadnix
