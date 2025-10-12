@@ -31,10 +31,10 @@
                 projectRoot = parentProject;
                 buildInputs = [ pkgs.nix ]; # Ensure nix is available for nix eval
               } ''
-              echo "--- Running nix eval --dump on $nixFile ---"
+              echo "--- Running nix eval --json on $nixFile ---"
               mkdir -p $out/share/nix-dumps
-              nix eval --dump --file "$projectRoot/$nixFile" > "$out/share/nix-dumps/${packageName}.dump"
-              echo "--- Finished nix eval --dump on $nixFile ---"
+              nix eval --json --file "$projectRoot/$nixFile" > "$out/share/nix-dumps/${packageName}.dump"
+              echo "--- Finished nix eval --json on $nixFile ---"
             '';
           }
         )
