@@ -284,6 +284,12 @@ statix-all: pre-nix-check
 	nix develop --command bash -c "statix check ."
 	@echo "--- Statix check on all Nix files complete ---"
 
+# Target to automatically fix Nix files using statix fix.
+statix-fix: pre-nix-check
+	@echo "--- Running statix fix on all Nix files in the project ---"
+	nix develop --command bash -c "statix fix ."
+	@echo "--- Statix fix on all Nix files complete ---"
+
 # Target to run statix check on hackathon_71_parts.nix
 statix-hackathon-parts: pre-nix-check
 	@echo "--- Running statix check on 10/03/hackathon_71_parts.nix ---"
@@ -335,7 +341,7 @@ get-file-hash:
 	@nix-hash --flat --base32 --type sha256 "$(FILE)"
 	@echo "--- File Hash Complete ---"
 
-.PHONY: debug-pkgs-writeShellScriptBin-type statix-all run-orchestrator test-qa-flakes build-mycology-workflow-puml build-mycology-workflow-flake get-tarball-hash get-file-hash
+.PHONY: debug-pkgs-writeShellScriptBin-type statix-all statix-fix run-orchestrator test-qa-flakes build-mycology-workflow-puml build-mycology-workflow-flake get-tarball-hash get-file-hash
 debug-pkgs-writeShellScriptBin-type:
 	@echo "--- Debugging pkgs.writeShellScriptBin type ---"
 	@nix eval --raw --impure --expr 'let pkgs = (builtins.getFlake "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify").outputs.legacyPackages.aarch64-linux; in builtins.typeOf pkgs.writeShellScriptBin'
