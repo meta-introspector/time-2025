@@ -128,10 +128,11 @@
 
       # Import the QA system
       nixTermExtractor = month10Flake.crqTextExtractor;
-      nGramGeneratorModule = month10Flake.nGramGenerator;
-      qa = import ./qa.nix { inherit pkgs lib self nix-stdlib nixTermExtractor nGramGeneratorModule; };
+      nGramGenerator = month10Flake.nGramGenerator;
 
-      # 4. Define the SELF-INGESTION & MODIFICATION derivation (Quasiquoted Transformation)
+      qa = pkgs.callPackage ./qa.nix { inherit nixTermExtractor nGramGenerator month10Flake nix-stdlib; };
+
+      # Define self-ingestion & modification derivation.
       # Temporarily using pkgs.stdenv.mkDerivation as pkgs.runCommand is causing "is not a derivation" error.
       # Original selfIngestionDerivation (commented out due to error):
       # selfIngestionDerivation = pkgs.runCommand "self-modifying-quine" {
@@ -248,6 +249,6 @@
         '';
       };
 
-      checks.${system} = qa.checks;
+      checks.${system}.default = qa.default;
     };
 }

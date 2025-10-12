@@ -18,7 +18,7 @@ repos:
 
       - id: statix
         name: statix
-        entry: bash -c "statix check"
+        entry: bash -c "statix check --config statix.toml"
         language: system
         files: \.nix$
         pass_filenames: false        # This hook performs static analysis on Nix files, contributing to

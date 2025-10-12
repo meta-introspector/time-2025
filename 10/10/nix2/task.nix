@@ -46,6 +46,8 @@ let
       hasInvalidBranches = (lib.length invalidBranches) > 0;
     };
 
+  flakeMetadataCollector = import ./task.d/00-flake-metadata.nix { inherit pkgs lib self; };
+
   # Step 5: Generate a comprehensive report
   comprehensiveReport = ''
     --- First Principle of Identity Enforcement Report ---
@@ -79,4 +81,5 @@ in
   report = comprehensiveReport;
   # Expose individual reports for detailed inspection
   inherit commandUniquenessReport urlPrefixValidationReport systemValidationReport submoduleUrlUniquenessReport submoduleBranchValidationReport;
+  flakeMetadata = flakeMetadataCollector.metadata;
 }
