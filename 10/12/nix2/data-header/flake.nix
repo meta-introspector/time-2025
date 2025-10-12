@@ -21,7 +21,7 @@
           (lib.filterAttrs (name: value: lib.hasSuffix ".nix" name) (builtins.readDir ./data));
       in
       {
-        packages.${system}.default = pkgs.runCommand "data-header-output"
+        default = pkgs.runCommand "data-header-output"
           {
             inherit dataFiles;
           } ''
