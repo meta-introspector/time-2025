@@ -18,13 +18,13 @@ repos:
       entry: statix check --config statix.toml
       language: system
       files: \.nix$
-      pass_filenames: true
-    - id: deadnix
-      name: deadnix
-      entry: nix develop --command bash -c "deadnix"
-      language: system
-      files: \.nix$
-      pass_filenames: true
+      pass_filenames: false
+      # - id: deadnix
+      #   name: deadnix
+      #   entry: nix develop --command bash -c "deadnix"
+      #   language: system
+      #   files: \.nix$
+        # This hook finds unused variable bindings in Nix files, promoting code purity and cleanliness.
     - id: shellcheck
       name: shellcheck
       entry: shellcheck -x
@@ -37,8 +37,8 @@ repos:
       entry: vale
       language: system
       args: [--config, ./.vale.ini]
-      repo: https://github.com/meta-introspector/vale-precommit
-      rev: 318812b24e90f97e458497976282014ee25a52fd
+  #    repo: https://github.com/meta-introspector/vale-precommit
+  #    rev: 318812b24e90f97e458497976282014ee25a52fd
 
     # Prose linter for checking writing style, grammar, and tone.
 

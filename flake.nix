@@ -130,7 +130,7 @@
       nixTermExtractor = month10Flake.crqTextExtractor;
       nGramGenerator = month10Flake.nGramGenerator;
 
-      qa = pkgs.callPackage ./qa.nix { inherit nixTermExtractor nGramGenerator month10Flake nix-stdlib rnix-parser; };
+      qa = pkgs.callPackage ./qa.nix { inherit self nixTermExtractor nGramGenerator month10Flake nix-stdlib rnix-parser; };
 
       # Define self-ingestion & modification derivation.
       # Temporarily using pkgs.stdenv.mkDerivation as pkgs.runCommand is causing "is not a derivation" error.
