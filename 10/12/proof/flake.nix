@@ -9,10 +9,11 @@
     rnix-dumper.url = "path:./000_rnix_dump";
     nar-exporter.url = "path:./001_nar_exporter";
     binstore-locator.url = "path:./002_binstore_locator";
+    nix-to-solana-translator.url = "path:./004_nix_to_solana_translator";
     # nix-dumper.url = "path:./001_dump_nix";
   };
 
-  outputs = { self, nixpkgs, flake-utils, streamofrandom, rnix-dumper, nar-exporter, binstore-locator }:
+  outputs = { self, nixpkgs, flake-utils, streamofrandom, rnix-dumper, nar-exporter, binstore-locator, nix-to-solana-translator }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -116,7 +117,8 @@
           rnixDumpCheck = rnixDumpCheckResult;
           # nixDumpCheck = nixDumpCheck; # Commented out
           default = combinedProofReport;
-          narBinstoreLocator = binstore-locator.packages.${system}.default; # New check
+          narBinstoreLocator = binstore-locator.packages.${system}.default;
+          solanaTranslator = nix-to-solana-translator.packages.${system}.default; # New check
         };
         apps.registry-demo = {
           type = "app";

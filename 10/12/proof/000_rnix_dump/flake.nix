@@ -6,7 +6,7 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     rnix-parser.url = "github:meta-introspector/rnix-parser?ref=feature/CRQ-016-nixify-workflow";
-    nix-store-dump.url = "path:../../10/11/nix-store-dump";
+    nix-store-dump.url = "github:meta-introspector/time-2025?ref=feature/aimyc-002-sample-extraction&dir=10/11/nix-store-dump";
   };
 
   outputs = { self, nixpkgs, flake-utils, rnix-parser, nix-store-dump }@inputs:
@@ -14,6 +14,7 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         dumper = import ./default.nix;
+        rnixDumpApp = rnix-parser.packages.${system}.rnix-parser;
       in
       {
         apps.default = {
