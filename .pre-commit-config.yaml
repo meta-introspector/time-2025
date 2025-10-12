@@ -6,62 +6,59 @@
 # Nix development environment (flake.nix).
 
 repos:
-  - repo: local
-    hooks:
-      - id: nixpkgs-fmt
-        name: nixpkgs-fmt
-        entry: nixpkgs-fmt
-        language: system
-        files: \.nix$
-
+- repo: local
+  hooks:
+    - id: nixpkgs-fmt
+      name: nixpkgs-fmt
+      entry: nixpkgs-fmt
+      language: system
+      files: \.nix$    
     - id: statix
       name: statix
       entry: statix check --config statix.toml
       language: system
       files: \.nix$
       pass_filenames: true
-      # This hook performs static analysis on Nix files, contributing to
-      # "Verification and Testing" (bott 10) and "Error Analysis" (bott 9).
-
     - id: deadnix
       name: deadnix
       entry: nix develop --command bash -c "deadnix"
       language: system
       files: \.nix$
-      #pass_filenames: false
-      # This hook finds unused variable bindings in Nix files, promoting code purity and cleanliness.
-
+      pass_filenames: true
     - id: shellcheck
       name: shellcheck
       entry: shellcheck -x
       language: system
       files: \.sh$
-      # Ensures shell scripts adhere to best practices, aiding in
-      # "Verification and Testing" (bott 10).
+      pass_filenames: true
 
-      # - id: script-sop-check
-      #   name: Script SOP Documentation Check
-      #   entry: 09/27/7-concepts/5-scripts-automation/script_sop_check.sh
-      #   language: system
-      #   files: \.(sh|py|rs|nix)$
-
-      # - id: crq-document-check
-      #   name: CRQ/Incident/Task Document Existence Check
-      #   entry: scripts/check-crq-document.sh
-      #   language: system
-      #   files: \.(md|txt)$
-      #   stages: [commit-msg]
-      #   enabled: false # Temporarily disabled as it's not working correctly
-       # This hook ensures that CRQ, Incident, or Task documents referenced in the commit message
-       # actually exist, enforcing "Verification and Testing" (bott 10).
-
-
-  - repo: https://github.com/meta-introspector/vale-precommit
-    rev: 318812b24e90f97e458497976282014ee25a52fd
-    hooks:
     - id: vale-system
+      name: vale
+      entry: vale
+      language: system
       args: [--config, ./.vale.ini]
-      # Prose linter for checking writing style, grammar, and tone.
+      repo: https://github.com/meta-introspector/vale-precommit
+      rev: 318812b24e90f97e458497976282014ee25a52fd
+
+    # Prose linter for checking writing style, grammar, and tone.
+
+    # - id: script-sop-check
+    #   name: Script SOP Documentation Check
+    #   entry: 09/27/7-concepts/5-scripts-automation/script_sop_check.sh
+    #   language: system
+    #   files: \.(sh|py|rs|nix)$
+
+    # - id: crq-document-check
+    #   name: CRQ/Incident/Task Document Existence Check
+    #   entry: scripts/check-crq-document.sh
+    #   language: system
+    #   files: \.(md|txt)$
+    #   stages: [commit-msg]
+    #   enabled: false # Temporarily disabled as it's not working correctly
+    # This hook ensures that CRQ, Incident, or Task documents referenced in the commit message
+    # actually exist, enforcing "Verification and Testing" (bott 10).
+    
+
 
   # - repo: local
   #   hooks:
