@@ -69,7 +69,7 @@ let
         acc
         allPredicateNames
     )
-    {}
+    { }
     predicateMatrix;
 
   # Sort predicates by frequency (most frequent first)
@@ -77,6 +77,7 @@ let
     (a: b: (predicateFrequencies.${a} or 0) > (predicateFrequencies.${b} or 0))
     allPredicateNames;
 
-in { 
+in
+{
   inherit predicateMatrix predicateFrequencies sortedPredicates;
 }

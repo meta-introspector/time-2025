@@ -1,4 +1,3 @@
-
 { pkgs, lib, targetFlake }:
 
 let
@@ -6,10 +5,11 @@ let
   nGramGenerator = import ./09/theory/n_gram_generator.nix { inherit lib pkgs builtins; };
 
   # Create a derivation to collect all text content from the target flake's source
-  collectedTextDerivation = pkgs.runCommand "${targetFlake.name or "target-flake"}-collected-text" {
-    src = targetFlake.self; # The source of the input flake
-    nativeBuildInputs = [ pkgs.findutils pkgs.bash ];
-  } ''
+  collectedTextDerivation = pkgs.runCommand "${targetFlake.name or "target-flake"}-collected-text"
+    {
+      src = targetFlake.self; # The source of the input flake
+      nativeBuildInputs = [ pkgs.findutils pkgs.bash ];
+    } ''
     # Create a temporary file to store concatenated content
     temp_content_file="$TMPDIR/all_content.txt"
     touch "$temp_content_file"

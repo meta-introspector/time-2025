@@ -38,19 +38,21 @@
         };
 
         # Analyze each repository
-        analyzedRepos = lib.mapAttrs (repoName: repoSource:
-          let
-            # Use existing nixGrepRegexes to grep the source
-            grepResults = nixGrepRegexes {
-              inherit pkgs;
-              src = repoSource;
-            };
-          in
-          {
-            inherit grepResults;
-            # Add more analysis results here (e.g., bucketing using other existing flakes)
-          }
-        ) reposToAnalyze;
+        analyzedRepos = lib.mapAttrs
+          (repoName: repoSource:
+            let
+              # Use existing nixGrepRegexes to grep the source
+              grepResults = nixGrepRegexes {
+                inherit pkgs;
+                src = repoSource;
+              };
+            in
+            {
+              inherit grepResults;
+              # Add more analysis results here (e.g., bucketing using other existing flakes)
+            }
+          )
+          reposToAnalyze;
 
       in
       {

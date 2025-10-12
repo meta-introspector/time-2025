@@ -18,10 +18,11 @@
       targetSource = self; # self here refers to the flake's source path
 
       # Create a derivation to collect all text content from the target flake's source
-      collectedTextDerivation = pkgs.runCommand "${baseNameOf targetSource}-collected-text" {
-        src = targetSource; # The source of this flake
-        nativeBuildInputs = [ pkgs.findutils pkgs.bash ];
-      } ''
+      collectedTextDerivation = pkgs.runCommand "${baseNameOf targetSource}-collected-text"
+        {
+          src = targetSource; # The source of this flake
+          nativeBuildInputs = [ pkgs.findutils pkgs.bash ];
+        } ''
         # Create a temporary file to store concatenated content
         temp_content_file="$TMPDIR/all_content.txt"
         touch "$temp_content_file"

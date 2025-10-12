@@ -6,6 +6,9 @@ let
     inherit pkgs lib self nix-stdlib nixTermExtractor nGramGenerator month10Flake rnix-parser;
   };
 
+  # Get all .nix files in the project
+  allNixFiles = lib.attrNames (lib.filterSource (path: type: lib.hasSuffix ".nix" path) ../.);
+
   # Import common helper modules
   qaHelpers = import ./qa.d/helpers.nix (commonArgs // {
     inherit (pkgs) nixpkgs-fmt statix shellcheck;
@@ -14,13 +17,13 @@ let
   projectInfo = import ./qa.d/project-info.nix (commonArgs // { inherit qaHelpers; });
 
   # Dynamically load checks from qa.d/
-  qaModules = lib.mapAttrs' 
+  qaModules = lib.mapAttrs'
     (name: path:
       # Filter out non-nix files and the common helper modules
       if lib.hasSuffix ".nix" name && name != "helpers.nix" && name != "project-info.nix"
       then {
         name = lib.removeSuffix ".nix" name;
-        value = import path (commonArgs // { inherit qaHelpers projectInfo; });
+        value = import path (commonArgs // { inherit qaHelpers projectInfo allNixFiles self; }); # Pass allNixFiles and self
       }
       else null # Filter out non-nix files and common modules
     )
@@ -41,7 +44,8 @@ let
         shellcheck-config-sh
         nix-emoji-report
         flake-metadata-from-nix2-task
-        url-extractor;
+        url-extractor
+        nix-dump-evaluator; # Add the new check
     } ''
     echo "--- Running all default QA checks ---"
     ${allChecks.check-all-nix-files}
@@ -52,6 +56,7 @@ let
     ${allChecks.nix-emoji-report}
     ${allChecks.flake-metadata-from-nix2-task}
     ${allChecks.url-extractor}
+    ${allChecks.nix-dump-evaluator} # Run the new check
     echo "--- All default QA checks passed. ---"
     touch $out
   '';

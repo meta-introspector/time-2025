@@ -1,4 +1,3 @@
-
 {
   description = "Nix flake to calculate Monster Knot similarity";
 

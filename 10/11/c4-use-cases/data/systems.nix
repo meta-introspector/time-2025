@@ -49,4 +49,4 @@
     name = "LLVM Compiler Infrastructure";
     description = "Backend for Rust compilation, low-level code generation, and analysis.";
   }
-    ]
+]

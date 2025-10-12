@@ -73,10 +73,11 @@ let
         lib.unique (knownTokens ++ currentTokens);
 
       # Impure step: Read log file and convert to JSON array using jq
-      logJsonArrayDerivation = pkgs.runCommand "log-to-json-array" {
-        src = logFilePath;
-        nativeBuildInputs = [ pkgs.jq ];
-      } ''
+      logJsonArrayDerivation = pkgs.runCommand "log-to-json-array"
+        {
+          src = logFilePath;
+          nativeBuildInputs = [ pkgs.jq ];
+        } ''
         cat "$src" | jq -s '.' > "$out"
       '';
 
@@ -94,9 +95,10 @@ let
             lineTokens = tokenizeLine (builtins.toJSON currentEntry); # Tokenize the raw JSON line
             isEntryNovel = isNovel { currentTokens = lineTokens; knownTokens = currentKnownTokens; };
 
-            newKnownTokens = if isEntryNovel
-                             then updateKB { currentTokens = lineTokens; knownTokens = currentKnownTokens; }
-                             else currentKnownTokens;
+            newKnownTokens =
+              if isEntryNovel
+              then updateKB { currentTokens = lineTokens; knownTokens = currentKnownTokens; }
+              else currentKnownTokens;
 
             processedSample = processLogEntry currentEntry;
             sampleFilename = "${processedSample.eventType}-${processedSample.sampleHash}.nix";
@@ -104,9 +106,10 @@ let
               inherit (processedSample) eventType originalContent allPaths;
             };
 
-            newCollectedSamples = if isEntryNovel
-                                  then collectedSamples ++ [ { inherit sampleFilename sampleContent; } ]
-                                  else collectedSamples;
+            newCollectedSamples =
+              if isEntryNovel
+              then collectedSamples ++ [{ inherit sampleFilename sampleContent; }]
+              else collectedSamples;
 
             newSampleCount = if isEntryNovel then sampleCount + 1 else sampleCount;
           in

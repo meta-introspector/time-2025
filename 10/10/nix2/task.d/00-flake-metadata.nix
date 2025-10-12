@@ -51,9 +51,10 @@
 { pkgs, lib, self }:
 
 let
-  flakeMetadata = pkgs.runCommand "flake-metadata-collector" {
-    nativeBuildInputs = [ pkgs.nix ];
-  } ''
+  flakeMetadata = pkgs.runCommand "flake-metadata-collector"
+    {
+      nativeBuildInputs = [ pkgs.nix ];
+    } ''
     echo "--- Collecting Nix Flake Metadata ---"
     mkdir -p $out
     nix flake metadata --json > $out/flake-metadata.json

@@ -37,7 +37,7 @@
                 nativeBuildInputs = [ pkgs.bash ];
                 results = searchResults;
               }
-              # see script.sh
+            # see script.sh
           );
 
       in

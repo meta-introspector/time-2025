@@ -38,9 +38,11 @@
               maxSamples = 20;
             };
             # Create individual derivations for each sample file
-            sampleFileDerivations = lib.map (sample:
-              pkgs.writeText sample.sampleFilename sample.sampleContent
-            ) sampleDefinitions;
+            sampleFileDerivations = lib.map
+              (sample:
+                pkgs.writeText sample.sampleFilename sample.sampleContent
+              )
+              sampleDefinitions;
           in
           # Symlink join all generated sample files into a single output directory
           pkgs.symlinkJoin {

@@ -12,7 +12,7 @@
         pkgs = nixpkgs.legacyPackages.${system};
       in
       {
-        checks.default = pkgs.runCommand "simple-repro-check" {} ''
+        checks.default = pkgs.runCommand "simple-repro-check" { } ''
           echo "--- Simple Repro Check Passed ---"
           touch $out
         '';

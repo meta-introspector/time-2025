@@ -1,5 +1,7 @@
-{
-  pkgs, lib, numberSearcher, system
+{ pkgs
+, lib
+, numberSearcher
+, system
 }:
 
 let
@@ -19,20 +21,20 @@ let
           inherit filePatterns;
         };
       in
-            pkgs.runCommand "check-search-results-${primeStr}"
-              {
-                nativeBuildInputs = [ pkgs.bash ];
-                PRIME_STR = primeStr;
-                RESULTS = searchResults;
-              } ''
-              #!/bin/bash
-              echo "--- Search for $PRIME_STR completed. Results in $RESULTS ---"
-              if [ -s "$RESULTS" ]; then
-                echo "Found occurrences of $PRIME_STR."
-                cat "$RESULTS"
-              else
-                echo "No occurrences of $PRIME_STR found."
-              fi
-            '');
+      pkgs.runCommand "check-search-results-${primeStr}"
+        {
+          nativeBuildInputs = [ pkgs.bash ];
+          PRIME_STR = primeStr;
+          RESULTS = searchResults;
+        } ''
+        #!/bin/bash
+        echo "--- Search for $PRIME_STR completed. Results in $RESULTS ---"
+        if [ -s "$RESULTS" ]; then
+          echo "Found occurrences of $PRIME_STR."
+          cat "$RESULTS"
+        else
+          echo "No occurrences of $PRIME_STR found."
+        fi
+      '');
 in
 primeSearchChecks

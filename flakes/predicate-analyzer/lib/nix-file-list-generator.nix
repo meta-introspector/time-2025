@@ -1,7 +1,7 @@
-
 { pkgs, lib, self }:
 
-pkgs.runCommand "nix-file-list" {
+pkgs.runCommand "nix-file-list"
+{
   nativeBuildInputs = [ pkgs.findutils ]; # For the 'find' command
   # The project source is implicitly available via 'self'
   # We need to ensure 'self' is a path, which it is in a flake context

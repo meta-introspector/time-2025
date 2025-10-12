@@ -19,11 +19,12 @@
         # number: The number to search for (string or int)
         # filePatterns: A list of glob patterns for files to search (e.g., ["**/*.md", "**/*.nix"])
         searchNumberInFiles = { number, filePatterns }:
-          pkgs.runCommand "search-for-${toString number}" {
-            nativeBuildInputs = [ pkgs.bash pkgs.gnugrep pkgs.findutils pkgs.jq ];
-            inherit (lib) toJSON;
-            searchScript = ./search-script.sh;
-          } "${searchScript} ${toString number} ${toJSON filePatterns} ${self} $out";
+          pkgs.runCommand "search-for-${toString number}"
+            {
+              nativeBuildInputs = [ pkgs.bash pkgs.gnugrep pkgs.findutils pkgs.jq ];
+              inherit (lib) toJSON;
+              searchScript = ./search-script.sh;
+            } "${searchScript} ${toString number} ${toJSON filePatterns} ${self} $out";
 
       in
       {

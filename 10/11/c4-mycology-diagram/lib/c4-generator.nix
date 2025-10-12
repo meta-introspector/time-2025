@@ -7,26 +7,26 @@ let
   formatRelationshipsLib = import ./formatters/format-relationships.nix { inherit lib; };
 in
 { systemName, description, people, systems, containers, relationships }:
-  let
-    formatPeople = formatPeopleLib.formatPeople people;
-    formatSystems = formatSystemsLib.formatSystems systems;
-    formatContainers = formatContainersLib.formatContainers containers;
-    formatRelationships = formatRelationshipsLib.formatRelationships relationships;
-  in
-  ''
-    @startuml C4_SystemContext
-    !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+let
+  formatPeople = formatPeopleLib.formatPeople people;
+  formatSystems = formatSystemsLib.formatSystems systems;
+  formatContainers = formatContainersLib.formatContainers containers;
+  formatRelationships = formatRelationshipsLib.formatRelationships relationships;
+in
+''
+  @startuml C4_SystemContext
+  !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
 
-    title AI Life Mycology Diagram for ${systemName}
-    ${description}
+  title AI Life Mycology Diagram for ${systemName}
+  ${description}
 
-    ${formatPeople}
+  ${formatPeople}
 
-    ${formatSystems}
+  ${formatSystems}
 
-    ${formatContainers}
+  ${formatContainers}
 
-    ${formatRelationships}
+  ${formatRelationships}
 
-    @enduml
-  ''
+  @enduml
+''

@@ -25,10 +25,11 @@
         };
 
         # Filter the list of all files to get only .nix files
-        nixFilesListDerivation = pkgs.runCommand "nix-files-list" {
-          allFiles = allFilesListDerivation;
-          nativeBuildInputs = [ pkgs.gnugrep ]; # For filtering
-        } ''
+        nixFilesListDerivation = pkgs.runCommand "nix-files-list"
+          {
+            allFiles = allFilesListDerivation;
+            nativeBuildInputs = [ pkgs.gnugrep ]; # For filtering
+          } ''
           mkdir -p $out
           grep ".nix$" "${allFiles}" > $out/nix-files.txt
         '';
@@ -47,9 +48,15 @@
         packages.default = pkgs.symlinkJoin {
           name = "predicate-analysis-results";
           paths = [
-            pkgs.writeText "predicate-frequencies.json" (builtins.toJSON predicateAnalysis.predicateFrequencies)
-            pkgs.writeText "sorted-predicates.json" (builtins.toJSON predicateAnalysis.sortedPredicates)
-            pkgs.writeText "predicate-matrix.json" (builtins.toJSON predicateAnalysis.predicateMatrix)
+            pkgs.writeText
+            "predicate-frequencies.json"
+            (builtins.toJSON predicateAnalysis.predicateFrequencies)
+            pkgs.writeText
+            "sorted-predicates.json"
+            (builtins.toJSON predicateAnalysis.sortedPredicates)
+            pkgs.writeText
+            "predicate-matrix.json"
+            (builtins.toJSON predicateAnalysis.predicateMatrix)
           ];
         };
 

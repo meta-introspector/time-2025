@@ -20,8 +20,8 @@ let
 
   # Simple assertion to check if the extracted paths match the expected paths
   # This might need more sophisticated comparison for order-independent lists
-  testResult = lib.lists.subtractLists expectedPaths extractedPaths == [] &&
-               lib.lists.subtractLists extractedPaths expectedPaths == [];
+  testResult = lib.lists.subtractLists expectedPaths extractedPaths == [ ] &&
+    lib.lists.subtractLists extractedPaths expectedPaths == [ ];
 
 in
 {
