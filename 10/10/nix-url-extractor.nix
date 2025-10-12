@@ -85,7 +85,10 @@ let
       dir = lib.head (lib.tail (lib.tail (lib.tail httpsMatch.captures)));
       inherit url;
     } else {
-      owner = null; repo = null; ref = null; dir = null; inherit url;
+      owner = null;
+      repo = null;
+      ref = null;
+      dir = null; inherit url;
     };
 
   # Parsed URLs
@@ -118,10 +121,12 @@ let
     '';
 
   # Instructions for generating repo.nix files
-  repoFileInstructions = lib.map (parsedUrl: {
-    path = "10/10/github/${parsedUrl.owner}/${parsedUrl.repo}.nix"; # This path needs to be relative to the root of the project
-    content = generateRepoNixContent parsedUrl;
-  }) parsedUrls;
+  repoFileInstructions = lib.map
+    (parsedUrl: {
+      path = "10/10/github/${parsedUrl.owner}/${parsedUrl.repo}.nix"; # This path needs to be relative to the root of the project
+      content = generateRepoNixContent parsedUrl;
+    })
+    parsedUrls;
 
 in
 {

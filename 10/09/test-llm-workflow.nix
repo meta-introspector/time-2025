@@ -11,7 +11,7 @@ let
   impureLlmResult = llmDataExtractorFlake.packages.aarch64-linux.default {
     inherit pkgs hackathonResults;
     # Placeholder for llmApiWrapper, as it's not yet implemented
-    llmApiWrapper = pkgs.runCommand "dummy-llm-api-wrapper" {} ''
+    llmApiWrapper = pkgs.runCommand "dummy-llm-api-wrapper" { } ''
       mkdir -p $out/bin
       echo '#!${pkgs.bash}/bin/bash' > $out/bin/call-llm-api
       echo 'echo "{\"project_name\": \"Dummy Project\", \"team_members\": [\"Dummy Member\"], \"technologies_used\": [\"Nix\"], \"project_description\": \"A dummy project for testing.\", \"link_to_repo\": \"https://example.com/dummy\"}"' >> $out/bin/call-llm-api
@@ -27,4 +27,4 @@ let
   };
 
 in
-  pureLlmResult
+pureLlmResult

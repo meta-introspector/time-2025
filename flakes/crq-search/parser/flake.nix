@@ -12,13 +12,14 @@
       let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [];
+          overlays = [ ];
         };
       in
       {
-        packages.default = pkgs.runCommand "crq-parser-success" {
-          meta.description = "Nix flake for parsing CRQ filenames into structured data.";
-        } ''
+        packages.default = pkgs.runCommand "crq-parser-success"
+          {
+            meta.description = "Nix flake for parsing CRQ filenames into structured data.";
+          } ''
           echo 'CRQ Parser flake built successfully!' > $out
         '';
 

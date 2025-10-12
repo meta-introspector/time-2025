@@ -1,3 +1,3 @@
 { impureGeminiTelemetry }:
 { mycologyContext }:
-  impureGeminiTelemetry { inherit mycologyContext; }
+impureGeminiTelemetry { inherit mycologyContext; }

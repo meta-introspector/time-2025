@@ -10,9 +10,10 @@
       pkgs = nixpkgs.legacyPackages.aarch64-linux;
     in
     {
-      packages.aarch64-linux.default = pkgs.runCommand "dummy-mcts-engine" {
-        buildInputs = [ pkgs.bash ];
-      } ''
+      packages.aarch64-linux.default = pkgs.runCommand "dummy-mcts-engine"
+        {
+          buildInputs = [ pkgs.bash ];
+        } ''
         mkdir -p $out/bin
         echo "#!${pkgs.bash}/bin/bash" > $out/bin/mcts-solver
         echo 'echo "Dummy MCTS solver output for schedule: $1, config: $2" >&2' >> $out/bin/mcts-solver

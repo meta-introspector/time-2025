@@ -64,14 +64,14 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, nixStoreDumpFlake, nixStoreExportFlake }: 
-    flake-utils.lib.eachDefaultSystem (system: 
+  outputs = { self, nixpkgs, flake-utils, nixStoreDumpFlake, nixStoreExportFlake }:
+    flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # Function to sanitize a path for use as a filename or directory name
-        sanitizePath = path: lib.strings.replaceStrings ["/" "." "-"] ["_" "_" "_"] path;
+        sanitizePath = path: lib.strings.replaceStrings [ "/" "." "-" ] [ "_" "_" "_" ] path;
 
         # Function to determine the subdirectory based on file extension
         # This is a simplified version of the "71 subdirectories" concept.
@@ -98,9 +98,9 @@
           let
             categoryDir = getCategoryDir originalFilePath;
             baseFileName = sanitizePath originalFilePath;
-            
+
             # Determine the final archive filename and the derivation to call
-            archiveInfo = 
+            archiveInfo =
               if archiveType == "nar" then {
                 fileName = "${baseFileName}.nar";
                 derivation = nixStoreDumpFlake.lib.dumpStorePath { inherit storePath; narFileName = "${baseFileName}.nar"; };
@@ -115,10 +115,11 @@
 
             finalOutputPath = "09/22/crq-binstore/${categoryDir}/${archiveInfo.fileName}";
           in
-          pkgs.runCommand "located-archive-${baseFileName}" {
-            nativeBuildInputs = [ pkgs.nix ];
-            archiveDerivation = archiveInfo.derivation;
-          } ''
+          pkgs.runCommand "located-archive-${baseFileName}"
+            {
+              nativeBuildInputs = [ pkgs.nix ];
+              archiveDerivation = archiveInfo.derivation;
+            } ''
             mkdir -p $(dirname $out/${finalOutputPath})
             cp ${archiveDerivation} $out/${finalOutputPath}
           '';

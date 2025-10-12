@@ -6,7 +6,7 @@
 let
   # Functions to construct error attribute sets
   typeError = expectedType: actualType: {
-    value = {};
+    value = { };
     errors = [{
       type = "type_error";
       message = "File ${file} evaluated to a ${builtins.toString actualType}, but a ${builtins.toString expectedType} was expected.";
@@ -14,7 +14,7 @@ let
   };
 
   evaluationError = errorMessage: {
-    value = {};
+    value = { };
     errors = [{
       type = "evaluation_error";
       message = "File ${file} failed to evaluate: ${builtins.toString errorMessage}";

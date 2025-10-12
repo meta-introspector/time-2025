@@ -5,7 +5,7 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify-workflow";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify-workflow";
     self = {
-      url = "github:meta-introspector/time-2025?ref=feature/CRQ-016-nixify-workflow&dir=source/github/meta-introspector/streamofrandom/2025"; # Project root
+      url = "github:meta-introspector/time-2025?ref=feature/CRQ-016-nixify-workflow"; # Project root
     };
     dataLatticeBuilder = {
       url = "path:../data-lattice-builder";
@@ -19,29 +19,33 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, dataLatticeBuilder, narLocatorFlake }: 
+  outputs = { self, nixpkgs, flake-utils, dataLatticeBuilder, narLocatorFlake }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # Get the data lattice from the dataLatticeBuilder flake
         dataLattice = dataLatticeBuilder.packages.${system}.default;
 
         # NAR-ify each keyword search result and place it in the binstore
-        narifiedKeywordIndexes = lib.mapAttrs (extFileName: keywordAttrset: 
-          lib.mapAttrs (keyword: searchResultsDerivation: 
-            let
-              ext = lib.strings.removeSuffix ".txt" extFileName;
-              narName = "${ext}-${keyword}-index.txt";
-            in
-            narLocatorFlake.lib.${system}.locateAndArchiveStorePath {
-              storePath = searchResultsDerivation;
-              originalFilePath = narName;
-              archiveType = "nar";
-            }
-          ) keywordAttrset
-        ) dataLattice;
+        narifiedKeywordIndexes = lib.mapAttrs
+          (extFileName: keywordAttrset:
+            lib.mapAttrs
+              (keyword: searchResultsDerivation:
+                let
+                  ext = lib.strings.removeSuffix ".txt" extFileName;
+                  narName = "${ext}-${keyword}-index.txt";
+                in
+                narLocatorFlake.lib.${system}.locateAndArchiveStorePath {
+                  storePath = searchResultsDerivation;
+                  originalFilePath = narName;
+                  archiveType = "nar";
+                }
+              )
+              keywordAttrset
+          )
+          dataLattice;
 
         # Flatten the nested attrset of narifiedKeywordIndexes
         flattenedNarifiedKeywordIndexes = lib.flatten (lib.attrValues narifiedKeywordIndexes);

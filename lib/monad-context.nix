@@ -8,7 +8,7 @@ let
     generateTasks = import ../lib/task-generator.nix { inherit lib pkgs; };
     derivationSpokes = import ../lib/derivation-spokes.nix { inherit pkgs lib; };
 
-  usageTracking = import ./llm/usage-tracking.nix { inherit lib; };
+    usageTracking = import ./llm/usage-tracking.nix { inherit lib; };
 
 
 
@@ -111,7 +111,8 @@ let
           if lib.strings.hasSubstr "assign_llm = [0]" solverOutput then
             { proceed = false; } # Task not assigned to any LLM
           else
-            { proceed = true;
+            {
+              proceed = true;
               assignedLLMIndex = lib.strings.substring (lib.strings.indexOf "assign_llm = [" solverOutput + 13) 1 solverOutput;
             };
 
@@ -130,4 +131,5 @@ let
 
   };
 
-in makeContext
+in
+makeContext

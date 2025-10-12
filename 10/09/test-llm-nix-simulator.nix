@@ -3,7 +3,7 @@ let
   pkgs = import <nixpkgs> { system = "aarch64-linux"; };
 
   # The Nix expression to simulate (e.g., our nar-bridge-flake)
-  nixExpressionToSimulate = pkgs.runCommand "nix-expression-to-simulate" {} ''
+  nixExpressionToSimulate = pkgs.runCommand "nix-expression-to-simulate" { } ''
     mkdir -p $out
     cp ${../hackathon/nar-bridge-flake/flake.nix} $out/flake.nix
   '';
@@ -20,4 +20,4 @@ let
   };
 
 in
-  simulatedRun
+simulatedRun

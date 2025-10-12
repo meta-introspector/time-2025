@@ -4,16 +4,18 @@ let
   # Function to extract direct inputs of a flake
   extractDirectInputs = flake:
     let
-      inputs = flake.inputs or {};
+      inputs = flake.inputs or { };
     in
-    lib.mapAttrs' (name: value: {
-      inherit name;
-      value = {
-        url = value.url or null;
-        rev = value.rev or null;
-        # Add more metadata extraction here as needed
-      };
-    }) inputs;
+    lib.mapAttrs'
+      (name: value: {
+        inherit name;
+        value = {
+          url = value.url or null;
+          rev = value.rev or null;
+          # Add more metadata extraction here as needed
+        };
+      })
+      inputs;
 
   # Recursive function to traverse flake dependencies
   # This is a placeholder and will be expanded later

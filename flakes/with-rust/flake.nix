@@ -1,4 +1,5 @@
-{ description = "A development environment for Rust code generation with Gemini.";
+{
+  description = "A development environment for Rust code generation with Gemini.";
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
@@ -6,7 +7,7 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }:
-    flake-utils.lib.eachDefaultSystem (system: 
+    flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in

@@ -27,9 +27,10 @@ let
   };
 
   # Run MiniZinc solver
-  solverResult = pkgs.runCommand "prime-mapping-result" {
-    buildInputs = [ pkgs.minizinc ];
-  } ''
+  solverResult = pkgs.runCommand "prime-mapping-result"
+    {
+      buildInputs = [ pkgs.minizinc ];
+    } ''
     echo "${mznModelContent}" > model.mzn
     echo "${dznDataContent}" > data.dzn
     ${pkgs.minizinc}/bin/minizinc \

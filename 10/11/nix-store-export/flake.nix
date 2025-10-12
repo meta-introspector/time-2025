@@ -48,18 +48,19 @@
 #   - Prime Exponents: { "2": 2, "3": 1, "5": 0, "7": 1, "11": 0, "13": 0, "17": 0, "19": 0, "23": 0, "29": 0, "31": 0, "41": 0, "47": 0, "59": 0, "71": 0 }
 #   - Emoji Representation: ☀️☀️🌑🚶‍♀️
 # -------------------
-{ description = "Nix flake for wrapping nix-store --export calls.";
+{
+  description = "Nix flake for wrapping nix-store --export calls.";
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
   };
 
-  outputs = { self, nixpkgs, flake-utils }: 
-    flake-utils.lib.eachDefaultSystem (system: 
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # Function to create a derivation that exports a store path to a tarball
         # storePath: The Nix store path to export
@@ -87,7 +88,8 @@
             passthru.storePath = storePath;
           };
 
-      in {
+      in
+      {
         lib = { inherit exportStorePath; };
         # Example of a default package for easy use
         packages.default = self.lib.exportStorePath {

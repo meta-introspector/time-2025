@@ -1,4 +1,4 @@
-{ pkgs, lib, crqBinstore ? {}, nixLib ? {} } @ args:
+{ pkgs, lib, crqBinstore ? { }, nixLib ? { } } @ args:
 
 let
   primesList = import ./primes.nix;

@@ -23,11 +23,11 @@ let
   # Build the final schedule
   finalSchedule = bootstrapMycologyScheduleFlake.packages.aarch64-linux.default {
     inherit pkgs zosSporeVialFlake sporeCultivationLabFlake
-            llmDataExtractorFlake projectSchedulerFlake
-            llmApiWrapper minizinc narBridgeFlake bridgeInstanceFlake
-            mctsSolanaFlake githubDataFetcherFlake; # Add githubDataFetcherFlake
+      llmDataExtractorFlake projectSchedulerFlake
+      llmApiWrapper minizinc narBridgeFlake bridgeInstanceFlake
+      mctsSolanaFlake githubDataFetcherFlake; # Add githubDataFetcherFlake
     # hackathonConsumerFlake is implicitly used by bridgeInstanceFlake
   };
 
 in
-  finalSchedule
+finalSchedule

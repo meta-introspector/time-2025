@@ -1,9 +1,8 @@
-{
-  nixCodeIndexerModule,
-  nixOntologyRepo,
-  pkgs,
-  nixpkgs,
-  ...
+{ nixCodeIndexerModule
+, nixOntologyRepo
+, pkgs
+, nixpkgs
+, ...
 }:
 
 let

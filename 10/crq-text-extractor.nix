@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {}, month09Flake }:
+{ pkgs ? import <nixpkgs> { }, month09Flake }:
 
 let
   crqs = month09Flake.crqs.foaf.nix {
@@ -14,7 +14,7 @@ let
     crq013 = month09Flake.crq-013.foaf.nix { inherit pkgs; inherit (pkgs) lib; };
   };
 
-  extractText = crq: 
+  extractText = crq:
     let
       text = crq.title + " " + crq.problemGoal + " " + crq.proposedSolution + " " + crq.justificationImpact;
     in

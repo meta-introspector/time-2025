@@ -1,4 +1,5 @@
-{ description = "A flake to grep for 'nar' in specified file types.";
+{
+  description = "A flake to grep for 'nar' in specified file types.";
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
@@ -6,7 +7,7 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }:
-    flake-utils.lib.eachDefaultSystem (system: 
+    flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
         # Define the absolute root directory for the grep search
@@ -26,9 +27,10 @@
 
       in
       {
-        packages.default = pkgs.runCommand "nar-grep-results" {
-          nativeBuildInputs = [ pkgs.gnugrep ];
-        } ''
+        packages.default = pkgs.runCommand "nar-grep-results"
+          {
+            nativeBuildInputs = [ pkgs.gnugrep ];
+          } ''
           grep -r ${grepIncludes} "nar" ${searchRoot} > $out
         '';
       });

@@ -11,7 +11,8 @@ let
   # Import the verification logic
   verifyFoafOwl = import ./verify-foaf-owl.nix { inherit pkgs lib foafData owlSchema; };
 
-in {
+in
+{
   # Expose the verification results
   verificationResults = verifyFoafOwl.validationResults;
   inherit (verifyFoafOwl) overallStatus;

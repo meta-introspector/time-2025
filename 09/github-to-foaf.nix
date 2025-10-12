@@ -30,7 +30,8 @@ let
       # Add more properties as needed
     };
 
-in {
+in
+{
   inherit repoToFoaf;
   inherit userToFoaf;
 }

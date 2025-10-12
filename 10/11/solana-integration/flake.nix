@@ -59,19 +59,20 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils }: 
+  outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # Function to conceptually deploy a Solana smart contract
         deploySmartContract = { contractPath, name ? "solana-contract-deployment" }:
-          pkgs.runCommand name {
-            inherit contractPath;
-            nativeBuildInputs = [ pkgs.bash ]; # Requires solana-cli in a real scenario
-            # __impure = true; # Solana interaction is impure
-          } ''
+          pkgs.runCommand name
+            {
+              inherit contractPath;
+              nativeBuildInputs = [ pkgs.bash ]; # Requires solana-cli in a real scenario
+              # __impure = true; # Solana interaction is impure
+            } ''
             echo "Conceptually deploying smart contract from $contractPath to Solana..."
             # In a real implementation, this would call 'solana program deploy $contractPath'
             # For now, generate a dummy program ID.
@@ -81,11 +82,12 @@
 
         # Function to conceptually send a transaction to Solana
         sendTransaction = { programId, transactionData, name ? "solana-transaction-result" }:
-          pkgs.runCommand name {
-            inherit programId transactionData;
-            nativeBuildInputs = [ pkgs.bash ]; # Requires solana-cli in a real scenario
-            # __impure = true; # Solana interaction is impure
-          } ''
+          pkgs.runCommand name
+            {
+              inherit programId transactionData;
+              nativeBuildInputs = [ pkgs.bash ]; # Requires solana-cli in a real scenario
+              # __impure = true; # Solana interaction is impure
+            } ''
             echo "Conceptually sending transaction to Solana program $programId with data $transactionData..."
             # In a real implementation, this would call 'solana transaction send ...'
             # For now, generate a dummy transaction ID.
@@ -99,11 +101,12 @@
 
         checks = {
           # Conceptual check for Solana integration
-          testSolanaIntegration = pkgs.runCommand "test-solana-integration" {
-            nativeBuildInputs = [ pkgs.bash ];
-            deployer = self.lib.${system}.deploySmartContract;
-            sender = self.lib.${system}.sendTransaction;
-          } ''
+          testSolanaIntegration = pkgs.runCommand "test-solana-integration"
+            {
+              nativeBuildInputs = [ pkgs.bash ];
+              deployer = self.lib.${system}.deploySmartContract;
+              sender = self.lib.${system}.sendTransaction;
+            } ''
             echo "Testing conceptual Solana integration..."
             local dummy_contract_path="dummy-contract.so"
             echo "dummy contract code" > $dummy_contract_path

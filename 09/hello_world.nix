@@ -1,6 +1,6 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
-pkgs.runCommand "hello-world" {} ''
+pkgs.runCommand "hello-world" { } ''
   mkdir -p $out
   echo "Hello, Nix!" > $out/hello.txt
 ''

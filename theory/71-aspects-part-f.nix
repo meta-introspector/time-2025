@@ -63,4 +63,5 @@ let
       description = "If '71' were to specify a cache size, it would directly impact system performance by determining the amount of data that can be stored for quick access.";
     }
   ];
-in aspectsOf71
+in
+aspectsOf71

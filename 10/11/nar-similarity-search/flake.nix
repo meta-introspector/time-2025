@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     self = {
-      url = "github:meta-introspector/time-2025?ref=feature/CRQ-016-nixify-workflow&dir=source/github/meta-introspector/streamofrandom/2025/10/11/nar-similarity-search";
+      url = "github:meta-introspector/time-2025?ref=feature/CRQ-016-nixify-workflow&dir=10/11/nar-similarity-search";
     };
   };
 
@@ -17,7 +17,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # Import the library functions
         similarityLib = import ./lib.nix {
@@ -28,11 +28,12 @@
       {
         lib = similarityLib;
         # Default package to demonstrate self-introspection and Gödel numbering
-        packages.default = pkgs.runCommand "self-gödel-number" {
-          nativeBuildInputs = [ pkgs.bash pkgs.jq ];
-          flakeSource = self;
-          extractedKeywordsDerivation = similarityLib.extractKeywords self;
-        }
+        packages.default = pkgs.runCommand "self-gödel-number"
+          {
+            nativeBuildInputs = [ pkgs.bash pkgs.jq ];
+            flakeSource = self;
+            extractedKeywordsDerivation = similarityLib.extractKeywords self;
+          }
           ''
             set -euo pipefail
 

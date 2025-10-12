@@ -16,11 +16,11 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, numberSearcher, narLocatorFlake }: 
+  outputs = { self, nixpkgs, flake-utils, numberSearcher, narLocatorFlake }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # Monster Group primes under 71
         primesUnder71 = [ 2 3 5 7 11 13 17 19 23 29 31 41 47 59 ];
@@ -28,7 +28,7 @@
         filePatterns = [ "**/*.md" ]; # Only Markdown files
 
         # Dynamically generate NAR indices for each prime
-        primeMdIndexes = lib.genAttrs (lib.map toString primesUnder71) (primeStr: 
+        primeMdIndexes = lib.genAttrs (lib.map toString primesUnder71) (primeStr:
           let
             searchNumber = builtins.fromJSON primeStr;
             # Get the list of Markdown files containing the current prime
@@ -38,10 +38,11 @@
             };
 
             # Create a derivation that outputs this list as a text file
-            mdFilesWithPrimeList = pkgs.runCommand "md-files-with-${primeStr}-list" {
-              nativeBuildInputs = [ pkgs.bash ];
-              results = mdFilesWithPrime;
-            } ''
+            mdFilesWithPrimeList = pkgs.runCommand "md-files-with-${primeStr}-list"
+              {
+                nativeBuildInputs = [ pkgs.bash ];
+                results = mdFilesWithPrime;
+              } ''
               cp $results $out
             '';
 

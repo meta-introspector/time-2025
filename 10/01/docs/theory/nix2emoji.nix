@@ -1,43 +1,49 @@
 {
   # Import the emoji OWL schema
-  emojiOwlModule,
-  ...
+  emojiOwlModule
+, ...
 }:
 
 let
-  common = import ../../../lib/common-imports.nix {};
+  common = import ../../../lib/common-imports.nix { };
   inherit (common) lib;
   inherit (common) builtins;
 
   # Extract emojiMap from the OWL schema
   emojiMap = builtins.listToAttrs (
-    builtins.map (
-      individualName: 
+    builtins.map
+      (
+        individualName:
         let
           individual = emojiOwlModule.ontology.individuals.${individualName};
           conceptName = builtins.replaceStrings [ "Concept" "Value" "Keyword" ] [ "" "" "" ] individualName;
         in
         { name = conceptName; value = individual.hasEmojiRepresentation; }
-    ) (builtins.attrNames emojiOwlModule.ontology.individuals)
+      )
+      (builtins.attrNames emojiOwlModule.ontology.individuals)
   );
 
   # Function to convert a Nix value to an emoji string
-  toEmoji = value: 
+  toEmoji = value:
     if builtins.isAttrs value then
       let
         attrEmojis = builtins.concatStringsSep "" (
-          builtins.mapAttrsToList (name: val: 
-            "${name}${emojiMap.Assign}${toEmoji val}${emojiMap.StatementEnd}"
-          ) value
+          builtins.mapAttrsToList
+            (name: val:
+              "${name}${emojiMap.Assign}${toEmoji val}${emojiMap.StatementEnd}"
+            )
+            value
         );
       in
       "${emojiMap.AttrSetOpen}${attrEmojis}${emojiMap.AttrSetClose}"
     else if builtins.isList value then
       let
         listEmojis = builtins.concatStringsSep "" (
-          builtins.map (val: 
-            "${toEmoji val}${emojiMap.StatementEnd}"
-          ) value
+          builtins.map
+            (val:
+              "${toEmoji val}${emojiMap.StatementEnd}"
+            )
+            value
         );
       in
       "${emojiMap.ListOpen}${listEmojis}${emojiMap.ListClose}"
@@ -50,7 +56,7 @@ let
     else if value == null then # Check for null
       emojiMap.NullValue
     else if builtins.isFunction value then
-      # Represent functions conceptually for now, as direct conversion is hard
+    # Represent functions conceptually for now, as direct conversion is hard
       "${emojiMap.FunctionConceptEmoji} (function)"
     else
       "❓(unknown_type)"; # Fallback for unhandled types

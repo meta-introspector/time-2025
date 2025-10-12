@@ -1,7 +1,7 @@
 _:
 
 let
-  common = import ../../../lib/common-imports.nix {};
+  common = import ../../../lib/common-imports.nix { };
   inherit (common) lib;
   inherit (common) pkgs;
   inherit (common) builtins;
@@ -21,18 +21,22 @@ let
 
   # A conceptual function to scan a file for secrets.
   # This function creates an impure derivation that runs a shell script to scan the file.
-  scanForSecrets = {
-    filePath, # Path to the file to scan (can be an impure path on the host filesystem)
-    patterns ? defaultSecretPatterns, # List of regex patterns to search for
-    name ? "secret-scan-report",
-  }:
-    pkgs.runCommand name {
-      inherit filePath patterns;
-      __impure = true; # Scanning an impure file is an impure operation
-      __noChroot = true; # Needs access to the host filesystem to read `filePath`
-      nativeBuildInputs = [ pkgs.gnugrep ]; # Use GNU grep for regex searching
-    }
-    '''
+  scanForSecrets =
+    { filePath
+    , # Path to the file to scan (can be an impure path on the host filesystem)
+      patterns ? defaultSecretPatterns
+    , # List of regex patterns to search for
+      name ? "secret-scan-report"
+    ,
+    }:
+    pkgs.runCommand name
+      {
+        inherit filePath patterns;
+        __impure = true; # Scanning an impure file is an impure operation
+        __noChroot = true; # Needs access to the host filesystem to read `filePath`
+        nativeBuildInputs = [ pkgs.gnugrep ]; # Use GNU grep for regex searching
+      }
+      '''
       echo "Scanning file: ${filePath} for secrets..." >&2
       SECRET_FOUND=false
       REPORT_FILE=$out/secret_report.txt

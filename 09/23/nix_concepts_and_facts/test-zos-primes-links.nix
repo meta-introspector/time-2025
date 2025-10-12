@@ -1,4 +1,5 @@
-{ pkgs ? import <nixpkgs> { }, lib ? pkgs.lib
+{ pkgs ? import <nixpkgs> { }
+, lib ? pkgs.lib
 , zos ? let
     primesList = [ 2 3 5 7 11 13 17 19 23 29 31 41 47 59 71 ];
     dummyZosPrimes = builtins.listToAttrs (builtins.map

@@ -1,9 +1,9 @@
-{ pkgs ? import <nixpkgs> {}, self, month09Flake }:
+{ pkgs ? import <nixpkgs> { }, self, month09Flake }:
 
 let
   crqBigrams = import ./crq-bigram-generator.nix { inherit pkgs self month09Flake; };
 
-  jaccardSimilarity = bigrams1: bigrams2: 
+  jaccardSimilarity = bigrams1: bigrams2:
     let
       uniqueBigrams1 = pkgs.lib.unique bigrams1;
       uniqueBigrams2 = pkgs.lib.unique bigrams2;
@@ -18,13 +18,17 @@ let
 
   crqIds = builtins.attrNames crqBigrams;
 
-  similarityMatrix = pkgs.lib.listToAttrs (map (id1: {
-    name = id1;
-    value = pkgs.lib.listToAttrs (map (id2: {
-      name = id2;
-      value = jaccardSimilarity crqBigrams.${id1} crqBigrams.${id2};
-    }) crqIds);
-  }) crqIds);
+  similarityMatrix = pkgs.lib.listToAttrs (map
+    (id1: {
+      name = id1;
+      value = pkgs.lib.listToAttrs (map
+        (id2: {
+          name = id2;
+          value = jaccardSimilarity crqBigrams.${id1} crqBigrams.${id2};
+        })
+        crqIds);
+    })
+    crqIds);
 
 in
 {

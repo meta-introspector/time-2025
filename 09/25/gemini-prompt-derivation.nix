@@ -6,7 +6,8 @@ let
   '';
 in
 
-pkgs.runCommand "gemini-prompt-output" {
+pkgs.runCommand "gemini-prompt-output"
+{
   buildInputs = [ gemini-cli ]; # Add gemini-cli to buildInputs
 } ''
   ${builderScript}

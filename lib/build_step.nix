@@ -18,16 +18,17 @@
  *   - dependencies: (List of Strings) A list of names of other build steps this step depends on.
  */
 {
-  mkBuildStep = {
-    name,
-    description ? "",
-    prePhase ? null,
-    nixBuildPhase ? null,
-    invarPhase ? null,
-    postPhase ? null,
-    dependencies ? [],
-  }:
-  {
-    inherit name description prePhase nixBuildPhase invarPhase postPhase dependencies;
-  };
+  mkBuildStep =
+    { name
+    , description ? ""
+    , prePhase ? null
+    , nixBuildPhase ? null
+    , invarPhase ? null
+    , postPhase ? null
+    , dependencies ? [ ]
+    ,
+    }:
+    {
+      inherit name description prePhase nixBuildPhase invarPhase postPhase dependencies;
+    };
 }

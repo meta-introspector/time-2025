@@ -5,14 +5,14 @@
 
 let
   # Helper function to find a prime by its brainfOperation
-  findPrimeByBrainfOperation = operation: 
+  findPrimeByBrainfOperation = operation:
     let
       found = lib.filter (p: p.brainfOperation == operation) (lib.attrValues primeLattice.primes);
     in
     if lib.length found > 0 then (lib.head found).value else null;
 
   # Recursive function to encode a SimpleExpr into a nested list of primes
-  encodeSimpleExpr = simpleExpr: 
+  encodeSimpleExpr = simpleExpr:
     let
       # Map SimpleExpr kinds to their corresponding brainfOperations
       kindToOperation = {
@@ -29,21 +29,22 @@ let
       currentPrime = findPrimeByBrainfOperation currentOperation;
 
       # Handle recursive encoding for nested expressions
-      encodedChildren = 
+      encodedChildren =
         if simpleExpr.type == "app" then
           [ (encodeSimpleExpr simpleExpr.fn) (encodeSimpleExpr simpleExpr.arg) ]
         else if simpleExpr.type == "forallE" || simpleExpr.type == "lam" then
           [ (encodeSimpleExpr simpleExpr.forbndrTyp) (encodeSimpleExpr simpleExpr.forbdB) ]
         else
-          []; # No children or not a recursive type
+          [ ]; # No children or not a recursive type
 
     in
     if currentPrime == null then
       throw "Unknown SimpleExpr type or unmapped operation: ${simpleExpr.type}"
     else
-      # Return a nested list: [currentPrime, encodedChild1, encodedChild2, ...]
+    # Return a nested list: [currentPrime, encodedChild1, encodedChild2, ...]
       [ currentPrime ] ++ encodedChildren;
 
-in {
+in
+{
   inherit encodeSimpleExpr;
 }

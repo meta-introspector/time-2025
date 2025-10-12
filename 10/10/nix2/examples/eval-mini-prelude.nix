@@ -49,7 +49,7 @@
 #   - Emoji Representation: ☀️🌑🌑
 # -------------------
 let
-  pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> { };
   inherit (pkgs) lib;
   miniPrelude = import ./mini-prelude.nix { inherit pkgs lib; };
 in

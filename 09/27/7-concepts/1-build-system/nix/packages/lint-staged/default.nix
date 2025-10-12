@@ -1,9 +1,7 @@
-{
-  lib,
-  buildNpmPackage,
-  fetchFromGitHub,
-  
-  # Add any other necessary build inputs here
+{ lib
+, buildNpmPackage
+, fetchFromGitHub
+, # Add any other necessary build inputs here
 }:
 
 buildNpmPackage rec {

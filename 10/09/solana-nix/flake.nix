@@ -10,9 +10,10 @@
       pkgs = nixpkgs.legacyPackages.aarch64-linux;
     in
     {
-      packages.aarch64-linux.default = pkgs.runCommand "dummy-solana-tools" {
-        buildInputs = [ pkgs.bash ];
-      } ''
+      packages.aarch64-linux.default = pkgs.runCommand "dummy-solana-tools"
+        {
+          buildInputs = [ pkgs.bash ];
+        } ''
         mkdir -p $out/bin
         echo '#!${pkgs.bash}/bin/bash' > $out/bin/solana-cli
         echo 'echo "Dummy Solana CLI output for command: $1, config: $2" >&2' >> $out/bin/solana-cli

@@ -12,6 +12,7 @@ let
   isLam = json:
     builtins.isAttrs json && json ? kind && json.kind == "lam" && json ? binderName && json ? binderInfo && json ? binderType && json ? body;
 
-in {
+in
+{
   inherit mkLam isLam;
 }

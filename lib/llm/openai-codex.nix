@@ -5,10 +5,11 @@ let
 
   usageTracking = import ./usage-tracking.nix { inherit lib; };
 
-  getOpenaiCodexApiKey = pkgs.runCommand "openai-codex-api-key" {
-    buildInputs = [ pkgs.sops ];
-    sopsFile = "${sopsSecretsPath}/openai-codex-api-key.json";
-  } ''
+  getOpenaiCodexApiKey = pkgs.runCommand "openai-codex-api-key"
+    {
+      buildInputs = [ pkgs.sops ];
+      sopsFile = "${sopsSecretsPath}/openai-codex-api-key.json";
+    } ''
     mkdir -p $out
     sops -d $sopsFile | jq -r '.apiKey' > $out/api-key
   '';

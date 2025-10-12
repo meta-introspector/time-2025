@@ -64,7 +64,7 @@
           inherit (gemini-cli.devShells.${system}.default) buildInputs;
 
           # Add bash for general shell scripting (from gemini_with_home_access_flake)
-          buildInputs = (gemini-cli.devShells.${system}.default.buildInputs or []) ++ [ pkgs.bash geminiConsumerApp ];
+          buildInputs = (gemini-cli.devShells.${system}.default.buildInputs or [ ]) ++ [ pkgs.bash geminiConsumerApp ];
 
           shellHook = ''
             echo "Welcome to the consolidated Gemini Integration devShell!"

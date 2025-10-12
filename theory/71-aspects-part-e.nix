@@ -63,4 +63,5 @@ let
       description = "The presence of '71' in test case identifiers would mark specific tests, aiding in tracking test coverage, results, and the overall quality assurance process.";
     }
   ];
-in aspectsOf71
+in
+aspectsOf71

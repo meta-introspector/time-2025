@@ -12,7 +12,8 @@ let
   inherit (pkgs) gemini-cli;
 
   # Generate 100 LLM tasks
-  allTasks = import ./llm-tasks.nix { inherit lib pkgs mkTask; flakeSources = [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=source/github/meta-introspector/streamofrandom/2025" ];
+  allTasks = import ./llm-tasks.nix {
+    inherit lib pkgs mkTask; flakeSources = [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir" ];
     inputFlakes = [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/10/llm-inputs" ];
     processFlakes = [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/10/llm-processes" ];
     outputFlakes = [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/10/llm-outputs" ];
@@ -25,14 +26,16 @@ let
   runOrchestration =
     let
       # Process all tasks through their phases
-      allPhasedOutputs = lib.flatten (lib.map (task:
-        [
-          task.plan
-          task.commit
-          task.run
-          task.eval
-        ]
-      ) allTasks);
+      allPhasedOutputs = lib.flatten (lib.map
+        (task:
+          [
+            task.plan
+            task.commit
+            task.run
+            task.eval
+          ]
+        )
+        allTasks);
     in
     allPhasedOutputs;
 

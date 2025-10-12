@@ -5,7 +5,7 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify-workflow";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify-workflow";
     self = {
-      url = "github:meta-introspector/time-2025?ref=feature/CRQ-016-nixify-workflow&dir=source/github/meta-introspector/streamofrandom/2025"; # Project root
+      url = "github:meta-introspector/time-2025?ref=feature/CRQ-016-nixify-workflow"; # Project root
     };
   };
 
@@ -13,7 +13,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # The lib_search_utils.sh script
         libSearchUtilsScript = "${self}/09/22/lib/lib_search_utils.sh";
@@ -30,10 +30,11 @@
 
         checks = {
           # Check to test a utility function (e.g., get_top_n_terms)
-          testSearchUtility = pkgs.runCommand "test-search-utility" {
-            nativeBuildInputs = [ pkgs.bash ];
-            searchUtils = searchUtilsPackage;
-          } ''
+          testSearchUtility = pkgs.runCommand "test-search-utility"
+            {
+              nativeBuildInputs = [ pkgs.bash ];
+              searchUtils = searchUtilsPackage;
+            } ''
             echo "Testing search utility function..."
             # Simulate a file with terms
             echo "apple banana apple orange banana apple" > terms.txt

@@ -81,11 +81,13 @@
       flake = false; # Since it's a directory, not a flake itself
     };
 
-    # 4. Ontology repository for Nix concepts
     nixOntologyRepo = {
       url = "github:meta-introspector/ontology";
       flake = false;
     };
+
+    #    month10Flake = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=10"; };
+    month10Flake = { url = "path:./10"; };
 
     # 5. Data Sources Flake (as a path input)
     dataSources = {
@@ -95,15 +97,10 @@
         flake-utils = { url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; };
       };
     };
-
-
-    self = {
-      url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench";
-    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, rnix-parser, nixTaskNew, nix-stdlib, nixOntologyRepo }:
-  let
+  outputs = { self, nixpkgs, flake-utils, rnix-parser, nixTaskNew, nix-stdlib, nixOntologyRepo, month10Flake, sops-nix, nixIntrospector, logAnalyzer, node2nix-src, nurl, nixToPoemVial, readMdVial, readRsVial, spore-vial, dataSources }:
+    let
       # Define mycologyWorkflow as nixTask
       mycologyWorkflow = nixTaskNew;
 
@@ -121,17 +118,17 @@
         flake = false;
       };
 
-      nixCodeIndexerModule = import (self.outPath + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
+      nixCodeIndexerModule = import (self + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
 
       nixFileIndexDerivation = nixCodeIndexerModule.indexNixFiles {
-        path = self.outPath;
-        projectRoot = self.outPath;
+        path = self;
+        projectRoot = self;
         name = "flake-nix-files-index";
       };
 
       # Import the QA system
-      nixTermExtractor = import (self.outPath + "/10/crq-text-extractor.nix") { inherit pkgs; month09Flake = self; };
-      nGramGeneratorModule = import (self.outPath + "/10/01/docs/theory/n_gram_generator.nix") { inherit lib pkgs builtins; };
+      nixTermExtractor = month10Flake.crqTextExtractor;
+      nGramGeneratorModule = month10Flake.nGramGenerator;
       qa = import ./qa.nix { inherit pkgs lib self nix-stdlib nixTermExtractor nGramGeneratorModule; };
 
       # 4. Define the SELF-INGESTION & MODIFICATION derivation (Quasiquoted Transformation)
@@ -175,7 +172,7 @@
           echo "hello from simple quine" > $out/hello.txt
         '';
       };
-    
+
       exampleUrlFetch = import (self + "/example_url_fetch.nix") {
         inherit pkgs lib builtins nixOntologyRepo self nixpkgs nixFileIndexDerivation;
       };
@@ -236,6 +233,7 @@
           pre-commit # Add pre-commit to the development shell
           jq # Add jq for parsing JSON output
           statix # Add statix for Nix linting
+          nixpkgs-fmt # Add nixpkgs-fmt for Nix code formatting
           pkgs.nodejs_22 # Add nodejs_22 for JavaScript development
           node2nix-src.packages.${system}.default # Add node2nix for JavaScript dependency management
           ncurses # Add ncurses for clear and reset commands

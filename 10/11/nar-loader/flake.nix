@@ -65,7 +65,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # Base path for the structured binstore (where NARs are stored by nar-locator)
         binstoreBasePath = "${narLocatorFlake}/nar-outputs/09/22/crq-binstore";
@@ -76,10 +76,11 @@
           let
             fullPath = "${binstoreBasePath}/${canonicalNarPath}";
           in
-          pkgs.runCommand "loaded-nar-${lib.strings.removeSuffix ".nar" (lib.strings.baseNameOf canonicalNarPath)}" {
-            nativeBuildInputs = [ pkgs.nix pkgs.nix-nar-unpack ];
-            narFile = fullPath;
-          } ''
+          pkgs.runCommand "loaded-nar-${lib.strings.removeSuffix ".nar" (lib.strings.baseNameOf canonicalNarPath)}"
+            {
+              nativeBuildInputs = [ pkgs.nix pkgs.nix-nar-unpack ];
+              narFile = fullPath;
+            } ''
             echo "Loading NAR from ${narFile}"
             mkdir -p $out
             nix-nar-unpack --file ${narFile} --to $out
@@ -94,40 +95,44 @@
             # Dynamically list all NAR files in the binstore
             allNarFiles = lib.attrValues (
               lib.mapAttrsRecursive (name: value: if lib.isDerivation value && lib.strings.hasSuffix ".nar" value.name then value else null)
-              (lib.readDir binstoreBasePath)
+                (lib.readDir binstoreBasePath)
             );
 
             # Filter NARs that contain the query string in their path
             matchingNarPaths = lib.filter (narFile: lib.strings.hasInfix query narFile.name) allNarFiles;
 
             # If searchContent is true, unpack and grep the content
-            contentSearchResults = if searchContent then
-              lib.map (
-                narFile: pkgs.runCommand "nar-content-search-${narFile.name}" {
-                  nativeBuildInputs = [ pkgs.nix pkgs.nix-nar-unpack pkgs.gnugrep pkgs.findutils ];
-                  narToUnpack = narFile;
-                  searchQuery = query;
-                } ''
-                  echo "Searching content of ${narToUnpack.name} for \"${searchQuery}\"..."
-                  local temp_unpack_dir=$(mktemp -d)
-                  nix-nar-unpack --file ${narToUnpack} --to $temp_unpack_dir
+            contentSearchResults =
+              if searchContent then
+                lib.map
+                  (
+                    narFile: pkgs.runCommand "nar-content-search-${narFile.name}"
+                      {
+                        nativeBuildInputs = [ pkgs.nix pkgs.nix-nar-unpack pkgs.gnugrep pkgs.findutils ];
+                        narToUnpack = narFile;
+                        searchQuery = query;
+                      } ''
+                      echo "Searching content of ${narToUnpack.name} for \"${searchQuery}\"..."
+                      local temp_unpack_dir=$(mktemp -d)
+                      nix-nar-unpack --file ${narToUnpack} --to $temp_unpack_dir
                   
-                  # Grep for the query in the unpacked content
-                  local grep_output=$(find $temp_unpack_dir -type f -print0 | xargs -0 grep -i -l "${searchQuery}" || true)
+                      # Grep for the query in the unpacked content
+                      local grep_output=$(find $temp_unpack_dir -type f -print0 | xargs -0 grep -i -l "${searchQuery}" || true)
 
-                  if [[ -n "$grep_output" ]]; then
-                    echo "Match found in content of ${narToUnpack.name}:"
-                    echo "$grep_output" | sed "s|^${temp_unpack_dir}/|  |" # Prettify output
-                    echo "${narToUnpack}" > $out # Output the path to the NAR if content matches
-                  else
-                    echo "No match found in content of ${narToUnpack.name}"
-                    # If no match, output an empty string or a specific marker
-                    # For now, we'll just not create an output if no match
-                    exit 0
-                  fi
-                ''
-              ) matchingNarPaths
-            else [];
+                      if [[ -n "$grep_output" ]]; then
+                        echo "Match found in content of ${narToUnpack.name}:"
+                        echo "$grep_output" | sed "s|^${temp_unpack_dir}/|  |" # Prettify output
+                        echo "${narToUnpack}" > $out # Output the path to the NAR if content matches
+                      else
+                        echo "No match found in content of ${narToUnpack.name}"
+                        # If no match, output an empty string or a specific marker
+                        # For now, we'll just not create an output if no match
+                        exit 0
+                      fi
+                    ''
+                  )
+                  matchingNarPaths
+              else [ ];
 
             # Combine path matches and content matches (if any)
             # For simplicity, we'll just return the paths of NARs that matched either way

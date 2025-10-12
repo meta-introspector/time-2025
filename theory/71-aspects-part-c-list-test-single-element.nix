@@ -6,4 +6,5 @@ let
   aspectsOf71 = [
     aspect29Imported
   ];
-in aspectsOf71
+in
+aspectsOf71

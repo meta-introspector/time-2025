@@ -16,7 +16,7 @@ let
   modifyCrqFile = file:
     let
       originalContent = builtins.readFile file;
-      modifiedContent = lib.replaceStrings ["\"@type\" = \"Document\";"] ["\"@type\" = \"dcterms:Document\";"] originalContent;
+      modifiedContent = lib.replaceStrings [ "\"@type\" = \"Document\";" ] [ "\"@type\" = \"dcterms:Document\";" ] originalContent;
     in
     { path = file; content = modifiedContent; };
 
@@ -28,4 +28,5 @@ let
     lib.concatStringsSep "\n" (lib.map (f: "echo -n ${lib.escapeShellArg f.content} > ${lib.escapeShellArg f.path}") modifiedCrqFiles)
   );
 
-in writeScript
+in
+writeScript

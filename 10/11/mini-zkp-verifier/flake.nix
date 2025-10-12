@@ -59,19 +59,20 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils }: 
+  outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # Function to conceptually generate a Zero-Knowledge Proof
         generateZkp = { statement, witness, name ? "zkp-generation" }:
-          pkgs.runCommand name {
-            inherit statement witness;
-            nativeBuildInputs = [ pkgs.bash ]; # Requires zkp tools in a real scenario
-            # __impure = true; # ZKP generation can be computationally intensive
-          } ''
+          pkgs.runCommand name
+            {
+              inherit statement witness;
+              nativeBuildInputs = [ pkgs.bash ]; # Requires zkp tools in a real scenario
+              # __impure = true; # ZKP generation can be computationally intensive
+            } ''
             echo "Conceptually generating ZKP for statement: '$statement' with witness: '$witness'..."
             # In a real implementation, this would invoke a ZKP prover.
             # For now, generate a dummy proof.
@@ -81,11 +82,12 @@
 
         # Function to conceptually verify a Zero-Knowledge Proof
         verifyZkp = { statement, proof, name ? "zkp-verification" }:
-          pkgs.runCommand name {
-            inherit statement proof;
-            nativeBuildInputs = [ pkgs.bash ]; # Requires zkp tools in a real scenario
-            # __impure = true; # ZKP verification can be computationally intensive
-          } ''
+          pkgs.runCommand name
+            {
+              inherit statement proof;
+              nativeBuildInputs = [ pkgs.bash ]; # Requires zkp tools in a real scenario
+              # __impure = true; # ZKP verification can be computationally intensive
+            } ''
             echo "Conceptually verifying ZKP: '$proof' for statement: '$statement'..."
             # In a real implementation, this would invoke a ZKP verifier.
             # For now, assume verification is always successful.
@@ -99,11 +101,12 @@
 
         checks = {
           # Conceptual check for ZKP generation and verification
-          testZkpWorkflow = pkgs.runCommand "test-zkp-workflow" {
-            nativeBuildInputs = [ pkgs.bash ];
-            generator = self.lib.${system}.generateZkp;
-            verifier = self.lib.${system}.verifyZkp;
-          } ''
+          testZkpWorkflow = pkgs.runCommand "test-zkp-workflow"
+            {
+              nativeBuildInputs = [ pkgs.bash ];
+              generator = self.lib.${system}.generateZkp;
+              verifier = self.lib.${system}.verifyZkp;
+            } ''
             echo "Testing conceptual ZKP workflow..."
             local dummy_statement="x is even"
             local dummy_witness="x=4"

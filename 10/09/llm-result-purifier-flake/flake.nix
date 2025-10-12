@@ -20,11 +20,12 @@
 
       # Create a fixed-output derivation from the impure LLM result
       # This makes the result pure and content-addressed
-      pureLlmResult = pkgs.runCommand "pure-llm-result" {
-        inherit impureLlmResult;
-        outputHashAlgo = "sha256";
-        outputHash = pkgs.lib.hashFile "sha256" "${impureLlmResult}/extracted-data.json"; # Hash the actual content
-      } ''
+      pureLlmResult = pkgs.runCommand "pure-llm-result"
+        {
+          inherit impureLlmResult;
+          outputHashAlgo = "sha256";
+          outputHash = pkgs.lib.hashFile "sha256" "${impureLlmResult}/extracted-data.json"; # Hash the actual content
+        } ''
         mkdir -p $out
         cp -r "${impureLlmResult}"/* $out/
       '';

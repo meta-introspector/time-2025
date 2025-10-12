@@ -1,93 +1,104 @@
-{
-  lib,
-  pkgs,
-  builtins,
-  ...
+{ lib
+, pkgs
+, builtins
+, ...
 }:
 
 let
   # A conceptual function to find and index all .nix files in a given path.
   # This would be an impure operation as it scans the filesystem.
-  indexNixFiles = {
-    path, # The path to scan for .nix files
-    projectRoot, # The root path to calculate relative paths against
-    name ? "nix-file-index",
-  }:
-    pkgs.runCommand name {
-      inherit path projectRoot;
-      __impure = true; # Scanning the filesystem is impure
-      nativeBuildInputs = [ pkgs.findutils pkgs.nix pkgs.gnused ]; # For `find`, `nix hash`, and `sed` commands
-    }
-    ''
-      echo "DEBUG: path = ${path}" >&2
-      echo "DEBUG: projectRoot = ${projectRoot}" >&2
-      echo "Indexing .nix files in ${path}..." >&2
-      mkdir -p $out
-      # Create a JSON array of objects { path, hash }
-      echo "[" > $out/nix-files.index.json
-      FIRST=true
-      find "${path}" -type f -name "*.nix" -print0 | while IFS= read -r -d $'\0' file; do
-          file_hash=$(nix hash file --sri "$file")
-          relative_path=$(echo "$file" | sed "s|^$projectRoot/||")
-          printf '  {"path": "%s", "hash": "%s"}' "$relative_path" "$file_hash" >> $out/nix-files.index.json
-        FIRST=false
-      done
-      echo "]" >> $out/nix-files.index.json
-      echo "Nix files indexed in $out/nix-files.index.json" >&2
-    '';
+  indexNixFiles =
+    { path
+    , # The path to scan for .nix files
+      projectRoot
+    , # The root path to calculate relative paths against
+      name ? "nix-file-index"
+    ,
+    }:
+    pkgs.runCommand name
+      {
+        inherit path projectRoot;
+        __impure = true; # Scanning the filesystem is impure
+        nativeBuildInputs = [ pkgs.findutils pkgs.nix pkgs.gnused ]; # For `find`, `nix hash`, and `sed` commands
+      }
+      ''
+        echo "DEBUG: path = ${path}" >&2
+        echo "DEBUG: projectRoot = ${projectRoot}" >&2
+        echo "Indexing .nix files in ${path}..." >&2
+        mkdir -p $out
+        # Create a JSON array of objects { path, hash }
+        echo "[" > $out/nix-files.index.json
+        FIRST=true
+        find "${path}" -type f -name "*.nix" -print0 | while IFS= read -r -d $'\0' file; do
+            file_hash=$(nix hash file --sri "$file")
+            relative_path=$(echo "$file" | sed "s|^$projectRoot/||")
+            printf '  {"path": "%s", "hash": "%s"}' "$relative_path" "$file_hash" >> $out/nix-files.index.json
+          FIRST=false
+        done
+        echo "]" >> $out/nix-files.index.json
+        echo "Nix files indexed in $out/nix-files.index.json" >&2
+      '';
 
   # A conceptual function to detect duplication based on the index.
   # This would analyze the content hashes to find identical files.
-  detectDuplication = {
-    nixFileIndex, # Output of indexNixFiles (path to nix-files.index.json)
-  }:
-  let
-    # Read the index file and parse it as JSON
-    indexedFiles = builtins.fromJSON (builtins.readFile "${nixFileIndex}/nix-files.index.json");
+  detectDuplication =
+    { nixFileIndex
+    , # Output of indexNixFiles (path to nix-files.index.json)
+    }:
+    let
+      # Read the index file and parse it as JSON
+      indexedFiles = builtins.fromJSON (builtins.readFile "${nixFileIndex}/nix-files.index.json");
 
-    # Group files by their hash to find duplicates
-    groupedByHash = builtins.groupBy (f: f.hash) indexedFiles;
-    duplicates = lib.filter (f: builtins.length f > 1) (builtins.attrValues groupedByHash);
-  in
-  {
-    inherit duplicates;
-    # A more advanced tool would analyze structural similarity, not just content hash.
-  };
+      # Group files by their hash to find duplicates
+      groupedByHash = builtins.groupBy (f: f.hash) indexedFiles;
+      duplicates = lib.filter (f: builtins.length f > 1) (builtins.attrValues groupedByHash);
+    in
+    {
+      inherit duplicates;
+      # A more advanced tool would analyze structural similarity, not just content hash.
+    };
 
   # A conceptual function to ingest Nix code from the index.
   # This would make the indexed Nix files available as an attribute set.
-  ingestNixCode = {
-    nixFileIndex, # Output of indexNixFiles (path to nix-files.index.json)
-    # The base path from which the index was created, to correctly import files
-    basePath, 
-  }:
-  let
-    indexedFiles = builtins.fromJSON (builtins.readFile "${nixFileIndex}/nix-files.index.json");
+  ingestNixCode =
+    { nixFileIndex
+    , # Output of indexNixFiles (path to nix-files.index.json)
+      # The base path from which the index was created, to correctly import files
+      basePath
+    ,
+    }:
+    let
+      indexedFiles = builtins.fromJSON (builtins.readFile "${nixFileIndex}/nix-files.index.json");
 
-    # Create an attribute set where keys are relative paths and values are imported Nix expressions.
-    # This is highly conceptual and assumes each .nix file is a valid Nix expression that can be imported.
-    importedNixExpressions = lib.listToAttrs (
-      lib.map (fileInfo: {
-        name = fileInfo.path; # Use relative path as attribute name
-        value = import "${basePath}/${fileInfo.path}"; # Import the Nix expression
-      }) indexedFiles
-    );
-  in
-  {
-    inherit importedNixExpressions;
-    rawIndex = indexedFiles;
-  };
+      # Create an attribute set where keys are relative paths and values are imported Nix expressions.
+      # This is highly conceptual and assumes each .nix file is a valid Nix expression that can be imported.
+      importedNixExpressions = lib.listToAttrs (
+        lib.map
+          (fileInfo: {
+            name = fileInfo.path; # Use relative path as attribute name
+            value = import "${basePath}/${fileInfo.path}"; # Import the Nix expression
+          })
+          indexedFiles
+      );
+    in
+    {
+      inherit importedNixExpressions;
+      rawIndex = indexedFiles;
+    };
 
   # A conceptual function to generate a Nix module that caches the indexed data.
   # This module can then be imported to quickly access the indexed information.
-  generateCacheModule = {
-    nixFileIndex, # Output of indexNixFiles (path to nix-files.index.json)
-    name ? "nix-index-cache",
-  }:
-    pkgs.runCommand name {
-      inherit nixFileIndex;
-    }
-    '''
+  generateCacheModule =
+    { nixFileIndex
+    , # Output of indexNixFiles (path to nix-files.index.json)
+      name ? "nix-index-cache"
+    ,
+    }:
+    pkgs.runCommand name
+      {
+        inherit nixFileIndex;
+      }
+      '''
       mkdir -p $out
       echo "# This file is auto-generated by nix_code_indexer.nix" > $out/default.nix
       echo "{ lib, ... }:\n" >> $out/default.nix

@@ -1,5 +1,6 @@
 {
   uncommittedFiles = [
-   ./flake.nix ./uncommitted.nix
+    ./flake.nix
+    ./uncommitted.nix
   ];
 }

@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
 let
   monadContext = import ./lib/monad-context.nix { inherit pkgs; inherit (pkgs) lib; geminiApi = import ./lib/gemini-api-wrapper.nix { inherit (pkgs) lib; }; };

@@ -1,4 +1,3 @@
-
 # A Vision of Pure Nix Submodule Commits: The 8-Layer NixOSI Model
 
 # Inspired by the OSI 7-Layer Model and the 'bott' Universal Architectural Framework,
@@ -12,10 +11,10 @@ let
   # The 'bott' Universal Architectural Framework primes as intrinsic vibes
   # zos=bott[8]=[2,3,5,7,11,13,17,19]
   bott = {
-    Layer1 = 2;  # Raw Data Ingestion / Physical/Data Link
-    Layer2 = 3;  # Segmentation and Division / Network
-    Layer3 = 5;  # Pattern Discernment / Transport
-    Layer4 = 7;  # Insight and Guidance / Session
+    Layer1 = 2; # Raw Data Ingestion / Physical/Data Link
+    Layer2 = 3; # Segmentation and Division / Network
+    Layer3 = 5; # Pattern Discernment / Transport
+    Layer4 = 7; # Insight and Guidance / Session
     Layer5 = 11; # Error Analysis and Transformation / Presentation
     Layer6 = 13; # Verification and Testing / Application
     Layer7 = 17; # Integration and Session Correlation / Self-Awareness/Meta-Introspection
@@ -28,7 +27,8 @@ let
     inherit content;
   };
 
-in {
+in
+{
   # Layer 1: Physical/Data Link - The Content-Addressed Store (bott 2)
   # Focus: Immutability, content-addressability, raw data.
   # Analogy: The physical medium and data framing.

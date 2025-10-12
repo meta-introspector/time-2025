@@ -6,13 +6,13 @@ let
   nixifyResource = { url, strategy }:
     let
       # Fetch the resource (impure, but contained)
-      fetchedResource = pkgs.runCommand "fetched-resource" {} ''
+      fetchedResource = pkgs.runCommand "fetched-resource" { } ''
         ${pkgs.curl}/bin/curl -L -o $out "${url}"
       '';
     in
     if strategy == "ontology" then
-      # Placeholder for ontology nixification logic
-      # This would involve parsing the ontology file and representing it as Nix data
+    # Placeholder for ontology nixification logic
+    # This would involve parsing the ontology file and representing it as Nix data
       {
         type = "ontology";
         inherit url;
@@ -23,7 +23,7 @@ let
         code = "Nix representation of ontology code from ${fetchedResource}";
       }
     else if strategy == "code" then
-      # Placeholder for code nixification logic
+    # Placeholder for code nixification logic
       {
         type = "code";
         inherit url;
@@ -31,7 +31,7 @@ let
         code = "Nix derivation for building code from ${fetchedResource}";
       }
     else if strategy == "document" then
-      # Placeholder for document nixification logic
+    # Placeholder for document nixification logic
       {
         type = "document";
         inherit url;
@@ -41,6 +41,7 @@ let
     else
       throw "Unknown nixification strategy: ${strategy}";
 
-in {
+in
+{
   inherit nixifyResource;
 }

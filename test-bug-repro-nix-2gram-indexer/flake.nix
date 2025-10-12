@@ -28,20 +28,22 @@
               name = "${name}-nix-file-index";
             };
           in
-          pkgs.runCommand "${name}-output" {
-            inherit nixFileIndexDerivation;
-          } "ln -s $nixFileIndexDerivation $out";
+          pkgs.runCommand "${name}-output"
+            {
+              inherit nixFileIndexDerivation;
+            } "ln -s $nixFileIndexDerivation $out";
 
-      # Vibe 2: Segmentation/JSON Extraction
-      vibe2 = { vibe1Output, name ? "vibe2-json-extractor" }:
-        let
-          indexedFilesJsonDerivation = pkgs.runCommand "${name}-indexed-files-json" {
-            inherit vibe1Output;
-            __impure = true;
-            passAsFile = [ "vibe1Output" ];
-          } "cat $vibe1OutputPath/nix-files.index.json > $out";
-        in
-        indexedFilesJsonDerivation;
+        # Vibe 2: Segmentation/JSON Extraction
+        vibe2 = { vibe1Output, name ? "vibe2-json-extractor" }:
+          let
+            indexedFilesJsonDerivation = pkgs.runCommand "${name}-indexed-files-json"
+              {
+                inherit vibe1Output;
+                __impure = true;
+                passAsFile = [ "vibe1Output" ];
+              } "cat $vibe1OutputPath/nix-files.index.json > $out";
+          in
+          indexedFilesJsonDerivation;
 
       in
       {

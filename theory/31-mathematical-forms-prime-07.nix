@@ -9,7 +9,7 @@
         else if isPrim' current then iter (current + 1) (acc ++ [ current ])
         else iter (current + 1) acc;
     in
-    iter 2 [];
+    iter 2 [ ];
 
   primesUpTo31 = generatePrimesUpTo 31;
   primesUpTo130 = generatePrimesUpTo 130; # For finding the 31st prime

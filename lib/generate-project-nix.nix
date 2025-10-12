@@ -4,10 +4,10 @@
 # within the project, generating a nested attribute set representation.
 # It composes smaller, atomic helper functions for clarity and testability.
 
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
 let
-  inherit (pkgs) lib; # Define lib here
+  inherit (pkgs) lib;# Define lib here
 
   # Import nix-stdlib for error handling and type checking utilities
   nix-stdlib = (import "github:meta-introspector/nix-stdlib?ref=feature/CRQ-016-nixify").lib { inherit pkgs lib; };
@@ -33,6 +33,6 @@ let
 in
 
 # The top-level function of the module, which takes the root path to scan.
-# Returns { result = <nested_attrset>, errors = <list_of_errors> }.
+  # Returns { result = <nested_attrset>, errors = <list_of_errors> }.
 { path }:
-  helpers.generate path
+helpers.generate path

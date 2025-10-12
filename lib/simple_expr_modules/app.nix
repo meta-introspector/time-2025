@@ -12,6 +12,7 @@ let
   isApp = json:
     builtins.isAttrs json && json ? kind && json.kind == "app" && json ? fn && json ? arg;
 
-in {
+in
+{
   inherit mkApp isApp;
 }

@@ -1,6 +1,6 @@
 { pkgs ? import <nixpkgs> { system = "aarch64-linux"; } }:
 
-pkgs.runCommand "dummy-project-state" {} ''
+pkgs.runCommand "dummy-project-state" { } ''
   mkdir -p $out
   echo "# Project Summary" > $out/project-summary.md
   echo "" >> $out/project-summary.md

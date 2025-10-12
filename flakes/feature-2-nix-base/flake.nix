@@ -6,8 +6,9 @@
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }:nix
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs = { self, nixpkgs, flake-utils, ... }: nix
+    flake-utils.lib.eachDefaultSystem
+    (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
         inherit lib;

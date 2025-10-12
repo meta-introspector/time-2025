@@ -13,9 +13,10 @@
       zosElements = [ 0 1 2 3 5 7 11 13 17 19 ];
 
       # A compressed representation of the ZOS elements
-      compressedZosElements = pkgs.runCommand "compressed-zos-elements" {
-        buildInputs = [ pkgs.jq ]; # For JSON processing
-      } ''
+      compressedZosElements = pkgs.runCommand "compressed-zos-elements"
+        {
+          buildInputs = [ pkgs.jq ]; # For JSON processing
+        } ''
         mkdir -p $out
         echo "${builtins.toJSON zosElements}" | jq -c . > $out/elements.json
         # Further compression could be applied here, e.g., base64 encoding, zstd compression

@@ -14,11 +14,11 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, lmfdb2nixFlake }: 
+  outputs = { self, nixpkgs, flake-utils, lmfdb2nixFlake }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # Task metadata
         taskMetadata = {
@@ -68,9 +68,10 @@
         lib = taskMetadata;
 
         # A dummy package to make the flake buildable, representing the task itself
-        packages.default = pkgs.runCommand "lmfdb2nix-implementation-task-placeholder" {
-          taskInfo = lib.toJSON taskMetadata;
-        } ''
+        packages.default = pkgs.runCommand "lmfdb2nix-implementation-task-placeholder"
+          {
+            taskInfo = lib.toJSON taskMetadata;
+          } ''
           echo "LMFDB to Nix Mirror Implementation Task Defined." > $out
           echo "Task Metadata: $(cat $taskInfo)" >> $out
         '';

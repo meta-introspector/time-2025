@@ -3,7 +3,7 @@
 {
   # TODO: Make the description more detailed and structured.
   # Function to describe a Nix expression to an LLM
-  nix2llm = nixExpression: filters: 
+  nix2llm = nixExpression: filters:
     let
       # For now, a generic description. This will be expanded later.
       description = "This Nix expression is: ${builtins.toJSON nixExpression}. Filters: ${builtins.toJSON filters}.";

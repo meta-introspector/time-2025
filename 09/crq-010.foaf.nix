@@ -1,8 +1,7 @@
 # crq-010.foaf.nix
-{
-  pkgs,
-  lib,
-  ...
+{ pkgs
+, lib
+, ...
 }:
 
 let

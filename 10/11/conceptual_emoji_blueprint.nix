@@ -101,10 +101,12 @@ let
 
   # Function to generate the emoji string for predicates
   generatePredicateEmojis = predicates: lib.strings.concatStringsSep "" (
-    lib.attrsets.mapAttrsToList (name: value:
-      let emojiPair = predicateEmojiMap.${name};
-      in if value then emojiPair.on else emojiPair.off
-    ) predicates
+    lib.attrsets.mapAttrsToList
+      (name: value:
+        let emojiPair = predicateEmojiMap.${name};
+        in if value then emojiPair.on else emojiPair.off
+      )
+      predicates
   );
 
   # Placeholder for a function that analyzes a Nix file and returns its triples
@@ -149,31 +151,37 @@ let
   # --- Conceptual Proof/Test Mechanism ---
   testPredicates = {
     # Test case 1: A simple flake.nix
-    "test-flake-definition" = lib.asserts.assertMsg (
-      isFlakeDefinition "{ description = \"My flake\"; inputs = {}; outputs = {}; }"
-    ) "isFlakeDefinition should be true for a flake.nix";
+    "test-flake-definition" = lib.asserts.assertMsg
+      (
+        isFlakeDefinition "{ description = \"My flake\"; inputs = {}; outputs = {}; }"
+      ) "isFlakeDefinition should be true for a flake.nix";
 
-    "test-not-flake-definition" = lib.asserts.assertMsg (
-      ! (isFlakeDefinition "{ pkgs, ... }: pkgs.mkShell { packages = [ pkgs.hello ]; } ")
-    ) "isFlakeDefinition should be false for a non-flake";
+    "test-not-flake-definition" = lib.asserts.assertMsg
+      (
+        ! (isFlakeDefinition "{ pkgs, ... }: pkgs.mkShell { packages = [ pkgs.hello ]; } ")
+      ) "isFlakeDefinition should be false for a non-flake";
 
     # Test case 2: A simple Nix module
-    "test-nix-module" = lib.asserts.assertMsg (
-      isNixModule "{ config, pkgs, ... }: { options.myOption = lib.mkOption { type = lib.types.str; }; }"
-    ) "isNixModule should be true for a Nix module";
+    "test-nix-module" = lib.asserts.assertMsg
+      (
+        isNixModule "{ config, pkgs, ... }: { options.myOption = lib.mkOption { type = lib.types.str; }; }"
+      ) "isNixModule should be true for a Nix module";
 
-    "test-not-nix-module" = lib.asserts.assertMsg (
-      ! (isNixModule "pkgs.stdenv.mkDerivation { name = \"my-package\"; } ")
-    ) "isNixModule should be false for a non-module";
+    "test-not-nix-module" = lib.asserts.assertMsg
+      (
+        ! (isNixModule "pkgs.stdenv.mkDerivation { name = \"my-package\"; } ")
+      ) "isNixModule should be false for a non-module";
 
     # Test case 3: A simple Nix package
-    "test-nix-package" = lib.asserts.assertMsg (
-      isNixPackage "pkgs.stdenv.mkDerivation { name = \"my-package\"; } "
-    ) "isNixPackage should be true for a Nix package";
+    "test-nix-package" = lib.asserts.assertMsg
+      (
+        isNixPackage "pkgs.stdenv.mkDerivation { name = \"my-package\"; } "
+      ) "isNixPackage should be true for a Nix package";
 
-    "test-not-nix-package" = lib.asserts.assertMsg (
-      ! (isNixPackage "{ config, pkgs, ... }: { options.myOption = lib.mkOption { type = lib.types.str; }; } ")
-    ) "isNixPackage should be false for a non-package";
+    "test-not-nix-package" = lib.asserts.assertMsg
+      (
+        ! (isNixPackage "{ config, pkgs, ... }: { options.myOption = lib.mkOption { type = lib.types.str; }; } ")
+      ) "isNixPackage should be false for a non-package";
 
     # Add more test cases for other predicates here
   };

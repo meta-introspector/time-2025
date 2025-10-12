@@ -10,16 +10,17 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # Function to perform GitHub code search
         # This function is impure as it makes network requests
         githubCodeSearch = { query, org ? "meta-introspector", name ? "github-code-search-result" }:
-          pkgs.runCommand name {
-            nativeBuildInputs = [ pkgs.gh ]; # GitHub CLI
-            inherit query org;
-            __impure = true; # Network access is impure
-          } ''
+          pkgs.runCommand name
+            {
+              nativeBuildInputs = [ pkgs.gh ]; # GitHub CLI
+              inherit query org;
+              __impure = true; # Network access is impure
+            } ''
             echo "Performing GitHub code search for query: \"$query\" in organization: \"$org\"..."
             gh search code "$query" --org "$org" > $out
             echo "GitHub search completed. Results in $out"
@@ -31,11 +32,12 @@
 
         checks = {
           # Conceptual check for GitHub code search
-          testGithubCodeSearch = pkgs.runCommand "test-github-code-search" {
-            nativeBuildInputs = [ pkgs.bash pkgs.gh ];
-            # This check is conceptual and will only verify that the 'gh' command can be run.
-            # A real test would require GitHub authentication and network access.
-          } ''
+          testGithubCodeSearch = pkgs.runCommand "test-github-code-search"
+            {
+              nativeBuildInputs = [ pkgs.bash pkgs.gh ];
+              # This check is conceptual and will only verify that the 'gh' command can be run.
+              # A real test would require GitHub authentication and network access.
+            } ''
             echo "Testing GitHub CLI availability and basic command execution..."
             if command -v gh &> /dev/null; then
               echo "GitHub CLI (gh) is available."

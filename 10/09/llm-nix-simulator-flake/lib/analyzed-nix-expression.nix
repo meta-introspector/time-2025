@@ -1,6 +1,7 @@
 { pkgs, nixExpressionToSimulate }:
 
-pkgs.runCommand "analyzed-nix-expression" {
+pkgs.runCommand "analyzed-nix-expression"
+{
   inherit nixExpressionToSimulate;
   buildInputs = [ pkgs.bash ]; # Placeholder for Nix analysis tools
 } ''

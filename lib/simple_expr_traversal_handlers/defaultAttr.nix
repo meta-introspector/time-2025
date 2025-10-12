@@ -3,5 +3,5 @@
 # Handler for default attribute sets (non-SimpleExpr)
 # It takes algebra, expr, depth, and recCall (the recursive call function)
 (algebra: expr: depth: recCall:
-  algebra.defaultAttr (lib.mapAttrs (name: recCall) expr) depth
+algebra.defaultAttr (lib.mapAttrs (name: recCall) expr) depth
 )

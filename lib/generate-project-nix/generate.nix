@@ -8,17 +8,18 @@
 
 # The main function that takes the root path
 path:
-  let
-    # Helper to read directory entries
-    getDirectoryEntries = builtins.readDir path;
+let
+  # Helper to read directory entries
+  getDirectoryEntries = builtins.readDir path;
 
-    # Process all entries in the current directory
-    # Pass 'generate' (this function) for recursive calls
-    processedEntries = lib.mapAttrs (name: type: (processEntry path) name type) getDirectoryEntries;
+  # Process all entries in the current directory
+  # Pass 'generate' (this function) for recursive calls
+  processedEntries = lib.mapAttrs (name: type: (processEntry path) name type) getDirectoryEntries;
 
-    # Aggregate values and errors from processed entries
-    aggregatedResult = lib.foldlAttrs
-      (import (builtins.fetchTarball "github:meta-introspector/time-2025?ref=feature/foaf&dir=10/04/lib/fold-accumulator.nix") { inherit lib types; })
-      { result = {}; errors = []; } processedEntries;
-  in
-  aggregatedResult
+  # Aggregate values and errors from processed entries
+  aggregatedResult = lib.foldlAttrs
+    (import (builtins.fetchTarball "github:meta-introspector/time-2025?ref=feature/foaf&dir=10/04/lib/fold-accumulator.nix") { inherit lib types; })
+    { result = { }; errors = [ ]; }
+    processedEntries;
+in
+aggregatedResult

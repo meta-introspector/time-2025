@@ -1,4 +1,4 @@
-{ pkgs, lib, concepts ? {}, zos ? {}, nixLib ? {} } @ args:
+{ pkgs, lib, concepts ? { }, zos ? { }, nixLib ? { } } @ args:
 
 let
   # Construct the list of ln -s commands for zosPrimes

@@ -32,11 +32,14 @@ SIMULATED_GET_NIX_FILE_LIST_PATH="/simulated/path/to/get-nix-file-list-flake"
 
 echo "Simulating nix eval command to generate nix-file-list.json..."
 
-# In a real Nix environment, getNixFileListFunc would process SIMULATED_FLAKE_PATHS_JSON.
-# For this test, we'll directly output a JSON array that getNixFileListFunc *might* produce.
-# This output should be a subset or transformation of the input flakePaths.
-# Let's assume getNixFileListFunc just returns the input paths for simplicity in this simulation.
-echo "$SIMULATED_FLAKE_PATHS_JSON" > nix-file-list.json
+# Call the Nix expression to get the simulated output
+nix eval --raw --expr "(import ./simulated-nix-eval.nix) { \
+  flakePathsJson = \"$SIMULATED_FLAKE_PATHS_JSON\"; \
+  system = \"$SIMULATED_SYSTEM\"; \
+  nixpkgsPath = \"$SIMULATED_NIXPKGS_PATH\"; \
+  selfOutPath = \"$SIMULATED_SELF_OUT_PATH\"; \
+  getNixFileListPath = \"$SIMULATED_GET_NIX_FILE_LIST_PATH\"; \
+}" > nix-file-list.json
 
 echo "Generated nix-file-list.json content:"
 cat nix-file-list.json

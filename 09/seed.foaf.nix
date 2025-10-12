@@ -1,7 +1,7 @@
 # seed.foaf.nix
-{
-  pkgs ? import <nixpkgs> {},
-  self,
+{ pkgs ? import <nixpkgs> { }
+, self
+,
 }:
 
 let
@@ -76,7 +76,8 @@ let
   # Combine agents and projects into a graph
   graph = agents ++ projects;
 
-in {
+in
+{
   "@context" = foafContext;
   "@graph" = graph;
 }

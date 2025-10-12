@@ -6,7 +6,7 @@ let
   narBridgeFlake = (builtins.getFlake (toString ./.)).outputs;
 
   # 1. Create a dummy derivation
-  dummyDerivation = pkgs.runCommand "my-dummy-output" {} ''
+  dummyDerivation = pkgs.runCommand "my-dummy-output" { } ''
     mkdir -p $out
     echo "Hello from dummy derivation!" > $out/hello.txt
   '';
@@ -24,10 +24,11 @@ let
   };
 
   # 4. Verify the restored path
-  testResult = pkgs.runCommand "test-nar-bridge" {
-    inherit restoredPath;
-    buildInputs = [ pkgs.diffutils ];
-  } ''
+  testResult = pkgs.runCommand "test-nar-bridge"
+    {
+      inherit restoredPath;
+      buildInputs = [ pkgs.diffutils ];
+    } ''
     # Read the actual restored path from the file
     ACTUAL_RESTORED_PATH=$(cat "$restoredPath/restored-path")
     
@@ -37,4 +38,4 @@ let
   '';
 
 in
-  testResult
+testResult

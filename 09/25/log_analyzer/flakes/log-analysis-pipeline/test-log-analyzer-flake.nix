@@ -15,9 +15,10 @@
         inherit (common) builtins;
       in
       {
-        packages.test-output = pkgs.runCommand "test-log-analyzer-package" {
-          buildInputs = [ log-analyzer-flake.packages.${system}.default ];
-        } "echo \"Log analyzer package found!\" > $$out";
+        packages.test-output = pkgs.runCommand "test-log-analyzer-package"
+          {
+            buildInputs = [ log-analyzer-flake.packages.${system}.default ];
+          } "echo \"Log analyzer package found!\" > $$out";
       }
     );
 }

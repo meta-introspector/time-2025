@@ -18,13 +18,15 @@ let
   tokenizePath = path:
     let
       # Replace delimiters with a single space for easy splitting
-      normalizedPath = lib.replaceStrings ["/" "-" "."] [" " " " " "] path;
+      normalizedPath = lib.replaceStrings [ "/" "-" "." ] [ " " " " " " ] path;
       # Split by space and filter out empty strings
       tokens = lib.filter (s: s != "") (lib.splitString " " normalizedPath);
       # Filter out common file extensions and other noise
-      filteredTokens = lib.filter (s:
-        ! (lib.elem s ["nix" "json" "md" "sh" "txt" "d" "flake" "lib" "src" "docs" "theory" "meme" "memestorm" "tiktok" "001" "09" "24" "25" "26" "jobs" "vendor" "nixpkgs" "github" "meta" "introspector" "streamofrandom" "2025" "pick" "up" "cli" "gemini" "today" "ai" "ml" "zk" "ops" "flakes" "external" "build" "step" "build_step" "common" "imports" "debug" "utils" "test" "utils" "log" "analyzer" "review2" "rungemini" "run_task" "nix_custom_attrs_test" "test_custom_attrs" "setup_gemini_context" "leech" "lattice" "24d" "monster" "group" "71" "vibe" "crqs" "blade" "instance" "blades" "d17"])
-      ) tokens;
+      filteredTokens = lib.filter
+        (s:
+          ! (lib.elem s [ "nix" "json" "md" "sh" "txt" "d" "flake" "lib" "src" "docs" "theory" "meme" "memestorm" "tiktok" "001" "09" "24" "25" "26" "jobs" "vendor" "nixpkgs" "github" "meta" "introspector" "streamofrandom" "2025" "pick" "up" "cli" "gemini" "today" "ai" "ml" "zk" "ops" "flakes" "external" "build" "step" "build_step" "common" "imports" "debug" "utils" "test" "utils" "log" "analyzer" "review2" "rungemini" "run_task" "nix_custom_attrs_test" "test_custom_attrs" "setup_gemini_context" "leech" "lattice" "24d" "monster" "group" "71" "vibe" "crqs" "blade" "instance" "blades" "d17" ])
+        )
+        tokens;
     in
     filteredTokens;
 

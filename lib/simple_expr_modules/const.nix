@@ -12,6 +12,7 @@ let
   isConst = json:
     builtins.isAttrs json && json ? kind && json.kind == "const" && json ? declName && json ? levels && json ? type;
 
-in {
+in
+{
   inherit mkConst isConst;
 }

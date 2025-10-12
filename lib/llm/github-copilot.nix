@@ -5,10 +5,11 @@ let
 
   usageTracking = import ./usage-tracking.nix { inherit lib; };
 
-  getGithubCopilotToken = pkgs.runCommand "github-copilot-token" {
-    buildInputs = [ pkgs.sops ];
-    sopsFile = "${sopsSecretsPath}/github-copilot-token.json";
-  } ''
+  getGithubCopilotToken = pkgs.runCommand "github-copilot-token"
+    {
+      buildInputs = [ pkgs.sops ];
+      sopsFile = "${sopsSecretsPath}/github-copilot-token.json";
+    } ''
     mkdir -p $out
     sops -d $sopsFile | jq -r '.token' > $out/token
   '';

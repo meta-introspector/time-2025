@@ -31,49 +31,68 @@
     narSimilaritySearch = { url = "path:../nar-similarity-search"; inputs.nixpkgs.follows = "nixpkgs"; inputs.flake-utils.follows = "flake-utils"; };
   };
 
-  outputs = { self, nixpkgs, flake-utils,
-              nixDuplicationDetector, nixNgramIndexer, oeisIndexer, searchUtils, githubCodeSearch,
-              lean4Verifier, ipfsStore, solanaIntegration, miniZkpVerifier, minaZkpIntegrationTask,
-              numberSearcher, binstorePrimeMdIndexes, fileIndexer, fileSplitter, keywordSearcher,
-              dataLatticeBuilder, metaIndexer, qaNarSimilarityPipeline, lmfdb2nix, narSimilaritySearch
-            }:
+  outputs =
+    { self
+    , nixpkgs
+    , flake-utils
+    , nixDuplicationDetector
+    , nixNgramIndexer
+    , oeisIndexer
+    , searchUtils
+    , githubCodeSearch
+    , lean4Verifier
+    , ipfsStore
+    , solanaIntegration
+    , miniZkpVerifier
+    , minaZkpIntegrationTask
+    , numberSearcher
+    , binstorePrimeMdIndexes
+    , fileIndexer
+    , fileSplitter
+    , keywordSearcher
+    , dataLatticeBuilder
+    , metaIndexer
+    , qaNarSimilarityPipeline
+    , lmfdb2nix
+    , narSimilaritySearch
+    }:
     flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+    let
+      pkgs = nixpkgs.legacyPackages.${system};
+      inherit (nixpkgs) lib;
 
-        # Aggregate checks from all new flakes
-        allChecks = lib.recursiveMerge [
-          (nixDuplicationDetector.checks.${system} or {})
-          (nixNgramIndexer.checks.${system} or {})
-          (oeisIndexer.checks.${system} or {})
-          (searchUtils.checks.${system} or {})
-          (githubCodeSearch.checks.${system} or {})
-          (lean4Verifier.checks.${system} or {})
-          (ipfsStore.checks.${system} or {})
-          (solanaIntegration.checks.${system} or {})
-          (miniZkpVerifier.checks.${system} or {})
-          (qaNarSimilarityPipeline.checks.${system} or {})
+      # Aggregate checks from all new flakes
+      allChecks = lib.recursiveMerge [
+        (nixDuplicationDetector.checks.${system} or { })
+        (nixNgramIndexer.checks.${system} or { })
+        (oeisIndexer.checks.${system} or { })
+        (searchUtils.checks.${system} or { })
+        (githubCodeSearch.checks.${system} or { })
+        (lean4Verifier.checks.${system} or { })
+        (ipfsStore.checks.${system} or { })
+        (solanaIntegration.checks.${system} or { })
+        (miniZkpVerifier.checks.${system} or { })
+        (qaNarSimilarityPipeline.checks.${system} or { })
+      ];
+
+    in
+    {
+      checks = allChecks;
+
+      devShells.default = pkgs.mkShell {
+        nativeBuildInputs = with pkgs; [
+          bash
+          jq
+          gh
+          curl
+          # Tools from narSimilaritySearch (needed by qaNarSimilarityPipeline)
+          narSimilaritySearch.packages.${system}.default
         ];
-
-      in
-      {
-        checks = allChecks;
-
-        devShells.default = pkgs.mkShell {
-          nativeBuildInputs = with pkgs; [
-            bash
-            jq
-            gh
-            curl
-            # Tools from narSimilaritySearch (needed by qaNarSimilarityPipeline)
-            narSimilaritySearch.packages.${system}.default
-          ];
-          shellHook = ''
-            echo "Welcome to the QA devShell for all new flakes!"
-            echo "Run 'nix flake check' to execute all aggregated checks."
-          '';
-        };
-      }
+        shellHook = ''
+          echo "Welcome to the QA devShell for all new flakes!"
+          echo "Run 'nix flake check' to execute all aggregated checks."
+        '';
+      };
+    }
     );
 }

@@ -5,26 +5,26 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify-workflow";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify-workflow";
     self = {
-      url = "github:meta-introspector/time-2025?ref=feature/CRQ-016-nixify-workflow&dir=source/github/meta-introspector/streamofrandom/2025"; # Project root
+      url = "github:meta-introspector/time-2025?ref=feature/CRQ-016-nixify-workflow"; # Project root
     };
     # Input for the nix_code_indexer.nix file itself
     nixCodeIndexerFile = {
-      url = "github:meta-introspector/time-2025?ref=feature/CRQ-016-nixify-workflow&dir=source/github/meta-introspector/streamofrandom/2025/10/01/docs/theory/nix_code_indexer.nix";
+      url = "github:meta-introspector/time-2025?ref=feature/CRQ-016-nixify-workflow&dir=10/01/docs/theory/nix_code_indexer.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, nixCodeIndexerFile }: 
+  outputs = { self, nixpkgs, flake-utils, nixCodeIndexerFile }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # Import the functions from nix_code_indexer.nix
         indexerLib = import nixCodeIndexerFile { inherit lib pkgs builtins; };
 
         # Function to detect duplicates in the project
-        detectDuplicates = 
+        detectDuplicates =
           let
             nixFileIndex = indexerLib.indexNixFiles {
               path = self;
@@ -39,10 +39,11 @@
 
         checks = {
           # Check for exact duplicate Nix files in the project
-          findExactNixDuplicates = pkgs.runCommand "find-exact-nix-duplicates" {
-            nativeBuildInputs = [ pkgs.bash pkgs.jq ];
-            duplicatesJson = lib.toJSON detectDuplicates.duplicates;
-          } ''
+          findExactNixDuplicates = pkgs.runCommand "find-exact-nix-duplicates"
+            {
+              nativeBuildInputs = [ pkgs.bash pkgs.jq ];
+              duplicatesJson = lib.toJSON detectDuplicates.duplicates;
+            } ''
             echo "Checking for exact Nix file duplicates..."
             local duplicates_array=$(cat $duplicatesJson)
             if echo "$duplicates_array" | jq -e '. == []' > /dev/null; then

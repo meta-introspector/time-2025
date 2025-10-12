@@ -27,10 +27,11 @@
       };
 
       # The "cultivation" process
-      cultivatedSpore = pkgs.runCommand "cultivated-zos-spore" {
-        buildInputs = [ pkgs.bash pkgs.jq ]; # Add any tools needed for cultivation
-        inherit restoredSpore;
-      } ''
+      cultivatedSpore = pkgs.runCommand "cultivated-zos-spore"
+        {
+          buildInputs = [ pkgs.bash pkgs.jq ]; # Add any tools needed for cultivation
+          inherit restoredSpore;
+        } ''
         mkdir -p $out/cultivated-output
 
         echo "DEBUG: Restored spore path: $(cat "$restoredSpore/restored-path")"

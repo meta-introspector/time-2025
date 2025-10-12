@@ -1,4 +1,3 @@
-
 # interpreter.nix
 # Defines the core dispatch mechanism for our prime-based emoji-Brainf* interpreter.
 
@@ -16,16 +15,17 @@ let
     if primeData == null then
       throw "Unknown prime: ${toString primeValue}"
     else if primeData.brainfOperation == "bind(name, value, context)" then
-      # Placeholder for bind logic
+    # Placeholder for bind logic
       "Executing bind for prime ${toString primeValue} with signature: ${primeData.brainfOperation}"
     else if primeData.brainfOperation == "call_indexed_function" then
-      # Placeholder for apply/Lean4 lambda application logic
+    # Placeholder for apply/Lean4 lambda application logic
       "Executing apply/Lean4 lambda for prime ${toString primeValue} with operation: ${primeData.brainfOperation}"
     else
-      # Placeholder for other operations
+    # Placeholder for other operations
       "Executing unknown operation for prime ${toString primeValue} with operation: ${primeData.brainfOperation}";
 
-in {
+in
+{
   # Expose the dispatch function
   inherit dispatch;
 }

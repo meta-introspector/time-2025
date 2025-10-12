@@ -48,8 +48,9 @@
 #   - Prime Exponents: { "2": 2, "3": 1, "5": 0, "7": 0, "11": 0, "13": 0, "17": 0, "19": 0, "23": 0, "29": 0, "31": 0, "41": 0, "47": 0, "59": 0, "71": 0 }
 #   - Emoji Representation: ☀️☀️🌑
 # -------------------
-{
-  lib, pkgs, discoveredRustProjects
+{ lib
+, pkgs
+, discoveredRustProjects
 }:
 
 let

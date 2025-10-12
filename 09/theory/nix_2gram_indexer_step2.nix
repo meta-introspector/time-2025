@@ -1,5 +1,5 @@
 let
-  pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> { };
 in
 { lib, pkgs, builtins, nixCodeIndexerModule, nGramGeneratorModule }:
 {
@@ -10,10 +10,11 @@ in
         inherit projectRoot;
       };
       nixFileIndex = step1Output; # nixFileIndex is defined here
-      indexedFilesJsonDerivation = pkgs.runCommand "nix-files-json" {
-        buildInputs = [ pkgs.nix ];
-        __impure = true; # Mark as impure because its input comes from an impure derivation
-      } "cat ${nixFileIndex}/nix-files.index.json > $out";
+      indexedFilesJsonDerivation = pkgs.runCommand "nix-files-json"
+        {
+          buildInputs = [ pkgs.nix ];
+          __impure = true; # Mark as impure because its input comes from an impure derivation
+        } "cat ${nixFileIndex}/nix-files.index.json > $out";
     in
     indexedFilesJsonDerivation;
 }

@@ -9,34 +9,36 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     self = {
-      url = "github:meta-introspector/time-2025?ref=feature/CRQ-016-nixify-workflow&dir=source/github/meta-introspector/streamofrandom/2025"; # Project root
+      url = "github:meta-introspector/time-2025?ref=feature/CRQ-016-nixify-workflow"; # Project root
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, narLocatorFlake }: 
-    flake-utils.lib.eachDefaultSystem (system: 
+  outputs = { self, nixpkgs, flake-utils, narLocatorFlake }:
+    flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # Function to find all flake.nix files in the project
         findAllFlakes = lib.filter (path: lib.strings.hasSuffix "flake.nix" path) (lib.filesystem.listFilesRecursive self);
 
         # Build each flake and create a NAR for it
-        allNars = lib.map (flakePath: 
-          let
-            # Get the flake reference (e.g., path:/absolute/path/to/flake)
-            flakeRef = "path:${self.outPath}/${flakePath}";
-            # Build the flake to get its default package (or a specific output)
-            # This assumes each flake has a 'packages.default' output
-            builtFlake = pkgs.callPackage ({ flake }: flake.packages.${system}.default) { flake = builtins.getFlake flakeRef; };
-          in
-          narLocatorFlake.lib.locateAndArchiveStorePath {
-            storePath = builtFlake;
-            originalFilePath = flakePath;
-            archiveType = "nar";
-          }
-        ) findAllFlakes;
+        allNars = lib.map
+          (flakePath:
+            let
+              # Get the flake reference (e.g., path:/absolute/path/to/flake)
+              flakeRef = "path:${self.outPath}/${flakePath}";
+              # Build the flake to get its default package (or a specific output)
+              # This assumes each flake has a 'packages.default' output
+              builtFlake = pkgs.callPackage ({ flake }: flake.packages.${system}.default) { flake = builtins.getFlake flakeRef; };
+            in
+            narLocatorFlake.lib.locateAndArchiveStorePath {
+              storePath = builtFlake;
+              originalFilePath = flakePath;
+              archiveType = "nar";
+            }
+          )
+          findAllFlakes;
 
       in
       {

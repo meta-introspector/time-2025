@@ -1,5 +1,5 @@
-{
-  foafSeedDataFlake,
+{ foafSeedDataFlake
+,
 }:
 
 # Get the seed graph from the seed data flake

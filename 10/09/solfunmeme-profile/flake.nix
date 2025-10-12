@@ -1,6 +1,5 @@
-
 # 10/09/solfunmeme-profile/flake.nix
-{ 
+{
   description = "Nix flake to fetch the solfunmeme profile page from Colosseum Arena.";
 
   inputs = {

@@ -87,7 +87,7 @@ let
   importedRepos = lib.map import generatedRepoFiles;
 
   # Combine all imported repos into a single attribute set
-  allRepos = lib.foldl lib.recursiveUpdate {} importedRepos;
+  allRepos = lib.foldl lib.recursiveUpdate { } importedRepos;
 
   # Import the rust-discovery module
   rustDiscovery = import ./nix2/rust-discovery.nix;
@@ -114,9 +114,11 @@ let
   };
 
   # Check for duplicate crate names
-  duplicateCrateNames = lib.filter (
-    name: (lib.length (lib.filter (c: c.name == name) extractedCrates)) > 1
-  ) (lib.unique (lib.map (c: c.name) extractedCrates));
+  duplicateCrateNames = lib.filter
+    (
+      name: (lib.length (lib.filter (c: c.name == name) extractedCrates)) > 1
+    )
+    (lib.unique (lib.map (c: c.name) extractedCrates));
 
   _ = lib.assertMsg (lib.length duplicateCrateNames == 0)
     "Duplicate crate names found: ${lib.concatStringsSep ", " duplicateCrateNames}";

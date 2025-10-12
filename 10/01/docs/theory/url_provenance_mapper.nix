@@ -1,20 +1,20 @@
-{
-  lib, ...
+{ lib
+, ...
 }:
 
 
 let
-  common = import ../../../lib/common-imports.nix {};
+  common = import ../../../lib/common-imports.nix { };
   inherit (common) lib pkgs builtins;
 
   # This function conceptually maps a URL to its verifiable provenance information.
   # In a real scenario, this would be a highly impure operation, relying on external APIs
   # (e.g., GitHub API, IPFS daemon, Solana RPC) and potentially ZKNotary services.
-  mapUrlToProvenance = url: 
+  mapUrlToProvenance = url:
     let
       # 1. URL to Git Repo Mapping (Conceptual)
       # This part would parse the URL and use external services to find the Git repo and a specific commit.
-      gitRepoInfo = 
+      gitRepoInfo =
         if lib.strings.hasPrefix "https://github.com/" url then
           let
             pathParts = lib.strings.splitString "/" (lib.strings.removePrefix "https://github.com/" url);
@@ -36,27 +36,27 @@ let
 
       # 2. Nix Source Hash (Conceptual)
       # This would involve using Nix's built-in fetchers (e.g., pkgs.fetchFromGitHub) and extracting the hash.
-      nixSourceHash = 
+      nixSourceHash =
         if gitRepoInfo.type == "github" then
-          # Placeholder hash for the given repo and commit
+        # Placeholder hash for the given repo and commit
           "sha256-NIX_SOURCE_HASH_FOR_${gitRepoInfo.owner}_${gitRepoInfo.repo}_${gitRepoInfo.version}"
         else
           null;
 
       # 3. IPFS CID (Conceptual)
       # This would involve pinning the Git repo content to IPFS and getting its CID.
-      ipfsCid = 
+      ipfsCid =
         if gitRepoInfo.type == "github" then
-          # Placeholder CID
+        # Placeholder CID
           "bafybeigxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" # Example CID
         else
           null;
 
       # 4. Solana Contract Address (Conceptual)
       # This would involve looking up a registry or a specific on-chain program associated with the repo/version.
-      solanaContractAddress = 
+      solanaContractAddress =
         if gitRepoInfo.type == "github" then
-          # Placeholder Solana address
+        # Placeholder Solana address
           "So1anaContractAddressPlaceholder1234567890" # Example Solana address
         else
           null;
@@ -68,9 +68,10 @@ let
       nix = {
         sourceHash = nixSourceHash;
         # Conceptual flake input string
-        flakeInput = if gitRepoInfo.type == "github" 
-                     then "github:${gitRepoInfo.owner}/${gitRepoInfo.repo}?rev=${gitRepoInfo.version}&sha256=${nixSourceHash}"
-                     else null;
+        flakeInput =
+          if gitRepoInfo.type == "github"
+          then "github:${gitRepoInfo.owner}/${gitRepoInfo.repo}?rev=${gitRepoInfo.version}&sha256=${nixSourceHash}"
+          else null;
       };
       ipfs = {
         cid = ipfsCid;

@@ -1,14 +1,18 @@
-  { pkgs, githubApiUrl, ... }:
-  
-  let
-    # An impure Nix derivation to execute a GraphQL query against the GitHub API.
-    # This requires a GitHub Personal Access Token (PAT).
-    executeGraphQLQuery = {
-      queryPayload, # The JSON payload constructed by buildGraphQLQuery
-      githubToken,  # GitHub Personal Access Token (PAT)
-      name ? "github-graphql-query",
+{ pkgs, githubApiUrl, ... }:
+
+let
+  # An impure Nix derivation to execute a GraphQL query against the GitHub API.
+  # This requires a GitHub Personal Access Token (PAT).
+  executeGraphQLQuery =
+    { queryPayload
+    , # The JSON payload constructed by buildGraphQLQuery
+      githubToken
+    , # GitHub Personal Access Token (PAT)
+      name ? "github-graphql-query"
+    ,
     }:
-      pkgs.runCommand name {
+    pkgs.runCommand name
+      {
         inherit queryPayload githubToken;
         __impure = true; # Network request to GitHub API is impure
         nativeBuildInputs = [ pkgs.curl ]; # Use curl to make the HTTP request
@@ -36,5 +40,5 @@
   
         echo "GitHub GraphQL query executed. Response in $out/response.json" >&2
       '';
-  in
-  executeGraphQLQuery
+in
+executeGraphQLQuery

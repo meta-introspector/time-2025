@@ -1,4 +1,3 @@
-
 {
   colosseumUrl = "https://colosseum.com";
 }

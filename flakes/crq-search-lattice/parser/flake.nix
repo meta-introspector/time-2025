@@ -1,4 +1,3 @@
-
 {
   description = "CRQ Parser flake, adding parseCrqFilename function.";
 
@@ -13,7 +12,7 @@
     let
       system = "aarch64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      baseLib = base.lib or {}; # Get lib from base, or empty set if not present
+      baseLib = base.lib or { }; # Get lib from base, or empty set if not present
     in
     {
       lib = baseLib // {

@@ -1,4 +1,3 @@
-
 {
   description = "A placeholder vial flake for Gemini prompts.";
 

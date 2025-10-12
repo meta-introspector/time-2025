@@ -83,15 +83,15 @@
           checkerResults = flake-checker {
             inherit lib pkgs;
             inherit flakePaths;
-            firstReflection = {}; # Placeholder
-            urlExtractor = {}; # Placeholder
-            gitmodulesPaths = []; # Placeholder
+            firstReflection = { }; # Placeholder
+            urlExtractor = { }; # Placeholder
+            gitmodulesPaths = [ ]; # Placeholder
             monsterCode = get-nix-file-list;
           };
         in
         {
           # Expose the report as a check result
-          flakeIdentityReport = pkgs.runCommand "flake-identity-report" {} ''
+          flakeIdentityReport = pkgs.runCommand "flake-identity-report" { } ''
             echo "${checkerResults.report}" > "$out"
             # If there are duplicates, fail the build
             if ${if checkerResults.hasDuplicates then "true" else "false"}; then

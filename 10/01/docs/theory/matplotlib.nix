@@ -1,9 +1,8 @@
-{
-  pandasModule,
-  pkgs,
-  lib,
-  builtins,
-  ...
+{ pandasModule
+, pkgs
+, lib
+, builtins
+, ...
 }:
 
 let

@@ -9,5 +9,6 @@ set -euo pipefail
 # 3. Generate an index (e.g., JSON) of these references.
 
 echo "Generating OEIS index (dummy output)..."
-mkdir -p $out
-echo '{"oeis_references": ["A000001", "A000002"]}' > $out/oeis_index.json
+out="$1"
+mkdir -p "$out"
+echo '{"oeis_references": ["A000001", "A000002"]}' > "$out"/oeis_index.json

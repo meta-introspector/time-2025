@@ -82,7 +82,7 @@ let
   findClosestNeighbors = { targetFlakeFeatures, allFlakeFeatures, n ? 3 }:
     # Placeholder for actual neighbor identification logic
     # This would involve calculating similarity with all other flakes and sorting
-    []; # Return a list of closest flake identifiers
+    [ ]; # Return a list of closest flake identifiers
 
   # Proof of Relation
   # Abstract function to generate a proof of relation between a flake and its neighbors

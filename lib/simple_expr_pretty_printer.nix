@@ -15,6 +15,7 @@ let
   prettyPrintSimpleExpr = expr:
     simpleExprTraversal.traverseSimpleExpr prettyPrinterAlgebra expr;
 
-in {
+in
+{
   inherit prettyPrintSimpleExpr;
 }

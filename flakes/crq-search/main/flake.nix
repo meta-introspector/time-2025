@@ -1,4 +1,3 @@
-
 {
   description = "Nix flake for comprehensive CRQ search functionality.";
 

@@ -1,5 +1,6 @@
 {
   uncommittedFiles = [
-   ./GLOSSARY.md ./uncommitted.nix
+    ./GLOSSARY.md
+    ./uncommitted.nix
   ];
 }

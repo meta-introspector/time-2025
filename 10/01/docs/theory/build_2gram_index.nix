@@ -1,10 +1,9 @@
-{
-  nix2gramIndexerModule,
-  ...
+{ nix2gramIndexerModule
+, ...
 }:
 
 let
-  common = import ../../../lib/common-imports.nix {};
+  common = import ../../../lib/common-imports.nix { };
   inherit (common) lib;
   inherit (common) pkgs;
   inherit (common) builtins;

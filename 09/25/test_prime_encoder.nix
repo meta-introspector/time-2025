@@ -1,12 +1,11 @@
-
 # test_prime_encoder.nix
 # Tests the prime_encoder.nix by encoding a SimpleExpr from MicroLean4.
 
-{ pkgs ? import <nixpkgs> {}, lib ? pkgs.lib }:
+{ pkgs ? import <nixpkgs> { }, lib ? pkgs.lib }:
 
 let
   # Reference to the current flake (assuming this is run within a flake)
-  self = builtins.getFlake (toString ./.) ;
+  self = builtins.getFlake (toString ./.);
 
   # Import our prime lattice
   primeLattice = import ./prime_lattice.nix;
@@ -28,5 +27,5 @@ let
   encodedPrimes = encodeSimpleExpr simpleExprObject;
 
 in
-  # Output the encoded primes for inspection
-  encodedPrimes
+# Output the encoded primes for inspection
+encodedPrimes

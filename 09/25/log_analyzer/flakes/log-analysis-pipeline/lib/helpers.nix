@@ -1,4 +1,4 @@
-{ pkgs, lib, system ? builtins.currentSystem, secretScannerModule ? {}, log-analyzer-flake ? {}, build-time-gemini-capture-flake ? {} } @ args:
+{ pkgs, lib, system ? builtins.currentSystem, secretScannerModule ? { }, log-analyzer-flake ? { }, build-time-gemini-capture-flake ? { } } @ args:
 
 let
   # common = import ../../../lib/common-imports.nix { inherit system; };
@@ -7,10 +7,12 @@ let
   # builtins = common.builtins;
 
   # Helper function for pure log analysis
-  analyzePureLogsToStore = {
-    logSourcePath, # Path to the log file within the Nix store
-    name ? "analyzed-log",
-  }:
+  analyzePureLogsToStore =
+    { logSourcePath
+    , # Path to the log file within the Nix store
+      name ? "analyzed-log"
+    ,
+    }:
     pkgs.stdenv.mkDerivation {
       pname = name;
       version = "1.0";
@@ -23,10 +25,12 @@ let
     };
 
   # Helper function for impure log analysis (reading from outside Nix store)
-  analyzeImpureLogsToStore = {
-    logFilePath, # Path to the log file on the host filesystem
-    name ? "analyzed-impure-log",
-  }:
+  analyzeImpureLogsToStore =
+    { logFilePath
+    , # Path to the log file on the host filesystem
+      name ? "analyzed-impure-log"
+    ,
+    }:
     let
       secretScanResult = secretScannerModule.scanForSecrets {
         filePath = logFilePath;
@@ -51,18 +55,22 @@ let
     };
 
   # Helper function for analyzing logs from a NAR file (impure fetch)
-  analyzeNarLogsToStore = {
-    narUrl, # URL to the NAR file
-    narHash, # Hash of the NAR file
-    logFileName ? "telemetry.log", # Expected name of the log file inside the NAR
-    name ? "analyzed-nar-log",
-  }:
+  analyzeNarLogsToStore =
+    { narUrl
+    , # URL to the NAR file
+      narHash
+    , # Hash of the NAR file
+      logFileName ? "telemetry.log"
+    , # Expected name of the log file inside the NAR
+      name ? "analyzed-nar-log"
+    ,
+    }:
     pkgs.stdenv.mkDerivation {
       pname = name;
       version = "1.0";
       __impure = true; # Fetching from external URL is impure
       nativeBuildInputs = [ log-analyzer-flake.packages.${system}.default pkgs.gnutar ]; # gnutar for extracting NAR
-      
+
       # Fetch the NAR file
       narFile = pkgs.fetchurl {
         url = narUrl;

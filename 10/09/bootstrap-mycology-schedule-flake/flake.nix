@@ -46,10 +46,20 @@
     };
   };
 
-  outputs = { self, nixpkgs, zosSporeVialFlake, sporeCultivationLabFlake,
-              bridgeInstanceFlake, llmDataExtractorFlake,
-              projectSchedulerFlake, llmApiWrapper, minizinc, narBridgeFlake,
-              mctsSolanaFlake, githubDataFetcherFlake }:
+  outputs =
+    { self
+    , nixpkgs
+    , zosSporeVialFlake
+    , sporeCultivationLabFlake
+    , bridgeInstanceFlake
+    , llmDataExtractorFlake
+    , projectSchedulerFlake
+    , llmApiWrapper
+    , minizinc
+    , narBridgeFlake
+    , mctsSolanaFlake
+    , githubDataFetcherFlake
+    }:
     let
       pkgs = nixpkgs.legacyPackages.aarch64-linux;
 
@@ -76,9 +86,10 @@
 
       # 4. Combine project state for the scheduler
       # This is a placeholder for combining cultivatedSpore, extractedHackathonData, and fetchedGitHubData
-      combinedProjectState = pkgs.runCommand "combined-project-state" {
-        inherit cultivatedSpore extractedHackathonData fetchedGitHubData;
-      } ''
+      combinedProjectState = pkgs.runCommand "combined-project-state"
+        {
+          inherit cultivatedSpore extractedHackathonData fetchedGitHubData;
+        } ''
         mkdir -p $out
         echo "# Combined Project State" > $out/project-summary.md
         echo "## Cultivated Spore Insights" >> $out/project-summary.md

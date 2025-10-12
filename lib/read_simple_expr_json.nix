@@ -11,6 +11,7 @@ let
     in
     parsedJson;
 
-in {
+in
+{
   inherit readSimpleExprJson;
 }

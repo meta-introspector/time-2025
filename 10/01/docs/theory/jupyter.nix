@@ -1,12 +1,11 @@
-{
-  pandasModule,
-  jupyterModule,
-  matplotlibModule,
-  ...
+{ pandasModule
+, jupyterModule
+, matplotlibModule
+, ...
 }:
 
 let
-  common = import ../../../lib/common-imports.nix {};
+  common = import ../../../lib/common-imports.nix { };
   inherit (common) lib;
   inherit (common) pkgs;
   inherit (common) builtins;
@@ -14,15 +13,15 @@ let
   # Represents a conceptual Jupyter Notebook/Workbook in Nix.
   # A workbook is a sequence of cells, where each cell is a Nix expression.
   NotebookSchema = {
-    cells = []; # List of cells
+    cells = [ ]; # List of cells
   };
 
   # Represents a single cell in the notebook.
   CellSchema = {
-    id = null;      # Unique ID for the cell (string)
-    type = "code";    # "code", "markdown", "url", "nix-node"
+    id = null; # Unique ID for the cell (string)
+    type = "code"; # "code", "markdown", "url", "nix-node"
     content = null; # The Nix expression, Markdown string, URL, or Nix store path
-    output = null;  # The result of evaluating/fetching the content (conceptual)
+    output = null; # The result of evaluating/fetching the content (conceptual)
   };
 
   # Conceptual function to create a Notebook
@@ -33,17 +32,18 @@ let
   # This would be an impure operation for URLs.
   resolveCellContent = cell:
     if cell.type == "url" then
-      # Conceptual: Fetch content from URL (impure)
-      pkgs.runCommand "fetch-cell-content-${cell.id}" {
-        url = cell.content;
-        __impure = true;
-        nativeBuildInputs = [ pkgs.curl ];
-      } ''
+    # Conceptual: Fetch content from URL (impure)
+      pkgs.runCommand "fetch-cell-content-${cell.id}"
+        {
+          url = cell.content;
+          __impure = true;
+          nativeBuildInputs = [ pkgs.curl ];
+        } ''
         mkdir -p $out
         curl -L "${cell.content}" > $out/content
       ''
     else if cell.type == "nix-node" then
-      # Assume cell.content is already a Nix store path or a flake reference
+    # Assume cell.content is already a Nix store path or a flake reference
       cell.content
     else
       cell.content; # Return as is for code/markdown
@@ -54,25 +54,27 @@ let
       # This is highly conceptual. Executing arbitrary Nix expressions in sequence
       # and managing state/outputs between them is complex.
       # It would involve a custom Nix evaluator or a build system that orchestrates derivations.
-      executedCells = lib.map (cell: # For each cell in the notebook
-        let
-          resolvedContent = resolveCellContent cell; # Resolve URL/Nix node
-          evaluatedContent =
-            if cell.type == "code" then
+      executedCells = lib.map
+        (cell: # For each cell in the notebook
+          let
+            resolvedContent = resolveCellContent cell; # Resolve URL/Nix node
+            evaluatedContent =
+              if cell.type == "code" then
               # Evaluate the Nix expression (conceptual)
-              "// Evaluated result of: ${builtins.toString cell.content}"
-            else if cell.type == "url" || cell.type == "nix-node" then
-              "// Fetched/Referenced content from: ${resolvedContent}"
-            else
-              cell.content; # Markdown content is just passed through
-        in
-        cell // { output = evaluatedContent; } # Add the conceptual output to the cell
-      ) notebook.cells;
+                "// Evaluated result of: ${builtins.toString cell.content}"
+              else if cell.type == "url" || cell.type == "nix-node" then
+                "// Fetched/Referenced content from: ${resolvedContent}"
+              else
+                cell.content; # Markdown content is just passed through
+          in
+          cell // { output = evaluatedContent; } # Add the conceptual output to the cell
+        )
+        notebook.cells;
     in
     createNotebook { cells = executedCells; };
 
   # Conceptual workflow definition using Pandas-like operations
-  dataAnalysisWorkflow = 
+  dataAnalysisWorkflow =
     let
       # Sample data
       rawData = pandasModule.createDataFrame {

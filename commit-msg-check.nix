@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {}, commitMsgFile ? null }:
+{ pkgs ? import <nixpkgs> { }, commitMsgFile ? null }:
 
 let
   regex = import ./regex-generator.nix { inherit pkgs; };
@@ -10,9 +10,9 @@ let
 
 in
 if isValid then
-  pkgs.runCommand "commit-msg-check-passed" {} "echo 'Commit message is valid.'; exit 0;"
+  pkgs.runCommand "commit-msg-check-passed" { } "echo 'Commit message is valid.'; exit 0;"
 else
-  pkgs.runCommand "commit-msg-check-failed" {} ''
+  pkgs.runCommand "commit-msg-check-failed" { } ''
     ${pkgs.writeText "run-error-script" ''
       #!${pkgs.bash}/bin/bash
       ${./scripts/commit-msg-error.sh} "${actualCommitMsgFile}" "${regex}"

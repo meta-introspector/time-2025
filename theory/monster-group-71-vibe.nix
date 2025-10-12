@@ -43,7 +43,8 @@ let
     };
   };
 
-in {
+in
+{
   # Expose the Monster Group's order
   inherit monsterGroupOrder;
 

@@ -1,5 +1,5 @@
 let
-  common = import ../../lib/common-imports.nix {};
+  common = import ../../lib/common-imports.nix { };
   inherit (common) pkgs;
   inherit (common) lib;
   inherit (common) builtins;
@@ -25,19 +25,23 @@ let
   indexedFiles = builtins.fromJSON (builtins.readFile "${nixFileIndex}/nix-files.index.json");
 
   # Process each Nix file to extract 2-grams and their locations
-  all2GramUsages = lib.flatten (lib.map (fileInfo: # For each indexed file
-    let
-      filePath = fileInfo.path; # Relative path of the Nix file
-      tokens = nGramGeneratorModule.tokenizePath filePath;
-      # Generate only 2-grams
-      twoGrams = nGramGeneratorModule.generateNGrams { inherit tokens; nGramLengths = [ 2 ]; };
-    in
-    # For each 2-gram found in this file, create a usage entry
-    lib.map (twoGram: {
-      value = twoGram;
-      inherit filePath; # Store filePath directly for grouping
-    }) twoGrams
-  ) indexedFiles);
+  all2GramUsages = lib.flatten (lib.map
+    (fileInfo: # For each indexed file
+      let
+        filePath = fileInfo.path; # Relative path of the Nix file
+        tokens = nGramGeneratorModule.tokenizePath filePath;
+        # Generate only 2-grams
+        twoGrams = nGramGeneratorModule.generateNGrams { inherit tokens; nGramLengths = [ 2 ]; };
+      in
+      # For each 2-gram found in this file, create a usage entry
+      lib.map
+        (twoGram: {
+          value = twoGram;
+          inherit filePath; # Store filePath directly for grouping
+        })
+        twoGrams
+    )
+    indexedFiles);
 
 in
 builtins.toJSON all2GramUsages

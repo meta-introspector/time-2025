@@ -6,8 +6,8 @@
 { builtins, ... }:
 
 expr:
-  builtins.tryEval (
-    if builtins.isAttrs expr then expr
-    else if builtins.isFunction expr then {} # Still a function, return empty set
-    else {} # Not a set or function, return empty set
-  )
+builtins.tryEval (
+  if builtins.isAttrs expr then expr
+  else if builtins.isFunction expr then { } # Still a function, return empty set
+  else { } # Not a set or function, return empty set
+)

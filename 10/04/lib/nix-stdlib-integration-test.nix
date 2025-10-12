@@ -6,7 +6,7 @@ let
   pkgs = nixpkgs.legacyPackages.${builtins.currentSystem}; # Define pkgs here
 
   inherit (lib) types;
-  inherit (builtins) tryEval; # Define tryEval here
+  inherit (builtins) tryEval;# Define tryEval here
 
   # errors and evaluateNixFile are not circularly dependent on generate or processEntry.
   errors = import ./lib/generate-project-nix/error-constructor.nix { inherit lib builtins; };
@@ -28,4 +28,4 @@ let
   inherit (mutuallyRecursive) generate;
 
 in
-  generate (builtins.path { path = ./.; })
+generate (builtins.path { path = ./.; })

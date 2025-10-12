@@ -55,21 +55,38 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils }: 
+  outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # Keywords and patterns to search for relevant codebases
         searchKeys = [
-          "mina" "zkp" "rust" "elliptic curve" "bls12_381" "pallas" "vesta" "pasta" "halo2" "plonk" "snark" "stark"
-          "crypto" "proof" "verifier" "prover" "curve"
+          "mina"
+          "zkp"
+          "rust"
+          "elliptic curve"
+          "bls12_381"
+          "pallas"
+          "vesta"
+          "pasta"
+          "halo2"
+          "plonk"
+          "snark"
+          "stark"
+          "crypto"
+          "proof"
+          "verifier"
+          "prover"
+          "curve"
         ];
 
         # Types of artifacts to search for
         artifactTypes = [
-          "git_repository" "rust_cargo_crate" "nix_flake"
+          "git_repository"
+          "rust_cargo_crate"
+          "nix_flake"
         ];
 
         # Target integration point
@@ -85,9 +102,10 @@
         };
 
         # A dummy package to make the flake buildable, representing the task itself
-        packages.default = pkgs.runCommand "mina-zkp-integration-task-placeholder" {
-          taskMetadata = lib.toJSON self.lib.${system};
-        } ''
+        packages.default = pkgs.runCommand "mina-zkp-integration-task-placeholder"
+          {
+            taskMetadata = lib.toJSON self.lib.${system};
+          } ''
           echo "Mina ZKP Integration Task Defined." > $out
           echo "Metadata: $(cat $taskMetadata)" >> $out
         '';

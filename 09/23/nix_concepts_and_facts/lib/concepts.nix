@@ -1,4 +1,4 @@
-{ pkgs, lib, flakeSelf ? {}, nixLib ? {} } @ args:
+{ pkgs, lib, flakeSelf ? { }, nixLib ? { } } @ args:
 
 let
   mkNumber = num: pkgs.runCommand "number-${builtins.toString num}"

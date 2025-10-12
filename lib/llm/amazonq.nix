@@ -5,10 +5,11 @@ let
 
   usageTracking = import ./usage-tracking.nix { inherit lib; };
 
-  getAmazonQCredentials = pkgs.runCommand "amazonq-credentials" {
-    buildInputs = [ pkgs.sops ];
-    sopsFile = "${sopsSecretsPath}/amazonq-credentials.json";
-  } ''
+  getAmazonQCredentials = pkgs.runCommand "amazonq-credentials"
+    {
+      buildInputs = [ pkgs.sops ];
+      sopsFile = "${sopsSecretsPath}/amazonq-credentials.json";
+    } ''
     mkdir -p $out
     sops -d $sopsFile | jq -r '.credentials' > $out/credentials
   '';

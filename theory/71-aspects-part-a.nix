@@ -63,4 +63,5 @@ let
       description = "Beyond explicit mentions, '71' appears in Git object hashes, submodule paths, and file names, indicating a pervasive, often coincidental, numerical signature woven into the project's infrastructure.";
     }
   ];
-in aspectsOf71
+in
+aspectsOf71

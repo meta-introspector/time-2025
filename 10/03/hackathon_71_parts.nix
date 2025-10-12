@@ -114,19 +114,19 @@ let
   plantumlGenerator = import ./lib/plantuml_generator.nix { inherit lib umlData; };
 
 in
-  allParts // {
-    plantUML = ''
-      @startuml
-      !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+allParts // {
+  plantUML = ''
+    @startuml
+    !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
       
-      ' Define custom stereotypes for vibes
-      ' Example: stereotype "Refinement/Communication" as RefinementCommunication
-      ' For now, we'll just use the vibe name directly as a stereotype
+    ' Define custom stereotypes for vibes
+    ' Example: stereotype "Refinement/Communication" as RefinementCommunication
+    ' For now, we'll just use the vibe name directly as a stereotype
       
-      ${plantumlGenerator.allPartsUML}
+    ${plantumlGenerator.allPartsUML}
       
-      ${plantumlGenerator.allRelationshipsUML}
+    ${plantumlGenerator.allRelationshipsUML}
       
-      @enduml
-    '';
-  }
+    @enduml
+  '';
+}

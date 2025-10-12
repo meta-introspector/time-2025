@@ -59,20 +59,21 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils }: 
+  outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # Function to conceptually add a NAR to IPFS and return its CID
         # This is a placeholder for actual IPFS daemon interaction.
         addNarToIpfs = { narPath, name ? "ipfs-cid" }:
-          pkgs.runCommand name {
-            inherit narPath;
-            nativeBuildInputs = [ pkgs.bash ]; # Requires ipfs client in a real scenario
-            # __impure = true; # IPFS interaction is impure
-          } ''
+          pkgs.runCommand name
+            {
+              inherit narPath;
+              nativeBuildInputs = [ pkgs.bash ]; # Requires ipfs client in a real scenario
+              # __impure = true; # IPFS interaction is impure
+            } ''
             echo "Conceptually adding NAR from $narPath to IPFS..."
             # In a real implementation, this would call 'ipfs add $narPath'
             # For now, generate a dummy CID.
@@ -86,10 +87,11 @@
 
         checks = {
           # Conceptual check for IPFS integration
-          testIpfsIntegration = pkgs.runCommand "test-ipfs-integration" {
-            nativeBuildInputs = [ pkgs.bash ];
-            ipfsAdder = self.lib.${system}.addNarToIpfs;
-          } ''
+          testIpfsIntegration = pkgs.runCommand "test-ipfs-integration"
+            {
+              nativeBuildInputs = [ pkgs.bash ];
+              ipfsAdder = self.lib.${system}.addNarToIpfs;
+            } ''
             echo "Testing conceptual IPFS integration..."
             local dummy_nar_path="dummy-nar.nar"
             echo "dummy content" > $dummy_nar_path

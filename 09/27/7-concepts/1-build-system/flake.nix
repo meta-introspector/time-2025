@@ -12,7 +12,7 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         src = ./.;
-        vendoredLintStaged = pkgs.callPackage ./nix/packages/lint-staged {};
+        vendoredLintStaged = pkgs.callPackage ./nix/packages/lint-staged { };
       in
       {
         devShells.default = pkgs.mkShell {
@@ -31,7 +31,7 @@
         # inherit rustVersions;
 
         checks = {
-          simple-test = pkgs.runCommand "simple-test" {} "echo \"Test passed!\" > $out";
+          simple-test = pkgs.runCommand "simple-test" { } "echo \"Test passed!\" > $out";
         };
         packages.vendoredLintStaged = vendoredLintStaged;
         packages.default = pkgs.runCommand "build-system-tools" { buildInputs = [ pkgs.pre-commit ]; } ''

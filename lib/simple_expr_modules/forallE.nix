@@ -12,6 +12,7 @@ let
   isForallE = json:
     builtins.isAttrs json && json ? kind && json.kind == "forallE" && json ? binderName && json ? binderInfo && json ? binderType && json ? body;
 
-in {
+in
+{
   inherit mkForallE isForallE;
 }

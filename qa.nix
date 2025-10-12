@@ -25,18 +25,22 @@ let
   findUncommittedNixFiles = dir:
     let
       entries = builtins.readDir dir;
-      files = pkgs.lib.attrsets.mapAttrsToList (name: type:
-        if type == "regular" && name == "uncommitted.nix" then
-          [ (dir + "/" + name) ]
-        else
-          []
-      ) entries;
-      dirs = pkgs.lib.attrsets.mapAttrsToList (name: type:
-        if type == "directory" then
-          findUncommittedNixFiles (dir + "/" + name)
-        else
-          []
-      ) entries;
+      files = pkgs.lib.attrsets.mapAttrsToList
+        (name: type:
+          if type == "regular" && name == "uncommitted.nix" then
+            [ (dir + "/" + name) ]
+          else
+            [ ]
+        )
+        entries;
+      dirs = pkgs.lib.attrsets.mapAttrsToList
+        (name: type:
+          if type == "directory" then
+            findUncommittedNixFiles (dir + "/" + name)
+          else
+            [ ]
+        )
+        entries;
     in
     pkgs.lib.lists.flatten (files ++ dirs);
 
@@ -54,11 +58,12 @@ in
 {
   checks = {
     # --- Check All Nix Files (Formatting and Static Analysis) ---
-    check-all-nix-files = pkgs.runCommand "check-all-nix-files" {
-      inherit allProjectNixFiles;
-      nixpkgs-fmt-check = qa-helpers.runNixFmtCheck allProjectNixFiles;
-      statix-check = qa-helpers.runStatixCheck allProjectNixFiles;
-    } ''
+    check-all-nix-files = pkgs.runCommand "check-all-nix-files"
+      {
+        inherit allProjectNixFiles;
+        nixpkgs-fmt-check = qa-helpers.runNixFmtCheck allProjectNixFiles;
+        statix-check = qa-helpers.runStatixCheck allProjectNixFiles;
+      } ''
       echo "--- Running checks on all .nix files ---"
       ${nixpkgs-fmt-check}
       ${statix-check}
@@ -67,9 +72,10 @@ in
     '';
 
     # --- Check Uncommitted Files ---
-    check-uncommitted-files = pkgs.runCommand "check-uncommitted-files" {
-      uncommittedFiles = lib.strings.concatStringsSep " " allUncommittedFiles;
-    } ''
+    check-uncommitted-files = pkgs.runCommand "check-uncommitted-files"
+      {
+        uncommittedFiles = lib.strings.concatStringsSep " " allUncommittedFiles;
+      } ''
       echo "--- Running checks on uncommitted files ---"
       echo "Found the following uncommitted files:"
       for f in $uncommittedFiles; do
@@ -81,10 +87,11 @@ in
 
 
     # --- Nix Flake & Expression Testing ---
-    nix-flake-check = pkgs.runCommand "nix-flake-check" {
-      inherit projectSrc;
-      nativeBuildInputs = [ pkgs.nix ];
-    } ''
+    nix-flake-check = pkgs.runCommand "nix-flake-check"
+      {
+        inherit projectSrc;
+        nativeBuildInputs = [ pkgs.nix ];
+      } ''
       tmpConfDir=$(mktemp -d)
       tmpStateDir=$(mktemp -d)
       tmpCacheDir=$(mktemp -d)
@@ -101,10 +108,11 @@ in
     '';
 
     # --- Pre-commit Hook Testing ---
-    pre-commit-all-files = pkgs.runCommand "pre-commit-all-files" {
-      inherit pre-commit git;
-      inherit projectSrc;
-    } ''
+    pre-commit-all-files = pkgs.runCommand "pre-commit-all-files"
+      {
+        inherit pre-commit git;
+        inherit projectSrc;
+      } ''
       echo "Running pre-commit hooks on all files..."
       # Copy project source to a temporary directory
       cp -r $projectSrc/. .
@@ -118,10 +126,11 @@ in
 
     # --- Script Testing (explicit shellcheck for config.sh) ---
     # This check is specifically for config.sh to ensure the disable comments work
-    shellcheck-config-sh = pkgs.runCommand "shellcheck-config-sh" {
-      inherit shellcheck;
-      inherit projectSrc;
-    } ''
+    shellcheck-config-sh = pkgs.runCommand "shellcheck-config-sh"
+      {
+        inherit shellcheck;
+        inherit projectSrc;
+      } ''
       echo "Running shellcheck on scripts/test-commit-checker/config.sh..."
       cp -r $projectSrc/. .
       ${shellcheck}/bin/shellcheck -x scripts/test-commit-checker/config.sh
@@ -132,11 +141,12 @@ in
     # e.g., statix, nix-url-check, specific build tests for other flakes
 
     # --- Nix Emoji Report ---
-    nix-emoji-report = pkgs.runCommand "nix-emoji-report" {
-      inherit projectSrc nixTermExtractor nGramGenerator;
-      nixFilePaths = lib.strings.splitString "\n" (builtins.readFile (projectSrc + "/index/chunks/nix.txt"));
-      nGramLengths = [ 1 2 3 5 7 11 13 17 19 ];
-    } ''
+    nix-emoji-report = pkgs.runCommand "nix-emoji-report"
+      {
+        inherit projectSrc nixTermExtractor nGramGenerator;
+        nixFilePaths = lib.strings.splitString "\n" (builtins.readFile (projectSrc + "/index/chunks/nix.txt"));
+        nGramLengths = [ 1 2 3 5 7 11 13 17 19 ];
+      } ''
       echo "--- Generating Nix Emoji Report ---"
       mkdir -p $out
       reportFile="$out/nix-emoji-report.md"
@@ -160,9 +170,10 @@ in
   };
 
   # A default check that runs all defined checks
-  defaultCheck = pkgs.runCommand "default-qa-check" {
-    inherit (self.checks) nix-flake-check pre-commit-all-files shellcheck-config-sh check-uncommitted-files check-all-nix-files nix-emoji-report;
-  } ''
+  defaultCheck = pkgs.runCommand "default-qa-check"
+    {
+      inherit (self.checks) nix-flake-check pre-commit-all-files shellcheck-config-sh check-uncommitted-files check-all-nix-files nix-emoji-report;
+    } ''
     echo "--- Running all default QA checks ---"
     # Ensure all dependencies are built by referencing their outputs
     ${self.checks.nix-flake-check}

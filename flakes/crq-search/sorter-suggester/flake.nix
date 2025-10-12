@@ -1,4 +1,3 @@
-
 {
   description = "Nix flake for sorting CRQ lists and providing top N suggestions.";
 

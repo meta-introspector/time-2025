@@ -2,7 +2,7 @@
 
 let
   # Initial terms of the OEIS sequence
-  initialTerms = [1 1]; # Example: Fibonacci sequence start
+  initialTerms = [ 1 1 ]; # Example: Fibonacci sequence start
 
   # Recurrence relation for the OEIS sequence (MiniZinc compatible)
   # This is a placeholder; a more complex relation would be defined here.

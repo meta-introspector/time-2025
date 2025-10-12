@@ -77,17 +77,19 @@ let
     lib.map extractSubmoduleInfo submoduleSections;
 
   # Parse .gitmodules files
-  pickUpNixSubmodules = if builtins.pathExists pickUpNixGitmodulesPath then parseGitmodules pickUpNixGitmodulesPath else [];
-  streamOfRandomSubmodules = if builtins.pathExists streamOfRandomGitmodulesPath then parseGitmodules streamOfRandomGitmodulesPath else [];
+  pickUpNixSubmodules = if builtins.pathExists pickUpNixGitmodulesPath then parseGitmodules pickUpNixGitmodulesPath else [ ];
+  streamOfRandomSubmodules = if builtins.pathExists streamOfRandomGitmodulesPath then parseGitmodules streamOfRandomGitmodulesPath else [ ];
 
   # Combine all submodules
   allContextSubmodules = pickUpNixSubmodules ++ streamOfRandomSubmodules;
 
   # Create explicit lookups for submodules
-  submoduleLookups = lib.listToAttrs (lib.map (sub: {
-    inherit (sub) name;
-    value = sub;
-  }) allContextSubmodules);
+  submoduleLookups = lib.listToAttrs (lib.map
+    (sub: {
+      inherit (sub) name;
+      value = sub;
+    })
+    allContextSubmodules);
 
 in
 {

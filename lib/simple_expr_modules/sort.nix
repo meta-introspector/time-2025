@@ -12,6 +12,7 @@ let
   isSort = json:
     builtins.isAttrs json && json ? kind && json.kind == "sort" && json ? level;
 
-in {
+in
+{
   inherit mkSort isSort;
 }

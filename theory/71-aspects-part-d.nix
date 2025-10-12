@@ -63,4 +63,5 @@ let
       description = "If '71' were used in bitmasks or flags, it would represent a specific combination of binary states, influencing low-level control flow or hardware interactions.";
     }
   ];
-in aspectsOf71
+in
+aspectsOf71

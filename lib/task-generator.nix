@@ -5,7 +5,7 @@ let
   functorMatrix = import ./code-generation/functor-matrix.nix { inherit lib; };
   tiktokConfig = import ./tiktok-config.nix { inherit lib; };
   nix2llm = import ./nix2llm.nix { inherit lib; };
-  oeisSolverResult = import ../solvers/run-oeis-solver.nix { inherit lib pkgs; config = {}; }; # Passed empty config
+  oeisSolverResult = import ../solvers/run-oeis-solver.nix { inherit lib pkgs; config = { }; }; # Passed empty config
   currentOeisNumber = builtins.readFile oeisSolverResult.solverResult;
 
   usageTracking = import ./llm/usage-tracking.nix { inherit lib; };
@@ -49,69 +49,85 @@ let
   moduleTasks = lib.map (path: generateTask path "build" "gemini") emojiEncodingModules;
   testTasks = lib.map (path: generateTask path "test" "gemini") emojiEncodingTests;
 
-  lean4Tasks = lib.map (concept: {
-    name = "lean4-gen-${concept}";
-    file_path = "generated/lean4/${concept}.lean";
-    derivation_type = "generate-lean4";
-    llm_provider = "gemini"; # Added
-    gemini_prompt = "Generate Lean4 code for the '${concept}' concept using the functorMatrix.lean4Generators.${concept} function.";
-  }) primeMappingConfig.concepts;
+  lean4Tasks = lib.map
+    (concept: {
+      name = "lean4-gen-${concept}";
+      file_path = "generated/lean4/${concept}.lean";
+      derivation_type = "generate-lean4";
+      llm_provider = "gemini"; # Added
+      gemini_prompt = "Generate Lean4 code for the '${concept}' concept using the functorMatrix.lean4Generators.${concept} function.";
+    })
+    primeMappingConfig.concepts;
 
-  rustTasks = lib.map (concept: {
-    name = "rust-gen-${concept}";
-    file_path = "generated/rust/${concept}.rs";
-    derivation_type = "generate-rust";
-    llm_provider = "gemini"; # Added
-    gemini_prompt = "Generate Rust code for the '${concept}' concept using the functorMatrix.rustGenerators.${concept} function.";
-  }) primeMappingConfig.concepts;
+  rustTasks = lib.map
+    (concept: {
+      name = "rust-gen-${concept}";
+      file_path = "generated/rust/${concept}.rs";
+      derivation_type = "generate-rust";
+      llm_provider = "gemini"; # Added
+      gemini_prompt = "Generate Rust code for the '${concept}' concept using the functorMatrix.rustGenerators.${concept} function.";
+    })
+    primeMappingConfig.concepts;
 
-  tiktokTasks = lib.map (concept: {
-    name = "tiktok-gen-${concept}";
-    file_path = "${tiktokConfig.tiktokOutputPath}/${concept}${tiktokConfig.tiktokScriptExtension}"; # Markdown for TikTok script
-    derivation_type = "generate-tiktok";
-    llm_provider = "gemini"; # Added
-    gemini_prompt = tiktokConfig.generateTiktokPrompt concept currentOeisNumber;
-  }) primeMappingConfig.concepts;
+  tiktokTasks = lib.map
+    (concept: {
+      name = "tiktok-gen-${concept}";
+      file_path = "${tiktokConfig.tiktokOutputPath}/${concept}${tiktokConfig.tiktokScriptExtension}"; # Markdown for TikTok script
+      derivation_type = "generate-tiktok";
+      llm_provider = "gemini"; # Added
+      gemini_prompt = tiktokConfig.generateTiktokPrompt concept currentOeisNumber;
+    })
+    primeMappingConfig.concepts;
 
-  dockerHubTasks = lib.map (concept: {
-    name = "dockerhub-publish-${concept}";
-    file_path = "generated/dockerhub/${concept}.json"; # Docker image config
-    derivation_type = "publish-dockerhub";
-    llm_provider = "gemini"; # Added
-    gemini_prompt = "Generate DockerHub publishing configuration for the '${concept}' concept.";
-  }) primeMappingConfig.concepts;
+  dockerHubTasks = lib.map
+    (concept: {
+      name = "dockerhub-publish-${concept}";
+      file_path = "generated/dockerhub/${concept}.json"; # Docker image config
+      derivation_type = "publish-dockerhub";
+      llm_provider = "gemini"; # Added
+      gemini_prompt = "Generate DockerHub publishing configuration for the '${concept}' concept.";
+    })
+    primeMappingConfig.concepts;
 
-  githubReleaseTasks = lib.map (concept: {
-    name = "github-release-${concept}";
-    file_path = "generated/github-release/${concept}.json"; # GitHub Release config
-    derivation_type = "create-github-release";
-    llm_provider = "gemini"; # Added
-    gemini_prompt = "Generate GitHub Release configuration for the '${concept}' concept.";
-  }) primeMappingConfig.concepts;
+  githubReleaseTasks = lib.map
+    (concept: {
+      name = "github-release-${concept}";
+      file_path = "generated/github-release/${concept}.json"; # GitHub Release config
+      derivation_type = "create-github-release";
+      llm_provider = "gemini"; # Added
+      gemini_prompt = "Generate GitHub Release configuration for the '${concept}' concept.";
+    })
+    primeMappingConfig.concepts;
 
-  githubActionsTasks = lib.map (concept: {
-    name = "github-actions-${concept}";
-    file_path = "generated/github-actions/${concept}.yaml"; # GitHub Actions workflow
-    derivation_type = "trigger-github-actions";
-    llm_provider = "gemini"; # Added
-    gemini_prompt = "Generate GitHub Actions workflow for the '${concept}' concept.";
-  }) primeMappingConfig.concepts;
+  githubActionsTasks = lib.map
+    (concept: {
+      name = "github-actions-${concept}";
+      file_path = "generated/github-actions/${concept}.yaml"; # GitHub Actions workflow
+      derivation_type = "trigger-github-actions";
+      llm_provider = "gemini"; # Added
+      gemini_prompt = "Generate GitHub Actions workflow for the '${concept}' concept.";
+    })
+    primeMappingConfig.concepts;
 
-  awsCodeBuildTasks = lib.map (concept: {
-    name = "aws-codebuild-${concept}";
-    file_path = "generated/aws-codebuild/${concept}.json"; # AWS CodeBuild config
-    derivation_type = "build-aws-codebuild";
-    llm_provider = "gemini"; # Added
-    gemini_prompt = "Generate AWS CodeBuild configuration for the '${concept}' concept.";
-  }) primeMappingConfig.concepts;
+  awsCodeBuildTasks = lib.map
+    (concept: {
+      name = "aws-codebuild-${concept}";
+      file_path = "generated/aws-codebuild/${concept}.json"; # AWS CodeBuild config
+      derivation_type = "build-aws-codebuild";
+      llm_provider = "gemini"; # Added
+      gemini_prompt = "Generate AWS CodeBuild configuration for the '${concept}' concept.";
+    })
+    primeMappingConfig.concepts;
 
-  selfHostedHydraTasks = lib.map (concept: {
-    name = "self-hosted-hydra-${concept}";
-    file_path = "generated/self-hosted-hydra/${concept}.nix"; # Hydra jobset
-    derivation_type = "schedule-self-hosted-hydra";
-    llm_provider = "gemini"; # Added
-    gemini_prompt = "Generate self-hosted Nix build Hydra jobset for the '${concept}' concept.";
-  }) primeMappingConfig.concepts;
+  selfHostedHydraTasks = lib.map
+    (concept: {
+      name = "self-hosted-hydra-${concept}";
+      file_path = "generated/self-hosted-hydra/${concept}.nix"; # Hydra jobset
+      derivation_type = "schedule-self-hosted-hydra";
+      llm_provider = "gemini"; # Added
+      gemini_prompt = "Generate self-hosted Nix build Hydra jobset for the '${concept}' concept.";
+    })
+    primeMappingConfig.concepts;
 
   # New function to generate tasks for a specific LLM provider
   generateLLMTask = llmProvider: concept:
@@ -162,4 +178,4 @@ let
   };
 
 in
-moduleTasks ++ testTasks ++ lean4Tasks ++ rustTasks ++ tiktokTasks ++ dockerHubTasks ++ githubReleaseTasks ++ githubActionsTasks ++ awsCodeBuildTasks ++ selfHostedHydraTasks ++ [refineOeisSolverTask] ++ geminiTasks ++ groqTasks ++ amazonqTasks ++ githubCopilotTasks ++ openaiCodexTasks ++ [bootstrapPlanTask]
+moduleTasks ++ testTasks ++ lean4Tasks ++ rustTasks ++ tiktokTasks ++ dockerHubTasks ++ githubReleaseTasks ++ githubActionsTasks ++ awsCodeBuildTasks ++ selfHostedHydraTasks ++ [ refineOeisSolverTask ] ++ geminiTasks ++ groqTasks ++ amazonqTasks ++ githubCopilotTasks ++ openaiCodexTasks ++ [ bootstrapPlanTask ]

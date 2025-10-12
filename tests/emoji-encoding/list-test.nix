@@ -1,7 +1,7 @@
 { lib, builtins, emojiForTag, repeatEmoji, multiplicityFromVal, listEncoder, emojiEncode }:
 
 let
-  testAst = ["a" 1];
+  testAst = [ "a" 1 ];
   # For testing, we need a mock emojiEncode that doesn't cause infinite recursion
   mockEmojiEncode = val:
     if builtins.isString val then "S" # Simplified string emoji

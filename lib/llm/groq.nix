@@ -5,10 +5,11 @@ let
 
   usageTracking = import ./usage-tracking.nix { inherit lib; };
 
-  getGroqApiKey = pkgs.runCommand "groq-api-key" {
-    buildInputs = [ pkgs.sops ];
-    sopsFile = "${sopsSecretsPath}/groq-api-key.json";
-  } ''
+  getGroqApiKey = pkgs.runCommand "groq-api-key"
+    {
+      buildInputs = [ pkgs.sops ];
+      sopsFile = "${sopsSecretsPath}/groq-api-key.json";
+    } ''
     mkdir -p $out
     sops -d $sopsFile | jq -r '.apiKey' > $out/api-key
   '';

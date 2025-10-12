@@ -22,12 +22,12 @@
         decryptedSopsSecrets = pkgs.stdenv.mkDerivation {
           pname = "decrypted-sops-secrets";
           version = "1.0";
-          
+
           buildPhase = ''
             mkdir -p $out/creds
             ${pkgs.sops}/bin/sops -d ./sops-secrets/google_accounts.json > $out/creds/google_accounts.json
           '';
-          
+
           buildInputs = [ pkgs.sops ];
         };
       in
@@ -52,9 +52,10 @@
 
           default = self.packages.${system}.rust-knowledge-extractor;
 
-          creds-test = pkgs.runCommand "creds-test" {
-            buildInputs = [ decryptedSopsSecrets ];
-          } ''
+          creds-test = pkgs.runCommand "creds-test"
+            {
+              buildInputs = [ decryptedSopsSecrets ];
+            } ''
             mkdir -p $out
             cp ${decryptedSopsSecrets}/creds/google_accounts.json $out/google_accounts.json
             echo "Credentials accessed successfully!" > $out/result.txt

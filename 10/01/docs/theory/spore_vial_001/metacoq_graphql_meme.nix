@@ -1,10 +1,9 @@
-{
-  verifiableFileTopologyModule,
-  ...
+{ verifiableFileTopologyModule
+, ...
 }:
 
 let
-  common = import ../../../../lib/common-imports.nix {};
+  common = import ../../../../lib/common-imports.nix { };
   inherit (common) lib;
   inherit (common) pkgs;
   inherit (common) builtins;
@@ -18,17 +17,18 @@ let
   # 1. Conceptual Derivation to Fetch and Extract Haskell Code
   # This would involve fetching the Git repository and then extracting the Haskell code
   # from the Org-mode file. This is a complex parsing task.
-  fetchMetaCoqHaskell = pkgs.runCommand "fetch-metacoq-haskell" {
-    src = pkgs.fetchFromGitHub {
-      owner = "meta-introspector";
-      repo = "th-desugar";
-      rev = metaCoqHaskellGitRev;
-      sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Placeholder hash
-    };
-    # This would need a tool to parse Org-mode and extract Haskell blocks
-    # nativeBuildInputs = [ pkgs.emacs ]; # If emacs can extract it
-  }
-  '''
+  fetchMetaCoqHaskell = pkgs.runCommand "fetch-metacoq-haskell"
+    {
+      src = pkgs.fetchFromGitHub {
+        owner = "meta-introspector";
+        repo = "th-desugar";
+        rev = metaCoqHaskellGitRev;
+        sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Placeholder hash
+      };
+      # This would need a tool to parse Org-mode and extract Haskell blocks
+      # nativeBuildInputs = [ pkgs.emacs ]; # If emacs can extract it
+    }
+    '''
     echo "Fetching MetaCoq Haskell from ${metaCoqHaskellUrl} (conceptual)..." >&2
     mkdir -p $out
     # Conceptual: Extract Haskell code from the Org-mode file
@@ -44,12 +44,13 @@ let
   # 2. Conceptual Derivation to Build the MetaCoq GraphQL Service
   # This would involve using Haskell build tools (cabal, stack) to build the service.
   # For now, it's a placeholder that just returns the extracted Haskell code.
-  buildMetaCoqGraphQLService = pkgs.runCommand "metacoq-graphql-service" {
-    haskellSrc = fetchMetaCoqHaskell;
-    # Conceptual: Add build inputs for GraphQL libraries, etc.
-    # buildInputs = [ pkgs.haskellPackages.graphql-api ];
-  }
-  '''
+  buildMetaCoqGraphQLService = pkgs.runCommand "metacoq-graphql-service"
+    {
+      haskellSrc = fetchMetaCoqHaskell;
+      # Conceptual: Add build inputs for GraphQL libraries, etc.
+      # buildInputs = [ pkgs.haskellPackages.graphql-api ];
+    }
+    '''
     echo "Conceptually building MetaCoq GraphQL service from $haskellSrc..." >&2
     mkdir -p $out/bin
     echo "#!/bin/sh" > $out/bin/metacoq-graphql-service

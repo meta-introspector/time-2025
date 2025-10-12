@@ -37,7 +37,7 @@ let
         else if isPrim' current then iter (current + 1) (acc ++ [ current ])
         else iter (current + 1) acc;
     in
-    iter 2 [];
+    iter 2 [ ];
 
   primesUpTo31 = generatePrimesUpTo 31;
   primesUpTo130 = generatePrimesUpTo 130; # For finding the 31st prime
@@ -51,7 +51,7 @@ let
           if n == 0 then acc
           else iter (myDiv n 10) ([ (myRem n 10) ] ++ acc);
       in
-      iter num [];
+      iter num [ ];
 
   # Helper to calculate sum of squares of digits
   sumOfSquaresOfDigits = num:
@@ -60,19 +60,19 @@ let
   # Helper to check if a number is happy
   isHappy = num: true;
   # FIXME
-    # let
-    #   # Keep track of seen numbers to detect cycles
-    #   seen = {};
-    #   iter = current: seenSet:
-    #     if current == 1 then true
-    #     else if lib.hasAttr (toString current) seenSet then false # Cycle detected
-    #     else
-    #       let
-    #         next = sumOfSquaresOfDigits current;
-    #       in
-    #       iter next (seenSet // { toString current = true; });
-    # in
-    # iter num {};
+  # let
+  #   # Keep track of seen numbers to detect cycles
+  #   seen = {};
+  #   iter = current: seenSet:
+  #     if current == 1 then true
+  #     else if lib.hasAttr (toString current) seenSet then false # Cycle detected
+  #     else
+  #       let
+  #         next = sumOfSquaresOfDigits current;
+  #       in
+  #       iter next (seenSet // { toString current = true; });
+  # in
+  # iter num {};
 
   # Get the Nth prime
   getNthPrime = n: primesList:

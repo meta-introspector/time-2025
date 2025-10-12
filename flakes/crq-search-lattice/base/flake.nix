@@ -1,4 +1,3 @@
-
 {
   description = "Base empty flake for CRQ search lattice.";
 
@@ -13,14 +12,15 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      packages.${system}.default = pkgs.runCommand "base-flake-metadata" {
-        DESCRIPTION = "Base empty flake for CRQ search lattice.";
-        meta = {
-          flakeName = "base";
-          inherit system;
-          nixpkgsRef = nixpkgs.rev or "";
-          flakeUtilsRef = flake-utils.rev or "";
-        };
-      } "echo 'Flake Name: $(meta.flakeName)' > $out\n echo 'Description: $(DESCRIPTION)' >> $out\n echo 'System: $(meta.system)' >> $out\n echo 'Nixpkgs Ref: $(meta.nixpkgsRef)' >> $out\n echo 'Flake-Utils Ref: $(meta.flakeUtilsRef)' >> $out";
+      packages.${system}.default = pkgs.runCommand "base-flake-metadata"
+        {
+          DESCRIPTION = "Base empty flake for CRQ search lattice.";
+          meta = {
+            flakeName = "base";
+            inherit system;
+            nixpkgsRef = nixpkgs.rev or "";
+            flakeUtilsRef = flake-utils.rev or "";
+          };
+        } "echo 'Flake Name: $(meta.flakeName)' > $out\n echo 'Description: $(DESCRIPTION)' >> $out\n echo 'System: $(meta.system)' >> $out\n echo 'Nixpkgs Ref: $(meta.nixpkgsRef)' >> $out\n echo 'Flake-Utils Ref: $(meta.flakeUtilsRef)' >> $out";
     };
 }

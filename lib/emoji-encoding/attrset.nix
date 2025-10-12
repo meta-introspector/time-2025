@@ -5,5 +5,6 @@
     let
       names = lib.attrNames ast;
       keyValEmojis = lib.concatMap (name: (emojiEncode name) + (emojiEncode ast.${name})) names;
-    in (repeatEmoji emojiForTag.attrset (multiplicityFromVal ast)) + keyValEmojis;
+    in
+    (repeatEmoji emojiForTag.attrset (multiplicityFromVal ast)) + keyValEmojis;
 }

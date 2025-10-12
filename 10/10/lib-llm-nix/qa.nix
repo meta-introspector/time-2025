@@ -18,10 +18,10 @@ let
     # Check if the dummyTask has the expected attributes
     hasExpectedAttributes = pkgs.lib.assertMsg
       (builtins.hasAttr "stableId" dummyTask &&
-       builtins.hasAttr "plan" dummyTask &&
-       builtins.hasAttr "commit" dummyTask &&
-       builtins.hasAttr "run" dummyTask &&
-       builtins.hasAttr "eval" dummyTask)
+        builtins.hasAttr "plan" dummyTask &&
+        builtins.hasAttr "commit" dummyTask &&
+        builtins.hasAttr "run" dummyTask &&
+        builtins.hasAttr "eval" dummyTask)
       "dummyTask does not have all expected attributes (stableId, plan, commit, run, eval).";
 
     # Check if derivations are actually derivations (i.e., not null or other types)
@@ -89,4 +89,4 @@ let
       "eval-script.sh is not readable or does not exist.";
   };
 in
-  qaChecks
+qaChecks

@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
 let
   nixFiles = import ./nix-indexer.nix { inherit pkgs; };
@@ -10,19 +10,21 @@ let
   mdCrqFiles = pkgs.lib.filter (p: pkgs.lib.hasSuffix ".md" p && pkgs.lib.hasPrefix "docs/crqs/CRQ_" p) nixFiles;
 
   # Function to get CRQ ID from .foaf.nix files (e.g., "crq-001.foaf.nix" -> "CRQ-001")
-  getFoafCrqId = path: let
-    baseName = builtins.baseNameOf path; # e.g., "crq-001.foaf.nix"
-    crqPart = pkgs.lib.substring 0 (pkgs.lib.stringLength baseName - 9) baseName; # "crq-001"
-  in
-    pkgs.lib.toUpper (pkgs.lib.replaceStrings ["crq-"] ["CRQ-"] crqPart);
+  getFoafCrqId = path:
+    let
+      baseName = builtins.baseNameOf path; # e.g., "crq-001.foaf.nix"
+      crqPart = pkgs.lib.substring 0 (pkgs.lib.stringLength baseName - 9) baseName; # "crq-001"
+    in
+    pkgs.lib.toUpper (pkgs.lib.replaceStrings [ "crq-" ] [ "CRQ-" ] crqPart);
 
   # Function to get CRQ ID from .md files (e.g., "CRQ_041_Title.md" -> "CRQ-041")
-  getMdCrqId = path: let
-    baseName = builtins.baseNameOf path; # e.g., "CRQ_041_Colosseum_Mirror_Flake.md"
-    # Match "CRQ_XXX" part
-    matched = builtins.match "CRQ_([0-9]+)_.*\\.md" baseName;
-    crqNum = pkgs.lib.head matched; # "041"
-  in
+  getMdCrqId = path:
+    let
+      baseName = builtins.baseNameOf path; # e.g., "CRQ_041_Colosseum_Mirror_Flake.md"
+      # Match "CRQ_XXX" part
+      matched = builtins.match "CRQ_([0-9]+)_.*\\.md" baseName;
+      crqNum = pkgs.lib.head matched; # "041"
+    in
     "CRQ-${crqNum}";
 
   # Extract IDs from both types of files

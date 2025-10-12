@@ -1,11 +1,11 @@
 {
   # Import the url_provenance_mapper for conceptual provenance tracking
-  urlProvenanceMapperModule,
-  ...
+  urlProvenanceMapperModule
+, ...
 }:
 
 let
-  common = import ../../../lib/common-imports.nix {};
+  common = import ../../../lib/common-imports.nix { };
   inherit (common) lib;
   inherit (common) pkgs;
   inherit (common) builtins;
@@ -13,21 +13,24 @@ let
   # A conceptual function to fork and vendor a W3C specification.
   # This function describes the process of bringing an external spec under local control
   # and making it available in the Nix store.
-  forkAndVendorSpec = {
-    specUrl, # The URL of the W3C specification (e.g., a GitHub repo, or a direct document link)
-    name ? (builtins.baseNameOf specUrl),
-    # Conceptual: hash of the vendorized content, potentially notarized
-    contentHash ? "sha256-VENDORIZED_SPEC_CONTENT_HASH",
-    # Conceptual: provenance information from ZKNotary
-    provenance ? urlProvenanceMapperModule.mapUrlToProvenance specUrl,
-  }:
-    pkgs.runCommand name {
-      inherit specUrl contentHash provenance;
-      __impure = true; # Forking/fetching from external URL is impure
-      # This would ideally involve ZK-TLS notarization of the fetch operation.
-      # ZKNotaryProof = provenance.solana.contractAddress; # Conceptual link to on-chain proof
-    }
-    '''
+  forkAndVendorSpec =
+    { specUrl
+    , # The URL of the W3C specification (e.g., a GitHub repo, or a direct document link)
+      name ? (builtins.baseNameOf specUrl)
+    , # Conceptual: hash of the vendorized content, potentially notarized
+      contentHash ? "sha256-VENDORIZED_SPEC_CONTENT_HASH"
+    , # Conceptual: provenance information from ZKNotary
+      provenance ? urlProvenanceMapperModule.mapUrlToProvenance specUrl
+    ,
+    }:
+    pkgs.runCommand name
+      {
+        inherit specUrl contentHash provenance;
+        __impure = true; # Forking/fetching from external URL is impure
+        # This would ideally involve ZK-TLS notarization of the fetch operation.
+        # ZKNotaryProof = provenance.solana.contractAddress; # Conceptual link to on-chain proof
+      }
+      '''
       echo "Conceptually forking and vendorizing W3C spec from ${specUrl}" >&2
       # In a real implementation, this would involve:
       # 1. Using git clone --bare or similar for Git repos, or curl for documents.
@@ -68,7 +71,7 @@ EOF
     '';
 
   # Conceptual usage example
-  exampleVendorization = 
+  exampleVendorization =
     let
       w3cHtmlSpecUrl = "https://www.w3.org/TR/html5/"; # Example W3C spec URL
       vendorizedHtmlSpec = forkAndVendorSpec {

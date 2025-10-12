@@ -1,5 +1,7 @@
 {
   uncommittedFiles = [
-   ./project.nix ./test-commit-check.nix ./uncommitted.nix
+    ./project.nix
+    ./test-commit-check.nix
+    ./uncommitted.nix
   ];
 }

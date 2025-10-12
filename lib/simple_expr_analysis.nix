@@ -93,32 +93,32 @@ let
   # Algebra for detailed analysis: counts, sizes, nesting
   detailedAnalysisAlgebra = {
     bvar = { deBruijnIndex, type, currentDepth }:
-      [ { kind = "bvar"; inherit currentDepth; } ] ++ type;
+      [{ kind = "bvar"; inherit currentDepth; }] ++ type;
 
     sort = { level, currentDepth }:
-      [ { kind = "sort"; inherit currentDepth; } ] ++ level;
+      [{ kind = "sort"; inherit currentDepth; }] ++ level;
 
     const = { declName, levels, type, currentDepth }:
-      [ { kind = "const"; inherit currentDepth; } ] ++ levels ++ type;
+      [{ kind = "const"; inherit currentDepth; }] ++ levels ++ type;
 
     app = { fn, arg, currentDepth }:
-      [ { kind = "app"; inherit currentDepth; } ] ++ fn ++ arg;
+      [{ kind = "app"; inherit currentDepth; }] ++ fn ++ arg;
 
     lam = { binderName, binderInfo, binderType, body, currentDepth }:
-      [ { kind = "lam"; inherit currentDepth; } ] ++ binderType ++ body;
+      [{ kind = "lam"; inherit currentDepth; }] ++ binderType ++ body;
 
     forallE = { binderName, binderInfo, binderType, body, currentDepth }:
-      [ { kind = "forallE"; inherit currentDepth; } ] ++ binderType ++ body;
+      [{ kind = "forallE"; inherit currentDepth; }] ++ binderType ++ body;
 
     # Default handlers for non-SimpleExpr types
     defaultAttr = attrs: currentDepth:
-      [ { kind = "attribute_set"; inherit currentDepth; } ] ++ (flatten (lib.attrValues attrs));
+      [{ kind = "attribute_set"; inherit currentDepth; }] ++ (flatten (lib.attrValues attrs));
 
     defaultList = list: currentDepth:
-      [ { kind = "list"; inherit currentDepth; } ] ++ (flatten list);
+      [{ kind = "list"; inherit currentDepth; }] ++ (flatten list);
 
     default = value: currentDepth:
-      [ { kind = "value"; inherit currentDepth; } ]; # Basic values don't have internal structure
+      [{ kind = "value"; inherit currentDepth; }]; # Basic values don't have internal structure
   };
 
   # Function to perform detailed analysis
@@ -128,25 +128,23 @@ let
   # Algebra for literal and constant analysis
   literalAndConstantAnalysisAlgebra = {
     bvar = { deBruijnIndex, type, currentDepth }:
-      [ { kind = "bvar_index"; value = deBruijnIndex; inherit currentDepth; } ] ++ type;
+      [{ kind = "bvar_index"; value = deBruijnIndex; inherit currentDepth; }] ++ type;
 
     sort = { level, currentDepth }:
-      [ { kind = "sort_level"; value = level; inherit currentDepth; } ] ++ level;
+      [{ kind = "sort_level"; value = level; inherit currentDepth; }] ++ level;
 
     const = { declName, levels, type, currentDepth }:
-      [ { kind = "const_declName"; value = declName; inherit currentDepth; } ] ++ levels ++ type;
+      [{ kind = "const_declName"; value = declName; inherit currentDepth; }] ++ levels ++ type;
 
     app = { fn, arg, currentDepth }: fn ++ arg; # No literals/constants directly in app
 
     lam = { binderName, binderInfo, binderType, body, currentDepth }:
-      [ { kind = "lam_binderName"; value = binderName; inherit currentDepth; }
-        { kind = "lam_binderInfo"; value = binderInfo; inherit currentDepth; }
-      ] ++ binderType ++ body;
+      [{ kind = "lam_binderName"; value = binderName; inherit currentDepth; }
+        { kind = "lam_binderInfo"; value = binderInfo; inherit currentDepth; }] ++ binderType ++ body;
 
     forallE = { binderName, binderInfo, binderType, body, currentDepth }:
-      [ { kind = "forallE_binderName"; value = binderName; inherit currentDepth; }
-        { kind = "forallE_binderInfo"; value = binderInfo; inherit currentDepth; }
-      ] ++ binderType ++ body;
+      [{ kind = "forallE_binderName"; value = binderName; inherit currentDepth; }
+        { kind = "forallE_binderInfo"; value = binderInfo; inherit currentDepth; }] ++ binderType ++ body;
 
     # Default handlers for non-SimpleExpr types
     defaultAttr = attrs: currentDepth:
@@ -157,15 +155,16 @@ let
 
     default = value: currentDepth:
       if builtins.isString value || builtins.isInt value || builtins.isFloat value || builtins.isBool value then
-        [ { kind = "literal"; inherit value; inherit currentDepth; } ]
+        [{ kind = "literal"; inherit value; inherit currentDepth; }]
       else
-        []; # Other basic types (e.g., null) don't count as literals for this analysis
+        [ ]; # Other basic types (e.g., null) don't count as literals for this analysis
   };
 
   # Function to perform literal and constant analysis
   performLiteralAndConstantAnalysis = expr:
     simpleExprTraversal.traverseSimpleExpr literalAndConstantAnalysisAlgebra expr 0;
 
-in {
+in
+{
   inherit calculateSize calculateDepth calculateKnuthianScore performDetailedAnalysis performLiteralAndConstantAnalysis;
 }

@@ -17,10 +17,11 @@ let
 
   # Find all .nix files in the current directory and subdirectories
   # and grep them for the defined regexes.
-  grepResult = pkgs.runCommand "nix-nar-grep-results" {
-    buildInputs = [ pkgs.gnugrep pkgs.findutils ];
-    inherit src; # Use the provided src
-  } ''
+  grepResult = pkgs.runCommand "nix-nar-grep-results"
+    {
+      buildInputs = [ pkgs.gnugrep pkgs.findutils ];
+      inherit src; # Use the provided src
+    } ''
     set -euxo pipefail # Enable debugging and exit on error
     
     echo "DEBUG: Current directory: $(pwd)"
@@ -39,4 +40,4 @@ let
   '';
 
 in
-  grepResult
+grepResult

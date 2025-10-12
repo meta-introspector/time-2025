@@ -10,7 +10,7 @@ rec {
           if n == 0 then acc
           else iter (lib.div n 10) ([ (lib.mod n 10) ] ++ acc);
       in
-      iter num [];
+      iter num [ ];
 
   # Helper to calculate sum of squares of digits
   sumOfSquaresOfDigits = num:

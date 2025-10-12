@@ -2,13 +2,14 @@
 
 {
   # Function to publish a derivation output to IPFS
-  publishToIpfs = derivationOutputPath: 
+  publishToIpfs = derivationOutputPath:
     let
       trace = builtins.trace (builtins.typeOf lib.strings);
     in
-    pkgs.runCommand "ipfs-publish-" {
-      buildInputs = [ pkgs.ipfs ];
-    } ''
+    pkgs.runCommand "ipfs-publish-"
+      {
+        buildInputs = [ pkgs.ipfs ];
+      } ''
       # Ensure the output path exists
       if [ ! -e "${derivationOutputPath}" ]; then
         echo "Error: Derivation output path ${derivationOutputPath} does not exist." >&2

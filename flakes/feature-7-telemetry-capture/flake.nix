@@ -14,7 +14,7 @@
         inherit lib;
 
         # A function that takes a gemini-cli command and captures its telemetry
-        captureGeminiTelemetry = { command, args ? [] }:
+        captureGeminiTelemetry = { command, args ? [ ] }:
           pkgs.stdenv.mkDerivation {
             pname = "gemini-telemetry-capture";
             version = "1.0";
@@ -26,7 +26,7 @@
 
             buildInputs = [
               pkgs.nodejs_22 # For gemini.js
-              pkgs.jq        # For JSON processing
+              pkgs.jq # For JSON processing
               gemini-cli.packages.${system}.default
             ];
 

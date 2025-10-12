@@ -1,14 +1,14 @@
-{ lib ? import <nixpkgs> {} }:
+{ lib ? import <nixpkgs> { } }:
 
 let
   # Emoji mappings for tags (visual "primes")
   emojiForTag = {
-    list = "📋";   # 2 (Duality/Foundation)
-    ifThenElse = "❓";  # 3 (Structure/Form)
-    int = "🔢";    # 5 (Pattern/Collection)
+    list = "📋"; # 2 (Duality/Foundation)
+    ifThenElse = "❓"; # 3 (Structure/Form)
+    int = "🔢"; # 5 (Pattern/Collection)
     attrset = "📦"; # 7 (Insight/Guidance)
-    lambda = "λ";  # 11 (Transformation/Flow)
-    letIn = "↩️";   # 13 (Challenge/Verification)
+    lambda = "λ"; # 11 (Transformation/Flow)
+    letIn = "↩️"; # 13 (Challenge/Verification)
     string = "📝"; # 17 (Refinement/Communication)
     unsupported = "🚫"; # 19 (Manifestation/Core Being - representing the boundary)
   };
@@ -58,7 +58,7 @@ in
   inherit emojiEncode;
   example = {
     ast = exampleAST;
-    inherit encodedEmoji;  # E.g., "📦📦📦📝📝🔢🔢🔢📝📝📝📝📝📝📝📝📝📝📝📝"
+    inherit encodedEmoji; # E.g., "📦📦📦📝📝🔢🔢🔢📝📝📝📝📝📝📝📝📝📝📝📝"
   };
   # Test: nix repl, load this, then example.encodedEmoji
 }

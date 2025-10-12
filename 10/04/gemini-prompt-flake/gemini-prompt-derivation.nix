@@ -1,4 +1,3 @@
-
 # gemini-prompt-derivation.nix
 # Builds a derivation by running gemini-cli with a given prompt.
 
@@ -15,14 +14,14 @@ let
   decryptedSopsSecrets = pkgs.stdenv.mkDerivation {
     pname = "decrypted-sops-secrets";
     version = "1.0";
-    
+
     buildPhase = ''
       mkdir -p $out/.gemini
       ${pkgs.sops}/bin/sops -d ./sops-secrets/oauth_creds.json > $out/.gemini/oauth_creds.json
       ${pkgs.sops}/bin/sops -d ./sops-secrets/settings.json > $out/.gemini/settings.json
       ${pkgs.sops}/bin/sops -d ./sops-secrets/google_accounts.json > $out/.gemini/google_accounts.json
     '';
-    
+
     buildInputs = [ pkgs.sops ];
   };
 
@@ -43,7 +42,7 @@ pkgs.stdenv.mkDerivation {
 
   buildInputs = [
     pkgs.nodejs_22 # gemini.js needs nodejs
-    pkgs.cacert    # For SSL/TLS
+    pkgs.cacert # For SSL/TLS
     gemini-cli.packages.${system}.default # Ensure gemini-cli is in buildInputs
     decryptedSopsSecrets # Add the derivation that decrypts sops secrets
   ];

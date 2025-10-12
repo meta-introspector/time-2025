@@ -1,4 +1,3 @@
-
 {
   description = "Nix flake for reading and parsing CRQ files from a directory.";
 

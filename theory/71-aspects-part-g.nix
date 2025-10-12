@@ -69,4 +69,5 @@ let
       description = "The pervasive and diverse occurrences of '71' across the project serve as a meta-introspection trigger, prompting deeper analysis into the underlying patterns and connections that shape the system's architectural genome and its 'vibe'.";
     }
   ];
-in aspectsOf71
+in
+aspectsOf71

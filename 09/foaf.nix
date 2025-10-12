@@ -26,18 +26,23 @@ let
 
   # Helper function to find entities by type
   findEntitiesByType = type:
-    builtins.filter (entity:
-      (builtins.isAttrs entity && entity ? "@type" && entity."@type" == type) ||
-      (builtins.isString entity."@type" && entity."@type" == type)
-    ) fullGraph;
+    builtins.filter
+      (entity:
+        (builtins.isAttrs entity && entity ? "@type" && entity."@type" == type) ||
+        (builtins.isString entity."@type" && entity."@type" == type)
+      )
+      fullGraph;
 
   # Helper function to find projects made by a specific owner
   findProjectsByMaker = makerId:
-    builtins.filter (project:
-      project ? "maker" && project.maker ? "@id" && project.maker."@id" == makerId
-    ) (findEntitiesByType "Project");
+    builtins.filter
+      (project:
+        project ? "maker" && project.maker ? "@id" && project.maker."@id" == makerId
+      )
+      (findEntitiesByType "Project");
 
-in {
+in
+{
   # Expose the raw parsed data
   raw = { "@context" = foafContext; "@graph" = fullGraph; };
 

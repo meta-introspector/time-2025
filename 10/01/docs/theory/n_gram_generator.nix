@@ -1,14 +1,13 @@
-{
-  lib,
-  pkgs,
-  builtins,
-  ...
+{ lib
+, pkgs
+, builtins
+, ...
 }:
 
 let
   # Function to tokenize a file path string into segments and parts.
   # Example: "/foo/bar/baz.nix" -> [ "foo" "bar" "baz" "nix" ]
-  tokenizePath = path: 
+  tokenizePath = path:
     let
       # Remove leading/trailing slashes and split by slash
       pathSegments = lib.strings.splitString "/" (lib.strings.removePrefix "/" (lib.strings.removeSuffix "/" path));
@@ -30,9 +29,31 @@ let
       # that outputs a structured AST or a list of tokens.
       # For demonstration, we return a fixed set of common Nix-related tokens.
       conceptualTokens = [
-        "flake" "inputs" "outputs" "nixpkgs" "url" "lib" "pkgs" "stdenv" "mkDerivation"
-        "pname" "version" "src" "buildInputs" "buildCommand" "let" "in" "attrSet" "list"
-        "callPackage" "overrideAttrs" "override" "final" "prev" "system" "eachDefaultSystem"
+        "flake"
+        "inputs"
+        "outputs"
+        "nixpkgs"
+        "url"
+        "lib"
+        "pkgs"
+        "stdenv"
+        "mkDerivation"
+        "pname"
+        "version"
+        "src"
+        "buildInputs"
+        "buildCommand"
+        "let"
+        "in"
+        "attrSet"
+        "list"
+        "callPackage"
+        "overrideAttrs"
+        "override"
+        "final"
+        "prev"
+        "system"
+        "eachDefaultSystem"
       ];
     in
     conceptualTokens;
@@ -41,18 +62,20 @@ let
   # nGramLengths: a list of integers (e.g., [2 3 5 7 11]) specifying the lengths of n-grams to generate.
   generateNGrams = { tokens, nGramLengths }:
     lib.flatten (
-      lib.map (n: # For each n-gram length
-        # Generate n-grams of length `n`
-        lib.genList (i: lib.strings.concatStringsSep "_" (lib.lists.sublist i n tokens)) (builtins.length tokens - n + 1)
-      ) nGramLengths
+      lib.map
+        (n: # For each n-gram length
+          # Generate n-grams of length `n`
+          lib.genList (i: lib.strings.concatStringsSep "_" (lib.lists.sublist i n tokens)) (builtins.length tokens - n + 1)
+        )
+        nGramLengths
     );
 
   # Conceptual usage example
-  exampleUsage = 
+  exampleUsage =
     let
       path = "/home/user/project/src/my-flake.nix";
       pathTokens = tokenizePath path;
-      nixExpressionPlaceholder = {}; # Placeholder for a structured Nix expression
+      nixExpressionPlaceholder = { }; # Placeholder for a structured Nix expression
       nixTokens = tokenizeNixExpression nixExpressionPlaceholder;
       allTokens = pathTokens ++ nixTokens;
       nGramLengths = [ 2 3 5 7 11 ];

@@ -1,7 +1,7 @@
 _:
 
 let
-  common = import ../../../lib/common-imports.nix {};
+  common = import ../../../lib/common-imports.nix { };
   inherit (common) lib;
   inherit (common) pkgs;
   inherit (common) builtins;
@@ -9,8 +9,8 @@ let
   # Represents a conceptual DataFrame in Nix.
   # A DataFrame is essentially a list of records (attribute sets) with a defined set of columns.
   DataFrameSchema = {
-    columns = []; # List of column names (strings)
-    data = [];    # List of attribute sets, where each attribute set is a row
+    columns = [ ]; # List of column names (strings)
+    data = [ ]; # List of attribute sets, where each attribute set is a row
   };
 
   # Conceptual function to create a DataFrame

@@ -1,9 +1,9 @@
 { lib, ... }:
 
 {
-  generateIdentityMatrix = size: 
+  generateIdentityMatrix = size:
     lib.genList
-      (rowIdx: 
+      (rowIdx:
         lib.genList
           (colIdx: if rowIdx == colIdx then "1.0" else "0.0")
           size

@@ -1,8 +1,8 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
 let
   # Import the test case data
-  testCase = import ./test-commit-check/test-case-crq-041.nix {};
+  testCase = import ./test-commit-check/test-case-crq-041.nix { };
   inherit (testCase) commitMsg;
 
   # Import the regex generator

@@ -43,6 +43,7 @@ let
     };
   };
 
-in {
+in
+{
   inherit llmQuotaSchema llmEstimatedUsageSchema llmMeasuredUsageSchema;
 }

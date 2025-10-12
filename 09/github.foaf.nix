@@ -4,7 +4,7 @@
 let
   # Fetch data for a specific repository
   owner = "meta-introspector";
-    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
+  rootFlake.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
   repoJson = fetchGithubData.fetchRepository { inherit owner repoName; };
 
   # Convert repository JSON to FOAF
@@ -14,7 +14,8 @@ let
   ownerJson = repoJson.owner;
   ownerFoaf = githubToFoaf.userToFoaf ownerJson;
 
-in {
+in
+{
   # Expose the GitHub FOAF entities
   githubEntities = [
     repoFoaf

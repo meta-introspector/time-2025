@@ -250,9 +250,13 @@ develop-crq-search-lattice-layer1: pre-nix-check
 # 'Verification and Testing' (bott 13) aspects by ensuring the structural
 # integrity and adherence to best practices in our Nix architectural genome.
 
-clean :
-	rm -f statix_output.txt statix_output_part_*
-	# echo
+.PHONY: clean
+clean:
+	rm -rf result *.log *.json *.txt *.dot
+
+.PHONY: fmt-nix
+fmt-nix:
+	find . -name '*.nix' -exec nixpkgs-fmt {} +
 # Target to lint Nix files using statix.
 lint-nix: clean pre-nix-check
 	@echo "--- Linting Nix files with statix ---"

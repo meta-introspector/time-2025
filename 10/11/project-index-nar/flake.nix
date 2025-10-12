@@ -59,17 +59,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Self-reference to get access to local scripts and index directory
-    self = { 
+    self = {
       url = "path:../../.."; # Points to the project root
       flake = false; # Treat as a path, not a flake
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, narLocatorFlake }: 
-    flake-utils.lib.eachDefaultSystem (system: 
+  outputs = { self, nixpkgs, flake-utils, narLocatorFlake }:
+    flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # Derivation to run the indexing scripts and collect all index files
         projectIndexRaw = pkgs.stdenv.mkDerivation {
@@ -77,7 +77,7 @@
           version = "0.1.0";
 
           # Source the entire project root to get access to scripts and index dir
-          src = self; 
+          src = self;
 
           nativeBuildInputs = [ pkgs.bash pkgs.coreutils pkgs.gnugrep pkgs.gawk pkgs.jq pkgs.nix ];
 

@@ -49,10 +49,10 @@
 #   - Emoji Representation: ☀️☀️🌑
 # -------------------
 
-{
-  pkgs ? import <nixpkgs> {},
-  lib ? pkgs.lib,
-  rootPath,
+{ pkgs ? import <nixpkgs> { }
+, lib ? pkgs.lib
+, rootPath
+,
 }:
 
 let
@@ -68,4 +68,4 @@ let
   rootContext = makeContext { path = rootPath; name = "root"; };
 
 in
-  rootContext.nixFiles
+rootContext.nixFiles

@@ -1,6 +1,7 @@
 { pkgs, analyzedNixExpression, promptFileDerivation, llmApiWrapper }:
 
-pkgs.runCommand "simulated-nix-run" {
+pkgs.runCommand "simulated-nix-run"
+{
   buildInputs = [ pkgs.bash pkgs.jq ];
   src = ./.; # Include the simulate.sh script
   inherit analyzedNixExpression promptFileDerivation;

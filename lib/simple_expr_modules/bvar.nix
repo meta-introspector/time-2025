@@ -12,6 +12,7 @@ let
   isBVar = json:
     builtins.isAttrs json && json ? kind && json.kind == "bvar" && json ? deBruijnIndex && json ? type;
 
-in {
+in
+{
   inherit mkBVar isBVar;
 }

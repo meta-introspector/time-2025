@@ -16,13 +16,14 @@
         secretScannerModule = import "${meta-introspector-flake}/10/01/docs/theory/secret_scanner.nix" { inherit lib pkgs; };
       in
       {
-        packages.test-secret-scanner = pkgs.runCommand "test-secret-scanner" {
-          # Try to call a function from the module to see if it evaluates
-          output = builtins.toJSON (secretScannerModule.scanForSecrets {
-            filePath = "/dev/null";
-            name = "test-scan";
-          });
-        } "echo \"$$output\" > $$out";
+        packages.test-secret-scanner = pkgs.runCommand "test-secret-scanner"
+          {
+            # Try to call a function from the module to see if it evaluates
+            output = builtins.toJSON (secretScannerModule.scanForSecrets {
+              filePath = "/dev/null";
+              name = "test-scan";
+            });
+          } "echo \"$$output\" > $$out";
       }
     );
 }

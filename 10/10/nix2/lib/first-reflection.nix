@@ -14,7 +14,7 @@ let
       jsonRepresentations = lib.mapAttrs (name: evalToJson) expressions;
       groupedByJson = builtins.groupBy (name: jsonRepresentations.${name}) (lib.attrNames expressions);
       duplicates = lib.filterAttrs (json: names: (lib.length names) > 1) groupedByJson;
-      hasDuplicates = (lib.attrNames duplicates) != [];
+      hasDuplicates = (lib.attrNames duplicates) != [ ];
     in
     {
       inherit jsonRepresentations duplicates hasDuplicates;
@@ -94,7 +94,7 @@ in
     wrapperRegistration = {
       description = "A central attribute set or function to register and manage all defined Nix wrappers.";
       registerWrapper = wrappers:
-        lib.foldlAttrs (acc: name: wrapper: acc // { "${name}" = wrapper; }) {} wrappers;
+        lib.foldlAttrs (acc: name: wrapper: acc // { "${name}" = wrapper; }) { } wrappers;
       # ...
     };
 
@@ -104,7 +104,7 @@ in
       description = "Mechanisms for searching source files to identify where commands are being used, both directly and through their Nix wrappers.";
       # Placeholder for grep-like functionality wrapped in Nix
       findDirectCommandUsage = { command, path }:
-        pkgs.runCommand "find-direct-usage" {} ''
+        pkgs.runCommand "find-direct-usage" { } ''
           echo "Searching for direct usage of '${command}' in '${path}'" > "$out"
           grep -r "${command}" "${path}" >> "$out" || true
         '';
@@ -170,15 +170,15 @@ in
         # Placeholder for report generation
         "Identity Principle Report:\n  Has Duplicates: ${if validationResults.hasDuplicates then "Yes" else "No"}\n  Duplicates: ${builtins.toJSON validationResults.duplicates}";
 
-      generateQaSample = {
-        commandUniquenessReport,
-        urlPrefixValidationReport,
-        systemValidationReport,
-        submoduleUrlUniquenessReport,
-        submoduleBranchValidationReport,
-        flakeHashes,
-        # ... other intermediate results
-      }:
+      generateQaSample =
+        { commandUniquenessReport
+        , urlPrefixValidationReport
+        , systemValidationReport
+        , submoduleUrlUniquenessReport
+        , submoduleBranchValidationReport
+        , flakeHashes
+        , # ... other intermediate results
+        }:
         ''
           --- LLM QA Sample ---
 

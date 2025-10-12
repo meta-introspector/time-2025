@@ -13,7 +13,7 @@
         inherit lib;
 
         # A function that wraps a gemini-cli command with YOLO approval
-        withYoloApproval = { geminiCliCommand, args ? [] }:
+        withYoloApproval = { geminiCliCommand, args ? [ ] }:
           pkgs.writeShellScriptBin "gemini-cli-yolo-approved" ''
             echo "--- YOLO Approval: Auto-approving Gemini CLI command ---"
             # In a real scenario, this would involve logic to determine if approval is needed

@@ -1,16 +1,16 @@
 # crqs.foaf.nix
-{
-  pkgs,
-  lib,
-  # Import individual CRQ FOAF documents
-  crq001,
-  crq007,
-  crq008,
-  crq009,
-  crq010,
-  crq011,
-  crq012,
-  crq013,
+{ pkgs
+, lib
+, # Import individual CRQ FOAF documents
+  crq001
+, crq007
+, crq008
+, crq009
+, crq010
+, crq011
+, crq012
+, crq013
+,
 }:
 
 let

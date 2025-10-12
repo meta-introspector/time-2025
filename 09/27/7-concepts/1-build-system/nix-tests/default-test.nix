@@ -1,7 +1,6 @@
+{ pkgs ? import <nixpkgs> { } }:
 
-{ pkgs ? import <nixpkgs> {} }:
-
-pkgs.runCommand "nixpkgs-fmt-test" {} ''
+pkgs.runCommand "nixpkgs-fmt-test" { } ''
   # Create a dummy Nix file
   cat > dummy.nix << '_NIX_EOF_'
   {   pkgs, ... }:

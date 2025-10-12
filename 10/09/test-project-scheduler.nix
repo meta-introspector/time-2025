@@ -17,4 +17,4 @@ let
   };
 
 in
-  optimizedSchedule
+optimizedSchedule

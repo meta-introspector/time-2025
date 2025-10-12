@@ -93,7 +93,7 @@
         '';
 
         # Impure derivation for telemetry capture
-        impureGeminiTelemetry = {  mycologyContext }: pkgs.stdenv.mkDerivation {
+        impureGeminiTelemetry = { mycologyContext }: pkgs.stdenv.mkDerivation {
           pname = "consolidated-impure-gemini-telemetry";
           version = "1.0";
 

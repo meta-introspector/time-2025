@@ -1,4 +1,4 @@
-{ lib, pkgs, flakeSource, inputFlakes, processFlakes, outputFlakes, constants ? {} }:
+{ lib, pkgs, flakeSource, inputFlakes, processFlakes, outputFlakes, constants ? { } }:
 
 {
   description = "Derived LLM Task Flake (Partial Application)";
@@ -6,8 +6,8 @@
   inputs = {
     nixpkgs.url = flakeSource;
   } // (pkgs.lib.genAttrs inputFlakes (f: { url = f; }))
-    // (pkgs.lib.genAttrs processFlakes (f: { url = f; }))
-    // (pkgs.lib.genAttrs outputFlakes (f: { url = f; }));
+  // (pkgs.lib.genAttrs processFlakes (f: { url = f; }))
+  // (pkgs.lib.genAttrs outputFlakes (f: { url = f; }));
 
   outputs = inputs@{ self, nixpkgs, ... }:
     let

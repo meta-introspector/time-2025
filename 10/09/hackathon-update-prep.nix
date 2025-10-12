@@ -1,4 +1,3 @@
-
 # 10/09/hackathon-update-prep.nix
 # Nix meta-program for preparing daily hackathon updates.
 

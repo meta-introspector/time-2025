@@ -63,4 +63,5 @@ let
       description = "Occurrences of '71' in Nix store paths and file sizes (as seen in `grep` output) indicate its presence in the very fabric of the build system's artifacts, even if coincidental, adding to its pervasive numerical signature.";
     }
   ];
-in aspectsOf71
+in
+aspectsOf71

@@ -1,4 +1,4 @@
-{ 
+{
   description = "A flake that fetches raw pages from colosseum.com";
 
   inputs = {

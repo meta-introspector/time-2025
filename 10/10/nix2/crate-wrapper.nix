@@ -48,8 +48,9 @@
 #   - Prime Exponents: { "2": 2, "3": 1, "5": 0, "7": 0, "11": 0, "13": 0, "17": 0, "19": 0, "23": 0, "29": 0, "31": 0, "41": 0, "47": 0, "59": 0, "71": 0 }
 #   - Emoji Representation: ☀️☀️🌑
 # -------------------
-{
-  lib, pkgs, extractedCrates
+{ lib
+, pkgs
+, extractedCrates
 }:
 
 let
@@ -64,17 +65,20 @@ let
       pname = crate.name;
       inherit (crate) version;
       src = crate.projectPath; # The source is the entire project for now
-      
+
       # Build steps will be added here later
       buildPhase = "echo Building ${drvName}";
-      
+
       # Install steps will be added here later
       installPhase = "mkdir -p $out/bin; echo \"Hello from ${drvName}\" > $out/bin/${crate.name}";
     };
 
   # Generate derivations for all extracted crates
-  crateDerivations = lib.mapAttrs (
-    name: generateCrateDerivation
-  ) (lib.listToAttrs (lib.map (crate: { inherit (crate) name value; }) extractedCrates));
+  crateDerivations = lib.mapAttrs
+    (
+      name: generateCrateDerivation
+    )
+    (lib.listToAttrs (lib.map (crate: { inherit (crate) name value; }) extractedCrates));
 
-in crateDerivations
+in
+crateDerivations

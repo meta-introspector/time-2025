@@ -1,16 +1,15 @@
-{
-  pandasModule,
-  createPlot,
-  renderPlot,
-  pkgs,
-  builtins,
-  lib,
-  ...
+{ pandasModule
+, createPlot
+, renderPlot
+, pkgs
+, builtins
+, lib
+, ...
 }:
 
 let
   # Conceptual usage example with pandas.nix
-  examplePlot = 
+  examplePlot =
     let
       # Sample DataFrame from pandas.nix
       sampleDataFrame = pandasModule.createDataFrame {

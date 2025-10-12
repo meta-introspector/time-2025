@@ -38,15 +38,16 @@
       '';
 
       # The impure derivation that interacts with the LLM
-      extractedData = pkgs.runCommand "extracted-hackathon-data" {
-        buildInputs = [ pkgs.bash pkgs.jq llmApiWrapper.packages.aarch64-linux.default ];
-        # Pass the hackathon results as a source
-        src = hackathonResults.packages.aarch64-linux.default;
-        # Pass the prompt template
-        prompt = extractionPromptTemplate;
-        # Mark as impure because it interacts with an external API
-        __impure = true;
-      } ''
+      extractedData = pkgs.runCommand "extracted-hackathon-data"
+        {
+          buildInputs = [ pkgs.bash pkgs.jq llmApiWrapper.packages.aarch64-linux.default ];
+          # Pass the hackathon results as a source
+          src = hackathonResults.packages.aarch64-linux.default;
+          # Pass the prompt template
+          prompt = extractionPromptTemplate;
+          # Mark as impure because it interacts with an external API
+          __impure = true;
+        } ''
         mkdir -p $out
 
         # Construct the full prompt

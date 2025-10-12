@@ -1,27 +1,29 @@
-{
-  pandasModule,
-  jupyterModule,
-  matplotlibModule,
-  ...
+{ pandasModule
+, jupyterModule
+, matplotlibModule
+, ...
 }:
 
 let
-  common = import ../../../lib/common-imports.nix {};
+  common = import ../../../lib/common-imports.nix { };
   inherit (common) lib;
   inherit (common) pkgs;
   inherit (common) builtins;
 
   # A function to run a data science workflow defined as a Jupyter notebook in Nix.
-  runDataScienceWorkflow = {
-    notebookDefinition, # A notebook created using jupyterModule.createNotebook
-    name ? "data-science-workflow-execution",
-  }:
-  pkgs.runCommand name {
-    inherit notebookDefinition;
-    __impure = true; # Workflow execution might involve impure steps (e.g., rendering plots)
-    nativeBuildInputs = [ pkgs.jq ]; # For processing JSON outputs
-  }
-  '''
+  runDataScienceWorkflow =
+    { notebookDefinition
+    , # A notebook created using jupyterModule.createNotebook
+      name ? "data-science-workflow-execution"
+    ,
+    }:
+    pkgs.runCommand name
+      {
+        inherit notebookDefinition;
+        __impure = true; # Workflow execution might involve impure steps (e.g., rendering plots)
+        nativeBuildInputs = [ pkgs.jq ]; # For processing JSON outputs
+      }
+      '''
     echo "Executing Nix-native data science workflow: ${name}..." >&2
     mkdir -p $out
 

@@ -17,27 +17,28 @@
       pkgs = nixpkgs.legacyPackages.aarch64-linux;
 
       # Fetch GitHub data (Impure)
-      githubData = pkgs.runCommand "github-project-data" {
-        buildInputs = [ pkgs.bash pkgs.jq githubApiWrapper.packages.aarch64-linux.default ];
-        # Placeholder for GitHub repository to fetch from
-        githubRepo = "meta-introspector/time-2025";
-        # Placeholder for GitHub API token (would be managed by sops-nix in a real scenario)
-        githubToken = "DUMMY_GITHUB_TOKEN";
-        __impure = true; # Mark as impure
-      }
-      ''
-        mkdir -p $out
+      githubData = pkgs.runCommand "github-project-data"
+        {
+          buildInputs = [ pkgs.bash pkgs.jq githubApiWrapper.packages.aarch64-linux.default ];
+          # Placeholder for GitHub repository to fetch from
+          githubRepo = "meta-introspector/time-2025";
+          # Placeholder for GitHub API token (would be managed by sops-nix in a real scenario)
+          githubToken = "DUMMY_GITHUB_TOKEN";
+          __impure = true; # Mark as impure
+        }
+        ''
+          mkdir -p $out
 
-        echo "Fetching GitHub data for ${githubRepo}"
-        # Assuming githubApiWrapper provides a binary like 'fetch-github-data'
-        # and it takes repo and token as arguments and outputs JSON
-        ${githubApiWrapper.packages.aarch64-linux.default}/bin/fetch-github-data \
-          --repo "${githubRepo}" \
-          --token "${githubToken}" \
-          --output "$out/github-data.json"
+          echo "Fetching GitHub data for ${githubRepo}"
+          # Assuming githubApiWrapper provides a binary like 'fetch-github-data'
+          # and it takes repo and token as arguments and outputs JSON
+          ${githubApiWrapper.packages.aarch64-linux.default}/bin/fetch-github-data \
+            --repo "${githubRepo}" \
+            --token "${githubToken}" \
+            --output "$out/github-data.json"
 
-        echo "GitHub data saved to $out/github-data.json"
-      '';
+          echo "GitHub data saved to $out/github-data.json"
+        '';
     in
     {
       packages.aarch64-linux.default = githubData;

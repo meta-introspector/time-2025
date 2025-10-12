@@ -29,21 +29,22 @@
 
       # 1. LLM-driven MCTS Configuration (Impure)
       # Use LLM to generate MCTS parameters and prediction market setup based on the schedule
-      mctsConfig = pkgs.runCommand "mcts-config" {
-        buildInputs = [ pkgs.bash pkgs.jq llmApiWrapper.packages.aarch64-linux.default ];
-        inherit projectSchedule;
-        promptTemplate = ''
-          Given the following optimized project schedule:
+      mctsConfig = pkgs.runCommand "mcts-config"
+        {
+          buildInputs = [ pkgs.bash pkgs.jq llmApiWrapper.packages.aarch64-linux.default ];
+          inherit projectSchedule;
+          promptTemplate = ''
+            Given the following optimized project schedule:
 
-          ${builtins.readFile projectSchedule}/schedule.txt
+            ${builtins.readFile projectSchedule}/schedule.txt
 
-          Generate MCTS simulation parameters (e.g., number of simulations, exploration constant)
-          and a proposal for a Solana prediction market (e.g., event to predict, market type, resolution criteria).
+            Generate MCTS simulation parameters (e.g., number of simulations, exploration constant)
+            and a proposal for a Solana prediction market (e.g., event to predict, market type, resolution criteria).
 
-          Format the output as a JSON object.
-        '';
-        __impure = true;
-      } ''
+            Format the output as a JSON object.
+          '';
+          __impure = true;
+        } ''
         mkdir -p $out
         FULL_PROMPT="${promptTemplate}"
         ${llmApiWrapper.packages.aarch64-linux.default}/bin/call-llm-api "$FULL_PROMPT" > "$out/mcts-config.json"
@@ -52,11 +53,12 @@
 
       # 2. MCTS Simulation and Solana Interaction (Impure)
       # This derivation runs MCTS and interacts with Solana prediction markets
-      mctsSolanaRun = pkgs.runCommand "mcts-solana-run" {
-        buildInputs = [ pkgs.bash pkgs.jq mctsEngine.packages.aarch64-linux.default solanaTools.packages.aarch64-linux.default ];
-        inherit projectSchedule mctsConfig;
-        __impure = true; # Interacts with external MCTS engine and Solana
-      } ''
+      mctsSolanaRun = pkgs.runCommand "mcts-solana-run"
+        {
+          buildInputs = [ pkgs.bash pkgs.jq mctsEngine.packages.aarch64-linux.default solanaTools.packages.aarch64-linux.default ];
+          inherit projectSchedule mctsConfig;
+          __impure = true; # Interacts with external MCTS engine and Solana
+        } ''
         mkdir -p $out
 
         # Run MCTS simulation (placeholder)

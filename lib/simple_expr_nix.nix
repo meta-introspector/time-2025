@@ -24,46 +24,52 @@ let
   # This will be a recursive function that traverses the JSON and builds Nix Expr objects
   jsonToSimpleExpr = json:
     if builtins.isAttrs json then
-      # Check if it's a SimpleExpr first
+    # Check if it's a SimpleExpr first
       if isBVar json then
-        mkBVar {
-          inherit (json) deBruijnIndex;
-          type = jsonToSimpleExpr json.type;
-        }
+        mkBVar
+          {
+            inherit (json) deBruijnIndex;
+            type = jsonToSimpleExpr json.type;
+          }
       else if isSort json then
-        mkSort {
-          level = jsonToSimpleExpr json.level; # level itself can be a nested structure
-        }
+        mkSort
+          {
+            level = jsonToSimpleExpr json.level; # level itself can be a nested structure
+          }
       else if isConst json then
-        mkConst {
-          inherit (json) declName;
-          levels = lib.map jsonToSimpleExpr json.levels; # Recursively process levels
-          type = jsonToSimpleExpr json.type;
-        }
+        mkConst
+          {
+            inherit (json) declName;
+            levels = lib.map jsonToSimpleExpr json.levels; # Recursively process levels
+            type = jsonToSimpleExpr json.type;
+          }
       else if isApp json then
-        mkApp {
-          fn = jsonToSimpleExpr json.fn;
-          arg = jsonToSimpleExpr json.arg;
-        }
+        mkApp
+          {
+            fn = jsonToSimpleExpr json.fn;
+            arg = jsonToSimpleExpr json.arg;
+          }
       else if isLam json then
-        mkLam {
-          inherit (json) binderName;
-          inherit (json) binderInfo;
-          binderType = jsonToSimpleExpr json.binderType;
-          body = jsonToSimpleExpr json.body;
-        }
+        mkLam
+          {
+            inherit (json) binderName;
+            inherit (json) binderInfo;
+            binderType = jsonToSimpleExpr json.binderType;
+            body = jsonToSimpleExpr json.body;
+          }
       else if isForallE json then
-        mkForallE {
-          inherit (json) binderName;
-          inherit (json) binderInfo;
-          binderType = jsonToSimpleExpr json.binderType;
-          body = jsonToSimpleExpr json.body;
-        }
+        mkForallE
+          {
+            inherit (json) binderName;
+            inherit (json) binderInfo;
+            binderType = jsonToSimpleExpr json.binderType;
+            body = jsonToSimpleExpr json.body;
+          }
       else
-        # If it's an attribute set but NOT a recognized SimpleExpr, just recursively process its values
+      # If it's an attribute set but NOT a recognized SimpleExpr, just recursively process its values
         lib.mapAttrs (name: jsonToSimpleExpr) json
     else if builtins.isList json then
-      # If it's a list, recursively process its elements
+    # If it's a list, recursively process its elements
       lib.map jsonToSimpleExpr json
     else
       json; # Return as is if not an attribute set or list
@@ -71,7 +77,8 @@ let
   # The actual SimpleExpr object derived from the JSON
   simpleExprObject = jsonToSimpleExpr simpleExprRec.cnstInfB.cnstInf.type;
 
-in {
+in
+{
   inherit mkBVar isBVar;
   inherit mkSort isSort;
   inherit mkConst isConst;

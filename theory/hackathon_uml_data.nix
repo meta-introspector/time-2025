@@ -7,19 +7,19 @@ let
   RIGOR_LAYER_DESC = parts.rigor_desc_full;
   PURE_DERIVATION_DESC = parts.pure_derivation_desc_full;
   FORMAL_TRIAD_DESC = parts.formal_triad_desc_core;
-  
+
   # UML Element Definitions as Nix Functions/Attribute Sets
-  mkBoundary = { name, description }: { type = "System_Boundary"; id = lib.strings.toLower (lib.strings.replaceStrings [" "] ["_"] name); inherit name description; };
-  mkContainer = { name, technology, description }: { type = "Container"; id = lib.strings.toLower (lib.strings.replaceStrings [" "] ["_"] name); inherit name technology description; };
-  mkComponent = { name, technology, description }: { type = "Component"; id = lib.strings.toLower (lib.strings.replaceStrings [" "] ["_"] name); inherit name technology description; };
+  mkBoundary = { name, description }: { type = "System_Boundary"; id = lib.strings.toLower (lib.strings.replaceStrings [ " " ] [ "_" ] name); inherit name description; };
+  mkContainer = { name, technology, description }: { type = "Container"; id = lib.strings.toLower (lib.strings.replaceStrings [ " " ] [ "_" ] name); inherit name technology description; };
+  mkComponent = { name, technology, description }: { type = "Component"; id = lib.strings.toLower (lib.strings.replaceStrings [ " " ] [ "_" ] name); inherit name technology description; };
   mkRel = { source, destination, description, technology ? null }: { type = "Rel"; inherit source destination description technology; };
 
   # --- System Elements Defined by Nix Attribute Sets ---
-  
+
   # 1. External/Boundary Nodes
   agent = { id = parts.agent_id; name = parts.agent_name; type = parts.agent_type; description = "${parts.agent_name} operating within the Ultimate Lattice"; };
   monster = { id = parts.monster_id; name = parts.monster_name; type = parts.monster_type; description = "${parts.monster_name} defining prime influence"; };
-  
+
   # 2. Containers (Workflow Layers)
   framework = mkBoundary {
     name = parts.framework_name;
@@ -43,14 +43,14 @@ let
     technology = parts.pure_engine_tech;
     description = PURE_DERIVATION_DESC;
   };
-  
+
   # 3. Components (Formal Triad)
   leanProof = mkComponent {
     name = parts.lean_proof_name;
     technology = parts.lean_proof_tech;
     description = parts.lean_proof_desc_full;
   };
-  
+
   minizincSolver = mkComponent {
     name = parts.minizinc_solver_name;
     technology = parts.minizinc_solver_tech;

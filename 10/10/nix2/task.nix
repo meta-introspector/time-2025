@@ -3,8 +3,8 @@
 let
   # Step 1: Define the scope of files to analyze
   # These lists will be passed from the calling flake
-  allFlakeNixFiles = []; # Placeholder
-  allGitmodulesFiles = []; # Placeholder
+  allFlakeNixFiles = [ ]; # Placeholder
+  allGitmodulesFiles = [ ]; # Placeholder
 
   # Step 2: Extract all relevant information (commands, URLs, systems, etc.)
   extractedInfo = {
@@ -16,10 +16,12 @@ let
   };
 
   # Calculate canonical hashes for all flake.nix files
-  flakeHashes = lib.map (flakePath: {
-    path = flakePath;
-    hash = monsterCode.monsterGroupSpec.getNixFileCanonicalHash flakePath;
-  }) allFlakeNixFiles;
+  flakeHashes = lib.map
+    (flakePath: {
+      path = flakePath;
+      hash = monsterCode.monsterGroupSpec.getNixFileCanonicalHash flakePath;
+    })
+    allFlakeNixFiles;
 
   # Step 3: Normalize extracted information
   normalizedCommands = lib.map firstReflection.identityPrincipleSpec.commandNormalization.normalizeShellCommand extractedInfo.flakeCommands;

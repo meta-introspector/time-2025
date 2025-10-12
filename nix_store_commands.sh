@@ -5,7 +5,6 @@
 
 # It expects 'nix-file-list.json' to be present in the current directory.
 JSON_FILE="nix-file-list.json"
-OUTPUT_NAR_NAME="nix-file-list.nar"
 
 if [ ! -f "$JSON_FILE" ]; then
   echo "Error: $JSON_FILE not found. Please ensure it exists." >&2
@@ -28,7 +27,7 @@ echo "Demonstrating how to create a NAR using the nar-locator flake..."
 
 echo "If Nix were installed and the nar-locator flake was used, a NAR file would have been created."
 
-echo "\nDemonstrating how to export a store path using the nar-locator flake..."
+printf "\nDemonstrating how to export a store path using the nar-locator flake...\n"
 # To actually export a store path to a tarball, you would build a Nix derivation like this:
 # nix build --no-link --print-out-paths \
 #   /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/10/11/nar-locator \

@@ -1,30 +1,33 @@
-{
-  lib, ...
+{ lib
+, ...
 }:
 
 let
-  common = import ../../../lib/common-imports.nix {};
+  common = import ../../../lib/common-imports.nix { };
   inherit (common) lib pkgs builtins;
 
   # A pure Nix function that describes a SPARQL query against an OWL ontology.
   # This function does NOT execute the query; it prepares the inputs for an external SPARQL engine.
-  buildSparqlQuery = {
-    ontology, # The OWL ontology (path to .ttl file, or a structured Nix representation)
-    query,    # The SPARQL query string
-    name ? "sparql-query-description",
-  }:
-  {
-    inherit ontology query;
-    # This output can then be consumed by an impure derivation that runs a SPARQL engine.
-    # For example, an impure derivation could look like this:
-    # pkgs.runCommand name {
-    #   nativeBuildInputs = [ pkgs.jena ]; # Example: Apache Jena for SPARQL
-    #   ontologyFile = ontology; # Assuming ontology is a path to a .ttl file
-    #   sparqlQuery = query;
-    # } '''
-    #   jena sparql --data=$ontologyFile --query="$sparqlQuery" > $out/results.txt
-    # ''';
-  };
+  buildSparqlQuery =
+    { ontology
+    , # The OWL ontology (path to .ttl file, or a structured Nix representation)
+      query
+    , # The SPARQL query string
+      name ? "sparql-query-description"
+    ,
+    }:
+    {
+      inherit ontology query;
+      # This output can then be consumed by an impure derivation that runs a SPARQL engine.
+      # For example, an impure derivation could look like this:
+      # pkgs.runCommand name {
+      #   nativeBuildInputs = [ pkgs.jena ]; # Example: Apache Jena for SPARQL
+      #   ontologyFile = ontology; # Assuming ontology is a path to a .ttl file
+      #   sparqlQuery = query;
+      # } '''
+      #   jena sparql --data=$ontologyFile --query="$sparqlQuery" > $out/results.txt
+      # ''';
+    };
 
   # Conceptual representation of a "Web3 network of NAR URLs".
   # Each attribute represents a resource (e.g., an ontology, a dataset) available as a NAR.
@@ -65,7 +68,7 @@ let
     };
 
   # Conceptual usage: Querying an ontology from the Web3 NAR network
-  exampleWeb3Query = 
+  exampleWeb3Query =
     let
       # Fetch the FOAF ontology from the conceptual Web3 NAR network
       foafOntology = fetchOntologyFromNar {

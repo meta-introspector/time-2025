@@ -1,6 +1,6 @@
-{
-  nixpkgs,
-  system,
+{ nixpkgs
+, system
+,
 }:
 
 let

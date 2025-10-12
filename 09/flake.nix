@@ -15,7 +15,8 @@
         inherit (common) pkgs;
         inherit (common) lib;
         inherit (common) builtins;
-      in {
+      in
+      {
         # A devShell that includes nixpkgs and potentially other tools
         devShells = {
           default = pkgs.mkShell {

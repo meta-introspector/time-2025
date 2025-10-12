@@ -1,4 +1,3 @@
-
 {
   description = "Nix flake to mirror the Colosseum website.";
 

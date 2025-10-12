@@ -86,11 +86,12 @@
                   logAnalyzerFeedback = "Log analyzer recognized self-signature in LLM trace and compiler run, triggering meta-awareness.";
                   introspectiveRustEngineAction = "Introspective Rust Engine initiated self-modification based on feedback.";
                 in
-                conceptualDerivation "IntegrationStrangeLoop" {
-                  llmTrace = llmTraceEvent;
-                  compilerRun = compilerRunEvent;
-                  feedbackFrom = selfRec.prime11_error_analysis_transformation; # Example of recursive dependency
-                } "Closing the strange loop: ${logAnalyzerFeedback}. Resulting action: ${introspectiveRustEngineAction}";
+                conceptualDerivation "IntegrationStrangeLoop"
+                  {
+                    llmTrace = llmTraceEvent;
+                    compilerRun = compilerRunEvent;
+                    feedbackFrom = selfRec.prime11_error_analysis_transformation; # Example of recursive dependency
+                  } "Closing the strange loop: ${logAnalyzerFeedback}. Resulting action: ${introspectiveRustEngineAction}";
 
               # Part 19: Core Manifestation (bott) - The src/ directory, culmination
               # Represents the manifestation of the system, the culmination of all design principles.

@@ -1,7 +1,7 @@
 { lib, ... }:
 
 let
-  buildDescription = { baseText, replacements ? {} }:
+  buildDescription = { baseText, replacements ? { } }:
     lib.foldlAttrs (text: key: value: lib.strings.replaceStrings [ "<${key}>" ] [ value ] text) baseText replacements;
 
   aspect29Imported = (import ./71-aspects-part-c-aspect-29-otel-event-trace.nix { inherit lib; }).aspect29;
@@ -66,4 +66,5 @@ let
       };
     }
   ];
-in aspectsOf71
+in
+aspectsOf71

@@ -50,7 +50,7 @@
 # -------------------
 
 let
-  pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> { };
   inherit (pkgs) lib;
   wrap_context_def = import ./wrap_context.nix;
 

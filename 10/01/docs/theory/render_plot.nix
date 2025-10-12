@@ -3,11 +3,13 @@
 {
   # Conceptual function to render a plot to an image file.
   # This would be an impure derivation that invokes an external plotting library (e.g., Python's Matplotlib).
-  renderPlot = { 
-    plotDefinition, # A PlotSchema instance
-    outputFileName ? "plot.png",
-    name ? "rendered-plot",
-  }:
+  renderPlot =
+    { plotDefinition
+    , # A PlotSchema instance
+      outputFileName ? "plot.png"
+    , name ? "rendered-plot"
+    ,
+    }:
     let
       pythonScriptContent = pkgs.lib.strings.concatStringsSep "\n" [
         "import matplotlib.pyplot as plt"
@@ -46,16 +48,17 @@
       ];
       pythonScript = pkgs.writeText "plot_script.py" pythonScriptContent;
     in
-    pkgs.runCommand name {
-      inherit plotDefinition outputFileName;
-      __impure = true; # Invoking external plotting tool is impure
-      nativeBuildInputs = [ pkgs.python3 pkgs.python3Packages.matplotlib pkgs.python3Packages.pandas ]; # Conceptual: Python with Matplotlib and Pandas
-      outPath = "$out"; # Pass $out as an environment variable
-    }
-    ''
-      echo "Conceptually rendering plot: ${plotDefinition.title} (Type: ${plotDefinition.type})..." >&2
-      mkdir -p $out
-      python ${pythonScript}
-    ''
+    pkgs.runCommand name
+      {
+        inherit plotDefinition outputFileName;
+        __impure = true; # Invoking external plotting tool is impure
+        nativeBuildInputs = [ pkgs.python3 pkgs.python3Packages.matplotlib pkgs.python3Packages.pandas ]; # Conceptual: Python with Matplotlib and Pandas
+        outPath = "$out"; # Pass $out as an environment variable
+      }
+      ''
+        echo "Conceptually rendering plot: ${plotDefinition.title} (Type: ${plotDefinition.type})..." >&2
+        mkdir -p $out
+        python ${pythonScript}
+      ''
   ;
 }

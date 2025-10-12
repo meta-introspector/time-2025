@@ -5,24 +5,25 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify-workflow";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify-workflow";
     self = {
-      url = "github:meta-introspector/time-2025?ref=feature/CRQ-016-nixify-workflow&dir=source/github/meta-introspector/streamofrandom/2025"; # Project root
+      url = "github:meta-introspector/time-2025?ref=feature/CRQ-016-nixify-workflow"; # Project root
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils }: 
+  outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # The generate_oeis_index.sh script
         generateOeisIndexScript = "${self}/scripts/generate_oeis_index.sh";
 
         # Function to generate the OEIS index
-        generateOeisIndex = pkgs.runCommand "oeis-index" {
-          nativeBuildInputs = [ pkgs.bash ];
-          script = generateOeisIndexScript;
-        } ''
+        generateOeisIndex = pkgs.runCommand "oeis-index"
+          {
+            nativeBuildInputs = [ pkgs.bash ];
+            script = generateOeisIndexScript;
+          } ''
           bash $script $out
         '';
 
@@ -32,10 +33,11 @@
 
         checks = {
           # Check to generate the OEIS index
-          generateOeisIndexCheck = pkgs.runCommand "generate-oeis-index-check" {
-            nativeBuildInputs = [ pkgs.bash pkgs.jq ];
-            oeisIndex = generateOeisIndex;
-          } ''
+          generateOeisIndexCheck = pkgs.runCommand "generate-oeis-index-check"
+            {
+              nativeBuildInputs = [ pkgs.bash pkgs.jq ];
+              oeisIndex = generateOeisIndex;
+            } ''
             echo "Checking OEIS index generation..."
             local oeis_index_path="$oeisIndex"
             echo "OEIS index generated at: $oeis_index_path"

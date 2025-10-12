@@ -48,14 +48,14 @@
 #   - Prime Exponents: { "2": 1, "3": 2, "5": 0, "7": 1, "11": 0, "13": 0, "17": 0, "19": 0, "23": 0, "29": 0, "31": 0, "41": 0, "47": 0, "59": 0, "71": 0 }
 #   - Emoji Representation: ☀️🌑🌑🚶‍♀️
 # -------------------
-{ pkgs ? import <nixpkgs> {}, narLocatorFlake }:
+{ pkgs ? import <nixpkgs> { }, narLocatorFlake }:
 
 let
   nix2-src = pkgs.lib.sources.cleanSource ./nix2;
   get-nix-file-list = nix2-src + "/get-nix-file-list.nix";
 in
 narLocatorFlake.lib.locateAndArchiveStorePath {
-  storePath = pkgs.runCommand "nix-file-list-store-path" {} ''
+  storePath = pkgs.runCommand "nix-file-list-store-path" { } ''
     # Generate the JSON file
     ${pkgs.nix}/bin/nix eval --raw -f ${get-nix-file-list} > nix-file-list.json
 

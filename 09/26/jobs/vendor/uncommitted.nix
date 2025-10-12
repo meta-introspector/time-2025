@@ -1,5 +1,5 @@
 {
   uncommittedFiles = [
-   ./uncommitted.nix
+    ./uncommitted.nix
   ];
 }

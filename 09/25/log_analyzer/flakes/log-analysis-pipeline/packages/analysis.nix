@@ -1,4 +1,4 @@
-{ pkgs, lib, self ? {}, system ? builtins.currentSystem, helpers ? {}, time-2025-flake ? {}, nix2gramIndexerModule ? {}, twoGramReportGeneratorModule ? {} } @ args:
+{ pkgs, lib, self ? { }, system ? builtins.currentSystem, helpers ? { }, time-2025-flake ? { }, nix2gramIndexerModule ? { }, twoGramReportGeneratorModule ? { } } @ args:
 
 let
   # common = import ../../../lib/common-imports.nix { inherit system; };

@@ -23,27 +23,28 @@
 
       # 1. LLM Task Generation (Impure)
       # This derivation interacts with an LLM to generate a lattice of tasks
-      llmGeneratedTasks = pkgs.runCommand "llm-generated-tasks" {
-        buildInputs = [ pkgs.bash pkgs.jq llmApiWrapper.packages.aarch64-linux.default ];
-        inherit projectState;
-        # Prompt for the LLM to generate tasks in a lattice structure
-        promptTemplate = ''
-          Given the following project state:
+      llmGeneratedTasks = pkgs.runCommand "llm-generated-tasks"
+        {
+          buildInputs = [ pkgs.bash pkgs.jq llmApiWrapper.packages.aarch64-linux.default ];
+          inherit projectState;
+          # Prompt for the LLM to generate tasks in a lattice structure
+          promptTemplate = ''
+            Given the following project state:
 
-          ${builtins.readFile projectState}/project-summary.md # Assuming projectState contains a summary
+            ${builtins.readFile projectState}/project-summary.md # Assuming projectState contains a summary
 
-          Generate a lattice of tasks required to complete this project.
-          Each task should have:
-          - A unique ID
-          - A description
-          - Estimated duration (in hours)
-          - Dependencies (list of task IDs)
-          - Resources required (e.g., "LLM", "Nix Expert", "Human Review")
+            Generate a lattice of tasks required to complete this project.
+            Each task should have:
+            - A unique ID
+            - A description
+            - Estimated duration (in hours)
+            - Dependencies (list of task IDs)
+            - Resources required (e.g., "LLM", "Nix Expert", "Human Review")
 
-          Format the output as a JSON array of task objects.
-        '';
-        __impure = true; # Mark as impure
-      } ''
+            Format the output as a JSON array of task objects.
+          '';
+          __impure = true; # Mark as impure
+        } ''
         mkdir -p $out
         FULL_PROMPT="${promptTemplate}"
         ${llmApiWrapper.packages.aarch64-linux.default}/bin/call-llm-api "$FULL_PROMPT" > "$out/llm-tasks.json"
@@ -52,46 +53,47 @@
 
       # 2. MiniZinc Optimization (Pure)
       # This derivation takes the LLM-generated tasks and optimizes the schedule
-      optimizedSchedule = pkgs.runCommand "optimized-project-schedule" {
-        buildInputs = [ pkgs.bash minizinc.packages.aarch64-linux.default ];
-        inherit llmGeneratedTasks;
-        # MiniZinc model for project scheduling (placeholder)
-        minizincModel = pkgs.writeText "project-schedule.mzn" ''
-          % MiniZinc model for project scheduling
-          % This is a placeholder and needs to be developed further
-          include "globals.mzn";
+      optimizedSchedule = pkgs.runCommand "optimized-project-schedule"
+        {
+          buildInputs = [ pkgs.bash minizinc.packages.aarch64-linux.default ];
+          inherit llmGeneratedTasks;
+          # MiniZinc model for project scheduling (placeholder)
+          minizincModel = pkgs.writeText "project-schedule.mzn" ''
+            % MiniZinc model for project scheduling
+            % This is a placeholder and needs to be developed further
+            include "globals.mzn";
 
-          int: num_tasks;
-          set of int: TASKS = 1..num_tasks;
+            int: num_tasks;
+            set of int: TASKS = 1..num_tasks;
 
-          array[TASKS] of int: duration;
-          array[TASKS] of set of TASKS: dependencies;
+            array[TASKS] of int: duration;
+            array[TASKS] of set of TASKS: dependencies;
 
-          array[TASKS] of var int: start_time;
-          var int: makespan;
+            array[TASKS] of var int: start_time;
+            var int: makespan;
 
-          constraint forall (t in TASKS) (
-            start_time[t] >= 0
-          );
+            constraint forall (t in TASKS) (
+              start_time[t] >= 0
+            );
 
-          constraint forall (t in TASKS) (
-            start_time[t] + duration[t] <= makespan
-          );
+            constraint forall (t in TASKS) (
+              start_time[t] + duration[t] <= makespan
+            );
 
-          constraint forall (t in TASKS) (
-            forall (d in dependencies[t]) (
-              start_time[t] >= start_time[d] + duration[d]
-            )
-          );
+            constraint forall (t in TASKS) (
+              forall (d in dependencies[t]) (
+                start_time[t] >= start_time[d] + duration[d]
+              )
+            );
 
-          solve minimize makespan;
+            solve minimize makespan;
 
-          output [
-            "Task \(t): Start \(start_time[t]), End \(start_time[t] + duration[t])\n"
-            | t in TASKS
-          ];
-        '';
-      } ''
+            output [
+              "Task \(t): Start \(start_time[t]), End \(start_time[t] + duration[t])\n"
+              | t in TASKS
+            ];
+          '';
+        } ''
         mkdir -p $out
 
         # Convert LLM-generated JSON tasks to MiniZinc data format

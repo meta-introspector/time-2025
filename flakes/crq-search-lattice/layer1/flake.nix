@@ -15,21 +15,22 @@
     let
       system = "aarch64-linux";
       pkgs = import nixpkgs {
-          inherit system;
-          overlays = [];
-        };
+        inherit system;
+        overlays = [ ];
+      };
     in
     {
-      packages.${system}.default = pkgs.runCommand "layer1-flake-metadata" {
-        DESCRIPTION = "Layer 1 flake for CRQ search lattice.";
-        meta = {
-          flakeName = "layer1";
-          inherit system;
-          nixpkgsRef = nixpkgs.rev or "";
-          flakeUtilsRef = flake-utils.rev or "";
-        };
-        baseFlakeMetadata = base.packages.${system}.default; # Inherit metadata from base flake
-      } "echo 'Flake Name: $(meta.flakeName)' > $out\n echo 'Description: $(DESCRIPTION)' >> $out\n echo 'System: $(meta.system)' >> $out\n echo 'Nixpkgs Ref: $(meta.nixpkgsRef)' >> $out\n echo 'Flake-Utils Ref: $(meta.flakeUtilsRef)' >> $out\n echo 'Base Flake Metadata: $(baseFlakeMetadata)' >> $out";
+      packages.${system}.default = pkgs.runCommand "layer1-flake-metadata"
+        {
+          DESCRIPTION = "Layer 1 flake for CRQ search lattice.";
+          meta = {
+            flakeName = "layer1";
+            inherit system;
+            nixpkgsRef = nixpkgs.rev or "";
+            flakeUtilsRef = flake-utils.rev or "";
+          };
+          baseFlakeMetadata = base.packages.${system}.default; # Inherit metadata from base flake
+        } "echo 'Flake Name: $(meta.flakeName)' > $out\n echo 'Description: $(DESCRIPTION)' >> $out\n echo 'System: $(meta.system)' >> $out\n echo 'Nixpkgs Ref: $(meta.nixpkgsRef)' >> $out\n echo 'Flake-Utils Ref: $(meta.flakeUtilsRef)' >> $out\n echo 'Base Flake Metadata: $(baseFlakeMetadata)' >> $out";
     };
 
 }

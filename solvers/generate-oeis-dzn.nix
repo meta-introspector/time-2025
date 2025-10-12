@@ -16,8 +16,8 @@ let
 
 in
 ''
-n = ${toString n};
-${initialTermsDzn}
-${communityContributionsDzn}
+  n = ${toString n};
+  ${initialTermsDzn}
+  ${communityContributionsDzn}
 ''
 

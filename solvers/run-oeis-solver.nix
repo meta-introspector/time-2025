@@ -14,9 +14,10 @@ let
   };
 
   # Run MiniZinc solver
-  solverResult = pkgs.runCommand "oeis-solver-result" {
-    buildInputs = [ pkgs.minizinc pkgs.jq ];
-  } ''
+  solverResult = pkgs.runCommand "oeis-solver-result"
+    {
+      buildInputs = [ pkgs.minizinc pkgs.jq ];
+    } ''
     echo "${mznModelContent}" > model.mzn
     echo "${dznDataContent}" > data.dzn
     result=$(${pkgs.minizinc}/bin/minizinc \

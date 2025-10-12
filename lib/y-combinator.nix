@@ -1,4 +1,3 @@
-
 # lib/y-combinator.nix
 # A template for a recursion function using a Y-combinator in Nix.
 

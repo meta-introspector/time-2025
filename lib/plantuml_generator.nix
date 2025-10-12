@@ -8,8 +8,8 @@ let
   createEntity = { type, id, name, technology ? null, description ? null }:
     let
       args = [ (quoteString name) ]
-             ++ (lib.optional (technology != null) (quoteString technology))
-             ++ (lib.optional (description != null) (quoteString description));
+        ++ (lib.optional (technology != null) (quoteString technology))
+        ++ (lib.optional (description != null) (quoteString description));
     in
     "${type}(${id}, ${lib.strings.concatStringsSep ", " args})";
 
@@ -17,7 +17,7 @@ let
   createRelationship = { source, destination, description, technology ? null }:
     let
       args = [ (quoteString description) ]
-             ++ (lib.optional (technology != null) (quoteString technology));
+        ++ (lib.optional (technology != null) (quoteString technology));
     in
     "Rel_R(${source}, ${destination}, ${lib.strings.concatStringsSep ", " args})";
 
@@ -52,12 +52,12 @@ let
     (renderElement umlData.boundary)
     "{"
   ]
-    ++ (lib.map renderElement umlData.elements)
-    ++ [ "}" ]
-    ++ (lib.map renderElement (lib.filter (e: e.type != "System_Boundary") umlData.externals))
-    ++ [ "" ]
-    ++ (lib.map renderRelationship umlData.relationships)
-    ++ [ "@enduml" ];
+  ++ (lib.map renderElement umlData.elements)
+  ++ [ "}" ]
+  ++ (lib.map renderElement (lib.filter (e: e.type != "System_Boundary") umlData.externals))
+  ++ [ "" ]
+  ++ (lib.map renderRelationship umlData.relationships)
+  ++ [ "@enduml" ];
 
 in
 

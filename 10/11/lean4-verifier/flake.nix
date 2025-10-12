@@ -63,19 +63,20 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, lean4Env }: 
+  outputs = { self, nixpkgs, flake-utils, lean4Env }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        lib = nixpkgs.lib;
+        inherit (nixpkgs) lib;
 
         # Function to conceptually verify a mathematical object using Lean 4
         # This is a placeholder for a complex formal verification process.
         verifyMathematicalObject = { objectDerivation, proofScript ? null }:
-          pkgs.runCommand "lean4-verification" {
-            inherit objectDerivation lean4Env proofScript;
-            # In a real implementation, this would invoke Lean 4 with the object and proof script.
-          } ''
+          pkgs.runCommand "lean4-verification"
+            {
+              inherit objectDerivation lean4Env proofScript;
+              # In a real implementation, this would invoke Lean 4 with the object and proof script.
+            } ''
             echo "Conceptually verifying $objectDerivation using Lean 4..."
             if [ -n "$proofScript" ]; then
               echo "Using proof script: $proofScript"
@@ -91,10 +92,11 @@
 
         checks = {
           # Conceptual check for Lean 4 verification
-          testLean4Verification = pkgs.runCommand "test-lean4-verification" {
-            nativeBuildInputs = [ pkgs.bash ];
-            verifier = self.lib.${system}.verifyMathematicalObject;
-          } ''
+          testLean4Verification = pkgs.runCommand "test-lean4-verification"
+            {
+              nativeBuildInputs = [ pkgs.bash ];
+              verifier = self.lib.${system}.verifyMathematicalObject;
+            } ''
             echo "Testing conceptual Lean 4 verification..."
             local dummy_object_derivation="dummy-object"
             local verification_result=$($verifier dummy_object_derivation)

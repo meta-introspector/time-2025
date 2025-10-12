@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {}, month09Flake, self }:
+{ pkgs ? import <nixpkgs> { }, month09Flake, self }:
 
 let
   crqTexts = import ./crq-text-extractor.nix { inherit pkgs month09Flake; };
@@ -9,7 +9,7 @@ let
     let
       lower = builtins.toLower text;
       # Replace punctuation with spaces
-      noPunct = pkgs.lib.replaceStrings ["." "," ":" ";" "(" ")" "\n"] [" " " " " " " " " " " " " "] lower;
+      noPunct = pkgs.lib.replaceStrings [ "." "," ":" ";" "(" ")" "\n" ] [ " " " " " " " " " " " " " " ] lower;
       words = pkgs.lib.splitString " " noPunct;
       # Filter out empty strings
       tokens = pkgs.lib.filter (s: s != "") words;

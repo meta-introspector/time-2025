@@ -2,7 +2,7 @@
 { selfPath ? builtins.path { path = ./.; } }:
 
 let
-  common = import ../lib/common-imports.nix {};
+  common = import ../lib/common-imports.nix { };
   inherit (common) pkgs lib builtins;
 
   # Mock self for foaf.nix import, as it expects self

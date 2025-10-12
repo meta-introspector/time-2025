@@ -14,7 +14,7 @@ let
       else if nix-stdlib.lib.types.strings.hasSuffix ".nix" name then
         safeEval fullPath # Use the safe-eval template
       else
-        { value = {}; errors = []; }; # Ignore other files;
+        { value = { }; errors = [ ]; }; # Ignore other files;
 
     generate = path:
       let
@@ -22,7 +22,8 @@ let
         processedEntries = lib.mapAttrs (name: type: recursiveDefinitions.processEntry path name type) getDirectoryEntries;
         aggregatedResult = lib.foldlAttrs
           foldAccumulator
-          { result = {}; errors = []; } processedEntries;
+          { result = { }; errors = [ ]; }
+          processedEntries;
       in
       aggregatedResult;
   };

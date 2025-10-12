@@ -16,18 +16,19 @@ let
   evalScript = pkgs.writeScript "eval-script" (builtins.readFile ./eval-script.sh);
 
   # Plan Phase: Generate a script that creates and builds the derived flake, including LLM review
-  planDerivation = pkgs.runCommand "plan-${lib.strings.sanitizeDerivationName flakeSource}" {
-    nativeBuildInputs = [ pkgs.gemini-cli ];
-  } "${llmReviewScript} ${flakeSource} ${initialDerivedFlakeContentFile} ${pkgs.gemini-cli}/bin/gemini";
+  planDerivation = pkgs.runCommand "plan-${lib.strings.sanitizeDerivationName flakeSource}"
+    {
+      nativeBuildInputs = [ pkgs.gemini-cli ];
+    } "${llmReviewScript} ${flakeSource} ${initialDerivedFlakeContentFile} ${pkgs.gemini-cli}/bin/gemini";
 
   # Commit Phase: Displays the generated flake.nix for the derived flake
-  commitDerivation = pkgs.runCommand "commit-${lib.strings.sanitizeDerivationName flakeSource}" {} "${commitScript} ${flakeSource} ${planDerivation}";
+  commitDerivation = pkgs.runCommand "commit-${lib.strings.sanitizeDerivationName flakeSource}" { } "${commitScript} ${flakeSource} ${planDerivation}";
 
   # Run Phase: Execute the build command from the plan
-  runDerivation = pkgs.runCommand "run-${lib.strings.sanitizeDerivationName flakeSource}" {} "${runScript} ${flakeSource} ${planDerivation}";
+  runDerivation = pkgs.runCommand "run-${lib.strings.sanitizeDerivationName flakeSource}" { } "${runScript} ${flakeSource} ${planDerivation}";
 
   # Eval Phase: Builds and tests the derived flake directly
-  evalDerivation = pkgs.runCommand "eval-${lib.strings.sanitizeDerivationName flakeSource}" {} "${evalScript} ${flakeSource} ${initialDerivedFlakeContentFile}";
+  evalDerivation = pkgs.runCommand "eval-${lib.strings.sanitizeDerivationName flakeSource}" { } "${evalScript} ${flakeSource} ${initialDerivedFlakeContentFile}";
 
 in
 {

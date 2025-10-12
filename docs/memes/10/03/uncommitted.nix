@@ -1,5 +1,6 @@
 {
   uncommittedFiles = [
-   ./poetry_archive.md ./uncommitted.nix
+    ./poetry_archive.md
+    ./uncommitted.nix
   ];
 }
