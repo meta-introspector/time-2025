@@ -1,0 +1,6 @@
+./09/25/log_analyzer/vendor/syn/src/gen/token.css
+./09/25/log_analyzer/osint/PHONEINFOGA/web/client/public/css/bootstrap-vue.min.css
+./09/25/log_analyzer/osint/PHONEINFOGA/web/client/public/css/bootstrap.min.css
+./09/26/synapse-system/vendor/nix/dream2nix/docs/src/style.css
+./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-local-development-nextjs/nextjs-app/src/app/globals.css
+./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-nextjs/nextjs-app/src/app/globals.css

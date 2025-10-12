@@ -1,0 +1,2 @@
+./09/25/log_analyzer/vendor/unicode-ident/tests/fst/xid_continue.fst
+./09/25/log_analyzer/vendor/unicode-ident/tests/fst/xid_start.fst

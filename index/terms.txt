@@ -1,0 +1,14 @@
+nix-store
+nix
+nix-nar
+nix-nar-unpack
+nar
+flake
+store
+export
+dump
+parse
+import
+path
+url
+NixOs

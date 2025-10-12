@@ -1,0 +1,9 @@
+./09/26/synapse-system/vendor/nix/pip2nix/CHANGELOG.rst
+./09/26/synapse-system/vendor/nix/pip2nix/README.rst
+./09/26/synapse-system/vendor/nix/pip2nix/docs/HACKING.rst
+./09/26/synapse-system/vendor/nix/pip2nix/docs/changelog.rst
+./09/26/synapse-system/vendor/nix/pip2nix/docs/configuration.rst
+./09/26/synapse-system/vendor/nix/pip2nix/docs/examples.rst
+./09/26/synapse-system/vendor/nix/pip2nix/docs/getting_started.rst
+./09/26/synapse-system/vendor/nix/pip2nix/docs/index.rst
+./09/26/synapse-system/vendor/nix/pip2nix/docs/tips.rst

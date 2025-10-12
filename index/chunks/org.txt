@@ -1,0 +1,3 @@
+./09/18/notes.org
+./09/19/notes.org
+./09/25/log_analyzer/notes.org

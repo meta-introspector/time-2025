@@ -1,0 +1,198 @@
+Match found in: ./09/22/nix-llm-task/flake.nix
+            export CRQ_BINSTORE_PATH=${crq-binstore}
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/simpleTranslate2.nix
+  mkExportedFinalObjects = finalObjects: exportedPackages:
+      exportedPackages.${finalObj.name} or null == finalObj.version)
+  mkRelevantFinalObjects = exportedFinalObjects: allDependencies:
+        exportedFinalObjects;
+      exportedPackages,
+          exportedPackages
+      exportedFinalObjects =
+        mkExportedFinalObjects finalObjects exportedPackages;
+        mkRelevantFinalObjects exportedFinalObjects allDependencies;
+                exportedPackages;
+            packages = exportedPackages;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/modules/dist.nix
+        export HOME=.virt-home
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-spago/default.nix
+      export HOME="$(realpath .)"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/buildRustPackage/default.nix
+      export CARGO_HOME=$(pwd)/.cargo_home
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/builtins-derivation/derivation-common/options.nix
+  exportReferenceGraph = lib.mkOption {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular-v3/configurePhase.nix
+  export PATH="$PATH:$nodeModules/.bin"
+  export NODE_PATH="$NODE_PATH:$nodeModules/$packageName/node_modules"
+  export HOME=$TMPDIR
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular-v3/devShell.nix
+    export PATH="$PATH:$(realpath ./node_modules)/.bin"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular-v3/unpackPhase.nix
+  export sourceRoot="$nodeModules/$packageName"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular/configurePhase.nix
+  export PATH="$PATH:$nodeModules/.bin"
+  export NODE_PATH="$NODE_PATH:$nodeModules/$packageName/node_modules"
+  export HOME=$TMPDIR
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular/devShell.nix
+    export PATH="$PATH:$(realpath ./node_modules)/.bin"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular/unpackPhase.nix
+  export sourceRoot="$nodeModules/$packageName"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-composer-lock/translate.nix
+      exportedPackages = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-granular/default.nix
+  # packages to export
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-granular/devShell.nix
+    export PATH="$PATH:$(realpath ./vendor)/bin"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/interface.nix
+          environment variables exported while locking
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/lock.nix
+    export PATH="$PATH:${lib.makeBinPath ([
+    export TMPDIR=$(${config.deps.coreutils}/bin/mktemp -d)
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-lock/translate.nix
+          # find replacements for all packages we export
+      exportedPackages = let
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-crane/default.nix
+      export CARGO_HOME=$(pwd)/.cargo_home
+      export cargoVendorDir="$TMPDIR/nix-vendor"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/all-modules.nix
+# Automatically exports modules from the `/**/modules` directory to:
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/apps.update-caches.nix
+# custom app to update the eval-cache of each exported package.
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/apps.update-locks.nix
+# custom app to update the lock file of each exported package.
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/checks.nix-unit.nix
+# evaluate packages from `/**/modules/drvs` and export them via `flake.packages`
+          export NIX_PATH=nixpkgs=${pkgs.path}
+          export HOME=$(realpath .)
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/core-modules.nix
+# Automatically exports modules from the `/**/modules` directory to:
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/devShells.nix
+            export NIX_PATH=nixpkgs=${inputs.nixpkgs}
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/examples.nix
+# evaluate packages from `/**/modules/drvs` and export them via `flake.packages`
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/formatter.nix
+      export PATH="${path}"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/pre-commit-check.nix
+              export PATH="$PATH:${lib.makeBinPath [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/pythonEnv/default.nix
+      export PATH="$PATH:${lib.makeBinPath [
+      export TMPDIR=$(${pkgs.coreutils}/bin/mktemp -d)
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/pkgs/fetchPipMetadata/script.nix
+        (acc: name: value: acc + "\nexport " + lib.toShellVar name value)
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/pkgs/writers/default.nix
+    export PATH="${lib.makeBinPath PATH}"
+    export NIX_PATH=nixpkgs=${path}
+    export TMPDIR=$(${coreutils}/bin/mktemp -d)
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/flake.nix
+                export SRC=$1
+                export PATH="${pkgs.lib.makeBinPath (with pkgs; [
+                export PYPI_DATA=${inp.pypi-deps-db}
+                export CONDA_DATA=${(import ./mach_nix/nix/conda-channels.nix {
+                export PATH="${pkgs.lib.makeBinPath (with pkgs; [
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/compileOverrides.nix
+      export out_file=$out/share/mach_nix_file.nix
+      export PYTHONPATH=${src}
+      export MACHNIX_CUDA_VERSION=${cudaVersion}
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/crawler/configuration.nix
+            export DB_PASS=$(cat /home/${user}/db_pass)
+            export GIT_SSH_COMMAND="${pkgs.openssh}/bin/ssh -i /home/${user}/.ssh/id_ed25519_deps_db"
+            export GIT_SSH_COMMAND="${pkgs.openssh}/bin/ssh -i /home/${user}/.ssh/id_ed25519_deps_db"
+            export PYTONPATH=${src}
+            export GIT_SSH_COMMAND="${pkgs.openssh}/bin/ssh -i /home/${user}/.ssh/id_ed25519_conda"
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/power-deps-crawler/configuration.nix
+      export DB_PASS=$(cat /home/${user}/db_pass)
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/shell.nix
+    export NIX_PATH="nixpkgs=${nixpkgs-src}:."
+    export SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt
+    export PYTHONPATH=$(pwd)/src
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/shell.nix
+    export PYTHONPATH=$(pwd)/
+    export PYPI_DATA=${pypiData}
+    export CONDA_DATA=${chondaChannelsJson.condaChannelsJson}
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/default.nix
+        export NIX_PATH=nixpkgs=${pkgs.path}
+        export SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/flake.nix
+                export HOME=$(mktemp -d)
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/test.nix
+  # Check that all exported modules are covered by a test suite with at least one test.
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/templates/hello-tkinter/flake.nix
+              export REPO_ROOT=$(git rev-parse --show-toplevel)
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/templates/hello-world/flake.nix
+              export REPO_ROOT=$(git rev-parse --show-toplevel)
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/flake.nix
+                  export HOME=$TMPDIR
+                  export NIX_STATE_DIR=$TMPDIR/nix-state
+                  export NIX_STORE_DIR=$TMPDIR/nix-store
+                  export NIX_DATA_DIR=$TMPDIR/nix-data
+                  export NIX_LOG_DIR=$TMPDIR/nix-log
+                  export NIX_CONF_DIR=$TMPDIR/nix-conf
+                  export NIX_EVAL_JOBS_BIN=${self'.packages.nix-eval-jobs}/bin/nix-eval-jobs
+                export HOME=$TMPDIR
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/shell.nix
+    export NIX_DEBUG_INFO_DIRS="${pkgs.curl.debug}/lib/debug:${nixComponents.nix-everything.debug}/lib/debug''${NIX_DEBUG_INFO_DIRS:+:$NIX_DEBUG_INFO_DIRS}"
+Match found in: ./09/26/jobs/vendor/nix-task/flake.nix
+                export PKG_PATH_BASH="${pkgs.bashInteractive}"
+                export PKG_PATH_COREUTILS="${pkgs.coreutils}"
+                export PKG_PATH_JQ="${pkgs.jq}"
+                export PKG_PATH_NODEJS="${pkgs.nodejs}"
+                export PKG_PATH_UTIL_LINUX="${pkgs.util-linux}"
+                export CONF_NIX_LIB_PATH="${./nix/lib}"
+                export PATH="$PATH:${pkgs.procps}/bin"
+Match found in: ./09/26/jobs/vendor/nix-task/nix/lib/getTasks.nix
+# __beginExports__
+Match found in: ./09/26/jobs/vendor/nix-task/nix/lib/mkTask.nix
+  artifacts ? [], # list of file names that this task exports as artifacts
+Match found in: ./09/26/jobs/vendor/nix-task/shell.nix
+    export REPO_ROOT=$PWD
+    export PKG_PATH_BASH="${pkgs.bashInteractive}"
+    export PKG_PATH_COREUTILS="${pkgs.coreutils}"
+    export PKG_PATH_JQ="${pkgs.jq}"
+    export PKG_PATH_NODEJS="${pkgs.nodejs}"
+    export PKG_PATH_UTIL_LINUX="${pkgs.util-linux}"
+    export CONF_NIX_LIB_PATH="$REPO_ROOT/nix/lib"
+Match found in: ./09/27/7-concepts/2-gemini-integration/gemini-integration/flake.nix
+          export PATH=${pkgs.nodejs}/bin:$PATH
+          export GEMINI_CONFIG_PATH=${geminiCliPackage}/etc/gemini-cli/settings.json
+            export GEMINI_HOME_DIR="$HOME/.gemini"
+            export XDG_CONFIG_HOME=$(mktemp -d)
+            echo "Remember to set GEMINI_API_KEY if you haven't already: export GEMINI_API_KEY='YOUR_API_KEY'"
+Match found in: ./09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture/flake.nix
+            export HOME=$(mktemp -d)
+Match found in: ./09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry/flake.nix
+            export GEMINI_CONFIG_PATH="$GEMINI_CONFIG_DIR/settings.json"
+Match found in: ./09/30/monster_experiment/rust_knowledge_extractor/flake.nix
+            export RUST_BACKTRACE=1
+Match found in: ./10/01/docs/theory/label_interpreter.nix
+    # Exported functions and data from the interpreter
+Match found in: ./10/01/docs/theory/nix2emoji.nix
+  inherit emojiMap; # Export map for reference
+Match found in: ./10/01/docs/theory/nix_2gram_indexer.nix
+  inherit TwoGramInstanceSchema; # Export the type definition
+  inherit UsageLocationSchema;     # Export the type definition
+Match found in: ./10/01/docs/theory/nix_data_science_platform.nix
+  # Export the example workflow from jupyter.nix
+Match found in: ./10/01/docs/theory/pandas.nix
+  inherit DataFrameSchema; # Export the type definition
+Match found in: ./10/01/docs/theory/verifiable_file_topology.nix
+  inherit FileTopologySchema; # Export the schema definition
+Match found in: ./10/04/gemini-prompt-flake/gemini-prompt-derivation.nix
+    export HOME=$(mktemp -d)
+Match found in: ./10/06/notebooklm-export/default.nix
+  # Expose the main function for NotebookLM export
+  notebooklmExport = traverseFlakeDependencies;
+Match found in: ./10/06/sops-gemini/flakes/wrap-gemini-secrets/flake.nix
+          export HOME=$(mktemp -d)
+Match found in: ./10/09/nix-grep-regexes.nix
+    "nix-store --export"
+Match found in: ./10/10/bootstrap-context.nix
+    ) "vendor/rust-index-guix" ".github/actions/install-nix-action" ".github/actions/nix-github-actions" ".github/actions/nix-installer-action" ".github/actions/cache-nix-action" ".github/actions/cache" ".github/actions/checkout" "vendor/rnix-parser" ".github/actions/upload-artifact" "vendor/nix-on-droid" "vendor/nix/nix" "source/github/jmikedupont2/orgs/Escaped-RDFa/namespace" "source/github/meta-introspector/git-submodule-tools-rs" "vendor/external/git-submodule-tools-rs" "source/github/meta-introspector/solfunmeme" "source/github/meta-introspector/lean4" "vendor/external/forgejo-python" "vendor/external/tmux" "vendor/external/minizinc-introspector" "vendor/external/tmux-interface-rs" "vendor/external/n00b" "vendor/external/monomcp-rust" "vendor/external/hugging-face-dataset-validator-rust" "vendor/external/turbomcp" "vendor/external/bitchat-solana-zos-solfunmeme" "vendor/external/trident" "vendor/external/solfunmeme-banner" "vendor/external/ragit" "vendor/external/bootstrap-meme" "vendor/external/emojis-rs" "vendor/external/introspector-llc" "vendor/external/coccinelleforrust_personal_mirror" "vendor/external/solfunmeme-model-builder-quiz" "vendor/external/solfunmeme-dioxus" "vendor/external/sophia_rs" "vendor/external/solfunmeme-metameme" "vendor/external/amazon-q-developer-cli" "vendor/external/grok-cli" "vendor/external/tclifford" "vendor/external/meta-meme" "vendor/external/gemini-cli" "source/github/meta-introspector/streamofrandom" "source/github/meta-introspector/lattice-introspector" "vendor/external/rust" "vendor/external/asciinema-scenario" "vendor/external/nix-asciinema-agg" "vendor/external/asciinema" "vendor/nix/nixtract" "vendor/nix/nixpkgs-lint" "vendor/guix/mes" "vendor/guix/guix" "vendor/lang-c" "vendor/steel" "vendor/strace/dutchcoders-trace" "vendor/strace/intentrace" "vendor/strace/lurk" "vendor/strace/rstrace" "source/github/meta-introspector/quasi-meta-meme" "source/github/meta-introspector/hackathon" "vendor/external/github-issues-export-rs" "source/github/meta-introspector/minizinc-introspector" "source/github/meta-introspector/time" "source/github/meta-introspector/neo" "source/github/meta-introspector/neo2" "vendor/nixpkgs" "vendor/plantuml-stdlib/C4-PlantUML" "vendor/ebpf/aya" "vendor/ebpf/bpfjit" "vendor/ebpf/bpfman" "vendor/ebpf/clean-dns-bpf" "vendor/ebpf/eadb" "vendor/ebpf/ebpfguard" "vendor/ebpf/libbpf-rs" "vendor/ebpf/rbpf" "source/github/meta-introspector/git-submodules-rs-nix" "vendor/mkAIDerivation" "vendor/nix/renix" "vendor/nix/nix-config-merger" "vendor/nix/nix-files-comparator" "vendor/nix/rnix-parser-tester" "source/github/meta-introspector/introspector-llc" "vendor/nix/nix-direnv" "vendor/hooks/shellcheck-precommit" "vendor/hooks/rusty-hook" "vendor/hooks/shebling" "vendor/nix/tvix" "vendor/nix/nil" "vendor/lint/shellcheck" "vendor/lint/git-hooks.nix" "vendor/lint/cachix-git-hooks.nix" "vendor/nix/nixpacks" "source/github/meta-introspector/ragit" "vendor/nix/flake-utils" "vendor/tools/detect-duplicates" "vendor/nix/fenix" "vendor/nix/nix-systems-default" "vendor/nix/nix-systems-default-fork" "vendor/nix/home-manager" "vendor/nix/nix-asciinema-agg" "vendor/external/fenix" "vendor/rust/just" "source/github/meta-introspector/bootstrap" "vendor/nix/nix-nar-rs" "source/github/meta-introspector/ai-ml-zk-ops" "vendor/nix/rust-overlay" "vendor/nix/naersk" "vendor/nix/flake-parts" "vendor/nix/treefmt-nix" "vendor/nix/yarnpnp2nix" "vendor/external/copilot-cli" "source/github/meta-introspector/solfunmeme-gitbook" "source/github/meta-introspector/solfunmeme-metameme" "vendor/nix/factorio-mods-nix" "vendor/nix/vpsfree-cz-configuration" "vendor/nix/sops-nix" "nix/vendor/nix/croissong-system" "nix/vendor/nix/bbigras-nix-config" "nix/vendor/nix/gmkonan-flake" "nix/vendor/nix/jpetrucciani-nix" "nix/vendor/nix/stites-configs-mirror" "nix/vendor/nix/privatevoid-depot" "nix/vendor/nix/catircservices-org" "nix/vendor/nix/duck1123-k3s-fleetops" "nix/vendor/nix/dominicegginton-dotfiles" "nix/vendor/nix/fort-nix-bitcoin" "nix/vendor/nix/bojeran-dotfiles" "nix/vendor/nix/sheeeng-nix" "nix/vendor/nix/fjolne-dotfiles" "nix/vendor/nix/vpsfreecz-config" "nix/vendor/nix/disassembler-network" "vendor/hooks/vale-precommit" "vendor/hooks/vale" "source/github/meta-introspector/pre-commit-hooks-collection" "vendor/nix/vale-precommit" "vendor/hooks/lint-staged" "vendor/lint/nixpkgs-lint" "vendor/nix/pre-commit-tool-hooks" "vendor/nix/nixdoc" "source/github/meta-introspector/th-desugar" "vendor/hooks/prek" "vendor/nix/felix-schausberger-nixos" "vendor/nix/nix-stdlib" "vendor/nix/nix-init" "vendor/nix/nix-prefetch" "vendor/nix/nix-prefetch-github" "vendor/nix/nurl" "vendor/nix/nix-universal-prefetch" "vendor/nix/prefetch-github" "vendor/nix/nix-upfetch" "vendor/nix/nix-prefetch-lheckemann" "vendor/external/codex";
+Match found in: ./10/10/bootstrap-context/part1.nix
+  "vendor/external/github-issues-export-rs" = {
+    path = "vendor/external/github-issues-export-rs";
+    url = "https://github.com/boxdot/github-issues-export-rs";
+Match found in: ./10/10/lib/nar/flake.nix
+  description = "A flake to export the nix-file-list to a NAR file";
+Match found in: ./flakes/gemini-feature-lattice/credential-setup.nix
+    export HOME=$(mktemp -d)
+Match found in: ./flakes/feature-3-home-dir-creds/flake.nix
+          export HOME="$TEMP_HOME_PATH"

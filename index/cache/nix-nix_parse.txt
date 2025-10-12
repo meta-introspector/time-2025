@@ -1,0 +1,419 @@
+Match found in: ./09/23/analyze_ngrams.nix
+  # Read and parse the JSON file.
+  # Access the "1-gram" array from the parsed JSON data.
+Match found in: ./09/23/repair_and_parse.nix
+  # Parse the repaired JSON string
+  parsedData = builtins.fromJSON jsonString;
+lib.length (lib.attrNames parsedData)
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/npm/default.nix
+  # the amount of arguments can vary and a custom parser is needed
+  parseParams = params:
+      parseParams [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/nodejsUtils.nix
+  parseSpdxId,
+    {license = parseSpdxId (packageJson.license or "");}
+    # returns the parsed package-lock.json for a given project
+  parseGitUrl = url: let
+      else throw "Cannot parse git url: ${url}";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/parseSpdxId.nix
+  # Parses a string like "Unlicense OR MIT" to `["unlicense" "mit"]`
+  # TODO: this does not parse `AND` or `WITH` or paranthesis, so it is
+  parseSpdxId = _id: let
+  parseSpdxId
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/php-semver.nix
+  parseConstraint = constraintStr: let
+    else throw ''Constraint "${constraintStr}" could not be parsed'';
+    inherit (parseConstraint constraint) ops v;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/prepareSourceTree.nix
+  It's more performant because it allows to parse a json or toml by accessing
+    is only parsed once, even if the parsed content is used in multiple places.
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/default.nix
+    parseSpdxId = _: _;
+  pdefs = parse cfg.packageLock;
+  parseSource = plent: name:
+        (nodejsUtils.parseGitUrl plent.resolved)
+  parse = lock:
+    (l.mapAttrsToList (parseEntry lock) lock.packages);
+  # pdefs = parse cfg.packageLock;
+  parseEntry = lock: path: plent: let
+      source = parseSource plent name;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/types.nix
+      "esparse": "bin/esparse.js",
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-lock-v3/default.nix
+  parseSource = plent:
+  parseEntry = lock: path: entry:
+      source = parseSource entry;
+  parse = lock:
+    (l.mapAttrsToList (parseEntry lock) lock.packages);
+  pdefs = parse config.nodejs-package-lock-v3.packageLock;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-lock/default.nix
+  nodejsUtils = import ../../../lib/internal/nodejsUtils.nix {inherit lib parseSpdxId;};
+  parseSpdxId = import ../../../lib/internal/parseSpdxId.nix {inherit lib;};
+    inherit lib nodejsUtils parseSpdxId simpleTranslate;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-lock/translate.nix
+    parsedDependencies = packageLockDeps;
+      then "0.0.0-rc.${b.substring 0 8 (nodejsUtils.parseGitUrl dependencyObject.version).rev}"
+          parsedDependencies);
+          nodejsUtils.parseGitUrl dependencyObject.version;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-composer-lock/default.nix
+  nodejsUtils = import ../../../lib/internal/nodejsUtils.nix {inherit lib parseSpdxId;};
+  parseSpdxId = import ../../../lib/internal/parseSpdxId.nix {inherit lib;};
+    inherit lib dreamLockUtils nodejsUtils parseSpdxId simpleTranslate2;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/default.nix
+  parsed_lock_data = libpdm.parseLockData {
+    (name: (libpyproject.pep508.parseString name).name)
+        inherit parsed_lock_data groups_with_deps;
+              (libpdm.getClosure parsed_lock_data name pkg.extras);
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/lib.nix
+  # Evaluates a parsed dependency against an environment to determine if it is required.
+    parsed_filename = libpyproject.pypa.parseWheelFileName filename;
+    wheels = map libpyproject.pypa.parseWheelFileName wheelFiles;
+  # Get the dependency names out from a list of parsed deps which are
+  requiredDeps = environ: parsed_deps: let
+    requiredDeps' = lib.filter (isDependencyRequired environ) parsed_deps;
+  parsePackage = environ: item: let
+    parsedDeps = map libpyproject.pep508.parseString item.dependencies or [];
+    dependencies = requiredDeps environ parsedDeps;
+  mkDepEntry = parsed_lock_data: dep @ {
+    inherit (parsed_lock_data.${name}.${mkExtrasKey {inherit extras;}}) sources;
+    inherit (parsed_lock_data.${name}.${mkExtrasKey {inherit extras;}}) version;
+  # Parse lockfile data.
+  parseLockData = {
+    (map (parsePackage environ) lock_data.package);
+  getClosure = parsed_lock_data: name: extras: let
+          value = parsed_lock_data.${name}.${mkExtrasKey {inherit extras;}};
+          value = parsed_lock_data.${dep.name}.${mkExtrasKey dep};
+    parsed_lock_data,
+        value = mkDepEntry parsed_lock_data dep;
+    getClosureForDep = dep: getClosure parsed_lock_data dep.name dep.extras;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-lock/default.nix
+  parseSpdxId = import ../../../lib/internal/parseSpdxId.nix {inherit lib;};
+    inherit lib parseSpdxId sanitizePath sanitizeRelativePath simpleTranslate2;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-lock/translate.nix
+  parseSpdxId,
+      # Filter root referencing member, we already parsed this (rootToml)
+    # Parse Cargo.lock and extract dependencies
+    parsedLock = projectTree.files."Cargo.lock".tomlContent;
+    parsedDeps = parsedLock.package;
+    getChecksum = dep: parsedLock.metadata."checksum ${makeDepId dep}";
+      parsedDeps;
+    # takes a parsed dependency entry and finds the original dependency from `Cargo.lock`
+    # This parses a "package-name version (source)" entry in the "dependencies"
+    parseDepEntryImpl = entry: let
+      parsed = l.splitString " " entry;
+      name = l.head parsed;
+      # parse the version if it exists
+        if l.length parsed > 1
+        then l.elemAt parsed 1
+      # parse the source if it exists
+        if l.length parsed > 2
+        then l.removePrefix "(" (l.removeSuffix ")" (l.elemAt parsed 2))
+      makePair = entry: l.nameValuePair entry (parseDepEntryImpl entry);
+      depEntries = l.flatten (l.map (dep: dep.dependencies or []) parsedDeps);
+    parseDepEntry = entry: entryToDependencyAttrs.${entry};
+    # Parses a git source, taken straight from nixpkgs.
+    parseSourceImpl = src: let
+    parsedSources = l.listToAttrs (
+      (dep: l.nameValuePair dep.source (parseSourceImpl dep.source))
+      (l.filter (dep: dep ? source) parsedDeps)
+    parseSource = dep:
+      then parsedSources.${dep.source}
+      source = parseSource rawObj;
+            (l.map parseSource parsedDeps)
+                {license = parseSpdxId licenseRaw;}
+      serializedRawObjects = parsedDeps;
+          (l.map parseDepEntry (rawObj.dependencies or []));
+          source = parseSource rawObj;
+              parsed = source.value;
+                if parsed.type or null == "branch"
+                then {ref = "refs/heads/${parsed.value}";}
+                else if parsed.type or null == "tag"
+                then {ref = "refs/tags/${parsed.value}";}
+                inherit (parsed) url;
+                rev = parsed.sha;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/apps.update-locks.nix
+        # Parse command line arguments as filters
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/reference-website/frontmatter.nix
+    parsed = builtins.partition ({index, ...}:
+    meta = (builtins.head parsed.right).part;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_nodejs_lock_v3/default.nix
+  test_nodejs_parse_root_lock = let
+  # test_nodejs_parse_lockfile = let
+  #   expr = config.nodejs-package-lock-v3.pdefs."argparse"."0.1.16";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_nodejs_lockutils/default.nix
+  test_nodejsLockUtils_findEntry_argparse = let
+    path = nodejsLockUtils.findEntry plock "" "argparse";
+    expected = "node_modules/argparse";
+      "node_modules/argparse"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_python-pdm-lib/default.nix
+        (libpyproject.pep508.parseString "foo==1.0.0; sys_platform == 'win32'");
+        (libpyproject.pep508.parseString "foo==1.0.0; sys_platform == 'linux'");
+  parsePackage = {
+      expr = libpdm.parsePackage linux_environ {
+  parseLockData = let
+    parsed = libpdm.parseLockData {
+        (parsed ? "requests")
+        && (parsed.requests.default.version == version)
+        && (parsed.requests.default ? sources);
+      expr = libpdm.preferWheelSelector (lib.attrNames parsed.requests.default.sources);
+      expr = map (dep: dep.name) parsed.requests.default.dependencies;
+      expr = libpdm.parseLockData {
+    parsed_lock_data_2 = libpdm.parseLockData {
+    deps = libpdm.getClosure parsed_lock_data_2 "requests" [];
+      parsed_lock_data = libpdm.parseLockData {
+      deps = libpdm.getClosure parsed_lock_data "pyjwt" ["crypto"];
+        pycparser = "2.21";
+      parsed_lock_data = libpdm.parseLockData {
+      deps = libpdm.getClosure parsed_lock_data "root" [];
+    parsed_lock_data = libpdm.parseLockData {
+      inherit parsed_lock_data groups_with_deps;
+      inherit parsed_lock_data groups_with_deps;
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/default.nix
+      "test_parse_all_pypi_reqs"
+      "test_parse_all_conda_reqs"
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/fixes.nix
+  # evaluate arbitrary python expression and return json parsed result
+    from packaging.version import Version, parse
+    result = parse('${ver1}') ${op} parse('${ver2}')
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/buildPythonPackage.nix
+    with (_buildPythonParseArgs args);
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/compileOverrides.nix
+  __providerDefaults = l.parseProviders _providerDefaults;
+      l.parseProviders (defaults // providers);
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/lib.nix
+  parseProviders = providers:
+  parseProvidersToJson =
+      pkgs.writeText "providers-json" (toJSON (parseProviders providers));
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/build.nix
+  parseGitURL =
+      throw "Could not parse git url: ${url}";
+      # List of parsed wheels
+      gitURL = parseGitURL source.git;
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/lock1.nix
+  inherit (pyproject-nix.lib.pep508) parseMarkers evalMarkers;
+  inherit (pyproject-nix.lib.pypa) parseWheelFileName;
+      # Lock file as parsed by parseLock
+              evalMarkers environ (parseMarkers markers)
+    Parse unmarshaled uv.lock
+  parseLock =
+      parseOptions =
+      # This is so that we only have to parse a marker exactly once even if the marker is repeated
+        map (markers: nameValuePair markers (parseMarkers markers)) (
+      requires-python = pep440.parseVersionConds requires-python;
+      manifest = self.parseManifest manifest;
+      package = map (self.parsePackage topLevelMarkers) package;
+      options = parseOptions options;
+  parseManifest =
+    Parse a package entry from uv.lock
+  parsePackage =
+      parseWheel =
+          file' = parseWheelFileName (baseNameOf url);
+          file' = parseWheelFileName filename;
+          file' = parseWheelFileName (baseNameOf path);
+      parseMetadata =
+          parseRequires =
+              marker = if marker != null then parseMarkers marker else null;
+              specifier = if specifier != null then pep440.parseVersionConds specifier else null;
+          requires-dist = map parseRequires requires-dist;
+          requires-dev = mapAttrs (_: map parseRequires) requires-dev;
+      # Parse marker, but avoid parsing markers already present in toplevel uv.lock marker fields
+      parseMarker = marker: topLevelMarkers.${marker} or (parseMarkers marker);
+      inherit (pep440) parseVersion;
+      parseDependency =
+          version' = if version != null then parseVersion version else null;
+          marker = if marker != null then parseMarker marker else null;
+      version' = pep440.parseVersion version;
+      wheels = map parseWheel wheels;
+      metadata = parseMetadata metadata;
+      # Don't parse resolution-markers.
+      dependencies = map parseDependency dependencies;
+      optional-dependencies = mapAttrs (_: map parseDependency) optional-dependencies;
+      dev-dependencies = mapAttrs (_: map parseDependency) dev-dependencies;
+                requires-python = null; # requires-python as parsed by pep621.parseRequiresPython
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/overlays.nix
+      # Lock parsed by lock1.parseLock
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/scripts.nix
+      uvLock = lock1.parseLock (importTOML lockPath);
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/test_build.nix
+          package = lock1.parsePackage { } (findFirstPkg depName locks.${projectName}.package);
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/test_lock1.nix
+  parseLock = mapAttrs' (
+          result = lock1.parseLock lock;
+      expected = lib.importJSON ./expected/lock1.parseLock.${name}.json;
+  # Implicitly tested by parseLock
+  parseManifest = {
+  parsePackage =
+      parsePkg = name: fixture: lock1.parsePackage { } (findFirstPkg name fixture.package);
+        expected = lib.importJSON ./expected/lock1.parsePackage.${name}.json;
+        testTrivial = parsePkg "arpeggio" locks.trivial;
+        testMetadataRequiresDistMany = parsePkg "a" locks.kitchenSinkA;
+        testWheelURL = parsePkg "arpeggio" locks.kitchenSinkA;
+        testSdistURL = parsePkg "blinker" locks.kitchenSinkA;
+        testGitURL = parsePkg "pip" locks.kitchenSinkA;
+        testLocal = parsePkg "b" locks.kitchenSinkA;
+        testLocalSdist = parsePkg "attrs" locks.kitchenSinkA;
+        testLocalEditable = parsePkg "c-editable" locks.kitchenSinkA;
+        testWithResolutionMarkers = parsePkg "arpeggio" locks.multiChoicePackage;
+        testOptionalDeps = parsePkg "optional-deps" locks.optionalDeps;
+        testMetadataRequiresDev = parsePkg "with-tool-uv-devdeps" locks.withToolUvDevDeps;
+        testWithResolverOptions = parsePkg "arpeggio" locks.withResolverOptions;
+        testWithExtra = parsePkg "with-extra" locks.withExtra;
+          parsed = lock1.parsePackage { } (findFirstPkg name fixture.package);
+        lock1.filterPackage environ parsed;
+            lock = lock1.parseLock locks.${projectName};
+      lock = lock1.parseLock locks.conflicts;
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/workspace.nix
+      uvLock = lock1.parseLock (importTOML (workspaceRoot + "/uv.lock"));
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/templates/hello-tkinter/flake.nix
+              export REPO_ROOT=$(git rev-parse --show-toplevel)
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/templates/hello-world/flake.nix
+              export REPO_ROOT=$(git rev-parse --show-toplevel)
+Match found in: ./09/26/jobs/vendor/nix-task/runner/yarn-manifest.nix
+    "@types/parse-json@npm:4.0.0" = {
+      name = "@types/parse-json";
+      outputName = "types-parse-json-4.0.0-298522afa6";
+      flatName = "parse-json";
+        "@types/parse-json" = packages."@types/parse-json@npm:4.0.0";
+        "parse-json" = packages."parse-json@npm:5.2.0";
+    "json-parse-even-better-errors@npm:2.3.1" = {
+      name = "json-parse-even-better-errors";
+      outputName = "json-parse-even-better-errors-2.3.1-144d62256e";
+      flatName = "json-parse-even-better-errors";
+    "parse-json@npm:5.2.0" = {
+      name = "parse-json";
+      outputName = "parse-json-5.2.0-00a63b1199";
+      flatName = "parse-json";
+        "json-parse-even-better-errors" = packages."json-parse-even-better-errors@npm:2.3.1";
+Match found in: ./09/foaf.nix
+  # Expose the raw parsed data
+Match found in: ./09/seed.foaf.nix
+    (mkProject { id = "https://github.com/h4ck3rm1k3/sweble-wikitext"; name = "sweble-wikitext"; homepage = "https://github.com/h4ck3rm1k3/sweble-wikitext"; description = "sweble the wikipedia parser wikitext "; makerId = h4ck3rm1k3.id; })
+Match found in: ./10/01/docs/theory/emoji2nix.nix
+  # A robust implementation would require a full parser for the emoji grammar.
+      "// Cannot parse complex emoji sequence back to Nix value: ${emojiString}";
+Match found in: ./10/01/docs/theory/n_gram_generator.nix
+      # In a real scenario, this would involve a Nix parser (e.g., written in Rust or Haskell)
+Match found in: ./10/01/docs/theory/nix_code_indexer.nix
+    # Read the index file and parse it as JSON
+Match found in: ./10/01/docs/theory/spore_vial_001/metacoq_graphql_meme.nix
+    # This would need a tool to parse Org-mode and extract Haskell blocks
+Match found in: ./10/01/docs/theory/url_provenance_mapper.nix
+      # This part would parse the URL and use external services to find the Git repo and a specific commit.
+Match found in: ./10/01/docs/theory/2gram_report_generator.nix
+    # Read and parse the 2-gram index
+Match found in: ./10/01/docs/theory/w3c_spec_vendorizer.nix
+  # Example: a function to parse the spec (conceptual)
+  parse = { content }: "Parsed content of: " + content;
+Match found in: ./10/04/killerjoke/flake.nix
+        packages.default = pkgs.runCommand "crq-parser-success" {
+          echo 'CRQ Parser flake built successfully!' > $out
+          parseCrqFilename = filename:
+Match found in: ./10/04/bootstrap/bootstrap-executor.nix
+  # Function to parse the bootstrap plan into a list of steps
+  # FIXME: Implement a more robust parser for structured bootstrap plans
+  parseBootstrapPlan = planString:
+  # Get the parsed steps
+  bootstrapSteps = parseBootstrapPlan bootstrapPlanExpression;
+Match found in: ./10/04/lib/crq-search.nix
+  parseCrqFilename = filename:
+  # Parse all CRQ files
+  parsedCrqs = builtins.filter (crq: crq != null) (builtins.map parseCrqFilename allCrqFiles);
+      builtins.filter (crq: builtins.match ".*${builtins.toLower keyword}.*" (builtins.toLower crq.title) != null) parsedCrqs
+      parsedCrqs;
+Match found in: ./10/10/nix2/lib/first-reflection.nix
+      # Placeholder for actual extraction logic (e.g., functions that read files and parse them)
+Match found in: ./10/10/nix2/qa/test-prelude.nix
+  # Test 1: Ensure parsedUrls is not empty
+  testParsedUrlsNotEmpty = lib.assertMsg (lib.length prelude > 0) "Parsed URLs list should not be empty.";
+  # Test 2: Ensure each parsed URL has expected components
+  testParsedUrlComponents = lib.map (parsedUrl:
+    lib.assertMsg (parsedUrl ? owner && parsedUrl ? repo && parsedUrl ? url)
+      "Each parsed URL should have 'owner', 'repo', and 'url' components."
+  testOwnerIsAllowed = lib.map (parsedUrl:
+    lib.assertMsg (parsedUrl.owner == "meta-introspector")
+      externalRepos = lib.filter (parsedUrl: parsedUrl.owner != "meta-introspector") prelude;
+      metaIntrospectorRepos = lib.filter (parsedUrl: parsedUrl.owner == "meta-introspector") prelude;
+      metaIntrospectorRepos = lib.filter (parsedUrl: parsedUrl.owner == "meta-introspector") prelude;
+    inherit testParsedUrlsNotEmpty testParsedUrlComponents testOwnerIsAllowed testExternalReposHaveMetaIntrospectorForks testMetaIntrospectorForksAreCheckedOutAndBranched;
+  allTestsPass = testParsedUrlsNotEmpty && (lib.all (x: x) testParsedUrlComponents) && (lib.all (x: x) testOwnerIsAllowed) && testExternalReposHaveMetaIntrospectorForks && testMetaIntrospectorForksAreCheckedOutAndBranched;
+Match found in: ./10/10/nix2/crate-extractor.nix
+  # Function to parse Cargo.toml and extract crate information
+Match found in: ./10/10/nix-url-extractor.nix
+  # Function to parse a GitHub URL into its components
+  parseGithubUrl = url:
+  # Parsed URLs
+  parsedUrls = lib.map parseGithubUrl allUniqueGithubUrls;
+  repoFileInstructions = lib.map (parsedUrl: {
+    path = "10/10/github/${parsedUrl.owner}/${parsedUrl.repo}.nix"; # This path needs to be relative to the root of the project
+    content = generateRepoNixContent parsedUrl;
+  }) parsedUrls;
+  inherit parsedUrls repoFileInstructions;
+Match found in: ./10/10/context.nix
+  # Function to parse a .gitmodules file
+  parseGitmodules = gitmodulesPath:
+  # Parse .gitmodules files
+  pickUpNixSubmodules = if builtins.pathExists pickUpNixGitmodulesPath then parseGitmodules pickUpNixGitmodulesPath else [];
+  streamOfRandomSubmodules = if builtins.pathExists streamOfRandomGitmodulesPath then parseGitmodules streamOfRandomGitmodulesPath else [];
+Match found in: ./10/10/bootstrap-context.nix
+    ) "vendor/rust-index-guix" ".github/actions/install-nix-action" ".github/actions/nix-github-actions" ".github/actions/nix-installer-action" ".github/actions/cache-nix-action" ".github/actions/cache" ".github/actions/checkout" "vendor/rnix-parser" ".github/actions/upload-artifact" "vendor/nix-on-droid" "vendor/nix/nix" "source/github/jmikedupont2/orgs/Escaped-RDFa/namespace" "source/github/meta-introspector/git-submodule-tools-rs" "vendor/external/git-submodule-tools-rs" "source/github/meta-introspector/solfunmeme" "source/github/meta-introspector/lean4" "vendor/external/forgejo-python" "vendor/external/tmux" "vendor/external/minizinc-introspector" "vendor/external/tmux-interface-rs" "vendor/external/n00b" "vendor/external/monomcp-rust" "vendor/external/hugging-face-dataset-validator-rust" "vendor/external/turbomcp" "vendor/external/bitchat-solana-zos-solfunmeme" "vendor/external/trident" "vendor/external/solfunmeme-banner" "vendor/external/ragit" "vendor/external/bootstrap-meme" "vendor/external/emojis-rs" "vendor/external/introspector-llc" "vendor/external/coccinelleforrust_personal_mirror" "vendor/external/solfunmeme-model-builder-quiz" "vendor/external/solfunmeme-dioxus" "vendor/external/sophia_rs" "vendor/external/solfunmeme-metameme" "vendor/external/amazon-q-developer-cli" "vendor/external/grok-cli" "vendor/external/tclifford" "vendor/external/meta-meme" "vendor/external/gemini-cli" "source/github/meta-introspector/streamofrandom" "source/github/meta-introspector/lattice-introspector" "vendor/external/rust" "vendor/external/asciinema-scenario" "vendor/external/nix-asciinema-agg" "vendor/external/asciinema" "vendor/nix/nixtract" "vendor/nix/nixpkgs-lint" "vendor/guix/mes" "vendor/guix/guix" "vendor/lang-c" "vendor/steel" "vendor/strace/dutchcoders-trace" "vendor/strace/intentrace" "vendor/strace/lurk" "vendor/strace/rstrace" "source/github/meta-introspector/quasi-meta-meme" "source/github/meta-introspector/hackathon" "vendor/external/github-issues-export-rs" "source/github/meta-introspector/minizinc-introspector" "source/github/meta-introspector/time" "source/github/meta-introspector/neo" "source/github/meta-introspector/neo2" "vendor/nixpkgs" "vendor/plantuml-stdlib/C4-PlantUML" "vendor/ebpf/aya" "vendor/ebpf/bpfjit" "vendor/ebpf/bpfman" "vendor/ebpf/clean-dns-bpf" "vendor/ebpf/eadb" "vendor/ebpf/ebpfguard" "vendor/ebpf/libbpf-rs" "vendor/ebpf/rbpf" "source/github/meta-introspector/git-submodules-rs-nix" "vendor/mkAIDerivation" "vendor/nix/renix" "vendor/nix/nix-config-merger" "vendor/nix/nix-files-comparator" "vendor/nix/rnix-parser-tester" "source/github/meta-introspector/introspector-llc" "vendor/nix/nix-direnv" "vendor/hooks/shellcheck-precommit" "vendor/hooks/rusty-hook" "vendor/hooks/shebling" "vendor/nix/tvix" "vendor/nix/nil" "vendor/lint/shellcheck" "vendor/lint/git-hooks.nix" "vendor/lint/cachix-git-hooks.nix" "vendor/nix/nixpacks" "source/github/meta-introspector/ragit" "vendor/nix/flake-utils" "vendor/tools/detect-duplicates" "vendor/nix/fenix" "vendor/nix/nix-systems-default" "vendor/nix/nix-systems-default-fork" "vendor/nix/home-manager" "vendor/nix/nix-asciinema-agg" "vendor/external/fenix" "vendor/rust/just" "source/github/meta-introspector/bootstrap" "vendor/nix/nix-nar-rs" "source/github/meta-introspector/ai-ml-zk-ops" "vendor/nix/rust-overlay" "vendor/nix/naersk" "vendor/nix/flake-parts" "vendor/nix/treefmt-nix" "vendor/nix/yarnpnp2nix" "vendor/external/copilot-cli" "source/github/meta-introspector/solfunmeme-gitbook" "source/github/meta-introspector/solfunmeme-metameme" "vendor/nix/factorio-mods-nix" "vendor/nix/vpsfree-cz-configuration" "vendor/nix/sops-nix" "nix/vendor/nix/croissong-system" "nix/vendor/nix/bbigras-nix-config" "nix/vendor/nix/gmkonan-flake" "nix/vendor/nix/jpetrucciani-nix" "nix/vendor/nix/stites-configs-mirror" "nix/vendor/nix/privatevoid-depot" "nix/vendor/nix/catircservices-org" "nix/vendor/nix/duck1123-k3s-fleetops" "nix/vendor/nix/dominicegginton-dotfiles" "nix/vendor/nix/fort-nix-bitcoin" "nix/vendor/nix/bojeran-dotfiles" "nix/vendor/nix/sheeeng-nix" "nix/vendor/nix/fjolne-dotfiles" "nix/vendor/nix/vpsfreecz-config" "nix/vendor/nix/disassembler-network" "vendor/hooks/vale-precommit" "vendor/hooks/vale" "source/github/meta-introspector/pre-commit-hooks-collection" "vendor/nix/vale-precommit" "vendor/hooks/lint-staged" "vendor/lint/nixpkgs-lint" "vendor/nix/pre-commit-tool-hooks" "vendor/nix/nixdoc" "source/github/meta-introspector/th-desugar" "vendor/hooks/prek" "vendor/nix/felix-schausberger-nixos" "vendor/nix/nix-stdlib" "vendor/nix/nix-init" "vendor/nix/nix-prefetch" "vendor/nix/nix-prefetch-github" "vendor/nix/nurl" "vendor/nix/nix-universal-prefetch" "vendor/nix/prefetch-github" "vendor/nix/nix-upfetch" "vendor/nix/nix-prefetch-lheckemann" "vendor/external/codex";
+Match found in: ./10/10/bootstrap-context/part1.nix
+  "vendor/rnix-parser" = {
+    path = "vendor/rnix-parser";
+    url = "https://github.com/nix-community/rnix-parser";
+  "vendor/nix/rnix-parser-tester" = {
+    path = "vendor/nix/rnix-parser-tester";
+    url = "https://github.com/darichey/rnix-parser-tester";
+Match found in: ./docs/NixOSI_Vision.nix
+        # Nix functions to parse and validate CRQ documents
+        parseCRQ = pkgs.callPackage ./lib/crq-parser.nix { };
+Match found in: ./flakes/crq-search/parser/flake.nix
+        packages.default = pkgs.runCommand "crq-parser-success" {
+          echo 'CRQ Parser flake built successfully!' > $out
+          parseCrqFilename = filename:
+Match found in: ./flakes/crq-search/reader/flake.nix
+    crqParser = {
+      url = "./../parser"; # Reference the local parser flake
+  outputs = { self, nixpkgs, flake-utils, crqParser }:
+        inherit (crqParser.lib.${system}) parseCrqFilename;
+        # Expose a function to read and parse CRQs from a given directory
+              # Parse all CRQ files
+              parsedCrqs = builtins.filter (crq: crq != null) (builtins.map parseCrqFilename allCrqFiles);
+            parsedCrqs;
+Match found in: ./flakes/crq-search/main/flake.nix
+              allParsedCrqs = readCrqs crqDir;
+              filtered = filterCrqs allParsedCrqs keyword;
+Match found in: ./flakes/crq-search-lattice/parser/flake.nix
+  description = "CRQ Parser flake, adding parseCrqFilename function.";
+        parseCrqFilename = filename:
+Match found in: ./flakes/crq-search-lattice/parser/default.nix
+  parserLib = flake.lib;
+  result = parserLib.parseCrqFilename testFilename;
+Match found in: ./flakes/crq-search-lattice/flake.nix
+    parser = {
+      url = "./parser"; # Reference the local parser flake
+  outputs = { self, nixpkgs, flake-utils, parser, base, layer1 }:
+      # Expose a test output for the parser function
+      tests.parserTest = {
+        value = parser.lib.parseCrqFilename "CRQ_001_Log_Analysis_Pure_Derivation.md";
+Match found in: ./lib/read_simple_expr_json.nix
+  # Function to read and parse the JSON file
+      # Parse the JSON string into a Nix attribute set
+      parsedJson = builtins.fromJSON jsonString;
+    parsedJson;
+Match found in: ./lib/simple_expr_nix.nix
+  # Import the parsed SimpleExpr.rec JSON
+  inherit simpleExprRec; # Expose the raw parsed JSON for further processing
+Match found in: ./lib/monad-context.nix
+        # Parse solver output to determine decision
+Match found in: ./lib/llm/gemini.nix
+  #   buildInputs = [ pkgs.jq ]; # jq is needed to parse the JSON
+Match found in: ./regex-generator.nix
+  crqIds = import ./crq-parser.nix { inherit pkgs; };
+Match found in: ./scripts/test-commit-checker/uncommitted.nix
+   ./get-commit-messages.sh ./parse-entry.sh ./process-commit-message.sh ./report-summary.sh ./temp-file-management.sh ./test-commit-checker.sh ./uncommitted.nix
+Match found in: ./test-bug-repro-nix-2gram-indexer/tests/test_step3_all2gram_usages.nix
+  # Read the indexed files from the JSON output and parse it
+Match found in: ./wrap_context.nix
+      # Helper function to parse a .gitmodules file
+      parseGitmodules = gitmodulesPath:
+      submodulesRaw = if builtins.pathExists gitmodulesPath then parseGitmodules gitmodulesPath else [];

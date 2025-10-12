@@ -1,0 +1,4 @@
+./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-local-development-nextjs/nextjs-app/src/app/layout.tsx
+./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-local-development-nextjs/nextjs-app/src/app/page.tsx
+./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-nextjs/nextjs-app/src/app/layout.tsx
+./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-nextjs/nextjs-app/src/app/page.tsx

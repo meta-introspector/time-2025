@@ -1,0 +1,37 @@
+Match found in: ./09/22/flake-templates/llm-task-template/flake.nix
+      url = "github:meta-introspector/gemini-cli?ref=feature/working-gemini-cli-nix-store";
+Match found in: ./09/23/nix_concepts_and_facts/lib/zos.nix
+        # No specific buildInputs needed for nix-store --restore as it's part of core Nix
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/default.nix
+    nixComponents.nix-store
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/flake.nix
+                  export NIX_STORE_DIR=$TMPDIR/nix-store
+Match found in: ./09/27/7-concepts/2-gemini-integration/nix-store-bundle-test.nix
+        pname = "nix-store-bundle-test";
+Match found in: ./09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry/flake.nix
+          echo "GitHub Branch: feature/working-gemini-cli-nix-store" 
+              "gemini_cli_source": "github:meta-introspector/gemini-cli?ref=feature/working-gemini-cli-nix-store",
+Match found in: ./09/27/7-concepts/test-secrets-sops/flake.nix
+    sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
+Match found in: ./09/27/7-concepts/ai-workflow/flake.nix
+            nix-store --dump $nar_path | nix-nar-unpack $temp_extract_dir
+                  echo "$(nix-store --dump $dummyNar)" > $out
+Match found in: ./09/30/monster_experiment/rust_knowledge_extractor/flake.nix
+    sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
+Match found in: ./09/flakes/search-results/flake.nix
+              nix-store --dump "$TEMP_DIR" > "$out"/${(pkgs.lib.replaceStrings [" "] ["-"] keyword)}.nar
+              nix-store --dump "$TEMP_DIR" > "$out"/repos-${ownerName}.nar
+            nix-store --dump "$TEMP_DIR" > "$out"/solana-block-number.nar
+Match found in: ./10/06/sops-gemini/flakes/wrap-gemini-secrets/flake.nix
+    sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
+Match found in: ./10/09/nix-grep-regexes.nix
+    "nix-store --import"
+    "nix-store --export"
+Match found in: ./10/10/lib/nar/flake.nix
+      #   store_path=$(${pkgs.nix}/bin/nix-store --add nix-file-list.json)
+      #   ${pkgs.nix}/bin/nix-store --dump $store_path > $out
+Match found in: ./10/10/export-nar.nix
+  store_path=$(${pkgs.nix}/bin/nix-store --add nix-file-list.json)
+  ${pkgs.nix}/bin/nix-store --dump $store_path > $out
+Match found in: ./flake.nix
+    sops-nix = { url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store"; };

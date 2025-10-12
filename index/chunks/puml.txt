@@ -1,0 +1,7 @@
+./09/25/log_analyzer/bott8_concepts/bott8_c4_diagram.puml
+./10/01/docs/theory/C4_Deployment_Diagram.puml
+./10/09/nix_c4_map.puml
+./10/09/nix_c4_map_v2.puml
+./docs/c4_component_diagram_error_analysis.puml
+./docs/c4_sequence_diagram.puml
+./test-bug-repro-nix-2gram-indexer/docs/c4_dependency_diagram_current_test.puml

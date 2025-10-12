@@ -1,0 +1,6 @@
+./09/26/synapse-system/vendor/nix/dream2nix/.envrc
+./09/26/synapse-system/vendor/nix/dream2nix/pkgs/fetchPipMetadata/src/.envrc
+./09/26/synapse-system/vendor/nix/mach-nix/.envrc
+./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/.envrc
+./09/26/jobs/vendor/nix-eval-jobs/.envrc
+./09/26/jobs/vendor/nix-task/.envrc

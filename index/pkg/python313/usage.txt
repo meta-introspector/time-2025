@@ -1,0 +1,4 @@
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-ansible/default.nix
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-apache-airflow/default.nix
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-pillow/default.nix
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/vendor/nix/dream2nix/pkgs/fetchPipMetadata/flake-module.nix

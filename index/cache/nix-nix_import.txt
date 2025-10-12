@@ -1,0 +1,1813 @@
+Match found in: ./09/22/flake-reconstruction-lattice/flake.nix
+        pkgs = import nixpkgs {
+Match found in: ./09/22/flake.nix
+        pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/22/simple.flake.nix
+        pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/22/nix-llm-context/flake.nix
+        pkgs = import nixpkgs { inherit system; };
+        primeSieve = import ./lib/prime-sieve.nix { inherit lib; };
+Match found in: ./09/23/nix_concepts_and_facts/concepts/fact_23_oracle.nix
+{ pkgs ? import <nixpkgs> { }, lib ? pkgs.lib }:
+Match found in: ./09/23/nix_concepts_and_facts/concepts/is_prime.nix
+{ pkgs ? import <nixpkgs> { }, lib ? pkgs.lib }:
+Match found in: ./09/23/nix_concepts_and_facts/concepts/number_23.nix
+{ pkgs ? import <nixpkgs> { }, lib ? pkgs.lib }:
+Match found in: ./09/23/nix_concepts_and_facts/ai_context.nix
+{ pkgs ? import <nixpkgs> { }, lib ? pkgs.lib, concepts ? import ./concepts { inherit pkgs; } }:
+Match found in: ./09/23/nix_concepts_and_facts/flake.nix
+        pkgs = import nixpkgs {
+        zos = import ./lib/zos.nix { inherit pkgs; inherit crqBinstore; inherit nixLib; };
+        concepts = import ./lib/concepts.nix { inherit pkgs; flakeSelf = self; inherit nixLib; };
+        aiContext = import ./lib/ai-context.nix { inherit pkgs; inherit concepts; inherit zos; inherit nixLib; };
+Match found in: ./09/23/nix_concepts_and_facts/lib/ai-context.nix
+    (import ./primes.nix));
+Match found in: ./09/23/nix_concepts_and_facts/lib/zos.nix
+  primesList = import ./primes.nix;
+Match found in: ./09/23/nix_concepts_and_facts/test-ai-context.nix
+{ pkgs ? import <nixpkgs> { }, lib ? pkgs.lib
+    primesList = import ./primes.nix;
+  aiContext = import ./lib/ai-context.nix { inherit pkgs lib concepts zos nixLib; };
+Match found in: ./09/23/nix_concepts_and_facts/test-zos-primes-links.nix
+{ pkgs ? import <nixpkgs> { }, lib ? pkgs.lib
+Match found in: ./09/23/analyze_ngrams.nix
+  # Import nixpkgs for the "lib" functions.
+  pkgs = import <nixpkgs> { };
+Match found in: ./09/23/count_lines.nix
+  pkgs = import <nixpkgs> { };
+Match found in: ./09/23/debug_repair.nix
+  pkgs = import <nixpkgs> { };
+Match found in: ./09/23/repair_and_parse.nix
+  pkgs = import <nixpkgs> { };
+Match found in: ./09/flake.nix
+        common = self.lib.common-imports;
+          foaf = import ./foaf.nix { inherit pkgs builtins self; };
+          seedFoaf = import ./seed.foaf.nix { inherit pkgs builtins self; };
+          cwm = import ./cwm.nix { inherit pkgs builtins self; inherit (flake-utils) lib; };
+Match found in: ./09/25/log_analyzer/flake.nix
+        pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/flake.nix
+        common = rootLib.common-imports { inherit system; };
+        # Import modules from meta-introspector-flake's source
+        secretScannerModule = import "${time-2025-src}/10/01/docs/theory/secret_scanner.nix" { inherit lib pkgs builtins; };
+        nix2gramIndexerModule = import "${time-2025-src}/10/01/docs/theory/nix_2gram_indexer.nix" { inherit lib pkgs builtins nGramGeneratorModule nixCodeIndexerModule; };
+        nGramGeneratorModule = import "${time-2025-src}/10/01/docs/theory/n_gram_generator.nix" { inherit lib pkgs builtins; };
+        nixCodeIndexerModule = import "${time-2025-src}/10/01/docs/theory/nix_code_indexer.nix" { inherit lib pkgs builtins; };
+        twoGramReportGeneratorModule = import "${time-2025-src}/10/01/docs/theory/2gram_report_generator.nix" { inherit lib pkgs builtins; };
+        # Helper functions (now imported from ./lib/helpers.nix)
+        helpers = import ./lib/helpers.nix {
+        # Import packages definitions (now imported from ./packages/analysis.nix)
+        analysisPackages = import ./packages/analysis.nix {
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/lib/helpers.nix
+  # common = import ../../../lib/common-imports.nix { inherit system; };
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/packages/analysis.nix
+  # common = import ../../../lib/common-imports.nix { inherit system; };
+  # Import helper functions from lib/helpers.nix
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/packages/default.nix
+import ./analysis.nix args // {
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/test-log-analyzer-flake.nix
+        common = rootFlake.lib.common-imports { inherit system; };
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/test-meta-introspector-flake.nix
+        common = rootFlake.lib.common-imports { inherit system; };
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/test-secret-scanner-module.nix
+        common = import ../../../../lib/common-imports.nix { inherit system; };
+        secretScannerModule = import "${meta-introspector-flake}/10/01/docs/theory/secret_scanner.nix" { inherit lib pkgs; };
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/test-cases/bug-repro-build-time-gemini-capture.nix
+        common = rootFlake.lib.common-imports { inherit system; };
+Match found in: ./09/25/prime_lattice.nix
+        value = import (./primes + "/${file}");
+Match found in: ./09/25/interpreter.nix
+  # Import our prime lattice definition
+  primeLattice = import ./prime_lattice.nix;
+Match found in: ./09/25/test_prime_encoder.nix
+{ pkgs ? import <nixpkgs> {}, lib ? pkgs.lib }:
+  # Import our prime lattice
+  primeLattice = import ./prime_lattice.nix;
+  # Import the JSON reader
+  readSimpleExprJsonModule = import ../lib/read_simple_expr_json.nix { inherit lib simpleExprJsonPath; };
+  # Import the prime encoder
+Match found in: ./09/26/synapse-system/flake.nix
+        pkgs = import nixpkgs {
+        pythonModule = import ./nix/modules/python-env.nix;
+Match found in: ./09/26/synapse-system/nix/flakes/4QZero/flake.nix
+        pkgs = import nixpkgs {
+Match found in: ./09/26/synapse-system/nix/flakes/architect/flake.nix
+        pkgs = import nixpkgs {
+Match found in: ./09/26/synapse-system/nix/flakes/base-agent/flake.nix
+        pkgs = import nixpkgs {
+Match found in: ./09/26/synapse-system/nix/flakes/clarity-judge/flake.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/synapse-system/nix/flakes/code-hound/flake.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/synapse-system/nix/flakes/devops-engineer/flake.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/synapse-system/nix/flakes/docs-writer/flake.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/synapse-system/nix/flakes/file-creator/flake.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/synapse-system/nix/flakes/git-workflow/flake.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/synapse-system/nix/flakes/golang-specialist/flake.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/synapse-system/nix/flakes/python-specialist/flake.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/synapse-system/nix/flakes/rust-specialist/flake.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/synapse-system/nix/flakes/security-specialist/flake.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/synapse-system/nix/flakes/synapse-project-manager/flake.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/synapse-system/nix/flakes/test-runner/flake.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/synapse-system/nix/flakes/tool-runner/flake.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/synapse-system/nix/flakes/typescript-specialist/flake.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/synapse-system/nix/flakes/ux-designer/flake.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/synapse-system/nix/modules/python-env.nix
+  # Import the generated python-packages.nix using pkgs.callPackage
+Match found in: ./09/26/synapse-system/shell.nix
+  pkgs ? import <nixpkgs> {},
+Match found in: ./09/26/synapse-system/tests/python/step1/flake.nix
+        pkgs = import nixpkgs {
+        pythonModule = import ./nix/modules/python-env.nix {
+          test-agent = (import agent {
+Match found in: ./09/26/synapse-system/tests/python/step1/nix/flakes/agent/flake.nix
+        pkgs = import nixpkgs {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/aliases/WIP-python-pdm.nix
+  imports = [dream2nix.modules.dream2nix.python-pdm];
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/default.nix
+    import
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/dev-flake/default.nix
+    import
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/dev-flake/flake-compat.nix
+      flake = import (flakeSrc + "/flake.nix");
+          flake = import (sourceInfo
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/dev-flake/flake.nix
+      imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/basics/derivation/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/basics/derivation/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/basics/htop-with-flags/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/basics/htop-with-flags/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/basics/mkDerivation/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/basics/mkDerivation/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/haskell-local-development-cabal/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/haskell-local-development-cabal/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-local-development-nextjs/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-local-development-nextjs/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-local-development-no-lock-file/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-local-development-no-lock-file/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-packaging-devshell-only/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-packaging-devshell-only/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-packaging/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-packaging/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/php-packaging/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/php-packaging/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-machine-learning/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-machine-learning/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-multiple-packages/default.nix
+  pyproject = lib.importTOML ./subpkg1/pyproject.toml;
+  imports = [
+  buildPythonPackage.pythonImportsCheck = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-multiple-packages/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-pdm-pytorch-from-nixpkgs/default.nix
+  imports = [
+    pythonImportsCheck = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-pdm-pytorch-from-nixpkgs/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-pdm/default.nix
+  imports = [
+    pythonImportsCheck = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-pdm/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development/default.nix
+  pyproject = lib.importTOML (config.mkDerivation.src + /pyproject.toml);
+  imports = [
+    pythonImportsCheck = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-ansible/default.nix
+  imports = [
+    pythonImportsCheck = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-ansible/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-apache-airflow/default.nix
+  imports = [
+        imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-apache-airflow/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-odoo/default.nix
+  imports = [
+        imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-odoo/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-pillow/default.nix
+  imports = [
+    pythonImportsCheck = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-pillow/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/rust-local-development-workspace/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/rust-local-development-workspace/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/rust-packaging-buildRustPackage/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/rust-packaging-buildRustPackage/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/rust-packaging/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/rust-packaging/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/spago-local-development/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/spago-local-development/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+          # Import our actual package definiton as a dream2nix module from ./default.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/repo-with-packages-flake/flake.nix
+  # We import the latest commit of dream2nix main branch and instruct nix to
+      dream2nix.lib.importPackages {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/repo-with-packages-flake/packages/hello/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/repo-with-packages/default.nix
+  pkgs ? import (import dream2nixSource {}).inputs.nixpkgs {},
+  dream2nix = import dream2nixSource {};
+  packages = dream2nix.lib.importPackages {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/repo-with-packages/packages/hello/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/flake.nix
+    devFlake = import ./dev-flake;
+    lib = import ./lib {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/default.nix
+  importPackages = args @ {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/http/default.nix
+    import ../extractSource.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/npm/default.nix
+    import ../extractSource.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/pypi-sdist/default.nix
+    import ../extractSource.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/types/default.nix
+  # This is important because derivations cannot be merged with drv-parts.
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/misc/benchmarks/builtins-derivation-modules-vs-pkg-func.nix
+  dream2nix = import dream2nixSource;
+  nixpkgs = import dream2nix.inputs.nixpkgs {};
+        imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/misc/benchmarks/mkDerivation-modules-vs-pkg-func.nix
+  dream2nix = import dream2nixSource;
+  nixpkgs = import dream2nix.inputs.nixpkgs {};
+      imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/misc/drafts/repo-flake-groups/flake.nix
+        imports = [
+            imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-groups/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-groups/group.nix
+        submoduleWithNameVersion = import ./submoduleWithNameVersion.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-groups/groups-option.nix
+      (import ./group.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-groups/interface.nix
+  options.groups = import ./groups-option.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-groups/submoduleWithNameVersion.nix
+            imports = [value];
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-haskell-cabal/default.nix
+  writers = import ../../../pkgs/writers {
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/default.nix
+  nodejsLockUtils = import ../../../lib/internal/nodejsLockUtils.nix {inherit lib;};
+  nodejsUtils = import ../../../lib/internal/nodejsUtils.nix {
+  graphUtils = import ../../../lib/internal/graphUtils.nix {inherit lib;};
+  utils = import ./utils.nix {inherit lib;};
+        imports = [
+        imports = [
+        imports = [
+        imports = [
+  imports = [
+      imports = [
+    // (import ./types.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/interface.nix
+      (import ./types.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/modules/dist.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/modules/installed.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/modules/prepared-dev.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/modules/prepared-prod.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-nextjs/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-packaging-package-lock-v1/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-packaging-package-lock/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/types.nix
+  dreamTypes = import ../../../lib/types {
+    imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/utils.nix
+  nodejsLockUtils = import ../../../lib/internal/nodejsLockUtils.nix {inherit lib;};
+  graphUtils = import ../../../lib/internal/graphUtils.nix {inherit lib;};
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-python-pyproject/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-spago/default.nix
+  writers = import ../../../pkgs/writers {
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/_template/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/buildPythonPackage-mixin/default.nix
+  buildPythonPackageOptions = import ../buildPythonPackage/options.nix {inherit config lib;};
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/buildPythonPackage-mixin/interface.nix
+  buildPythonPackageOptions = import ../buildPythonPackage/options.nix {inherit config lib;};
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/buildPythonPackage-mixin/tests/packages/basic/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/buildPythonPackage/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/buildPythonPackage/interface.nix
+  buildPythonPackageOptions = import ./options.nix {inherit config lib;};
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/buildPythonPackage/options.nix
+  pythonImportsCheck = l.mkOption {
+      Check whether importing the listed modules works
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/buildPythonPackage/tests/packages/basic/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/buildRustPackage/default.nix
+  readDreamLock = import ../../../lib/internal/readDreamLock.nix {inherit lib;};
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/builtins-derivation/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/builtins-derivation/interface.nix
+  common-options = import ./derivation-common/options.nix {inherit lib;};
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/docs/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/eval-cache/default.nix
+  ifdInfoMsg = "Information on how to fix this is shown below if evaluated with `--allow-import-from-derivation`";
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/flags/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/lock/default.nix
+    import os
+    import subprocess
+    from pathlib import Path
+    import tempfile
+    import subprocess
+    import os
+    import json
+    from pathlib import Path
+      import codecs
+      import json
+      import os
+      import re
+      import subprocess
+      import sys
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/lock/interface.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/paths/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/public/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/public/interface.nix
+    optsPackage = import ./optsPackage.nix {
+    optsPackageCompat = import ./optsPackageCompat.nix {inherit lib;};
+    optsPackageDrvParts = import ./optsPackageDrvParts.nix {inherit lib;};
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/tests/packages/nixpkgs/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/ui/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/mkDerivation-mixin/default.nix
+  mkDerivationOptions = import ../mkDerivation/options.nix {
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/mkDerivation-mixin/interface.nix
+  mkDerivationOptions = import ../mkDerivation/options.nix {
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/mkDerivation-mixin/tests/packages/basic/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/mkDerivation/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/mkDerivation/interface.nix
+  mkDerivationOptions = import ./options.nix {
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/mkDerivation/options.nix
+  dreamTypes = import ../../../lib/types {
+  common-options = import ../builtins-derivation/derivation-common/options.nix {inherit lib;};
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/mkDerivation/tests/packages/basic/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/multi-derivation-package/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/multi-derivation-package/interface.nix
+  dreamTypes = import ../../../lib/types {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nixpkgs-overrides/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-devshell-v3/default.nix
+  imports = [
+    imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-devshell/default.nix
+  imports = [
+    imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-devshell/tests/packages/basic/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular-v3/default.nix
+  extractSource = import ../../../lib/internal/fetchers/extractSource.nix {
+  findCycles = import ../../../lib/internal/findCycles.nix {
+          imports = [
+    imports = [
+      unpackPhase = import ./unpackPhase.nix {};
+      configurePhase = import ./configurePhase.nix {
+      buildPhaseNodejs = import ./buildPhase.nix {
+      installPhaseNodejs = import ./installPhase.nix {
+  imports = [
+    passthru.devShell = import ./devShell.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular-v3/interface.nix
+  mkSubmodule = import ../../../lib/internal/mkSubmodule.nix {inherit lib specialArgs;};
+    imports = [
+      imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular/default.nix
+    import ../../../lib/internal/fetchDreamLockSources.nix
+  getDreamLockSource = import ../../../lib/internal/getDreamLockSource.nix {inherit lib;};
+  readDreamLock = import ../../../lib/internal/readDreamLock.nix {inherit lib;};
+  hashPath = import ../../../lib/internal/hashPath.nix {
+  hashFile = import ../../../lib/internal/hashFile.nix {
+    git = import ../../../lib/internal/fetchers/git {
+    http = import ../../../lib/internal/fetchers/http {
+          imports = [
+    imports = [
+      unpackPhase = import ./unpackPhase.nix {};
+      configurePhase = import ./configurePhase.nix {
+      buildPhaseNodejs = import ./buildPhase.nix {
+      installPhaseNodejs = import ./installPhase.nix {
+  imports = [
+    passthru.devShell = import ./devShell.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular/interface.nix
+  mkSubmodule = import ../../../lib/internal/mkSubmodule.nix {inherit lib specialArgs;};
+    imports = [
+      imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-node-modules-v3/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-node-modules/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-node-modules/tests/packages/basic/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-node-modules/tests/packages/nodejs-packaging-node-modules-only/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-json-v3/default.nix
+  writers = import ../../../pkgs/writers {
+  imports = [
+      packageJson = lib.importJSON (config.nodejs-package-json.source + /package.json);
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-json-v3/interface.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-json/default.nix
+  writers = import ../../../pkgs/writers {
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-json/interface.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-json/tests/packages/basic/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-lock-v3/default.nix
+  nodejsLockUtils = import ../../../lib/internal/nodejsLockUtils.nix {inherit lib;};
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-lock-v3/interface.nix
+  dreamTypes = import ../../../lib/types {
+    #     Usually it's a bad idea to disable this, as development dependencies can contain important build time dependencies.
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-lock/default.nix
+  nodejsUtils = import ../../../lib/internal/nodejsUtils.nix {inherit lib parseSpdxId;};
+  parseSpdxId = import ../../../lib/internal/parseSpdxId.nix {inherit lib;};
+  prepareSourceTree = import ../../../lib/internal/prepareSourceTree.nix {inherit lib;};
+  simpleTranslate = import ../../../lib/internal/simpleTranslate.nix {inherit lib;};
+  translate = import ./translate.nix {
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-lock/interface.nix
+        Usually it's a bad idea to disable this, as development dependencies can contain important build time dependencies.
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/overrides/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/package-func/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-composer-lock/default.nix
+  dreamLockUtils = import ../../../lib/internal/dreamLockUtils.nix {inherit lib;};
+  nodejsUtils = import ../../../lib/internal/nodejsUtils.nix {inherit lib parseSpdxId;};
+  parseSpdxId = import ../../../lib/internal/parseSpdxId.nix {inherit lib;};
+  prepareSourceTree = import ../../../lib/internal/prepareSourceTree.nix {inherit lib;};
+  simpleTranslate2 = import ../../../lib/internal/simpleTranslate2.nix {inherit lib;};
+  translate = import ./translate.nix {
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-composer-lock/interface.nix
+        Usually it's a bad idea to disable this, as development dependencies can contain important build time dependencies.
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-composer-lock/translate.nix
+      (import ../../../lib/internal/php-semver.nix {inherit lib;})
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-granular/default.nix
+    import ../../../lib/internal/fetchDreamLockSources.nix
+  getDreamLockSource = import ../../../lib/internal/getDreamLockSource.nix {inherit lib;};
+  readDreamLock = import ../../../lib/internal/readDreamLock.nix {inherit lib;};
+  hashPath = import ../../../lib/internal/hashPath.nix {
+    git = import ../../../lib/internal/fetchers/git {
+    path = import ../../../lib/internal/fetchers/path {
+  inherit (import ../../../lib/internal/php-semver.nix {inherit lib;}) satisfies;
+      imports = [
+      public.devShell = import ./devShell.nix {
+  imports = [
+          imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-granular/interface.nix
+  mkSubmodule = import ../../../lib/internal/mkSubmodule.nix {inherit lib specialArgs;};
+    imports = [
+      imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/default.nix
+  writers = import ../../../pkgs/writers {
+        imports = [
+    imports = [
+  imports = [
+      # This is imported directly instead of depending on dream2nix.packages
+      fetchPipMetadataScript = import ../../../pkgs/fetchPipMetadata/script.nix {
+            # to re-activate it by doing "import _sitecustomize".
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/interface.nix
+  mkSubmodule = import ../../../lib/internal/mkSubmodule.nix {inherit lib specialArgs;};
+    imports = [
+      imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/pip-hotfixes/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/tests/packages/can-build-setuptools/default.nix
+  pyproject = lib.importTOML (config.mkDerivation.src + /pyproject.toml);
+  imports = [
+    pythonImportsCheck = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/tests/packages/can-handle-setuptools-runtime-dep/default.nix
+  pyproject = lib.importTOML (config.mkDerivation.src + /pyproject.toml);
+  imports = [
+    pythonImportsCheck = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/tests/packages/lock-script-works/default.nix
+  pyproject = lib.importTOML (config.mkDerivation.src + /pyproject.toml);
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/tests/packages/python-nodejs/default.nix
+  imports = [
+    pythonImportsCheck = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-editables/default.nix
+  imports = [
+  editablesShellHook = import ./editable.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/default.nix
+  libpdm = import ./lib.nix {
+  libpyproject = import (dream2nix.inputs.pyproject-nix + "/lib") {inherit lib;};
+  lock_data = lib.importTOML config.pdm.lockfile;
+  pyproject = libpdm.loadPdmPyProject (lib.importTOML config.pdm.pyproject);
+    imports = [
+  imports = [
+    imports = [commonModule];
+        # safely ignored. They are still set up correctly and can be imported.
+          imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/interface-dependency.nix
+    sourceSelector = import ./sourceSelectorOption.nix {inherit lib;};
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/interface.nix
+  mkSubmodule = import ../../../lib/internal/mkSubmodule.nix {inherit lib specialArgs;};
+    imports = [
+      sourceSelector = import ./sourceSelectorOption.nix {inherit lib;};
+    (import ../WIP-groups/groups-option.nix {inherit config lib specialArgs;})
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/lock.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/tests/packages/jupyter-lab/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/tests/packages/python-local-development/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-lock/cargoLock.nix
+  readDreamLock = import ../../../lib/internal/readDreamLock.nix {inherit lib;};
+  toTOML = import ../../../lib/internal/toTOML.nix {inherit lib;};
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-lock/default.nix
+  parseSpdxId = import ../../../lib/internal/parseSpdxId.nix {inherit lib;};
+  sanitizePath = import ../../../lib/internal/sanitizePath.nix {inherit lib;};
+  sanitizeRelativePath = import ../../../lib/internal/sanitizeRelativePath.nix {inherit lib;};
+  prepareSourceTree = import ../../../lib/internal/prepareSourceTree.nix {inherit lib;};
+  simpleTranslate2 = import ../../../lib/internal/simpleTranslate2.nix {inherit lib;};
+  translate = import ./translate.nix {
+  cargoLock = import ./cargoLock.nix {
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-lock/translate.nix
+      (import ./findAllCrates.nix {inherit lib;})
+      # Note: the ordering is important here, since packageToml assumes
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-vendor/default.nix
+    import ../../../lib/internal/fetchDreamLockSources.nix
+  getDreamLockSource = import ../../../lib/internal/getDreamLockSource.nix {inherit lib;};
+  readDreamLock = import ../../../lib/internal/readDreamLock.nix {inherit lib;};
+  hashPath = import ../../../lib/internal/hashPath.nix {
+  hashFile = import ../../../lib/internal/hashFile.nix {
+    git = import ../../../lib/internal/fetchers/git {
+    crates-io = import ../../../lib/internal/fetchers/crates-io {
+    path = import ../../../lib/internal/fetchers/path {
+  vendoring = import ./vendor.nix {
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-vendor/vendor.nix
+          import toml
+          import json
+          import sys
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-crane/default.nix
+  readDreamLock = import ../../../lib/internal/readDreamLock.nix {inherit lib;};
+  _crane = import config.deps.craneSource {
+  imports = [
+    devShell = import ./devshell.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/all-modules.nix
+# Automatically imports all flake-parts modules from `/**/modules/flake-parts`
+  imports = flakePartsModules;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/apps.update-locks.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/checks.nix
+    dream2nixFlake = import ../../. {};
+    importFlake = flakeFile: let
+      self' = (import flakeFile).outputs {
+      (importFlake (flakePath + "/flake.nix")).packages.${system}.default or {};
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/checks.nix-unit.nix
+    dream2nixFlake = import ../../. {};
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/core-modules.nix
+# Automatically imports all flake-parts modules from `/**/modules/flake-parts`
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/devShells.nix
+    makeDevshell = import "${inputs.devshell}/modules" pkgs;
+          imports = [];
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/examples.nix
+  dream2nixFlake = import ../../. {};
+  importFlake = flakeFile: let
+    self' = (import flakeFile).outputs {
+      flake = importFlake flakeFile;
+            imported =
+              (import ../../examples/repo-with-packages {
+            imported;
+            (importFlake ../../examples/repo-with-packages-flake/flake.nix).packages.${system}.hello;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/pythonEnv/flake-template.nix
+          imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/reference-website/default.nix
+    inherit (import ./frontmatter.nix {inherit lib;}) getFrontmatterString;
+    dream2nix = import dream2nixRoot;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/overrides/python/certifi/default.nix
+  imports = [dream2nix.modules.dream2nix.nixpkgs-overrides];
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/overrides/python/nvidia-cublas-cu12/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/overrides/python/nvidia-cuda-cupti-cu12/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/overrides/python/nvidia-cuda-nvrtc-cu12/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/overrides/python/nvidia-cuda-runtime-cu12/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/overrides/python/nvidia-cudnn-cu12/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/overrides/python/nvidia-cufft-cu12/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/overrides/python/nvidia-curand-cu12/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/overrides/python/nvidia-cusolver-cu12/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/overrides/python/nvidia-cusparse-cu12/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/overrides/python/nvidia-nccl-cu12/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/overrides/python/nvidia-nvjitlink-cu12/default.nix
+  imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/overrides/python/pillow/default.nix
+  imports = [dream2nix.modules.dream2nix.nixpkgs-overrides];
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/overrides/python/psycopg2/default.nix
+  imports = [dream2nix.modules.dream2nix.nixpkgs-overrides];
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/pkgs/fetchPipMetadata/flake-module.nix
+    packages.fetch-pip-metadata-package = import ./package.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/pkgs/fetchPipMetadata/script.nix
+  package = import ./package.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/shell.nix
+(import ./default.nix).devShells.${builtins.currentSystem}.default
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/fixtures.nix
+    imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_findCycles/default.nix
+  pkgs ? import <nixpkgs> {},
+  lib ? import <nixpkgs/lib>,
+  findCycles = import ../../../lib/internal/findCycles.nix {inherit lib;};
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_graph_utils/default.nix
+{lib ? import <nixpkgs/lib>, ...}: let
+  sanitizeGraphTests = import ./sanitizeGraph.nix {inherit lib;};
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_graph_utils/fileSystem.nix
+{lib ? import <nixpkgs/lib>, ...}: let
+  utils = import ../../../lib/internal/graphUtils.nix {inherit lib;};
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_graph_utils/sanitizeGraph.nix
+{lib ? import <nixpkgs/lib>, ...}: let
+  util = import ../../../lib/internal/graphUtils.nix {inherit lib;};
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_groups/default.nix
+  pkgs ? import <nixpkgs> {},
+  lib ? import <nixpkgs/lib>,
+  dream2nix ? import ../../.. inputs,
+  fixtures = import ../fixtures.nix {inherit dream2nix;};
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_groups_multi_derivation_package/default.nix
+  pkgs ? import <nixpkgs> {},
+  lib ? import <nixpkgs/lib>,
+  dream2nix ? import ../../.. inputs,
+  fixtures = import ../fixtures.nix {inherit dream2nix;};
+      dreamTypes = import ../../../lib/types {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_nodejs_lock_v3/default.nix
+  pkgs ? import <nixpkgs> {},
+  lib ? import <nixpkgs/lib>,
+  dream2nix ? import ../../.. inputs,
+      imports = [
+      imports = [
+      imports = [
+      imports = [
+      imports = [
+      imports = [
+      imports = [
+      imports = [
+  #     imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_nodejs_lockutils/default.nix
+  # pkgs ? import <nixpkgs> {},
+  lib ? import <nixpkgs/lib>,
+  nodejsLockUtils ? import ../../../lib/internal/nodejsLockUtils.nix {inherit lib;},
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_nodejs_node_builder_v3/default.nix
+  pkgs ? import <nixpkgs> {},
+  lib ? import <nixpkgs/lib>,
+  dream2nix ? import ../../.. inputs,
+      imports = [
+      imports = [
+      imports = [
+      imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_paths/default.nix
+  pkgs ? import <nixpkgs> {},
+  lib ? import <nixpkgs/lib>,
+  dream2nix ? import ../../.. inputs,
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_pip_pyproject/default.nix
+  pkgs ? import <nixpkgs> {},
+  lib ? import <nixpkgs/lib>,
+  dream2nix ? import ../../.. inputs,
+      imports = [
+      imports = [
+      imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_python-pdm-lib/default.nix
+  pkgs ? import <nixpkgs> {},
+  lib ? import <nixpkgs/lib>,
+  dream2nix ? (import ../../../.),
+  inputs ? (import ../../../.).inputs,
+  libpdm = (import ../../../modules/dream2nix/python-pdm/lib.nix) {
+  libpyproject = import (pyproject-nix + "/lib") {inherit lib;};
+  linux_environ = lib.importJSON ./environ.json;
+    lock_data = lib.importTOML ./fixtures/pdm-example1.lock;
+    pyproject = libpdm.loadPdmPyProject (lib.importTOML ./fixtures/pyproject.toml);
+    lock_data_2 = lib.importTOML ./fixtures/pdm-example1.lock;
+      lock_data = lib.importTOML ./fixtures/pdm-with-cycles.lock;
+      lock_data = lib.importTOML ./fixtures/pdm-extras.lock;
+    pyproject = libpdm.loadPdmPyProject (lib.importTOML ./fixtures/pyproject.toml);
+    lock_data = lib.importTOML ./fixtures/pdm-example1.lock;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_python-pdm/default.nix
+  pkgs ? import <nixpkgs> {},
+  lib ? import <nixpkgs/lib>,
+  dream2nix ? import ../../../. inputs,
+  inputs ? (import ../../../.).inputs,
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/debug/build_overrides.nix
+  pkgs = import (import ../mach_nix/nix/nixpkgs-src.nix) { config = {}; overlays = []; };
+  result = import ./overrides.nix { inherit pkgs python; };
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/debug/pypi-deps-db.nix
+  pkgs =  import (import ../mach_nix/nix/nixpkgs-src.nix) {};
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/default.nix
+  pkgs ? import (import ./mach_nix/nix/nixpkgs-src.nix) { config = {}; overlays = []; },
+  pypiDataRev ? ((import ./mach_nix/nix/flake-inputs.nix) "pypi-deps-db").rev,
+  pypiDataSha256 ? ((import ./mach_nix/nix/flake-inputs.nix) "pypi-deps-db").sha256,
+  l = import ./mach_nix/nix/lib.nix { inherit pkgs; inherit (pkgs) lib; };
+  python_machnix = import ./mach_nix/nix/python.nix { inherit pkgs; };
+  pypiFetcher = (import ./mach_nix/nix/deps-db-and-fetcher.nix {
+  withDot = mkPython: import ./mach_nix/nix/withDot.nix { inherit mkPython pypiFetcher; };
+        It is recommended to pass a newer pypiDataRev to mach-nix during import.
+        (import ./mach_nix/nix/buildPythonPackage.nix machnixArgs) python func { src = args; }
+        (import ./mach_nix/nix/buildPythonPackage.nix machnixArgs) python func (l.throwOnDeprecatedArgs func args);
+        (import ./mach_nix/nix/mkPython.nix machnixArgs) python { packagesExtra = args; }
+        (import ./mach_nix/nix/mkPython.nix machnixArgs) python (l.throwOnDeprecatedArgs caller args);
+  pythonDeps = builtins.attrValues (import ./mach_nix/nix/python-deps.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/flake.nix
+          mach-nix-default = import ./default.nix {
+          devShell = import ./shell.nix {
+                    pkgs = import <nixpkgs> {};
+                  in (import ./lib/extractor {}).extract_from_src {
+                  (import ./mach_nix/nix/python.nix {
+                export CONDA_DATA=${(import ./mach_nix/nix/conda-channels.nix {
+                # This ensures that mach_nix is importable.
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/interpreter.nix
+  pkgs = import (import ./mach_nix/nix/nixpkgs-src.nix) { config = {}; };
+  deps = pkgs.lib.attrValues (import ./mach_nix/nix/python-deps.nix { inherit python; inherit (pkgs) fetchurl; });
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/lib/extractor/default.nix
+  pkgs ? import <nixpkgs> { config = { allowUnfree = true; };},
+  fetchPypi = import fetchPypiSrc;
+    import sys, setuptools, tokenize, os; sys.argv[0] = 'setup.py'; __file__='setup.py';
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/lib/extractor/extractor.nix
+(import ./default.nix).extractor
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/lib/extractor/fast-extractor.nix
+(import ./default.nix {}).extractor-fast
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/lib/extractor/make-drvs.nix
+(import ./default.nix {}).make-drvs
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/fixes.nix
+    import json
+    from packaging.version import Version, parse
+  # This is important because null will be returned whenever the attribute to modify doesn't exist
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/buildPythonPackage.nix
+  l = import ./lib.nix { inherit (pkgs) lib; inherit pkgs; };
+      _fixes ? import ../fixes.nix {inherit pkgs;},
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/call_mach.nix
+  pkgs = import nixpkgs { config = {}; overlays = []; };
+import ./compileOverrides.nix {
+  pypiData = (import ./deps-db-and-fetcher.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/compileOverrides.nix
+  _providerDefaults ? (import ./lib.nix { inherit (pkgs) lib; inherit pkgs; }).makeProviderDefaults requirements
+  l = import ./lib.nix { inherit (pkgs) lib; inherit pkgs; };
+  nixpkgs_json = import ./nixpkgs-json.nix {
+    (pkgs.lib.attrValues (import ./python-deps.nix {python = pkgs.python39; inherit (pkgs) fetchurl; }))
+  db_and_fetcher = import ./deps-db-and-fetcher.nix {
+      conda_channels_json =  (import ./conda-channels.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/conda-channels.nix
+  pkgs ? import (import ./nixpkgs-src.nix) {},
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/deps-db-and-fetcher.nix
+  pkgs ? import (import ./nixpkgs-src.nix) {},
+  pypi_deps_db_commit ? ((import ./flake-inputs.nix) "pypi-deps-db").rev,
+  pypi_deps_db_sha256 ? ((import ./flake-inputs.nix) "pypi-deps-db").sha256,
+  pypi_fetcher = import pypi_fetcher_src {
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/from-nixpkgs/mk-python-derivation.nix
+, pythonImportsCheckHook
+# C can import package A propagated by B
+      pythonImportsCheckHook
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/lib.nix
+  pkgs ? import (import ./nixpkgs-src.nix) { config = {}; overlays = []; },
+  autoPatchelfHook = import ./auto_patchelf_hook.nix {inherit (pkgs) fetchurl makeSetupHook writeText;};
+    importJSON (pkgs.runCommand "yml" { nativeBuildInputs = [pkgs.yq] ;} ''echo '${escape ["'"] str}' | yq . > $out'');
+            Either remove `python=` from your requirements or do not specify 'python' when importing mach-nix
+  compileExpression = args: import ./compileOverrides.nix args;
+      result = import file { inherit (args) pkgs python; };
+      file_path = "${(import ../../lib/extractor { inherit pkgs; }).extract_from_src {
+      aliases = import ./aliases.nix;
+          throw ''${func} does not accept '${k}' anymore. Instead, provide '${moved."${k}"}' when importing mach-nix.''
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/mkPython.nix
+  l = import ./lib.nix { inherit (pkgs) lib; inherit pkgs; };
+  buildPythonPackageBase = import ./buildPythonPackage.nix {
+      _fixes ? import ../fixes.nix {inherit pkgs;},
+          nixpkgs = import pkgs.path { inherit (pkgs) config; overlays = pkgs.overlays ++ [ overlay ]; };
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/nixpkgs-json.nix
+  pkgs ? import (import ./nixpkgs-src.nix) { config = {}; overlays = []; },
+  l = import ./lib.nix { inherit (pkgs) lib; inherit pkgs; };
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/nixpkgs-src.nix
+  nixpkgsInput = (import ./flake-inputs.nix) "nixpkgs";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/python.nix
+  pkgs ? import (import ./nixpkgs-src.nix) { config = {}; overlays = []; },
+  pythonDeps = lib.attrValues (import ./python-deps.nix { inherit python; inherit (pkgs) fetchurl; });
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/crawler/configuration.nix
+  python = import ../python.nix;
+  nixpkgs_src = (import ../../nix/nixpkgs-src.nix).stable;
+  extractor = import extractor_dir { inherit pkgs; };
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/crawler/hetzner.nix
+    { imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/database/configuration.nix
+with import (import ../nixpkgs-src.nix).stable {};
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/database/hetzner.nix
+    { imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/power-deps-crawler/configuration.nix
+  python = import ../python.nix;
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/power-deps-crawler/genesis.nix
+    imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/power-wheels-crawler/configuration.nix
+  python = import ../python.nix;
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/power-wheels-crawler/genesis.nix
+    imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/power-wheels-crawler/hetzner-cloud.nix
+    { imports = [
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/python.nix
+  mach-nix = import (builtins.fetchGit {
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/shell.nix
+  nixpkgs-src = (import ./nix/nixpkgs-src.nix).stable;
+  pkgs = import nixpkgs-src {};
+    (import ./nix/python.nix)
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/shell.nix
+  pkgs ? import (import ./mach_nix/nix/nixpkgs-src.nix) { config = {}; },
+  pypiData ? (import ./mach_nix/nix/deps-db-and-fetcher.nix {
+  chondaChannelsJson ? import ./mach_nix/nix/conda-channels.nix {
+  pythonWithPkgs = import ./mach_nix/nix/python.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/all-tests.nix
+  mach-nix = import ../. {};
+  makeTests = import ./make-tests.nix;
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/make-tests.nix
+  mach-nix = import ../. {};
+      import file ({
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_alias_dateutil.nix
+  mach-nix ? import ../. {},
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_dot_in_name.nix
+  mach-nix ? import ../. {},
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_extra_pkgs.nix
+  mach-nix ? import ../. {},
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_extras.nix
+  mach-nix ? import ../. {},
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_flakes.nix
+  mach-nix ? import ../. {},
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_flakes_legacy_consistent.nix
+  mach-nix ? import ../. {},
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_flakes_lib.nix
+  mach-nix ? import ../. {},
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_jupyterlab_nixpkgs.nix
+  mach-nix ? import ../. {},
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_lazy_usage.nix
+  mach-nix ? import ../. {},
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_non_python_extra_pkgs.nix
+  mach-nix ? import ../. {},
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_overrides_selectPkgs.nix
+  mach-nix ? import ../. {},
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_passthru_select_pypi_pname.nix
+  mach-nix ? import ../. {},
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_py38_cp38_wheel.nix
+  mach-nix ? import ../. {},
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_pymc3.nix
+  mach-nix ? import ../. {},
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_remove_unwanted_deps.nix
+  mach-nix ? import ../. {},
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/default.nix
+{ pkgs ? import ./nix {}
+, sources ? import ./nix/sources.nix
+  pythonPackagesGenerated = import ./python-packages.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/examples/shell/shell.nix
+let pkgs = import <nixpkgs> { };
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/flake.nix
+        packages = import ./release.nix {
+          pkgs = import nixpkgs {
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/nix/default.nix
+, sources ? import ./sources.nix
+    inherit (import sources.gitignore { inherit (pkgs) lib; }) gitignoreSource;
+    inherit ((import (sources.pip2nix + "/release.nix") {
+      pkgs = import sources."nixpkgs-20.03" {};
+  pkgs = import nixpkgs {
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/nix/sources.nix
+        import (builtins_fetchTarball { inherit (sources.nixpkgs) url sha256; }) { inherit system; };
+        import <nixpkgs> {}
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/release-shell.nix
+{ pkgs ? (import <nixpkgs> {})
+  pythonPackagesGenerated = import ./release-python-packages.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/release.nix
+{ pkgs ? import ./nix { nixpkgs = builtins.getAttr nixpkgs sources; }
+, sources ? import ./nix/sources.nix
+    value = import ./default.nix {
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/shell.nix
+{ pkgs ? import ./nix {}
+    (import ./default.nix { inherit pkgs; })
+Match found in: ./09/26/synapse-system/vendor/nix/pynixify/default.nix
+# with (import ./pynixify/nixpkgs.nix { });  # Use this in projects other than pynixify
+with (import ./nix/nixpkgs.nix { });
+Match found in: ./09/26/synapse-system/vendor/nix/pynixify/nix/nixpkgs.nix
+in import nixpkgs (args // { overlays = [ pynixifyOverlay ] ++ overlays; })
+Match found in: ./09/26/synapse-system/vendor/nix/pynixify/nix/shell.nix
+  pkgs = import ./nixpkgs.nix { };
+Match found in: ./09/26/synapse-system/vendor/nix/pynixify/pynixify/data/parse_setuppy_data.nix
+{ file, stdenv ? (import <nixpkgs> { }).stdenv, lib ? (import <nixpkgs> { }).lib
+, unzip ? (import <nixpkgs> { }).unzip, python ? (import <nixpkgs> { }).python3
+    # src = (import <nixpkgs> {}).lib.cleanSource ./setuptools;
+Match found in: ./09/26/synapse-system/vendor/nix/pynixify/pynixify/data/pythonPackages.nix
+with (import <nixpkgs> { });
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/default.nix
+  lib = import ./lib {
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/dev/build-systems.nix
+        importlib-resources = [ ];
+        importlib-metadata = [ ];
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/dev/checks.nix
+  buildSystems' = import ./build-systems.nix;
+  buildSystemOverrides = import ./build-system-overrides.nix;
+  patchingDeps = import ./patching-deps.nix;
+          python -c 'import arpeggio.patched'
+          python -c "import socks"
+          ! python -c "import arpeggio"
+          python -c "import arpeggio"
+          python -c 'import tqdm'
+          python -c 'import arpeggio'
+          python -c 'import arpeggio'
+            test "$(python -c 'import workspace_package; print(workspace_package.hello())')" = "Hello from workspace-package!"
+            test "$(python -c 'import workspace_package; print(workspace_package.hello())')" = "Hello from mutable-package!"
+            test "$(python -c 'import c_editable; print(c_editable.hello())')" = "Hello from c-editable!"
+            test "$(python -c 'import c_editable; print(c_editable.hello())')" = "Hello from mutable-package!"
+          test "$(python -c 'import workspace_with_legacy')" == "legacy-package"
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/doc/src/overriding/overrides-sdist.nix
+    # important build systems already, so you don't have to add these to your project.
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/flake.nix
+      npins = import ./npins;
+      githubActions = (import npins.nix-github-actions).mkGithubMatrix {
+      lib = import ./lib {
+              template = import (path + "/flake.nix");
+      libTests = import ./lib/test.nix {
+        // import ./dev/checks.nix {
+                  flake' = import (path + "/flake.nix");
+                        overlay = import ./dev/build-systems.nix;
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/default.nix
+  mapAttrs (_: path: import path ({ inherit lib pyproject-nix; } // self)) {
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/scripts.nix
+    importTOML
+      uvLock = lock1.parseLock (importTOML lockPath);
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/test.nix
+  inherit (import ./testutil.nix { inherit lib; }) capitalise;
+  callTest = path: import path (uv2nix // { inherit pkgs lib pyproject-nix; });
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/test_build.nix
+  inherit (lib) mapAttrs findFirst importTOML;
+  locks = mapAttrs (_: dir: importTOML (dir + "/uv.lock")) projectDirs;
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/test_lock1.nix
+    importTOML
+  locks = mapAttrs (_: dir: importTOML (dir + "/uv.lock")) projectDirs;
+  inherit (import ./testutil.nix { inherit lib; }) capitalise;
+      expected = lib.importJSON ./expected/lock1.parseLock.${name}.json;
+        expected = lib.importJSON ./expected/lock1.parsePackage.${name}.json;
+        expected = lib.importJSON ./expected/lock1.filterPackage.${name}.json;
+        expected = lib.importJSON ./expected/lock1.resolveDependencies.${name}.json;
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/test_workspace.nix
+  inherit (import ./testutil.nix { inherit lib; }) capitalise;
+      pyprojects = map (_m: lib.importTOML (root + "/pyproject.toml")) members;
+      expected = lib.importJSON ./expected/workspace.loadConfig.${name}.json;
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/workspace.nix
+    importTOML
+      pyproject = importTOML (workspaceRoot + "/pyproject.toml");
+      uvLock = lock1.parseLock (importTOML (workspaceRoot + "/uv.lock"));
+    # List of imported (lib.importTOML) pyproject.toml files from workspace from which to load config
+      pyproject ? importTOML (workspaceRoot + "/pyproject.toml"),
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/flake.nix
+      imports = [ inputs.treefmt-nix.flakeModule ];
+            import (inputs.nix + "/packaging/dependencies.nix") {
+            import (inputs.nix + "/packaging/components.nix") {
+          treefmt.imports = [ ./dev/treefmt.nix ];
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/shell.nix
+    import nixpkgs { }
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/tests/assets/ci.nix
+{ pkgs ? import <nixpkgs> {}, lib ? pkgs.lib, system ? builtins.currentSystem }:
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/tests/assets/flake.nix
+      hydraJobs = import ./ci.nix { inherit system; };
+Match found in: ./09/26/jobs/vendor/nix-task/flake.nix
+        pkgs = import nixpkgs {
+          yarnManifest = import ./runner/yarn-manifest.nix;
+        devShells.default = import ./shell.nix {
+      lib = import ./nix/lib { lib = nixpkgsLib; };
+Match found in: ./09/26/jobs/vendor/nix-task/flakes/all-repos/flake.nix
+        pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/jobs/vendor/nix-task/nix/base-job/flake.nix
+        pkgs = import nixpkgs { inherit system; };
+Match found in: ./09/26/jobs/vendor/nix-task/nix/lib/default.nix
+    mkTask = import ./mkTask.nix { lib = _lib; };
+    mkTaskOutput = import ./mkTaskOutput.nix { lib = _lib; };
+  } // (import ./getTasks.nix);
+Match found in: ./09/26/jobs/vendor/nix-task/nix/lib/getTasks.nix
+# This file can't import anything as we include the contents of this file
+Match found in: ./09/26/jobs/vendor/nix-task/runner/yarn-manifest.nix
+        "import-fresh" = packages."import-fresh@npm:3.3.0";
+    "import-fresh@npm:3.3.0" = {
+      name = "import-fresh";
+      outputName = "import-fresh-3.3.0-3e34265ca9";
+      flatName = "import-fresh";
+Match found in: ./09/27/7-concepts/1-build-system/nix-tests/default.nix
+{ pkgs ? import <nixpkgs> {} }:
+Match found in: ./09/27/7-concepts/1-build-system/nix-tests/default-test.nix
+{ pkgs ? import <nixpkgs> {} }:
+Match found in: ./09/30/monster_experiment/rust_knowledge_extractor/flake.nix
+        # Import the secrets definition
+        secretsConfig = import ./secrets.nix { inherit pkgs lib; };
+Match found in: ./09/foaf.nix
+  # Import GitHub FOAF data
+  githubFoafData = import ./github.foaf.nix { inherit pkgs lib fetchGithubData githubToFoaf; };
+  # Import individual CRQ FOAF documents
+  crq001 = import ./crq-001.foaf.nix { inherit pkgs lib; };
+  crq007 = import ./crq-007.foaf.nix { inherit pkgs lib; };
+  crq008 = import ./crq-008.foaf.nix { inherit pkgs lib; };
+  crq009 = import ./crq-009.foaf.nix { inherit pkgs lib; };
+  crq010 = import ./crq-010.foaf.nix { inherit pkgs lib; };
+  crq011 = import ./crq-011.foaf.nix { inherit pkgs lib; };
+  crq012 = import ./crq-012.foaf.nix { inherit pkgs lib; };
+  crq013 = import ./crq-013.foaf.nix { inherit pkgs lib; };
+  allCrqs = import ./crqs.foaf.nix { inherit pkgs crq001 crq007 crq008 crq009 crq010 crq011 crq012 crq013 lib; };
+  # nix-instantiate --eval -E 'with import ./foaf.nix {}; getProjects'
+  # nix-instantiate --eval -E 'with import ./foaf.nix {}; getProjectsByMaker "http://github.com/meta-introspector"'
+  # nix-instantiate --eval -E 'with import ./foaf.nix {}; getCrqs'
+Match found in: ./09/seed.foaf.nix
+  pkgs ? import <nixpkgs> {},
+Match found in: ./09/crqs.foaf.nix
+  # Import individual CRQ FOAF documents
+Match found in: ./09/cwm.nix
+  # Import the FOAF data
+  foafData = import ./foaf.nix { inherit pkgs lib self; };
+  # Import the OWL schema
+  owlSchema = import ./owl.nix { inherit pkgs lib; };
+  # Import the verification logic
+  verifyFoafOwl = import ./verify-foaf-owl.nix { inherit pkgs lib foafData owlSchema; };
+Match found in: ./09/eval-cwm.nix
+  cwm = import ./cwm.nix { inherit pkgs lib self; };
+Match found in: ./09/test.nix
+  common = import ../lib/common-imports.nix {};
+  # Mock self for foaf.nix import, as it expects self
+  # Import the FOAF data
+  foafData = import ./foaf.nix { inherit pkgs; self = mockSelf; };
+  # Import the OWL schema
+  owlSchema = import ./owl.nix { inherit pkgs lib; };
+  # Import the verification logic
+  verifyFoafOwl = import ./verify-foaf-owl.nix { inherit pkgs lib foafData owlSchema; };
+Match found in: ./09/lib/common-imports.nix
+{ pkgs ? import <nixpkgs> {}, lib ? pkgs.lib, builtins ? builtins }: { inherit pkgs lib builtins; }
+Match found in: ./09/theory/nix_2gram_indexer_step2.nix
+  pkgs = import <nixpkgs> {};
+Match found in: ./09/hello_world.nix
+{ pkgs ? import <nixpkgs> {} }:
+Match found in: ./09/temp_step2_eval.nix
+  common = import ./lib/common-imports.nix {};
+  nixCodeIndexerModule = import ./theory/nix_code_indexer.nix { inherit lib pkgs builtins; };
+  nGramGeneratorModule = import ./theory/n_gram_generator.nix { inherit lib pkgs builtins; };
+  generate2GramIndexStep1Module = import ./theory/nix_2gram_indexer_step1.nix {
+  generate2GramIndexStep2Module = import ./theory/nix_2gram_indexer_step2.nix {
+Match found in: ./09/24/nix_custom_attrs_test/default.nix
+{ pkgs ? import <nixpkgs> { }, lib ? pkgs.lib }:
+Match found in: ./09/crq-042.foaf.nix
+  title = "Centralized Nix Import Management";
+    This CRQ proposes the development of a new Nix-based import function designed to centralize,
+    wrap, cache, and manage all external and internal Nix imports and paths. The function will:
+    1.  **Wrap Imports**: Provide a unified interface for all `import` and `fetch` operations.
+    3.  **Branch Switching**: Enable dynamic switching of imported flake references to specific branches
+    4.  **Documentation & Reporting**: Automatically document import sources, versions, and their
+    5.  **Integrity Checks**: Incorporate checks for import integrity, purity, and adherence to
+    tags = [ "Nix" "flake" "import-management" "caching" "branching" ];
+Match found in: ./commit-msg-check.nix
+{ pkgs ? import <nixpkgs> {}, commitMsgFile ? null }:
+  regex = import ./regex-generator.nix { inherit pkgs; };
+Match found in: ./10/01/docs/theory/label_interpreter.nix
+  # Import the unmath.owl.nix schema
+  unmathOwl = import ./unmath.owl.nix;
+Match found in: ./10/01/docs/theory/emoji_grammar_graph.nix
+  # Import the OWL schema and the label interpreter
+  unmathOwl = import ./unmath.owl.nix;
+  labelInterpreter = import ./label_interpreter.nix;
+Match found in: ./10/01/docs/theory/build_2gram_index.nix
+  common = import ../../../lib/common-imports.nix {};
+Match found in: ./10/01/docs/theory/emoji2nix.nix
+  # Import the emoji OWL schema
+  common = import ../../../lib/common-imports.nix {};
+Match found in: ./10/01/docs/theory/jupyter.nix
+  common = import ../../../lib/common-imports.nix {};
+Match found in: ./10/01/docs/theory/markdown_twin_generator.nix
+  common = import ../../../lib/common-imports.nix {};
+Match found in: ./10/01/docs/theory/matplotlib.nix
+  plotSchemaModule = import ./plot_schema.nix { inherit lib; };
+  inherit ((import ./create_plot.nix { inherit lib; inherit (plotSchemaModule) PlotSchema; })) createPlot;
+  inherit ((import ./render_plot.nix { inherit lib pkgs builtins; inherit (plotSchemaModule) PlotSchema; })) renderPlot;
+  inherit ((import ./example_plot.nix { inherit pandasModule pkgs builtins lib; inherit createPlot renderPlot; })) examplePlot;
+Match found in: ./10/01/docs/theory/nix2emoji.nix
+  # Import the emoji OWL schema
+  common = import ../../../lib/common-imports.nix {};
+Match found in: ./10/01/docs/theory/nix_code_indexer.nix
+    # The base path from which the index was created, to correctly import files
+    # Create an attribute set where keys are relative paths and values are imported Nix expressions.
+    # This is highly conceptual and assumes each .nix file is a valid Nix expression that can be imported.
+    importedNixExpressions = lib.listToAttrs (
+        value = import "${basePath}/${fileInfo.path}"; # Import the Nix expression
+    inherit importedNixExpressions;
+  # This module can then be imported to quickly access the indexed information.
+Match found in: ./10/01/docs/theory/nix_2gram_indexer.nix
+  generate2GramIndexStep8Module = import ./nix_2gram_indexer_step8.nix { inherit lib pkgs builtins nixCodeIndexerModule nGramGeneratorModule; };
+Match found in: ./10/01/docs/theory/nix_data_science_platform.nix
+  common = import ../../../lib/common-imports.nix {};
+Match found in: ./10/01/docs/theory/pandas.nix
+  common = import ../../../lib/common-imports.nix {};
+Match found in: ./10/01/docs/theory/spore_vial_001/metacoq_graphql_meme.nix
+  common = import ../../../../lib/common-imports.nix {};
+Match found in: ./10/01/docs/theory/nix_to_owl_ontology.nix
+  common = import ../../../../lib/common-imports.nix { inherit nixpkgs; };
+  # Import prefixes
+  nixOntologyPrefix = (import ./nix_to_owl_ontology_declarations/prefixes/nixOntologyPrefix.nix) { inherit lib pkgs builtins nixOntologyRepo; };
+  owlPrefix = (import ./nix_to_owl_ontology_declarations/prefixes/owlPrefix.nix) { inherit lib pkgs builtins; };
+  rdfPrefix = (import ./nix_to_owl_ontology_declarations/prefixes/rdfPrefix.nix) { inherit lib pkgs builtins; };
+  rdfsPrefix = (import ./nix_to_owl_ontology_declarations/prefixes/rdfsPrefix.nix) { inherit lib pkgs builtins; };
+  xsdPrefix = (import ./nix_to_owl_ontology_declarations/prefixes/xsdPrefix.nix) { inherit lib pkgs builtins; };
+  nixToOwlMapper = nixFileIndex: (import ./nix_to_owl_ontology_declarations/nixToOwlMapper.nix) {
+Match found in: ./10/01/docs/theory/project_nix_path_ngrams.nix
+  common = import ../../../lib/common-imports.nix {};
+Match found in: ./10/01/docs/theory/secret_scanner.nix
+  common = import ../../../lib/common-imports.nix {};
+Match found in: ./10/01/docs/theory/sparql.nix
+  common = import ../../../lib/common-imports.nix {};
+Match found in: ./10/01/docs/theory/url_provenance_mapper.nix
+  common = import ../../../lib/common-imports.nix {};
+Match found in: ./10/01/docs/theory/verifiable_file_topology.nix
+  common = import ../../../lib/common-imports.nix {};
+Match found in: ./10/01/docs/theory/w3c_ontology_importer.nix
+  common = import ../../../lib/common-imports.nix {};
+Match found in: ./10/01/docs/theory/w3c_spec_vendorizer.nix
+  # Import the url_provenance_mapper for conceptual provenance tracking
+  common = import ../../../lib/common-imports.nix {};
+Match found in: ./10/01/docs/theory/nix_2gram_indexer_step2.nix
+  generate2GramIndexStep1Module = import ./nix_2gram_indexer_step1.nix { inherit lib pkgs builtins nixCodeIndexerModule; };
+Match found in: ./10/01/docs/theory/nix_2gram_indexer_step3.nix
+  generate2GramIndexStep2Module = import ./nix_2gram_indexer_step2.nix { inherit lib pkgs builtins nixCodeIndexerModule nGramGeneratorModule; };
+Match found in: ./10/01/docs/theory/nix_2gram_indexer_step4.nix
+  generate2GramIndexStep3Module = import ./nix_2gram_indexer_step3.nix { inherit lib pkgs builtins nixCodeIndexerModule nGramGeneratorModule; };
+Match found in: ./10/01/docs/theory/nix_2gram_indexer_step5.nix
+  generate2GramIndexStep4Module = import ./nix_2gram_indexer_step4.nix { inherit lib pkgs builtins nixCodeIndexerModule nGramGeneratorModule; };
+Match found in: ./10/01/docs/theory/nix_2gram_indexer_step6.nix
+  generate2GramIndexStep5Module = import ./nix_2gram_indexer_step5.nix { inherit lib pkgs builtins nixCodeIndexerModule nGramGeneratorModule; };
+Match found in: ./10/01/docs/theory/nix_2gram_indexer_step7.nix
+  generate2GramIndexStep6Module = import ./nix_2gram_indexer_step6.nix { inherit lib pkgs builtins nixCodeIndexerModule nGramGeneratorModule; };
+Match found in: ./10/01/docs/theory/nix_2gram_indexer_step8.nix
+  generate2GramIndexStep7Module = import ./nix_2gram_indexer_step7.nix { inherit lib pkgs builtins nixCodeIndexerModule nGramGeneratorModule; };
+Match found in: ./10/01/docs/theory/render_plot.nix
+        "import matplotlib.pyplot as plt"
+        "import pandas as pd"
+        "import json"
+        "import os"
+Match found in: ./10/crq-text-extractor.nix
+{ pkgs ? import <nixpkgs> {}, month09Flake }:
+Match found in: ./10/crq-bigram-generator.nix
+{ pkgs ? import <nixpkgs> {}, month09Flake, self }:
+  crqTexts = import ./crq-text-extractor.nix { inherit pkgs month09Flake; };
+Match found in: ./10/similarity-matrix.nix
+{ pkgs ? import <nixpkgs> {}, self, month09Flake }:
+  crqBigrams = import ./crq-bigram-generator.nix { inherit pkgs self month09Flake; };
+Match found in: ./10/03/colosseum-mirror/flake.nix
+        pkgs = import nixpkgs {
+Match found in: ./10/03/hackathon_71_parts.nix
+  # Import PlantUML generation logic
+  plantumlGenerator = import ./lib/plantuml_generator.nix { inherit lib umlData; };
+Match found in: ./10/04/killerjoke/flake.nix
+        pkgs = import nixpkgs {
+Match found in: ./10/04/gemini-prompt-flake/flake.nix
+        # Import the prompt string from the input
+        prompt = import promptArg;
+        packages.gemini-prompt-derivation = import ./gemini-prompt-derivation.nix {
+Match found in: ./10/04/gemini-prompt-flake/gemini-prompt-derivation.nix
+  # Import the secrets definition
+  secretsConfig = import ./secrets.nix { inherit pkgs lib; };
+Match found in: ./10/04/lib/wrapEval.nix
+builtins.tryEval (import file)
+Match found in: ./10/04/lib/crq-document-check.nix
+{ pkgs ? import <nixpkgs> {}, commitMsgFile ? null }:
+Match found in: ./10/04/lib/dump-pkgs-env.nix
+{ pkgs ? import <nixpkgs> {} }:
+Match found in: ./10/04/lib/simplified-pkgs-dump.nix
+{ pkgs ? import <nixpkgs> {} }:
+Match found in: ./10/04/lib/nix-stdlib-integration-test.nix
+  errors = import ./lib/generate-project-nix/error-constructor.nix { inherit lib builtins; };
+  evaluateNixFile = import ./lib/generate-project-nix/evaluateNixFile.nix { inherit lib builtins types errors tryEval pkgs; }; # Inherit pkgs here
+    processEntry = import ./lib/generate-project-nix/processEntry.nix {
+    generate = import ./lib/generate-project-nix/generate.nix {
+Match found in: ./10/06/meta-introspector-fetchers/flake.nix
+        pkgs = import nixpkgs { inherit system; };
+Match found in: ./10/06/sops-gemini/flakes/wrap-gemini-secrets/flake.nix
+        # Import the secrets.nix from the parent directory
+        secretsConfig = import secrets { inherit pkgs lib; };
+Match found in: ./10/07/nix-monster-encoding.nix
+{ lib ? import <nixpkgs> {} }:
+  # Import specialized emoji encoders
+  intEncoder = import ./lib/emoji-encoding/int.nix { inherit lib builtins emojiForTag repeatEmoji multiplicityFromVal; };
+  stringEncoder = import ./lib/emoji-encoding/string.nix { inherit lib builtins emojiForTag repeatEmoji multiplicityFromVal; };
+  listEncoder = import ./lib/emoji-encoding/list.nix { inherit lib builtins emojiForTag repeatEmoji multiplicityFromVal emojiEncode; };
+  attrsetEncoder = import ./lib/emoji-encoding/attrset.nix { inherit lib builtins emojiForTag repeatEmoji multiplicityFromVal emojiEncode; };
+  lambdaEncoder = import ./lib/emoji-encoding/lambda.nix { inherit lib builtins emojiForTag repeatEmoji multiplicityFromVal emojiEncode; };
+  letInEncoder = import ./lib/emoji-encoding/let-in.nix { inherit lib builtins emojiForTag repeatEmoji multiplicityFromVal emojiEncode; };
+  ifThenElseEncoder = import ./lib/emoji-encoding/if-then-else.nix { inherit lib builtins emojiForTag repeatEmoji multiplicityFromVal emojiEncode; };
+Match found in: ./10/09/solfunmeme-profile/flake.nix
+        pkgs = import nixpkgs {
+Match found in: ./10/09/hackathon/colosseum/arena.nix
+{ pkgs ? import <nixpkgs> {} }:
+Match found in: ./10/09/hackathon/nar-bridge-flake/test.nix
+  pkgs = import <nixpkgs> { system = "aarch64-linux"; };
+Match found in: ./10/09/hackathon/nar-bridge-flake/inspect-nix.nix
+  nixpkgs = import (builtins.getFlake "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify") { system = "aarch64-linux"; };
+Match found in: ./10/09/nix-grep-regexes.nix
+    "nix-store --import"
+Match found in: ./10/09/test-llm-workflow.nix
+  pkgs = import <nixpkgs> { system = "aarch64-linux"; };
+Match found in: ./10/09/dummy-project-state.nix
+{ pkgs ? import <nixpkgs> { system = "aarch64-linux"; } }:
+Match found in: ./10/09/test-project-scheduler.nix
+  pkgs = import <nixpkgs> { system = "aarch64-linux"; };
+  # Import the dummy project state
+  dummyProjectState = import ./dummy-project-state.nix { inherit pkgs; };
+  # Import the project-scheduler-flake
+Match found in: ./10/09/llm-nix-simulator-flake/flake.nix
+      # Import lib files
+      pkgs = import ./lib/pkgs.nix { inherit nixpkgs; system = "aarch64-linux"; };
+      analyzedNixExpression = import ./lib/analyzed-nix-expression.nix { inherit pkgs nixExpressionToSimulate; };
+      promptFileDerivation = import ./lib/prompt-file-derivation.nix { inherit pkgs analyzedNixExpression; };
+      simulatedNixRun = import ./lib/simulated-nix-run.nix { inherit pkgs analyzedNixExpression promptFileDerivation llmApiWrapper; };
+      packages.aarch64-linux = import ./lib/packages.nix { inherit simulatedNixRun; };
+Match found in: ./10/09/test-llm-nix-simulator.nix
+  pkgs = import <nixpkgs> { system = "aarch64-linux"; };
+  # Import the LLM Nix Simulator Flake
+Match found in: ./10/09/test-bootstrap-mycology-schedule.nix
+  pkgs = import <nixpkgs> { system = "aarch64-linux"; };
+  # Import all the necessary flakes
+  mctsSolanaFlake = (builtins.getFlake "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/mcts-solana-flake").outputs; # Import the MCTS Solana Flake
+  # Import the GitHub Data Fetcher Flake
+  # Import the top-level orchestration flake
+Match found in: ./10/09/llm-tasks.nix
+import ../10/lib-llm-nix/lib {
+Match found in: ./10/09/orchestrator.nix
+  # Import necessary modules
+  makeContext = import ./lib/monad-context.nix { inherit pkgs lib; };
+  # Import the nix-task mkTask function
+  # Import the gemini-cli package
+  allTasks = import ./llm-tasks.nix { inherit lib pkgs mkTask; flakeSources = [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=source/github/meta-introspector/streamofrandom/2025" ];
+Match found in: ./10/10/lib-llm-nix/lib/flake-template-generator.nix
+  "      pkgs = import nixpkgs { system = \"x86_64-linux\"; };"
+Match found in: ./10/10/lib-llm-nix/lib/flake-template.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./10/10/lib-llm-nix/lib/task-phases.nix
+  # Import the flake template generator
+  generateFlakeTemplateString = import ./flake-template-generator.nix {
+  # Import the shell scripts
+Match found in: ./10/10/lib-llm-nix/lib/default.nix
+      taskPhases = import ./task-phases.nix {
+Match found in: ./10/10/lib-llm-nix/qa.nix
+  # Import the lib-llm-nix library
+  llmTasksLib = import ./lib {
+      (builtins.isString (import ./lib/flake-template-generator.nix {
+      ((import ./lib/flake-template-generator.nix {
+Match found in: ./10/10/grep-nar-flake/flake.nix
+        pkgs = import nixpkgs { inherit system; };
+Match found in: ./10/10/nix2/flake-checker.nix
+  # Import the abstract task definition
+  task = import ./task.nix {
+Match found in: ./10/10/nix2/flake.nix
+      flake-checker = import ./flake-checker.nix;
+          pkgs = import nixpkgs { inherit system; };
+Match found in: ./10/10/nix2/qa/test-prelude.nix
+  # Import the prelude.nix
+  prelude = import ../../prelude.nix {
+    # We need to ensure they are available in the context where prelude.nix is imported
+    firstReflection = import ../lib/first-reflection.nix { inherit lib pkgs; };
+    urlExtractor = import ../nix-url-extractor.nix;
+Match found in: ./10/10/nix2/mini-prelude.nix
+  pkgs ? import <nixpkgs> {},
+  # Import the raw createContext function
+  rawCreateContext = import ./createContext.nix;
+Match found in: ./10/10/nix2/createContext.nix
+  utils = import ./lib/utils.nix { inherit lib pkgs; };
+Match found in: ./10/10/nix2/get-nix-file-list/flake.nix
+        getNixFileList = { rootPath }: import ../mini-prelude.nix { inherit pkgs lib rootPath; };
+Match found in: ./10/10/nix2/examples/eval-mini-prelude.nix
+  pkgs = import <nixpkgs> {};
+  miniPrelude = import ./mini-prelude.nix { inherit pkgs lib; };
+Match found in: ./10/10/prelude.nix
+  # Import the URL extractor module
+  urlExtractorModule = import ./nix-url-extractor.nix;
+  # Import the generate-repos module
+  generateRepos = import ./nix2/generate-repos.nix;
+  # Dynamically import all generated repo.nix files
+  importedRepos = lib.map import generatedRepoFiles;
+  # Combine all imported repos into a single attribute set
+  allRepos = lib.foldl lib.recursiveUpdate {} importedRepos;
+  # Import the rust-discovery module
+  rustDiscovery = import ./nix2/rust-discovery.nix;
+  # Import the crate-extractor module
+  crateExtractor = import ./nix2/crate-extractor.nix;
+  # Import the crate-wrapper module
+  crateWrapper = import ./nix2/crate-wrapper.nix;
+Match found in: ./10/10/bootstrap-context.nix
+      import ./bootstrap-context/part1.nix
+      import ./bootstrap-context/part2.nix
+      import ./bootstrap-context/part3.nix
+      import ./bootstrap-context/part4.nix
+      import ./bootstrap-context/part5.nix
+      import ./bootstrap-context/part6.nix
+      import ./bootstrap-context/part7.nix
+Match found in: ./10/10/lib/nar/flake.nix
+      # pkgs = import nixpkgs { inherit system; };
+      #       # Re-import pkgs from the passed pkgs path
+      #       pkgsSet = import pkgs { inherit system; };
+      #       # Re-import the get-nix-file-list flake from the passed flake reference
+Match found in: ./10/10/export-nar.nix
+{ pkgs ? import <nixpkgs> {} }:
+Match found in: ./crq-parser.nix
+{ pkgs ? import <nixpkgs> {} }:
+  nixFiles = import ./nix-indexer.nix { inherit pkgs; };
+Match found in: ./default.nix
+{ pkgs ? import <nixpkgs> {} }:
+  generatedDerivations = import ./eval-tasks.nix { inherit pkgs; };
+Match found in: ./eval-output.nix
+  pkgs = import <nixpkgs> {};
+  result = import ./default.nix { inherit pkgs; };
+Match found in: ./eval-tasks.nix
+{ pkgs ? import <nixpkgs> {} }:
+  monadContext = import ./lib/monad-context.nix { inherit pkgs; inherit (pkgs) lib; geminiApi = import ./lib/gemini-api-wrapper.nix { inherit (pkgs) lib; }; };
+  # Import the list of task attribute sets
+Match found in: ./example_url_fetch.nix
+  urlReader = import (self + "/lib/url_url_reader.nix") { inherit lib pkgs builtins; };
+  urlExtractor = import (self + "/lib/url_extractor.nix") { inherit lib pkgs builtins; };
+  nixCodeIndexerModule = import (self + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
+  nixToOwlOntologyModule = import (self + "/10/01/docs/theory/nix_to_owl_ontology.nix") {
+Match found in: ./flakes/crq-search/parser/flake.nix
+        pkgs = import nixpkgs {
+Match found in: ./flakes/crq-search-lattice/layer1/flake.nix
+      pkgs = import nixpkgs {
+Match found in: ./flakes/crq-document-check/flake.nix
+      pkgs = import nixpkgs { inherit system; };
+          NIX_OUTPUT=$(${pkgs.nix}/bin/nix eval --json --arg pkgs "$nixpkgsPath" --arg crqCheckLib "$crqCheckLibPath" --argstr commitMsgFile "$COMMIT_MSG_FILE" --expr 'let pkgs = import pkgs {}; in import crqCheckLib { inherit pkgs; commitMsgFile = commitMsgFile; }')
+Match found in: ./flakes/composite-2-3-nix-base-home-creds/flake.nix
+        baseLib = import feature2 { inherit nixpkgs flake-utils; }.lib.${system};
+        homeCredsApp = import feature3 { inherit nixpkgs flake-utils gemini-cli; }.apps.${system}.default;
+Match found in: ./flakes/composite-2-3-5-nix-base-home-oauth/flake.nix
+        baseLib = import feature2 { inherit nixpkgs flake-utils; }.lib.${system};
+        homeCredsApp = import feature3 { inherit nixpkgs flake-utils gemini-cli; }.apps.${system}.default;
+        oauthLib = import feature5 { inherit nixpkgs flake-utils; }.lib.${system};
+Match found in: ./flakes/composite-2-3-5-7-nix-base-home-oauth-telemetry/flake.nix
+        baseLib = import feature2 { inherit nixpkgs flake-utils; }.lib.${system};
+        homeCredsApp = import feature3 { inherit nixpkgs flake-utils gemini-cli; }.apps.${system}.default;
+        oauthLib = import feature5 { inherit nixpkgs flake-utils; }.lib.${system};
+        telemetryLib = import feature7 { inherit nixpkgs flake-utils gemini-cli; }.lib.${system};
+Match found in: ./flakes/composite-2-3-5-7-11-nix-base-home-oauth-telemetry-llm-output/flake.nix
+        baseLib = import feature2 { inherit nixpkgs flake-utils; }.lib.${system};
+        homeCredsApp = import feature3 { inherit nixpkgs flake-utils gemini-cli; }.apps.${system}.default;
+        oauthLib = import feature5 { inherit nixpkgs flake-utils; }.lib.${system};
+        telemetryLib = import feature7 { inherit nixpkgs flake-utils gemini-cli; }.lib.${system};
+        llmOutputLib = import feature11 { inherit nixpkgs flake-utils; }.lib.${system};
+Match found in: ./flakes/composite-2-3-5-7-11-13-nix-base-home-oauth-telemetry-llm-output-makefile-input/flake.nix
+        baseLib = import feature2 { inherit nixpkgs flake-utils; }.lib.${system};
+        homeCredsApp = import feature3 { inherit nixpkgs flake-utils gemini-cli; }.apps.${system}.default;
+        oauthLib = import feature5 { inherit nixpkgs flake-utils; }.lib.${system};
+        telemetryLib = import feature7 { inherit nixpkgs flake-utils gemini-cli; }.lib.${system};
+        llmOutputLib = import feature11 { inherit nixpkgs flake-utils; }.lib.${system};
+        makefileInputLib = import feature13 { inherit nixpkgs flake-utils; }.lib.${system};
+Match found in: ./flakes/composite-2-3-5-7-11-13-17-nix-base-home-oauth-telemetry-llm-output-makefile-input-yolo/flake.nix
+        baseLib = import feature2 { inherit nixpkgs flake-utils; }.lib.${system};
+        homeCredsApp = import feature3 { inherit nixpkgs flake-utils gemini-cli; }.apps.${system}.default;
+        oauthLib = import feature5 { inherit nixpkgs flake-utils; }.lib.${system};
+        telemetryLib = import feature7 { inherit nixpkgs flake-utils gemini-cli; }.lib.${system};
+        llmOutputLib = import feature11 { inherit nixpkgs flake-utils; }.lib.${system};
+        makefileInputLib = import feature13 { inherit nixpkgs flake-utils; }.lib.${system};
+        yoloApprovalLib = import feature17 { inherit nixpkgs flake-utils; }.lib.${system};
+Match found in: ./flakes/composite-2-3-5-7-11-13-17-19-nix-base-home-oauth-telemetry-llm-output-makefile-input-yolo-self-source/flake.nix
+        baseLib = import feature2 { inherit nixpkgs flake-utils; }.lib.${system};
+        homeCredsApp = import feature3 { inherit nixpkgs flake-utils gemini-cli; }.apps.${system}.default;
+        oauthLib = import feature5 { inherit nixpkgs flake-utils; }.lib.${system};
+        telemetryLib = import feature7 { inherit nixpkgs flake-utils gemini-cli; }.lib.${system};
+        llmOutputLib = import feature11 { inherit nixpkgs flake-utils; }.lib.${system};
+        makefileInputLib = import feature13 { inherit nixpkgs flake-utils; }.lib.${system};
+        yoloApprovalLib = import feature17 { inherit nixpkgs flake-utils; }.lib.${system};
+        selfSourceLib = import feature19 { inherit nixpkgs flake-utils; }.lib.${system};
+Match found in: ./flakes/mycology-workflow/flake.nix
+        # In a real scenario, these would be imported from other flakes or defined more robustly.
+        mycologyWorkflowPuml = import args.vial.packages.${system}.default {
+Match found in: ./generate-derivations.nix
+  tasks = import ./lib/task-generator.nix { inherit lib; };
+Match found in: ./github_graphql_modules/github_graphql_common.nix
+  common = import ../../../lib/common-imports.nix {};
+Match found in: ./github_graphql_modules/github_graphql_main.nix
+  commonModule = import ./github_graphql_common.nix { inherit lib pkgs builtins; };
+  buildQueryModule = import ./github_graphql_build_query.nix { inherit lib pkgs builtins; };
+  executeQueryModule = import ./github_graphql_execute_query.nix { inherit lib pkgs builtins githubApiUrl buildGraphQLQuery; };
+  exampleQueriesModule = import ./github_graphql_example_queries.nix { inherit lib pkgs builtins buildGraphQLQuery; };
+Match found in: ./github_graphql_parts/github_graphql_part1.nix
+  common = import ../lib/common-imports.nix { inherit nixpkgs; };
+Match found in: ./hello_world.nix
+  pkgs ? import <nixpkgs> {},
+Match found in: ./lib/generate-project-nix.nix
+{ pkgs ? import <nixpkgs> {} }:
+  # Import nix-stdlib for error handling and type checking utilities
+  nix-stdlib = (import "github:meta-introspector/nix-stdlib?ref=feature/CRQ-016-nixify").lib { inherit pkgs lib; };
+    tryEval = import (builtins.fetchTarball "github:meta-introspector/time-2025?ref=feature/foaf&dir=lib/generate-project-nix/tryEval.nix") { inherit builtins; };
+    evaluateNixFile = import (builtins.fetchTarball "github:meta-introspector/time-2025?ref=feature/foaf&dir=lib/generate-project-nix/evaluateNixFile.nix") { inherit pkgs lib builtins tryEval errors types; };
+    processEntry = import (builtins.fetchTarball "github:meta-introspector/time-2025?ref=feature/foaf&dir=lib/generate-project-nix/processEntry.nix") {
+    generate = import (builtins.fetchTarball "github:meta-introspector/time-2025?ref=feature/foaf&dir=lib/generate-project-nix/generate.nix") {
+Match found in: ./lib/generate-project-nix/evaluateNixFile.nix
+    # Use builtins.tryEval to catch evaluation errors during import or function calls.
+    evalResult = import (builtins.fetchTarball "github:meta-introspector/time-2025?ref=feature/foaf&dir=10/04/lib/wrapEval.nix") { inherit file builtins; }; # Use wrapEval to get the evaluation result
+    finalResult = import (builtins.fetchTarball "github:meta-introspector/time-2025?ref=feature/foaf&dir=10/04/lib/error-isolation.nix") { inherit evalResult file builtins errors types; };
+Match found in: ./lib/generate-project-nix/generate.nix
+# It traverses the file system, importing `.nix` files and recursing into directories.
+      (import (builtins.fetchTarball "github:meta-introspector/time-2025?ref=feature/foaf&dir=10/04/lib/fold-accumulator.nix") { inherit lib types; })
+Match found in: ./lib/generate-project-nix/processEntry.nix
+      evaluated = (import (builtins.fetchTarball "github:meta-introspector/time-2025?ref=feature/foaf&dir=lib/generate-project-nix/evaluateNixFile.nix")) { file = fullPath; inherit errors types builtins; };
+    import (builtins.fetchTarball "github:meta-introspector/time-2025?ref=feature/foaf&dir=10/04/lib/error-isolation.nix") { evalResult = evaluated; file = fullPath; inherit builtins errors types; }
+Match found in: ./lib/nix-templates/safe-eval.nix
+    evalResult = nix-stdlib.lib.nix.eval (import file);
+Match found in: ./lib/simple_expr_nix.nix
+  # Import the parsed SimpleExpr.rec JSON
+  # Import individual SimpleExpr constructor modules
+  bvarModule = import ./simple_expr_modules/bvar.nix { inherit lib; };
+  sortModule = import ./simple_expr_modules/sort.nix { inherit lib; };
+  constModule = import ./simple_expr_modules/const.nix { inherit lib; };
+  appModule = import ./simple_expr_modules/app.nix { inherit lib; };
+  lamModule = import ./simple_expr_modules/lam.nix { inherit lib; };
+  forallEModule = import ./simple_expr_modules/forallE.nix { inherit lib; };
+Match found in: ./lib/simple_expr_traversal.nix
+  # Import constructors and checkers from simpleExprNix
+Match found in: ./lib/simple_expr_analysis.nix
+  # Explicitly import lib functions to ensure 'foldl' and 'max' are available
+  sumUtil = import ./utils/sum.nix { inherit lib; }; # Import our custom sum
+Match found in: ./lib/task-generator.nix
+  primeMappingConfig = import ./prime-mapping-config.nix { inherit lib; };
+  functorMatrix = import ./code-generation/functor-matrix.nix { inherit lib; };
+  tiktokConfig = import ./tiktok-config.nix { inherit lib; };
+  nix2llm = import ./nix2llm.nix { inherit lib; };
+  oeisSolverResult = import ../solvers/run-oeis-solver.nix { inherit lib pkgs; config = {}; }; # Passed empty config
+  usageTracking = import ./llm/usage-tracking.nix { inherit lib; };
+Match found in: ./lib/monad-context.nix
+    generateTasks = import ../lib/task-generator.nix { inherit lib pkgs; };
+    derivationSpokes = import ../lib/derivation-spokes.nix { inherit pkgs lib; };
+  usageTracking = import ./llm/usage-tracking.nix { inherit lib; };
+Match found in: ./lib/derivation-spokes.nix
+  tiktokConfig = import ../lib/tiktok-config.nix { inherit lib; };
+  ipfsPublisher = import ../lib/ipfs-publisher.nix { inherit pkgs lib; };
+Match found in: ./lib/llm/gemini.nix
+  usageTracking = import ./usage-tracking.nix { inherit lib; };
+Match found in: ./lib/llm/groq.nix
+  usageTracking = import ./usage-tracking.nix { inherit lib; };
+Match found in: ./lib/llm/amazonq.nix
+  usageTracking = import ./usage-tracking.nix { inherit lib; };
+Match found in: ./lib/llm/github-copilot.nix
+  usageTracking = import ./usage-tracking.nix { inherit lib; };
+Match found in: ./lib/llm/openai-codex.nix
+  usageTracking = import ./usage-tracking.nix { inherit lib; };
+Match found in: ./lib/monad-context-providers/gemini.nix
+  # Import the generic makeContext
+  makeContext = import ../monad-context.nix { inherit pkgs lib; };
+  # Import the specific Gemini LLM module
+  geminiLLM = import ../llm/gemini.nix { inherit pkgs lib sopsSecretsPath hostGeminiHome; };
+Match found in: ./lib/monad-context-providers/groq.nix
+  # Import the generic makeContext
+  makeContext = import ../monad-context.nix { inherit pkgs lib; };
+  # Import the specific Groq LLM module
+  groqLLM = import ../llm/groq.nix { inherit pkgs lib sopsSecretsPath hostGeminiHome; };
+Match found in: ./lib/monad-context-providers/amazonq.nix
+  # Import the generic makeContext
+  makeContext = import ../monad-context.nix { inherit pkgs lib; };
+  # Import the specific AmazonQ LLM module
+  amazonqLLM = import ../llm/amazonq.nix { inherit pkgs lib sopsSecretsPath hostGeminiHome; };
+Match found in: ./lib/monad-context-providers/github-copilot.nix
+  # Import the generic makeContext
+  makeContext = import ../monad-context.nix { inherit pkgs lib; };
+  # Import the specific GitHub Copilot LLM module
+  githubCopilotLLM = import ../llm/github-copilot.nix { inherit pkgs lib sopsSecretsPath hostGeminiHome; };
+Match found in: ./lib/monad-context-providers/openai-codex.nix
+  # Import the generic makeContext
+  makeContext = import ../monad-context.nix { inherit pkgs lib; };
+  # Import the specific OpenAI Codex LLM module
+  openaiCodexLLM = import ../llm/openai-codex.nix { inherit pkgs lib sopsSecretsPath hostGeminiHome; };
+Match found in: ./nix-indexer.nix
+{ pkgs ? import <nixpkgs> {} }:
+Match found in: ./flake.nix
+      pkgs = import nixpkgs { inherit system; };
+      # Import the secrets module and get the sopsSecretsPath option
+      secretsModule = import ./lib/secrets.nix { inherit lib; };
+      nixCodeIndexerModule = import (self + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
+      # Import the QA system
+      qa = import ./qa.nix { inherit pkgs self; };
+      exampleUrlFetch = import (self + "/example_url_fetch.nix") {
+        generateHackathonUml = import ./theory/generate_hackathon_uml.nix { inherit pkgs lib self; };
+            ${(import ./orchestrator.nix {
+Match found in: ./qa.nix
+  # Import QA helper functions
+  qa-helpers = import ./lib/qa-helpers.nix { inherit pkgs lib; };
+  # Import the dynamically generated project.nix
+  projectNix = import ./project.nix { inherit pkgs; };
+  # Import all uncommitted.nix files and merge their uncommittedFiles lists
+  allUncommittedFiles = pkgs.lib.lists.flatten (pkgs.lib.lists.map (file: (import file).uncommittedFiles) uncommittedNixFiles);
+Match found in: ./regex-generator.nix
+{ pkgs ? import <nixpkgs> {} }:
+  crqIds = import ./crq-parser.nix { inherit pkgs; };
+Match found in: ./temp_step1_eval.nix
+  common = import ./lib/common-imports.nix {};
+  nixCodeIndexerModule = import ./10/01/docs/theory/nix_code_indexer.nix { inherit lib pkgs builtins; };
+  nGramGeneratorModule = import ./10/01/docs/theory/n_gram_generator.nix { inherit lib pkgs builtins; };
+  generate2GramIndexStep1Module = import ./10/01/docs/theory/nix_2gram_indexer_step1.nix {
+Match found in: ./simulate-orchestrator.nix
+  # Import necessary modules
+  geminiMonadContext = import ./lib/monad-context-providers/gemini.nix { inherit pkgs lib sopsSecretsPath hostGeminiHome; };
+  nix2llm = import ./lib/nix2llm.nix { inherit lib; };
+  orchestratorPrompt = import ./static-orchestrator-prompt.nix { inherit pkgs lib; };
+Match found in: ./solvers/run-prime-mapping-solver.nix
+  primeMappingConfig = import ../lib/prime-mapping-config.nix { inherit lib; };
+  matrixUtils = import ../lib/matrix-utils.nix { inherit lib; };
+  vibeConstants = import ../lib/vibe-constants.nix { inherit lib; };
+  vibeMatrixGenerator = import ../lib/vibe-matrix-generator.nix { inherit lib vibeConstants primeMappingConfig; };
+  mznModelContent = import ./generate-mzn-model.nix {
+  dznDataContent = import ./generate-dzn-data.nix {
+Match found in: ./solvers/run-oeis-solver.nix
+  oeisConfig = import ../lib/oeis-config.nix { inherit lib; };
+  dznDataContent = import ./generate-oeis-dzn.nix {
+Match found in: ./temp_step2_eval.nix
+  common = import ./lib/common-imports.nix {};
+  nixCodeIndexerModule = import ./10/01/docs/theory/nix_code_indexer.nix { inherit lib pkgs builtins; };
+  nGramGeneratorModule = import ./10/01/docs/theory/n_gram_generator.nix { inherit lib pkgs builtins; };
+  generate2GramIndexStep1Module = import ./10/01/docs/theory/nix_2gram_indexer_step1.nix {
+  generate2GramIndexStep2Module = import ./10/01/docs/theory/nix_2gram_indexer_step2.nix {
+Match found in: ./test-bug-repro-nix-2gram-indexer/flake.nix
+        common = rootFlake.lib.common-imports { inherit system; };
+        nixCodeIndexerModule = import (time2025-src + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
+        nGramGeneratorModule = import (time2025-src + "/10/01/docs/theory/n_gram_generator.nix") { inherit lib pkgs builtins; };
+Match found in: ./test-bug-repro-nix-2gram-indexer/inspect_derivation_output.nix
+  common = import ../lib/common-imports.nix {};
+  testUtils = import ../lib/test-utils.nix { inherit pkgs lib builtins; };
+  nixCodeIndexerModule = import (time-2025-src + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
+  nGramGeneratorModule = import (time-2025-src + "/10/01/docs/theory/n_gram_generator.nix") { inherit lib pkgs builtins; };
+  nix2gramIndexerModule = import (time-2025-src + "/10/01/docs/theory/nix_2gram_indexer.nix") {
+Match found in: ./test-bug-repro-nix-2gram-indexer/inspect_indexer_output.nix
+  common = import ../lib/common-imports.nix {};
+  testUtils = import ../lib/test-utils.nix { inherit pkgs lib builtins; };
+  nixCodeIndexerModule = import (time2025-src + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
+  nGramGeneratorModule = import (time2025-src + "/10/01/docs/theory/n_gram_generator.nix") { inherit lib pkgs builtins; };
+  nix_2gram_indexer_module = import (time2025-src + "/10/01/docs/theory/nix_2gram_indexer.nix") {
+Match found in: ./test-bug-repro-nix-2gram-indexer/test_flatten.nix
+  common = import ../lib/common-imports.nix {};
+Match found in: ./test-bug-repro-nix-2gram-indexer/tests/test_n_gram_generator_functions.nix
+  common = import ../../lib/common-imports.nix {};
+  nGramGeneratorModule = import ../../10/01/docs/theory/n_gram_generator.nix { inherit lib pkgs builtins; };
+Match found in: ./test-bug-repro-nix-2gram-indexer/tests/test_step1_nix_file_index.nix
+  common = import ../../lib/common-imports.nix {};
+  testUtils = import ../../lib/test-utils.nix { inherit pkgs lib builtins; };
+  nixCodeIndexerModule = import (time-2025-src + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
+Match found in: ./test-bug-repro-nix-2gram-indexer/tests/test_step2_indexed_files.nix
+  common = import ../../lib/common-imports.nix {};
+  testUtils = import ../../lib/test-utils.nix { inherit pkgs lib builtins; };
+  nixCodeIndexerModule = import (time-2025-src + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
+Match found in: ./test-bug-repro-nix-2gram-indexer/tests/test_step3_all2gram_usages.nix
+  common = import ../../lib/common-imports.nix {};
+  testUtils = import ../../lib/test-utils.nix { inherit pkgs lib builtins; };
+  nixCodeIndexerModule = import (time-2025-src + "/10/01/docs/theory/nix_code_indexer.nix") { inherit lib pkgs builtins; };
+  nGramGeneratorModule = import (time-2025-src + "/10/01/docs/theory/n_gram_generator.nix") { inherit lib pkgs builtins; };
+Match found in: ./test-commit-check.nix
+{ pkgs ? import <nixpkgs> {} }:
+  # Import the test case data
+  testCase = import ./test-commit-check/test-case-crq-041.nix {};
+  # Import the regex generator
+  regex = import ./regex-generator.nix { inherit pkgs; };
+  # Import the check logic
+  isValid = import ./test-commit-check/check-logic.nix { inherit pkgs commitMsg regex; };
+  import ./test-commit-check/success-derivation.nix { inherit pkgs; }
+  import ./test-commit-check/failure-derivation.nix { inherit pkgs commitMsg regex; }
+Match found in: ./test-crq-search.nix
+      pkgs = import nixpkgs { inherit system; };
+Match found in: ./test_depth_eval.nix
+  pkgs = import <nixpkgs> {};
+  inherit ((import ./lib/read_simple_expr_json.nix { inherit lib simpleExprJsonPath; })) readSimpleExprJson;
+  simpleExprNix = import ./lib/simple_expr_nix.nix { inherit lib pkgs readSimpleExprJson; };
+  simpleExprTraversal = import ./lib/simple_expr_traversal.nix { inherit lib pkgs simpleExprNix; };
+  simpleExprAnalysis = import ./lib/simple_expr_analysis.nix { inherit lib pkgs simpleExprTraversal; };
+Match found in: ./test_detailed_analysis_eval.nix
+  pkgs = import <nixpkgs> {};
+  inherit ((import ./lib/read_simple_expr_json.nix { inherit lib simpleExprJsonPath; })) readSimpleExprJson;
+  simpleExprNix = import ./lib/simple_expr_nix.nix { inherit lib pkgs readSimpleExprJson; };
+  simpleExprTraversal = import ./lib/simple_expr_traversal.nix { inherit lib pkgs simpleExprNix; };
+  simpleExprAnalysis = import ./lib/simple_expr_analysis.nix { inherit lib pkgs simpleExprTraversal; };
+Match found in: ./test_eval.nix
+  pkgs = import <nixpkgs> {};
+  inherit ((import ./lib/read_simple_expr_json.nix { inherit lib pkgs; })) readSimpleExprJson;
+  simpleExprNix = import ./lib/simple_expr_nix.nix { inherit lib pkgs readSimpleExprJson; };
+  simpleExprTraversal = import ./lib/simple_expr_traversal.nix { inherit lib simpleExprNix; };
+  simpleExprPrettyPrinter = import ./lib/simple_expr_pretty_printer.nix { inherit lib simpleExprTraversal; };
+Match found in: ./test_knuthian_eval.nix
+  pkgs = import <nixpkgs> {};
+  inherit ((import ./lib/read_simple_expr_json.nix { inherit lib simpleExprJsonPath; })) readSimpleExprJson;
+  simpleExprNix = import ./lib/simple_expr_nix.nix { inherit lib pkgs readSimpleExprJson; };
+  simpleExprTraversal = import ./lib/simple_expr_traversal.nix { inherit lib pkgs simpleExprNix; };
+  simpleExprAnalysis = import ./lib/simple_expr_analysis.nix { inherit lib pkgs simpleExprTraversal; };
+Match found in: ./test_literal_analysis_eval.nix
+  pkgs = import <nixpkgs> {};
+  inherit ((import ./lib/read_simple_expr_json.nix { inherit lib pkgs; })) readSimpleExprJson;
+  simpleExprNix = import ./lib/simple_expr_nix.nix { inherit lib pkgs readSimpleExprJson; };
+  simpleExprTraversal = import ./lib/simple_expr_traversal.nix { inherit lib pkgs simpleExprNix; };
+  simpleExprAnalysis = import ./lib/simple_expr_analysis.nix { inherit lib pkgs simpleExprTraversal; };
+Match found in: ./test.nix
+  pkgs ? import <nixpkgs> {},
+Match found in: ./tests/emoji-encoding/list-test.nix
+  # Re-import listEncoder with the mockEmojiEncode
+  listEncoderMocked = import ../../lib/emoji-encoding/list.nix {
+Match found in: ./tests/emoji-encoding/attrset-test.nix
+  # Re-import attrsetEncoder with the mockEmojiEncode
+  attrsetEncoderMocked = import ../../lib/emoji-encoding/attrset.nix {
+Match found in: ./tests/emoji-encoding/lambda-test.nix
+  lambdaEncoderMocked = import ../../lib/emoji-encoding/lambda.nix {
+Match found in: ./tests/emoji-encoding/let-in-test.nix
+  letInEncoderMocked = import ../../lib/emoji-encoding/let-in.nix {
+Match found in: ./tests/emoji-encoding/if-then-else-test.nix
+  ifThenElseEncoderMocked = import ../../lib/emoji-encoding/if-then-else.nix {
+Match found in: ./test_size.nix
+  pkgs = import <nixpkgs> {};
+  inherit ((import ./lib/read_simple_expr_json.nix { inherit lib pkgs; })) readSimpleExprJson;
+  simpleExprNix = import ./lib/simple_expr_nix.nix { inherit lib pkgs readSimpleExprJson; };
+  simpleExprTraversal = import ./lib/simple_expr_traversal.nix { inherit lib pkgs simpleExprNix; };
+  simpleExprAnalysis = import ./lib/simple_expr_analysis.nix { inherit lib pkgs simpleExprTraversal; };
+Match found in: ./test_size_eval.nix
+  pkgs = import <nixpkgs> {};
+  inherit ((import ./lib/read_simple_expr_json.nix { inherit lib simpleExprJsonPath; })) readSimpleExprJson;
+  simpleExprNix = import ./lib/simple_expr_nix.nix { inherit lib pkgs readSimpleExprJson; };
+  simpleExprTraversal = import ./lib/simple_expr_traversal.nix { inherit lib pkgs simpleExprNix; };
+  simpleExprAnalysis = import ./lib/simple_expr_analysis.nix { inherit lib pkgs simpleExprTraversal; };
+Match found in: ./theory/71-aspects-part-c.nix
+  aspect29Imported = (import ./71-aspects-part-c-aspect-29-otel-event-trace.nix { inherit lib; }).aspect29;
+    aspect29Imported
+Match found in: ./theory/71-aspects-part-f.nix
+      description = "The appearance of '71' as a line number in configuration files could point to specific settings or parameters, highlighting their importance or potential for misconfiguration.";
+Match found in: ./theory/31-aspects-of-31.nix
+    "18-Builtins" = "Functions provided directly by the Nix evaluator, available without explicit import.";
+Match found in: ./theory/31-mathematical-forms.nix
+  # Dynamically import all .nix files from the formsDir
+      value = (import (formsDir + "/${name}")) { inherit lib; }; # Construct full path
+Match found in: ./theory/leech-lattice-24d.nix
+    name: type: import (./leech-lattice-blades.d + "/${name}")
+Match found in: ./theory/leech-lattice-blade-instance.nix
+  leechLattice = import ./leech-lattice-24d.nix { inherit lib; };
+Match found in: ./theory/nix-indexer-pipeline.nix
+        ! (lib.elem s ["nix" "json" "md" "sh" "txt" "d" "flake" "lib" "src" "docs" "theory" "meme" "memestorm" "tiktok" "001" "09" "24" "25" "26" "jobs" "vendor" "nixpkgs" "github" "meta" "introspector" "streamofrandom" "2025" "pick" "up" "cli" "gemini" "today" "ai" "ml" "zk" "ops" "flakes" "external" "build" "step" "build_step" "common" "imports" "debug" "utils" "test" "utils" "log" "analyzer" "review2" "rungemini" "run_task" "nix_custom_attrs_test" "test_custom_attrs" "setup_gemini_context" "leech" "lattice" "24d" "monster" "group" "71" "vibe" "crqs" "blade" "instance" "blades" "d17"])
+Match found in: ./theory/hackathon_uml_data.nix
+  parts = import ./hackathon_71_parts.nix { inherit lib pkgs; };
+Match found in: ./theory/generate_hackathon_uml.nix
+  plantumlGenerator = import (self + "/lib/plantuml_generator.nix") {
+Match found in: ./theory/71-aspects-part-c-list-test-single-element.nix
+  aspect29Imported = (import ./71-aspects-part-c-aspect-29-otel-event-trace.nix { inherit lib; }).aspect29;
+    aspect29Imported
+Match found in: ./theory/31-mathematical-forms-prime-03.nix
+  isHappyModule = import ./lib/isHappy.nix { inherit lib; };
+Match found in: ./theory/31-mathematical-forms-prime-11.nix
+  "32-FixForCubeNumberCheck" = (import ./31-mathematical-forms-cube-number-check-fix.nix { inherit lib; }).fixedLine;
+Match found in: ./theory/mathematical-forms/01-Value.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/02-IsPrime.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/03-MersennePrimeExponent.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/04-CenteredPentagonalNumber.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/05-IsHappyNumber.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/06-PermutablePrime.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/07-Emirp.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/08-PrimeIndex.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/09-PrimeIndexIsPrime.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/10-DifferenceOfSquares.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/11-SumOfFourPrimes.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/12-NumberOfDivisors.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/13-SumOfDivisors.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/14-BinaryRepresentation.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/15-HexadecimalRepresentation.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/16-OctalRepresentation.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/17-NumberOfBits.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/18-SmallestPrimeGreaterThan29.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/19-LargestPrimeLessThan37.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/20-ConsecutivePrimeGap.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/21-NotAFibonacciNumber.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/22-NotACatalanNumber.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/23-NotAFactorial.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/24-NotATriangularNumber.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/25-NotASquareNumber.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/26-NotACubeNumber.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/27-SumOfTwoPrimes.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/28-SumOfThreePrimes.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/29-SumOfDistinctPrimes.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/30-NumberInSomeMonths.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/31-TheNthPrime.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./theory/mathematical-forms/32-FixForCubeNumberCheck.nix
+  common = import ./_common.nix { inherit lib; };
+Match found in: ./grep-inputs.nix
+{ pkgs ? import <nixpkgs> {}, src ? builtins.toString ./. } :
+Match found in: ./content.nix
+  pkgs = import <nixpkgs> {};
+  wrap_context_def = import ./wrap_context.nix;

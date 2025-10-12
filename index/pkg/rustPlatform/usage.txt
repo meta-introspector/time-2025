@@ -1,0 +1,3 @@
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/25/log_analyzer/flake.nix
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/27/7-concepts/3-response-artifacts/response-007-cli-nar-output/flake.nix
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/flakes/with-rust/flake.nix

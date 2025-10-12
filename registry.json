@@ -1,0 +1,37 @@
+{
+  "flakes": {
+    "streamofrandom": {
+      "url": "github:meta-introspector/streamofrandom?ref=feature/aimyc-001-cleanbench"
+    },
+    "nixpkgs": {
+      "url": "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify"
+    },
+    "flake-utils": {
+      "url": "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"
+    },
+    "rnix-parser": {
+      "url": "github:meta-introspector/rnix-parser?ref=feature/CRQ-016-nixify-workflow"
+    },
+    "nix-stdlib": {
+      "url": "github:meta-introspector/nix-stdlib"
+    },
+    "nix-task": {
+      "url": "github:meta-introspector/nix-task?ref=feature/lattice-30030-homedir"
+    },
+    "sops-nix": {
+      "url": "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store"
+    },
+    "node2nix": {
+      "url": "github:meta-introspector/node2nix"
+    },
+    "nurl": {
+      "url": "github:meta-introspector/nurl"
+    },
+    "ontology": {
+      "url": "github:meta-introspector/ontology"
+    },
+    "time-2025": {
+      "url": "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+Match found in: ./09/22/nix-llm-task/flake.nix
+            nix-nar-unpack
+          buildInputs = [ pkgs.nix ]; # Ensure nix is available for nix-nar-unpack
+Match found in: ./09/22/flake-templates/llm-task-template/flake.nix
+              nix-nar-unpack --file "''${NAR_PATH}" --to "''${OUTPUT_DIR}"
+Match found in: ./09/27/7-concepts/ai-workflow/flake.nix
+            nix-store --dump $nar_path | nix-nar-unpack $temp_extract_dir
+                buildInputs = [ pkgs.bash pkgs.nix pkgs.coreutils pkgs.findutils pkgs.gnused pkgs.gnugrep pkgs.gawk pkgs.nix-nar-unpack aiInferenceTool ];
+Match found in: ./10/09/hackathon/nar-bridge-flake/flake.nix
+          buildInputs = [ pkgs.nix-nar-unpack ]; # Use the dedicated nix-nar-unpack package
+          nix-nar-unpack --file "$narFile" --to "$out/restored-content" || { echo "ERROR: nix-nar-unpack failed!"; exit 1; }
+Match found in: ./flakes/data-sources/flake.nix
+              buildInputs = [ pkgs.nix ]; # nix-nar-unpack is part of nix
+            # A more sophisticated approach would use 'nix-nar-unpack' or similar.

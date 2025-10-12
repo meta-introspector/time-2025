@@ -1,0 +1,4 @@
+./09/15/minizinc_emoji_primes.mzn
+./10/04/bootstrap/llm-optimizer.mzn
+./solvers/prime-mapping-solver.mzn
+./solvers/oeis-generator.mzn

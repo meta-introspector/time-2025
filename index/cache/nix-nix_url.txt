@@ -1,0 +1,1727 @@
+Match found in: ./09/22/flake-reconstruction-lattice/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    rust-overlay.url = "github:meta-introspector/rust-overlay?ref=feature/CRQ-016-nixify";
+    template-generator-bin.url = "github:meta-introspector/time-2025/feature/foaf?dir=tools/template_generator_bin";
+            pkgs.curl
+Match found in: ./09/22/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      url = "git+https://github.com/meta-introspector/pick-up-nix?ref=feature/808017424794512875886459904961710757005754368000000000";
+      url = "git+https://github.com/meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
+            pkgs.curl
+Match found in: ./09/22/nix-llm-task/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    crq-binstore.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/22/crq-binstore";
+Match found in: ./09/22/flake-templates/llm-task-template/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    crq-binstore.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/22/crq-binstore";
+      url = "github:meta-introspector/gemini-cli?ref=feature/working-gemini-cli-nix-store";
+Match found in: ./09/22/simple.flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./09/22/nix-llm-context/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    mainProject.url = "github:meta-introspector/time-2025/feature/foaf";
+Match found in: ./09/23/nix_concepts_and_facts/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/crq-binstore"; # Input for the CRQ binstore
+Match found in: ./09/23/repair_and_parse.nix
+  # Wrap the content in curly braces to form a valid JSON object
+Match found in: ./09/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
+          inherit (search-results.packages.${system}) url2fileLocatorScript;
+Match found in: ./09/25/log_analyzer/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    time-2025-flake.url = "github:meta-introspector/time-2025?dir=09&ref=feature/foaf";
+    log-analyzer-flake.url = "github:meta-introspector/time-2025?dir=09/25/log_analyzer&ref=feature/foaf";
+    build-time-gemini-capture-flake.url = "github:meta-introspector/time-2025?dir=09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture&ref=feature/foaf";
+          url = "https://github.com/meta-introspector/time-2025";
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/lib/helpers.nix
+    narUrl, # URL to the NAR file
+      __impure = true; # Fetching from external URL is impure
+      narFile = pkgs.fetchurl {
+        url = narUrl;
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/packages/analysis.nix
+    narUrl = "https://example.com/path/to/logs.nar"; # Placeholder URL
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/test-log-analyzer-flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    log-analyzer-flake.url = "github:meta-introspector/time-2025?dir=09/25/log_analyzer&ref=feature/foaf";
+    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/test-meta-introspector-flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    meta-introspector-flake.url = "github:meta-introspector/time-2025?ref=feature/foaf"; # Point to root
+    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/test-secret-scanner-module.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    meta-introspector-flake.url = "github:meta-introspector/time-2025?dir=09&ref=feature/foaf";
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/test-cases/bug-repro-build-time-gemini-capture.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    build-time-gemini-capture-flake.url = "github:meta-introspector/time-2025?dir=09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture&ref=feature/foaf";
+    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/foaf";
+Match found in: ./09/25/rungemini/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    geminiCli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+Match found in: ./09/26/synapse-system/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    pip2nix.url = "github:meta-introspector/pip2nix?ref=master";
+    #AGENT1.url = "github:meta-introspector/synapse-system?dir=nix/flakes/4QZero&ref=feature/base-agent-flake";
+    Agent4QZero.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/synapse-system/nix/flakes/4QZero";
+    ARCHITECT.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/synapse-system/nix/flakes/architect";
+    #ARCHITECT.url = "github:meta-introspector/synapse-system?dir=nix/flakes/architect&ref=feature/base-agent-flake";
+    #base-agent.url = "github:meta-introspector/synapse-system?dir=nix/flakes/base-agent&ref=feature/base-agent-flake";
+Match found in: ./09/26/synapse-system/nix/flakes/4QZero/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    pip2nix.url = "github:meta-introspector/pip2nix?ref=master";
+    base-agent.url = "github:meta-introspector/synapse-system?dir=nix/flakes/base-agent&ref=feature/base-agent-flake";
+Match found in: ./09/26/synapse-system/nix/flakes/architect/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    pip2nix.url = "github:meta-introspector/pip2nix?ref=master";
+Match found in: ./09/26/synapse-system/nix/flakes/base-agent/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    pip2nix.url = "github:meta-introspector/pip2nix?ref=master";
+Match found in: ./09/26/synapse-system/nix/python-packages.nix
+{ pkgs, lib ? pkgs.lib, fetchurl ? pkgs.fetchurl, fetchgit ? pkgs.fetchgit, fetchhg ? pkgs.fetchhg }:
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/fe/ba/e2081de779ca30d473f21f5b30e0e737c438205440784c7dfc81efc2b029/async_timeout-5.0.1-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/e5/48/1549795ba7742c948d2ad169c1c8cdbae65bc450d6cd753d124b17c8cd32/certifi-2025.8.3-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/83/2d/5fd176ceb9b2fc619e63405525573493ca23441330fcdaee6bef9460e924/charset_normalizer-3.4.3.tar.gz";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/e3/26/57c6fb270950d476074c087527a558ccb6f4436657314bfb6cdf484114c4/docker-7.1.0-py3-none-any.whl";
+      self."urllib3"
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/36/f4/c6e662dade71f56cd2f3735141b265c3c79293c109549c1e6933b0651ffc/exceptiongroup-1.3.0-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/76/c6/c88e154df9c4e1a2a66ccf0005a88dfb2650c1dffb6f5ce603dfbd452ce3/idna-3.10-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/2c/e1/e6716421ea10d38022b952c159d5161ca1193197fb744506875fbb87ea7b/iniconfig-2.1.0-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/04/00/1f74089c06aec1fac9390e2300a6a6b2381e0dac281783d64ccca9d681fd/neo4j-5.28.2-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/a9/75/10dd1f8116a8b796cb2c737b674e02d02e80454bda953fa7e65d8c12b016/numpy-2.0.2.tar.gz";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/20/12/38679034af332785aac8774540895e234f4d07f7545804097de4b666afd8/packaging-25.0-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/54/20/4d324d65cc6d9205fabedc306948156824eb9f0ee1633355a8f7ec5c66bf/pluggy-1.6.0-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/c7/21/705964c7812476f378728bdf590ca4b771ec72385c533964653c68e86bdc/pygments-2.19.2-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/a8/a4/20da314d277121d6534b3a980b29035dcd51e6744bd79075a6ce8fa4eb8d/pytest-8.4.2-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/cb/29/518f32faf6edad9f56d6e0107217f7de6b79f297a47170414a2bd4be7f01/pytest_snapshot-0.9.0-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/5f/ed/539768cf28c661b5b068d66d96a2f155c4971a5d55684a514c1a0e0dec2f/python_dotenv-1.1.1-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/81/c4/34e93fe5f5429d7570ec1fa436f1986fb1f00c3e0f43a589fe2bbcd22c3f/pytz-2025.2-py2.py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/e8/02/89e2ed7e85db6c93dfa9e8f691c5087df4e3551ab39081a4d7c6d1f90e05/redis-6.4.0-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/1e/db/4254e3eabe8020b458f1a747140d32277ec7a271daf1d235b70dc0b4e6e3/requests-2.32.5-py3-none-any.whl";
+      self."urllib3"
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/cc/30/f0660686920e09680b8afb0d2738580223dbef087a9bd92f3f14163c2fa6/testcontainers-4.13.1-py3-none-any.whl";
+      self."urllib3"
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/a0/84/ac813e7aed7a527e5bc4c7cbb6e47d72498e76b8371e3805ccab96619b38/testcontainers_core-0.0.1rc1-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/46/66/8d4c91ffc41ddf5f292d7b07331f59d5f6857d3b02f2b3c7419694ff02a4/testcontainers_neo4j-0.0.1rc1-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/0c/a2/34d6576c52c5916503ecd2f7991689b0272167457f13c36093a12fddfdab/testcontainers_redis-0.0.1rc1-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/6e/c2/61d3e0f47e2b74ef40a68b9e6ad5984f6241a942f7cd3bbfbdbd03861ea9/tomli-2.2.1-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl";
+  "urllib3" = super.buildPythonPackage rec {
+    pname = "urllib3";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/a7/c2/fe1e52489ae3122415c51f387e221dd0773709bad6c6cdaa599e8a2c5185/urllib3-2.5.0-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/95/8f/aeb76c5b46e273670962298c23e7ddde79916cb74db802131d49a85e4b7d/wrapt-1.17.3.tar.gz";
+Match found in: ./09/26/synapse-system/tests/python/step1/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    pip2nix.url = "github:meta-introspector/pip2nix?ref=master";
+    agent.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/synapse-system/nix/flakes/agent";
+Match found in: ./09/26/synapse-system/tests/python/step1/nix/flakes/agent/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/dev-flake/flake-compat.nix
+            {url = "https://api.${info.host or "github.com"}/repos/${info.owner}/${info.repo}/tarball/${info.rev}";}
+                inherit (info) url;
+            {inherit (info) url;}
+            {url = "https://${info.host or "gitlab.com"}/api/v4/projects/${info.owner}%2F${info.repo}/repository/archive.tar.gz?sha=${info.rev}";}
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/dev-flake/flake.nix
+    nixpkgs.url = "nixpkgs/nixpkgs-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-compat.url = "github:nix-community/flake-compat/pull/4/head";
+    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
+      url = "github:numtide/devshell";
+    nuschtos.url = "github:NuschtOS/search";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/basics/derivation/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/basics/htop-with-flags/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/basics/mkDerivation/default.nix
+      fetchurl
+    src = config.deps.fetchurl {
+      url = "mirror://gnu/hello/${config.name}-${config.version}.tar.gz";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/basics/mkDerivation/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/haskell-local-development-cabal/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-local-development-nextjs/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-local-development-no-lock-file/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-packaging-devshell-only/default.nix
+      url = "https://github.com/DavHau/cowsay";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-packaging-devshell-only/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-packaging/default.nix
+      url = "https://github.com/DavHau/cowsay";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-packaging/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/php-packaging/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-machine-learning/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-multiple-packages/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-pdm-pytorch-from-nixpkgs/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-pdm/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-ansible/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-apache-airflow/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-odoo/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-pillow/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/rust-local-development-workspace/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/rust-packaging-buildRustPackage/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/rust-packaging/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/spago-local-development/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/repo-with-packages-flake/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/repo-with-packages-flake/packages/hello/default.nix
+      url = "https://ftp.gnu.org/gnu/hello/hello-${config.version}.tar.gz";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/repo-with-packages/default.nix
+      url = "https://github.com/nix-community/dream2nix/tarball/main";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/repo-with-packages/packages/hello/default.nix
+      url = "https://ftp.gnu.org/gnu/hello/hello-${config.version}.tar.gz";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/flake.nix
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    pyproject-nix.url = "github:pyproject-nix/pyproject.nix";
+    purescript-overlay.url = "github:thomashoneyman/purescript-overlay";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/archive/default.nix
+    "url"
+  outputs = {url, ...}: let
+        inherit url;
+            inherit url;
+            inherit url hash;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/crates-io/default.nix
+  fetchurl,
+    url = "https://crates.io/api/v1/crates/${pname}/${version}/download";
+      hashFile algo (b.fetchurl {
+        inherit url;
+      fetched = fetchurl {
+        inherit url;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/git/default.nix
+    "url"
+    url,
+              inherit url submodules;
+                inherit url submodules;
+              inherit url;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/github/default.nix
+        url = "https://github.com/${owner}/${repo}/tarball/${rev}";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/gitlab/default.nix
+        url = "https://gitlab.com/${owner}/${repo}/-/archive/${rev}/${repo}-${rev}.tar.gz";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/http/default.nix
+  fetchurl,
+    "url"
+  outputs = {url, ...}: let
+      hashFile algo (b.fetchurl {
+        inherit url;
+          fetchurl {
+            inherit url;
+          fetchurl {
+            inherit url hash;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/npm/default.nix
+    url = "https://registry.npmjs.org/${pname}/-/${submodule}-${version}.tgz";
+        b.fetchurl {inherit url;}
+        (pkgs.fetchurl {
+          inherit url;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/pypi-sdist/default.nix
+    url =
+      source = pkgs.fetchurl {
+        inherit url;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/pypi-wheel/default.nix
+          pkgs.curl
+        url=$(curl "https://pypi.org/pypi/$pname/json" | jq -r ".releases.\"$version\"[] | select(.filename == \"$filename\") | .url")
+        curl $url --output $out
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/getDreamLockSource.nix
+              "${pname}"."${version}" = builtins.fetchurl { ... };
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/nodejsUtils.nix
+  identifyGitUrl = url:
+    l.hasPrefix "git+" url
+    || l.match ''^github:.*/.*#.*'' url != null;
+  parseGitUrl = url: let
+    githubMatch = l.match ''^github:(.*)/(.*)#(.*)$'' url;
+      url = "https://github.com/${owner}/${repo}";
+      splitUrlRev = l.splitString "#" url;
+      rev = l.last splitUrlRev;
+      urlOnly = l.head splitUrlRev;
+      if l.hasPrefix "git+ssh://" urlOnly
+        url = "https://${(l.last (l.splitString "@" url))}";
+      else if l.hasPrefix "git+https://" urlOnly
+        url = l.removePrefix "git+" urlOnly;
+      else throw "Cannot parse git url: ${url}";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/misc/benchmarks/mkDerivation-modules-vs-pkg-func.nix
+          src = nixpkgs.fetchurl {
+            url = "mirror://gnu/hello/hello-${version}.tar.gz";
+        src = nixpkgs.fetchurl {
+          url = "mirror://gnu/hello/hello-${version}.tar.gz";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/misc/drafts/repo-flake-groups/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-haskell-cabal/default.nix
+    config.deps.fetchurl {
+      inherit (p.cabal) url hash;
+      inherit (p.src) url hash;
+        fetchurl
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/default.nix
+  inherit (config.deps) fetchurl;
+      else if nodejsUtils.identifyGitUrl plent.resolved
+        (nodejsUtils.parseGitUrl plent.resolved)
+        l.warnIfNot (plent ? integrity) "Package ${name}/${plent.version} didn't provide 'integrity' field, which is required for url dependencies."
+          src = fetchurl {
+            url = plent.resolved;
+      fetchurl
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-nextjs/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-packaging-package-lock-v1/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-packaging-package-lock/default.nix
+      url = "https://github.com/DavHau/cowsay";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-packaging-package-lock/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-spago/default.nix
+      url = dep.repo;
+      config.deps.curl
+        curl
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular/default.nix
+      inherit (config.deps) fetchurl;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-node-modules/tests/packages/nodejs-packaging-node-modules-only/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-json/tests/packages/basic/default.nix
+      src = nixpkgs.fetchurl {
+        url = "https://registry.npmjs.org/npm/-/npm-${version}.tgz";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-lock-v3/default.nix
+  inherit (config.deps) fetchurl fetchGit;
+        url = l.removePrefix "git+" (builtins.head split);
+      fetchurl {
+        url = plent.resolved;
+      fetchurl
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-lock/default.nix
+      fetchurl
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-lock/translate.nix
+    # TODO: when integrity is there, and git url is github then use tarball instead
+      nodejsUtils.identifyGitUrl dependencyObject.version;
+      then "0.0.0-rc.${b.substring 0 8 (nodejsUtils.parseGitUrl dependencyObject.version).rev}"
+      url = "https://registry.npmjs.org/${name}/-/${name}-${version}.tgz";
+          nodejsUtils.parseGitUrl dependencyObject.version;
+            url = dependencyObject.version;
+            url = dependencyObject.resolved;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-composer-lock/default.nix
+      fetchurl
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-composer-lock/translate.nix
+            inherit (rawObj.source) type url;
+            path = rawObj.dist.url;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-granular/default.nix
+          url = "${root}/vendor/${name}";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/default.nix
+    url = info: config.deps.fetchurl {inherit (info) url sha256;};
+    git = info: config.deps.fetchgit {inherit (info) url sha256 rev;};
+        inherit (nixpkgs) fetchFromGitHub fetchurl gitMinimal nix-prefetch-scripts openssh python3 rustPlatform writeText;
+      inherit (nixpkgs) nix fetchgit fetchurl writeText;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/tests/packages/can-build-setuptools/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/tests/packages/can-handle-setuptools-runtime-dep/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/tests/packages/python-nodejs/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/default.nix
+                urls =
+                  lib.optionals (lib.hasAttrByPath ["tool" "pdm" "source"] pyproject.pyproject) (builtins.map (source: source.url) pyproject.pyproject.tool.pdm.source)
+                  # if there is a tool.pdm.source with name=pypi, the user would like to exclude the default url
+                # pURL identifier for SBOM generation
+                  identifiers.purlParts = {
+                    # https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#pypi
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/lib.nix
+  # Get the filename from an URL.
+  getFilename = url: lib.lists.last (lib.splitString "/" url);
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/tests/packages/jupyter-lab/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/tests/packages/python-local-development/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-lock/cargoLock.nix
+            (src: src.url == sourceSpec.url && src.sha == sourceSpec.rev)
+            (throw "no git source: ${sourceSpec.url}#${sourceSpec.rev}")
+        in "git+${sourceSpec.url}${refPart}#${sourceSpec.rev}"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-lock/translate.nix
+            url = l.elemAt parts 0;
+                inherit (parsed) url;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-vendor/default.nix
+      inherit (config.deps) fetchurl runCommandLocal;
+        fetchurl
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-vendor/vendor.nix
+      [source."${source.url}${l.optionalString (source ? type) "?${source.type}=${source.value}"}"]
+      git = "${source.url}"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/pythonEnv/flake-template.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/website-options.nix
+      urlPrefix = "https://github.com/nix-community/dream2nix/blob/main/";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/pkgs/fetchPipMetadata/script.nix
+  fetchurl,
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/scripts/flake.nix
+    dream2nix.url = "github:nix-community/dream2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_python-pdm-lib/default.nix
+            url = null;
+        "urllib3"
+        urllib3 = "2.0.5";
+        urllib3 = "urllib3-2.0.5-py3-none-any.whl";
+      expected = ["certifi" "charset-normalizer" "idna" "requests" "urllib3"];
+        urllib3 = "2.0.5";
+        urllib3 = "urllib3-2.0.5-py3-none-any.whl";
+        urllib3 = "2.0.5";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/debug/pypi-deps-db.nix
+    url = "https://github.com/DavHau/pypi-deps-db/tarball/${commit}";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/default.nix
+    url = "https://github.com/DavHau/pypi-deps-db/tarball/${pypiDataRev}";
+    inherit (pkgs) fetchurl;
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/pypi-deps-db";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/interpreter.nix
+  deps = pkgs.lib.attrValues (import ./mach_nix/nix/python-deps.nix { inherit python; inherit (pkgs) fetchurl; });
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/lib/extractor/default.nix
+   url = "https://github.com/DavHau/nix-pypi-fetcher-2/archive/${commit}.tar.gz";
+   # Hash obtained using `nix-prefetch-url --unpack <url>`
+  extractor-fast = {pkg, version, url, sha256, pyVersions ? [], ...}:
+      src = (pkgs.fetchurl {
+        inherit url sha256;
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/auto_patchelf_hook.nix
+{fetchurl, makeSetupHook, writeText}:
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/call_mach.nix
+    url = "https://github.com/nixos/nixpkgs/tarball/${nixpkgs_rev}";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/compileOverrides.nix
+    (pkgs.lib.attrValues (import ./python-deps.nix {python = pkgs.python39; inherit (pkgs) fetchurl; }))
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/conda-channels.nix
+  channelRegistry = fromJSON (readFile (fetchurl {
+    url = "https://raw.githubusercontent.com/${repoOwner}/${repoName}/${condaDataRev}/sha256.json";
+      mapAttrsToList (part: sha256: builtins.fetchurl {
+        url = "https://raw.githubusercontent.com/${repoOwner}/${repoName}/${condaDataRev}/channels/${chan}/${sys}.${part}.json";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/deps-db-and-fetcher.nix
+    url = "https://github.com/DavHau/pypi-deps-db/tarball/${pypi_deps_db_commit}";
+    url = "https://github.com/DavHau/nix-pypi-fetcher-2/tarball/${pypi_fetcher_commit}";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/lib.nix
+  autoPatchelfHook = import ./auto_patchelf_hook.nix {inherit (pkgs) fetchurl makeSetupHook writeText;};
+  is_http_url = url:
+    if (substring 0 8 url) == "https://" || (substring 0 7 url) == "http://" then true else false;
+    if isString src && is_http_url src then (fetchTarball src) else src;
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/nixpkgs-src.nix
+    url = "https://github.com/nixos/nixpkgs/tarball/${nixpkgsInput.rev}";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/python-deps.nix
+{python, fetchurl, ...}:
+    src = fetchurl {
+      url = "https://github.com/pypa/distlib/archive/05375908c1b2d6b0e74bdeb574569d3609db9f56.zip";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/ac/20/9541749d77aebf66dd92e2b803f38a50e3a5c76e7876f45eb2b37e758d82/resolvelib-0.8.1.tar.gz";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/0d/91/8d860c75c3e70e6bbec7b898b5f753bf5da404be9296e245034360759645/tree-format-0.1.2.tar.gz";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/python.nix
+  pythonDeps = lib.attrValues (import ./python-deps.nix { inherit python; inherit (pkgs) fetchurl; });
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/crawler/configuration.nix
+      crawl-urls =
+            EMAIL = "hsngrmpf+pypiurlcrawler@gmail.com";
+          description = "Crawl PyPi URLs";
+            ${python}/bin/python -u ${src}/crawl_urls.py ./pypi
+            pypi_fetcher_url="https://github.com/DavHau/nix-pypi-fetcher-2/archive/''${pypi_fetcher_commit}.tar.gz"
+            pypi_fetcher_hash=$(nix-prefetch-url --unpack $pypi_fetcher_url)
+            pypi_fetcher_url="https://github.com/DavHau/nix-pypi-fetcher-2/archive/''${pypi_fetcher_commit}.tar.gz"
+            pypi_fetcher_hash=$(nix-prefetch-url --unpack $pypi_fetcher_url)
+          path = with pkgs; [ curl gawk git gzip jq openssl moreutils ];
+                curl -H "Accept-Encoding: gzip" -L https://repo.anaconda.com/pkgs/$channel/$arch/repodata.json | gzip -d > .tmpfile \
+                curl -H "Accept-Encoding: gzip" -L https://conda.anaconda.org/$channel/$arch/repodata.json | gzip -d > .tmpfile \
+      crawl-urls = {
+        partOf = [ "crawl-urls.service" ];
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/nixpkgs-src.nix
+    url = "https://github.com/nixos/nixpkgs/tarball/b4db68ff563895eea6aab4ff24fa04ef403dfe14";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/python.nix
+    url = "https://github.com/DavHau/mach-nix";
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/default.nix
+    inherit (pkgs) fetchurl fetchgit fetchhg;
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/examples/shell/python-packages.nix
+{ pkgs, fetchurl, fetchgit, fetchhg }:
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/4f/52/34c6cf5bb9285074dc3531c437b3919e825d976fde097a7a73f79e726d03/certifi-2025.7.14-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/e4/33/89c2ced2b67d1c2a61c19c6751aa8902d46ce3dacb23600a283619f5a12d/charset_normalizer-3.4.2.tar.gz";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/76/c6/c88e154df9c4e1a2a66ccf0005a88dfb2650c1dffb6f5ce603dfbd452ce3/idna-3.10-py3-none-any.whl";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/7c/e4/56027c4a6b4ae70ca9de302488c5ca95ad4a39e190093d6c1a8ace08341b/requests-2.32.4-py3-none-any.whl";
+      self."urllib3"
+  "urllib3" = super.buildPythonPackage rec {
+    pname = "urllib3";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/a7/c2/fe1e52489ae3122415c51f387e221dd0773709bad6c6cdaa599e8a2c5185/urllib3-2.5.0-py3-none-any.whl";
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/nix/sources.nix
+        builtins_fetchurl { inherit (spec) url sha256; name = name'; }
+        pkgs.fetchurl { inherit (spec) url sha256; name = name'; };
+        builtins_fetchTarball { name = name'; inherit (spec) url sha256; }
+        pkgs.fetchzip { name = name'; inherit (spec) url sha256; };
+        ({ url = spec.repo; inherit (spec) rev; inherit ref; } // submoduleArg);
+  fetch_builtin-url = name: throw
+    ''[${name}] The niv type "builtin-url" will soon be deprecated. You should instead use `builtin = true`.
+        import (builtins_fetchTarball { inherit (sources.nixpkgs) url sha256; }) { inherit system; };
+    else if spec.type == "builtin-url" then fetch_builtin-url name
+  builtins_fetchTarball = { url, name ? null, sha256 }@attrs:
+        fetchTarball ({ inherit url; } // (optionalAttrs (name != null) { inherit name; }))
+  # fetchurl version that is compatible between all the versions of Nix
+  builtins_fetchurl = { url, name ? null, sha256 }@attrs:
+      inherit (builtins) lessThan nixVersion fetchurl;
+        fetchurl ({ inherit url; } // (optionalAttrs (name != null) { inherit name; }))
+        fetchurl attrs;
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/python-packages.nix
+{ pkgs, fetchurl, fetchgit, fetchhg }:
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/b9/2e/64db92e53b86efccfaea71321f597fa2e1b2bd3853d8ce658568f7a13094/MarkupSafe-1.1.1.tar.gz";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/27/6f/be940c8b1f1d69daceeb0032fee6c34d7bd70e3e649ccac0951500b4720e/click-7.1.2.tar.gz";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/64/61/079eb60459c44929e684fa7d9e2fdca403f67d64dd9dbac27296be2e0fab/configobj-5.0.6.tar.gz";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/83/8e/fa97d40616c8d1bda8f83b12ab0ccf9fe0420cb89cf73184436bd3c581fe/contexter-0.1.4.tar.gz";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/64/a7/45e11eebf2f15bf987c3bc11d37dcc838d9dc81250e67e4c5968f6008b6c/Jinja2-2.11.2.tar.gz";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/cb/5f/ae1eb8bda1cde4952bd12e468ab8a254c345a0189402bf1421457577f4f3/pip-20.3.1.tar.gz";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/6b/34/415834bfdafca3c5f451532e8a8d9ba89a21c9743a0c59fbd0205c7f9426/six-1.15.0.tar.gz";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/be/ba/1f744cdc819428fc6b5084ec34d9b30660f6f9daaf70eead706e3203ec3c/toml-0.10.2.tar.gz";
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/release-python-packages.nix
+{ pkgs, fetchurl, fetchgit, fetchhg }:
+    src = fetchurl {
+      url = "https://pypi.python.org/packages/14/41/8c9da3549f8e00c84f0432c3a8cf8ed6898374714676aab91501d48760db/bumpversion-0.5.3.tar.gz";
+    src = fetchurl {
+      url = "https://pypi.python.org/packages/23/3f/8be01c50ed24a4bd6b8da799839066ce0288f66f5e11f0367323467f0cbc/certifi-2017.11.5.tar.gz";
+    src = fetchurl {
+      url = "https://pypi.python.org/packages/fc/bb/a5768c230f9ddb03acc9ef3f0d4a3cf93462473795d18e9535498c8f929d/chardet-3.0.4.tar.gz";
+    src = fetchurl {
+      url = "https://pypi.python.org/packages/f4/bd/0467d62790828c23c47fc1dfa1b1f052b24efdf5290f071c7a91d0d82fd3/idna-2.6.tar.gz";
+    src = fetchurl {
+      url = "https://pypi.python.org/packages/58/54/57f7c5638fecdf232a5b6b767da467b0ff31467d7f86a7364c252acf2321/pkginfo-1.4.1.tar.gz";
+      self."urllib3"
+    src = fetchurl {
+      url = "https://pypi.python.org/packages/b0/e1/eab4fc3752e3d240468a8c0b284607899d2fbfb236a56b7377a329aa8d09/requests-2.18.4.tar.gz";
+    src = fetchurl {
+      url = "https://pypi.python.org/packages/86/f9/e80fa23edca6c554f1994040064760c12b51daff54b55f9e379e899cd3d4/requests-toolbelt-0.8.0.tar.gz";
+    src = fetchurl {
+      url = "https://pypi.python.org/packages/e9/c3/5986db56819bd88e1a250cad2a97249211686b1b7b5d95f9ab64d403a2cb/setuptools-38.2.5.zip";
+    src = fetchurl {
+      url = "https://pypi.python.org/packages/19/c6/4d74a16323f5045e6d4444bd1e3104b8ba52507700bc152a9c6bd88d1cfb/tqdm-4.19.5.tar.gz";
+    src = fetchurl {
+      url = "https://pypi.python.org/packages/7e/b4/ecc6aaf0eb287c6577e796bcc3089ce6286d273d5caa70655050cc3462f9/twine-1.9.1.tar.gz";
+  "urllib3" = super.buildPythonPackage {
+    name = "urllib3-1.22";
+    src = fetchurl {
+      url = "https://pypi.python.org/packages/ee/11/7c59620aceedcc1ef65e156cc5ce5a24ef87be4107c2b74458464e437a5d/urllib3-1.22.tar.gz";
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/release-shell.nix
+    inherit (pkgs) fetchurl fetchgit fetchhg;
+Match found in: ./09/26/synapse-system/vendor/nix/pynixify/pynixify/data/pythonPackages.nix
+    else if !value.src ? urls then 
+      [ (d // {src=builtins.head value.src.urls;})];
+  urlToPypiName = url:
+    if builtins.isNull url then
+        match = builtins.match "mirror://pypi/./([^/]+)/.*" url;
+          "https://files.pythonhosted.org/packages/[^/]+/./([^/]+)/.*" url;
+    (builtins.map (e: e // { pypiName = urlToPypiName e.src; }) sources);
+    # Get the PyPI name of a derivation from its source URL. If it's not
+        pypiName = if (builtins.isNull (urlToPypiName e.src)) then
+          urlToPypiName e.src;
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/dev/build-system-overrides.nix
+    urllib3 = {
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/dev/build-systems.nix
+      fetchurl,
+      src = fetchurl {
+        url = "https://files.pythonhosted.org/packages/d7/7d/60976d532519c3a0b41e06a59ad60949e2be1af937cf02738fec91bfd808/pytest-runner-6.0.1.tar.gz";
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/doc/src/patterns/development-scripts/flake.nix
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+      url = "github:pyproject-nix/pyproject.nix";
+      url = "github:pyproject-nix/uv2nix";
+      url = "github:pyproject-nix/build-system-pkgs";
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/doc/src/patterns/testing/flake.nix
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+      url = "github:pyproject-nix/pyproject.nix";
+      url = "github:pyproject-nix/uv2nix";
+      url = "github:pyproject-nix/build-system-pkgs";
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/flake.nix
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    pyproject-nix.url = "github:pyproject-nix/pyproject.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/build.nix
+  parseGitURL =
+    url:
+      m1 = match "([^?]+)\\?([^#]+)#(.+)" url;
+      m2 = match "([^#]+)#(.+)" url;
+        url = elemAt m1 0;
+            nameValuePair (unquoteURL (elemAt parts 0)) (unquoteURL (elemAt parts 1))
+        fragment = unquoteURL (elemAt m1 2);
+        url = elemAt m2 0;
+        fragment = unquoteURL (elemAt m2 1);
+      throw "Could not parse git url: ${url}";
+  unquoteURL =
+  # fetchurl doesn't un-escape the name, leaving percent encoding characters in the filename
+  srcFilename = url: unquoteURL (baseNameOf url);
+      fetchurl,
+      isURL = source ? url;
+        if isURL then
+      gitURL = parseGitURL source.git;
+              inherit (gitURL) url;
+              rev = gitURL.fragment;
+            // optionalAttrs (gitURL ? query.tag) { ref = "refs/tags/${gitURL.query.tag}"; }
+            passthru.url = source.path;
+        else if (isPypi || isURL) && format == "pyproject" then
+          fetchurl {
+            url = package.source.url or package.sdist.url;
+        else if isURL && format == "wheel" then
+              whl: whl.url == source.url
+            ) (throw "Wheel URL ${source.url} not found in list of wheels: ${package.wheels}") package.wheels;
+          fetchurl {
+            name = srcFilename wheel.url;
+              url
+            # Fetch wheel from URL
+            if selectedWheel ? url then
+                fetchurl {
+                  name = srcFilename selectedWheel.url;
+                  inherit (selectedWheel) url hash;
+                lib.warn "wheel url '${selectedWheel.url}' missing hash, falling back to builtins.fetchurl" (
+                  builtins.fetchurl {
+                    name = srcFilename selectedWheel.url;
+                    inherit (selectedWheel) url;
+          optional (hasSuffix ".zip" (src.passthru.url or "")) unzip
+      // optionalAttrs (isGit && gitURL ? query.subdirectory) {
+        sourceRoot = "source/${gitURL.query.subdirectory}";
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/lock1.nix
+          url ? null,
+        assert (whl ? url) -> (!whl ? filename && !whl ? path);
+        assert (whl ? filename) -> (!whl ? url && !whl ? path);
+        assert (whl ? path) -> (!whl ? url && !whl ? filename);
+        // optionalAttrs (url != null) {
+          inherit url;
+          file' = parseWheelFileName (baseNameOf url);
+              url ? null,
+                url
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/test_build.nix
+            arpeggio = baseNameOf (mkTest "arpeggio").src.url;
+            urllib3 = baseNameOf (mkTest "urllib3").src.url;
+          urllib3 = "urllib3-2.2.2.tar.gz";
+            arpeggio = baseNameOf (mkTest "arpeggio").src.url;
+            urllib3 = baseNameOf (mkTest "urllib3").src.url;
+          urllib3 = "urllib3-2.2.2.tar.gz";
+            ).src.url;
+            ).src.url;
+            ).src.url;
+            ).src.url;
+            ).src.url;
+            ).src.url;
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/test_lock1.nix
+        testWheelURL = parsePkg "arpeggio" locks.kitchenSinkA;
+        testSdistURL = parsePkg "blinker" locks.kitchenSinkA;
+        testGitURL = parsePkg "pip" locks.kitchenSinkA;
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/npins/default.nix
+      url ? null,
+    # At the moment, either it is a plain git repository (which has an url), or it is a GitHub/GitLab repository
+    # In the latter case, there we will always be an url to the tarball
+    if url != null then
+        inherit url;
+        urlToName =
+          _url: rev:
+            matched = builtins.match "^.*/([^/]*)(\\.git)?$" repository.url;
+        name = urlToName repository.url revision;
+        inherit (repository) url;
+    { url, hash, ... }:
+    builtins.fetchurl {
+      inherit url;
+    { url, hash, ... }:
+      inherit url;
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/pkgs/uv-bin/default.nix
+  fetchurl,
+    src = fetchurl {
+      url = "https://github.com/astral-sh/uv/releases/download/${version}/uv-${platform}.tar.gz";
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/templates/hello-tkinter/flake.nix
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+      url = "github:pyproject-nix/pyproject.nix";
+      url = "github:pyproject-nix/uv2nix";
+      url = "github:pyproject-nix/build-system-pkgs";
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/templates/hello-world/flake.nix
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+      url = "github:pyproject-nix/pyproject.nix";
+      url = "github:pyproject-nix/uv2nix";
+      url = "github:pyproject-nix/build-system-pkgs";
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/templates/inline-metadata/flake.nix
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+      url = "github:pyproject-nix/pyproject.nix";
+      url = "github:pyproject-nix/uv2nix";
+      url = "github:pyproject-nix/build-system-pkgs";
+Match found in: ./09/26/jobs/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    self.url = "github:meta-introspector/time-2025/feature/foaf";
+      buildInputs = [ nixpkgs.legacyPackages.x86_64-linux.curl ];
+        curl -o output.html https://example.com
+Match found in: ./09/26/jobs/test_nix_project/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+      buildInputs = [ nixpkgs.legacyPackages.x86_64-linux.curl ];
+        curl -o output.html https://example.com
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/default.nix
+    curl
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/flake.nix
+  # inputs.nixpkgs.url = "https://nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz";
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/nix?ref=feature/CRQ-016-nixify";
+    flake-parts.url = "github:meta-introspector/flake-parts?ref=feature/CRQ-016-nixify";
+    treefmt-nix.url = "github:meta-introspector/treefmt-nix?ref=feature/CRQ-016-nixify";
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/shell.nix
+          url = "https://github.com/${locked.owner}/${locked.repo}/archive/${locked.rev}.tar.gz";
+    export NIX_DEBUG_INFO_DIRS="${pkgs.curl.debug}/lib/debug:${nixComponents.nix-everything.debug}/lib/debug''${NIX_DEBUG_INFO_DIRS:+:$NIX_DEBUG_INFO_DIRS}"
+Match found in: ./09/26/jobs/vendor/nix-task/examples/gemini-caller-flake/flake.nix
+    nix-task.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/jobs/vendor/nix-task";
+Match found in: ./09/26/jobs/vendor/nix-task/examples/gemini-input-flake/flake.nix
+    gemini-caller-flake.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/jobs/vendor/nix-task/examples/gemini-caller-flake";
+Match found in: ./09/26/jobs/vendor/nix-task/examples/nixMathHomework/flake.nix
+  inputs.nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
+    nix-task.url = "../../.";
+Match found in: ./09/26/jobs/vendor/nix-task/flake.nix
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    utils.url = "github:meta-introspector/flake-utils";
+    yarnpnp2nix = { url = "github:meta-introspector/yarnpnp2nix"; inputs.nixpkgs.follows = "nixpkgs"; inputs.utils.follows = "utils"; };
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+    base-job.url = "./nix/base-job";
+Match found in: ./09/26/jobs/vendor/nix-task/flakes/all-repos/flake.nix
+    # Replace 'your-repo-name' and 'your-repo-url' with actual values
+      url = "github:meta-introspector/example-repo"; # Placeholder URL
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./09/26/jobs/vendor/nix-task/nix/base-job/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./09/27/7-concepts/1-build-system/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./09/27/7-concepts/1-build-system/nix/packages/lint-staged/default.nix
+    url = "https://github.com/meta-introspector/lint-staged/archive/feature/CRQ-016-nixify.tar.gz";
+Match found in: ./09/27/7-concepts/2-gemini-integration/nix-store-bundle-test.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+Match found in: ./09/27/7-concepts/2-gemini-integration/test-github-gemini.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+Match found in: ./09/27/7-concepts/2-gemini-integration/working-nix-store-gemini.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+Match found in: ./09/27/7-concepts/2-gemini-integration/gemini-integration/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+    gemini-api-consumer-flake.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/27/7-concepts/2-gemini-integration/gemini-integration/gemini_api_consumer_flake";
+Match found in: ./09/27/7-concepts/3-response-artifacts/response-007-cli-nar-output/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./09/27/7-concepts/6-qa-testing/tests/2025-01-27-gemini-hello-world/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+Match found in: ./09/27/7-concepts/6-qa-testing/tests/2025-01-27-minimal-qa-test/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+Match found in: ./09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+            pkgs.curl
+Match found in: ./09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+    vial.url = "path:./vial-placeholder"; # Placeholder for the actual vial flake
+    credsSourceDir.url = "path:./default-creds-source"; # Default placeholder for the creds source directory
+            pkgs.curl
+Match found in: ./09/27/7-concepts/test-secrets-sops/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./09/27/7-concepts/ai-workflow/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+          buildInputs = [ pkgs.curl pkgs.python3 ]; # Example build inputs
+          nativeBuildInputs = [ pkgs.bash pkgs.nix pkgs.curl pkgs.python3 ];
+Match found in: ./09/30/monster_experiment/rust_knowledge_extractor/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    naersk.url = "github:nix-community/naersk/master"; # Using standard naersk for now
+    sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
+Match found in: ./09/flakes/search-results/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    pickUpNix2.url = "github:meta-introspector/pick-up-nix2?ref=feature/CRQ-016-nixify"; # Assuming pick-up-nix2 is a flake
+              gh repo list "${ownerName}" --json name,url,description,owner,isArchived,isFork,createdAt,updatedAt --limit 1000 > "$TEMP_DIR/repos.json"
+            curl # For making HTTP requests to Solana RPC
+            BLOCK_INFO=$(curl -s -X POST -H "Content-Type: application/json" \
+        # Derivation to create a url2file locator script
+        url2fileLocatorScript = { projectRoot }:
+          pkgs.writeShellScriptBin "url2file-locate" ''
+            GITHUB_URL="$1"
+            if [ -z "$GITHUB_URL" ]; then
+                echo "Error: GITHUB_URL is not set. Usage: url2file-locate \"https://github.com/owner/repo/blob/branch/path/to/file\"" >&2
+            echo "Locating local file for URL: $GITHUB_URL..."
+            OWNER=$(echo "$GITHUB_URL" | awk -F'/' '{print $4}')
+            REPO=$(echo "$GITHUB_URL" | awk -F'/' '{print $5}')
+            REPO_PATH=$(echo "$GITHUB_URL" | sed -E 's|https://github.com/[^/]+/[^/]+/blob/[^/]+/||')
+          url2fileLocatorScript = url2fileLocatorScript { projectRoot = pickUpNix2.outPath; }; # Pass pickUpNix2.outPath as projectRoot
+              curl # Add curl to devShell for testing
+Match found in: ./09/crq-008.foaf.nix
+  problemGoal = "While striving for pure functional systems (as outlined in CRQ-001 and CRQ-007), real-world agent operations often necessitate controlled side effects, such as accessing external services or securely managing credentials. Uncontrolled side effects can compromise reproducibility, security, and verifiability. Goal: To establish a secure, auditable, and reproducible framework for managing necessary side effects within agent operations, specifically focusing on secure credential management via a vault and controlled external communication via HTTPS URL access for single-step agent actions.";
+  proposedSolution = "1.  **Secure Vault Integration:** Integrate a secure vault solution (e.g., HashiCorp Vault, AWS Secrets Manager, or a Nix-based secrets management system) for storing and retrieving sensitive information required by agents (e.g., API keys, authentication tokens, private keys). Access to the vault will be strictly controlled, auditable, and integrated into the Nix environment to ensure reproducible access patterns. 2.  **Controlled HTTPS URL Access:** Implement a controlled mechanism for agents to perform single-step external network requests via HTTPS URLs. This mechanism will ensure that all external communications are explicitly declared, logged, and potentially sandboxed to limit their impact on the system's purity and reproducibility. Each external call will be treated as a distinct, auditable side effect. 3.  **Nix-Managed Side Effect Declarations:** Utilize Nix to declare and manage the dependencies and configurations for both vault access and HTTPS communication. This will ensure that the environment for executing side effects is reproducible and that all external interactions are explicitly defined within the Nix build. 4.  **Agent Step Isolation:** Design agent operations such that each step requiring a side effect (e.g., fetching a secret from the vault, making an API call) is isolated and clearly demarcated. This isolation facilitates testing, auditing, and understanding the impact of each side effect. 5.  **Auditable Side Effect Logs:** Implement comprehensive logging for all vault accesses and HTTPS communications, capturing details such as timestamps, agent identity, accessed resources, and data exchanged (where appropriate and secure). These logs will be integrated into the overall reproducible analysis pipeline (CRQ-001) for auditing and verification.";
+Match found in: ./09/fetch-github-data.nix
+      # Use curl to fetch repository data from GitHub API
+          ${pkgs.curl}/bin/curl -s "https://api.github.com/repos/${owner}/${repoName}" > $out
+Match found in: ./09/github-to-foaf.nix
+  dctermsNs = "http://purl.org/dc/terms/";
+      "@id" = repoJson.html_url; # Use repository URL as ID
+      "${foafNs}homepage" = { "@id" = repoJson.homepage or repoJson.html_url; };
+      "${foafNs}maker" = { "@id" = repoJson.owner.html_url; }; # Assuming owner is the maker
+      "${githubNs}hasOwner" = { "@id" = repoJson.owner.html_url; };
+      "@id" = userJson.html_url; # Use user URL as ID
+      "${foafNs}homepage" = { "@id" = userJson.html_url; };
+Match found in: ./09/github.foaf.nix
+    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
+Match found in: ./09/nixify-resource.nix
+  nixifyResource = { url, strategy }:
+        ${pkgs.curl}/bin/curl -L -o $out "${url}"
+        inherit url;
+        inherit url;
+        inherit url;
+Match found in: ./09/bug_repro.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+Match found in: ./09/24/nix_custom_attrs_test/mypackage.nix
+{ pkgs, lib, stdenv ? pkgs.stdenv, fetchurl ? pkgs.fetchurl }:
+  src = fetchurl {
+    url = "mirror://gnu/hello/${pname}-${version}.tar.gz";
+Match found in: ./09/poems.nix
+        The architect's dream, in logic unfurled,
+Match found in: ./bug_repro.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+Match found in: ./10/01/docs/theory/jupyter.nix
+    type = "code";    # "code", "markdown", "url", "nix-node"
+    content = null; # The Nix expression, Markdown string, URL, or Nix store path
+  # Conceptual function to resolve a cell's content if it's a URL or Nix node.
+  # This would be an impure operation for URLs.
+    if cell.type == "url" then
+      # Conceptual: Fetch content from URL (impure)
+        url = cell.content;
+        nativeBuildInputs = [ pkgs.curl ];
+        curl -L "${cell.content}" > $out/content
+          resolvedContent = resolveCellContent cell; # Resolve URL/Nix node
+            else if cell.type == "url" || cell.type == "nix-node" then
+        (CellSchema // { id = "external_data_url"; type = "url"; content = "https://example.com/some_data.csv"; output = "// Fetched content from https://example.com/some_data.csv"; })
+Match found in: ./10/01/docs/theory/n_gram_generator.nix
+        "flake" "inputs" "outputs" "nixpkgs" "url" "lib" "pkgs" "stdenv" "mkDerivation"
+Match found in: ./10/01/docs/theory/spore_vial_001/metacoq_graphql_meme.nix
+  # The GitHub URL for the MetaCoq Haskell extraction
+  metaCoqHaskellUrl = "https://github.com/meta-introspector/th-desugar/blob/b915468a8ab8510cc1e6669c8b556229cb4c934a/Server/MetaCoq/TestMeta.org";
+    echo "Fetching MetaCoq Haskell from ${metaCoqHaskellUrl} (conceptual)..." >&2
+      gitUrl = metaCoqHaskellGitRepo;
+Match found in: ./10/01/docs/theory/sparql.nix
+  # Conceptual representation of a "Web3 network of NAR URLs".
+      url = "https://example.com/web3/foaf.nar";
+      url = "https://example.com/web3/people.nar";
+  # A conceptual function to fetch and extract an ontology from a NAR URL.
+  fetchOntologyFromNar = { narUrl, narHash, ontologyFileName ? "ontology.ttl", name ? "fetched-ontology" }:
+      __impure = true; # Fetching from external URL is impure
+      narFile = pkgs.fetchurl {
+        url = narUrl;
+        narUrl = web3NarNetwork.foafOntologyNar.url;
+Match found in: ./10/01/docs/theory/url_provenance_mapper.nix
+  # This function conceptually maps a URL to its verifiable provenance information.
+  mapUrlToProvenance = url: 
+      # 1. URL to Git Repo Mapping (Conceptual)
+      # This part would parse the URL and use external services to find the Git repo and a specific commit.
+        if lib.strings.hasPrefix "https://github.com/" url then
+            pathParts = lib.strings.splitString "/" (lib.strings.removePrefix "https://github.com/" url);
+            # For conceptual purposes, assume a fixed commit hash for any GitHub URL
+            resolvedUrl = "https://github.com/${owner}/${repo}/commit/${commit}";
+          { type = "unknown"; resolvedUrl = url; version = null; owner = null; repo = null; };
+      originalUrl = url;
+        gatewayUrl = if ipfsCid != null then "https://ipfs.io/ipfs/${ipfsCid}" else null;
+        explorerUrl = if solanaContractAddress != null then "https://solscan.io/account/${solanaContractAddress}" else null;
+  inherit mapUrlToProvenance;
+Match found in: ./10/01/docs/theory/verifiable_file_topology.nix
+      gatewayUrl = null; # IPFS Gateway URL (string)
+      explorerUrl = null; # Solana Explorer URL (string)
+      url = null; # URL in Git (string)
+      gitUrl = null;
+      gatewayUrl = if impureData.ipfsCid != null then "https://ipfs.io/ipfs/${impureData.ipfsCid}" else null;
+      explorerUrl = if impureData.solanaContractAddress != null then "https://solscan.io/account/${impureData.solanaContractAddress}" else null;
+      url = impureData.gitUrl;
+Match found in: ./10/01/docs/theory/w3c_ontology_importer.nix
+  # In a real scenario, this would use pkgs.fetchurl or similar, possibly with ZKNotary.
+    url, # URL of the W3C ontology file (e.g., .rdf, .owl)
+    name ? (builtins.baseNameOf url),
+      inherit url hash;
+      __impure = true; # Fetching from external URL is impure
+      # ZKNotaryProof = "... (proof of fetch from URL) ...";
+      echo "Conceptually fetching W3C ontology from ${url}" >&2
+      # In a real implementation, use curl/wget to fetch and verify hash
+      # curl -L ${url} > $out/${name}
+Match found in: ./10/01/docs/theory/w3c_spec_vendorizer.nix
+  # Import the url_provenance_mapper for conceptual provenance tracking
+  urlProvenanceMapperModule,
+    specUrl, # The URL of the W3C specification (e.g., a GitHub repo, or a direct document link)
+    name ? (builtins.baseNameOf specUrl),
+    provenance ? urlProvenanceMapperModule.mapUrlToProvenance specUrl,
+      inherit specUrl contentHash provenance;
+      __impure = true; # Forking/fetching from external URL is impure
+      echo "Conceptually forking and vendorizing W3C spec from ${specUrl}" >&2
+      # 1. Using git clone --bare or similar for Git repos, or curl for documents.
+      # 2. Storing the content in a reproducible way (e.g., pkgs.fetchgit, pkgs.fetchurl).
+      echo "Vendorized content for ${specUrl}" > $out/${name}.txt
+      w3cHtmlSpecUrl = "https://www.w3.org/TR/html5/"; # Example W3C spec URL
+        specUrl = w3cHtmlSpecUrl;
+Match found in: ./10/01/docs/theory/nix_to_owl_ontology_declarations/prefixes/nixOntologyPrefix.nix
+  nixOntologyPrefixUrlString = "https://github.com/meta-introspector/ontology"; # Use the actual GitHub URL
+  urlString = nixOntologyPrefixUrlString;
+Match found in: ./10/01/docs/theory/nix_to_owl_ontology_declarations/prefixes/owlPrefix.nix
+  owlPrefixUrl = "http://www.w3.org/2002/07/owl";
+  fetchedOwlPrefix = pkgs.fetchurl {
+    url = owlPrefixUrl;
+  urlString = owlPrefixUrl;
+Match found in: ./10/01/docs/theory/nix_to_owl_ontology_declarations/prefixes/rdfPrefix.nix
+  rdfPrefixUrl = "http://www.w3.org/1999/02/22-rdf-syntax-ns";
+  fetchedRdfPrefix = pkgs.fetchurl {
+    url = rdfPrefixUrl;
+  urlString = rdfPrefixUrl;
+Match found in: ./10/01/docs/theory/nix_to_owl_ontology_declarations/prefixes/rdfsPrefix.nix
+  rdfsPrefixUrl = "http://www.w3.org/2000/01/rdf-schema";
+  fetchedRdfsPrefix = pkgs.fetchurl {
+    url = rdfsPrefixUrl;
+  urlString = rdfsPrefixUrl;
+Match found in: ./10/01/docs/theory/nix_to_owl_ontology_declarations/prefixes/xsdPrefix.nix
+  xsdPrefixUrl = "http://www.w3.org/2001/XMLSchema";
+  fetchedXsdPrefix = pkgs.fetchurl {
+    url = xsdPrefixUrl;
+  urlString = xsdPrefixUrl;
+Match found in: ./10/01/docs/theory/nix_to_owl_ontology_declarations/nixToOwlMapper.nix
+    OWL_PREFIX_URL_STRING = owlPrefix.urlString;
+    RDF_PREFIX_URL_STRING = rdfPrefix.urlString;
+    RDFS_PREFIX_URL_STRING = rdfsPrefix.urlString;
+    XSD_PREFIX_URL_STRING = xsdPrefix.urlString;
+Match found in: ./10/02/github-to-foaf/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./10/02/fetch-github-data/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./10/03/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./10/03/colosseum-mirror/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+        colosseumUrl = "https://colosseum.com";
+          src = pkgs.fetchurl {
+            url = colosseumUrl;
+Match found in: ./10/04/killerjoke/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./10/04/gemini-prompt-flake/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+      url = "path:./default-prompt.nix";
+Match found in: ./10/06/meta-introspector-fetchers/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    git-submodules-rs-nix.url = "github:meta-introspector/git-submodules-rs-nix";
+    naersk.url = "github:meta-introspector/naersk?ref=feature/CRQ-016-nixify";
+        fetchGraphQL = { url, query }: pkgs.writeText "graphql-data" "Fetched GraphQL data from ${url} with query: ${query}";
+        fetchRSS = { url }: pkgs.writeText "rss-feed" "Fetched RSS feed from ${url}";
+        fetchW3C = { url }: pkgs.writeText "w3c-data" "Fetched W3C data from ${url}";
+        fetchLinkedData = { url }: pkgs.writeText "linked-data" "Fetched Linked Data from ${url}";
+Match found in: ./10/06/notebooklm-export/default.nix
+        url = value.url or null;
+        url = flake.url or null;
+Match found in: ./10/06/sops-gemini/flakes/wrap-gemini-secrets/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+      url = "path:../";
+Match found in: ./10/08/hackathon/flakes/consolidated-impure-gemini-telemetry-modules/flake.nix
+    originalFlake.url = "path:../../../09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry";
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./10/08/hackathon/flakes/consolidated-impure-gemini-telemetry-modules/impure-gemini-telemetry-derivation.nix
+        pkgs.curl
+Match found in: ./10/08/hackathon/flakes/consolidated-impure-gemini-telemetry-modules/inputs.nix
+  nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+  flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+  vial.url = "path:./vial-placeholder"; # Placeholder for the actual vial flake
+Match found in: ./10/09/colosseum-update.nix
+  colosseumUrl = "https://colosseum.com";
+Match found in: ./10/09/hackathon-update-prep.nix
+  colosseumUrl = "https://colosseum.com";
+    src = pkgs.fetchurl {
+      url = colosseumUrl;
+    src = pkgs.fetchurl {
+      url = "${colosseumUrl}${colosseumHackathonPath}";
+  # Expose the URLs and fetched derivations
+  urls = {
+    inherit colosseumUrl colosseumHackathonPath;
+Match found in: ./10/09/solfunmeme-profile/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+        solfunmemeProfileUrl = "https://arena.colosseum.org/profiles/solfunmeme";
+          src = pkgs.fetchurl {
+            url = solfunmemeProfileUrl;
+Match found in: ./10/09/hackathon/colosseum/arena.nix
+  src = pkgs.fetchurl {
+    url = "https://arena.colosseum.org/";
+Match found in: ./10/09/hackathon/colosseum/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs/26833ad1dad83826ef7cc52e0009ca9b7097c79f";
+Match found in: ./10/09/hackathon/consumer/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs/26833ad1dad83826ef7cc52e0009ca9b7097c79f";
+Match found in: ./10/09/hackathon/bridge-pattern/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs/26833ad1dad83826ef7cc52e0009ca9b7097c79f";
+Match found in: ./10/09/hackathon/bridge.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs/26833ad1dad83826ef7cc52e0009ca9b7097c79f";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/bridge-pattern";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/colosseum";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/consumer";
+Match found in: ./10/09/hackathon/nar-bridge-flake/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+Match found in: ./10/09/github-grep-flake/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/nix-grep-regexes.nix";
+Match found in: ./10/09/llm-data-extractor-flake/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/consumer";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/llm-api-wrapper";
+Match found in: ./10/09/llm-result-purifier-flake/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/nar-bridge-flake";
+Match found in: ./10/09/project-scheduler-flake/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/llm-api-wrapper";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/minizinc-nix";
+Match found in: ./10/09/llm-api-wrapper/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+Match found in: ./10/09/minizinc-nix/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+Match found in: ./10/09/zos-spore-flake/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+Match found in: ./10/09/zos-spore-vial-flake/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/zos-spore-flake";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/nar-bridge-flake";
+Match found in: ./10/09/spore-cultivation-lab-flake/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/zos-spore-vial-flake";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/nar-bridge-flake";
+Match found in: ./10/09/llm-nix-simulator-flake/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+Match found in: ./10/09/llm-nix-simulator-flake/lib/prompt-file-derivation.nix
+  2.  Any external dependencies that would be fetched (e.g., GitHub repositories, URLs).
+Match found in: ./10/09/bootstrap-mycology-schedule-flake/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/zos-spore-vial-flake";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/spore-cultivation-lab-flake";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/llm-data-extractor-flake";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/project-scheduler-flake";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/llm-api-wrapper";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/minizinc-nix";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/nar-bridge-flake";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/mcts-solana-flake";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/github-data-fetcher-flake";
+Match found in: ./10/09/mcts-solana-flake/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/llm-api-wrapper";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/mcts-nix";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/solana-nix";
+Match found in: ./10/09/mcts-nix/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+Match found in: ./10/09/solana-nix/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+Match found in: ./10/09/github-data-fetcher-flake/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/github-api-wrapper";
+    sops-nix.url = "github:NixOS/sops-nix"; # Placeholder, assuming sops-nix is available
+Match found in: ./10/09/github-api-wrapper/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+Match found in: ./10/09/orchestration-flake/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
+Match found in: ./10/10/lib-llm-nix/lib/flake-template-generator.nix
+  "    nixpkgs.url = \"${flakeSource}\";"
+  (pkgs.lib.concatStringsSep "\n" (pkgs.lib.map (f: "    input-${lib.strings.sanitizeDerivationName f}.url = \"${f}\";") inputFlakes))
+  (pkgs.lib.concatStringsSep "\n" (pkgs.lib.map (f: "    process-${lib.strings.sanitizeDerivationName f}.url = \"${f}\";") processFlakes))
+  (pkgs.lib.concatStringsSep "\n" (pkgs.lib.map (f: "    output-${lib.strings.sanitizeDerivationName f}.url = \"${f}\";") outputFlakes))
+Match found in: ./10/10/lib-llm-nix/lib/flake-template.nix
+    nixpkgs.url = flakeSource;
+  } // (pkgs.lib.genAttrs inputFlakes (f: { url = f; }))
+    // (pkgs.lib.genAttrs processFlakes (f: { url = f; }))
+    // (pkgs.lib.genAttrs outputFlakes (f: { url = f; }));
+Match found in: ./10/10/grep-nar-flake/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:numtide/flake-utils";
+Match found in: ./10/10/nix2/lib/first-reflection.nix
+          # Heuristic to find flake input URLs
+          urlMatches = lib.strings.match "url = \"([^\"]*)\"" flakeContent;
+          urls = lib.map (m: m.captures.c1) urlMatches;
+        { inherit commands urls systems; };
+      extractSubmoduleUrls = gitmodulesPath:
+          urlMatches = lib.strings.match "url = ([^\n]*)" gitmodulesContent;
+        lib.map (m: m.captures.c1) urlMatches;
+      description = "Validation rules specific to Nix flakes, such as URL and system constraints.";
+      validateFlakeUrls = urls:
+          invalidUrls = lib.filter (url: ! (lib.strings.hasPrefix "github:meta-introspector" url)) urls;
+          hasInvalidUrls = (lib.length invalidUrls) > 0;
+          inherit invalidUrls hasInvalidUrls;
+      validateUrlsWithPrefixes = { urls, allowedPrefixes }:
+          invalidUrls = lib.filter (url: !(lib.any (prefix: lib.strings.hasPrefix prefix url) allowedPrefixes)) urls;
+          hasInvalidUrls = (lib.length invalidUrls) > 0;
+          inherit invalidUrls hasInvalidUrls;
+        urlPrefixValidationReport,
+        submoduleUrlUniquenessReport,
+          URL Prefix Validation:
+          Has Invalid URLs: ${if urlPrefixValidationReport.hasInvalidUrls then "Yes" else "No"}
+          Invalid URLs: ${builtins.toJSON urlPrefixValidationReport.invalidUrls}
+          Submodule URL Uniqueness:
+          Has Duplicate Submodule URLs: ${if submoduleUrlUniquenessReport.hasDuplicates then "Yes" else "No"}
+          Duplicate Submodule URLs: ${builtins.toJSON submoduleUrlUniquenessReport.duplicates}
+Match found in: ./10/10/nix2/flake-checker.nix
+{ lib, pkgs, firstReflection, urlExtractor, flakePaths, gitmodulesPaths }:
+    inherit lib pkgs firstReflection urlExtractor;
+  inherit (task) commandUniquenessReport urlPrefixValidationReport systemValidationReport submoduleUrlUniquenessReport submoduleBranchValidationReport;
+Match found in: ./10/10/nix2/flake.nix
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11"; # Or a more appropriate nixpkgs
+    get-nix-file-list.url = "github:meta-introspector/get-nix-file-list?ref=feature/CRQ-016-nixify";
+            urlExtractor = {}; # Placeholder
+Match found in: ./10/10/nix2/task.nix
+{ lib, pkgs, firstReflection, urlExtractor, monsterCode }:
+  # Step 2: Extract all relevant information (commands, URLs, systems, etc.)
+    flakeUrls = lib.flatten (lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).urls) allFlakeNixFiles);
+    submoduleUrls = lib.flatten (lib.map (gitmodulesPath: firstReflection.identityPrincipleSpec.rawCommandExtraction.extractSubmoduleUrls gitmodulesPath) allGitmodulesFiles);
+  allUrls = extractedInfo.flakeUrls ++ extractedInfo.submoduleUrls;
+  urlPrefixValidationReport = firstReflection.identityPrincipleSpec.flakeValidation.validateUrlsWithPrefixes {
+    urls = allUrls;
+  submoduleUrlUniquenessReport = firstReflection.identityPrincipleSpec.uniquenessValidation.check (lib.listToAttrs (lib.mapWithIndex (i: url: { name = "submodule-url-${toString i}"; value = url; }) extractedInfo.submoduleUrls));
+    URL Prefix Validation:
+    Has Invalid URLs: ${if urlPrefixValidationReport.hasInvalidUrls then "Yes" else "No"}
+    Invalid URLs: ${builtins.toJSON urlPrefixValidationReport.invalidUrls}
+    Submodule URL Uniqueness:
+    Has Duplicate Submodule URLs: ${if submoduleUrlUniquenessReport.hasDuplicates then "Yes" else "No"}
+    Duplicate Submodule URLs: ${builtins.toJSON submoduleUrlUniquenessReport.duplicates}
+  inherit commandUniquenessReport urlPrefixValidationReport systemValidationReport submoduleUrlUniquenessReport submoduleBranchValidationReport;
+Match found in: ./10/10/nix2/task.d/01-extract-info.nix
+    flakeUrls = lib.flatten (lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).urls) allFlakeNixFiles);
+    submoduleUrls = lib.flatten (lib.map (gitmodulesPath: firstReflection.identityPrincipleSpec.rawCommandExtraction.extractSubmoduleUrls gitmodulesPath) allGitmodulesFiles);
+Match found in: ./10/10/nix2/task.d/02-normalize-and-validate.nix
+  allUrls = extractedInfo.flakeUrls ++ extractedInfo.submoduleUrls;
+  urlPrefixValidationReport = firstReflection.identityPrincipleSpec.flakeValidation.validateUrlsWithPrefixes {
+    urls = allUrls;
+  submoduleUrlUniquenessReport = firstReflection.identityPrincipleSpec.uniquenessValidation.check (lib.listToAttrs (lib.mapWithIndex (i: url: { name = "submodule-url-${toString i}"; value = url; }) extractedInfo.submoduleUrls));
+  inherit commandUniquenessReport urlPrefixValidationReport systemValidationReport submoduleUrlUniquenessReport submoduleBranchValidationReport;
+Match found in: ./10/10/nix2/task.d/03-generate-report.nix
+{ lib, pkgs, firstReflection, commandUniquenessReport, urlPrefixValidationReport, systemValidationReport, submoduleUrlUniquenessReport, submoduleBranchValidationReport }:
+    URL Prefix Validation:
+    Has Invalid URLs: ${if urlPrefixValidationReport.hasInvalidUrls then "Yes" else "No"}
+    Invalid URLs: ${builtins.toJSON urlPrefixValidationReport.invalidUrls}
+    Submodule URL Uniqueness:
+    Has Duplicate Submodule URLs: ${if submoduleUrlUniquenessReport.hasDuplicates then "Yes" else "No"}
+    Duplicate Submodule URLs: ${builtins.toJSON submoduleUrlUniquenessReport.duplicates}
+Match found in: ./10/10/nix2/qa/test-prelude.nix
+    # firstReflection and urlExtractor are implicitly passed through prelude.nix's arguments
+    urlExtractor = import ../nix-url-extractor.nix;
+  # Test 1: Ensure parsedUrls is not empty
+  testParsedUrlsNotEmpty = lib.assertMsg (lib.length prelude > 0) "Parsed URLs list should not be empty.";
+  # Test 2: Ensure each parsed URL has expected components
+  testParsedUrlComponents = lib.map (parsedUrl:
+    lib.assertMsg (parsedUrl ? owner && parsedUrl ? repo && parsedUrl ? url)
+      "Each parsed URL should have 'owner', 'repo', and 'url' components."
+  testOwnerIsAllowed = lib.map (parsedUrl:
+    lib.assertMsg (parsedUrl.owner == "meta-introspector")
+      externalRepos = lib.filter (parsedUrl: parsedUrl.owner != "meta-introspector") prelude;
+      metaIntrospectorRepos = lib.filter (parsedUrl: parsedUrl.owner == "meta-introspector") prelude;
+        lib.assertMsg hasFork "External repo '${externalRepo.url}' must have a corresponding 'meta-introspector' fork."
+      metaIntrospectorRepos = lib.filter (parsedUrl: parsedUrl.owner == "meta-introspector") prelude;
+          "Meta-introspector fork '${miRepo.url}' at '${expectedPath}' must be checked out and on branch '${currentBranch}'."
+    inherit testParsedUrlsNotEmpty testParsedUrlComponents testOwnerIsAllowed testExternalReposHaveMetaIntrospectorForks testMetaIntrospectorForksAreCheckedOutAndBranched;
+  allTestsPass = testParsedUrlsNotEmpty && (lib.all (x: x) testParsedUrlComponents) && (lib.all (x: x) testOwnerIsAllowed) && testExternalReposHaveMetaIntrospectorForks && testMetaIntrospectorForksAreCheckedOutAndBranched;
+Match found in: ./10/10/nix2/get-nix-file-list/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+Match found in: ./10/10/nix2/list-files/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+      url = "path:../../get-nix-file-list.nix"; # Relative path to the file
+Match found in: ./10/10/nix2/examples/flake.nix
+    nar-flake.url = "../../lib/nar";
+Match found in: ./10/10/nix-url-extractor.nix
+  # Extract all URLs from flakes
+  allFlakeUrls = lib.flatten (
+    lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).urls) flakePaths
+  # Extract all URLs from submodules
+  allSubmoduleUrls = lib.flatten (
+    lib.map (gitmodulesPath: firstReflection.identityPrincipleSpec.rawCommandExtraction.extractSubmoduleUrls gitmodulesPath) gitmodulesPaths
+  # Combine and deduplicate all URLs
+  allUniqueGithubUrls = lib.unique (allFlakeUrls ++ allSubmoduleUrls);
+  # Function to parse a GitHub URL into its components
+  parseGithubUrl = url:
+      githubMatch = lib.strings.match "github:([^/]+)/([^?#]+)(\\?ref=([^&]+))?(&dir=(.*))?" url;
+      httpsMatch = lib.strings.match "https://github.com/([^/]+)/([^/]+)/tree/([^/]+)/(.*)" url;
+      inherit url;
+      inherit url;
+      owner = null; repo = null; ref = null; dir = null; inherit url;
+  # Parsed URLs
+  parsedUrls = lib.map parseGithubUrl allUniqueGithubUrls;
+  generateRepoNixContent = { owner, repo, ref, dir, url }:
+        # Original URL: ${url}
+        url = "${url}"; # Store the original URL
+  repoFileInstructions = lib.map (parsedUrl: {
+    path = "10/10/github/${parsedUrl.owner}/${parsedUrl.repo}.nix"; # This path needs to be relative to the root of the project
+    content = generateRepoNixContent parsedUrl;
+  }) parsedUrls;
+  urls = allUniqueGithubUrls;
+  inherit parsedUrls repoFileInstructions;
+Match found in: ./10/10/monster-code.nix
+  extractFlakeFeatures = { flakePath, extractedCommands, extractedUrls, extractedSystems }:
+      inputs = extractedUrls; # Example: use extracted URLs as a feature
+Match found in: ./10/10/prelude.nix
+  # Import the URL extractor module
+  urlExtractorModule = import ./nix-url-extractor.nix;
+  # Extract URLs using the extractor module
+  extractedInfo = urlExtractorModule {
+Match found in: ./10/10/prelude-bootstrap.nix
+    url = "github:meta-introspector/synapse-system?dir=nix/flakes/4QZero&ref=feature/base-agent-flake";
+    url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/synapse-system/nix/flakes/4QZero";
+    url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/synapse-system/nix/flakes/agent";
+    url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/synapse-system/nix/flakes/architect";
+    url = "github:meta-introspector/synapse-system?dir=nix/flakes/base-agent&ref=feature/base-agent-flake";
+    url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry";
+    url = "github:meta-introspector/flake-utils";
+    url = "github:nix-community/flake-compat/pull/4/head";
+    url = "github:meta-introspector/flake-parts?ref=feature/CRQ-016-nixify";
+    url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    url = "github:numtide/flake-utils";
+    url = "github:meta-introspector/time-2025/feature/foaf?dir=flakes/foaf/context";
+    url = "github:meta-introspector/time-2025/feature/foaf?dir=flakes/foaf/seed-data";
+    url = "github:meta-introspector/time-2025/feature/foaf?dir=09/27/7-concepts/2-gemini-integration/gemini-integration/gemini_api_consumer_flake";
+    url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/jobs/vendor/nix-task/examples/gemini-caller-flake";
+    url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+    url = "github:meta-introspector/time-2025/feature/foaf?dir=10/02/fetch-github-data";
+Match found in: ./10/10/context.nix
+      submoduleSections = lib.strings.match ''^\[submodule "([^"]+)"\]\n\s*path = ([^\n]+)\n\s*url = ([^\n]+)(\n\s*branch = ([^\n]+))?'' content;
+          url = lib.head (lib.tail (lib.tail match.captures));
+        { inherit name path url branch; };
+Match found in: ./10/10/bootstrap-context.nix
+    ) "vendor/rust-index-guix" ".github/actions/install-nix-action" ".github/actions/nix-github-actions" ".github/actions/nix-installer-action" ".github/actions/cache-nix-action" ".github/actions/cache" ".github/actions/checkout" "vendor/rnix-parser" ".github/actions/upload-artifact" "vendor/nix-on-droid" "vendor/nix/nix" "source/github/jmikedupont2/orgs/Escaped-RDFa/namespace" "source/github/meta-introspector/git-submodule-tools-rs" "vendor/external/git-submodule-tools-rs" "source/github/meta-introspector/solfunmeme" "source/github/meta-introspector/lean4" "vendor/external/forgejo-python" "vendor/external/tmux" "vendor/external/minizinc-introspector" "vendor/external/tmux-interface-rs" "vendor/external/n00b" "vendor/external/monomcp-rust" "vendor/external/hugging-face-dataset-validator-rust" "vendor/external/turbomcp" "vendor/external/bitchat-solana-zos-solfunmeme" "vendor/external/trident" "vendor/external/solfunmeme-banner" "vendor/external/ragit" "vendor/external/bootstrap-meme" "vendor/external/emojis-rs" "vendor/external/introspector-llc" "vendor/external/coccinelleforrust_personal_mirror" "vendor/external/solfunmeme-model-builder-quiz" "vendor/external/solfunmeme-dioxus" "vendor/external/sophia_rs" "vendor/external/solfunmeme-metameme" "vendor/external/amazon-q-developer-cli" "vendor/external/grok-cli" "vendor/external/tclifford" "vendor/external/meta-meme" "vendor/external/gemini-cli" "source/github/meta-introspector/streamofrandom" "source/github/meta-introspector/lattice-introspector" "vendor/external/rust" "vendor/external/asciinema-scenario" "vendor/external/nix-asciinema-agg" "vendor/external/asciinema" "vendor/nix/nixtract" "vendor/nix/nixpkgs-lint" "vendor/guix/mes" "vendor/guix/guix" "vendor/lang-c" "vendor/steel" "vendor/strace/dutchcoders-trace" "vendor/strace/intentrace" "vendor/strace/lurk" "vendor/strace/rstrace" "source/github/meta-introspector/quasi-meta-meme" "source/github/meta-introspector/hackathon" "vendor/external/github-issues-export-rs" "source/github/meta-introspector/minizinc-introspector" "source/github/meta-introspector/time" "source/github/meta-introspector/neo" "source/github/meta-introspector/neo2" "vendor/nixpkgs" "vendor/plantuml-stdlib/C4-PlantUML" "vendor/ebpf/aya" "vendor/ebpf/bpfjit" "vendor/ebpf/bpfman" "vendor/ebpf/clean-dns-bpf" "vendor/ebpf/eadb" "vendor/ebpf/ebpfguard" "vendor/ebpf/libbpf-rs" "vendor/ebpf/rbpf" "source/github/meta-introspector/git-submodules-rs-nix" "vendor/mkAIDerivation" "vendor/nix/renix" "vendor/nix/nix-config-merger" "vendor/nix/nix-files-comparator" "vendor/nix/rnix-parser-tester" "source/github/meta-introspector/introspector-llc" "vendor/nix/nix-direnv" "vendor/hooks/shellcheck-precommit" "vendor/hooks/rusty-hook" "vendor/hooks/shebling" "vendor/nix/tvix" "vendor/nix/nil" "vendor/lint/shellcheck" "vendor/lint/git-hooks.nix" "vendor/lint/cachix-git-hooks.nix" "vendor/nix/nixpacks" "source/github/meta-introspector/ragit" "vendor/nix/flake-utils" "vendor/tools/detect-duplicates" "vendor/nix/fenix" "vendor/nix/nix-systems-default" "vendor/nix/nix-systems-default-fork" "vendor/nix/home-manager" "vendor/nix/nix-asciinema-agg" "vendor/external/fenix" "vendor/rust/just" "source/github/meta-introspector/bootstrap" "vendor/nix/nix-nar-rs" "source/github/meta-introspector/ai-ml-zk-ops" "vendor/nix/rust-overlay" "vendor/nix/naersk" "vendor/nix/flake-parts" "vendor/nix/treefmt-nix" "vendor/nix/yarnpnp2nix" "vendor/external/copilot-cli" "source/github/meta-introspector/solfunmeme-gitbook" "source/github/meta-introspector/solfunmeme-metameme" "vendor/nix/factorio-mods-nix" "vendor/nix/vpsfree-cz-configuration" "vendor/nix/sops-nix" "nix/vendor/nix/croissong-system" "nix/vendor/nix/bbigras-nix-config" "nix/vendor/nix/gmkonan-flake" "nix/vendor/nix/jpetrucciani-nix" "nix/vendor/nix/stites-configs-mirror" "nix/vendor/nix/privatevoid-depot" "nix/vendor/nix/catircservices-org" "nix/vendor/nix/duck1123-k3s-fleetops" "nix/vendor/nix/dominicegginton-dotfiles" "nix/vendor/nix/fort-nix-bitcoin" "nix/vendor/nix/bojeran-dotfiles" "nix/vendor/nix/sheeeng-nix" "nix/vendor/nix/fjolne-dotfiles" "nix/vendor/nix/vpsfreecz-config" "nix/vendor/nix/disassembler-network" "vendor/hooks/vale-precommit" "vendor/hooks/vale" "source/github/meta-introspector/pre-commit-hooks-collection" "vendor/nix/vale-precommit" "vendor/hooks/lint-staged" "vendor/lint/nixpkgs-lint" "vendor/nix/pre-commit-tool-hooks" "vendor/nix/nixdoc" "source/github/meta-introspector/th-desugar" "vendor/hooks/prek" "vendor/nix/felix-schausberger-nixos" "vendor/nix/nix-stdlib" "vendor/nix/nix-init" "vendor/nix/nix-prefetch" "vendor/nix/nix-prefetch-github" "vendor/nix/nurl" "vendor/nix/nix-universal-prefetch" "vendor/nix/prefetch-github" "vendor/nix/nix-upfetch" "vendor/nix/nix-prefetch-lheckemann" "vendor/external/codex";
+Match found in: ./10/10/bootstrap-context/part1.nix
+    url = "https://github.com/meta-introspector/rust-index-guix";
+    url = "https://github.com/meta-introspector/install-nix-action";
+    url = "https://github.com/meta-introspector/nix-github-actions";
+    url = "https://github.com/meta-introspector/nix-installer-action";
+    url = "https://github.com/meta-introspector/cache-nix-action";
+    url = "https://github.com/meta-introspector/cache";
+    url = "https://github.com/meta-introspector/checkout";
+    url = "https://github.com/nix-community/rnix-parser";
+    url = "https://github.com/meta-introspector/upload-artifact";
+    url = "https://github.com/nix-community/nix-on-droid";
+    url = "https://github.com/NixOS/nix";
+    url = "https://github.com/Escaped-RDFa/namespace";
+    url = "https://github.com/meta-introspector/git-submodule-tools-rs";
+    url = "https://github.com/meta-introspector/git-submodule-tools-rs";
+    url = "https://github.com/meta-introspector/solfunmeme";
+    url = "https://github.com/meta-introspector/lean4";
+    url = "https://github.com/meta-introspector/forgejo-python";
+    url = "https://github.com/tmux/tmux";
+    url = "https://github.com/meta-introspector/minizinc-introspector";
+    url = "https://github.com/meta-introspector/tmux-interface-rs";
+    url = "https://github.com/meta-introspector/n00b";
+    url = "https://github.com/meta-introspector/monomcp-rust";
+    url = "https://github.com/meta-introspector/hugging-face-dataset-validator-rust";
+    url = "https://github.com/meta-introspector/turbomcp";
+    url = "https://github.com/meta-introspector/bitchat-solana-zos-solfunmeme";
+    url = "https://github.com/meta-introspector/trident";
+    url = "https://github.com/meta-introspector/solfunmeme-banner";
+    url = "https://github.com/meta-introspector/ragit";
+    url = "https://github.com/meta-introspector/bootstrap-meme";
+    url = "https://github.com/meta-introspector/emojis-rs";
+    url = "https://github.com/meta-introspector/introspector-llc";
+    url = "https://github.com/meta-introspector/coccinelleforrust_personal_mirror";
+    url = "https://github.com/meta-introspector/solfunmeme-model-builder-quiz";
+    url = "https://github.com/meta-introspector/solfunmeme-dioxus";
+    url = "https://github.com/meta-introspector/sophia_rs";
+    url = "https://github.com/meta-introspector/solfunmeme-metameme";
+    url = "https://github.com/meta-introspector/amazon-q-developer-cli";
+    url = "https://github.com/meta-introspector/grok-cli";
+    url = "https://github.com/meta-introspector/tclifford";
+    url = "https://github.com/meta-introspector/meta-meme";
+    url = "https://github.com/meta-introspector/gemini-cli";
+    url = "https://github.com/meta-introspector/streamofrandom";
+    url = "https://github.com/meta-introspector/lattice-introspector";
+    url = "https://github.com/meta-introspector/rust";
+    url = "https://github.com/garbas/asciinema-scenario";
+    url = "https://github.com/a-h/nix-asciinema-agg";
+    url = "https://github.com/asciinema/asciinema";
+    url = "https://github.com/tweag/nixtract";
+    url = "https://github.com/nix-community/nixpkgs-lint";
+    url = "https://github.com/meta-introspector/mes";
+    url = "https://github.com/meta-introspector/guix";
+    url = "https://github.com/vickenty/lang-c";
+    url = "https://github.com/mattwparas/steel";
+    url = "https://github.com/dutchcoders/trace";
+    url = "https://github.com/sectordistrict/intentrace";
+    url = "https://github.com/JakWai01/lurk";
+    url = "https://github.com/thundergolfer/strace-rs";
+    url = "https://github.com/meta-introspector/quasi-meta-meme";
+    url = "https://github.com/meta-introspector/hackathon";
+    url = "https://github.com/boxdot/github-issues-export-rs";
+    url = "https://github.com/meta-introspector/minizinc-introspector";
+    url = "https://github.com/meta-introspector/time/";
+    url = "https://github.com/meta-introspector/neo";
+    url = "https://github.com/meta-introspector/neo";
+    url = "https://github.com/meta-introspector/nixpkgs";
+    url = "https://github.com/plantuml-stdlib/C4-PlantUML";
+    url = "https://github.com/meta-introspector/aya";
+    url = "https://github.com/meta-introspector/bpfjit";
+    url = "https://github.com/bpfman/bpfman";
+    url = "https://github.com/ihciah/clean-dns-bpf";
+    url = "https://github.com/tiann/eadb";
+    url = "https://github.com/deepfence/ebpfguard";
+    url = "https://github.com/libbpf/libbpf-rs";
+    url = "https://github.com/qmonnet/rbpf";
+    url = "https://github.com/meta-introspector/git-submodules-rs-nix.git";
+    url = "https://github.com/meta-introspector/mkAIDerivation.git";
+    url = "https://github.com/meta-introspector/renix.git";
+    url = "https://github.com/spectropaws/nix-config-merger";
+    url = "https://github.com/yashghogre/nix-files-comparator";
+    url = "https://github.com/darichey/rnix-parser-tester";
+    url = "https://github.com/meta-introspector/introspector-llc/";
+    url = "https://github.com/nix-community/nix-direnv";
+    url = "https://github.com/koalaman/shellcheck-precommit";
+    url = "https://github.com/swellaby/rusty-hook";
+    url = "https://github.com/MariaSolOs/shebling";
+    url = "https://github.com/tvlfyi/tvix";
+    url = "https://github.com/oxalica/nil";
+    url = "https://github.com/koalaman/shellcheck";
+    url = "https://github.com/cachix/git-hooks.nix";
+    url = "https://github.com/cachix/git-hooks.nix";
+    url = "https://github.com/meta-introspector/nixpacks";
+    url = "https://github.com/meta-introspector/ragit";
+    url = "https://github.com/meta-introspector/flake-utils";
+    url = "https://github.com/meta-introspector/detect-duplicates";
+    url = "https://github.com/nix-community/fenix.git";
+    url = "https://github.com/nix-systems/default.git";
+    url = "https://github.com/nix-systems/default.git";
+    url = "https://github.com/nix-community/home-manager.git";
+    url = "https://github.com/a-h/nix-asciinema-agg.git";
+    url = "https://github.com/nix-community/fenix";
+    url = "https://github.com/casey/just";
+    url = "https://github.com/meta-introspector/bootstrap";
+    url = "https://gitlab.com/abstract-binary/nix-nar-rs";
+    url = "https://github.com/meta-introspector/ai-ml-zk-ops";
+    url = "https://github.com/meta-introspector/rust-overlay";
+    url = "https://github.com/meta-introspector/naersk";
+    url = "https://github.com/meta-introspector/flake-parts";
+    url = "https://github.com/meta-introspector/treefmt-nix";
+    url = "https://github.com/madjam002/yarnpnp2nix";
+    url = "https://github.com/github/copilot-cli.git";
+    url = "https://github.com/meta-introspector/solfunmeme-gitbook.git";
+    url = "https://github.com/meta-introspector/solfunmeme-metameme.git";
+    url = "https://github.com/YellowOnion/factorio-mods-nix";
+    url = "https://github.com/meta-introspector/vpsfree-cz-configuration";
+    url = "https://github.com/meta-introspector/sops-nix";
+    url = "https://github.com/croissong/system";
+    url = "https://github.com/bbigras/nix-config";
+    url = "https://github.com/GMkonan/flake";
+    url = "https://github.com/jpetrucciani/nix";
+    url = "https://github.com/stites/configs-mirror";
+    url = "https://github.com/privatevoid-net/depot";
+    url = "https://github.com/catircservices/catircservices.org";
+    url = "https://github.com/duck1123/k3s-fleetops";
+    url = "https://github.com/dominicegginton/dotfiles";
+    url = "https://github.com/fort-nix/nix-bitcoin";
+    url = "https://github.com/bojeran/dotfiles";
+    url = "https://github.com/sheeeng/nix";
+    url = "https://github.com/fjolne/dotfiles";
+    url = "https://github.com/vpsfreecz/vpsfree-cz-configuration";
+    url = "https://github.com/disassembler/network";
+    url = "https://github.com/meta-introspector/vale-precommit";
+    url = "https://github.com/meta-introspector/vale";
+    url = "https://github.com/meta-introspector/pre-commit-hooks-collection";
+    url = "https://github.com/pwalleni/vale-precommit";
+    url = "https://github.com/meta-introspector/lint-staged/";
+    url = "https://github.com/nix-community/nixpkgs-lint";
+    url = "https://github.com/google/pre-commit-tool-hooks";
+    url = "https://github.com/nix-community/nixdoc";
+    url = "https://github.com/meta-introspector/th-desugar";
+    url = "https://github.com/j178/prek.git";
+    url = "https://github.com/FelixSchausberger/nixos";
+    url = "https://github.com/meta-introspector/nix-stdlib.git";
+    url = "https://github.com/meta-introspector/nix-init";
+    url = "https://github.com/meta-introspector/nix-prefetch";
+    url = "https://github.com/meta-introspector/nix-prefetch-github";
+  "vendor/nix/nurl" = {
+    path = "vendor/nix/nurl";
+    url = "https://github.com/meta-introspector/nurl";
+    url = "https://github.com/meta-introspector/nix-universal-prefetch";
+    url = "https://github.com/meta-introspector/prefetch-github";
+    url = "https://github.com/meta-introspector/nix-upfetch";
+    url = "https://github.com/meta-introspector/nix-prefetch";
+    url = "https://github.com/meta-introspector/codex";
+Match found in: ./10/10/bootstrap-context/part2.nix
+    url = "https://github.com/meta-introspector/time-2025";
+Match found in: ./10/10/bootstrap-context/part3.nix
+    url = "https://github.com/meta-introspector/livestream-tiktok-plugin";
+Match found in: ./10/10/bootstrap-context/part4.nix
+    url = "https://github.com/meta-introspector/twitter-plugin";
+Match found in: ./10/10/bootstrap-context/part5.nix
+    url = "https://github.com/elizaos-plugins/plugin-twitter";
+Match found in: ./10/10/lib/nar/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    nix2.url = "github.com/meta-introspector/time-2025?ref=feature/git-nix-file-list&dir=10/10/nix2";
+    get-nix-file-list.url = "github.com/meta-introspector/time-2025?ref=feature/git-nix-file-list&dir=10/10/nix2/get-nix-file-list";
+Match found in: ./docs/NixOSI_Vision.nix
+        nixpkgs = { url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify"; };
+        flake-utils = { url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; };
+        mySubmodule = { url = "github:meta-introspector/my-submodule?ref=main"; };
+Match found in: ./example_url_fetch.nix
+  urlReader = import (self + "/lib/url_url_reader.nix") { inherit lib pkgs builtins; };
+  urlExtractor = import (self + "/lib/url_extractor.nix") { inherit lib pkgs builtins; };
+  fetchedWebsite = urlReader.fetchImpureUrl {
+    url = "https://example.com"; # Replace with the actual spec website URL
+  # Extract URLs from the nixOntologyRepo
+  extractedUrls = urlExtractor.extractUrls {
+    name = "ontology-urls";
+  inherit extractedUrls;
+Match found in: ./flakes/foaf/aggregator/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    foafContextFlake.url = "github:meta-introspector/time-2025/feature/foaf?dir=flakes/foaf/context";
+    foafSeedDataFlake.url = "github:meta-introspector/time-2025/feature/foaf?dir=flakes/foaf/seed-data";
+Match found in: ./flakes/foaf/aggregator/context/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    foafContextFlake.url = "./../../context"; # Relative path to the foafContextFlake
+Match found in: ./flakes/foaf/aggregator/seed-graph/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    foafSeedDataFlake.url = "./../../seed-data"; # Relative path to the foafSeedDataFlake
+Match found in: ./flakes/foaf/aggregator/full-graph/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    foafAggregatorContextFlake.url = "./../context"; # Relative path to the aggregator context flake
+    foafAggregatorSeedGraphFlake.url = "./../seed-graph"; # Relative path to the aggregator seed graph flake
+Match found in: ./flakes/foaf/github-data/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    fetchGithubDataFlake.url = "github:meta-introspector/time-2025/feature/foaf?dir=10/02/fetch-github-data";
+    githubToFoafFlake.url = "github:meta-introspector/time-2025/feature/foaf?dir=10/02/github-to-foaf";
+Match found in: ./flakes/search-results/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+        lib.url2fileLocatorScript = pkgs.writeShellScript "url2fileLocatorScript" "echo \"Placeholder script\"";
+Match found in: ./flakes/crq-search/parser/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./flakes/crq-search/reader/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      url = "./../parser"; # Reference the local parser flake
+Match found in: ./flakes/crq-search/filter/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./flakes/crq-search/sorter-suggester/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./flakes/crq-search/main/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=flakes/crq-search/reader";
+      url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=flakes/crq-search/filter";
+      url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=flakes/crq-search/sorter-suggester";
+Match found in: ./flakes/crq-search-lattice/base/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./flakes/crq-search-lattice/parser/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./flakes/crq-search-lattice/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      url = "./parser"; # Reference the local parser flake
+      url = "./base"; # Reference the local base flake
+      url = "./layer1"; # Reference the local layer1 flake
+Match found in: ./flakes/crq-search-lattice/layer1/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      url = "../base"; # Reference the local base flake
+Match found in: ./flakes/crq-document-check/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    mainProject.url = "github:meta-introspector/time-2025?ref=feature/foaf"; # Reference the main project flake
+Match found in: ./flakes/feature-2-nix-base/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./flakes/feature-3-home-dir-creds/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+      url = "path:../../flakes/gemini-feature-lattice/credential-setup.nix";
+Match found in: ./flakes/feature-5-oauth-creds/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./flakes/feature-7-telemetry-capture/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+Match found in: ./flakes/feature-11-llm-output-capture/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./flakes/feature-13-makefile-input/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./flakes/feature-17-yolo-approval/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./flakes/feature-19-self-source-input/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./flakes/composite-2-3-nix-base-home-creds/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+      url = "path:../feature-2-nix-base";
+      url = "path:../feature-3-home-dir-creds";
+Match found in: ./flakes/composite-2-3-5-nix-base-home-oauth/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+      url = "path:../feature-2-nix-base";
+      url = "path:../feature-3-home-dir-creds";
+      url = "path:../feature-5-oauth-creds";
+Match found in: ./flakes/composite-2-3-5-7-nix-base-home-oauth-telemetry/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+      url = "path:../feature-2-nix-base";
+      url = "path:../feature-3-home-dir-creds";
+      url = "path:../feature-5-oauth-creds";
+      url = "path:../feature-7-telemetry-capture";
+Match found in: ./flakes/composite-2-3-5-7-11-nix-base-home-oauth-telemetry-llm-output/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+      url = "path:../feature-2-nix-base";
+      url = "path:../feature-3-home-dir-creds";
+      url = "path:../feature-5-oauth-creds";
+      url = "path:../feature-7-telemetry-capture";
+      url = "path:../feature-11-llm-output-capture";
+Match found in: ./flakes/composite-2-3-5-7-11-13-nix-base-home-oauth-telemetry-llm-output-makefile-input/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+      url = "path:../feature-2-nix-base";
+      url = "path:../feature-3-home-dir-creds";
+      url = "path:../feature-5-oauth-creds";
+      url = "path:../feature-7-telemetry-capture";
+      url = "path:../feature-11-llm-output-capture";
+      url = "path:../feature-13-makefile-input";
+Match found in: ./flakes/composite-2-3-5-7-11-13-17-nix-base-home-oauth-telemetry-llm-output-makefile-input-yolo/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+      url = "path:../feature-2-nix-base";
+      url = "path:../feature-3-home-dir-creds";
+      url = "path:../feature-5-oauth-creds";
+      url = "path:../feature-7-telemetry-capture";
+      url = "path:../feature-11-llm-output-capture";
+      url = "path:../feature-13-makefile-input";
+      url = "path:../feature-17-yolo-approval";
+Match found in: ./flakes/composite-2-3-5-7-11-13-17-19-nix-base-home-oauth-telemetry-llm-output-makefile-input-yolo-self-source/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-cli.url = "github:meta-introspector/gemini-cli?ref=feature/CRQ-016-nixify-2025-10-06";
+      url = "path:../feature-2-nix-base";
+      url = "path:../feature-3-home-dir-creds";
+      url = "path:../feature-5-oauth-creds";
+      url = "path:../feature-7-telemetry-capture";
+      url = "path:../feature-11-llm-output-capture";
+      url = "path:../feature-13-makefile-input";
+      url = "path:../feature-17-yolo-approval";
+      url = "path:../feature-19-self-source-input";
+Match found in: ./flakes/with-rust/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./flakes/mycology-workflow/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    consolidated-impure-gemini-telemetry.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry";
+Match found in: ./flakes/data-sources/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+          url = "https://github.com/meta-introspector/crq-binstore/archive/main.tar.gz";
+Match found in: ./flakes/article-wrapper/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=flakes/data-sources"; # Point to the data-sources flake in the current repo
+Match found in: ./flakes/telemetry-wrapper/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    consolidatedTelemetry.url = "path:../../09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry";
+Match found in: ./github_graphql_modules/github_graphql_common.nix
+  githubApiUrl = "https://api.github.com/graphql";
+  inherit lib pkgs builtins githubApiUrl;
+Match found in: ./github_graphql_modules/github_graphql_execute_query.nix
+{ lib, pkgs, builtins, githubApiUrl, buildGraphQLQuery, ... }:
+      nativeBuildInputs = [ pkgs.curl ]; # Use curl to make the HTTP request
+      # Execute the query using curl
+      curl -s -X POST \
+        "${githubApiUrl}" > $out/response.json
+Match found in: ./github_graphql_modules/github_graphql_example_queries.nix
+              url
+                  url
+Match found in: ./github_graphql_modules/github_graphql_main.nix
+  # Extract githubApiUrl and buildGraphQLQuery from their respective modules
+  inherit (commonModule) githubApiUrl;
+  executeQueryModule = import ./github_graphql_execute_query.nix { inherit lib pkgs builtins githubApiUrl buildGraphQLQuery; };
+Match found in: ./github_graphql_modules/github_graphql_execute_query-test.nix
+{ lib, pkgs, builtins, githubApiUrl, buildGraphQLQuery }:
+Match found in: ./github_graphql_modules/github_graphql_get_repository_details.nix
+            url
+Match found in: ./github_graphql_modules/github_graphql_list_repository_issues.nix
+                url
+Match found in: ./github_graphql_parts/github_graphql_part1.nix
+  githubApiUrl = "https://api.github.com/graphql";
+  inherit lib pkgs builtins githubApiUrl;
+Match found in: ./github_graphql_parts/github_graphql_execute_query.nix
+  { pkgs, githubApiUrl, ... }:
+        nativeBuildInputs = [ pkgs.curl ]; # Use curl to make the HTTP request
+        # Execute the query using curl
+        curl -s -X POST \
+          "${githubApiUrl}" > $out/response.json
+Match found in: ./github_graphql_parts/github_graphql_example_queries.nix
+              url
+                  url
+Match found in: ./lib/url_reader.nix
+  fetchImpureUrl = { url, name ? "fetched-url-content" }:
+      inherit url;
+      nativeBuildInputs = [ pkgs.curl ]; # Use curl to fetch the URL
+      curl -L -o $out/content.html "${url}"
+Match found in: ./lib/url_extractor.nix
+  extractUrls = { path, name ? "extracted-urls" }:
+      nativeBuildInputs = [ pkgs.gnugrep ]; # Use grep to find URLs
+      extractUrlsScript = pkgs.writeShellScript "extract-urls" ''
+        grep -r -o -E "http(s)?://[^\"'<>[:space:]]+" "$path" > "$out"/urls.txt || true
+      bash $extractUrlsScript
+Match found in: ./lib/llm/gemini.nix
+  #   buildInputs = [ pkgs.curl pkgs.jq ];
+  #   RESPONSE=$(curl -s -X POST -H "Content-Type: application/json" \
+Match found in: ./flake.nix
+    nixpkgs = { url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify"; };
+    nixIntrospector = { url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; }; # Placeholder ref, acts as LIL/QQC for Nix expressions
+    logAnalyzer = { url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=09/25/log_analyzer"; };
+    sops-nix = { url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store"; };
+    node2nix-src = { url = "github:meta-introspector/node2nix"; };
+    nurl = { url = "github:meta-introspector/nurl"; };
+    nixToPoemVial = { url = "github:meta-introspector/time-2025?ref=${branch}&dir=theory/nix-to-poem-vial"; }; # Placeholder
+    readMdVial = { url = "github:meta-introspector/time-2025?ref=${branch}&dir=theory/read-md-vial"; }; # Placeholder
+    readRsVial = { url = "github:meta-introspector/time-2025?ref=${branch}&dir=theory/read-rs-vial"; }; # Placeholder
+    nixTaskNew = { url = "github:meta-introspector/nix-task?ref=${branch}"; };
+      url = "github:meta-introspector/time-2025?ref=${branch}&dir=theory/hackathon-mycology-workflow-puml";
+      url = "github:meta-introspector/ontology";
+      url = "./flakes/data-sources";
+        nixpkgs = { url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify"; };
+        flake-utils = { url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; };
+  outputs = { self, nixpkgs, nixIntrospector, logAnalyzer, nixOntologyRepo, sops-nix, node2nix-src, dataSources, spore-vial, nixToPoemVial, readMdVial, readRsVial, nixTaskNew, nurl, ... } @ args:
+        url = "path:${sopsSecretsPath}";
+      exampleUrlFetch = import (self + "/example_url_fetch.nix") {
+        exampleUrlFetch = exampleUrlFetch.fetchedWebsite;
+        ontologyUrls = exampleUrlFetch.extractedUrls;
+        nixOwlOntology = exampleUrlFetch.nixToOwlOntology;
+          nurl.packages.${system}.default # Add nurl to the development shell
+Match found in: ./qa.nix
+    # e.g., statix, nix-url-check, specific build tests for other flakes
+Match found in: ./test-bug-repro-nix-2gram-indexer/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    time2025-src.url = "github:meta-introspector/time-2025?ref=feature/foaf"; # Source for nixCodeIndexerModule and nGramGeneratorModule
+    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/foaf";
+Match found in: ./test-bug-repro-nix-2gram-indexer/inspect_derivation_output.nix
+    url = "https://github.com/meta-introspector/time-2025/archive/e53d59001de6f67e513328a4602a24fa0956cf7c.tar.gz";
+Match found in: ./test-bug-repro-nix-2gram-indexer/inspect_indexer_output.nix
+    url = "https://github.com/meta-introspector/time-2025/archive/feature/foaf.tar.gz";
+Match found in: ./test-bug-repro-nix-2gram-indexer/tests/test_step1_nix_file_index.nix
+    url = "https://github.com/meta-introspector/time-2025/archive/e53d59001de6f67e513328a4602a24fa0956cf7c.tar.gz";
+Match found in: ./test-bug-repro-nix-2gram-indexer/tests/test_step2_indexed_files.nix
+    url = "https://github.com/meta-introspector/time-2025/archive/e53d59001de6f67e513328a4602a24fa0956cf7c.tar.gz";
+Match found in: ./test-bug-repro-nix-2gram-indexer/tests/test_step3_all2gram_usages.nix
+    url = "https://github.com/meta-introspector/time-2025/archive/e53d59001de6f67e513328a4602a24fa0956cf7c.tar.gz";
+Match found in: ./test-crq-search.nix
+    streamofrandom.url = "github:meta-introspector/streamofrandom?ref=feature/foaf"; # Reference the main flake
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+Match found in: ./theory/71-aspects-part-a.nix
+      description = "The occurrence of 71 as a line number for a critical verification error in a Dafny BST lemma (URL 5) positions it as a marker for vulnerabilities, logical flaws, or points requiring rigorous correctness checks.";
+      description = "Explicitly listed in 'knownPrimes' for RSA cryptographic utilities (URL 6), 71 underscores its role as a fundamental building block in secure cryptographic operations, essential for establishing trust and integrity.";
+      description = "The value '0.71' appearing as a probability in a trigram language model (URL 4) signifies a specific likelihood or influence in linguistic patterns, connecting the '71-vibe' to neural network processing and data weighting.";
+Match found in: ./theory/71-aspects-part-c.nix
+      title = "The '71' in Git Submodule URLs";
+      description = "The presence of '71' in GitHub URLs and submodule paths (e.g., 'sue71/autobind-decorator') highlights its role in external dependency management, linking to specific external projects or forks.";
+Match found in: ./theory/hackathon-mycology-workflow-puml/flake.nix
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./wrap_context.nix
+            (builtins.fromJSON "[ \"^\\[submodule \\\"([^\\\"]+)\\\"\\]\\n\\\\s*path = ([^\\\\n]+)\\\\n\\\\s*url = ([^\\\\n]+)(?:\\\\n\\\\s*branch = ([^\\\\n]+))?\"]")
+              url = lib.elemAt match 2;
+            { inherit name subPath url branch; };

@@ -1,0 +1,8 @@
+./09/25/log_analyzer/vendor/regex-automata/tests/gen/dense/multi_pattern_v2_fwd.bigendian.dfa
+./09/25/log_analyzer/vendor/regex-automata/tests/gen/dense/multi_pattern_v2_fwd.littleendian.dfa
+./09/25/log_analyzer/vendor/regex-automata/tests/gen/dense/multi_pattern_v2_rev.bigendian.dfa
+./09/25/log_analyzer/vendor/regex-automata/tests/gen/dense/multi_pattern_v2_rev.littleendian.dfa
+./09/25/log_analyzer/vendor/regex-automata/tests/gen/sparse/multi_pattern_v2_fwd.bigendian.dfa
+./09/25/log_analyzer/vendor/regex-automata/tests/gen/sparse/multi_pattern_v2_fwd.littleendian.dfa
+./09/25/log_analyzer/vendor/regex-automata/tests/gen/sparse/multi_pattern_v2_rev.bigendian.dfa
+./09/25/log_analyzer/vendor/regex-automata/tests/gen/sparse/multi_pattern_v2_rev.littleendian.dfa

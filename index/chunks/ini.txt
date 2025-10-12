@@ -1,0 +1,9 @@
+./09/26/synapse-system/vendor/nix/mach-nix/pytest.ini
+./09/26/synapse-system/vendor/nix/pip2nix/pip2nix.ini
+./09/26/synapse-system/vendor/nix/pip2nix/pip2nix.release.ini
+./09/26/synapse-system/vendor/nix/pip2nix/pip2nix/confspec.ini
+./09/26/synapse-system/vendor/nix/pynixify/mypy.ini
+./09/26/synapse-system/vendor/nix/pynixify/pytest.ini
+./09/.vale.ini
+./10/08/hackathon/.vale.ini
+./.vale.ini

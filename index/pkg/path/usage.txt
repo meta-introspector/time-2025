@@ -1,0 +1,8 @@
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/tests/packages/lock-script-works/default.nix
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/checks.nix-unit.nix
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/mk-python-derivation-overlay.nix
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/mkPython.nix
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/vendor/nix/pip2nix/default.nix
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/10/10/run-qa.nix
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/10/11/qa-nar-similarity-pipeline/tests/test-calculate-monster-knot-simple.nix
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/flakes/monster-knot-calculator/flake.nix

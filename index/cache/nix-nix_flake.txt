@@ -1,0 +1,1714 @@
+Match found in: ./09/22/flake-reconstruction-lattice/flake.nix
+  description = "Experimental flake reconstructing dependencies from flake.lock";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, rust-overlay, template-generator-bin }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./09/22/flake.nix
+  description = "Main project flake for the 2025 repository.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    # Reference parent repositories for flake integration
+  outputs = { self, nixpkgs, flake-utils, nix2, time2025 }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./09/22/nix-llm-task/flake.nix
+  description = "Nix flake for LLM tasks involving NAR files from crq-binstore";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, crq-binstore }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./09/22/flake-templates/llm-task-template/flake.nix
+  description = "Template Nix flake for LLM tasks with dynamic NAR and prompt.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    # Assuming the gemini-cli is available from this flake
+    geminiCliFlake = {
+  outputs = { self, nixpkgs, flake-utils, crq-binstore, geminiCliFlake }:
+    flake-utils.lib.eachDefaultSystem (system:
+            GEMINI_CLI = "${geminiCliFlake.packages.${system}.gemini-cli}/bin/gemini-cli"; # Path to the actual gemini-cli executable
+Match found in: ./09/22/simple.flake.nix
+  description = "A basic flake for streamofrandom";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./09/22/nix-llm-context/flake.nix
+  description = "Nix flake for generating LLM context for symbols. (Updated for OEIS)";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    # This refers to the repository where this flake.nix resides
+  outputs = { self, nixpkgs, flake-utils, mainProject }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./09/23/nix_concepts_and_facts/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      flake = false;
+  outputs = { self, nixpkgs, flake-utils, crqBinstore } @ inputs:
+    flake-utils.lib.eachDefaultSystem (system:
+        concepts = import ./lib/concepts.nix { inherit pkgs; flakeSelf = self; inherit nixLib; };
+Match found in: ./09/23/nix_concepts_and_facts/lib/concepts.nix
+{ pkgs, lib, flakeSelf ? {}, nixLib ? {} } @ args:
+        cp ${flakeSelf}/scripts/number.sh $out
+        cp ${flakeSelf}/scripts/is-prime-check.sh $out
+        cp ${flakeSelf}/scripts/fact-oracle.sh $out
+    $script $out ${flakeSelf}/facts/fact_about_23.txt
+Match found in: ./09/flake.nix
+  description = "Flake for streamofrandom/2025/09, exposing daily content.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
+  outputs = { nixpkgs, flake-utils, search-results, self, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+          cwm = import ./cwm.nix { inherit pkgs builtins self; inherit (flake-utils) lib; };
+          hello = pkgs.writeShellScriptBin "hello" "echo Hello from Nix flake!";
+Match found in: ./09/25/log_analyzer/flake.nix
+  description = "Nix flake for the log_analyzer Rust project";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system: 
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/flake.nix
+  description = "A Nix-flake for analyzing build telemetry logs using log_analyzer";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    time-2025-flake.url = "github:meta-introspector/time-2025?dir=09&ref=feature/foaf";
+    log-analyzer-flake.url = "github:meta-introspector/time-2025?dir=09/25/log_analyzer&ref=feature/foaf";
+    build-time-gemini-capture-flake.url = "github:meta-introspector/time-2025?dir=09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture&ref=feature/foaf";
+    rootLib.follows = "rootFlake/lib";
+  outputs = { self, nixpkgs, flake-utils, time-2025-flake, log-analyzer-flake, build-time-gemini-capture-flake, rootLib } @ inputs:
+    flake-utils.lib.eachDefaultSystem (system:
+        # Import modules from meta-introspector-flake's source
+        buildTimeTelemetryOutput = build-time-gemini-capture-flake.packages.${system}.default;
+          inherit lib pkgs system time-2025-flake secretScannerModule log-analyzer-flake build-time-gemini-capture-flake;
+          inherit lib pkgs self system helpers time-2025-flake nix2gramIndexerModule twoGramReportGeneratorModule;
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/lib/helpers.nix
+{ pkgs, lib, system ? builtins.currentSystem, secretScannerModule ? {}, log-analyzer-flake ? {}, build-time-gemini-capture-flake ? {} } @ args:
+      nativeBuildInputs = [ log-analyzer-flake.packages.${system}.default ];
+        RUST_BACKTRACE=1 ${log-analyzer-flake.packages.${system}.default}/bin/log_analyzer --log-file ${logSourcePath} > $out/analysis-result.txt
+      nativeBuildInputs = [ log-analyzer-flake.packages.${system}.default ];
+        RUST_BACKTRACE=1 ${log-analyzer-flake.packages.${system}.default}/bin/log_analyzer --log-file ${logFilePath} > $out/analysis-result.txt
+      nativeBuildInputs = [ log-analyzer-flake.packages.${system}.default pkgs.gnutar ]; # gnutar for extracting NAR
+        RUST_BACKTRACE=1 ${log-analyzer-flake.packages.${system}.default}/bin/log_analyzer --log-file $LOG_FILE_PATH > $out/analysis-result.txt
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/packages/analysis.nix
+{ pkgs, lib, self ? {}, system ? builtins.currentSystem, helpers ? {}, time-2025-flake ? {}, nix2gramIndexerModule ? {}, twoGramReportGeneratorModule ? {} } @ args:
+  # Build the buildTimeTelemetry derivation to get its output (now directly from build-time-gemini-capture-flake)
+  buildTimeTelemetryOutput = args.build-time-gemini-capture-flake.packages.${system}.default;
+    projectRoot = self; # The flake itself is the project root
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/test-log-analyzer-flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    log-analyzer-flake.url = "github:meta-introspector/time-2025?dir=09/25/log_analyzer&ref=feature/foaf";
+    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
+  outputs = { self, nixpkgs, flake-utils, log-analyzer-flake, rootFlake }:
+    flake-utils.lib.eachDefaultSystem (system:
+        common = rootFlake.lib.common-imports { inherit system; };
+          buildInputs = [ log-analyzer-flake.packages.${system}.default ];
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/test-meta-introspector-flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    meta-introspector-flake.url = "github:meta-introspector/time-2025?ref=feature/foaf"; # Point to root
+    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
+  outputs = { self, nixpkgs, flake-utils, meta-introspector-flake, rootFlake }:
+    flake-utils.lib.eachDefaultSystem (system:
+        common = rootFlake.lib.common-imports { inherit system; };
+          # Evaluate and print the attributes of meta-introspector-flake
+          # This will show what's available under meta-introspector-flake
+          output = builtins.toJSON (builtins.readDir (meta-introspector-flake + "/09"));
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/test-secret-scanner-module.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    meta-introspector-flake.url = "github:meta-introspector/time-2025?dir=09&ref=feature/foaf";
+  outputs = { self, nixpkgs, flake-utils, meta-introspector-flake }:
+    flake-utils.lib.eachDefaultSystem (system:
+        secretScannerModule = import "${meta-introspector-flake}/10/01/docs/theory/secret_scanner.nix" { inherit lib pkgs; };
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/test-cases/bug-repro-build-time-gemini-capture.nix
+  description = "Minimal test case to reproduce build-time-gemini-capture-flake bug";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    build-time-gemini-capture-flake.url = "github:meta-introspector/time-2025?dir=09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture&ref=feature/foaf";
+    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/foaf";
+  outputs = { self, nixpkgs, flake-utils, build-time-gemini-capture-flake, rootFlake }:
+    flake-utils.lib.eachDefaultSystem (system:
+        common = rootFlake.lib.common-imports { inherit system; };
+        packages.default = build-time-gemini-capture-flake.packages.${system}.default;
+Match found in: ./09/25/test_prime_encoder.nix
+  # Reference to the current flake (assuming this is run within a flake)
+  self = builtins.getFlake (toString ./.) ;
+Match found in: ./09/26/synapse-system/flake.nix
+  description = "A lattice of flakes for the Synapse system.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    # Agent flakes
+    #AGENT1.url = "github:meta-introspector/synapse-system?dir=nix/flakes/4QZero&ref=feature/base-agent-flake";
+    Agent4QZero.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/synapse-system/nix/flakes/4QZero";
+    ARCHITECT.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/synapse-system/nix/flakes/architect";
+    #ARCHITECT.url = "github:meta-introspector/synapse-system?dir=nix/flakes/architect&ref=feature/base-agent-flake";
+    #base-agent.url = "github:meta-introspector/synapse-system?dir=nix/flakes/base-agent&ref=feature/base-agent-flake";
+  outputs = { self, nixpkgs, flake-utils, pip2nix, Agent4QZero, ARCHITECT
+    flake-utils.lib.eachDefaultSystem (system:
+        #  inherit self nixpkgs flake-utils pip2nix pythonModule pythonPackagesFile;
+            inherit self nixpkgs flake-utils pip2nix;
+            inherit self nixpkgs flake-utils pip2nix;
+Match found in: ./09/26/synapse-system/nix/flakes/4QZero/flake.nix
+  description = "Nix flake for the 4QZero agent.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    base-agent.url = "github:meta-introspector/synapse-system?dir=nix/flakes/base-agent&ref=feature/base-agent-flake";
+  outputs = { self, nixpkgs, flake-utils, pip2nix, base-agent, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+          # The path to the agent script is relative to the current flake
+Match found in: ./09/26/synapse-system/nix/flakes/architect/flake.nix
+  description = "Nix flake for the architect agent.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, pip2nix
+    flake-utils.lib.eachDefaultSystem (system:
+          # The path to the agent script is relative to the current flake
+Match found in: ./09/26/synapse-system/nix/flakes/base-agent/flake.nix
+  description = "Base agent flake providing a shared Python environment.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, pip2nix, pythonModule, pythonPackagesFile, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./09/26/synapse-system/nix/flakes/clarity-judge/flake.nix
+  description = "A flake for the clarity-judge agent.";
+Match found in: ./09/26/synapse-system/nix/flakes/code-hound/flake.nix
+  description = "A flake for the code-hound agent.";
+Match found in: ./09/26/synapse-system/nix/flakes/devops-engineer/flake.nix
+  description = "A flake for the devops-engineer agent.";
+Match found in: ./09/26/synapse-system/nix/flakes/docs-writer/flake.nix
+  description = "A flake for the docs-writer agent.";
+Match found in: ./09/26/synapse-system/nix/flakes/file-creator/flake.nix
+  description = "A flake for the file-creator agent.";
+Match found in: ./09/26/synapse-system/nix/flakes/git-workflow/flake.nix
+  description = "A flake for the git-workflow agent.";
+Match found in: ./09/26/synapse-system/nix/flakes/golang-specialist/flake.nix
+  description = "A flake for the golang-specialist agent.";
+Match found in: ./09/26/synapse-system/nix/flakes/python-specialist/flake.nix
+  description = "A flake for the python-specialist agent.";
+Match found in: ./09/26/synapse-system/nix/flakes/rust-specialist/flake.nix
+  description = "A flake for the rust-specialist agent.";
+Match found in: ./09/26/synapse-system/nix/flakes/security-specialist/flake.nix
+  description = "A flake for the security-specialist agent.";
+Match found in: ./09/26/synapse-system/nix/flakes/synapse-project-manager/flake.nix
+  description = "A flake for the synapse-project-manager agent.";
+Match found in: ./09/26/synapse-system/nix/flakes/test-runner/flake.nix
+  description = "A flake for the test-runner agent.";
+Match found in: ./09/26/synapse-system/nix/flakes/tool-runner/flake.nix
+  description = "A flake for the tool-runner agent.";
+Match found in: ./09/26/synapse-system/nix/flakes/typescript-specialist/flake.nix
+  description = "A flake for the typescript-specialist agent.";
+Match found in: ./09/26/synapse-system/nix/flakes/ux-designer/flake.nix
+  description = "A flake for the ux-designer agent.";
+Match found in: ./09/26/synapse-system/tests/python/step1/flake.nix
+  description = "A minimal reproducible test case for Nix flake resolution issue.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    agent.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/synapse-system/nix/flakes/agent";
+  outputs = { self, nixpkgs, flake-utils, pip2nix, agent, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+            inherit self nixpkgs flake-utils;
+Match found in: ./09/26/synapse-system/tests/python/step1/nix/flakes/agent/flake.nix
+  description = "Nix flake for a test agent.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, pythonEnv, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/default.nix
+  flake =
+    ./dev-flake/flake-compat.nix
+  flake.defaultNix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/dev-flake/default.nix
+  flake =
+    ./flake-compat.nix
+  flake.defaultNix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/dev-flake/flake-compat.nix
+# copied from github:nix-community/flake-compat/pull/4/head
+# Compatibility function to allow flakes to be used by
+# non-flake-enabled Nix versions. Given a source tree containing a
+# 'flake.nix' and 'flake.lock' file, it fetches the flake inputs and
+# calls the flake's 'outputs' function. It then returns an attrset
+  makeFlakeCompat = impureOverrides: let
+    overrideWrap' = fn: set: set // {overrideInputs = ov: fn (makeFlakeCompat ov);};
+    lockFilePath = src + "/flake.lock";
+        throw "flake input has unsupported input type '${info.type}'";
+    callLocklessFlake = flakeSrc: let
+      flake = import (flakeSrc + "/flake.nix");
+      outputs = flakeSrc // (flake.outputs {self = outputs;});
+          flake = import (sourceInfo
+            + "/flake.nix");
+          outputs = flake.outputs (inputs // {self = result;});
+              _type = "flake";
+          if node.flake or true
+          then assert builtins.isFunction flake.outputs; result
+      then callLocklessFlake rootSrc
+  makeFlakeCompat {}
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/dev-flake/flake.nix
+  description = "Flake containing inputs/outputs not intended for overriding by the end-user";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
+    flake-compat.url = "github:nix-community/flake-compat/pull/4/head";
+    flake-compat.flake = false;
+      flake = false;
+    flake-parts,
+    flake-parts.lib.mkFlake {inherit inputs;} {
+        ../modules/flake-parts/all-modules.nix
+        ../pkgs/fetchPipMetadata/flake-module.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/basics/derivation/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+              # can be changed to ".git" or "flake.nix" to get rid of .project-root
+              projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/basics/htop-with-flags/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+                        # can be changed to ".git" or "flake.nix" to get rid of .project-root
+                        projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/basics/mkDerivation/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+              projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/haskell-local-development-cabal/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+                        # can be changed to ".git" or "flake.nix" to get rid of .project-root
+                        projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-local-development-nextjs/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+                        # can be changed to ".git" or "flake.nix" to get rid of .project-root
+                        projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-local-development-no-lock-file/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+              # can be changed to ".git" or "flake.nix" to get rid of .project-root
+              projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-packaging-devshell-only/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+              projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-packaging/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+              # can be changed to ".git" or "flake.nix" to get rid of .project-root
+              projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/php-packaging/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+                        # can be changed to ".git" or "flake.nix" to get rid of .project-root
+                        projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-machine-learning/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+              projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-multiple-packages/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+                        # can be changed to ".git" or "flake.nix" to get rid of .project-root
+                        projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-pdm-pytorch-from-nixpkgs/default.nix
+          (lib.hasSuffix "flake.lock" name)
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-pdm-pytorch-from-nixpkgs/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+                        # can be changed to ".git" or "flake.nix" to get rid of .project-root
+                        projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-pdm/default.nix
+          (lib.hasSuffix "flake.lock" name)
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-pdm/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+              # can be changed to ".git" or "flake.nix" to get rid of .project-root
+              projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development/default.nix
+          (lib.hasSuffix "flake.lock" name)
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+              # can be changed to ".git" or "flake.nix" to get rid of .project-root
+              projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-ansible/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+                        # can be changed to ".git" or "flake.nix" to get rid of .project-root
+                        projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-apache-airflow/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+                        # can be changed to ".git" or "flake.nix" to get rid of .project-root
+                        projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-odoo/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+                        # can be changed to ".git" or "flake.nix" to get rid of .project-root
+                        projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-pillow/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+                        # can be changed to ".git" or "flake.nix" to get rid of .project-root
+                        projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/rust-local-development-workspace/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+              # can be changed to ".git" or "flake.nix" to get rid of .project-root
+              projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/rust-packaging-buildRustPackage/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+                        # can be changed to ".git" or "flake.nix" to get rid of .project-root
+                        projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/rust-packaging/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+              # can be changed to ".git" or "flake.nix" to get rid of .project-root
+              projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/spago-local-development/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+              projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/repo-with-packages-flake/flake.nix
+  # This example flake.nix is pretty generic and the same for all
+  description = "Dream2nix example flake";
+        # All packages defined in ./packages/<name> are automatically added to the flake outputs
+        # can be changed to ".git" or "flake.nix" to get rid of .project-root
+        projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/flake.nix
+    devFlake = import ./dev-flake;
+      (devFlake)
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/getDreamLockSource.nix
+          dream2nix.make[Flake]Outputs {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/misc/drafts/repo-flake-groups/flake.nix
+  description = "My flake with dream2nix packages";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-nextjs/flake.nix
+  description = "My flake with dream2nix packages";
+    # All packages defined in ./packages/<name> are automatically added to the flake outputs
+            # can be changed to ".git" or "flake.nix" to get rid of .project-root
+            projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-packaging-package-lock-v1/flake.nix
+  description = "My flake with dream2nix packages";
+    # All packages defined in ./packages/<name> are automatically added to the flake outputs
+            # can be changed to ".git" or "flake.nix" to get rid of .project-root
+            projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-packaging-package-lock/flake.nix
+  description = "My flake with dream2nix packages";
+    # All packages defined in ./packages/<name> are automatically added to the flake outputs
+            # can be changed to ".git" or "flake.nix" to get rid of .project-root
+            projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/lock/default.nix
+    print("Add this file to git if flakes is used.")
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-node-modules/tests/packages/nodejs-packaging-node-modules-only/flake.nix
+  description = "My flake with dream2nix packages";
+    # All packages defined in ./packages/<name> are automatically added to the flake outputs
+            # can be changed to ".git" or "flake.nix" to get rid of .project-root
+            projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/tests/packages/can-build-setuptools/flake.nix
+  description = "My flake with dream2nix packages";
+                        # can be changed to ".git" or "flake.nix" to get rid of .project-root
+                        projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/tests/packages/can-handle-setuptools-runtime-dep/flake.nix
+  description = "My flake with dream2nix packages";
+              # can be changed to ".git" or "flake.nix" to get rid of .project-root
+              projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/tests/packages/python-nodejs/flake.nix
+  description = "My flake with dream2nix packages";
+              projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/tests/packages/jupyter-lab/flake.nix
+  description = "My flake with dream2nix packages";
+    # All packages defined in ./packages/<name> are automatically added to the flake outputs
+            # can be changed to ".git" or "flake.nix" to get rid of .project-root
+            projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/tests/packages/python-local-development/flake.nix
+  description = "My flake with dream2nix packages";
+    # All packages defined in ./packages/<name> are automatically added to the flake outputs
+            # can be changed to ".git" or "flake.nix" to get rid of .project-root
+            projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/_template.nix
+  flake = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/all-modules.nix
+#   `flake.modules.<kind>.<name>`
+# Automatically imports all flake-parts modules from `/**/modules/flake-parts`
+  flakePartsModules = attrValues (
+    (mapModules "flake-parts")
+  imports = flakePartsModules;
+  options.flake.modules = mkOption {
+  # generates future flake outputs: `modules.<kind>.<module-name>`
+    flake = {
+      nixosModules = config.flake.modules.nixos or {};
+      darwinModules = config.flake.modules.darwin or {};
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/checks.nix
+    dream2nixFlake = import ../../. {};
+    importFlake = flakeFile: let
+      self' = (import flakeFile).outputs {
+        dream2nix = dream2nixFlake;
+      if lib.pathExists (path + "/flake.nix")
+      then makePackageFromFlake path
+    makePackageFromFlake = flakePath:
+      (importFlake (flakePath + "/flake.nix")).packages.${system}.default or {};
+          dream2nix = dream2nixFlake;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/checks.nix-unit.nix
+# evaluate packages from `/**/modules/drvs` and export them via `flake.packages`
+    dream2nixFlake = import ../../. {};
+    inputs = lib.mapAttrs (name: input: "${input.outPath}") dream2nixFlake.inputs;
+      # map all modules in /examples to a package output in the flake.
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/core-modules.nix
+#   `flake.modules.<kind>.<name>`
+# Automatically imports all flake-parts modules from `/**/modules/flake-parts`
+  # generates future flake outputs: `modules.<kind>.<module-name>`
+  config.flake.modules.dream2nix = modules;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/drv-parts-deprecated.nix
+  flake.modules.drv-parts = throw ''
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/examples.nix
+# evaluate packages from `/**/modules/drvs` and export them via `flake.packages`
+  dream2nixFlake = import ../../. {};
+      flake = examplesPath + "/${name}/flake.nix";
+  importFlake = flakeFile: let
+    self' = (import flakeFile).outputs {
+      dream2nix = dream2nixFlake;
+  exampleFlakes = foldl (a: b: a // b) {} allExamplesList;
+  packageTempaltes = flip mapAttrs exampleFlakes (name: def: {
+  allExamples = flip mapAttrs' exampleFlakes (name: example: {
+    value = example.flake;
+  flake.templates =
+      repo.description = "Dream2nix repo without flakes";
+      repo-flake.description = "Dream2nix repo with flakes";
+      repo-flake.path = ../../examples/repo-with-packages-flake;
+    getPackage = flakeFile: let
+      flake = importFlake flakeFile;
+      flake.packages.${system}.default or {};
+    # map all modules in /examples to a package output in the flake.
+          repo-with-packages-flake =
+            (importFlake ../../examples/repo-with-packages-flake/flake.nix).packages.${system}.hello;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/overrides.nix
+  flake.overrides =
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/pythonEnv/default.nix
+      # initialize flake template
+      cat ${./flake-template.nix} > $TMPDIR/flake.nix
+      sed -i 's\__PYTHON_ATTR__\${pythonAttr}\g' $TMPDIR/flake.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/pythonEnv/flake-template.nix
+  description = "My flake with dream2nix packages";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts,
+    flake-parts.lib.mkFlake {inherit inputs;} {
+                projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/writers.nix
+{flake-parts-lib, ...}: {
+  options.perSystem = flake-parts-lib.mkPerSystemOption ({
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/pkgs/writers/default.nix
+  # Docs at modules/flake-parts/writers.nix
+  # Docs at modules/flake-parts/writers.nix
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/scripts/flake.nix
+  description = "My flake with dream2nix packages";
+    # All packages defined in ./packages/<name> are automatically added to the flake outputs
+            # can be changed to ".git" or "flake.nix" to get rid of .project-root
+            projectRootFile = "flake.nix";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/shell.nix
+or (throw "dev-shell not defined. Cannot find flake attribute devShell.${builtins.currentSystem}.default")
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/default.nix
+  pypiDataRev ? ((import ./mach_nix/nix/flake-inputs.nix) "pypi-deps-db").rev,
+  pypiDataSha256 ? ((import ./mach_nix/nix/flake-inputs.nix) "pypi-deps-db").sha256,
+        For flakes users: Update the `pypi-deps-db` input of mach-nix.
+    # these tests are expensive and therefore only executed in CI via flakes app 'tests-unit'
+  # expose dot interface for flakes cmdline
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      flake = false;
+  outputs = { self, nixpkgs, flake-utils, ... }@inp:
+      (flake-utils.lib.eachDefaultSystem (system:
+          apps.mach-nix = flake-utils.lib.mkApp { drv = packages.mach-nix.mach-nix; };
+                  nixFlakes
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/deps-db-and-fetcher.nix
+  pypi_deps_db_commit ? ((import ./flake-inputs.nix) "pypi-deps-db").rev,
+  pypi_deps_db_sha256 ? ((import ./flake-inputs.nix) "pypi-deps-db").sha256,
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/flake-inputs.nix
+  lock = (fromJSON (readFile ../flake.lock)).nodes;
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/nixpkgs-src.nix
+  nixpkgsInput = (import ./flake-inputs.nix) "nixpkgs";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_flakes.nix
+  pyEnv = (builtins.getFlake (toString ../.)).packages.${system}.gen.python.requests;
+  pyEnvDockerImage = (builtins.getFlake (toString ../.)).packages.${system}.gen.docker.requests;
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_flakes_legacy_consistent.nix
+  mkPythonFlakes = (getFlake (toString ../.)).lib.${system}.mkPython;
+  pyFlakes = mkPythonFlakes {
+if pyFlakes == py then
+  throw "flakes and legacy output differ"
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/tests/test_flakes_lib.nix
+  inherit ((builtins.getFlake (toString ../.)).lib.${system}) mkPython;
+  inherit ((builtins.getFlake (toString ../.)).lib.${system}) buildPythonPackage;
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/flake.nix
+    flake-utils = {
+      repo = "flake-utils";
+      flake-utils,
+    flake-utils.lib.eachDefaultSystem (
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/dev/build-systems.nix
+# TODO: This file is a temporary arrangement to avoid Flake dependencies.
+# The solution to removing this file is to stop using flakes for CI so we can depend on https://github.com/pyproject-nix/build-system-pkgs
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/doc/src/patterns/development-scripts/flake.nix
+  description = "Using Nix Flake apps to run scripts with uv2nix";
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/doc/src/patterns/testing/flake.nix
+  description = "Pytest flake using uv2nix";
+      forAllSystems = lib.genAttrs lib.systems.flakeExposed;
+                # For usage with Flakes we will refer to the passthru.tests attributes to construct the flake checks attribute set.
+      # Construct flake checks from Python set
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/flake.nix
+      forAllSystems = lib.genAttrs lib.systems.flakeExposed;
+              template = import (path + "/flake.nix");
+          # Test flake templates
+              # Call a nested flake with the inputs from this one.
+              callFlake =
+                  flake' = import (path + "/flake.nix");
+                  args = mapAttrs (name: _: inputs'.${name}) (functionArgs flake'.outputs);
+                  flake = flake'.outputs args;
+                    self = flake;
+                flake;
+                    flake = callFlake (./templates + "/${template}");
+                        flake.${attr}.${system} or { }
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/lock1.nix
+            # When using submodules with Flakes users need to pass submodules=1 to `nix develop`.
+                This can happen when using Git submodules within a Flake without passing submodules=1 to `nix develop`.
+                    Hint: Are you in a Flake and forgot to `git add pyproject.toml`?
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/test_workspace.nix
+    # This is analogous to using Flake inputs which are passed as contextful strings.
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/workspace.nix
+            This is most likely because you are using Flakes, and are automatically inferring the editable root from workspaceRoot.
+            Flakes are copied to the Nix store on evaluation. This can temporarily be worked around using --impure.
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/templates/hello-tkinter/flake.nix
+      forAllSystems = lib.genAttrs lib.systems.flakeExposed;
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/templates/hello-world/flake.nix
+      forAllSystems = lib.genAttrs lib.systems.flakeExposed;
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/templates/inline-metadata/flake.nix
+      forAllSystems = lib.genAttrs lib.systems.flakeExposed;
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/treefmt.nix
+  projectRootFile = "flake.lock";
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/default.nix
+    nixComponents.nix-flake
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/dev/treefmt.nix
+  flakeCheck = pkgs.hostPlatform.system != "riscv64-linux";
+  projectRootFile = "flake.lock";
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/flake.nix
+      flake = false;
+    flake-parts.url = "github:meta-introspector/flake-parts?ref=feature/CRQ-016-nixify";
+    flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
+    inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ inputs.treefmt-nix.flakeModule ];
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/shell.nix
+      flakeLock = fromJSON (readFile ./flake.lock);
+      inherit (flakeLock.nodes.nixpkgs) locked;
+Match found in: ./09/26/jobs/vendor/nix-task/examples/gemini-caller-flake/flake.nix
+  description = "A flake to call the run-gemini-cli task";
+Match found in: ./09/26/jobs/vendor/nix-task/examples/gemini-input-flake/flake.nix
+  description = "A flake that uses the gemini-caller-flake";
+    gemini-caller-flake.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/jobs/vendor/nix-task/examples/gemini-caller-flake";
+  outputs = { self, gemini-caller-flake }: {
+    # You can define a devShell or a package here that uses gemini-caller-flake's outputs
+    devShells.default = gemini-caller-flake.devShells.default;
+Match found in: ./09/26/jobs/vendor/nix-task/examples/nixMathHomework/flake.nix
+  description = "A very basic flake";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
+    utils.lib.mkFlake {
+                  echo "flake ref"
+                  echo "$NIX_TASK_FLAKE_PATH"
+Match found in: ./09/26/jobs/vendor/nix-task/flake.nix
+    utils.url = "github:meta-introspector/flake-utils";
+Match found in: ./09/26/jobs/vendor/nix-task/flakes/all-repos/flake.nix
+  description = "Aggregator flake for all project repositories";
+      # flake = false; # Set to true if the repo itself is a flake
+    utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./09/26/jobs/vendor/nix-task/nix/base-job/flake.nix
+  description = "Base flake for common job definitions and utilities";
+    utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+Match found in: ./09/26/jobs/vendor/nix-task/nix/lib/getTasks.nix
+      else if (isAttrSetWithTaskOutput value) then { __type = "taskOutput"; flakeAttributePath = "${currentPath}.${name}.output"; deps = depsWithDerivations "${currentPath}.${name}.output.deps" value.output.deps; }
+        flakeAttributePath = currentPath;
+  sortTasks = a: b: (builtins.stringLength a.flakeAttributePath) < (builtins.stringLength b.flakeAttributePath);
+Match found in: ./09/26/jobs/vendor/nix-task/nix/tasks/solana-nix-trigger-interpreter.nix
+    # Simulate parsing Solana event data to extract a Nix flake signature
+    NIX_FLAKE_SIG=$(echo "$SOLANA_EVENT_DATA" | awk '{print $NF}') # Get the last word as the sig
+    if [ -z "$NIX_FLAKE_SIG" ]; then
+      echo "Error: Could not extract Nix flake signature from SOLANA_EVENT_DATA." >&2
+    echo "Interpreted Nix flake signature: $NIX_FLAKE_SIG"
+    echo "Simulating triggering of Nix task: nix run .#tasks.$NIX_FLAKE_SIG"
+    # ${pkgs.nix}/bin/nix run .#tasks.$NIX_FLAKE_SIG
+Match found in: ./09/27/7-concepts/1-build-system/flake.nix
+# flake.nix
+  description = "A Nix flake providing pre-commit hooks for code quality and formatting, embodying bott principles of integration and pattern recognition.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachSystem [ "aarch64-linux" ] (system:
+Match found in: ./09/27/7-concepts/2-gemini-integration/working-nix-store-gemini.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, gemini-cli }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./09/27/7-concepts/2-gemini-integration/gemini-integration/flake.nix
+  description = "Consolidated Nix flake for Gemini CLI and API integration, providing various interaction methods.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    gemini-api-consumer-flake.url = "github:meta-introspector/time-2025/feature/foaf?dir=09/27/7-concepts/2-gemini-integration/gemini-integration/gemini_api_consumer_flake";
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, gemini-api-consumer-flake }:
+    flake-utils.lib.eachDefaultSystem (system:
+        # --- From gemini_runner_flake ---
+        geminiCliSrc = gemini-cli; # This refers to the entire flake's source
+        # --- From gemini_api_consumer_flake ---
+        geminiConsumerApp = gemini-api-consumer-flake.apps.${system}.default;
+          # Inherit buildInputs from gemini-cli's devShell (from my_gemini_flake)
+          # Add bash for general shell scripting (from gemini_with_home_access_flake)
+            # Create a symlink to the user's actual ~/.gemini directory (from gemini_with_home_access_flake)
+Match found in: ./09/27/7-concepts/3-response-artifacts/response-007-cli-nar-output/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./09/27/7-concepts/6-qa-testing/tests/2025-01-27-gemini-hello-world/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, gemini-cli }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./09/27/7-concepts/6-qa-testing/tests/2025-01-27-minimal-qa-test/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, gemini-cli }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, geminiCredsDir ? "${geminiCredsDir}" } @ inputs:
+      eachSystem = flake-utils.lib.eachDefaultSystem;
+        flakeNixContent = builtins.readFile (self + "/flake.nix");
+          FLAKE_NIX_CONTENT = flakeNixContent; # Pass the content here
+		"$WRAPPER_PATH" --debug --output-format json --approval-mode yolo --model gemini-2.5-flash --prompt "I am calling you from INSIDE a Nix build derivation! This is real-time telemetry capture. Bundle hash: $BUNDLE_HASH. Time: $(date) Please read flake.nix, and modify it to read @task.md for more instructions. If you cant read flake.nix write a nix package that adds flake.nix, task.md and mission.md to the output. then add a report of the telemetry log via another rust crate and another derivation. we want to create multiple derviations from one task, a whole lattice of them."
+Match found in: ./09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    vial.url = "path:./vial-placeholder"; # Placeholder for the actual vial flake
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, credsSourceDir ? "/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/time-2025/09/27/7-concepts/creds" } @ inputs:
+    flake-utils.lib.eachDefaultSystem (system:
+          # CRITICAL: This assumes the 'creds' directory is available in the source of this flake.
+Match found in: ./09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry/vial-placeholder/flake.nix
+  description = "A placeholder vial flake for Gemini prompts.";
+      lib.getPrompt = { pkgs }: "Default prompt from vial-placeholder flake.";
+Match found in: ./09/27/7-concepts/test-secrets-sops/flake.nix
+  description = "A minimal test flake for build-time sops-nix secrets";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, sops-nix, flake-utils, ... }: {
+    inherit (flake-utils.lib.eachDefaultSystem (system:
+            src = self; # Use the flake itself as the source
+Match found in: ./09/27/7-concepts/ai-workflow/flake.nix
+  description = "Consolidated Nix flake for AI/LLM workflows, providing impure LLM job execution and AI derivation functions.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+        # --- From impure-llm-job/flake.nix ---
+        # --- From response-010-ai-derivation-script/flake.nix ---
+        # Function to run a flake impurely and produce an AI derivation
+        runFlakeForAI = { flakeRef }:
+                  pname = "input-cli"; # Dummy name, actual name comes from input flake
+                  src = flakeRef; # Use the input flake as source
+                  cargoLock = "${flakeRef}/Cargo.lock"; # Assuming Cargo.lock is at the workspace root
+                  cargoRoot = flakeRef;
+        # Expose the runFlakeForAI function
+        lib.runFlakeForAI = runFlakeForAI;
+            echo "Or use the runFlakeForAI function from lib."
+            echo "Example: nix build -f . --arg flakeRef ../response-007-cli-nar-output"
+Match found in: ./09/30/monster_experiment/rust_knowledge_extractor/flake.nix
+  description = "A Nix flake for the rust_knowledge_extractor, allowing impure network access.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, naersk, sops-nix, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./09/flakes/search-results/flake.nix
+# flakes/search-results/flake.nix
+  description = "Flake for GitHub search results packaged as NARs.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    pickUpNix2.url = "github:meta-introspector/pick-up-nix2?ref=feature/CRQ-016-nixify"; # Assuming pick-up-nix2 is a flake
+  outputs = { self, nixpkgs, flake-utils, pickUpNix2, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./09/crq-001.foaf.nix
+  problemGoal = "The current log analysis process may not guarantee pure derivation, leading to potential inconsistencies or non-reproducible results. This can hinder debugging, auditing, and the overall reliability of insights derived from logs. For the purpose of this CRQ, **purity** is defined as: a Nix build that reads its inputs from the store and writes its outputs to the store. Goal: Ensure that the log analysis pipeline operates with pure functions and deterministic outputs, making the analysis fully reproducible and verifiable. This aligns with the principles of functional programming and the capabilities offered by Nix for reproducible environments. Specifically, the goal is to create a pure functional system for the collection of Nix store artifacts from GitHub accounts associated with Solana wallets, pointing to IPFS nodes or files that contain Nix flakes of data. All data will be treated as Nix flakes.";
+  proposedSolution = "1.  **Refactor Pipeline for Purity:** Identify all stages within the log analysis pipeline (e.g., ingestion, parsing, transformation, aggregation). Refactor each stage to adhere strictly to functional programming principles, where functions produce the same output for the same input and have no side effects. 2.  **Nix Flake-based Data Ingestion:** Implement a pure functional ingestion mechanism to collect Nix store artifacts. This mechanism will interface with GitHub accounts (linked via Solana wallets) to identify repositories containing Nix flakes. Data will be sourced from IPFS nodes or files referenced within these Nix flakes, ensuring all collected data is itself a Nix flake. All data, regardless of its origin, will be treated as a Nix flake, providing a unified and reproducible data format for the entire pipeline. 3.  **Explicit Side-Effect Management:** Isolate and explicitly manage any necessary side-effecting operations (e.g., reading from disk, writing to a database, network calls). These operations should be clearly defined and their impact contained. 4.  **Clear Input-Output Contracts:** Define precise input and output contracts (schemas, types) for each function and stage in the pipeline to ensure data integrity and predictable transformations. 5.  **Nix for Environment Purity:** Utilize Nix to define and manage the entire log analysis environment, including all dependencies, tools, and configurations. This will enforce pure derivation at the environment level, guaranteeing that the analysis always runs in the exact same context. 6.  **Comprehensive Testing:** Develop extensive unit tests for individual pure functions to verify their determinism and correctness. Implement integration tests to ensure that the composition of pure functions within the pipeline maintains overall purity and produces expected results.";
+Match found in: ./09/crq-010.foaf.nix
+  proposedSolution = "1.  **ISO 9000 (Quality Management Systems) Integration:** Establish and document a quality management system (QMS) covering all project activities, from design and development to deployment and maintenance. Implement processes for document control, record keeping, internal audits, and continuous improvement, ensuring adherence to ISO 9000 principles. 2.  **Good Manufacturing Practices (GMP) for Software Development:** Adapt GMP principles to software development, focusing on rigorous control over the software development lifecycle (SDLC). Implement strict version control, change management, testing protocols, and release procedures to ensure software quality and integrity, treating software artifacts as \"manufactured\" products. 3.  **Six Sigma for Process Optimization:** Apply Six Sigma methodologies (DMAIC - Define, Measure, Analyze, Improve, Control) to critical development and operational processes. Identify and eliminate defects, reduce variability, and optimize efficiency in areas such as code generation, deployment pipelines, and incident management. 4.  **ITIL (Information Technology Infrastructure Library) for Service Management:** Adopt ITIL best practices for IT service management, focusing on service strategy, design, transition, operation, and continual service improvement. Implement structured processes for incident management, problem management, change management, and release management to ensure reliable and efficient service delivery. 5.  **Agile Methodologies with Rigor:** Combine the flexibility and responsiveness of Agile (e.g., Scrum, Kanban) with the strict controls of other frameworks. Emphasize iterative development, continuous feedback, and adaptive planning, while ensuring that each iteration adheres to the quality and process standards defined by ISO 9000, GMP, and Six Sigma. 6.  **Extreme Nixism for Ultimate Reproducibility:** Extend the application of Nix principles to their extreme, ensuring that every aspect of the project—from development environments and dependencies to build processes, deployments, and even data artifacts—is purely functional, content-addressable, and fully reproducible within the Nix store. This includes rigorous use of Nix flakes, deterministic builds, and immutable infrastructure principles. 7.  **Integrated Audit and Compliance Framework:** Develop an integrated framework for auditing and compliance that leverages the documentation and traceability provided by all integrated methodologies. Ensure that all processes and artifacts are auditable, providing verifiable proof of adherence to established standards.";
+Match found in: ./09/crq-011.foaf.nix
+  proposedSolution = "1.  **Lean 4 Environment Setup (Nix-Managed):** Establish a fully reproducible Lean 4 development environment using Nix, ensuring all dependencies, libraries (e.g., Mathlib), and tools are consistently available. This environment will support the development and verification of Unimath and HoTT-based formalizations. 2.  **Formalization of Core Mathematical Concepts:** Systematically formalize key mathematical concepts and theories relevant to the project (e.g., cryptography, distributed systems, functional programming paradigms) within Lean 4 using Unimath and HoTT principles. Prioritize concepts that underpin the correctness and security of critical project components. 3.  **Proof Development and Verification:** Utilize Lean 4's interactive theorem proving capabilities to construct and formally verify mathematical proofs. Leverage HoTT's interpretation of types as spaces to reason about equivalences and higher-dimensional structures, providing a richer framework for mathematical reasoning. 4.  **Integration with Project Artifacts:** Explore methods to integrate formally verified mathematical results and proofs directly into project artifacts (e.g., as part of Nix flakes, documentation, or even directly influencing code generation). This could involve generating code from verified specifications or using verified properties to validate existing code. 5.  **Training and Expertise Development:** Invest in developing internal expertise in Unimath, HoTT, and Lean 4 to ensure sustainable development and application of these advanced techniques. Foster a culture of formal verification and rigorous mathematical reasoning within the team.";
+Match found in: ./09/crq-012.foaf.nix
+  proposedSolution = "1.  **Formal Definition of Nix Pure Derivation in Unimath:** Develop a formal definition of a \"pure derivation\" within the Unimath framework in Lean 4. This definition will capture the essential properties of Nix derivations: content-addressability, immutability, and deterministic output based solely on inputs. This will involve representing Nix store paths, inputs, and outputs as Unimath types. 2.  **Mapping of Nix Properties to Unimath Type Properties:** Systematically map the key properties of Nix pure derivations to corresponding properties of Unimath types: **Reproducibility:** Correlate the deterministic nature of Nix builds to the well-definedness and uniqueness of canonical forms in Unimath types. **Content-Addressability:** Relate the cryptographic hashing of Nix store paths to the identity and equivalence of types in Unimath (e.g., path equality). **Immutability:** Map the immutability of Nix store artifacts to the inherent immutability of mathematical objects and types in Unimath. 3.  **Formal Verification of Derivation Equivalence:** Utilize Lean 4 to formally prove that if two Nix derivations are equivalent (i.e., produce the same output hash), their corresponding Unimath types are also equivalent (e.g., propositionally equal or equivalent via an equivalence). Conversely, prove that distinct Nix derivations correspond to distinct Unimath types. 4.  **Type-Theoretic Representation of Nix Flakes:** Extend the formalization to represent Nix flakes themselves as Unimath types, capturing their structure, inputs, and outputs within the type-theoretic framework. This would allow for formal reasoning about the composition and properties of entire Nix-based projects. 5.  **Implications for Software Verification:** Explore how this formal equivalence can be leveraged for the formal verification of software systems built with Nix. This could involve proving properties about the behavior of Nix derivations directly within Lean 4, providing a new layer of assurance for software correctness.";
+Match found in: ./09/crq-013.foaf.nix
+  proposedSolution = "1.  **Vouched Data Collection Framework:** Extend the Nix pure derivation as Unimath type framework (CRQ-012) to formally define and verify data items collected from various sources, including GitHub. Each collected data item will be represented as a Nix pure derivation, whose type can be formally reasoned about in Unimath, providing a strong basis for \"vouching\" for its integrity and provenance. 2.  **GitHub Data Ingestion and Nix Flake Conversion:** Implement a robust ingestion pipeline for GitHub data (e.g., repository metadata, code, commit history). All ingested GitHub data will be converted into Nix flakes, ensuring content-addressability and immutability within the Nix store. 3.  **RocksDB for High-Performance Caching:** Utilize RocksDB, the high-performance key-value store used by Solana, as a local cache for GitHub-related Nix flakes and their associated metadata. This will enable rapid access to frequently used data, reducing reliance on external API calls and improving overall system responsiveness. 4.  **Cache Time and Invalidation Strategy:** Implement a configurable cache invalidation strategy based on a \"cache time\" for GitHub data. Data items in RocksDB will be marked with a timestamp, and older entries will be subject to re-fetching or re-validation from GitHub. This ensures data freshness while minimizing redundant API calls. 5.  **Activity-Based Code Execution Prioritization:** Develop a mechanism to track the \"activity\" of code (e.g., frequency of use, recent commits, associated transactions). Only the \"most active\" code (represented as Nix flakes) will be prioritized for execution, analysis, or further processing, optimizing resource utilization and focusing on relevant data. This can be integrated with the Solana smart contract triggers (CRQ-007) and LLM inference (CRQ-009). 6.  **Formal Vouching Mechanism:** Define a formal process, potentially leveraging ZKPs (Zero-Knowledge Proofs) or cryptographic signatures, to \"vouch\" for the integrity and correctness of collected data items. This vouching process will be tied to the Unimath type representation of the Nix derivations, providing a verifiable guarantee of data quality.";
+Match found in: ./09/cwm.nix
+    inputsFrom = [ self ]; # Inherit inputs from the main flake
+Match found in: ./09/test.nix
+  # This is a workaround for direct evaluation outside a flake context
+Match found in: ./09/github.foaf.nix
+    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
+Match found in: ./09/crq-041.foaf.nix
+  title = "Colosseum Mirror Flake with Daily Archiving and hackathon_71_parts.nix Relocation";
+    This Change Request introduces a new Nix flake designed to mirror the Colosseum website,
+    providing a reproducible and versioned archive of its content. The flake includes a `Makefile`
+    "Creation of `flakes/colosseum-mirror/flake.nix`."
+    "Creation of `flakes/colosseum-mirror/Makefile` with `build`, `clean`, `shell`, and `archive-daily` targets."
+    "The `colosseum-mirror` flake builds successfully using `nix build`."
+    "flake-utils"
+Match found in: ./09/poems.nix
+        The Nix flake sleeps, a puzzle unsolved,
+Match found in: ./09/crq-042.foaf.nix
+    3.  **Branch Switching**: Enable dynamic switching of imported flake references to specific branches
+    tags = [ "Nix" "flake" "import-management" "caching" "branching" ];
+Match found in: ./10/01/docs/theory/jupyter.nix
+      # Assume cell.content is already a Nix store path or a flake reference
+Match found in: ./10/01/docs/theory/n_gram_generator.nix
+        "flake" "inputs" "outputs" "nixpkgs" "url" "lib" "pkgs" "stdenv" "mkDerivation"
+      path = "/home/user/project/src/my-flake.nix";
+Match found in: ./10/01/docs/theory/nix_2gram_indexer.nix
+    value = null; # The 2-gram string (e.g., "flake_inputs")
+Match found in: ./10/01/docs/theory/url_provenance_mapper.nix
+        # Conceptual flake input string
+        flakeInput = if gitRepoInfo.type == "github" 
+Match found in: ./10/01/docs/theory/nix_2gram_indexer_step7.nix
+    value = null; # The 2-gram string (e.g., "flake_inputs")
+Match found in: ./10/02/github-to-foaf/flake.nix
+  description = "Minimal flake for github-to-foaf";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./10/02/fetch-github-data/flake.nix
+  description = "Minimal flake for fetch-github-data";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./10/crq-text-extractor.nix
+{ pkgs ? import <nixpkgs> {}, month09Flake }:
+  crqs = month09Flake.crqs.foaf.nix {
+    crq001 = month09Flake.crq-001.foaf.nix { inherit pkgs; inherit (pkgs) lib; };
+    crq007 = month09Flake.crq-007.foaf.nix { inherit pkgs; inherit (pkgs) lib; };
+    crq008 = month09Flake.crq-008.foaf.nix { inherit pkgs; inherit (pkgs) lib; };
+    crq009 = month09Flake.crq-009.foaf.nix { inherit pkgs; inherit (pkgs) lib; };
+    crq010 = month09Flake.crq-010.foaf.nix { inherit pkgs; inherit (pkgs) lib; };
+    crq011 = month09Flake.crq-011.foaf.nix { inherit pkgs; inherit (pkgs) lib; };
+    crq012 = month09Flake.crq-012.foaf.nix { inherit pkgs; inherit (pkgs) lib; };
+    crq013 = month09Flake.crq-013.foaf.nix { inherit pkgs; inherit (pkgs) lib; };
+Match found in: ./10/crq-bigram-generator.nix
+{ pkgs ? import <nixpkgs> {}, month09Flake, self }:
+  crqTexts = import ./crq-text-extractor.nix { inherit pkgs month09Flake; };
+Match found in: ./10/similarity-matrix.nix
+{ pkgs ? import <nixpkgs> {}, self, month09Flake }:
+  crqBigrams = import ./crq-bigram-generator.nix { inherit pkgs self month09Flake; };
+Match found in: ./10/03/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+            echo "This flake defines conceptual stages of the LLM-compiler strange loop."
+Match found in: ./10/03/colosseum-mirror/flake.nix
+  description = "Nix flake to mirror the Colosseum website.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./10/03/colosseum-mirror/uncommitted.nix
+   ./flake.nix ./uncommitted.nix
+Match found in: ./10/03/hackathon_71_parts.nix
+  part71_mycelial_strain_storage_desc = "Stores artifact portfolios and gene codes as Content-Addressable Spore Vials (Nix flakes/derivations)";
+Match found in: ./10/03/uncommitted.nix
+   ./flake.nix ./hackathon_71_parts.nix ./uncommitted.nix
+Match found in: ./10/04/killerjoke/flake.nix
+  description = "Nix flake for parsing CRQ filenames into structured data.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, base }:
+    flake-utils.lib.eachDefaultSystem (system:
+          meta.description = "Nix flake for parsing CRQ filenames into structured data.";
+          echo 'CRQ Parser flake built successfully!' > $out
+Match found in: ./10/04/gemini-prompt-flake/flake.nix
+  description = "A flake for prime-based emoji-Brainf* interpreter and Gemini prompting.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      flake = false; # Mark as not a flake itself
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, promptArg }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./10/04/gemini-prompt-flake/gemini-prompt-derivation.nix
+  # Define the system for flake-utils
+Match found in: ./10/04/gemini-prompt-flake/default-prompt.nix
+# Default prompt string for the gemini-prompt-flake.
+Match found in: ./10/04/lib/nix-stdlib-integration-test.nix
+  # Use the specified nixpkgs flake
+  nixpkgs = builtins.getFlake "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+Match found in: ./10/06/meta-introspector-fetchers/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, naersk, git-submodules-rs-nix, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./10/06/notebooklm-export/default.nix
+  # Function to extract direct inputs of a flake
+  extractDirectInputs = flake:
+      inputs = flake.inputs or {};
+  # Recursive function to traverse flake dependencies
+  traverseFlakeDependencies = flake:
+      directInputs = extractDirectInputs flake;
+      flake = {
+        url = flake.url or null;
+        rev = flake.rev or null;
+  # This will take a flake and return a structured description
+  notebooklmExport = traverseFlakeDependencies;
+Match found in: ./10/06/sops-gemini/flakes/wrap-gemini-secrets/flake.nix
+  description = "A flake to test sops-nix integration with gemini-cli";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      flake = false;
+  outputs = { self, nixpkgs, flake-utils, sops-nix, gemini-cli, secrets, ... } @ args:
+    flake-utils.lib.eachDefaultSystem (system:
+          default = flake-utils.lib.mkApp {
+Match found in: ./10/08/hackathon/flakes/consolidated-impure-gemini-telemetry-modules/flake.nix
+    originalFlake.url = "path:../../../09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, originalFlake, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+        # Expose the original flake's outputs
+        inherit (originalFlake.outputs.${system}) lib packages apps;
+Match found in: ./10/08/hackathon/flakes/consolidated-impure-gemini-telemetry-modules/impure-gemini-telemetry-derivation.nix
+  impureGeminiTelemetryDerivation = { mycologyContext, pkgs, gemini-cli, flakeNixContent, inputs, system }:
+      FLAKE_NIX_CONTENT = flakeNixContent;
+Match found in: ./10/08/hackathon/flakes/consolidated-impure-gemini-telemetry-modules/inputs.nix
+  flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  vial.url = "path:./vial-placeholder"; # Placeholder for the actual vial flake
+Match found in: ./10/08/hackathon/flakes/consolidated-impure-gemini-telemetry-modules/outputs-header.nix
+{ self, nixpkgs, flake-utils, gemini-cli, ... } @ inputs:
+  flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./10/09/solfunmeme-profile/flake.nix
+# 10/09/solfunmeme-profile/flake.nix
+  description = "Nix flake to fetch the solfunmeme profile page from Colosseum Arena.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./10/09/hackathon/colosseum/flake.nix
+  description = "A flake that fetches raw pages from colosseum.com";
+Match found in: ./10/09/hackathon/consumer/flake.nix
+  description = "A flake that consumes raw hackathon pages and converts them to JSON.";
+    hackathon-status-raw.flake = false; # This will be overridden by the bridge
+Match found in: ./10/09/hackathon/bridge-pattern/flake.nix
+  description = "A generic bridge flake that connects a producer and a consumer.";
+    producer.flake = true;
+    consumer.flake = true;
+Match found in: ./10/09/hackathon/bridge.nix
+  description = "An instance of the bridge flake, connecting the colosseum producer and consumer.";
+      flake = true;
+      flake = true;
+      flake = true;
+Match found in: ./10/09/hackathon/nar-bridge-flake/flake.nix
+  description = "A flake to bridge between Nix store paths and NAR archives.";
+      # Usage: nar-bridge-flake.lib.createNar { name = "my-archive"; path = /nix/store/...; }
+Match found in: ./10/09/hackathon/nar-bridge-flake/test.nix
+  # Get the nar-bridge-flake outputs
+  narBridgeFlake = (builtins.getFlake (toString ./.)).outputs;
+  archivedNar = narBridgeFlake.lib.createNar {
+  restoredPath = narBridgeFlake.lib.restoreNar {
+Match found in: ./10/09/hackathon/nar-bridge-flake/inspect-nix.nix
+  nixpkgs = import (builtins.getFlake "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify") { system = "aarch64-linux"; };
+Match found in: ./10/09/github-grep-flake/flake.nix
+  description = "A flake to grep a GitHub repository for specific patterns.";
+      flake = false; # We want the source, not a flake output
+      flake = false; # It's a plain Nix expression, not a flake
+Match found in: ./10/09/llm-data-extractor-flake/flake.nix
+  description = "An impure flake to extract specific data from hackathon results using an LLM.";
+      # This input will be the JSON output from the hackathon-consumer-flake
+      flake = true;
+      flake = true;
+Match found in: ./10/09/llm-result-purifier-flake/flake.nix
+  description = "A flake to purify and record the results of an impure LLM task flake.";
+    narBridgeFlake = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/nar-bridge-flake";
+      flake = true;
+      # This input will be the output of the impure LLM task flake
+      flake = false; # We want the raw derivation output
+  outputs = { self, nixpkgs, narBridgeFlake, impureLlmResult }:
+      # Optionally, archive the pure result into a NAR using our nar-bridge-flake
+      archivedPureLlmResult = narBridgeFlake.lib.createNar {
+Match found in: ./10/09/test-llm-workflow.nix
+  # 1. Build the hackathon-consumer-flake to get the JSON results
+  hackathonConsumerFlake = (builtins.getFlake (toString ../hackathon/consumer)).outputs;
+  hackathonResults = hackathonConsumerFlake.packages.aarch64-linux.default;
+  # 2. Build the llm-data-extractor-flake
+  llmDataExtractorFlake = (builtins.getFlake (toString ./llm-data-extractor-flake)).outputs;
+  impureLlmResult = llmDataExtractorFlake.packages.aarch64-linux.default {
+  # 3. Build the llm-result-purifier-flake
+  llmResultPurifierFlake = (builtins.getFlake (toString ./llm-result-purifier-flake)).outputs;
+  pureLlmResult = llmResultPurifierFlake.packages.aarch64-linux.default {
+    narBridgeFlake = (builtins.getFlake (toString ../hackathon/nar-bridge-flake)).outputs;
+Match found in: ./10/09/project-scheduler-flake/flake.nix
+  description = "A flake to generate an optimized project schedule using LLM-generated tasks and MiniZinc.";
+      flake = true;
+      flake = true;
+      flake = false; # We want the raw derivation output
+Match found in: ./10/09/llm-api-wrapper/flake.nix
+  description = "Dummy LLM API wrapper flake for testing.";
+Match found in: ./10/09/dummy-project-state.nix
+  echo "This is a dummy project summary for testing the project scheduler flake." >> $out/project-summary.md
+Match found in: ./10/09/test-project-scheduler.nix
+  # Import the project-scheduler-flake
+  projectSchedulerFlake = (builtins.getFlake (toString ./project-scheduler-flake)).outputs;
+  optimizedSchedule = projectSchedulerFlake.packages.aarch64-linux.default {
+    llmApiWrapper = (builtins.getFlake (toString ./llm-api-wrapper)).outputs;
+    minizinc = (builtins.getFlake (toString ./minizinc-nix)).outputs;
+Match found in: ./10/09/zos-spore-flake/flake.nix
+      # Self-description of the flake
+        # ZOS Spore Flake: Self-Description
+        This Nix flake represents a "bootstrap spore seed kernel nugget, enigma block"
+Match found in: ./10/09/zos-spore-vial-flake/flake.nix
+  description = "A flake to package the ZOS Spore Flake output into a NAR vial.";
+    zosSporeFlake = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/zos-spore-flake";
+      flake = true;
+    narBridgeFlake = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/nar-bridge-flake";
+      flake = true;
+  outputs = { self, nixpkgs, zosSporeFlake, narBridgeFlake }:
+      # Get the default output (compressed ZOS elements) from the ZOS Spore Flake
+      zosSporeOutput = zosSporeFlake.packages.aarch64-linux.default;
+      # Create a NAR archive (the "vial") from the ZOS Spore Flake's output
+      zosSporeVial = narBridgeFlake.lib.createNar {
+Match found in: ./10/09/spore-cultivation-lab-flake/flake.nix
+    zosSporeVialFlake = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/zos-spore-vial-flake";
+      flake = true;
+    narBridgeFlake = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/nar-bridge-flake";
+      flake = true;
+  outputs = { self, nixpkgs, zosSporeVialFlake, narBridgeFlake }:
+      zosSporeVial = zosSporeVialFlake.packages.aarch64-linux.default;
+      restoredSpore = narBridgeFlake.lib.restoreNar {
+Match found in: ./10/09/llm-nix-simulator-flake/flake.nix
+      # It should be a flake that provides the LLM API wrapper
+      flake = true;
+      flake = false; # We want the raw Nix expression file
+Match found in: ./10/09/test-llm-nix-simulator.nix
+  # The Nix expression to simulate (e.g., our nar-bridge-flake)
+    cp ${../hackathon/nar-bridge-flake/flake.nix} $out/flake.nix
+  # Define llmApiWrapper as a flake input here
+  llmApiWrapper = (builtins.getFlake (toString ./llm-api-wrapper)).outputs;
+  # Import the LLM Nix Simulator Flake
+  llmNixSimulatorFlake = (builtins.getFlake (toString ./llm-nix-simulator-flake)).outputs;
+  simulatedRun = llmNixSimulatorFlake.packages.aarch64-linux.default {
+Match found in: ./10/09/bootstrap-mycology-schedule-flake/flake.nix
+    zosSporeVialFlake = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/zos-spore-vial-flake";
+      flake = true;
+    sporeCultivationLabFlake = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/spore-cultivation-lab-flake";
+      flake = true;
+    bridgeInstanceFlake = {
+      # It should be a flake that provides the bridge instance
+      flake = true;
+    llmDataExtractorFlake = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/llm-data-extractor-flake";
+      flake = true;
+    projectSchedulerFlake = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/project-scheduler-flake";
+      flake = true;
+      flake = true;
+      flake = true;
+    narBridgeFlake = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/nar-bridge-flake";
+      flake = true;
+    mctsSolanaFlake = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/mcts-solana-flake";
+      flake = true;
+    githubDataFetcherFlake = {
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/github-data-fetcher-flake";
+      flake = true;
+  outputs = { self, nixpkgs, zosSporeVialFlake, sporeCultivationLabFlake,
+              bridgeInstanceFlake, llmDataExtractorFlake,
+              projectSchedulerFlake, llmApiWrapper, minizinc, narBridgeFlake,
+              mctsSolanaFlake, githubDataFetcherFlake }:
+      zosSporeVial = zosSporeVialFlake.packages.aarch64-linux.default;
+      cultivatedSpore = sporeCultivationLabFlake.packages.aarch64-linux.default {
+        inherit pkgs narBridgeFlake zosSporeVialFlake; # Pass the flake itself
+      # 3. Get Hackathon Results (from the bridge instance flake) and Extract Data
+      hackathonResults = bridgeInstanceFlake.packages.aarch64-linux.default;
+      extractedHackathonData = llmDataExtractorFlake.packages.aarch64-linux.default {
+      fetchedGitHubData = githubDataFetcherFlake.packages.aarch64-linux.default {
+        githubApiWrapper = (builtins.getFlake (toString ../github-api-wrapper)).outputs; # Pass the dummy github-api-wrapper
+        # sops-nix is not directly passed here, but would be used internally by githubDataFetcherFlake
+      finalSchedule = projectSchedulerFlake.packages.aarch64-linux.default {
+      mctsSolanaOutput = mctsSolanaFlake.packages.aarch64-linux.default {
+        mctsEngine = (builtins.getFlake (toString ../mcts-nix)).outputs; # Pass the dummy mcts-nix flake
+        solanaTools = (builtins.getFlake (toString ../solana-nix)).outputs; # Pass the dummy solana-nix flake
+Match found in: ./10/09/test-bootstrap-mycology-schedule.nix
+  # Import all the necessary flakes
+  zosSporeVialFlake = (builtins.getFlake "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/zos-spore-vial-flake").outputs;
+  sporeCultivationLabFlake = (builtins.getFlake "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/spore-cultivation-lab-flake").outputs;
+  hackathonConsumerFlake = (builtins.getFlake "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/consumer").outputs; # This is the consumer flake
+  llmDataExtractorFlake = (builtins.getFlake "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/llm-data-extractor-flake").outputs;
+  projectSchedulerFlake = (builtins.getFlake "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/project-scheduler-flake").outputs;
+  llmApiWrapper = (builtins.getFlake "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/llm-api-wrapper").outputs;
+  minizinc = (builtins.getFlake "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/minizinc-nix").outputs;
+  narBridgeFlake = (builtins.getFlake "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/nar-bridge-flake").outputs;
+  bridgeInstanceFlake = (builtins.getFlake "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/hackathon/bridge").outputs; # The actual bridge instance
+  mctsSolanaFlake = (builtins.getFlake "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/mcts-solana-flake").outputs; # Import the MCTS Solana Flake
+  # Import the GitHub Data Fetcher Flake
+  githubDataFetcherFlake = (builtins.getFlake "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/github-data-fetcher-flake").outputs;
+  # Import the top-level orchestration flake
+  bootstrapMycologyScheduleFlake = (builtins.getFlake "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/09/bootstrap-mycology-schedule-flake").outputs;
+  finalSchedule = bootstrapMycologyScheduleFlake.packages.aarch64-linux.default {
+    inherit pkgs zosSporeVialFlake sporeCultivationLabFlake
+            llmDataExtractorFlake projectSchedulerFlake
+            llmApiWrapper minizinc narBridgeFlake bridgeInstanceFlake
+            mctsSolanaFlake githubDataFetcherFlake; # Add githubDataFetcherFlake
+    # hackathonConsumerFlake is implicitly used by bridgeInstanceFlake
+Match found in: ./10/09/mcts-solana-flake/flake.nix
+  description = "A flake integrating Monte Carlo Tree Search (MCTS) with Solana prediction markets for project optimization.";
+      flake = true;
+      flake = true;
+      flake = true;
+    # Input for the project schedule (from project-scheduler-flake)
+      flake = false; # We want the raw derivation output
+Match found in: ./10/09/github-data-fetcher-flake/flake.nix
+  description = "An impure flake to fetch CRQs, tasks, issues, comments, and discussions from GitHub.";
+      flake = true;
+Match found in: ./10/09/github-api-wrapper/flake.nix
+  description = "Dummy GitHub API wrapper flake for testing.";
+Match found in: ./10/09/orchestration-flake/flake.nix
+  description = "Top-level orchestration flake for the entire project workflow, pinning all inputs.";
+      flake = true;
+      # Extract all necessary flakes from the pinned time2025 input
+      # This assumes time2025 is a flake that exposes these as outputs
+      # If not, we'll need to adjust how they are accessed (e.g., time2025.inputs.self.outPath + "/path/to/flake")
+        zosSporeVialFlake
+        sporeCultivationLabFlake
+        hackathonConsumerFlake
+        llmDataExtractorFlake
+        projectSchedulerFlake
+        narBridgeFlake
+        bridgeInstanceFlake
+        mctsSolanaFlake
+        githubDataFetcherFlake
+        bootstrapMycologyScheduleFlake;
+      # Call the top-level orchestration flake with all pinned inputs
+      finalOrchestration = bootstrapMycologyScheduleFlake.packages.aarch64-linux.default {
+        inherit pkgs zosSporeVialFlake sporeCultivationLabFlake
+                llmDataExtractorFlake projectSchedulerFlake
+                llmApiWrapper minizinc narBridgeFlake bridgeInstanceFlake
+                mctsSolanaFlake githubDataFetcherFlake;
+        # Access ZOS elements from the zosSporeFlake's lib attribute
+        ZOS_ELEMENTS_JSON = builtins.toJSON zosSporeVialFlake.inputs.zosSporeFlake.lib.zosElements;
+Match found in: ./10/09/llm-tasks.nix
+{ lib, pkgs, mkTask, flakeSources ? [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=source/github/meta-introspector/streamofrandom/2025" ],
+  inputFlakes ? [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/10/llm-inputs" ],
+  processFlakes ? [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/10/llm-processes" ],
+  outputFlakes ? [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/10/llm-outputs" ]
+  inherit lib pkgs mkTask flakeSources inputFlakes processFlakes outputFlakes;
+Match found in: ./10/09/orchestrator.nix
+  allTasks = import ./llm-tasks.nix { inherit lib pkgs mkTask; flakeSources = [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=source/github/meta-introspector/streamofrandom/2025" ];
+    inputFlakes = [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/10/llm-inputs" ];
+    processFlakes = [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/10/llm-processes" ];
+    outputFlakes = [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/10/llm-outputs" ];
+Match found in: ./10/10/lib-llm-nix/lib/flake-template-generator.nix
+{ lib, pkgs, flakeSource, inputFlakes, processFlakes, outputFlakes }:
+  "  description = \"Derived LLM Task Flake (Partial Application)\";"
+  "    nixpkgs.url = \"${flakeSource}\";"
+  (pkgs.lib.concatStringsSep "\n" (pkgs.lib.map (f: "    input-${lib.strings.sanitizeDerivationName f}.url = \"${f}\";") inputFlakes))
+  (pkgs.lib.concatStringsSep "\n" (pkgs.lib.map (f: "    process-${lib.strings.sanitizeDerivationName f}.url = \"${f}\";") processFlakes))
+  (pkgs.lib.concatStringsSep "\n" (pkgs.lib.map (f: "    output-${lib.strings.sanitizeDerivationName f}.url = \"${f}\";") outputFlakes))
+  "        echo \"This derived flake represents a partial application with holes.\" >> \"$out\"\n"
+  "        echo \"Input Patterns: ${pkgs.lib.concatStringsSep ", " inputFlakes}\" >> \"$out\"\n"
+  "        echo \"Process Patterns: ${pkgs.lib.concatStringsSep ", " processFlakes}\" >> \"$out\"\n"
+  "        echo \"Outputs: ${pkgs.lib.concatStringsSep ", " outputFlakes}\" >> \"$out\"\n"
+Match found in: ./10/10/lib-llm-nix/lib/flake-template.nix
+{ lib, pkgs, flakeSource, inputFlakes, processFlakes, outputFlakes, constants ? {} }:
+  description = "Derived LLM Task Flake (Partial Application)";
+    nixpkgs.url = flakeSource;
+  } // (pkgs.lib.genAttrs inputFlakes (f: { url = f; }))
+    // (pkgs.lib.genAttrs processFlakes (f: { url = f; }))
+    // (pkgs.lib.genAttrs outputFlakes (f: { url = f; }));
+        This derived flake represents a partial application with holes.
+        Input Patterns: ${pkgs.lib.concatStringsSep ", " inputFlakes}
+        Process Patterns: ${pkgs.lib.concatStringsSep ", " processFlakes}
+        Outputs: ${pkgs.lib.concatStringsSep ", " outputFlakes}
+Match found in: ./10/10/lib-llm-nix/lib/task-phases.nix
+{ lib, pkgs, flakeSource, inputFlakes, processFlakes, outputFlakes }:
+  # Import the flake template generator
+  generateFlakeTemplateString = import ./flake-template-generator.nix {
+    inherit lib pkgs flakeSource inputFlakes processFlakes outputFlakes;
+  # Write the generated flake template string to a temporary file for the scripts to use
+  initialDerivedFlakeContentFile = pkgs.writeText "initial-derived-flake.nix" generateFlakeTemplateString;
+  # Plan Phase: Generate a script that creates and builds the derived flake, including LLM review
+  planDerivation = pkgs.runCommand "plan-${lib.strings.sanitizeDerivationName flakeSource}" {
+  } "${llmReviewScript} ${flakeSource} ${initialDerivedFlakeContentFile} ${pkgs.gemini-cli}/bin/gemini";
+  # Commit Phase: Displays the generated flake.nix for the derived flake
+  commitDerivation = pkgs.runCommand "commit-${lib.strings.sanitizeDerivationName flakeSource}" {} "${commitScript} ${flakeSource} ${planDerivation}";
+  runDerivation = pkgs.runCommand "run-${lib.strings.sanitizeDerivationName flakeSource}" {} "${runScript} ${flakeSource} ${planDerivation}";
+  # Eval Phase: Builds and tests the derived flake directly
+  evalDerivation = pkgs.runCommand "eval-${lib.strings.sanitizeDerivationName flakeSource}" {} "${evalScript} ${flakeSource} ${initialDerivedFlakeContentFile}";
+Match found in: ./10/10/lib-llm-nix/lib/default.nix
+{ lib, pkgs, mkTask, flakeSources ? [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=source/github/meta-introspector/streamofrandom/2025" ],
+  inputFlakes ? [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/10/llm-inputs" ],
+  processFlakes ? [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/10/llm-processes" ],
+  outputFlakes ? [ "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/10/llm-outputs" ]
+  generateTask = flakeSource:
+        inherit lib pkgs flakeSource inputFlakes processFlakes outputFlakes;
+      stableId = "phased-task-${lib.strings.sanitizeDerivationName flakeSource}";
+  lib.map generateTask flakeSources
+Match found in: ./10/10/lib-llm-nix/qa.nix
+    flakeSources = [ "github:example/dummy-flake?ref=main" ]; # Use a dummy flake source for QA
+    inputFlakes = [ "github:example/dummy-input?ref=main" ];
+    processFlakes = [ "github:example/dummy-process?ref=main" ];
+    outputFlakes = [ "github:example/dummy-output?ref=main" ];
+    # Basic check for the content of the generated flake template (string, not empty)
+    generatedFlakeTemplateIsString = pkgs.lib.assertMsg
+      (builtins.isString (import ./lib/flake-template-generator.nix {
+        flakeSource = "github:example/dummy-flake?ref=main";
+        inputFlakes = [ "github:example/dummy-input?ref=main" ];
+        processFlakes = [ "github:example/dummy-process?ref=main" ];
+        outputFlakes = [ "github:example/dummy-output?ref=main" ];
+      "flake-template-generator.nix does not return a string.";
+    generatedFlakeTemplateIsNotEmpty = pkgs.lib.assertMsg
+      ((import ./lib/flake-template-generator.nix {
+        flakeSource = "github:example/dummy-flake?ref=main";
+        inputFlakes = [ "github:example/dummy-input?ref=main" ];
+        processFlakes = [ "github:example/dummy-process?ref=main" ];
+        outputFlakes = [ "github:example/dummy-output?ref=main" ];
+      "flake-template-generator.nix returns an empty string.";
+Match found in: ./10/10/grep-nar-flake/flake.nix
+{ description = "A flake to grep for 'nar' in specified file types.";
+    flake-utils.url = "github:numtide/flake-utils";
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system: 
+Match found in: ./10/10/nix2/lib/first-reflection.nix
+      extractFlakeCommands = flakePath:
+          flakeContent = builtins.readFile flakePath;
+          runCommandMatches = lib.strings.match "pkgs\\.runCommand \"[^\"]*\" \{[^}]*\} \"([^\"]*)\"" flakeContent;
+          writeShellScriptMatches = lib.strings.match "pkgs\\.writeShellScript \"[^\"]*\" \"([^\"]*)\"" flakeContent;
+          # Heuristic to find flake input URLs
+          urlMatches = lib.strings.match "url = \"([^\"]*)\"" flakeContent;
+          systemMatches = lib.strings.match "system = \"([^\"]*)\"" flakeContent;
+    # New Layer: Flake Validation Layer
+    flakeValidation = {
+      description = "Validation rules specific to Nix flakes, such as URL and system constraints.";
+      validateFlakeUrls = urls:
+      validateFlakeSystems = systems:
+        flakeHashes,
+          This is a sample of intermediate results from the Nix flake identity principle enforcement.
+          Flake Hashes (Monster Group Addresses):
+          ${builtins.toJSON flakeHashes}
+Match found in: ./10/10/nix2/flake-checker.nix
+{ lib, pkgs, firstReflection, urlExtractor, flakePaths, gitmodulesPaths }:
+    inherit flakePaths gitmodulesPaths;
+Match found in: ./10/10/nix2/flake.nix
+  description = "Dynamic Flake Checker";
+      # For now, a simplified list of flakes to check
+      flakePaths = [
+        (toString ../../.. + "/flake.nix") # Main flake
+        (toString ./flake-checker.nix) # Our checker flake
+        (toString ../../../09/26/jobs/vendor/nix-task/flake.nix)
+        (toString ../grep-nar-flake/flake.nix)
+        (toString ../../09/orchestration-flake/flake.nix)
+      flake-checker = import ./flake-checker.nix;
+      lib.flakePaths = flakePaths;
+      # Define a check that runs our flake checker
+          # Call our flake checker with the list of all flake.nix files
+          checkerResults = flake-checker {
+            inherit flakePaths;
+          flakeIdentityReport = pkgs.runCommand "flake-identity-report" {} ''
+Match found in: ./10/10/nix2/task.nix
+  # These lists will be passed from the calling flake
+  allFlakeNixFiles = []; # Placeholder
+    flakeCommands = lib.flatten (lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).commands) allFlakeNixFiles);
+    flakeUrls = lib.flatten (lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).urls) allFlakeNixFiles);
+    flakeSystems = lib.flatten (lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).systems) allFlakeNixFiles);
+  # Calculate canonical hashes for all flake.nix files
+  flakeHashes = lib.map (flakePath: {
+    path = flakePath;
+    hash = monsterCode.monsterGroupSpec.getNixFileCanonicalHash flakePath;
+  }) allFlakeNixFiles;
+  normalizedCommands = lib.map firstReflection.identityPrincipleSpec.commandNormalization.normalizeShellCommand extractedInfo.flakeCommands;
+  allUrls = extractedInfo.flakeUrls ++ extractedInfo.submoduleUrls;
+  urlPrefixValidationReport = firstReflection.identityPrincipleSpec.flakeValidation.validateUrlsWithPrefixes {
+  systemValidationReport = firstReflection.identityPrincipleSpec.flakeValidation.validateFlakeSystems extractedInfo.flakeSystems;
+    --- Flake Hashes (Monster Group Addresses) ---
+    ${builtins.toJSON flakeHashes}
+Match found in: ./10/10/nix2/task.d/01-extract-info.nix
+{ lib, pkgs, firstReflection, allFlakeNixFiles, allGitmodulesFiles }:
+    flakeCommands = lib.flatten (lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).commands) allFlakeNixFiles);
+    flakeUrls = lib.flatten (lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).urls) allFlakeNixFiles);
+    flakeSystems = lib.flatten (lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).systems) allFlakeNixFiles);
+Match found in: ./10/10/nix2/task.d/02-normalize-and-validate.nix
+  normalizedCommands = lib.map firstReflection.identityPrincipleSpec.commandNormalization.normalizeShellCommand extractedInfo.flakeCommands;
+  allUrls = extractedInfo.flakeUrls ++ extractedInfo.submoduleUrls;
+  urlPrefixValidationReport = firstReflection.identityPrincipleSpec.flakeValidation.validateUrlsWithPrefixes {
+  systemValidationReport = firstReflection.identityPrincipleSpec.flakeValidation.validateFlakeSystems extractedInfo.flakeSystems;
+Match found in: ./10/10/nix2/repo.nix
+  flakeNix = "${repoPath}/flake.nix";
+  flakeNix = if builtins.pathExists flakeNix then flakeNix else null;
+Match found in: ./10/10/nix2/list-files/flake.nix
+  description = "A simple flake to provide nixpkgs from meta-introspector";
+      flake = false; # It's a plain Nix expression, not a flake
+Match found in: ./10/10/nix2/examples/flake.nix
+  description = "A test flake to build the nar flake";
+    nar-flake.url = "../../lib/nar";
+  outputs = { self, nar-flake }:
+      packages.${system}.default = nar-flake.packages.${system}.default;
+Match found in: ./10/10/nix-url-extractor.nix
+{ lib, pkgs, firstReflection, flakePaths, gitmodulesPaths }:
+  # Extract all URLs from flakes
+  allFlakeUrls = lib.flatten (
+    lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).urls) flakePaths
+  allUniqueGithubUrls = lib.unique (allFlakeUrls ++ allSubmoduleUrls);
+        flakeNix = "${repoPath}/flake.nix";
+        flakeNix = if builtins.pathExists flakeNix then flakeNix else null;
+Match found in: ./10/10/monster-code.nix
+  # Assigns a unique address (e.g., a hash) to each Nix flake
+  assignMonsterGroupAddress = flakeCanonicalHash: flakeCanonicalHash; # For now, the hash is the address
+  # Abstract functions to extract key features from a Nix flake for similarity comparison
+  extractFlakeFeatures = { flakePath, extractedCommands, extractedUrls, extractedSystems }:
+      # This would involve parsing the flake's structure, inputs, outputs, etc.
+  # Abstract function to calculate a similarity score between two flakes
+  calculateFlakeSimilarity = { flakeFeatures1, flakeFeatures2 }:
+  # Abstract function to find the 'n' closest neighbors for a given flake
+  findClosestNeighbors = { targetFlakeFeatures, allFlakeFeatures, n ? 3 }:
+    # This would involve calculating similarity with all other flakes and sorting
+    []; # Return a list of closest flake identifiers
+  # Abstract function to generate a proof of relation between a flake and its neighbors
+  generateProofOfRelation = { targetFlake, neighbors }:
+    "Proof of relation for ${targetFlake.address}:\n  Neighbors: ${lib.strings.concatStringsSep ", " (lib.map (n: n.address) neighbors)}";
+    inherit extractFlakeFeatures calculateFlakeSimilarity findClosestNeighbors generateProofOfRelation;
+Match found in: ./10/10/prelude.nix
+  # Placeholder for flake and gitmodules paths (will be dynamically generated later)
+  flakePaths = [
+    (toString ../../flake.nix)
+    (toString ../../09/26/jobs/vendor/nix-task/flake.nix)
+    inherit flakePaths gitmodulesPaths;
+Match found in: ./10/10/prelude-bootstrap.nix
+  # Flake input for synapse-system's 4QZero agent, base-agent-flake branch
+    url = "github:meta-introspector/synapse-system?dir=nix/flakes/4QZero&ref=feature/base-agent-flake";
+  # Flake input for time-2025's 4QZero agent, foaf branch
+    url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/synapse-system/nix/flakes/4QZero";
+  # Flake input for time-2025's agent, foaf branch
+    url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/synapse-system/nix/flakes/agent";
+  # Flake input for time-2025's architect, foaf branch
+    url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/synapse-system/nix/flakes/architect";
+  # Flake input for synapse-system's base-agent, base-agent-flake branch
+    url = "github:meta-introspector/synapse-system?dir=nix/flakes/base-agent&ref=feature/base-agent-flake";
+  # Flake input for time-2025's consolidated-impure-gemini-telemetry, lattice-30030-homedir branch
+  # Flake input for meta-introspector/flake-utils (no specific ref/dir provided in grep output)
+  meta-introspector-flake-utils = {
+    url = "github:meta-introspector/flake-utils";
+  # Flake input for nix-community/flake-compat, pull/4/head
+  nix-community-flake-compat = {
+    url = "github:nix-community/flake-compat/pull/4/head";
+  # Flake input for meta-introspector/flake-parts, CRQ-016-nixify branch
+  meta-introspector-flake-parts = {
+    url = "github:meta-introspector/flake-parts?ref=feature/CRQ-016-nixify";
+  # Flake input for meta-introspector/flake-utils, CRQ-016-nixify branch
+  meta-introspector-flake-utils-crq = {
+    url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  # Flake input for numtide/flake-utils (no specific ref/dir provided in grep output)
+  numtide-flake-utils = {
+    url = "github:numtide/flake-utils";
+  # Flake input for time-2025's foaf context, foaf branch
+    url = "github:meta-introspector/time-2025/feature/foaf?dir=flakes/foaf/context";
+  # Flake input for time-2025's foaf seed-data, foaf branch
+    url = "github:meta-introspector/time-2025/feature/foaf?dir=flakes/foaf/seed-data";
+  # Flake input for time-2025's gemini-api-consumer-flake, foaf branch
+    url = "github:meta-introspector/time-2025/feature/foaf?dir=09/27/7-concepts/2-gemini-integration/gemini-integration/gemini_api_consumer_flake";
+  # Flake input for time-2025's gemini-caller-flake, foaf branch
+    url = "github:meta-introspector/time-2025/feature/foaf?dir=09/26/jobs/vendor/nix-task/examples/gemini-caller-flake";
+  # Flake input for meta-introspector/gemini-cli, CRQ-016-nixify-2025-10-06 branch
+  # Flake input for time-2025's fetch-github-data, foaf branch
+Match found in: ./10/10/bootstrap-context.nix
+    ) "vendor/rust-index-guix" ".github/actions/install-nix-action" ".github/actions/nix-github-actions" ".github/actions/nix-installer-action" ".github/actions/cache-nix-action" ".github/actions/cache" ".github/actions/checkout" "vendor/rnix-parser" ".github/actions/upload-artifact" "vendor/nix-on-droid" "vendor/nix/nix" "source/github/jmikedupont2/orgs/Escaped-RDFa/namespace" "source/github/meta-introspector/git-submodule-tools-rs" "vendor/external/git-submodule-tools-rs" "source/github/meta-introspector/solfunmeme" "source/github/meta-introspector/lean4" "vendor/external/forgejo-python" "vendor/external/tmux" "vendor/external/minizinc-introspector" "vendor/external/tmux-interface-rs" "vendor/external/n00b" "vendor/external/monomcp-rust" "vendor/external/hugging-face-dataset-validator-rust" "vendor/external/turbomcp" "vendor/external/bitchat-solana-zos-solfunmeme" "vendor/external/trident" "vendor/external/solfunmeme-banner" "vendor/external/ragit" "vendor/external/bootstrap-meme" "vendor/external/emojis-rs" "vendor/external/introspector-llc" "vendor/external/coccinelleforrust_personal_mirror" "vendor/external/solfunmeme-model-builder-quiz" "vendor/external/solfunmeme-dioxus" "vendor/external/sophia_rs" "vendor/external/solfunmeme-metameme" "vendor/external/amazon-q-developer-cli" "vendor/external/grok-cli" "vendor/external/tclifford" "vendor/external/meta-meme" "vendor/external/gemini-cli" "source/github/meta-introspector/streamofrandom" "source/github/meta-introspector/lattice-introspector" "vendor/external/rust" "vendor/external/asciinema-scenario" "vendor/external/nix-asciinema-agg" "vendor/external/asciinema" "vendor/nix/nixtract" "vendor/nix/nixpkgs-lint" "vendor/guix/mes" "vendor/guix/guix" "vendor/lang-c" "vendor/steel" "vendor/strace/dutchcoders-trace" "vendor/strace/intentrace" "vendor/strace/lurk" "vendor/strace/rstrace" "source/github/meta-introspector/quasi-meta-meme" "source/github/meta-introspector/hackathon" "vendor/external/github-issues-export-rs" "source/github/meta-introspector/minizinc-introspector" "source/github/meta-introspector/time" "source/github/meta-introspector/neo" "source/github/meta-introspector/neo2" "vendor/nixpkgs" "vendor/plantuml-stdlib/C4-PlantUML" "vendor/ebpf/aya" "vendor/ebpf/bpfjit" "vendor/ebpf/bpfman" "vendor/ebpf/clean-dns-bpf" "vendor/ebpf/eadb" "vendor/ebpf/ebpfguard" "vendor/ebpf/libbpf-rs" "vendor/ebpf/rbpf" "source/github/meta-introspector/git-submodules-rs-nix" "vendor/mkAIDerivation" "vendor/nix/renix" "vendor/nix/nix-config-merger" "vendor/nix/nix-files-comparator" "vendor/nix/rnix-parser-tester" "source/github/meta-introspector/introspector-llc" "vendor/nix/nix-direnv" "vendor/hooks/shellcheck-precommit" "vendor/hooks/rusty-hook" "vendor/hooks/shebling" "vendor/nix/tvix" "vendor/nix/nil" "vendor/lint/shellcheck" "vendor/lint/git-hooks.nix" "vendor/lint/cachix-git-hooks.nix" "vendor/nix/nixpacks" "source/github/meta-introspector/ragit" "vendor/nix/flake-utils" "vendor/tools/detect-duplicates" "vendor/nix/fenix" "vendor/nix/nix-systems-default" "vendor/nix/nix-systems-default-fork" "vendor/nix/home-manager" "vendor/nix/nix-asciinema-agg" "vendor/external/fenix" "vendor/rust/just" "source/github/meta-introspector/bootstrap" "vendor/nix/nix-nar-rs" "source/github/meta-introspector/ai-ml-zk-ops" "vendor/nix/rust-overlay" "vendor/nix/naersk" "vendor/nix/flake-parts" "vendor/nix/treefmt-nix" "vendor/nix/yarnpnp2nix" "vendor/external/copilot-cli" "source/github/meta-introspector/solfunmeme-gitbook" "source/github/meta-introspector/solfunmeme-metameme" "vendor/nix/factorio-mods-nix" "vendor/nix/vpsfree-cz-configuration" "vendor/nix/sops-nix" "nix/vendor/nix/croissong-system" "nix/vendor/nix/bbigras-nix-config" "nix/vendor/nix/gmkonan-flake" "nix/vendor/nix/jpetrucciani-nix" "nix/vendor/nix/stites-configs-mirror" "nix/vendor/nix/privatevoid-depot" "nix/vendor/nix/catircservices-org" "nix/vendor/nix/duck1123-k3s-fleetops" "nix/vendor/nix/dominicegginton-dotfiles" "nix/vendor/nix/fort-nix-bitcoin" "nix/vendor/nix/bojeran-dotfiles" "nix/vendor/nix/sheeeng-nix" "nix/vendor/nix/fjolne-dotfiles" "nix/vendor/nix/vpsfreecz-config" "nix/vendor/nix/disassembler-network" "vendor/hooks/vale-precommit" "vendor/hooks/vale" "source/github/meta-introspector/pre-commit-hooks-collection" "vendor/nix/vale-precommit" "vendor/hooks/lint-staged" "vendor/lint/nixpkgs-lint" "vendor/nix/pre-commit-tool-hooks" "vendor/nix/nixdoc" "source/github/meta-introspector/th-desugar" "vendor/hooks/prek" "vendor/nix/felix-schausberger-nixos" "vendor/nix/nix-stdlib" "vendor/nix/nix-init" "vendor/nix/nix-prefetch" "vendor/nix/nix-prefetch-github" "vendor/nix/nurl" "vendor/nix/nix-universal-prefetch" "vendor/nix/prefetch-github" "vendor/nix/nix-upfetch" "vendor/nix/nix-prefetch-lheckemann" "vendor/external/codex";
+Match found in: ./10/10/bootstrap-context/part1.nix
+  "vendor/nix/flake-utils" = {
+    path = "vendor/nix/flake-utils";
+    url = "https://github.com/meta-introspector/flake-utils";
+  "vendor/nix/flake-parts" = {
+    path = "vendor/nix/flake-parts";
+    url = "https://github.com/meta-introspector/flake-parts";
+  "nix/vendor/nix/gmkonan-flake" = {
+    path = "nix/vendor/nix/gmkonan-flake";
+    url = "https://github.com/GMkonan/flake";
+Match found in: ./10/10/lib/nar/flake.nix
+  description = "A flake to export the nix-file-list to a NAR file";
+      # flakePaths = pkgs.lib.filter (path: pkgs.lib.hasSuffix ".nix" path)
+      # getNixFileList = get-nix-file-list.lib.${system}.getNixFileList { inherit flakePaths; };
+      #     { get-nix-file-list, pkgs, system, self, flakePaths }:
+      #       # Re-import the get-nix-file-list flake from the passed flake reference
+      #     getNixFileListFunc { inherit flakePaths; }
+      #     --argstr flakePaths ${builtins.toJSON flakePaths} \
+Match found in: ./crq-parser.nix
+    baseName = builtins.baseNameOf path; # e.g., "CRQ_041_Colosseum_Mirror_Flake.md"
+Match found in: ./docs/crqs/uncommitted.nix
+   ./CRQ_017_Topological_Graph_Explanation.md ./CRQ_023_Pure_Nix_Quality_System.md ./CRQ_072_Pure_Nix_Quality_System_Conceptual_Flake.md ./CRQ_073_Debugging_Project_Nix_Generation.md ./CRQ_074_Nix_Twin_Indexing_and_Integration.md ./uncommitted.nix
+Match found in: ./docs/NixOSI_Vision.nix
+        "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"
+  # Layer 2: Network - Flake Inputs and Outputs (bott 3)
+  # Analogy: Routing and addressing between different Nix flakes.
+    description = "Interconnecting flakes as nodes in a global content-addressed graph. Defining flake inputs and outputs.";
+      flakeInputs = {
+        flake-utils = { url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; };
+        # Submodules are treated as first-class flake inputs
+      flakeOutputs = { self, nixpkgs, mySubmodule, ... }: {
+  # Layer 3: Transport - Flake Evaluation and Derivations (bott 5)
+        src = ./.; # Source from the current flake
+      # Flake evaluation ensures all dependencies are met
+Match found in: ./flakes/foaf/seed-data/flake.nix
+        "foaf:maker" = self.lib.agentMetaIntrospector; # Reference within the same flake
+        "foaf:maker" = self.lib.agentMetaIntrospector; # Reference within the same flake
+      projectFlakeUtils = {
+        "@id" = "http://github.com/meta-introspector/flake-utils";
+        "foaf:name" = "Flake Utils Fork";
+        "foaf:homepage" = "https://github.com/meta-introspector/flake-utils";
+        "foaf:maker" = self.lib.agentMetaIntrospector; # Reference within the same flake
+        self.lib.projectFlakeUtils
+Match found in: ./flakes/foaf/aggregator/flake.nix
+    foafContextFlake.url = "github:meta-introspector/time-2025/feature/foaf?dir=flakes/foaf/context";
+    foafSeedDataFlake.url = "github:meta-introspector/time-2025/feature/foaf?dir=flakes/foaf/seed-data";
+  outputs = { self, nixpkgs, foafContextFlake, foafSeedDataFlake }:
+      # Get the FOAF context from the context flake
+      inherit (foafContextFlake.lib) foafContext;
+      # Get the seed graph from the seed data flake
+      inherit (foafSeedDataFlake.lib) seedGraph;
+Match found in: ./flakes/foaf/aggregator/context/flake.nix
+  description = "Exposes the FOAF context URI from foafContextFlake.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    foafContextFlake.url = "./../../context"; # Relative path to the foafContextFlake
+  outputs = { self, nixpkgs, flake-utils, foafContextFlake }:
+    flake-utils.lib.eachDefaultSystem (system:
+          inherit (foafContextFlake.lib) foafContext;
+Match found in: ./flakes/foaf/aggregator/seed-graph/flake.nix
+  description = "Exposes the FOAF seed graph from foafSeedDataFlake.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    foafSeedDataFlake.url = "./../../seed-data"; # Relative path to the foafSeedDataFlake
+  outputs = { self, nixpkgs, flake-utils, foafSeedDataFlake }:
+    flake-utils.lib.eachDefaultSystem (system:
+          inherit (foafSeedDataFlake.lib) seedGraph;
+Match found in: ./flakes/foaf/aggregator/full-graph/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    foafAggregatorContextFlake.url = "./../context"; # Relative path to the aggregator context flake
+    foafAggregatorSeedGraphFlake.url = "./../seed-graph"; # Relative path to the aggregator seed graph flake
+  outputs = { self, nixpkgs, flake-utils, foafAggregatorContextFlake, foafAggregatorSeedGraphFlake }:
+    flake-utils.lib.eachDefaultSystem (system:
+        # Get the FOAF context from the aggregator context flake
+        inherit (foafAggregatorContextFlake.lib) foafContext;
+        # Get the seed graph from the aggregator seed graph flake
+        inherit (foafAggregatorSeedGraphFlake.lib) seedGraph;
+Match found in: ./flakes/foaf/aggregator/lib/get-foaf-context.nix
+  foafContextFlake,
+# Get the FOAF context from the context flake
+foafContextFlake.lib.foafContext
+Match found in: ./flakes/foaf/aggregator/lib/get-seed-graph.nix
+  foafSeedDataFlake,
+# Get the seed graph from the seed data flake
+foafSeedDataFlake.lib.seedGraph
+Match found in: ./flakes/foaf/github-data/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    fetchGithubDataFlake.url = "github:meta-introspector/time-2025/feature/foaf?dir=10/02/fetch-github-data";
+    githubToFoafFlake.url = "github:meta-introspector/time-2025/feature/foaf?dir=10/02/github-to-foaf";
+  outputs = { self, nixpkgs, flake-utils, fetchGithubDataFlake, githubToFoafFlake }:
+    flake-utils.lib.eachDefaultSystem (system:
+        inherit (fetchGithubDataFlake.lib) fetchGithubData;
+        inherit (githubToFoafFlake.lib) githubToFoaf;
+Match found in: ./flakes/search-results/flake.nix
+  description = "Minimal flake for search-results";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./flakes/crq-search/parser/flake.nix
+  description = "Nix flake for parsing CRQ filenames into structured data.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+          meta.description = "Nix flake for parsing CRQ filenames into structured data.";
+          echo 'CRQ Parser flake built successfully!' > $out
+Match found in: ./flakes/crq-search/reader/flake.nix
+  description = "Nix flake for reading and parsing CRQ files from a directory.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      url = "./../parser"; # Reference the local parser flake
+      inputs.flake-utils.follows = "flake-utils";
+  outputs = { self, nixpkgs, flake-utils, crqParser }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./flakes/crq-search/filter/flake.nix
+  description = "Nix flake for filtering CRQ lists by keyword.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./flakes/crq-search/sorter-suggester/flake.nix
+  description = "Nix flake for sorting CRQ lists and providing top N suggestions.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./flakes/crq-search/main/flake.nix
+  description = "Nix flake for comprehensive CRQ search functionality.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=flakes/crq-search/reader";
+      inputs.flake-utils.follows = "flake-utils";
+      url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=flakes/crq-search/filter";
+      inputs.flake-utils.follows = "flake-utils";
+      url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=flakes/crq-search/sorter-suggester";
+      inputs.flake-utils.follows = "flake-utils";
+  outputs = { self, nixpkgs, flake-utils, crqReader, crqFilter, crqSorterSuggester }:
+    flake-utils.lib.eachDefaultSystem (system:
+        apps.default = flake-utils.lib.mkApp {
+                flake = builtins.getFlake (toString ./.);
+                searchCrqs = flake.outputs.lib.${system}.searchCrqs;
+Match found in: ./flakes/crq-search-lattice/base/flake.nix
+  description = "Base empty flake for CRQ search lattice.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils }:
+      packages.${system}.default = pkgs.runCommand "base-flake-metadata" {
+        DESCRIPTION = "Base empty flake for CRQ search lattice.";
+          flakeName = "base";
+          flakeUtilsRef = flake-utils.rev or "";
+      } "echo 'Flake Name: $(meta.flakeName)' > $out\n echo 'Description: $(DESCRIPTION)' >> $out\n echo 'System: $(meta.system)' >> $out\n echo 'Nixpkgs Ref: $(meta.nixpkgsRef)' >> $out\n echo 'Flake-Utils Ref: $(meta.flakeUtilsRef)' >> $out";
+Match found in: ./flakes/crq-search-lattice/parser/flake.nix
+  description = "CRQ Parser flake, adding parseCrqFilename function.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, base }:
+Match found in: ./flakes/crq-search-lattice/parser/default.nix
+  flake = builtins.getFlake (toString ./.);
+  parserLib = flake.lib;
+Match found in: ./flakes/crq-search-lattice/flake.nix
+  description = "Root flake for the CRQ search lattice, aggregating sub-flakes for testing.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      url = "./parser"; # Reference the local parser flake
+        flake-utils.follows = "flake-utils";
+      url = "./base"; # Reference the local base flake
+        flake-utils.follows = "flake-utils";
+      url = "./layer1"; # Reference the local layer1 flake
+        flake-utils.follows = "flake-utils";
+  outputs = { self, nixpkgs, flake-utils, parser, base, layer1 }:
+        meta.description = "Root flake for the CRQ search lattice, aggregating sub-flakes for testing.";
+      } "echo 'CRQ Search Lattice flake built successfully!' > $out";
+Match found in: ./flakes/crq-search-lattice/layer1/flake.nix
+  description = "Layer 1 flake for CRQ search lattice, building on the base flake.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      url = "../base"; # Reference the local base flake
+      inputs.flake-utils.follows = "flake-utils";
+  outputs = { self, nixpkgs, flake-utils, base }:
+      packages.${system}.default = pkgs.runCommand "layer1-flake-metadata" {
+        DESCRIPTION = "Layer 1 flake for CRQ search lattice.";
+          flakeName = "layer1";
+          flakeUtilsRef = flake-utils.rev or "";
+        baseFlakeMetadata = base.packages.${system}.default; # Inherit metadata from base flake
+      } "echo 'Flake Name: $(meta.flakeName)' > $out\n echo 'Description: $(DESCRIPTION)' >> $out\n echo 'System: $(meta.system)' >> $out\n echo 'Nixpkgs Ref: $(meta.nixpkgsRef)' >> $out\n echo 'Flake-Utils Ref: $(meta.flakeUtilsRef)' >> $out\n echo 'Base Flake Metadata: $(baseFlakeMetadata)' >> $out";
+Match found in: ./flakes/crq-document-check/flake.nix
+  description = "Nix flake for the CRQ document check script.";
+    mainProject.url = "github:meta-introspector/time-2025?ref=feature/foaf"; # Reference the main project flake
+Match found in: ./flakes/feature-2-nix-base/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, ... }:nix
+    flake-utils.lib.eachDefaultSystem (system:
+        # Expose pkgs and lib for other flakes to consume
+        packages.default = pkgs.writeText "nix-base-feature" "This flake provides a foundational Nix environment.";
+Match found in: ./flakes/feature-3-home-dir-creds/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      url = "path:../../flakes/gemini-feature-lattice/credential-setup.nix";
+      flake = false;
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, credentialSetup, hostGeminiHome ? "/data/data/com.termux.nix/files/home/.gemini", ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+        # This makes the flake impure, but necessary for this feature
+        # hostGeminiHome is now configurable via flake inputs or defaults to the hardcoded path
+          default = flake-utils.lib.mkApp {
+Match found in: ./flakes/feature-5-oauth-creds/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+        packages.default = pkgs.writeText "oauth-creds-feature" "This flake provides OAuth credential management (placeholder).";
+Match found in: ./flakes/feature-7-telemetry-capture/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+        packages.default = pkgs.writeText "telemetry-feature" "This flake provides Gemini telemetry capture.";
+Match found in: ./flakes/feature-11-llm-output-capture/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+        packages.default = pkgs.writeText "llm-output-capture-feature" "This flake provides LLM output capture.";
+Match found in: ./flakes/feature-13-makefile-input/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+        packages.default = pkgs.writeText "makefile-input-feature" "This flake integrates Makefile generated input.";
+Match found in: ./flakes/feature-17-yolo-approval/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+        packages.default = pkgs.writeText "yolo-approval-feature" "This flake provides YOLO auto-approval.";
+Match found in: ./flakes/feature-19-self-source-input/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+          src = self; # The source of this flake itself
+        packages.default = pkgs.writeText "self-source-feature" "This flake demonstrates taking its own source code as input.";
+Match found in: ./flakes/composite-2-3-nix-base-home-creds/flake.nix
+  description = "Composite Flake: Combines Nix Base (2) and Home Directory Credentials (3).";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    # Feature flakes as inputs
+      flake = false; # Not a flake itself, just a path to its lib
+      flake = false; # Not a flake itself, just a path to its lib
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, feature2, feature3, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+        baseLib = import feature2 { inherit nixpkgs flake-utils; }.lib.${system};
+        homeCredsApp = import feature3 { inherit nixpkgs flake-utils gemini-cli; }.apps.${system}.default;
+Match found in: ./flakes/composite-2-3-5-nix-base-home-oauth/flake.nix
+  description = "Composite Flake: Combines Nix Base (2), Home Directory Credentials (3), and OAuth Credentials (5).";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    # Feature flakes as inputs
+      flake = false;
+      flake = false;
+      flake = false;
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, feature2, feature3, feature5, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+        baseLib = import feature2 { inherit nixpkgs flake-utils; }.lib.${system};
+        homeCredsApp = import feature3 { inherit nixpkgs flake-utils gemini-cli; }.apps.${system}.default;
+        oauthLib = import feature5 { inherit nixpkgs flake-utils; }.lib.${system};
+Match found in: ./flakes/composite-2-3-5-7-nix-base-home-oauth-telemetry/flake.nix
+  description = "Composite Flake: Combines Nix Base (2), Home Directory Credentials (3), OAuth Credentials (5), and Telemetry Capture (7).";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    # Feature flakes as inputs
+      flake = false;
+      flake = false;
+      flake = false;
+      flake = false;
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, feature2, feature3, feature5, feature7, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+        baseLib = import feature2 { inherit nixpkgs flake-utils; }.lib.${system};
+        homeCredsApp = import feature3 { inherit nixpkgs flake-utils gemini-cli; }.apps.${system}.default;
+        oauthLib = import feature5 { inherit nixpkgs flake-utils; }.lib.${system};
+        telemetryLib = import feature7 { inherit nixpkgs flake-utils gemini-cli; }.lib.${system};
+Match found in: ./flakes/composite-2-3-5-7-11-nix-base-home-oauth-telemetry-llm-output/flake.nix
+  description = "Composite Flake: Combines Nix Base (2), Home Directory Credentials (3), OAuth Credentials (5), Telemetry Capture (7), and LLM Output Capture (11).";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    # Feature flakes as inputs
+      flake = false;
+      flake = false;
+      flake = false;
+      flake = false;
+      flake = false;
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, feature2, feature3, feature5, feature7, feature11, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+        baseLib = import feature2 { inherit nixpkgs flake-utils; }.lib.${system};
+        homeCredsApp = import feature3 { inherit nixpkgs flake-utils gemini-cli; }.apps.${system}.default;
+        oauthLib = import feature5 { inherit nixpkgs flake-utils; }.lib.${system};
+        telemetryLib = import feature7 { inherit nixpkgs flake-utils gemini-cli; }.lib.${system};
+        llmOutputLib = import feature11 { inherit nixpkgs flake-utils; }.lib.${system};
+Match found in: ./flakes/composite-2-3-5-7-11-13-nix-base-home-oauth-telemetry-llm-output-makefile-input/flake.nix
+  description = "Composite Flake: Combines Nix Base (2), Home Directory Credentials (3), OAuth Credentials (5), Telemetry Capture (7), LLM Output Capture (11), and Makefile Input (13).";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    # Feature flakes as inputs
+      flake = false;
+      flake = false;
+      flake = false;
+      flake = false;
+      flake = false;
+      flake = false;
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, feature2, feature3, feature5, feature7, feature11, feature13, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+        baseLib = import feature2 { inherit nixpkgs flake-utils; }.lib.${system};
+        homeCredsApp = import feature3 { inherit nixpkgs flake-utils gemini-cli; }.apps.${system}.default;
+        oauthLib = import feature5 { inherit nixpkgs flake-utils; }.lib.${system};
+        telemetryLib = import feature7 { inherit nixpkgs flake-utils gemini-cli; }.lib.${system};
+        llmOutputLib = import feature11 { inherit nixpkgs flake-utils; }.lib.${system};
+        makefileInputLib = import feature13 { inherit nixpkgs flake-utils; }.lib.${system};
+Match found in: ./flakes/composite-2-3-5-7-11-13-17-nix-base-home-oauth-telemetry-llm-output-makefile-input-yolo/flake.nix
+  description = "Composite Flake: Combines Nix Base (2), Home Directory Credentials (3), OAuth Credentials (5), Telemetry Capture (7), LLM Output Capture (11), Makefile Input (13), and YOLO Approval (17).";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    # Feature flakes as inputs
+      flake = false;
+      flake = false;
+      flake = false;
+      flake = false;
+      flake = false;
+      flake = false;
+      flake = false;
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, feature2, feature3, feature5, feature7, feature11, feature13, feature17, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+        baseLib = import feature2 { inherit nixpkgs flake-utils; }.lib.${system};
+        homeCredsApp = import feature3 { inherit nixpkgs flake-utils gemini-cli; }.apps.${system}.default;
+        oauthLib = import feature5 { inherit nixpkgs flake-utils; }.lib.${system};
+        telemetryLib = import feature7 { inherit nixpkgs flake-utils gemini-cli; }.lib.${system};
+        llmOutputLib = import feature11 { inherit nixpkgs flake-utils; }.lib.${system};
+        makefileInputLib = import feature13 { inherit nixpkgs flake-utils; }.lib.${system};
+        yoloApprovalLib = import feature17 { inherit nixpkgs flake-utils; }.lib.${system};
+Match found in: ./flakes/composite-2-3-5-7-11-13-17-19-nix-base-home-oauth-telemetry-llm-output-makefile-input-yolo-self-source/flake.nix
+  description = "Composite Flake: Combines Nix Base (2), Home Directory Credentials (3), OAuth Credentials (5), Telemetry Capture (7), LLM Output Capture (11), Makefile Input (13), YOLO Approval (17), and Self Source Input (19).";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    # Feature flakes as inputs
+      flake = false;
+      flake = false;
+      flake = false;
+      flake = false;
+      flake = false;
+      flake = false;
+      flake = false;
+      flake = false;
+  outputs = { self, nixpkgs, flake-utils, gemini-cli, feature2, feature3, feature5, feature7, feature11, feature13, feature17, feature19, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+        baseLib = import feature2 { inherit nixpkgs flake-utils; }.lib.${system};
+        homeCredsApp = import feature3 { inherit nixpkgs flake-utils gemini-cli; }.apps.${system}.default;
+        oauthLib = import feature5 { inherit nixpkgs flake-utils; }.lib.${system};
+        telemetryLib = import feature7 { inherit nixpkgs flake-utils gemini-cli; }.lib.${system};
+        llmOutputLib = import feature11 { inherit nixpkgs flake-utils; }.lib.${system};
+        makefileInputLib = import feature13 { inherit nixpkgs flake-utils; }.lib.${system};
+        yoloApprovalLib = import feature17 { inherit nixpkgs flake-utils; }.lib.${system};
+        selfSourceLib = import feature19 { inherit nixpkgs flake-utils; }.lib.${system};
+Match found in: ./flakes/with-rust/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system: 
+Match found in: ./flakes/mycology-workflow/flake.nix
+  description = "Nix flake to build the Hackathon Mycology Workflow PlantUML diagram.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, dataSources, consolidated-impure-gemini-telemetry, ... } @ args:
+    flake-utils.lib.eachDefaultSystem (system:
+        # In a real scenario, these would be imported from other flakes or defined more robustly.
+        # Invoke the consolidated-impure-gemini-telemetry flake
+Match found in: ./flakes/data-sources/flake.nix
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./flakes/article-wrapper/flake.nix
+  description = "Nix flake to wrap and process articles from various data sources (Wikidata, Wikipedia).";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=flakes/data-sources"; # Point to the data-sources flake in the current repo
+        flake-utils.follows = "flake-utils";
+  outputs = { self, nixpkgs, flake-utils, dataSources }:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./flakes/telemetry-wrapper/flake.nix
+  description = "Wrapper flake to call consolidated-impure-gemini-telemetry with a filePath input.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils, consolidatedTelemetry, ... } @ inputs:
+    flake-utils.lib.eachDefaultSystem (system:
+Match found in: ./lib/generate-project-nix/processEntry.nix
+  else if type == "regular" && lib.strings.hasSuffix ".nix" name && name != "project.nix" && name != "flake.nix" then
+Match found in: ./lib/secrets.nix
+##    default = self + "/sops-secrets"; # Path to sops-secrets relative to the flake root
+Match found in: ./flake.nix
+    # 1. Access the source code of this flake itself (last stable self)
+    nixIntrospector = { url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; }; # Placeholder ref, acts as LIL/QQC for Nix expressions
+      flake = false; # Since it's a directory, not a flake itself
+      flake = false;
+    # 5. Data Sources Flake (as a path input)
+      url = "./flakes/data-sources";
+        flake-utils = { url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; };
+        flake = false;
+        name = "flake-nix-files-index";
+      #     SOURCE_CONTENT=$(cat $sourcePath/flake.nix)
+      #     AST=$($introspector/bin/analyze $sourcePath/flake.nix)
+      #     echo "$MODIFIED_CONTENT" > $out/flake.nix
+            echo "--- Content of the modified flake.nix ---"
+            cat "$QUINE_OUTPUT/flake.nix"
+Match found in: ./qa.nix
+    # --- Nix Flake & Expression Testing ---
+    nix-flake-check = pkgs.runCommand "nix-flake-check" {
+      echo "Running nix flake check..."
+      nix flake check --extra-experimental-features 'nix-command flakes'
+    # e.g., statix, nix-url-check, specific build tests for other flakes
+    inherit (self.checks) nix-flake-check pre-commit-all-files shellcheck-config-sh check-uncommitted-files check-all-nix-files;
+    ${self.checks.nix-flake-check}
+Match found in: ./test-bug-repro-nix-2gram-indexer/flake.nix
+  description = "Top-level flake for 2-gram indexer vibes.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    rootFlake.url = "github:meta-introspector/time-2025?ref=feature/foaf";
+  outputs = { self, nixpkgs, flake-utils, time2025-src, rootFlake }:
+    flake-utils.lib.eachDefaultSystem (system:
+        common = rootFlake.lib.common-imports { inherit system; };
+Match found in: ./test-commit-check/test-case-crq-041.nix
+  commitMsg = "feat(CRQ-041): add-colosseum-mirror-flake-and-move-hackathon-71-parts\n\n- Introduced a Nix flake for mirroring the Colosseum website, including a Makefile with detailed comments for building and daily archiving.\n- Moved the colosseum-mirror flake and its Makefile to 10/03/.\n- Added 10/03/README.md.\n- Moved theory/hackathon_71_parts.nix to 10/03/hackathon_71_parts.nix.\n- Converted poems to pure Nix representation in 09/poems.nix.";
+Match found in: ./test-crq-search.nix
+  description = "Temporary flake for testing crq-search.nix";
+    streamofrandom.url = "github:meta-introspector/streamofrandom?ref=feature/foaf"; # Reference the main flake
+          echo "--- Running CRQ Search Test from temporary flake ---"
+          nix eval --json --expr 'builtins.getFlake (toString ./.).inputs.streamofrandom.lib.crqSearch { keyword = "Log Analysis"; }'
+Match found in: ./test_depth_eval.nix
+  self = builtins.getFlake (toString ./.) ;
+Match found in: ./test_detailed_analysis_eval.nix
+  self = builtins.getFlake (toString ./.) ;
+Match found in: ./test_knuthian_eval.nix
+  self = builtins.getFlake (toString ./.) ;
+Match found in: ./test_size_eval.nix
+  self = builtins.getFlake (toString ./.) ;
+Match found in: ./theory/31-aspects-of-31.nix
+    "06-Flakes" = "The modern, self-contained, and reproducible way to manage Nix projects and their dependencies.";
+    "20-DevShell" = "A specific output of a flake defining a development environment.";
+    "21-Outputs" = "The attribute set returned by a flake, containing packages, devShells, and other definitions.";
+    "22-Inputs" = "The dependencies of a flake, typically other flakes or Git repositories.";
+Match found in: ./theory/monster-group-crqs.nix
+      title = "Nix Flake Feature Lattice Mapped to Monster Group Topology";
+      description = "Manifesting the abstract theory by mapping the entire Nix flake structure onto the Monster Group's topological lattice.";
+      nixMapping = "Functions for analyzing flake inputs/outputs; visualizations/reports based on Monster Group topology.";
+Match found in: ./theory/nix-indexer-pipeline.nix
+        ! (lib.elem s ["nix" "json" "md" "sh" "txt" "d" "flake" "lib" "src" "docs" "theory" "meme" "memestorm" "tiktok" "001" "09" "24" "25" "26" "jobs" "vendor" "nixpkgs" "github" "meta" "introspector" "streamofrandom" "2025" "pick" "up" "cli" "gemini" "today" "ai" "ml" "zk" "ops" "flakes" "external" "build" "step" "build_step" "common" "imports" "debug" "utils" "test" "utils" "log" "analyzer" "review2" "rungemini" "run_task" "nix_custom_attrs_test" "test_custom_attrs" "setup_gemini_context" "leech" "lattice" "24d" "monster" "group" "71" "vibe" "crqs" "blade" "instance" "blades" "d17"])
+Match found in: ./theory/generate_hackathon_uml.nix
+      # { type = "Container"; name = "Nix Flake"; id = "nixFlake"; technology = "Nix"; description = "Manages project dependencies and builds"; }
+Match found in: ./theory/hackathon-mycology-workflow-puml/flake.nix
+  description = "Nix flake for the Hackathon Mycology Workflow PlantUML diagram.";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+        # These would typically be inputs from other flakes, but for this puml, we'll mock them.
+    Container(mycelial_strain_storage, "Spore Vial Storage", "Nix Store/IPFS", "Stores artifact portfolios and gene codes as Content-Addressable Spore Vials (Nix flakes/derivations)").
+Rel_R(pure_derivation_engine, mycelial_strain_storage, "Reads Strains (Nix Flakes) from Store").

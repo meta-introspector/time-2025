@@ -1,0 +1,20 @@
+Match found in: ./09/27/7-concepts/ai-workflow/flake.nix
+            nix-store --dump $nar_path | nix-nar-unpack $temp_extract_dir
+                  echo "$(nix-store --dump $dummyNar)" > $out
+Match found in: ./09/flakes/search-results/flake.nix
+              nix-store --dump "$TEMP_DIR" > "$out"/${(pkgs.lib.replaceStrings [" "] ["-"] keyword)}.nar
+              nix-store --dump "$TEMP_DIR" > "$out"/repos-${ownerName}.nar
+            nix-store --dump "$TEMP_DIR" > "$out"/solana-block-number.nar
+Match found in: ./10/10/lib/nar/flake.nix
+      #   ${pkgs.nix}/bin/nix-store --dump $store_path > $out
+Match found in: ./10/10/export-nar.nix
+  ${pkgs.nix}/bin/nix-store --dump $store_path > $out
+Match found in: ./nix_store_commands.sh
+# Literal command from flake.nix: ${pkgs.nix}/bin/nix-store --dump $store_path > $out
+$NIX_BIN_PATH nix-store --dump "$store_path" > "$OUTPUT_NAR"
+Match found in: ./create_nar_from_json.sh
+# and nix-store --dump would create a NAR archive.
+Match found in: ./Makefile
+	@echo "--- Grepping for 'nix-store --dump' in nix, sh, and makefiles using find_nix_store_dump.sh ---"
+	@echo "nix-store --dump" > $(TEMP_TERMS_FILE)
+	@echo "--- Grep for 'nix-store --dump' complete. Results in $(OUTPUT_BASE)_nix_store___dump.txt ---"

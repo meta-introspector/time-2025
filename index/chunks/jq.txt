@@ -1,0 +1,1 @@
+./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-vendor/patch-workspace.jq

@@ -130,7 +130,7 @@
       nixTermExtractor = month10Flake.crqTextExtractor;
       nGramGenerator = month10Flake.nGramGenerator;
 
-      qa = pkgs.callPackage ./qa.nix { inherit nixTermExtractor nGramGenerator month10Flake nix-stdlib; };
+      qa = pkgs.callPackage ./qa.nix { inherit nixTermExtractor nGramGenerator month10Flake nix-stdlib rnix-parser; };
 
       # Define self-ingestion & modification derivation.
       # Temporarily using pkgs.stdenv.mkDerivation as pkgs.runCommand is causing "is not a derivation" error.
@@ -240,6 +240,7 @@
           ncurses # Add ncurses for clear and reset commands
           gnupg # Add gnupg for sops encryption/decryption
           nurl.packages.${system}.default # Add nurl to the development shell
+          deadnix # Add deadnix for finding unused Nix code
           # Add any other development tools here
         ];
         # You can also add shell hooks or environment variables here
@@ -249,6 +250,6 @@
         '';
       };
 
-      checks.${system}.default = qa.default;
+      checks.${system} = qa;
     };
 }

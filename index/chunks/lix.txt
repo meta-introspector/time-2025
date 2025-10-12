@@ -1,0 +1,1 @@
+./09/26/synapse-system/vendor/nix/uv2nix/.envrc.lix

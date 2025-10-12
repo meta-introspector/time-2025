@@ -1,0 +1,40 @@
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/lock/default.nix
+  # script to re-compute all fields for the lock file and dump it to a file
+        json.dump(lock_data, out_file, indent=2)
+                      json.dump(checksum, f, indent=2)
+          json.dump(checksum, f, indent=2)
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-vendor/vendor.nix
+          sys.stdout.write(${to}.dumps(t))
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/lib/extractor/default.nix
+    # Tells our modified python builtins to dump setup attributes instead of doing an actual installation
+    dump_setup_attrs = "y";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/fixes.nix
+    print(json.dumps(result))
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/crawler/configuration.nix
+            ${python}/bin/python -u ${src}/dump_sdist_deps.py ./sdist
+            dump_dir = "/home/${user}/pypi-deps-db/wheel";
+            ${python}/bin/python -u ${src}/crawl_wheel_deps.py $dump_dir
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/power-wheels-crawler/configuration.nix
+        dump_dir = "/home/${user}/wheels";
+        dump_dir = "/home/${user}/wheels";
+        dump_dir = "/home/${user}/wheels";
+        dump_dir = "/home/${user}/wheels";
+Match found in: ./09/27/7-concepts/ai-workflow/flake.nix
+            nix-store --dump $nar_path | nix-nar-unpack $temp_extract_dir
+                  echo "$(nix-store --dump $dummyNar)" > $out
+Match found in: ./09/flakes/search-results/flake.nix
+              nix-store --dump "$TEMP_DIR" > "$out"/${(pkgs.lib.replaceStrings [" "] ["-"] keyword)}.nar
+              nix-store --dump "$TEMP_DIR" > "$out"/repos-${ownerName}.nar
+            nix-store --dump "$TEMP_DIR" > "$out"/solana-block-number.nar
+Match found in: ./10/03/ooda.nix
+      description = "Comprehensive indexing of the entire process via strace, perf, ebpf, telemetry, objdump, and addr2line. This phase focuses on collecting raw execution and system data.";
+Match found in: ./10/04/lib/simplified-pkgs-dump.nix
+  # Select a few simple attributes from pkgs for a simplified dump
+Match found in: ./10/09/nix-grep-regexes.nix
+    "nix store dump-path"
+Match found in: ./10/10/lib/nar/flake.nix
+      #   # Dump the store path to a NAR file
+      #   ${pkgs.nix}/bin/nix-store --dump $store_path > $out
+Match found in: ./10/10/export-nar.nix
+  # Dump the store path to a NAR file
+  ${pkgs.nix}/bin/nix-store --dump $store_path > $out

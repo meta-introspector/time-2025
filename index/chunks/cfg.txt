@@ -1,0 +1,2 @@
+./09/26/synapse-system/vendor/nix/pip2nix/.bumpversion.cfg
+./09/26/synapse-system/vendor/nix/pip2nix/setup.cfg

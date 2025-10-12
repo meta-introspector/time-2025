@@ -1,0 +1,8 @@
+./09/26/jobs/vendor/nix-eval-jobs/src/buffered-io.hh
+./09/26/jobs/vendor/nix-eval-jobs/src/constituents.hh
+./09/26/jobs/vendor/nix-eval-jobs/src/drv.hh
+./09/26/jobs/vendor/nix-eval-jobs/src/eval-args.hh
+./09/26/jobs/vendor/nix-eval-jobs/src/output-stream-lock.hh
+./09/26/jobs/vendor/nix-eval-jobs/src/store.hh
+./09/26/jobs/vendor/nix-eval-jobs/src/strings-portable.hh
+./09/26/jobs/vendor/nix-eval-jobs/src/worker.hh

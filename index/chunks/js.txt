@@ -1,0 +1,17 @@
+./09/25/log_analyzer/osint/PHONEINFOGA/web/client/jest.config.js
+./09/25/log_analyzer/osint/PHONEINFOGA/web/client/tests/e2e/.eslintrc.js
+./09/25/log_analyzer/osint/PHONEINFOGA/web/client/tests/e2e/plugins/index.js
+./09/25/log_analyzer/osint/PHONEINFOGA/web/client/tests/e2e/specs/test.js
+./09/25/log_analyzer/osint/PHONEINFOGA/web/client/tests/e2e/support/commands.js
+./09/25/log_analyzer/osint/PHONEINFOGA/web/client/tests/e2e/support/index.js
+./09/25/log_analyzer/osint/PHONEINFOGA/web/client/vue.config.js
+./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-local-development-nextjs/nextjs-app/postcss.config.js
+./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-nextjs/nextjs-app/postcss.config.js
+./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/docs/src/highlight.js
+./09/26/jobs/vendor/nix-task/runner/.yarn/sdks/typescript/lib/tsc.js
+./09/26/jobs/vendor/nix-task/runner/.yarn/sdks/typescript/lib/tsserver.js
+./09/26/jobs/vendor/nix-task/runner/.yarn/sdks/typescript/lib/tsserverlibrary.js
+./09/26/jobs/vendor/nix-task/runner/.yarn/sdks/typescript/lib/typescript.js
+./09/26/jobs/vendor/nix-task/runner/build.js
+./09/26/jobs/vendor/nix-task/runner/nix-task.js
+./09/27/7-concepts/1-build-system/commitlint.config.js

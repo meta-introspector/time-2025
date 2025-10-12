@@ -35,6 +35,23 @@ pre-commit install
 
 (Further usage instructions will be added here as the project evolves.)
 
+## Local Flake Registry
+
+To simplify referencing flakes within the `meta-introspector` organization, a local flake registry has been configured. This allows you to use short names (e.g., `nixpkgs`) instead of full GitHub URLs.
+
+To enable this registry, set the `NIX_REGISTRY_CONFIG` environment variable to point to the `registry.json` file in the project root:
+
+```bash
+export NIX_REGISTRY_CONFIG="$(pwd)/registry.json"
+```
+
+Once set, you can refer to flakes like `nixpkgs` or `streamofrandom` directly:
+
+```bash
+nix flake show nixpkgs
+nix flake show streamofrandom
+```
+
 
 ## Testing Specific Flakes
 

@@ -1,0 +1,6 @@
+./09/vendor/w3c-ontologies/wot-resources/discovery/v1/ontology/discovery-ontology.ttl
+./09/vendor/w3c-ontologies/wot-resources/td/v1.1/ontology/hctl.ttl
+./09/vendor/w3c-ontologies/wot-resources/td/v1.1/ontology/jsonschema.ttl
+./09/vendor/w3c-ontologies/wot-resources/td/v1.1/ontology/td.ttl
+./09/vendor/w3c-ontologies/wot-resources/td/v1.1/ontology/tm.ttl
+./09/vendor/w3c-ontologies/wot-resources/td/v1.1/ontology/wotsec.ttl

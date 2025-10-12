@@ -1,9 +1,9 @@
-{ pkgs, lib, self, nix-stdlib, nixTermExtractor, nGramGenerator, month10Flake }:
+{ pkgs, lib, self, nix-stdlib, nixTermExtractor, nGramGenerator, month10Flake, rnix-parser }:
 
 let
   # Common inputs for all modules
   commonArgs = {
-    inherit pkgs lib self nix-stdlib nixTermExtractor nGramGenerator month10Flake;
+    inherit pkgs lib self nix-stdlib nixTermExtractor nGramGenerator month10Flake rnix-parser;
   };
 
   # Import common helper modules
@@ -40,7 +40,8 @@ let
         pre-commit-all-files
         shellcheck-config-sh
         nix-emoji-report
-        flake-metadata-from-nix2-task;
+        flake-metadata-from-nix2-task
+        url-extractor;
     } ''
     echo "--- Running all default QA checks ---"
     ${allChecks.check-all-nix-files}
@@ -50,6 +51,7 @@ let
     ${allChecks.shellcheck-config-sh}
     ${allChecks.nix-emoji-report}
     ${allChecks.flake-metadata-from-nix2-task}
+    ${allChecks.url-extractor}
     echo "--- All default QA checks passed. ---"
     touch $out
   '';

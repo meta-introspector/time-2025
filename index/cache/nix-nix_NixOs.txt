@@ -1,0 +1,101 @@
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/flake.nix
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/misc/drafts/repo-flake-groups/flake.nix
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/assertions.nix
+  # impl of assertions is in <nixpkgs/nixos/modules/system/activation/top-level.nix>
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/docs/default.nix
+  nixosOptionsDoc = deps.nixosOptionsDoc {
+      inputDoc = nixosOptionsDoc.optionsDocBook;
+        nixosOptionsDoc
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/public/optsPackage.nix
+#   https://github.com/NixOS/nix/issues/6507
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/public/optsPackageCompat.nix
+# The proposal in https://github.com/NixOS/nix/issues/6507 is not entirely
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/ui/interface.nix
+      https://github.com/NixOS/nix/issues/6507#issuecomment-1474664755 .
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/package-func/default.nix
+  #   https://github.com/NixOS/nix/issues/6507
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/default.nix
+            # https://github.com/NixOS/nixpkgs/pull/297628 would fix this, but it was reverted for now in
+            # https://github.com/NixOS/nixpkgs/pull/302385
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/all-modules.nix
+      # comapt to current schema: `nixosModules` / `darwinModules`
+      nixosModules = config.flake.modules.nixos or {};
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/lib/extractor/default.nix
+        # prefer binary wrapper - but if that's not available (e.g. nixos 21.05)
+    # https://github.com/NixOS/nix/blob/2.3.2/src/libstore/store-api.cc#L85-L112
+    # https://github.com/NixOS/nix/blob/2242be83c61788b9c0736a92bb0b5c7bbfc40803/nix-rust/src/store/path.rs#L100-L125
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/fixes.nix
+  # remove if merged: https://github.com/NixOS/nixpkgs/pull/114384
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/call_mach.nix
+    url = "https://github.com/nixos/nixpkgs/tarball/${nixpkgs_rev}";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/from-nixpkgs/mk-python-derivation.nix
+      pythonRecompileBytecodeHook  # Remove when solved https://github.com/NixOS/nixpkgs/issues/81441
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/nixpkgs-src.nix
+    url = "https://github.com/nixos/nixpkgs/tarball/${nixpkgsInput.rev}";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/crawler/hetzner.nix
+        <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/database/hetzner.nix
+        <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/nixpkgs-src.nix
+    # nixos-20.03
+    url = "https://github.com/nixos/nixpkgs/tarball/b4db68ff563895eea6aab4ff24fa04ef403dfe14";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/power-deps-crawler/genesis.nix
+      <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
+    networking.hostName = "nixos";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/power-wheels-crawler/genesis.nix
+      <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
+    networking.hostName = "nixos";
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/power-wheels-crawler/hetzner-cloud.nix
+        <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/flake.nix
+      owner = "NixOS";
+      ref = "nixos-20.09";
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/nix/default.nix
+    # pip2nix requires pip version from nixos-20.03
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/nix/sources.nix
+  # https://github.com/NixOS/nixpkgs/pull/83241/files#diff-c6f540a4f3bfa4b0e8b6bafd4cd54e8bR695
+  # https://github.com/NixOS/nixpkgs/blob/0258808f5744ca980b9a1f24fe0b1e6f0fecee9c/lib/lists.nix#L295
+  # https://github.com/NixOS/nixpkgs/blob/0258808f5744ca980b9a1f24fe0b1e6f0fecee9c/lib/strings.nix#L257
+  # https://github.com/NixOS/nixpkgs/blob/0258808f5744ca980b9a1f24fe0b1e6f0fecee9c/lib/strings.nix#L269
+  # https://github.com/NixOS/nixpkgs/blob/8a9f58a375c401b96da862d969f66429def1d118/lib/attrsets.nix#L331
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/doc/src/patterns/development-scripts/flake.nix
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/doc/src/patterns/testing/flake.nix
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+                      # See https://nixos.org/manual/nixpkgs/stable/#chap-multiple-output for more information on multiple outputs.
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/flake.nix
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/templates/hello-tkinter/flake.nix
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/templates/hello-world/flake.nix
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/templates/inline-metadata/flake.nix
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/flake.nix
+  # inputs.nixpkgs.url = "https://nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz";
+Match found in: ./09/26/jobs/vendor/nix-task/flake.nix
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+Match found in: ./09/26/jobs/vendor/nix-task/nix/lib/getTasks.nix
+      # see - https://github.com/NixOS/nix/blob/d5e979ab87ab894fde132799dac242780b28bc05/src/libexpr/primops/context.cc#L49
+Match found in: ./09/27/7-concepts/3-response-artifacts/response-007-cli-nar-output/flake.nix
+            echo "Try: GITHUB_TOKEN=... cargo run -- github-search nixos"
+Match found in: ./10/09/github-data-fetcher-flake/flake.nix
+    sops-nix.url = "github:NixOS/sops-nix"; # Placeholder, assuming sops-nix is available
+Match found in: ./10/10/nix2/flake.nix
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11"; # Or a more appropriate nixpkgs
+Match found in: ./10/10/bootstrap-context.nix
+    ) "vendor/rust-index-guix" ".github/actions/install-nix-action" ".github/actions/nix-github-actions" ".github/actions/nix-installer-action" ".github/actions/cache-nix-action" ".github/actions/cache" ".github/actions/checkout" "vendor/rnix-parser" ".github/actions/upload-artifact" "vendor/nix-on-droid" "vendor/nix/nix" "source/github/jmikedupont2/orgs/Escaped-RDFa/namespace" "source/github/meta-introspector/git-submodule-tools-rs" "vendor/external/git-submodule-tools-rs" "source/github/meta-introspector/solfunmeme" "source/github/meta-introspector/lean4" "vendor/external/forgejo-python" "vendor/external/tmux" "vendor/external/minizinc-introspector" "vendor/external/tmux-interface-rs" "vendor/external/n00b" "vendor/external/monomcp-rust" "vendor/external/hugging-face-dataset-validator-rust" "vendor/external/turbomcp" "vendor/external/bitchat-solana-zos-solfunmeme" "vendor/external/trident" "vendor/external/solfunmeme-banner" "vendor/external/ragit" "vendor/external/bootstrap-meme" "vendor/external/emojis-rs" "vendor/external/introspector-llc" "vendor/external/coccinelleforrust_personal_mirror" "vendor/external/solfunmeme-model-builder-quiz" "vendor/external/solfunmeme-dioxus" "vendor/external/sophia_rs" "vendor/external/solfunmeme-metameme" "vendor/external/amazon-q-developer-cli" "vendor/external/grok-cli" "vendor/external/tclifford" "vendor/external/meta-meme" "vendor/external/gemini-cli" "source/github/meta-introspector/streamofrandom" "source/github/meta-introspector/lattice-introspector" "vendor/external/rust" "vendor/external/asciinema-scenario" "vendor/external/nix-asciinema-agg" "vendor/external/asciinema" "vendor/nix/nixtract" "vendor/nix/nixpkgs-lint" "vendor/guix/mes" "vendor/guix/guix" "vendor/lang-c" "vendor/steel" "vendor/strace/dutchcoders-trace" "vendor/strace/intentrace" "vendor/strace/lurk" "vendor/strace/rstrace" "source/github/meta-introspector/quasi-meta-meme" "source/github/meta-introspector/hackathon" "vendor/external/github-issues-export-rs" "source/github/meta-introspector/minizinc-introspector" "source/github/meta-introspector/time" "source/github/meta-introspector/neo" "source/github/meta-introspector/neo2" "vendor/nixpkgs" "vendor/plantuml-stdlib/C4-PlantUML" "vendor/ebpf/aya" "vendor/ebpf/bpfjit" "vendor/ebpf/bpfman" "vendor/ebpf/clean-dns-bpf" "vendor/ebpf/eadb" "vendor/ebpf/ebpfguard" "vendor/ebpf/libbpf-rs" "vendor/ebpf/rbpf" "source/github/meta-introspector/git-submodules-rs-nix" "vendor/mkAIDerivation" "vendor/nix/renix" "vendor/nix/nix-config-merger" "vendor/nix/nix-files-comparator" "vendor/nix/rnix-parser-tester" "source/github/meta-introspector/introspector-llc" "vendor/nix/nix-direnv" "vendor/hooks/shellcheck-precommit" "vendor/hooks/rusty-hook" "vendor/hooks/shebling" "vendor/nix/tvix" "vendor/nix/nil" "vendor/lint/shellcheck" "vendor/lint/git-hooks.nix" "vendor/lint/cachix-git-hooks.nix" "vendor/nix/nixpacks" "source/github/meta-introspector/ragit" "vendor/nix/flake-utils" "vendor/tools/detect-duplicates" "vendor/nix/fenix" "vendor/nix/nix-systems-default" "vendor/nix/nix-systems-default-fork" "vendor/nix/home-manager" "vendor/nix/nix-asciinema-agg" "vendor/external/fenix" "vendor/rust/just" "source/github/meta-introspector/bootstrap" "vendor/nix/nix-nar-rs" "source/github/meta-introspector/ai-ml-zk-ops" "vendor/nix/rust-overlay" "vendor/nix/naersk" "vendor/nix/flake-parts" "vendor/nix/treefmt-nix" "vendor/nix/yarnpnp2nix" "vendor/external/copilot-cli" "source/github/meta-introspector/solfunmeme-gitbook" "source/github/meta-introspector/solfunmeme-metameme" "vendor/nix/factorio-mods-nix" "vendor/nix/vpsfree-cz-configuration" "vendor/nix/sops-nix" "nix/vendor/nix/croissong-system" "nix/vendor/nix/bbigras-nix-config" "nix/vendor/nix/gmkonan-flake" "nix/vendor/nix/jpetrucciani-nix" "nix/vendor/nix/stites-configs-mirror" "nix/vendor/nix/privatevoid-depot" "nix/vendor/nix/catircservices-org" "nix/vendor/nix/duck1123-k3s-fleetops" "nix/vendor/nix/dominicegginton-dotfiles" "nix/vendor/nix/fort-nix-bitcoin" "nix/vendor/nix/bojeran-dotfiles" "nix/vendor/nix/sheeeng-nix" "nix/vendor/nix/fjolne-dotfiles" "nix/vendor/nix/vpsfreecz-config" "nix/vendor/nix/disassembler-network" "vendor/hooks/vale-precommit" "vendor/hooks/vale" "source/github/meta-introspector/pre-commit-hooks-collection" "vendor/nix/vale-precommit" "vendor/hooks/lint-staged" "vendor/lint/nixpkgs-lint" "vendor/nix/pre-commit-tool-hooks" "vendor/nix/nixdoc" "source/github/meta-introspector/th-desugar" "vendor/hooks/prek" "vendor/nix/felix-schausberger-nixos" "vendor/nix/nix-stdlib" "vendor/nix/nix-init" "vendor/nix/nix-prefetch" "vendor/nix/nix-prefetch-github" "vendor/nix/nurl" "vendor/nix/nix-universal-prefetch" "vendor/nix/prefetch-github" "vendor/nix/nix-upfetch" "vendor/nix/nix-prefetch-lheckemann" "vendor/external/codex";
+Match found in: ./10/10/bootstrap-context/part1.nix
+    url = "https://github.com/NixOS/nix";
+  "vendor/nix/felix-schausberger-nixos" = {
+    path = "vendor/nix/felix-schausberger-nixos";
+    url = "https://github.com/FelixSchausberger/nixos";
+Match found in: ./docs/NixOSI_Vision.nix
+# A Vision of Pure Nix Submodule Commits: The 8-Layer NixOSI Model
+        "github:NixOS/nixpkgs/nixos-23.11"
+Match found in: ./theory/31-aspects-of-31.nix
+    "19-EvalModules" = "The mechanism for composing NixOS configurations from modular definitions.";
+    "26-Modules" = "Declarative configuration units used in NixOS and home-manager.";
+    "27-ConfigurationNix" = "The central file for defining a NixOS system configuration.";

@@ -1,0 +1,1 @@
+./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/haskell-local-development-cabal/app/Main.hs

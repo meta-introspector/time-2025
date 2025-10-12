@@ -1,0 +1,2 @@
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/09/26/synapse-system/nix/python-packages.nix
+/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/10/01/docs/theory/w3c_spec_vendorizer.nix

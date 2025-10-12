@@ -1,0 +1,2206 @@
+Match found in: ./09/22/nix-llm-task/flake.nix
+                        # Create a wrapper script to set CRQ_BINSTORE_PATH
+            export CRQ_BINSTORE_PATH=${crq-binstore}
+Match found in: ./09/22/flake-templates/llm-task-template/flake.nix
+            GEMINI_CLI = "${geminiCliFlake.packages.${system}.gemini-cli}/bin/gemini-cli"; # Path to the actual gemini-cli executable
+            CRQ_BINSTORE_PATH = crq-binstore;
+              CRQ_BINSTORE_PATH="$CRQ_BINSTORE_PATH"
+              if [[ -z "$CRQ_BINSTORE_PATH" ]]; then
+                echo "Error: CRQ_BINSTORE_PATH is not set."
+              NAR_PATH="''${CRQ_BINSTORE_PATH}/''${NAR_FILE}"
+              if [[ ! -f "$NAR_PATH" ]]; then
+                echo "Error: NAR file not found at ''${NAR_PATH}"
+              echo "Unpacking NAR file: ''${NAR_PATH}"
+              nix-nar-unpack --file "''${NAR_PATH}" --to "''${OUTPUT_DIR}"
+Match found in: ./09/23/nix_concepts_and_facts/concepts/fact_23_oracle.nix
+  # Get the path to the directory containing this file
+  currentDir = builtins.path { path = ./.; };
+  factPath = "${currentDir}/../facts/fact_about_23.txt";
+  cp ${factPath} $out/fact
+Match found in: ./09/23/nix_concepts_and_facts/lib/zos.nix
+      narPath = "${crqBinstore}/${narFileName}"; # Path to the NAR file within the input
+      $script ${narPath} $out
+Match found in: ./09/23/analyze_ngrams.nix
+  # Path to the JSON file.
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/lib/helpers.nix
+    logSourcePath, # Path to the log file within the Nix store
+        RUST_BACKTRACE=1 ${log-analyzer-flake.packages.${system}.default}/bin/log_analyzer --log-file ${logSourcePath} > $out/analysis-result.txt
+    logFilePath, # Path to the log file on the host filesystem
+        filePath = logFilePath;
+          echo "WARNING: Secrets detected in ${logFilePath}. Review ${secretScanResult}/secret_report.txt" >&2
+        RUST_BACKTRACE=1 ${log-analyzer-flake.packages.${system}.default}/bin/log_analyzer --log-file ${logFilePath} > $out/analysis-result.txt
+        LOG_FILE_PATH=$(find . -name "${logFileName}" | head -n 1)
+        if [ -z "$LOG_FILE_PATH" ]; then
+        RUST_BACKTRACE=1 ${log-analyzer-flake.packages.${system}.default}/bin/log_analyzer --log-file $LOG_FILE_PATH > $out/analysis-result.txt
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/packages/analysis.nix
+    logSourcePath = "${buildTimeTelemetryOutput}/logs/build-time-capture.log";
+    logFilePath = "/dev/null"; # Temporarily hardcoded for testing
+    narUrl = "https://example.com/path/to/logs.nar"; # Placeholder URL
+    twoGramIndexJsonPath = build2GramIndexPackage; # Use the output of the 2-gram index build
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/test-meta-introspector-flake.nix
+          # We'll try to access a known path to see if it works
+Match found in: ./09/25/log_analyzer/flakes/log-analysis-pipeline/test-secret-scanner-module.nix
+            filePath = "/dev/null";
+Match found in: ./09/25/test_prime_encoder.nix
+  # Path to the SimpleExpr JSON file
+  simpleExprJsonPath = self + "/10/05/MicroLean4/SimpleExpr.rec_686e510a6699f2e1ff1b216c16d94cd379ebeca00c030a79a3134adff699e06c.json";
+  readSimpleExprJsonModule = import ../lib/read_simple_expr_json.nix { inherit lib simpleExprJsonPath; };
+Match found in: ./09/26/synapse-system/nix/flakes/4QZero/flake.nix
+          # The path to the agent script is relative to the current flake
+Match found in: ./09/26/synapse-system/nix/flakes/architect/flake.nix
+          # The path to the agent script is relative to the current flake
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/dev-flake/flake-compat.nix
+    lockFilePath = src + "/flake.lock";
+    lockFile = builtins.fromJSON (builtins.readFile lockFilePath);
+        outPath =
+          outPath =
+      else if info.type == "path"
+        outPath = builtins.path {
+          path =
+            if builtins.substring 0 1 info.path != "/"
+            then src + ("/" + info.path)
+            else info.path;
+        outPath =
+        outPath =
+        else {outPath = src;};
+      isGit = builtins.pathExists (src + "/.git");
+      isShallow = builtins.pathExists (src + "/.git/shallow");
+        if src ? outPath
+              type = "path";
+              outPath = rootOverrides.${key};
+          # either a node name, or a 'follows' path from the root
+            then getInputByPath lockFile.root inputSpec
+          # Follow an input path (e.g. ["dwarffs" "nixpkgs"]) from the
+          getInputByPath = nodeName: path:
+            if path == []
+              getInputByPath
+              (resolveInput lockFile.nodes.${nodeName}.inputs.${builtins.head path})
+              (builtins.tail path);
+      if !(builtins.pathExists lockFilePath)
+      else throw "lock file '${lockFilePath}' has unsupported version ${toString lockFile.version}";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/basics/derivation/flake.nix
+            paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/basics/htop-with-flags/flake.nix
+                      paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/basics/mkDerivation/flake.nix
+            paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/haskell-local-development-cabal/flake.nix
+                      paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-local-development-nextjs/flake.nix
+                      paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-local-development-no-lock-file/flake.nix
+            paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-packaging-devshell-only/flake.nix
+            paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/nodejs-packaging/flake.nix
+            paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/php-packaging/flake.nix
+                      paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-machine-learning/flake.nix
+            paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-multiple-packages/default.nix
+    config.paths.projectRoot
+    config.paths.package
+  paths.lockFile = "lock.${config.deps.stdenv.system}.json";
+      "${config.paths.package}/subpkg1"
+      "${config.paths.package}/subpkg2"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-multiple-packages/flake.nix
+                      paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-pdm-pytorch-from-nixpkgs/flake.nix
+                      paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development-pdm/flake.nix
+            paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development/default.nix
+  paths.lockFile = "lock.${config.deps.stdenv.system}.json";
+    # Setting editables.$pkg to a relative or absolute path, as a string, will
+    # link this path as an editable install to .dream2nix/editables in
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-local-development/flake.nix
+            paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-ansible/default.nix
+  paths.lockFile = "lock.${config.deps.stdenv.system}.json";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-ansible/flake.nix
+                      paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-apache-airflow/default.nix
+  paths.lockFile = "lock.${config.deps.stdenv.system}.json";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-apache-airflow/flake.nix
+                      paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-odoo/default.nix
+  paths.lockFile = "lock.${config.deps.stdenv.system}.json";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-odoo/flake.nix
+                      paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-pillow/default.nix
+  paths.lockFile = "lock.${config.deps.stdenv.system}.json";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/python-packaging-pillow/flake.nix
+                      paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/rust-local-development-workspace/flake.nix
+            paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/rust-packaging-buildRustPackage/flake.nix
+                      paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/rust-packaging/flake.nix
+            paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/spago-local-development/flake.nix
+            paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/flake.nix
+    corePath = ./modules/dream2nix/core;
+    coreDirs = filterAttrs (name: _: name != "default.nix") (readDir corePath);
+        value = corePath + "/${fn}";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/default.nix
+    packagesDirPath =
+                (packagesDirPath + "/${module}")
+                  paths = {
+    (builtins.readDir packagesDirPath);
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/dreamLockUtils.nix
+    relPath,
+      relPath
+  mkPathSource = {
+    path,
+      type = "path";
+    mkPathSource
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchDreamLockSources.nix
+          else if source.type == "path"
+            path =
+              if l.isStorePath (l.concatStringsSep "/" (l.take 4 (l.splitString "/" source.path)))
+              then source.path
+              then "${fetchedSources."${source.rootName}"."${source.rootVersion}"}/${source.path}"
+              then "${sourceRoot}/${source.path}"
+              else throw "${name}-${version}: cannot determine path source";
+            l.path {
+              inherit path;
+    # attrset: pname -> path of downloaded source
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/git/default.nix
+  hashPath ? utils.hashPath,
+        hashPath algo
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/github/default.nix
+      utils.hashPath algo (b.fetchTarball {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/gitlab/default.nix
+      utils.hashPath algo (b.fetchTarball {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/npm/default.nix
+      utils.hashPath algo (
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/fetchers/path/default.nix
+    "path"
+  outputs = {path, ...}: {
+    calcHash = algo: utils.hashPath "${path}";
+    fetched = hash: "${path}";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/graphUtils.nix
+            // l.foldlAttrs (fileSystem: path: pathInfo:
+              if pathInfo
+                // getFileSystemInfo path pdef entry
+              else fileSystem) {} entry.info.allPaths
+  getFileSystemInfo = path: pdef: entry: let
+      ${path} = {
+            name = (builtins.dirOf path) + "/.bin/" + name;
+            value = path + "/" + target;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/hashFile.nix
+  hashFile = algo: path: let
+      ${nix}/bin/nix --option experimental-features nix-command hash file ${path} | tr --delete '\n' > $out
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/hashPath.nix
+  # hash the contents of a path via `nix hash path`
+  hashPath = algo: path: let
+    hashPath = runCommandLocal "hash-${algo}" {} ''
+      ${nix}/bin/nix --option experimental-features nix-command hash path ${path} | tr --delete '\n' > $out
+    l.readFile hashPath;
+  hashPath
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/nodejsLockUtils.nix
+  # path = node_modules/@org/lib/node_modules/bar
+  parentPath = path: let
+    # noPackages = lib.removePrefix "packages/" path;
+    packages = lib.splitString "node_modules/" path; # = [ "@org/lib" "bar" ]
+    nextPath = lib.concatStringsSep "node_modules/" (lib.init packages);
+      if path == nextPath
+      else nextPath
+    currentPath:
+      searchPath = lib.removePrefix "/" "${currentPath}/node_modules/${search}"; # = "my-package/node_modules/@foo/bar/node_modules/kitty"
+      if packageLock.packages ? ${searchPath}
+        searchPath
+      else if currentPath == ""
+      else findEntry packageLock (parentPath currentPath) search;
+  inherit findEntry parentPath;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/nodejsUtils.nix
+    dirRelPath = workspaceParent;
+      (tree.getNodeFromPath "${dirRelPath}/package.json").jsonContent;
+    else tree.getNodeFromPath "${dirRelPath}/${fname}";
+    (wsRelPath:
+      (tree.getNodeFromPath "${wsRelPath}/package.json").jsonContent);
+    (wsRelPath: json:
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/prepareSourceTree.nix
+        relPath = "package.json"
+        fullPath = "${source}/package.json"
+        relPath = "packages";
+        fullPath = "${source}/packages";
+  prepareSourceTreeInternal = sourceRoot: relPath: name: depth: let
+    relPath' = relPath;
+    fullPath' = "${toString sourceRoot}/${relPath}";
+    current = l.readDir fullPath';
+    makeNewPath = prefix: name:
+        (makeNewPath relPath dname)
+        fullPath = "${fullPath'}/${fname}";
+        relPath = makeNewPath relPath' fname;
+        content = readTextFile fullPath;
+    # returns the tree object of the given sub-path
+    getNodeFromPath = path: let
+      cleanPath = l.removePrefix "/" path;
+      pathSplit = l.splitString "/" cleanPath;
+      dirSplit = l.init pathSplit;
+      leaf = l.last pathSplit;
+        Failed while trying to navigate to ${path} from ${fullPath'}
+      dirAttrPath =
+        if (l.length dirSplit == 0) || dirAttrPath == [""]
+        else if ! l.hasAttrByPath dirAttrPath directories
+        else l.getAttrFromPath dirAttrPath directories;
+      if path == ""
+        inherit files getNodeFromPath name relPath;
+        fullPath = fullPath';
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/readDreamLock.nix
+  listDirs = path: l.attrNames (l.filterAttrs (n: v: v == "directory") (builtins.readDir path));
+      (d: l.pathExists "${dir}/${d}/dream-lock.json")
+      l.isPath dreamLock
+        || spec.type != "path"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/sanitizePath.nix
+  sanitizePath = path: let
+    absolute = (l.substring 0 1 path) == "/";
+    sanitizedRelPath = l.removePrefix "/" (l.toString (l.toPath "/${path}"));
+    then "/${sanitizedRelPath}"
+    else sanitizedRelPath;
+  sanitizePath
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/sanitizeRelativePath.nix
+  sanitizeRelativePath = path:
+    l.removePrefix "/" (l.toString (l.toPath "/${path}"));
+  sanitizeRelativePath
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/simpleTranslate.nix
+            (type == "path")
+            && l.isStorePath (l.removeSuffix "/" constructedArgs.path);
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/internal/simpleTranslate2.nix
+          # Filter out all `path` sources which link to store paths.
+              (finalObj.sourceSpec.type != "path")
+              || ! l.isStorePath (l.removeSuffix "/" finalObj.sourceSpec.path))
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/lib/types/default.nix
+  derivation = t.oneOf [t.str t.path t.package];
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-groups/submoduleWithNameVersion.nix
+    path
+      check = x: isAttrs x || isFunction x || path.check x;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-haskell-cabal/default.nix
+      path
+        path
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/default.nix
+        # Merge package paths
+                    allPaths =
+                      acc.${entry.name}.${version}.info.allPaths
+                      // {${pkg.info.initialPath} = true;};
+  getBins = path: plent:
+  getDependencies = lock: path: plent:
+        packageIdent = nodejsLockUtils.findEntry lock path name;
+  # path :: Key of the package e.g. "/node_modules/prettier". Could also be nested
+  parseEntry = lock: path: plent: let
+    info = utils.getInfo path plent;
+      bins = getBins path plent;
+          dependencies = getDependencies lock path plent;
+      name = l.last (builtins.split "node_modules/" path);
+      bins = getBins path plent;
+            dependencies = getDependencies lock path plent;
+    if path == ""
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/interface.nix
+      type = t.nullOr t.path;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-nextjs/flake.nix
+          paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-packaging-package-lock-v1/flake.nix
+          paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/tests/packages/nodejs-packaging-package-lock/flake.nix
+          paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/types.nix
+    options.info.initialPath = l.mkOption {
+    options.info.allPaths = l.mkOption {
+    source :: Derivation | Path
+    prepared-dev :: Derivation | Path
+    prepared-prod :: Derivation | Path
+    dist :: Derivation | Path
+    installed :: Derivation | Path
+      initialPath :: "node_modules/"
+      Such as bins, path etc.
+    ${nodePath} :: Derivation
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-nodejs-builder-v3/utils.nix
+  getInfo = path: plent: {
+    initialPath = path;
+        path == ""
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-spago/default.nix
+      path
+      export HOME="$(realpath .)"
+        path
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/WIP-spago/interface.nix
+      type = t.path;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/buildPythonPackage/options.nix
+        TODO: For cross we probably need a different PYTHONPATH, or not
+    type = t.listOf (t.oneOf [t.str t.path t.package]);
+    type = t.listOf (t.oneOf [t.str t.path t.package]);
+      paths included in this list. Items listed in `install_requires` go here.
+    type = t.attrsOf (t.oneOf [t.str t.path t.package]);
+  disabledTestPaths = l.mkOption {
+      Test paths to ignore in checkPhase
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/buildRustPackage/default.nix
+  replacePaths =
+    config.rust-cargo-vendor.replaceRelativePathsWithAbsolute
+    subsystemAttrs.relPathReplacements.${pname}.${version};
+      ${replacePaths}
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/builtins-derivation/derivation-common/options.nix
+    type = t.nullOr (t.listOf (t.oneOf [t.str t.path]));
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/builtins-derivation/interface.nix
+      type = t.oneOf [t.str t.path t.package];
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/default.nix
+    ./paths
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/env/default.nix
+        baseTypes = [t.bool t.int t.str t.path t.package];
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/eval-cache/default.nix
+  file = config.paths.cacheFileAbs;
+    "cat $(nix-build ${cfg.newFile.drvPath} --no-link) > $(realpath $(${config.paths.findRoot})/${config.paths.package}/${config.paths.cacheFile})";
+  cacheMissingMsg = "The cache file ${config.paths.package}/${config.paths.cacheFile} for drv-parts module '${packageName}' doesn't exist, please create it.";
+  cacheInvalidMsg = "The cache file ${config.paths.package}/${config.paths.cacheFile} for drv-parts module '${packageName}' is outdated, please update it.";
+  cacheFileExists = l.pathExists file;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/eval-cache/interface.nix
+      type = t.path;
+      type = t.path;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/lock/default.nix
+  file = config.paths.lockFileAbs;
+  fileExists = l.pathExists file;
+    from pathlib import Path
+    repo_path = Path(subprocess.run(
+        ['${config.paths.findRoot}'],  # noqa: E501
+    lock_path_rel = Path('${config.paths.package}/${config.paths.lockFile}')  # noqa: E501
+    lock_path = repo_path / lock_path_rel.relative_to(lock_path_rel.anchor)
+    if lock_path.exists():
+        os.remove(lock_path)
+    from pathlib import Path
+    repo_path = Path(subprocess.run(
+        ['${config.paths.findRoot}'],  # noqa: E501
+    lock_path_rel = Path('${config.paths.package}/${config.paths.lockFile}')  # noqa: E501
+    lock_path = repo_path / lock_path_rel.relative_to(lock_path_rel.anchor)
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(lock_path, 'w') as out_file:
+    drvPath = l.unsafeDiscardStringContext fod.drvPath;
+      out_path = os.getenv("out")
+      drv_path = "${drvPath}"  # noqa: E501
+      nix_build = ["${config.deps.nix}/bin/nix", "build", "-L", drv_path]  # noqa: E501
+                  with open(out_path, 'w') as f:
+      show_derivation = ["${config.deps.nix}/bin/nix", "derivation show", drv_path]  # noqa: E501
+      checksum = drv[drv_path]["outputs"]["out"]["hash"]
+      with open(out_path, 'w') as f:
+      bash -c $(nix-build ${config.lock.refresh.drvPath} --no-link)/bin/refresh
+    The lock file ${config.paths.package}/${config.paths.lockFile}
+    The lock file ${config.paths.package}/${config.paths.lockFile}
+    The lock file ${config.paths.package}/${config.paths.lockFile}
+        currDir="$(${config.deps.coreutils}/bin/realpath .)"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/lock/interface.nix
+    (lib.mkRemovedOptionModule ["lock" "repoRoot"] "Use paths.projectRoot instead.")
+    (lib.mkRemovedOptionModule ["lock" "lockFileRel"] "Use paths.package instead.")
+      type = t.listOf t.path;
+              type = t.path;
+      type = t.functionTo t.path;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/paths/default.nix
+  paths = {
+      config.paths.projectRoot + "/${config.paths.package}/${config.paths.lockFile}";
+      config.paths.projectRoot + "/${config.paths.package}/${config.paths.cacheFile}";
+    # - identify the root by searching for the marker config.paths.projectRootFile in the current dir and parents
+          inherit (config.paths) projectRootFile;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/paths/interface.nix
+  cfg = config.paths;
+  options.paths = lib.mapAttrs (_: lib.mkOption) {
+      type = lib.types.path;
+        Path to the root of the project on which dream2nix operates.
+        Must contain the marker file specified by 'paths.projectRootFile'
+      type = lib.types.either lib.types.path lib.types.str;
+        Path to the directory containing the definition of the current package.
+        Relative to 'paths.projectRoot'.
+      apply = path': let
+        path = toString path';
+        if path == projectRoot
+        else if lib.hasPrefix projectRoot path
+        then lib.path.subpath.normalise "./${lib.removePrefix projectRoot path}"
+        else lib.path.subpath.normalise "./${path}";
+        Ensure 'paths.projectRoot' contains a file named like this.
+        Path to the lock file of the current package.
+        Relative to "''${paths.projectRoot}/''${paths.package}"".
+        Path to the eval cache file of the current package.
+        Relative to "''${paths.projectRoot}/''${paths.package}"".
+      type = lib.types.path;
+        Absolute path to the lock file of the current package.
+        Derived from 'paths.projectRoot', 'paths.package' and 'paths.lockFile'.
+      type = lib.types.path;
+        Absolute path to the eval cache file of the current package.
+        Derived from 'paths.projectRoot', 'paths.package' and 'paths.cacheFile'.
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/public/interface.nix
+      Contains fields like name, outputs, drvPath, outPath, etc.
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/public/optsPackageCompat.nix
+  drvPath = l.mkOption {
+    type = t.path;
+  outPath = l.mkOption {
+    type = t.path;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/public/optsPackageDrvParts.nix
+  #   type = t.path;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/ui/default.nix
+    inherit (config.public) drvPath;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/core/ui/interface.nix
+    drvPath = lib.mkOption {
+      type = lib.types.path;
+      description = "The path to the derivation of the package";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/mkDerivation/options.nix
+    type = t.nullOr (t.listOf (t.oneOf [t.str t.path t.package]));
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/multi-derivation-package/default.nix
+      drvPath
+      outPath
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-devshell-v3/default.nix
+  # - tracks node-modules store path via .dream2nix/.node_modules_id
+  # - omits copying if store path did not change
+  # - if store path changes, only replaces updated files
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-devshell/default.nix
+  # - tracks node-modules store path via .dream2nix/.node_modules_id
+  # - omits copying if store path did not change
+  # - if store path changes, only replaces updated files
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular-v3/configurePhase.nix
+  # add bin path entries collected by python script
+  export PATH="$PATH:$nodeModules/.bin"
+  # add dependencies to NODE_PATH
+  export NODE_PATH="$NODE_PATH:$nodeModules/$packageName/node_modules"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular-v3/default.nix
+  #   source :: Derivation | Path
+  # name: version: -> store-path
+      # - adds executables of direct node module dependencies to PATH
+      # - adds the current node module to NODE_PATH
+      # TODO: don't install dev dependencies. Load into NODE_PATH instead
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular-v3/devShell.nix
+    for executablePath in ${binDir}/*; do
+      binaryName=$(basename $executablePath)
+      target=$(realpath $executablePath)
+    export PATH="$PATH:$(realpath ./node_modules)/.bin"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular-v3/interface.nix
+        type = t.nullOr (t.oneOf [t.str t.path t.package]);
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular-v3/unpackPhase.nix
+  nodeModules=$(realpath ./package)
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular/configurePhase.nix
+  # add bin path entries collected by python script
+  export PATH="$PATH:$nodeModules/.bin"
+  # add dependencies to NODE_PATH
+  export NODE_PATH="$NODE_PATH:$nodeModules/$packageName/node_modules"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular/default.nix
+  hashPath = import ../../../lib/internal/hashPath.nix {
+      inherit hashPath;
+  # name: version: -> store-path
+      # - adds executables of direct node module dependencies to PATH
+      # - adds the current node module to NODE_PATH
+      # TODO: don't install dev dependencies. Load into NODE_PATH instead
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular/devShell.nix
+    for executablePath in ${binDir}/*; do
+      binaryName=$(basename $executablePath)
+      target=$(realpath $executablePath)
+    export PATH="$PATH:$(realpath ./node_modules)/.bin"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular/interface.nix
+        type = t.nullOr (t.oneOf [t.str t.path t.package]);
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-granular/unpackPhase.nix
+  nodeModules=$(realpath ./package)
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-node-modules-v3/default.nix
+      for executablePath in $out/lib/node_modules/.bin/*; do
+        binaryName=$(basename $executablePath)
+        target=$(realpath --relative-to=$localNodeModules/.bin $executablePath)
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-node-modules/default.nix
+      for executablePath in $out/lib/node_modules/.bin/*; do
+        binaryName=$(basename $executablePath)
+        target=$(realpath --relative-to=$localNodeModules/.bin $executablePath)
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-node-modules/tests/packages/nodejs-packaging-node-modules-only/flake.nix
+          paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-json-v3/default.nix
+      path
+          path
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-json-v3/interface.nix
+      type = t.either t.path t.package;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-json/default.nix
+      path
+          path
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-json/interface.nix
+      type = t.either t.path t.package;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-json/tests/packages/basic/default.nix
+  paths.projectRootFile = "package.json";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-lock-v3/default.nix
+  getDependencies = lock: path: plent:
+        packageIdent = nodejsLockUtils.findEntry lock path name;
+  parseEntry = lock: path: entry:
+    if path == ""
+          dependencies = getDependencies lock path entry;
+        name = l.last (builtins.split "node_modules/" path);
+            dependencies = getDependencies lock path entry;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-lock-v3/interface.nix
+      type = t.nullOr t.path;
+    #   source :: Derivation | Path
+    #   type = t.path;
+    #   type = t.either t.path t.package;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-lock/default.nix
+    projectRelPath = "";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-lock/interface.nix
+      type = t.path;
+      type = t.nullOr t.path;
+      type = t.either t.path t.package;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/nodejs-package-lock/translate.nix
+  getPackageLockPath = tree: workspaceParent: let
+    node = tree.getNodeFromPath parent;
+    projectRelPath,
+    workspaceParent ? projectRelPath,
+    tree = args.tree.getNodeFromPath projectRelPath;
+    relPath = projectRelPath;
+    source = "${args.source}/${relPath}";
+        path = getPath dependencyObject;
+        if ! (l.pathExists "${source}/${path}/package.json")
+            The lock file references a sub-package residing at '${source}/${path}',
+            (b.readFile "${source}/${path}/package.json")
+    getPath = dependencyObject:
+                  WARNING: could not find dependency ${name} in ${getPackageLockPath args.tree workspaceParent}
+      location = relPath;
+        then "path"
+        path = dependencyObject:
+            type = "path";
+            path = let
+            type = "path";
+            path = getPath dependencyObject;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/package-func/default.nix
+  outputPaths = l.mapAttrs (_: drv: "${drv}") outputDrvs;
+    l.mapAttrsToList (output: path: l.attrNames (l.getContext path)) outputPaths;
+    # outputs, drvPath
+      drvPath = warnIfMultiDrvOr defaultOutput.drvPath;
+      outPath = warnIfMultiDrvOr defaultOutput.outPath;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/package-func/interface.nix
+    #     type = t.path;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-composer-lock/default.nix
+    projectRelPath = "";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-composer-lock/interface.nix
+      type = t.path;
+      type = t.nullOr t.path;
+      type = t.either t.path t.package;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-composer-lock/translate.nix
+    projectRelPath,
+    rootSource = tree.fullPath;
+    projectTree = tree.getNodeFromPath projectRelPath;
+    composerJson = (projectTree.getNodeFromPath "composer.json").jsonContent;
+    composerLock = (projectTree.getNodeFromPath "composer.lock").jsonContent;
+        type = "path";
+        path = rootSource;
+      # relative path of the project within the source tree.
+      location = projectRelPath;
+          if rawObj ? "source" && rawObj.source.type == "path"
+            inherit (rawObj.source) type path;
+          else if rawObj ? "dist" && rawObj.dist.type == "path"
+            path = rawObj.dist.url;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-granular/default.nix
+  hashPath = import ../../../lib/internal/hashPath.nix {
+      inherit hashPath;
+    path = import ../../../lib/internal/fetchers/path {
+      inherit hashPath;
+          type = "path";
+          # disable packagist, set path repositories
+            --slurpfile repositories $repositoriesStringPath \
+            --slurpfile dependencies $dependenciesStringPath \
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/php-granular/devShell.nix
+    export PATH="$PATH:$(realpath ./vendor)/bin"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/default.nix
+      path
+    local = info: "${config.paths.projectRoot}/${info.path}";
+            path
+          addAutoPatchelfSearchPath $propagatedBuildInputs
+        inherit (config.paths) findRoot;
+  # pips lock files are platform-specific, so lets make this visible in its path
+  paths.lockFile = l.mkDefault "lock.${config.deps.python.system}.json";
+    inherit (config) name paths;
+      ${config.name} = config.paths.package;
+            # Nixpkgs ships a sitecustomize.py with all of it's pyEnvs to add support for NIX_PYTHONPATH.
+          (name: _path: config.drvs.${name}.mkDerivation.buildInputs or [])
+        (name: _path: config.drvs.${name}.mkDerivation.nativeBuildInputs or [])
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/tests/packages/can-build-setuptools/flake.nix
+                      paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/tests/packages/can-handle-setuptools-runtime-dep/flake.nix
+            paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/tests/packages/lock-script-works/default.nix
+  paths.projectRootFile = "pyproject.toml";
+      # - the path to the nixpkgs
+          (builtins.unsafeDiscardStringContext (toString pkgs.path));
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/pip/tests/packages/python-nodejs/flake.nix
+            paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-editables/default.nix
+  editables = lib.filterAttrs (_name: path: path) config.editables;
+    inherit (config.paths) findRoot;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-editables/interface.nix
+        An attribute set mapping package names to a path, absolute or relative,
+        use a path inside the current repo to avoid unecessary rebuilds.
+    paths = lib.mkOption {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/default.nix
+    inherit (config) name paths;
+      ${config.name} = config.paths.package;
+        (name: _path: config.groups.${config.pdm.group}.packages.${name}.evaluated.mkDerivation.buildInputs or [])
+      (name: _path: config.groups.${config.pdm.group}.packages.${name}.evaluated.mkDerivation.nativeBuildInputs or [])
+                  lib.optionals (lib.hasAttrByPath ["tool" "pdm" "source"] pyproject.pyproject) (builtins.map (source: source.url) pyproject.pyproject.tool.pdm.source)
+                      !(lib.hasAttrByPath ["tool" "pdm" "source"] pyproject)
+              addAutoPatchelfSearchPath $propagatedBuildInputs
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/interface.nix
+        type = t.path;
+        type = t.path;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/lib.nix
+    # paths so we need to do that here.
+    tool_pdm_path = ["tool" "pdm" "dev-dependencies"];
+    pep_735_path = ["dependency-groups"];
+    extrasAttrPaths =
+      lib.optional (lib.hasAttrByPath tool_pdm_path pyproject-data) (lib.concatStringsSep "." tool_pdm_path)
+      ++ lib.optional (lib.hasAttrByPath pep_735_path pyproject-data) (lib.concatStringsSep "." pep_735_path);
+      // lib.optionalAttrs (builtins.length extrasAttrPaths > 0) {
+        inherit extrasAttrPaths;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/lock.nix
+    export PATH="$PATH:${lib.makeBinPath ([
+    pushd "$(${config.paths.findRoot})/${config.paths.package}"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/tests/packages/jupyter-lab/flake.nix
+          paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/python-pdm/tests/packages/python-local-development/flake.nix
+          paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-lock/cargoLock.nix
+      (sourceSpec.type != "path" && !isMainPackage)
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-lock/default.nix
+  sanitizePath = import ../../../lib/internal/sanitizePath.nix {inherit lib;};
+  sanitizeRelativePath = import ../../../lib/internal/sanitizeRelativePath.nix {inherit lib;};
+    inherit lib parseSpdxId sanitizePath sanitizeRelativePath simpleTranslate2;
+    projectRelPath = "";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-lock/findAllCrates.nix
+          inherit (tree) relPath;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-lock/interface.nix
+      type = t.path;
+      type = t.either t.path t.package;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-lock/translate.nix
+  sanitizePath,
+  sanitizeRelativePath,
+    projectRelPath,
+    projectTree = rootTree.getNodeFromPath projectRelPath;
+    rootSource = rootTree.fullPath;
+    projectSource = sanitizePath "${rootSource}/${projectRelPath}";
+    # this is used while resolving path dependencies
+      relPath = projectRelPath;
+    # and while resolving path dependencies
+            # remove leading period, its not necessary (it also causes issues with getNodeFromPath for some reason)
+              dirs = (rootTree.getNodeFromPath parentDirRel).directories;
+      (relPath: {
+        inherit relPath;
+        value = (projectTree.getNodeFromPath "${relPath}/Cargo.toml").tomlContent;
+      (l.filter (relPath: relPath != ".") workspaceMembers);
+      if l.hasAttrByPath ["package" "name"] rootToml.value
+        type = "path";
+      if l.length duplicateVersions > 1 && source.type != "path"
+      # relative path of the project within the source tree.
+      location = projectRelPath;
+        relPathReplacements = let
+          # function to find path replacements for one package
+            # We only need to patch path dependencies
+            pathDeps = l.filter (dep: dep ? path) tomlDeps;
+            # filter out path dependencies whose path are same as in workspace members.
+            # this is because otherwise workspace.members paths will also get replaced in the build.
+                  !(l.any (memberPath: dep.path == memberPath) workspaceMembers)
+              pathDeps;
+              name = dep.path;
+              value = sanitizeRelativePath "${package.relPath}/${dep.path}";
+            # this means that the path doesn't need to be replaced because it's
+                n: v: ! l.pathExists (sanitizePath "${projectSource}/${v}")
+            path = dependencyObject: let
+                    inherit (pkg) relPath;
+                  type = "path";
+                  path = projectRelPath;
+                  type = "path";
+                  path = workspaceCrate.relPath;
+                  type = "path";
+                  path = nonWorkspaceCrate.relPath;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-vendor/default.nix
+  hashPath = import ../../../lib/internal/hashPath.nix {
+      inherit hashPath;
+    path = import ../../../lib/internal/fetchers/path {
+      inherit hashPath;
+      replaceRelativePathsWithAbsolute
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-vendor/interface.nix
+      description = "Path to vendored sources";
+      type = t.functionTo (t.functionTo t.path);
+    replaceRelativePathsWithAbsolute = {
+      description = "Makes shell commands that will replace relative dependency paths with absolute paths in Cargo.toml";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-cargo-vendor/vendor.nix
+      path = getSource dep.name dep.version;
+      inherit path spec dep;
+      # crate, we should find the crate path using `cargo metadata`.
+      crateCargoTOML=$(${cargo} metadata --format-version 1 --no-deps --manifest-path $tree/Cargo.toml | \
+        ${jq} -r '.packages[] | select(.name == "${pkg.name}") | .manifest_path')
+          crateCargoTOML=$(${cargo} metadata --format-version 1 --no-deps --manifest-path "$manifest" | ${jq} -r '.packages[] | select(.name == "${pkg.name}") | .manifest_path' || :)
+          >&2 echo "Cannot find path for crate '${pkg.name}-${pkg.version}' in the tree in: $tree"
+      isPath = source.spec.type == "path";
+      l.optionalString (!isPath) ''
+        tree="${source.path}"
+  # Generates a script that replaces relative path dependency paths with absolute
+  # ones, if the path dependency isn't in the source dream2nix provides
+  replaceRelativePathsWithAbsolute = replacements: let
+          from: relPath: ''--replace "\"${from}\"" "\"${sourceRoot}/${relPath}\""''
+    echo "dream2nix: replacing relative dependency paths with absolute paths in Cargo.toml"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-crane/default.nix
+  replacePaths =
+    config.rust-cargo-vendor.replaceRelativePathsWithAbsolute
+    dreamLockInterface.subsystemAttrs.relPathReplacements.${pname}.${version};
+      ${replacePaths}
+    # we pass cargoLock path to buildDepsOnly
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/dream2nix/rust-crane/interface.nix
+      type = t.path;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/apps.update-locks.nix
+        scriptPath = "${pkg.config.lock.refresh}/bin/refresh";
+        packagePath = "./examples/packages/languages/${l.removePrefix "example-" name}";
+          pushd "${packagePath}" > /dev/null
+          "${scriptPath}"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/checks.nix
+      (_: module: lib.pathExists (module + /tests/packages))
+    getPackagePaths = moduleName: modulePath:
+        "module-${moduleName}-${packageDir}" = "${modulePath}/tests/packages/${packageDir}";
+      (builtins.readDir (modulePath + /tests/packages));
+    makePackage = path:
+      if lib.pathExists (path + "/flake.nix")
+      then makePackageFromFlake path
+      else makePackageFromDefaultNix path;
+    makePackageFromFlake = flakePath:
+      (importFlake (flakePath + "/flake.nix")).packages.${system}.default or {};
+    makePackageFromDefaultNix = testModulePath: let
+          testModulePath
+            paths.projectRoot = testModulePath;
+            paths.package = testModulePath;
+      lib.concatMapAttrs getPackagePaths modulesWithTests;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/checks.nix-unit.nix
+    inputs = lib.mapAttrs (name: input: "${input.outPath}") dream2nixFlake.inputs;
+          export NIX_PATH=nixpkgs=${pkgs.path}
+          export HOME=$(realpath .)
+              --eval-store $(realpath .) \
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/core-modules.nix
+  path = ../dream2nix/core;
+      (path + "/${fn}"))
+    (filterAttrs isModule (readDir path));
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/devShells.nix
+            export NIX_PATH=nixpkgs=${inputs.nixpkgs}
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/examples.nix
+    examplesPath = ../../examples/packages + "/${dirName}";
+    examples = readDir examplesPath;
+      dir = examplesPath + "/${name}";
+      flake = examplesPath + "/${name}/flake.nix";
+  # Type: [ {${name} = {module, packagePath} ]
+    path = def.dir;
+      repo.path = ../../examples/repo-with-packages;
+      repo-flake.path = ../../examples/repo-with-packages-flake;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/formatter.nix
+      path = lib.makeBinPath [
+      export PATH="${path}"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/pre-commit-check.nix
+              export PATH="$PATH:${lib.makeBinPath [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/pythonEnv/default.nix
+      export PATH="$PATH:${lib.makeBinPath [
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/pythonEnv/flake-template.nix
+              paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/reference-website/default.nix
+    state = name: path: let
+      frontmatter = getFrontmatterString path name;
+    doDisplay = name: path: lib.pathExists (path + "/README.md");
+        name: path: state name path
+      linkOptionsDocs = name: sourcePath: ''
+      createReference = name: sourcePath: ''
+        cat ${sourcePath}/README.md > "$out/${name}.md"
+        echo -e '\n\n👉 ${linkOptionsDocs name sourcePath}' >> "$out/${name}.md"
+            ln -sfT $(nix build .#optionsReference --no-link --print-out-paths) src/reference
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/reference-website/frontmatter.nix
+  getReadme = modulepath: modulename: let
+    readme = modulepath + "/README.md";
+      if (builtins.pathExists readme)
+  getFrontmatterString = modulepath: modulename: let
+    content = getReadme modulepath modulename;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/modules/flake-parts/writers.nix
+            - `PATH` only contains exactly the packages passed via the `PATH` arg
+            - `NIX_PATH` is set to the path of the current `pkgs`
+          Creates a script in a `bin/` directory in the output; suitable for use with `lib.makeBinPath`, etc.
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/overrides/python/torch/default.nix
+  # use the autoAddDriverRunpath to add /run/opengl-driver/lib to the RPATH
+    inherit (nixpkgs) autoAddDriverRunpath;
+    config.deps.autoAddDriverRunpath
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/pkgs/fetchPipMetadata/script.nix
+  path = [coreutils nix gitMinimal openssh] ++ nativeBuildInputs;
+    path
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/pkgs/writers/default.nix
+  path, # nixpkgs path
+  writePureShellScript = PATH: script:
+    writeScript "script.sh" (mkScript PATH script);
+  writePureShellScriptBin = binName: PATH: script:
+    writeScriptBin binName (mkScript PATH script);
+  mkScript = PATH: script: ''
+    export PATH="${lib.makeBinPath PATH}"
+    export NIX_PATH=nixpkgs=${path}
+    "PATH"
+    "NIX_PATH"
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/scripts/flake.nix
+          paths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_graph_utils/fileSystem.nix
+          allPaths = {
+          allPaths = {
+          allPaths = {
+          allPaths = {
+          allPaths = {
+          allPaths = {
+          allPaths = {
+          allPaths = {
+          allPaths = {
+          allPaths = {
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_groups/default.nix
+    expr = config.groups.my-group.packages.hello."1.0.0".public ? drvPath;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_groups_multi_derivation_package/default.nix
+  test_toplevel_drvPath_exists = {
+    expr = config ? drvPath;
+  test_out_drvPath_exists = {
+    expr = config.out ? drvPath;
+  test_dist_drvPath_exists = {
+    expr = config.dist ? drvPath;
+      config.drvPath
+      == config.out.drvPath;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_nodejs_lockutils/default.nix
+  # test the path strip function
+  test_nodejsLockUtils_parentPath_simple = {
+    expr = nodejsLockUtils.parentPath "node_modules/@org/lib/node_modules/bar";
+  test_nodejsLockUtils_parentPath_root = {
+    expr = nodejsLockUtils.parentPath "node_modules/bar";
+  test_nodejsLockUtils_parentPath_empty = {
+    expr = nodejsLockUtils.parentPath "";
+  test_nodejsLockUtils_parentPath_complex = {
+    expr = nodejsLockUtils.parentPath "node_modules/@org/lib/node_modules/bar/node_modules/foo";
+  test_nodejsLockUtils_parentPath_local_package = {
+    expr = nodejsLockUtils.parentPath "packages/foo";
+    path = nodejsLockUtils.findEntry plock "" "argparse";
+    expr = path;
+    path = builtins.tryEval (nodejsLockUtils.findEntry plock "" "foo");
+    expr = path;
+    path =
+    expr = path;
+    path =
+    expr = path;
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_nodejs_node_builder_v3/default.nix
+        initialPath
+      initialPath = "";
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_paths/default.nix
+      paths.projectRoot = "${./.}";
+      paths.package = "${./.}";
+    expr = {inherit (config.paths) projectRoot package;};
+      paths.projectRoot = "${./.}";
+      paths.package = "./.";
+    expr = {inherit (config.paths) projectRoot package;};
+      paths.projectRoot = "${./.}";
+      paths.package = "${./.}/package";
+    expr = {inherit (config.paths) projectRoot package;};
+      paths.projectRoot = "${./.}";
+      paths.package = "./package";
+    expr = {inherit (config.paths) projectRoot package;};
+    self = /nix/store/some/path;
+      paths.projectRoot = self;
+      paths.package = self + /package;
+    expr = {inherit (config.paths) projectRoot package;};
+Match found in: ./09/26/synapse-system/vendor/nix/dream2nix/tests/nix-unit/test_python-pdm/default.nix
+    expr = (lib.head (lib.attrValues config.groups.default.packages.certifi)).public ? drvPath;
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/debug/pypi-deps-db.nix
+  paths = [ src ];
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/default.nix
+      else if isString args || isPath args || pkgs.lib.isDerivation args then
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/flake.nix
+                    src = pkgs.copyPathToStore srcEnv;
+                export PATH="${pkgs.lib.makeBinPath (with pkgs; [
+                # Use "python -m pytest" to add current directory to python path.
+                export PATH="${pkgs.lib.makeBinPath (with pkgs; [
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/lib/extractor/default.nix
+      paths = [ python_env ];
+          # wrap it once more, set PYTHONPATH, ignoring NIXPYTHON_PATH and NIX_PYTHONEXECUTABLE
+              --set PYTHONPATH "$out/lib/python${major}.${minor}"
+    # https://github.com/NixOS/nix/blob/2242be83c61788b9c0736a92bb0b5c7bbfc40803/nix-rust/src/store/path.rs#L100-L125
+          (extractor-fast job).drvPath
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/compileOverrides.nix
+      export PYTHONPATH=${src}
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/conda-channels.nix
+  registryChannels = foldl' (a: b: recursiveUpdate a b) {} (mapAttrsToList (path: sha256:
+      split = splitString "/" path;
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/from-nixpkgs/mk-python-derivation.nix
+, pythonPath ? []
+      buildInputs ++ pythonPath
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/lib.nix
+          paths = map (p: "${p}/${dir}") ps;
+      file_path = "${(import ../../lib/extractor { inherit pkgs; }).extract_from_src {
+      if pathExists file_path then fromJSON (builtins.unsafeDiscardStringContext (readFile file_path)) else throw fail_msg;
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/mk-python-derivation-overlay.nix
+          pythonPath = [ ]; # Deprecated, for compatibility.
+      makeOverridable (callPackage "${pkgs.path}/pkgs/development/interpreters/python/mk-python-derivation.nix" {
+      makeOverridable (callPackage "${pkgs.path}/pkgs/development/interpreters/python/mk-python-derivation.nix" {
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/mkPython.nix
+          (map (p: "--suffix PATH : ${p}/bin") extra_pkgs_other)
+          ++ [''--set QT_PLUGIN_PATH ${py_final_with_pkgs}/plugins''];
+          nixpkgs = import pkgs.path { inherit (pkgs) config; overlays = pkgs.overlays ++ [ overlay ]; };
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/mach_nix/nix/nixpkgs-json.nix
+      else if hasAttrByPath ["meta" "broken"] pkg
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/crawler/configuration.nix
+  nix.nixPath = [ "nixpkgs=${nixpkgs_src}" ];
+            PYTHONPATH = src;
+          path = [ python pkgs.git ];
+            PYTHONPATH = src;
+            NIX_PATH = "nixpkgs=${nixpkgs_src}";
+          path = [ python ] ++ (with pkgs; [ git nix gawk gnutar gzip ]);
+            PYTHONPATH = src;
+          path = [ python ] ++ (with pkgs; [ git nix gawk gnutar gzip ]);
+            export PYTONPATH=${src}
+          path = with pkgs; [ curl gawk git gzip jq openssl moreutils ];
+            for f in $(find . -type f -not -path './.git/*' -not -name '.*' -not -name 'sha256*'); do
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/power-deps-crawler/configuration.nix
+      PYTHONPATH = src;
+    path = [ python pkgs.git pkgs.nix pkgs.gnutar];
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/nix/power-wheels-crawler/configuration.nix
+        PYTHONPATH = src;
+      path = [ python pkgs.git ];
+        PYTHONPATH = src;
+      path = [ python pkgs.git ];
+        PYTHONPATH = src;
+      path = [ python pkgs.git ];
+        PYTHONPATH = src;
+      path = [ python pkgs.git ];
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/pypi-crawlers/shell.nix
+    export NIX_PATH="nixpkgs=${nixpkgs-src}:."
+    export PYTHONPATH=$(pwd)/src
+Match found in: ./09/26/synapse-system/vendor/nix/mach-nix/shell.nix
+    export PYTHONPATH=$(pwd)/
+    git config core.hooksPath ./git-hooks
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/default.nix
+  basename = path: last (splitString "/" path);
+  src-filter = path: type:
+      ext = last (splitString "." path);
+      parts = last (splitString "/" path);
+      !elem (basename path) [".git" "__pycache__" ".eggs" "_bootstrap_env"] &&
+      !startsWith "result" (basename path);
+        export NIX_PATH=nixpkgs=${pkgs.path}
+Match found in: ./09/26/synapse-system/vendor/nix/pip2nix/nix/sources.nix
+  fetch_local = spec: spec.path;
+      hasNixpkgsPath = builtins.any (x: x.prefix == "nixpkgs") builtins.nixPath;
+      hasThisAsNixpkgsPath = <nixpkgs> == ./.;
+      else if hasNixpkgsPath && ! hasThisAsNixpkgsPath then
+            Please specify either <nixpkgs> (through -I or NIX_PATH=nixpkgs=...) or
+  # the path directly as opposed to the fetched source.
+        # this turns the string into an actual Nix path (for both absolute and
+        # relative paths)
+        if builtins.hasAttr "outPath" spec
+          "The values in sources.json should not have an 'outPath' attribute"
+          spec // { outPath = replace name (fetch config.pkgs name spec); }
+    { sourcesFile ? if builtins.pathExists ./sources.json then ./sources.json else null
+Match found in: ./09/26/synapse-system/vendor/nix/pynixify/default.nix
+        # Add nixfmt to pynixify's PATH
+        wrapProgram $out/bin/pynixify --prefix PATH : "${chosenNixfmt}/bin"
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/dev/build-system-overrides.nix
+      pathspec = [ ];
+    pathspec = {
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/dev/build-systems.nix
+        pathspec = [ ];
+        pathspec = [ ];
+  pathspec =
+      inherit (python3Packages.pathspec)
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/doc/src/overriding/overrides-sdist.nix
+        pathspec = [ ];
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/doc/src/patterns/cross/build-systems.nix
+          pathspec = [ ];
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/flake.nix
+              path = root + "/${dir}";
+              template = import (path + "/flake.nix");
+              inherit path;
+                path:
+                  flake' = import (path + "/flake.nix");
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/build.nix
+      isPath = source ? path; # Path to sdist
+        else if isPath then
+        else if isPath then
+            outPath = "${workspaceRoot + "/${source.path}"}";
+            passthru.url = source.path;
+            # Get wheel from local path
+            else if selectedWheel ? path then
+              (workspaceRoot + "/${source.registry}/${selectedWheel.path}")
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/default.nix
+  mapAttrs (_: path: import path ({ inherit lib pyproject-nix; } // self)) {
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/lock1.nix
+    pathExists
+    # Path to local workspace project
+    # Path to non-uv project
+    # Path to local project with no build-system defined
+    Get relative path for a local package
+  getLocalPath =
+      or (throw "Not a project path: ${toJSON package.source}");
+          path ? null,
+        assert (whl ? url) -> (!whl ? filename && !whl ? path);
+        assert (whl ? filename) -> (!whl ? url && !whl ? path);
+        assert (whl ? path) -> (!whl ? url && !whl ? filename);
+        // optionalAttrs (path != null) {
+          inherit path;
+          file' = parseWheelFileName (baseNameOf path);
+              path ? null,
+                path
+          localPath = self.getLocalPath package;
+          projectRoot = if localPath == "." then workspaceRoot else workspaceRoot + "/${localPath}";
+          if (pathExists (projectRoot + "/pyproject.toml")) then
+            throwIf (pathExists projectRoot && readDir projectRoot == { })
+                inherit projectRoot; # Path to project root
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/scripts.nix
+    isPath
+    `script`: Path to script
+    `lockPath`: Alternative lock file path
+      # Path to inline metadata script
+      # Path to lock file for script
+      lockPath ? script + ".lock",
+    # Scripts must either be passed as a path or as a contextful string
+    assert (isPath script || (isString script && hasContext script));
+      uvLock = lock1.parseLock (importTOML lockPath);
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/test.nix
+  callTest = path: import path (uv2nix // { inherit pkgs lib pyproject-nix; });
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/test_lock1.nix
+  getLocalPath = {
+      expr = lock1.getLocalPath { source.editable = "foo"; };
+      expr = lock1.getLocalPath { source.directory = "foo"; };
+      expr = lock1.getLocalPath { source.virtual = "foo"; };
+      expr = lock1.getLocalPath { source = { }; };
+      expectedError.msg = "Not a project path";
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/test_workspace.nix
+    # This is analogous to using builtins.fetchGit & such which return an attrset with an outPath member.
+        outPath = "${./fixtures/workspace-flat}";
+      testOutpathSrc = {
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/lib/workspace.nix
+    isPath
+    path
+  splitPath = splitString "/";
+  getSubComponents = p: path.subpath.components (path.splitRoot p).subpath;
+    `workspaceRoot`: Workspace root as a path
+      # Workspace root as a path
+      isPath workspaceRoot
+      || (isAttrs workspaceRoot && workspaceRoot ? outPath)
+          Editable root was passed as a Nix store path.
+          Pass editable root either as a string pointing to an absolute non-store path, or use environment variables for relative paths.
+      globs = map splitPath (workspace'.members or [ ]);
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/npins/default.nix
+      path =
+    spec // { outPath = path; };
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/templates/hello-tkinter/flake.nix
+              unset PYTHONPATH
+Match found in: ./09/26/synapse-system/vendor/nix/uv2nix/templates/hello-world/flake.nix
+              unset PYTHONPATH
+Match found in: ./09/26/jobs/vendor/nix-eval-jobs/dev/treefmt.nix
+    && (builtins.tryEval pkgs.deno.outPath).success;
+Match found in: ./09/26/jobs/vendor/nix-task/examples/nixMathHomework/flake.nix
+                path = with channels.nixpkgs; [
+                path = with channels.nixpkgs; [
+                path = with channels.nixpkgs; [
+                  echo "$NIX_TASK_FLAKE_PATH"
+              path = with channels.nixpkgs; [
+Match found in: ./09/26/jobs/vendor/nix-task/flake.nix
+                export PKG_PATH_BASH="${pkgs.bashInteractive}"
+                export PKG_PATH_COREUTILS="${pkgs.coreutils}"
+                export PKG_PATH_JQ="${pkgs.jq}"
+                export PKG_PATH_NODEJS="${pkgs.nodejs}"
+                export PKG_PATH_UTIL_LINUX="${pkgs.util-linux}"
+                export CONF_NIX_LIB_PATH="${./nix/lib}"
+                export PATH="$PATH:${pkgs.procps}/bin"
+Match found in: ./09/26/jobs/vendor/nix-task/nix/lib/getTasks.nix
+  depsWithDerivations = currentPath: deps:
+      else if (isAttrSetWithTaskOutput value) then { __type = "taskOutput"; flakeAttributePath = "${currentPath}.${name}.output"; deps = depsWithDerivations "${currentPath}.${name}.output.deps" value.output.deps; }
+  collectMaybeTask = { taskDefinition, currentPath, opts }:
+      collectTask { inherit taskDefinition; inherit currentPath; inherit opts; }
+      collectTasks { output = taskDefinition.output.deps; currentPath = "${currentPath}.output.deps"; inherit opts; }
+      collectTasks { output = taskDefinition; inherit currentPath; inherit opts; }
+  collectTask = { taskDefinition, currentPath, opts }:
+        flakeAttributePath = currentPath;
+        deps = depsWithDerivations "${currentPath}.deps" taskDefinition.deps;
+          (map (pathItem: if (hasAttr "drvPath" pathItem) then pathItem.drvPath else pathItem) taskDefinition.path)
+        inherit path;
+      depsTasks = flatten (mapAttrsToList (key: value: collectMaybeTask { taskDefinition = value; inherit opts; currentPath = "${if currentPath != "" then "${currentPath}." else ""}deps.${key}"; }) taskDefinition.deps);
+  collectTasks = { output, currentPath, opts ? {} }:
+      (collectTask { taskDefinition = output; inherit currentPath; inherit opts; })
+      concatMap (attrName: collectMaybeTask { taskDefinition = output.${attrName}; inherit opts; currentPath = if currentPath != "" then "${currentPath}.${attrName}" else attrName; }) (attrNames output)
+  # sort by shortest path to task
+  sortTasks = a: b: (builtins.stringLength a.flakeAttributePath) < (builtins.stringLength b.flakeAttributePath);
+      currentPath = "";
+Match found in: ./09/26/jobs/vendor/nix-task/nix/lib/mkTask.nix
+{ pkgs, lib, path ? [], run ? "", impureEnvPassthrough ? [], stableId ? null, impureBuild ? false }:
+  path ? [],
+  inherit path;
+      inherit path;
+Match found in: ./09/26/jobs/vendor/nix-task/nix/tasks/gemini.nix
+  path = [ pkgs.nix ];
+Match found in: ./09/26/jobs/vendor/nix-task/nix/tasks/helius-block-processor.nix
+  path = [ pkgs.bash ]; # Ensure bash is available
+Match found in: ./09/26/jobs/vendor/nix-task/nix/tasks/process-solana-nar.nix
+    if [ -z "$SOLANA_NAR_PATH" ]; then
+      echo "Error: SOLANA_NAR_PATH environment variable is not set." >&2
+    echo "Processing Solana NAR file: $SOLANA_NAR_PATH"
+    ${pkgs.nix}/bin/nix-nar --unpack-to "$TMP_DIR" < "$SOLANA_NAR_PATH"
+  path = [ pkgs.bash pkgs.nix ]; # Ensure bash and nix-nar are available
+  impureEnvPassthrough = [ "SOLANA_NAR_PATH" ]; # Pass through the path to the NAR file
+Match found in: ./09/26/jobs/vendor/nix-task/nix/tasks/run-gemini-cli.nix
+  path = [ pkgs.nix ];
+Match found in: ./09/26/jobs/vendor/nix-task/nix/tasks/solana-ai-trigger.nix
+  path = [ pkgs.bash ]; # Ensure bash is available for the echo command
+Match found in: ./09/26/jobs/vendor/nix-task/nix/tasks/solana-nix-trigger-interpreter.nix
+    # For demonstration, let's assume SOLANA_EVENT_DATA contains a simple attribute path
+  path = [ pkgs.bash pkgs.gnused pkgs.gawk ]; # Ensure bash, sed, and awk are available for parsing
+Match found in: ./09/26/jobs/vendor/nix-task/runner/yarn-manifest.nix
+        "path-type" = packages."path-type@npm:4.0.0";
+        "path-key" = packages."path-key@npm:3.1.1";
+        "npm-run-path" = packages."npm-run-path@npm:5.1.0";
+    "fs.realpath@npm:1.0.0" = {
+      name = "fs.realpath";
+      outputName = "fs.realpath-1.0.0-c8f05d8126";
+      flatName = "fs.realpath";
+        "fs.realpath" = packages."fs.realpath@npm:1.0.0";
+        "path-is-absolute" = packages."path-is-absolute@npm:1.0.1";
+    "npm-run-path@npm:5.1.0" = {
+      name = "npm-run-path";
+      outputName = "npm-run-path-5.1.0-79c0668d42";
+      flatName = "npm-run-path";
+        "path-key" = packages."path-key@npm:4.0.0";
+    "path-is-absolute@npm:1.0.1" = {
+      name = "path-is-absolute";
+      outputName = "path-is-absolute-1.0.1-31bc695ffd";
+      flatName = "path-is-absolute";
+    "path-key@npm:3.1.1" = {
+      name = "path-key";
+      outputName = "path-key-3.1.1-0e66ea8321";
+      flatName = "path-key";
+    "path-key@npm:4.0.0" = {
+      name = "path-key";
+      outputName = "path-key-4.0.0-2bce99f089";
+      flatName = "path-key";
+    "path-type@npm:4.0.0" = {
+      name = "path-type";
+      outputName = "path-type-4.0.0-10d47fc86a";
+      flatName = "path-type";
+Match found in: ./09/26/jobs/vendor/nix-task/shell.nix
+    export PKG_PATH_BASH="${pkgs.bashInteractive}"
+    export PKG_PATH_COREUTILS="${pkgs.coreutils}"
+    export PKG_PATH_JQ="${pkgs.jq}"
+    export PKG_PATH_NODEJS="${pkgs.nodejs}"
+    export PKG_PATH_UTIL_LINUX="${pkgs.util-linux}"
+    export CONF_NIX_LIB_PATH="$REPO_ROOT/nix/lib"
+Match found in: ./09/27/7-concepts/2-gemini-integration/nix-store-bundle-test.nix
+          echo "Gemini CLI package path: ${gemini-cli.packages.${system}.default}"
+Match found in: ./09/27/7-concepts/2-gemini-integration/test-github-gemini.nix
+        echo "Gemini CLI Path: ${gemini-cli.packages.${system}.default}/bin/gemini"
+Match found in: ./09/27/7-concepts/2-gemini-integration/working-nix-store-gemini.nix
+        # Known working Nix store path (hash: 9bfmqvdsyk2br1bw5xcfy2g62axp7id7)
+        geminiStorePath = "${gemini-cli.packages.${system}.default}";
+        geminiBundle = "${geminiStorePath}/share/gemini-cli/bundle/gemini.js";
+        geminiWrapper = "${geminiStorePath}/bin/gemini";
+        # Test script using confirmed Nix store paths
+          echo "Store path: ${geminiStorePath}"
+          echo "Bundle path: ${geminiBundle}"
+          echo "Hash: $(basename ${geminiStorePath} | cut -d'-' -f1)"
+            echo "Bundle hash: $(basename ${geminiStorePath} | cut -d'-' -f1)" >> $out/logs/capture.log
+            echo "Bundle path: ${geminiBundle}" >> $out/logs/capture.log
+              timeout 60 ${geminiWrapper} "Hello from Nix store bundle! Hash: $(basename ${geminiStorePath} | cut -d'-' -f1)" 2>&1 | tee -a $out/logs/capture.log || echo "API test exit: $?"
+              "bundle_hash": "$(basename ${geminiStorePath} | cut -d'-' -f1)",
+              "store_path": "${geminiStorePath}",
+              "bundle_path": "${geminiBundle}",
+              "wrapper_path": "${geminiWrapper}",
+        # Expose the confirmed working paths
+          inherit geminiStorePath;
+Match found in: ./09/27/7-concepts/2-gemini-integration/gemini-integration/flake.nix
+          # Ensure Node.js is in PATH
+          export PATH=${pkgs.nodejs}/bin:$PATH
+          # Set GEMINI_CONFIG_PATH to point to the generated settings.json
+          export GEMINI_CONFIG_PATH=${geminiCliPackage}/etc/gemini-cli/settings.json
+Match found in: ./09/27/7-concepts/6-qa-testing/tests/2025-01-27-gemini-hello-world/flake.nix
+            echo "Source path: $src" | tee -a $out/diagnostics/source_analysis.txt
+            # 3. Path Resolution Test (from minimal-qa-test)
+            echo "=== PATH RESOLUTION TEST ===" | tee -a $out/diagnostics/path_resolution.txt
+            echo "Attempting to resolve source paths..." | tee -a $out/diagnostics/path_resolution.txt
+            # Test different path approaches
+            echo "Direct source access:" | tee -a $out/diagnostics/path_resolution.txt
+            ls "$src" >/dev/null 2>&1 && echo "✅ Source accessible" || (echo "❌ Source NOT accessible" | tee -a $out/diagnostics/path_resolution.txt && exit 1)
+            echo "Bundle path test:" | tee -a $out/diagnostics/path_resolution.txt
+            ls "$src/bundle" >/dev/null 2>&1 && echo "✅ Bundle accessible" || (echo "❌ Bundle NOT accessible" | tee -a $out/diagnostics/path_resolution.txt && exit 1)
+            echo "Gemini.js path test:" | tee -a $out/diagnostics/path_resolution.txt
+            ls "$src/bundle/gemini.js" >/dev/null 2>&1 && echo "✅ gemini.js accessible" || (echo "❌ gemini.js NOT accessible" | tee -a $out/diagnostics/path_resolution.txt && exit 1)
+              echo "Source Path: $src"
+              echo "Output Path: $out"
+            cat $out/diagnostics/path_resolution.txt | tee -a $out/analysis/summary.txt
+                "diagnostics/path_resolution.txt"
+          # Build and get result path
+          RESULT_PATH=$(nix build --no-link --print-out-paths ${self.packages.${system}.default})
+          if [ -n "$RESULT_PATH" ] && [ -d "$RESULT_PATH" ]; then
+            echo "✅ Test built successfully at: $RESULT_PATH"
+            exec "$RESULT_PATH/bin/run-test-report.sh" "$RESULT_PATH"
+            echo "❌ Test build failed or result path not found"
+Match found in: ./09/27/7-concepts/6-qa-testing/tests/2025-01-27-minimal-qa-test/flake.nix
+            echo "Source path: $src" | tee -a $out/diagnostics/source_analysis.txt
+            # 3. Path Resolution Test
+            echo "=== PATH RESOLUTION TEST ===" | tee $out/diagnostics/path_resolution.txt
+            echo "Attempting to resolve source paths..." | tee -a $out/diagnostics/path_resolution.txt
+            # Test different path approaches
+            echo "Direct source access:" | tee -a $out/diagnostics/path_resolution.txt
+            ls "$src" >/dev/null 2>&1 && echo "✅ Source accessible" || echo "❌ Source NOT accessible" | tee -a $out/diagnostics/path_resolution.txt
+            echo "Bundle path test:" | tee -a $out/diagnostics/path_resolution.txt
+            ls "$src/bundle" >/dev/null 2>&1 && echo "✅ Bundle accessible" || echo "❌ Bundle NOT accessible" | tee -a $out/diagnostics/path_resolution.txt
+            echo "Gemini.js path test:" | tee -a $out/diagnostics/path_resolution.txt
+            ls "$src/bundle/gemini.js" >/dev/null 2>&1 && echo "✅ gemini.js accessible" || echo "❌ gemini.js NOT accessible" | tee -a $out/diagnostics/path_resolution.txt
+            RESULT_PATH="$1"
+            if [ -z "$RESULT_PATH" ]; then
+              echo "Usage: $0 <result-path>"
+              echo "Run with: nix build --no-link --print-out-paths | xargs $0"
+            if [ -f "$RESULT_PATH/analysis/summary.txt" ]; then
+              cat "$RESULT_PATH/analysis/summary.txt"
+              echo "Summary not found at: $RESULT_PATH/analysis/summary.txt"
+            for file in "$RESULT_PATH/diagnostics"/*.txt; do
+            ls -la "$RESULT_PATH/logs/" 2>/dev/null || echo "No logs directory"
+            RESULT=$(nix build --no-link --print-out-paths ${self.packages.${system}.default})
+Match found in: ./09/27/7-concepts/6-qa-testing/tests/2025-01-27-build-time-gemini-capture/flake.nix
+            # Credential files are directly available via extra-sandbox-paths at /creds
+              BUNDLE_PATH="${gemini-cli.packages.${system}.default}/share/gemini-cli/bundle/gemini.js"
+              WRAPPER_PATH="${gemini-cli.packages.${system}.default}/bin/gemini"
+              echo "Bundle path: $BUNDLE_PATH"
+              echo "Wrapper path: $WRAPPER_PATH"
+              if [ -f "$BUNDLE_PATH" ]; then
+                BUNDLE_SIZE=$(stat -c%s "$BUNDLE_PATH")
+              if timeout 30 "$WRAPPER_PATH" --version; then
+              if timeout 30 "$WRAPPER_PATH" --help | head -5; then
+		"$WRAPPER_PATH" --debug --output-format json --approval-mode yolo --model gemini-2.5-flash --prompt "I am calling you from INSIDE a Nix build derivation! This is real-time telemetry capture. Bundle hash: $BUNDLE_HASH. Time: $(date) Please read flake.nix, and modify it to read @task.md for more instructions. If you cant read flake.nix write a nix package that adds flake.nix, task.md and mission.md to the output. then add a report of the telemetry log via another rust crate and another derivation. we want to create multiple derviations from one task, a whole lattice of them."
+Match found in: ./09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry/flake.nix
+    vial.url = "path:./vial-placeholder"; # Placeholder for the actual vial flake
+    credsSourceDir.url = "path:./default-creds-source"; # Default placeholder for the creds source directory
+        # sopsSecretsPath = lib.attrByPath [ "sopsSecretsPath" ] null mycologyContext;
+            export GEMINI_CONFIG_PATH="$GEMINI_CONFIG_DIR/settings.json"
+Match found in: ./09/27/7-concepts/ai-workflow/flake.nix
+            decryptedPath = builtins.getEnv "LLM_API_KEY_FILE" ""; # Get path from host env
+            hasDecrypted = builtins.pathExists decryptedPath;
+            builtins.readFile decryptedPath # Read the content of the decrypted file
+          echo "Received NAR paths for inference:"
+          while IFS= read -r nar_path; do
+            echo "  - $nar_path"
+            nix-store --dump $nar_path | nix-nar-unpack $temp_extract_dir
+            echo "  Extracted content from $nar_path to $temp_extract_dir"
+              local nar_paths=$(cat $inputCliOutput)
+              echo "$nar_paths" | $aiInferenceTool > $ai_output_dir/ai_inference_log.txt
+Match found in: ./09/30/monster_experiment/rust_knowledge_extractor/flake.nix
+        src = builtins.path { path = ./.; };
+              # PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+Match found in: ./09/flakes/search-results/flake.nix
+                gh search code "${keyword}" --owner "$owner" --json path,repository,text > "$TEMP_DIR/owner_results_$owner.json"
+              jq -r '.[] | .path + " " + .repository.name + " " + .text' "$TEMP_DIR/all_search_results.json" | while read -r file_path repo_name snippet;
+                mkdir -p "$TEMP_DIR/$repo_name/$(dirname "$file_path")"
+                echo "$snippet" > "$TEMP_DIR/$repo_name/$file_path.snippet"
+                echo "Error: GITHUB_URL is not set. Usage: url2file-locate \"https://github.com/owner/repo/blob/branch/path/to/file\"" >&2
+            # Extract owner, repo, and path within repo
+            # Remove "blob/branch/" part and get the rest of the path
+            REPO_PATH=$(echo "$GITHUB_URL" | sed -E 's|https://github.com/[^/]+/[^/]+/blob/[^/]+/||')
+            LOCAL_FILE_PATH="$LOCAL_GITHUB_ROOT/$OWNER/$REPO/$REPO_PATH"
+            if [ -f "$LOCAL_FILE_PATH" ]; then
+                echo "Local file found: $LOCAL_FILE_PATH"
+                echo "Local file not found at: $LOCAL_FILE_PATH"
+          url2fileLocatorScript = url2fileLocatorScript { projectRoot = pickUpNix2.outPath; }; # Pass pickUpNix2.outPath as projectRoot
+Match found in: ./09/crq-012.foaf.nix
+  proposedSolution = "1.  **Formal Definition of Nix Pure Derivation in Unimath:** Develop a formal definition of a \"pure derivation\" within the Unimath framework in Lean 4. This definition will capture the essential properties of Nix derivations: content-addressability, immutability, and deterministic output based solely on inputs. This will involve representing Nix store paths, inputs, and outputs as Unimath types. 2.  **Mapping of Nix Properties to Unimath Type Properties:** Systematically map the key properties of Nix pure derivations to corresponding properties of Unimath types: **Reproducibility:** Correlate the deterministic nature of Nix builds to the well-definedness and uniqueness of canonical forms in Unimath types. **Content-Addressability:** Relate the cryptographic hashing of Nix store paths to the identity and equivalence of types in Unimath (e.g., path equality). **Immutability:** Map the immutability of Nix store artifacts to the inherent immutability of mathematical objects and types in Unimath. 3.  **Formal Verification of Derivation Equivalence:** Utilize Lean 4 to formally prove that if two Nix derivations are equivalent (i.e., produce the same output hash), their corresponding Unimath types are also equivalent (e.g., propositionally equal or equivalent via an equivalence). Conversely, prove that distinct Nix derivations correspond to distinct Unimath types. 4.  **Type-Theoretic Representation of Nix Flakes:** Extend the formalization to represent Nix flakes themselves as Unimath types, capturing their structure, inputs, and outputs within the type-theoretic framework. This would allow for formal reasoning about the composition and properties of entire Nix-based projects. 5.  **Implications for Software Verification:** Explore how this formal equivalence can be leveraged for the formal verification of software systems built with Nix. This could involve proving properties about the behavior of Nix derivations directly within Lean 4, providing a new layer of assurance for software correctness.";
+Match found in: ./09/verify-foaf-owl.nix
+  owlProperties = lib.filter (e: lib.hasAttrByPath ["@type"] e && (e."@type" == "http://www.w3.org/2002/07/owl#ObjectProperty" || e."@type" == "http://www.w3.org/2002/07/owl#DatatypeProperty")) owlSchema."@graph";
+Match found in: ./09/test.nix
+{ selfPath ? builtins.path { path = ./.; } }:
+  mockSelf = { outPath = selfPath; };
+Match found in: ./09/batch-modify-crqs.nix
+    { path = file; content = modifiedContent; };
+    lib.concatStringsSep "\n" (lib.map (f: "echo -n ${lib.escapeShellArg f.content} > ${lib.escapeShellArg f.path}") modifiedCrqFiles)
+Match found in: ./09/nixify-resource.nix
+        path = fetchedResource;
+        path = fetchedResource;
+        path = fetchedResource;
+Match found in: ./09/theory/nix_code_indexer.nix
+  indexNixFiles = { path, projectRoot, name ? "nix-file-index" }:
+      inherit path projectRoot;
+      find "${path}" -type f -name "*.nix" -print0 | while IFS= read -r -d $'\0' file; do
+          relative_path=$(echo "$file" | sed "s|^${projectRoot}/||")
+          printf '  {"path": "%s", "hash": "%s"}' "$relative_path" "$file_hash" >> $out/nix-files.index.json
+Match found in: ./09/theory/nix_2gram_indexer_step1.nix
+        path = projectRoot;
+Match found in: ./09/theory/nix_2gram_indexer_step2.nix
+        path = projectRoot;
+Match found in: ./09/bug_repro.nix
+        path, # The path to scan for .nix files
+        projectRoot, # The root path to calculate relative paths against
+          inherit path projectRoot;
+          echo "DEBUG: path = ${path}" >&2
+          echo "Indexing .nix files in ${path}..." >&2
+          find "${path}" -type f -name "*.nix" -print0 | while IFS= read -r -d $'\0' file; do
+              relative_path=$(echo "$file" | sed "s|^${projectRoot}/||")
+              printf '  {"path": "%s", "hash": "%s"}' "$relative_path" "$file_hash" >> $out/nix-files.index.json
+        path = ./dummy_project;
+Match found in: ./09/24/nix_custom_attrs_test/mypackage.nix
+    echo "Extra data path: ${myExtraData}"
+Match found in: ./09/poems.nix
+        A future unfolding, a path to be trod.
+        From unknown frontiers, to pathways so clear,
+        Mapping new pathways, a brand new start.
+        Mapping new pathways, a brand new start.
+        Mapping new pathways, a brand new start.
+        Mapping new pathways, a brand new start.
+        Mapping new pathways, a brand new start.
+        Revealing the pathways, no matter how far.
+        No longer fear, the path now clear and bright,
+Match found in: ./09/crq-042.foaf.nix
+    wrap, cache, and manage all external and internal Nix imports and paths. The function will:
+        resolved paths, generating reports for auditability and dependency analysis.
+Match found in: ./bug_repro.nix
+        path, # The path to scan for .nix files
+        projectRoot, # The root path to calculate relative paths against
+          inherit path projectRoot;
+          echo "DEBUG: path = ${path}" >&2
+          echo "Indexing .nix files in ${path}..." >&2
+          find "${path}" -type f -name "*.nix" -print0 | while IFS= read -r -d $'\0' file; do
+              relative_path=$(echo "$file" | sed "s|^$projectRoot/||")
+              printf '  {"path": "%s", "hash": "%s"}' "$relative_path" "$file_hash" >> $out/nix-files.index.json
+        path = ./dummy_project;
+Match found in: ./10/01/docs/theory/build_2gram_index.nix
+  projectRoot = pkgs.lib.cleanSource ../../../../../../../..; # Adjust path to project root
+Match found in: ./10/01/docs/theory/jupyter.nix
+    content = null; # The Nix expression, Markdown string, URL, or Nix store path
+      # Assume cell.content is already a Nix store path or a flake reference
+Match found in: ./10/01/docs/theory/markdown_twin_generator.nix
+  # A conceptual function to find and index all .md files in a given path.
+    path, # The path to scan for .md files
+      inherit path;
+      echo "Indexing .md files in ${path}..." >&2
+      # Create a JSON array of objects { path, hash }
+      find "${path}" -name "*.md" -print0 | while IFS= read -r -d $'\0' file; do
+        relative_path=$(realpath --relative-to="${path}" "$file")
+        echo "  {\"path\": \"${relative_path}\", \"hash\": \"${file_hash}\"}" >> $out/markdown-files.index.json
+    markdownFilePath, # Path to the Markdown file in the Nix store
+    name ? (builtins.baseNameOf markdownFilePath),
+      inherit markdownFilePath;
+      echo "Generating HTML for ${markdownFilePath}..." >&2
+      pandoc -f markdown -t html ${markdownFilePath} > $out/index.html
+      echo "HTML generated for ${markdownFilePath} at $out/index.html" >&2
+      # Assume a path to a directory containing Markdown files
+      markdownSourcePath = pkgs.lib.cleanSource ./.; # Conceptual: index current directory
+      indexedMDFiles = indexMarkdownFiles { path = markdownSourcePath; };
+            markdownFilePath = "${markdownSourcePath}/${firstMDFile.path}";
+            name = builtins.baseNameOf firstMDFile.path;
+Match found in: ./10/01/docs/theory/n_gram_generator.nix
+  # Function to tokenize a file path string into segments and parts.
+  tokenizePath = path: 
+      pathSegments = lib.strings.splitString "/" (lib.strings.removePrefix "/" (lib.strings.removeSuffix "/" path));
+      splitByDot = lib.flatten (lib.map (segment: lib.strings.splitString "." segment) pathSegments);
+      path = "/home/user/project/src/my-flake.nix";
+      pathTokens = tokenizePath path;
+      allTokens = pathTokens ++ nixTokens;
+      pathNGrams = generateNGrams { tokens = pathTokens; inherit nGramLengths; };
+      inherit pathTokens nixTokens allTokens;
+      inherit pathNGrams nixNGrams combinedNGrams;
+  inherit tokenizePath;
+Match found in: ./10/01/docs/theory/nix_code_indexer.nix
+  # A conceptual function to find and index all .nix files in a given path.
+    path, # The path to scan for .nix files
+    projectRoot, # The root path to calculate relative paths against
+      inherit path projectRoot;
+      echo "DEBUG: path = ${path}" >&2
+      echo "Indexing .nix files in ${path}..." >&2
+      # Create a JSON array of objects { path, hash }
+      find "${path}" -type f -name "*.nix" -print0 | while IFS= read -r -d $'\0' file; do
+          relative_path=$(echo "$file" | sed "s|^$projectRoot/||")
+          printf '  {"path": "%s", "hash": "%s"}' "$relative_path" "$file_hash" >> $out/nix-files.index.json
+    nixFileIndex, # Output of indexNixFiles (path to nix-files.index.json)
+    nixFileIndex, # Output of indexNixFiles (path to nix-files.index.json)
+    # The base path from which the index was created, to correctly import files
+    basePath, 
+    # Create an attribute set where keys are relative paths and values are imported Nix expressions.
+        name = fileInfo.path; # Use relative path as attribute name
+        value = import "${basePath}/${fileInfo.path}"; # Import the Nix expression
+    nixFileIndex, # Output of indexNixFiles (path to nix-files.index.json)
+Match found in: ./10/01/docs/theory/nix_2gram_indexer.nix
+    uniquePaths = []; # A deduplicated list of file paths where this 2-gram is found
+    pathSetHash = null; # A hash representing the unique set of paths (conceptual prime factorization)
+    filePath = null; # Path to the Nix file where the 2-gram is found
+  # A function to generate an index of 2-grams from Nix file paths, with usage pointers.
+    projectRoot, # The root path of the project to index
+Match found in: ./10/01/docs/theory/spore_vial_001/metacoq_graphql_meme.nix
+  metaCoqHaskellFilePath = "Server/MetaCoq/TestMeta.org";
+    file = fetchMetaCoqHaskell; # The path to the extracted Haskell code
+Match found in: ./10/01/docs/theory/project_nix_path_ngrams.nix
+  # A function to generate n-grams from the paths of all Nix files in the project.
+  generateProjectNixPathNGrams = { 
+    projectRoot, # The root path of the project to index
+    name ? "project-nix-path-ngrams",
+      path = projectRoot;
+    # Extract all file paths
+    allNixFilePaths = lib.map (f: f.path) indexedFiles;
+    # Tokenize each path and generate n-grams
+    allPathNGrams = lib.flatten (lib.map (path: # For each file path
+        tokens = nGramGeneratorModule.tokenizePath path;
+    ) allNixFilePaths);
+      inherit allPathNGrams;
+      echo "${lib.strings.concatStringsSep "\n" allPathNGrams}" > $out/nix-path-ngrams.txt
+      echo "Generated ${builtins.length allPathNGrams} n-grams from Nix file paths." >&2
+  inherit generateProjectNixPathNGrams;
+Match found in: ./10/01/docs/theory/secret_scanner.nix
+    filePath, # Path to the file to scan (can be an impure path on the host filesystem)
+      inherit filePath patterns;
+      __noChroot = true; # Needs access to the host filesystem to read `filePath`
+      echo "Scanning file: ${filePath} for secrets..." >&2
+        if grep -E --with-filename --line-number "$pattern" "${filePath}" >> $REPORT_FILE; then
+        echo "Secrets detected in ${filePath}. Review $REPORT_FILE" >&2
+        echo "No secrets detected in ${filePath}." >&2
+Match found in: ./10/01/docs/theory/sparql.nix
+    ontology, # The OWL ontology (path to .ttl file, or a structured Nix representation)
+    #   ontologyFile = ontology; # Assuming ontology is a path to a .ttl file
+      ontology = foafOntology; # Pass the path to the fetched ontology
+Match found in: ./10/01/docs/theory/url_provenance_mapper.nix
+            pathParts = lib.strings.splitString "/" (lib.strings.removePrefix "https://github.com/" url);
+            owner = lib.head pathParts;
+            repo = lib.head (lib.tail pathParts);
+Match found in: ./10/01/docs/theory/2gram_report_generator.nix
+    twoGramIndexJsonPath, # Path to the nix-2gram-index.json file
+    inherit twoGramIndexJsonPath;
+    INDEX_CONTENT=$(cat "${twoGramIndexJsonPath}")
+    TOP_2GRAMS=$(echo "$INDEX_CONTENT" | jq -r 'sort_by(.count) | reverse | .[] | "\(.value) (Count: \(.count), Paths: \(.uniquePaths | length))"' | head -n 46)
+    echo "│ (Generated from project Nix file paths)                                      │" >> $REPORT_FILE
+Match found in: ./10/01/docs/theory/verifiable_file_topology.nix
+    file = null; # Path to the file in the Nix store (string)
+    inode = null; # Inode of the file (string, conceptual for Nix store paths)
+      path = null; # Path to the NAR file in the Nix store (string, conceptual)
+      storePath = null; # Full Nix store path of the file (string)
+  # It takes a file (as a Nix store path) and pre-computed impure data as inputs.
+    file, # The file (Nix store path) for which to build the topology
+    nixStorePath = file;
+    # Conceptual inode (Nix store paths don't have stable inodes across systems/builds,
+    # Conceptual NAR path and hash (would be generated by `nix archive` in an impure step)
+    conceptualNarPath = "${nixStorePath}.nar";
+      path = conceptualNarPath;
+      storePath = nixStorePath;
+Match found in: ./10/01/docs/theory/w3c_ontology_importer.nix
+    w3cOntology, # The fetched W3C ontology (as a Nix attribute set or path to file)
+Match found in: ./10/01/docs/theory/content_transformer_and_organizer.nix
+    inputFile, # Path to an image or text file
+    inputFile, # Path to a document file (e.g., Markdown)
+    inputFile, # Path to any text-based file (code, markdown, logs, etc.)
+    changeDescriptionFile, # Path to a text file describing changes
+    sources, # A list of derivations/paths representing the 2MB sources
+Match found in: ./10/01/docs/theory/w3c_spec_vendorizer.nix
+    vendorizedSpecPath, # Path to the vendorized spec in the Nix store
+    specName ? (builtins.baseNameOf vendorizedSpecPath),
+      inherit vendorizedSpecPath specName;
+  specContent = builtins.readFile ${vendorizedSpecPath};
+      vendorizedSpecPath = "${vendorizedHtmlSpec}/html5-spec.txt";
+Match found in: ./10/01/docs/theory/nix_2gram_indexer_step1.nix
+  # A function to generate an index of 2-grams from Nix file paths, with usage pointers.
+    projectRoot, # The root path of the project to index
+      path = projectRoot;
+Match found in: ./10/01/docs/theory/nix_2gram_indexer_step2.nix
+    projectRoot, # The root path of the project to index
+Match found in: ./10/01/docs/theory/nix_2gram_indexer_step3.nix
+    projectRoot, # The root path of the project to index
+Match found in: ./10/01/docs/theory/nix_2gram_indexer_step4.nix
+    projectRoot, # The root path of the project to index
+Match found in: ./10/01/docs/theory/nix_2gram_indexer_step5.nix
+    projectRoot, # The root path of the project to index
+        filePath = fileInfo.path; # Relative path of the Nix file
+        tokens = nGramGeneratorModule.tokenizePath filePath;
+        inherit filePath; # Store filePath directly for grouping
+Match found in: ./10/01/docs/theory/nix_2gram_indexer_step6.nix
+    projectRoot, # The root path of the project to index
+Match found in: ./10/01/docs/theory/nix_2gram_indexer_step7.nix
+    uniquePaths = []; # A deduplicated list of file paths where this 2-gram is found
+    pathSetHash = null; # A hash representing the unique set of paths (conceptual prime factorization)
+    projectRoot, # The root path of the project to index
+        # Get unique file paths where this 2-gram is used
+        uniquePaths = lib.unique (lib.map (usage: usage.filePath) usages);
+        # Sort paths for consistent hashing of the set
+        sortedUniquePaths = lib.sort lib.compareStrings uniquePaths;
+        # Hash the sorted unique paths to get a unique identifier for the set
+        pathSetHash = builtins.hashString "sha256" (lib.strings.concatStringsSep ";" sortedUniquePaths);
+        uniquePaths = sortedUniquePaths;
+        inherit pathSetHash;
+Match found in: ./10/01/docs/theory/nix_2gram_indexer_step8.nix
+    projectRoot, # The root path of the project to index
+      echo "Generated 2-gram index for Nix file paths in $out/nix-2gram-index.json" >&2
+Match found in: ./10/01/docs/theory/nix_to_owl_ontology_declarations/prefixes/nixOntologyPrefix.nix
+  nixOntologyPrefixPath = nixOntologyRepo;
+  fetchedPath = nixOntologyPrefixPath;
+Match found in: ./10/01/docs/theory/nix_to_owl_ontology_declarations/prefixes/owlPrefix.nix
+  fetchedPath = fetchedOwlPrefix;
+Match found in: ./10/01/docs/theory/nix_to_owl_ontology_declarations/prefixes/rdfPrefix.nix
+  fetchedPath = fetchedRdfPrefix;
+Match found in: ./10/01/docs/theory/nix_to_owl_ontology_declarations/prefixes/rdfsPrefix.nix
+  fetchedPath = fetchedRdfsPrefix;
+Match found in: ./10/01/docs/theory/nix_to_owl_ontology_declarations/prefixes/xsdPrefix.nix
+  fetchedPath = fetchedXsdPrefix;
+Match found in: ./10/01/docs/theory/nix_to_owl_ontology_declarations/nixToOwlMapper.nix
+  jqPathFilter = ".path";
+    inherit nixFileIndex jqFilter jqPathFilter jqHashFilter;
+    JQ_PATH_FILTER = jqPathFilter;
+Match found in: ./10/01/docs/theory/render_plot.nix
+        "output_path = os.path.join(os.environ[''outPath''], plot_def.get('''outputFileName''', '''plot.png'''))"
+        "plt.savefig(output_path)"
+        "print(\"Plot saved to \" + output_path)"
+      outPath = "$out"; # Pass $out as an environment variable
+Match found in: ./10/04/gemini-prompt-flake/flake.nix
+      url = "path:./default-prompt.nix";
+Match found in: ./10/04/gemini-prompt-flake/gemini-prompt-derivation.nix
+  # Path to the gemini-cli executable
+  geminiCliPath = "${gemini-cli.packages.${system}.default}/bin/gemini";
+    ${geminiCliPath} --debug --output-format json --approval-mode yolo --model gemini-2.5-flash --prompt "$GEMINI_PROMPT" > $out/gemini_output.json
+Match found in: ./10/04/lib/dump-pkgs-env.nix
+    else if builtins.isPath value then
+      # Represent paths as their string representation
+Match found in: ./10/04/lib/nix-stdlib-integration-test.nix
+  generate (builtins.path { path = ./.; })
+Match found in: ./10/06/sops-gemini/flakes/wrap-gemini-secrets/flake.nix
+      url = "path:../";
+        # It now expects the path to the decrypted secrets as an argument
+          # The first argument to this script will be the path to the decrypted secrets
+          DECRYPTED_SECRETS_PATH="$1"
+          cp -r "$DECRYPTED_SECRETS_PATH"/* "$HOME/.gemini/"
+          echo "✅ Credentials copied from $DECRYPTED_SECRETS_PATH to $HOME/.gemini/"
+Match found in: ./10/08/hackathon/flakes/consolidated-impure-gemini-telemetry-modules/flake.nix
+    originalFlake.url = "path:../../../09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry";
+Match found in: ./10/08/hackathon/flakes/consolidated-impure-gemini-telemetry-modules/inputs.nix
+  vial.url = "path:./vial-placeholder"; # Placeholder for the actual vial flake
+Match found in: ./10/08/hackathon/flakes/consolidated-impure-gemini-telemetry-modules/packages-default.nix
+    filePath = "default-path.nix";
+Match found in: ./10/09/hackathon-update-prep.nix
+  colosseumHackathonPath = "/hackathon";
+      url = "${colosseumUrl}${colosseumHackathonPath}";
+    inherit colosseumUrl colosseumHackathonPath;
+Match found in: ./10/09/hackathon/nar-bridge-flake/flake.nix
+  description = "A flake to bridge between Nix store paths and NAR archives.";
+      # Function to create a NAR archive from a given store path
+      # Usage: nar-bridge-flake.lib.createNar { name = "my-archive"; path = /nix/store/...; }
+      lib.createNar = { name, path }:
+          inherit path;
+          echo "DEBUG: Running ${pkgs.nix}/bin/nix nar pack for path: $path"
+          ${pkgs.nix}/bin/nix nar pack "$path" > "$out/${name}.nar" || { echo "ERROR: nix nar pack failed!"; exit 1; }
+          echo "$out/restored-content" > "$out/restored-path"
+Match found in: ./10/09/hackathon/nar-bridge-flake/test.nix
+    path = dummyDerivation;
+  restoredPath = narBridgeFlake.lib.restoreNar {
+  # 4. Verify the restored path
+    inherit restoredPath;
+    # Read the actual restored path from the file
+    ACTUAL_RESTORED_PATH=$(cat "$restoredPath/restored-path")
+    diff -q "${dummyDerivation}/hello.txt" "$ACTUAL_RESTORED_PATH/hello.txt" || exit 1
+Match found in: ./10/09/nix-grep-regexes.nix
+    "nix store dump-path"
+Match found in: ./10/09/llm-result-purifier-flake/flake.nix
+        path = pureLlmResult;
+Match found in: ./10/09/zos-spore-vial-flake/flake.nix
+        path = zosSporeOutput;
+Match found in: ./10/09/spore-cultivation-lab-flake/flake.nix
+        echo "DEBUG: Restored spore path: $(cat "$restoredSpore/restored-path")"
+        RESTORED_PATH=$(cat "$restoredSpore/restored-path")
+        ls -la "$RESTORED_PATH"
+        jq -c . "$RESTORED_PATH/elements.json" > "$out/cultivated-output/transformed-elements.json"
+        cat "$RESTORED_PATH/self-description.md" >> "$out/cultivated-output/self-description-copy.md"
+Match found in: ./10/09/llm-nix-simulator-flake/lib/prompt-file-derivation.nix
+  1.  The expected Nix store path(s) of the primary output(s).
+Match found in: ./10/09/orchestration-flake/flake.nix
+      # If not, we'll need to adjust how they are accessed (e.g., time2025.inputs.self.outPath + "/path/to/flake")
+Match found in: ./10/09/orchestrator.nix
+{ pkgs, lib, mycologyWorkflow, nixpkgs, nixIntrospector, dataSources, sopsSecretsPath, zosSporeVial, nixToPoemVial, readMdVial, readRsVial, targetFilePath ? null, ... }:
+        PHASE_OUTPUT_PATH=$(nix build --no-link --print-out-paths $PHASE_DERIVATION)
+        echo "--- Phase Output Path: $PHASE_OUTPUT_PATH ---"
+        cat "$PHASE_OUTPUT_PATH"
+Match found in: ./10/10/run-qa.nix
+  # Set NIX_PATH for the build environment to ensure nix-instantiate can find nixpkgs
+  NIX_PATH = "nixpkgs=${pkgs.path}";
+Match found in: ./10/10/grep-nar-flake/flake.nix
+        # This needs to be the absolute path to the project root
+Match found in: ./10/10/nix2/lib/first-reflection.nix
+      extractFlakeCommands = flakePath:
+          flakeContent = builtins.readFile flakePath;
+      extractSubmoduleUrls = gitmodulesPath:
+          gitmodulesContent = builtins.readFile gitmodulesPath;
+      extractSubmoduleBranches = gitmodulesPath:
+          gitmodulesContent = builtins.readFile gitmodulesPath;
+      description = "Functions to normalize extracted commands (e.g., removing whitespace, standardizing arguments, resolving paths) to identify true uniqueness.";
+      findDirectCommandUsage = { command, path }:
+          echo "Searching for direct usage of '${command}' in '${path}'" > "$out"
+          grep -r "${command}" "${path}" >> "$out" || true
+Match found in: ./10/10/nix2/flake-checker.nix
+{ lib, pkgs, firstReflection, urlExtractor, flakePaths, gitmodulesPaths }:
+    inherit flakePaths gitmodulesPaths;
+Match found in: ./10/10/nix2/flake.nix
+      flakePaths = [
+      lib.flakePaths = flakePaths;
+            inherit flakePaths;
+            gitmodulesPaths = []; # Placeholder
+Match found in: ./10/10/nix2/task.nix
+    flakeCommands = lib.flatten (lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).commands) allFlakeNixFiles);
+    flakeUrls = lib.flatten (lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).urls) allFlakeNixFiles);
+    flakeSystems = lib.flatten (lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).systems) allFlakeNixFiles);
+    submoduleUrls = lib.flatten (lib.map (gitmodulesPath: firstReflection.identityPrincipleSpec.rawCommandExtraction.extractSubmoduleUrls gitmodulesPath) allGitmodulesFiles);
+    submoduleBranches = lib.flatten (lib.map (gitmodulesPath: firstReflection.identityPrincipleSpec.rawCommandExtraction.extractSubmoduleBranches gitmodulesPath) allGitmodulesFiles);
+  flakeHashes = lib.map (flakePath: {
+    path = flakePath;
+    hash = monsterCode.monsterGroupSpec.getNixFileCanonicalHash flakePath;
+Match found in: ./10/10/nix2/task.d/01-extract-info.nix
+    flakeCommands = lib.flatten (lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).commands) allFlakeNixFiles);
+    flakeUrls = lib.flatten (lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).urls) allFlakeNixFiles);
+    flakeSystems = lib.flatten (lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).systems) allFlakeNixFiles);
+    submoduleUrls = lib.flatten (lib.map (gitmodulesPath: firstReflection.identityPrincipleSpec.rawCommandExtraction.extractSubmoduleUrls gitmodulesPath) allGitmodulesFiles);
+    submoduleBranches = lib.flatten (lib.map (gitmodulesPath: firstReflection.identityPrincipleSpec.rawCommandExtraction.extractSubmoduleBranches gitmodulesPath) allGitmodulesFiles);
+Match found in: ./10/10/nix2/repo.nix
+{ lib, pkgs, repoPath }:
+  flakeNix = "${repoPath}/flake.nix";
+  gitmodules = "${repoPath}/.gitmodules";
+  flakeNix = if builtins.pathExists flakeNix then flakeNix else null;
+  gitmodules = if builtins.pathExists gitmodules then gitmodules else null;
+Match found in: ./10/10/nix2/qa/test-prelude.nix
+          # Construct the expected path for the fork (this is a heuristic and might need refinement)
+          expectedPath = toString (../../source/github/meta-introspector + "/${miRepo.repo}");
+          isPathCheckedOut = builtins.pathExists expectedPath;
+          isBranchCorrect = if isPathCheckedOut then
+              headContent = builtins.readFile "${expectedPath}/.git/HEAD";
+        lib.assertMsg (isPathCheckedOut && isBranchCorrect)
+          "Meta-introspector fork '${miRepo.url}' at '${expectedPath}' must be checked out and on branch '${currentBranch}'."
+Match found in: ./10/10/nix2/generate-repos.nix
+  instruction: pkgs.writeText instruction.path instruction.content
+Match found in: ./10/10/nix2/rust-discovery.nix
+  isRustProject = repoPath: builtins.pathExists (repoPath + "/Cargo.toml");
+  rustProjects = lib.filter (repo: isRustProject repo.path) (lib.attrValues allRepos);
+Match found in: ./10/10/nix2/crate-extractor.nix
+  extractCrateInfo = projectPath:
+      cargoTomlPath = projectPath + "/Cargo.toml";
+      cargoTomlContent = builtins.readFile cargoTomlPath;
+      inherit name version projectPath;
+Match found in: ./10/10/nix2/crate-wrapper.nix
+      src = crate.projectPath; # The source is the entire project for now
+Match found in: ./10/10/nix2/mini-prelude.nix
+  rootPath,
+  makeContext = { path, name }: rawCreateContext {
+    inherit lib pkgs path name;
+  # Create context for the given root path
+  rootContext = makeContext { path = rootPath; name = "root"; };
+Match found in: ./10/10/nix2/createContext.nix
+  path,
+  # Convert path to string explicitly
+  pathStr = builtins.toString path;
+  # Get .nix filenames in the current path
+  nixFilenames = utils.getNixFiles path;
+  # Construct full paths for the .nix files
+  nixFilesRaw = map (filename: pathStr + "/" + filename) nixFilenames;
+Match found in: ./10/10/nix2/get-nix-file-list/flake.nix
+        getNixFileList = { rootPath }: import ../mini-prelude.nix { inherit pkgs lib rootPath; };
+Match found in: ./10/10/nix2/list-files/flake.nix
+      url = "path:../../get-nix-file-list.nix"; # Relative path to the file
+      # Also expose it directly for easier access to its path
+      lib.nixpkgsPath = nixpkgs;
+Match found in: ./10/10/nix-url-extractor.nix
+{ lib, pkgs, firstReflection, flakePaths, gitmodulesPaths }:
+    lib.map (flakePath: (firstReflection.identityPrincipleSpec.rawCommandExtraction.extractFlakeCommands flakePath).urls) flakePaths
+    lib.map (gitmodulesPath: firstReflection.identityPrincipleSpec.rawCommandExtraction.extractSubmoduleUrls gitmodulesPath) gitmodulesPaths
+      # Regex to match github:owner/repo?ref=branch&dir=path or https://github.com/owner/repo/tree/branch/path
+      { lib, pkgs, repoPath }:
+        flakeNix = "${repoPath}/flake.nix";
+        gitmodules = "${repoPath}/.gitmodules";
+        flakeNix = if builtins.pathExists flakeNix then flakeNix else null;
+        gitmodules = if builtins.pathExists gitmodules then gitmodules else null;
+    path = "10/10/github/${parsedUrl.owner}/${parsedUrl.repo}.nix"; # This path needs to be relative to the root of the project
+Match found in: ./10/10/monster-code.nix
+  extractFlakeFeatures = { flakePath, extractedCommands, extractedUrls, extractedSystems }:
+Match found in: ./10/10/prelude.nix
+  # Placeholder for flake and gitmodules paths (will be dynamically generated later)
+  flakePaths = [
+    # Example paths
+  gitmodulesPaths = [
+    # Example paths
+    inherit flakePaths gitmodulesPaths;
+  # This assumes that the generatedRepoFiles is a list of paths to the generated files
+Match found in: ./10/10/context.nix
+  # Path to the .gitmodules file for pick-up-nix context
+  pickUpNixGitmodulesPath = ../../context/pick-up-nix/.gitmodules;
+  # Path to the .gitmodules file for streamofrandom context
+  streamOfRandomGitmodulesPath = ../../context/streamofrandom/.gitmodules;
+  parseGitmodules = gitmodulesPath:
+      content = builtins.readFile gitmodulesPath;
+      submoduleSections = lib.strings.match ''^\[submodule "([^"]+)"\]\n\s*path = ([^\n]+)\n\s*url = ([^\n]+)(\n\s*branch = ([^\n]+))?'' content;
+          path = lib.head (lib.tail match.captures);
+        { inherit name path url branch; };
+  pickUpNixSubmodules = if builtins.pathExists pickUpNixGitmodulesPath then parseGitmodules pickUpNixGitmodulesPath else [];
+  streamOfRandomSubmodules = if builtins.pathExists streamOfRandomGitmodulesPath then parseGitmodules streamOfRandomGitmodulesPath else [];
+Match found in: ./10/10/bootstrap-context/part1.nix
+    path = "vendor/rust-index-guix";
+    path = ".github/actions/install-nix-action";
+    path = ".github/actions/nix-github-actions";
+    path = ".github/actions/nix-installer-action";
+    path = ".github/actions/cache-nix-action";
+    path = ".github/actions/cache";
+    path = ".github/actions/checkout";
+    path = "vendor/rnix-parser";
+    path = ".github/actions/upload-artifact";
+    path = "vendor/nix-on-droid";
+    path = "vendor/nix/nix";
+    path = "source/github/jmikedupont2/orgs/Escaped-RDFa/namespace";
+    path = "source/github/meta-introspector/git-submodule-tools-rs";
+    path = "vendor/external/git-submodule-tools-rs";
+    path = "source/github/meta-introspector/solfunmeme";
+    path = "vendor/lean/lean4";
+    path = "vendor/external/forgejo-python";
+    path = "vendor/external/tmux";
+    path = "vendor/external/minizinc-introspector";
+    path = "vendor/external/tmux-interface-rs";
+    path = "vendor/external/n00b";
+    path = "vendor/external/monomcp-rust";
+    path = "vendor/external/hugging-face-dataset-validator-rust";
+    path = "vendor/external/turbomcp";
+    path = "vendor/external/bitchat-solana-zos-solfunmeme";
+    path = "vendor/external/trident";
+    path = "vendor/external/solfunmeme-banner";
+    path = "vendor/external/ragit";
+    path = "vendor/external/bootstrap-meme";
+    path = "vendor/external/emojis-rs";
+    path = "vendor/external/introspector-llc";
+    path = "vendor/external/coccinelleforrust_personal_mirror";
+    path = "vendor/external/solfunmeme-model-builder-quiz";
+    path = "vendor/external/solfunmeme-dioxus";
+    path = "vendor/external/sophia_rs";
+    path = "vendor/external/solfunmeme-metameme";
+    path = "vendor/external/amazon-q-developer-cli";
+    path = "vendor/external/grok-cli";
+    path = "vendor/external/tclifford";
+    path = "vendor/external/meta-meme";
+    path = "vendor/external/gemini-cli";
+    path = "source/github/meta-introspector/streamofrandom";
+    path = "source/github/meta-introspector/lattice-introspector";
+    path = "vendor/external/rust";
+    path = "vendor/external/asciinema-scenario";
+    path = "vendor/external/nix-asciinema-agg";
+    path = "vendor/external/asciinema";
+    path = "vendor/nix/nixtract";
+    path = "vendor/nix/nixpkgs-lint";
+    path = "vendor/guix/mes";
+    path = "vendor/guix/guix";
+    path = "vendor/lang-c";
+    path = "vendor/steel";
+    path = "vendor/strace/dutchcoders-trace";
+    path = "vendor/strace/intentrace";
+    path = "vendor/strace/lurk";
+    path = "vendor/strace/rstrace";
+    path = "source/github/meta-introspector/quasi-meta-meme";
+    path = "source/github/meta-introspector/hackathon";
+    path = "vendor/external/github-issues-export-rs";
+    path = "source/github/meta-introspector/minizinc-introspector";
+    path = "source/github/meta-introspector/time";
+    path = "source/github/meta-introspector/neo";
+    path = "source/github/meta-introspector/neo2";
+    path = "vendor/nixpkgs";
+    path = "vendor/plantuml-stdlib/C4-PlantUML";
+    path = "vendor/ebpf/aya";
+    path = "vendor/ebpf/bpfjit";
+    path = "vendor/ebpf/bpfman";
+    path = "vendor/ebpf/clean-dns-bpf";
+    path = "vendor/ebpf/eadb";
+    path = "vendor/ebpf/ebpfguard";
+    path = "vendor/ebpf/libbpf-rs";
+    path = "vendor/ebpf/rbpf";
+    path = "source/github/meta-introspector/git-submodules-rs-nix";
+    path = "vendor/mkAIDerivation";
+    path = "vendor/nix/renix";
+    path = "vendor/nix/nix-config-merger";
+    path = "vendor/nix/nix-files-comparator";
+    path = "vendor/nix/rnix-parser-tester";
+    path = "source/github/meta-introspector/introspector-llc";
+    path = "vendor/nix/nix-direnv";
+    path = "vendor/hooks/shellcheck-precommit";
+    path = "vendor/hooks/rusty-hook";
+    path = "vendor/hooks/shebling";
+    path = "vendor/nix/tvix";
+    path = "vendor/nix/nil";
+    path = "vendor/lint/shellcheck";
+    path = "vendor/lint/git-hooks.nix";
+    path = "vendor/lint/cachix-git-hooks.nix";
+    path = "vendor/nix/nixpacks";
+    path = "source/github/meta-introspector/ragit";
+    path = "vendor/nix/flake-utils";
+    path = "vendor/tools/detect-duplicates";
+    path = "vendor/nix/fenix";
+    path = "vendor/nix/nix-systems-default";
+    path = "vendor/nix/nix-systems-default-fork";
+    path = "vendor/nix/home-manager";
+    path = "vendor/nix/nix-asciinema-agg";
+    path = "vendor/external/fenix";
+    path = "vendor/rust/just";
+    path = "source/github/meta-introspector/bootstrap";
+    path = "vendor/nix/nix-nar-rs";
+    path = "source/github/meta-introspector/ai-ml-zk-ops";
+    path = "vendor/nix/rust-overlay";
+    path = "vendor/nix/naersk";
+    path = "vendor/nix/flake-parts";
+    path = "vendor/nix/treefmt-nix";
+    path = "vendor/nix/yarnpnp2nix";
+    path = "vendor/external/copilot-cli";
+    path = "source/github/meta-introspector/solfunmeme-gitbook";
+    path = "source/github/meta-introspector/solfunmeme-metameme";
+    path = "vendor/nix/factorio-mods-nix";
+    path = "vendor/nix/vpsfree-cz-configuration";
+    path = "vendor/nix/sops-nix";
+    path = "nix/vendor/nix/croissong-system";
+    path = "nix/vendor/nix/bbigras-nix-config";
+    path = "nix/vendor/nix/gmkonan-flake";
+    path = "nix/vendor/nix/jpetrucciani-nix";
+    path = "nix/vendor/nix/stites-configs-mirror";
+    path = "nix/vendor/nix/privatevoid-depot";
+    path = "nix/vendor/nix/catircservices-org";
+    path = "nix/vendor/nix/duck1123-k3s-fleetops";
+    path = "nix/vendor/nix/dominicegginton-dotfiles";
+    path = "nix/vendor/nix/fort-nix-bitcoin";
+    path = "nix/vendor/nix/bojeran-dotfiles";
+    path = "nix/vendor/nix/sheeeng-nix";
+    path = "nix/vendor/nix/fjolne-dotfiles";
+    path = "nix/vendor/nix/vpsfreecz-config";
+    path = "nix/vendor/nix/disassembler-network";
+    path = "vendor/hooks/vale-precommit";
+    path = "vendor/hooks/vale";
+    path = "source/github/meta-introspector/pre-commit-hooks-collection";
+    path = "vendor/nix/vale-precommit";
+    path = "vendor/hooks/lint-staged";
+    path = "vendor/lint/nixpkgs-lint";
+    path = "vendor/nix/pre-commit-tool-hooks";
+    path = "vendor/nix/nixdoc";
+    path = "source/github/meta-introspector/th-desugar";
+    path = "vendor/hooks/prek";
+    path = "vendor/nix/felix-schausberger-nixos";
+    path = "vendor/nix/nix-stdlib";
+    path = "vendor/nix/nix-init";
+    path = "vendor/nix/nix-prefetch";
+    path = "vendor/nix/nix-prefetch-github";
+    path = "vendor/nix/nurl";
+    path = "vendor/nix/nix-universal-prefetch";
+    path = "vendor/nix/prefetch-github";
+    path = "vendor/nix/nix-upfetch";
+    path = "vendor/nix/nix-prefetch-lheckemann";
+    path = "vendor/external/codex";
+Match found in: ./10/10/bootstrap-context/part2.nix
+    path = "2025";
+Match found in: ./10/10/bootstrap-context/part3.nix
+    path = "vendor/livestream-tiktok-plugin";
+Match found in: ./10/10/bootstrap-context/part4.nix
+    path = "vendor/twitter-plugin";
+Match found in: ./10/10/bootstrap-context/part5.nix
+    path = "vendor/elizaos-plugins/plugin-twitter";
+Match found in: ./10/10/lib/nar/flake.nix
+      # flakePaths = pkgs.lib.filter (path: pkgs.lib.hasSuffix ".nix" path)
+      #              (pkgs.lib.filesystem.listFilesRecursive nix2.outPath);
+      # getNixFileList = get-nix-file-list.lib.${system}.getNixFileList { inherit flakePaths; };
+      #     { get-nix-file-list, pkgs, system, self, flakePaths }:
+      #       # Re-import pkgs from the passed pkgs path
+      #       getNixFileListFunc = get-nix-file-list.outputs.lib.${system}.getNixFileList { pkgs = pkgsSet; rootPath = self; };
+      #     getNixFileListFunc { inherit flakePaths; }
+      #     --argstr flakePaths ${builtins.toJSON flakePaths} \
+      #     --arg self ${self.outPath} \
+      #   store_path=$(${pkgs.nix}/bin/nix-store --add nix-file-list.json)
+      #   # Dump the store path to a NAR file
+      #   ${pkgs.nix}/bin/nix-store --dump $store_path > $out
+Match found in: ./10/10/export-nar.nix
+  store_path=$(${pkgs.nix}/bin/nix-store --add nix-file-list.json)
+  # Dump the store path to a NAR file
+  ${pkgs.nix}/bin/nix-store --dump $store_path > $out
+Match found in: ./crq-parser.nix
+  getFoafCrqId = path: let
+    baseName = builtins.baseNameOf path; # e.g., "crq-001.foaf.nix"
+  getMdCrqId = path: let
+    baseName = builtins.baseNameOf path; # e.g., "CRQ_041_Colosseum_Mirror_Flake.md"
+Match found in: ./docs/NixOSI_Vision.nix
+      # Example: A raw content-addressed path
+      nixStorePath = "/nix/store/sha256-my-immutable-data";
+Match found in: ./eval-tasks.nix
+  # Process each task and collect the derivation paths
+  # Convert the list of derivation paths to a list of strings
+Match found in: ./example_url_fetch.nix
+    path = self;
+    path = nixOntologyRepo;
+Match found in: ./flakes/foaf/aggregator/context/flake.nix
+    foafContextFlake.url = "./../../context"; # Relative path to the foafContextFlake
+Match found in: ./flakes/foaf/aggregator/seed-graph/flake.nix
+    foafSeedDataFlake.url = "./../../seed-data"; # Relative path to the foafSeedDataFlake
+Match found in: ./flakes/foaf/aggregator/full-graph/flake.nix
+    foafAggregatorContextFlake.url = "./../context"; # Relative path to the aggregator context flake
+    foafAggregatorSeedGraphFlake.url = "./../seed-graph"; # Relative path to the aggregator seed graph flake
+Match found in: ./flakes/crq-search/main/flake.nix
+            # Example usage: nix run .#crq-search-app -- /path/to/crqs "keyword" 3
+Match found in: ./flakes/crq-document-check/flake.nix
+          nixpkgsPath = nixpkgs; # Pass nixpkgs as a build input
+          crqCheckLibPath = "github:meta-introspector/time-2025?ref=feature/foaf&dir=10/04/lib/crq-document-check.nix"; # Pass crqCheckLib as a build input
+          NIX_OUTPUT=$(${pkgs.nix}/bin/nix eval --json --arg pkgs "$nixpkgsPath" --arg crqCheckLib "$crqCheckLibPath" --argstr commitMsgFile "$COMMIT_MSG_FILE" --expr 'let pkgs = import pkgs {}; in import crqCheckLib { inherit pkgs; commitMsgFile = commitMsgFile; }')
+          RUN_CRQ_CHECK_SCRIPT=$(${pkgs.nix}/bin/nix build .#packages.${system}.run-crq-check-script --no-link --print-out-paths)
+            --nixpkgs-path ${nixpkgs} \
+            --crq-check-lib-path "github:meta-introspector/time-2025?ref=feature/foaf&dir=10/04/lib/crq-document-check.nix" \
+Match found in: ./flakes/gemini-feature-lattice/credential-setup.nix
+  credentialsPath,
+    cp -r ${credentialsPath}/* "$HOME/.gemini/"
+    echo "✅ Credentials copied from ${credentialsPath} to $HOME/.gemini/"
+    # The output of this derivation is the path to the temporary HOME
+    echo "$HOME" > $out/home_path
+Match found in: ./flakes/feature-3-home-dir-creds/flake.nix
+      url = "path:../../flakes/gemini-feature-lattice/credential-setup.nix";
+        # The path to the user's actual ~/.gemini directory on the host
+        # hostGeminiHome is now configurable via flake inputs or defaults to the hardcoded path
+          credentialsPath = hostGeminiHome; # Pass the host's ~/.gemini path
+          # The geminiCredsDerivation outputs a path to a temporary HOME
+          # We need to read that path from the derivation's output
+          TEMP_HOME_PATH=$(cat ${geminiCredsDerivation}/home_path)
+          export HOME="$TEMP_HOME_PATH"
+Match found in: ./flakes/composite-2-3-nix-base-home-creds/flake.nix
+      url = "path:../feature-2-nix-base";
+      flake = false; # Not a flake itself, just a path to its lib
+      url = "path:../feature-3-home-dir-creds";
+      flake = false; # Not a flake itself, just a path to its lib
+Match found in: ./flakes/composite-2-3-5-nix-base-home-oauth/flake.nix
+      url = "path:../feature-2-nix-base";
+      url = "path:../feature-3-home-dir-creds";
+      url = "path:../feature-5-oauth-creds";
+Match found in: ./flakes/composite-2-3-5-7-nix-base-home-oauth-telemetry/flake.nix
+      url = "path:../feature-2-nix-base";
+      url = "path:../feature-3-home-dir-creds";
+      url = "path:../feature-5-oauth-creds";
+      url = "path:../feature-7-telemetry-capture";
+Match found in: ./flakes/composite-2-3-5-7-11-nix-base-home-oauth-telemetry-llm-output/flake.nix
+      url = "path:../feature-2-nix-base";
+      url = "path:../feature-3-home-dir-creds";
+      url = "path:../feature-5-oauth-creds";
+      url = "path:../feature-7-telemetry-capture";
+      url = "path:../feature-11-llm-output-capture";
+Match found in: ./flakes/composite-2-3-5-7-11-13-nix-base-home-oauth-telemetry-llm-output-makefile-input/flake.nix
+      url = "path:../feature-2-nix-base";
+      url = "path:../feature-3-home-dir-creds";
+      url = "path:../feature-5-oauth-creds";
+      url = "path:../feature-7-telemetry-capture";
+      url = "path:../feature-11-llm-output-capture";
+      url = "path:../feature-13-makefile-input";
+Match found in: ./flakes/composite-2-3-5-7-11-13-17-nix-base-home-oauth-telemetry-llm-output-makefile-input-yolo/flake.nix
+      url = "path:../feature-2-nix-base";
+      url = "path:../feature-3-home-dir-creds";
+      url = "path:../feature-5-oauth-creds";
+      url = "path:../feature-7-telemetry-capture";
+      url = "path:../feature-11-llm-output-capture";
+      url = "path:../feature-13-makefile-input";
+      url = "path:../feature-17-yolo-approval";
+Match found in: ./flakes/composite-2-3-5-7-11-13-17-19-nix-base-home-oauth-telemetry-llm-output-makefile-input-yolo-self-source/flake.nix
+      url = "path:../feature-2-nix-base";
+      url = "path:../feature-3-home-dir-creds";
+      url = "path:../feature-5-oauth-creds";
+      url = "path:../feature-7-telemetry-capture";
+      url = "path:../feature-11-llm-output-capture";
+      url = "path:../feature-13-makefile-input";
+      url = "path:../feature-17-yolo-approval";
+      url = "path:../feature-19-self-source-input";
+Match found in: ./flakes/with-rust/flake.nix
+          RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
+Match found in: ./flakes/mycology-workflow/flake.nix
+          inherit (args) sopsSecretsPath; # Example: pass sopsSecretsPath
+Match found in: ./flakes/article-wrapper/flake.nix
+          dataSources.wikidata; # Assuming wikidata is an attrset of NAR paths
+Match found in: ./flakes/telemetry-wrapper/flake.nix
+  description = "Wrapper flake to call consolidated-impure-gemini-telemetry with a filePath input.";
+    consolidatedTelemetry.url = "path:../../09/27/7-concepts/6-qa-testing/tests/consolidated-impure-gemini-telemetry";
+Match found in: ./lib/read_simple_expr_json.nix
+{ lib, simpleExprJsonPath }:
+      jsonString = builtins.readFile simpleExprJsonPath;
+Match found in: ./lib/generate-project-nix.nix
+# The top-level function of the module, which takes the root path to scan.
+{ path }:
+  helpers.generate path
+Match found in: ./lib/qa-helpers.nix
+  # Function to recursively collect all .nix file paths from a given attribute set.
+  # It traverses the attribute set, identifying paths that end with ".nix".
+        else if nix-stdlib.lib.types.paths.isType value && lib.strings.hasSuffix ".nix" (builtins.toString value) then
+          [ (builtins.toString value) ] # Collect .nix file paths
+  # Function to run nixpkgs-fmt --check on a list of Nix file paths.
+  # Function to run statix check on a list of Nix file paths.
+  # Function to run shellcheck -x on a list of shell script paths.
+Match found in: ./lib/generate-project-nix/generate.nix
+# The main function that takes the root path
+path:
+    getDirectoryEntries = builtins.readDir path;
+    processedEntries = lib.mapAttrs (name: type: (processEntry path) name type) getDirectoryEntries;
+Match found in: ./lib/generate-project-nix/processEntry.nix
+path:
+    fullPath = path + "/" + name;
+    (let res = generate fullPath; in { value = res.result; inherit (res) errors; }) # Recurse for directories
+      evaluated = (import (builtins.fetchTarball "github:meta-introspector/time-2025?ref=feature/foaf&dir=lib/generate-project-nix/evaluateNixFile.nix")) { file = fullPath; inherit errors types builtins; };
+    import (builtins.fetchTarball "github:meta-introspector/time-2025?ref=feature/foaf&dir=10/04/lib/error-isolation.nix") { evalResult = evaluated; file = fullPath; inherit builtins errors types; }
+Match found in: ./lib/nix-templates/recursive-scanner.nix
+    processEntry = path: name: type:
+        fullPath = "${path}/${name}";
+        recursiveDefinitions.generate fullPath # Recursive call
+        safeEval fullPath # Use the safe-eval template
+    generate = path:
+        getDirectoryEntries = builtins.readDir path;
+        processedEntries = lib.mapAttrs (name: type: recursiveDefinitions.processEntry path name type) getDirectoryEntries;
+Match found in: ./lib/url_extractor.nix
+  extractUrls = { path, name ? "extracted-urls" }:
+      inherit path;
+        grep -r -o -E "http(s)?://[^\"'<>[:space:]]+" "$path" > "$out"/urls.txt || true
+Match found in: ./lib/task-generator.nix
+  generateTask = file_path: type: llm_provider:
+      prompt = "Create a Nix derivation to ${type} the file ${file_path}.";
+      name = "${type}-${(lib.strings.removeSuffix ".nix" (lib.strings.removePrefix "lib/emoji-encoding/" file_path))}";
+      inherit file_path type llm_provider;
+  moduleTasks = lib.map (path: generateTask path "build" "gemini") emojiEncodingModules;
+  testTasks = lib.map (path: generateTask path "test" "gemini") emojiEncodingTests;
+    file_path = "generated/lean4/${concept}.lean";
+    file_path = "generated/rust/${concept}.rs";
+    file_path = "${tiktokConfig.tiktokOutputPath}/${concept}${tiktokConfig.tiktokScriptExtension}"; # Markdown for TikTok script
+    file_path = "generated/dockerhub/${concept}.json"; # Docker image config
+    file_path = "generated/github-release/${concept}.json"; # GitHub Release config
+    file_path = "generated/github-actions/${concept}.yaml"; # GitHub Actions workflow
+    file_path = "generated/aws-codebuild/${concept}.json"; # AWS CodeBuild config
+    file_path = "generated/self-hosted-hydra/${concept}.nix"; # Hydra jobset
+      file_path = "generated/${llmProvider}/${concept}.txt"; # Generic output file
+    file_path = "solvers/oeis-generator.mzn";
+    file_path = "generated/bootstrap/plan.nix";
+Match found in: ./lib/monad-context.nix
+        derivationPath = createDerivationFile task.name llmResponse.derivationCode task.derivation_type task.llm_provider;
+      derivationPath; # Returns the path to the generated derivation
+Match found in: ./lib/derivation-spokes.nix
+      mkdir -p $out/${tiktokConfig.tiktokOutputPath}
+      echo "${tiktokConfig.tiktokChallengePrefix}#${oeisNumber}" > $out/${tiktokConfig.tiktokOutputPath}/${tiktokConfig.tiktokChallengeFile}
+      echo "${tiktokContent}" > $out/${tiktokConfig.tiktokOutputPath}/${tiktokConfig.tiktokScriptFile}
+      # Usage: ./run-next-step.sh [current_global_state_json_path]
+      # If no current_global_state_json_path is provided, it starts with an empty state.
+      current_state_path="$1"
+      if [ -z "$current_state_path" ]; then
+        current_state="$(cat "$current_state_path")"
+      bootstrap_plan_path="$out/bootstrap-plan/bootstrap-plan.nix"
+      executor_path="$out/bootstrap-plan/bootstrap-executor.nix"
+        --argstr bootstrapPlanExpression "$(cat "$bootstrap_plan_path")" \
+        "$executor_path" > $out/bootstrap-plan/next-global-state.json
+Match found in: ./lib/tiktok-config.nix
+  tiktokOutputPath = "generated/tiktok";
+  inherit tiktokLevels tiktokOutputPath tiktokScriptExtension tiktokChallengePrefix tiktokChallengeFile tiktokScriptFile defaultOeisNumber generateTiktokPrompt;
+Match found in: ./lib/ipfs-publisher.nix
+  publishToIpfs = derivationOutputPath: 
+      # Ensure the output path exists
+      if [ ! -e "${derivationOutputPath}" ]; then
+        echo "Error: Derivation output path ${derivationOutputPath} does not exist." >&2
+      echo "Mock IPFS CID for ${derivationOutputPath}: $mock_cid" >&2
+Match found in: ./lib/secrets.nix
+##  options.sopsSecretsPath = lib.mkOption {
+##    default = self + "/sops-secrets"; # Path to sops-secrets relative to the flake root
+##    description = "The path to the sops-secrets directory.";
+Match found in: ./lib/llm/groq.nix
+{ pkgs, lib, sopsSecretsPath, ... }:
+    sopsFile = "${sopsSecretsPath}/groq-api-key.json";
+Match found in: ./lib/llm/amazonq.nix
+{ pkgs, lib, sopsSecretsPath, ... }:
+    sopsFile = "${sopsSecretsPath}/amazonq-credentials.json";
+Match found in: ./lib/llm/github-copilot.nix
+{ pkgs, lib, sopsSecretsPath, ... }:
+    sopsFile = "${sopsSecretsPath}/github-copilot-token.json";
+Match found in: ./lib/llm/openai-codex.nix
+{ pkgs, lib, sopsSecretsPath, ... }:
+    sopsFile = "${sopsSecretsPath}/openai-codex-api-key.json";
+Match found in: ./lib/monad-context-providers/gemini.nix
+{ pkgs, lib, sopsSecretsPath, hostGeminiHome, ... }:
+  geminiLLM = import ../llm/gemini.nix { inherit pkgs lib sopsSecretsPath hostGeminiHome; };
+Match found in: ./lib/monad-context-providers/groq.nix
+{ pkgs, lib, sopsSecretsPath, hostGeminiHome, ... }:
+  groqLLM = import ../llm/groq.nix { inherit pkgs lib sopsSecretsPath hostGeminiHome; };
+Match found in: ./lib/monad-context-providers/amazonq.nix
+{ pkgs, lib, sopsSecretsPath, hostGeminiHome, ... }:
+  amazonqLLM = import ../llm/amazonq.nix { inherit pkgs lib sopsSecretsPath hostGeminiHome; };
+Match found in: ./lib/monad-context-providers/github-copilot.nix
+{ pkgs, lib, sopsSecretsPath, hostGeminiHome, ... }:
+  githubCopilotLLM = import ../llm/github-copilot.nix { inherit pkgs lib sopsSecretsPath hostGeminiHome; };
+Match found in: ./lib/monad-context-providers/openai-codex.nix
+{ pkgs, lib, sopsSecretsPath, hostGeminiHome, ... }:
+  openaiCodexLLM = import ../llm/openai-codex.nix { inherit pkgs lib sopsSecretsPath hostGeminiHome; };
+Match found in: ./flake.nix
+    # 5. Data Sources Flake (as a path input)
+      # Import the secrets module and get the sopsSecretsPath option
+      sopsSecretsPath = secretsModule.options.sopsSecretsPath.default; # Access the default value
+        url = "path:${sopsSecretsPath}";
+        path = self;
+      #   sourcePath = self;
+      #     echo "Reading source code from $sourcePath"
+      #     SOURCE_CONTENT=$(cat $sourcePath/flake.nix)
+      #     AST=$($introspector/bin/analyze $sourcePath/flake.nix)
+              inherit pkgs lib nixpkgs nixIntrospector dataSources sopsSecretsPath;
+              targetFilePath = null; # Default to null, can be overridden
+        # nixOntologyRepoPath = pkgs.runCommand "nix-ontology-repo-path" {} "ln -s ${nixOntologyRepo} $out"; # Expose nixOntologyRepo as a derivation
+            QUINE_OUTPUT=$(nix build --no-link --print-out-paths .#packages.${system}.default)
+            echo "Quine Derivation Output Path: $QUINE_OUTPUT"
+              paths = [ self.packages.${system}.orchestratorApp ];
+      lib.sourcePath = self;
+      lib.sopsSecretsPath = sopsSecretsPath;
+Match found in: ./qa.nix
+  # Collect all .nix file paths from the projectNix attribute set
+Match found in: ./simulate-orchestrator.nix
+{ pkgs, lib, sopsSecretsPath, hostGeminiHome, ... }:
+  geminiMonadContext = import ./lib/monad-context-providers/gemini.nix { inherit pkgs lib sopsSecretsPath hostGeminiHome; };
+Match found in: ./test-bug-repro-nix-2gram-indexer/flake.nix
+              path = projectRoot;
+          } "cat $vibe1OutputPath/nix-files.index.json > $out";
+Match found in: ./test-bug-repro-nix-2gram-indexer/inspect_indexer_output.nix
+  nixFileIndexDrvPath = nix_2gram_indexer_module.nixFileIndex.drvPath;
+  indexedFilesJsonDerivationDrvPath = nix_2gram_indexer_module.indexedFilesJsonDerivation.drvPath;
+  readIndexedFilesJsonDrvPath = nix_2gram_indexer_module.readIndexedFilesJson.drvPath;
+  twoGramIndexDerivationDrvPath = twoGramIndexDerivation.drvPath;
+Match found in: ./test-bug-repro-nix-2gram-indexer/test_flatten.nix
+    { path = "foo/test1.nix"; hash = "hash1"; }
+    { path = "bar/test2.nix"; hash = "hash2"; }
+Match found in: ./test-bug-repro-nix-2gram-indexer/tests/test_n_gram_generator_functions.nix
+  # Test tokenizePath
+  testPath = "/foo/bar/baz.nix";
+  tokenizedPath = nGramGeneratorModule.tokenizePath testPath;
+  inherit tokenizedPath;
+Match found in: ./test-bug-repro-nix-2gram-indexer/tests/test_step1_nix_file_index.nix
+    path = dummyProjectRoot;
+Match found in: ./test-bug-repro-nix-2gram-indexer/tests/test_step2_indexed_files.nix
+    path = dummyProjectRoot;
+Match found in: ./test-bug-repro-nix-2gram-indexer/tests/test_step3_all2gram_usages.nix
+    path = dummyProjectRoot;
+      filePath = fileInfo.path; # Relative path of the Nix file
+      tokens = nGramGeneratorModule.tokenizePath filePath;
+      inherit filePath; # Store filePath directly for grouping
+Match found in: ./test_depth_eval.nix
+  simpleExprJsonPath = self + "/10/05/MicroLean4/SimpleExpr.rec_686e510a6699f2e1ff1b216c16d94cd379ebeca00c030a79a3134adff699e06c.json";
+  inherit ((import ./lib/read_simple_expr_json.nix { inherit lib simpleExprJsonPath; })) readSimpleExprJson;
+Match found in: ./test_detailed_analysis_eval.nix
+  simpleExprJsonPath = self + "/10/05/MicroLean4/SimpleExpr.rec_686e510a6699f2e1ff1b216c16d94cd379ebeca00c030a79a3134adff699e06c.json";
+  inherit ((import ./lib/read_simple_expr_json.nix { inherit lib simpleExprJsonPath; })) readSimpleExprJson;
+Match found in: ./test_knuthian_eval.nix
+  simpleExprJsonPath = self + "/10/05/MicroLean4/SimpleExpr.rec_686e510a6699f2e1ff1b216c16d94cd379ebeca00c030a79a3134adff699e06c.json";
+  inherit ((import ./lib/read_simple_expr_json.nix { inherit lib simpleExprJsonPath; })) readSimpleExprJson;
+Match found in: ./test_size_eval.nix
+  simpleExprJsonPath = self + "/10/05/MicroLean4/SimpleExpr.rec_686e510a6699f2e1ff1b216c16d94cd379ebeca00c030a79a3134adff699e06c.json";
+  inherit ((import ./lib/read_simple_expr_json.nix { inherit lib simpleExprJsonPath; })) readSimpleExprJson;
+Match found in: ./theory/71-aspects-part-a.nix
+      description = "Beyond explicit mentions, '71' appears in Git object hashes, submodule paths, and file names, indicating a pervasive, often coincidental, numerical signature woven into the project's infrastructure.";
+Match found in: ./theory/71-aspects-part-b.nix
+      description = "The frequent appearance of '71' within Git commit hashes, object IDs, and various file paths (e.g., `a1d63ada602a272a57f41bd225e8f80e9e8a1480`) suggests its pervasive, almost subliminal, presence in the project's digital fingerprint.";
+      description = "Occurrences of '71' in Nix store paths and file sizes (as seen in `grep` output) indicate its presence in the very fabric of the build system's artifacts, even if coincidental, adding to its pervasive numerical signature.";
+Match found in: ./theory/71-aspects-part-c.nix
+      description = "The presence of '71' in GitHub URLs and submodule paths (e.g., 'sue71/autobind-decorator') highlights its role in external dependency management, linking to specific external projects or forks.";
+      description = "Occurrences in paths like 'time/202X/XX/' (e.g., 'time/2023/07/17/experiments/GODEL') suggest its presence in temporal organization of project data, marking specific dates or experimental runs.";
+      title = "The '71' in Nixpkgs Paths";
+      description = "Its appearance in Nixpkgs paths (e.g., 'pkgs/development/tools/misc/autoconf/2.71.nix') signifies its role in defining specific package versions or configurations within the Nix ecosystem.";
+      description = "The reference to 'qc71_laptop' in Nixpkgs paths suggests a connection to specific hardware identifiers or configurations, linking the '71-vibe' to physical system architecture.";
+Match found in: ./theory/31-aspects-of-31.nix
+    "04-Immutability" = "Nix store paths are immutable; once built, they cannot be changed, ensuring stability.";
+    "08-GarbageCollection" = "The mechanism to remove unreferenced paths from the Nix store, reclaiming space.";
+    "12-NixStoreQueryRoots" = "Inspecting the garbage collection roots to understand what keeps paths alive.";
+Match found in: ./theory/31-mathematical-forms.nix
+      value = (import (formsDir + "/${name}")) { inherit lib; }; # Construct full path
+Match found in: ./theory/nix-indexer-pipeline.nix
+# from Nix paths and metadata.
+  # Defines a simple tokenizePath function and extracts unique terms.
+  tokenizePath = path:
+      normalizedPath = lib.replaceStrings ["/" "-" "."] [" " " " " "] path;
+      tokens = lib.filter (s: s != "") (lib.splitString " " normalizedPath);
+  # Extract all tokens from all indexed file paths
+  allTokens = lib.flatten (lib.map (file: tokenizePath file.path) indexedFiles);
+Match found in: ./wrap_context.nix
+{ lib, path, name }:
+      parseGitmodules = gitmodulesPath:
+          content = builtins.readFile gitmodulesPath;
+            (builtins.fromJSON "[ \"^\\[submodule \\\"([^\\\"]+)\\\"\\]\\n\\\\s*path = ([^\\\\n]+)\\\\n\\\\s*url = ([^\\\\n]+)(?:\\\\n\\\\s*branch = ([^\\\\n]+))?\"]")
+              subPath = lib.elemAt match 1;
+            { inherit name subPath url branch; };
+      # Get .nix files in the current path
+      ) (builtins.attrNames (builtins.readDir path));
+      # Get submodules in the current path
+      gitmodulesPath = path + "/.gitmodules";
+      submodulesRaw = if builtins.pathExists gitmodulesPath then parseGitmodules gitmodulesPath else [];
+            value = wrap_context { inherit lib; path = path + "/" + sub.subPath; inherit (sub) name; };
+      files = map (file: path + "/" + file) nixFiles;
+Match found in: ./content.nix
+    paths = [ /data/data/com.termux.nix/files/home/pick-up-nix2 ];
+    paths = [ /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom ];
+    paths = [ /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025 ];

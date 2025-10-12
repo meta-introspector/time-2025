@@ -1,0 +1,6 @@
+./09/25/log_analyzer/osint/PHONEINFOGA/web/docs/swagger.yaml
+./09/26/synapse-system/vendor/nix/dream2nix/examples/packages/languages/spago-local-development/spago.yaml
+./09/27/7-concepts/test-secrets-sops/secrets/secrets.yaml
+./09/24/tasks/commit_analysis/lattice_folded_commit_summary.yaml
+./10/08/hackathon/.pre-commit-config.yaml
+./.pre-commit-config.yaml
