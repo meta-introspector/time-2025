@@ -24,11 +24,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-P3Jvd/i4ypFbOky5uonc1TFs8eeVhHaWYFZgqvoClmM=",
-        "path": "/nix/store/jy9nmz1c3cafcd0naq7qkpmyvgxnk8s4-source/flakes/data-sources",
+        "path": "/nix/store/z3mxnnp1niiqrfzsiiysn3yd7wijl42q-source/flakes/data-sources",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/jy9nmz1c3cafcd0naq7qkpmyvgxnk8s4-source/flakes/data-sources",
+        "path": "/nix/store/z3mxnnp1niiqrfzsiiysn3yd7wijl42q-source/flakes/data-sources",
         "type": "path"
       }
     },
@@ -224,7 +224,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-7KrR0QPLSRoUw08KET+XUhzEGX0fjkvqyxONkL1MCTM=",
+        "narHash": "sha256-2ssi8tmTI9OzvrqsCjTy56idN6KriPt4gxBxUHD+Xzw=",
         "path": "./10",
         "type": "path"
       },
@@ -303,24 +303,6 @@
         "owner": "meta-introspector",
         "ref": "feature/lattice-30030-homedir",
         "repo": "nix-task",
-        "type": "github"
-      }
-    },
-    "nixToPoemVial": {
-      "locked": {
-        "dir": "flakes/nix-to-poem-vial",
-        "lastModified": 1760230509,
-        "narHash": "sha256-Q7YgB5x1M02/Gv5bpZZr4a+SDCYRPg+mWsHJ2GJKnHE=",
-        "owner": "meta-introspector",
-        "repo": "time-2025",
-        "rev": "3bdcc29f10a1196e792a915da8edd8843dfdbd22",
-        "type": "github"
-      },
-      "original": {
-        "dir": "flakes/nix-to-poem-vial",
-        "owner": "meta-introspector",
-        "ref": "feature/aimyc-001-cleanbench",
-        "repo": "time-2025",
         "type": "github"
       }
     },
@@ -616,11 +598,11 @@
         "utils": "utils_3"
       },
       "locked": {
-        "lastModified": 1758426618,
-        "narHash": "sha256-jpF4Xm7dYe4Iwt87O6zPjxfPuxneJDoFXSdubwlS++c=",
+        "lastModified": 1760302422,
+        "narHash": "sha256-YRi6nP4ytvlpynJAPQPSwkOBxghMc9YYIMZ9Lc165W0=",
         "owner": "meta-introspector",
         "repo": "rnix-parser",
-        "rev": "a9b2afe235aac649138020c7ee5e1354b9c4ec8d",
+        "rev": "d6b98730837a5c4d81143f2f564458e2293f9f86",
         "type": "github"
       },
       "original": {
@@ -640,7 +622,6 @@
         "nixIntrospector": "nixIntrospector",
         "nixOntologyRepo": "nixOntologyRepo",
         "nixTaskNew": "nixTaskNew",
-        "nixToPoemVial": "nixToPoemVial",
         "nixpkgs": "nixpkgs_8",
         "node2nix-src": "node2nix-src_2",
         "nurl": "nurl",

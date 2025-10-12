@@ -22,3 +22,7 @@
 [submodule "09/26/synapse-system"]
 	path = 09/26/synapse-system
 	url = https://github.com/meta-introspector/synapse-system.git
+[submodule "10/12/proof/vendor/rnix-parser"]
+	path = 10/12/proof/vendor/rnix-parser
+	url = https://github.com/meta-introspector/rnix-parser
+	branch = feature/CRQ-016-nixify-workflow

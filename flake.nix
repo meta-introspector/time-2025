@@ -69,7 +69,7 @@
 
     # nix-stdlib = { url = "github:meta-introspector/nix-stdlib?ref=feature/CRQ-016-nixify-workflow"; };
 
-    nixToPoemVial = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=flakes/nix-to-poem-vial"; }; # Placeholder
+    # nixToPoemVial = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=flakes/nix-to-poem-vial"; }; # Placeholder (Commented out to fix build issue)
     readMdVial = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=flakes/read-md-vial"; }; # Placeholder
     readRsVial = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=flakes/read-rs-vial"; }; # Placeholder
 
@@ -99,7 +99,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, rnix-parser, nixTaskNew, nix-stdlib, nixOntologyRepo, month10Flake, sops-nix, nixIntrospector, logAnalyzer, node2nix-src, nurl, nixToPoemVial, readMdVial, readRsVial, spore-vial, dataSources }:
+  outputs = { self, nixpkgs, flake-utils, rnix-parser, nixTaskNew, nix-stdlib, nixOntologyRepo, month10Flake, sops-nix, nixIntrospector, logAnalyzer, node2nix-src, nurl, spore-vial, dataSources }:
     let
       # Define mycologyWorkflow as nixTask
       mycologyWorkflow = nixTaskNew;

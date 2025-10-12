@@ -14,7 +14,7 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         dumper = import ./default.nix;
-        rnixDumpApp = rnix-parser.packages.${system}.rnix-parser;
+        rnixParserExecutable = pkgs.rnix-parser;
       in
       {
         apps.default = {
@@ -31,11 +31,11 @@
         };
         packages.default = pkgs.runCommand "rnix-ast-json"
           {
-            nativeBuildInputs = [ rnixDumpApp ];
+            nativeBuildInputs = [ rnixParserExecutable ];
             nixFileToAnalyze = ../../default.nix; # Hardcoded for now
           } ''
-          mkdir -p $out # Add this line
-          $rnixDumpApp "$nixFileToAnalyze" "$out/ast.json"
+          mkdir -p $out
+          ${rnixParserExecutable}/bin/rnix-parser --json "$nixFileToAnalyze" > "$out/ast.json"
         '';
       }
     );

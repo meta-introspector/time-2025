@@ -9,12 +9,12 @@
       url = "git+https://github.com/meta-introspector/pick-up-nix?ref=feature/808017424794512875886459904961710757005754368000000000";
     };
     streamofrandom = {
-      url = "git+https://github.com/meta-introspector/time-2025?ref=feature/lattice-30030-homedir";
+      url = "github:meta-introspector/streamofrandom?ref=feature/foaf";
     };
     # time2025 = "git+https://github.com/meta-introspector/time-2025?ref=feature/808017424794512875886459904961710757005754368000000000";
   };
 
-  outputs = { self, nixpkgs, flake-utils, nix2, time2025 }:
+  outputs = { self, nixpkgs, flake-utils, nix2, streamofrandom }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
@@ -67,6 +67,7 @@
           default = pkgs.writeShellScriptBin "hello-nix" ''
             echo "Hello from Nix!"
           '';
+          rnixAstNar = import ./lib/rnix-ast-nar.nix { inherit pkgs; };
         };
 
         # You can add other packages, apps, etc. here for the main project
