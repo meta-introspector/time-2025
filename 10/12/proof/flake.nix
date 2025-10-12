@@ -6,13 +6,45 @@
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     # Reference the main project flake
     streamofrandom.url = "path:../../..";
+    rnix-dumper.url = "path:./000_rnix_dump";
+    nar-exporter.url = "path:./001_nar_exporter";
+    binstore-locator.url = "path:./002_binstore_locator";
+    # nix-dumper.url = "path:./001_dump_nix";
   };
 
-  outputs = { self, nixpkgs, flake-utils, streamofrandom }:
+  outputs = { self, nixpkgs, flake-utils, streamofrandom, rnix-dumper, nar-exporter, binstore-locator }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
         lib = pkgs.lib;
+
+        # Function to safely evaluate an expression and capture errors
+        tryEval = expr:
+          let
+            result = builtins.tryEval expr;
+          in
+          if result.success
+          then { success = true; value = result.value; error = null; }
+          else { success = false; value = null; error = result.error; };
+
+        # Check from 000_rnix_dump, wrapped in tryEval
+        rnixDumpCheckResult = tryEval rnix-dumper.packages.${system}.default;
+
+        # # Safely evaluate nix-dumper package
+        # nixDumperPackageResult = tryEval nix-dumper.packages.${system}.default;
+
+        # Check from 001_dump_nix, depending on the first check
+        nixDumpCheck =
+          if !rnixDumpCheckResult.success then
+            pkgs.runCommand "nix-dump-check-failed-rnix"
+              {
+                passthru.error = "rnixDumpCheck failed: ${rnixDumpCheckResult.error}";
+              } "echo \"rnixDumpCheck failed: ${rnixDumpCheckResult.error}\" > $out"
+          else
+            pkgs.runCommand "nix-dump-check"
+              {
+                buildInputs = [ rnixDumpCheckResult.value ];
+              } "touch $out";
 
         # Run the default QA check from the main project flake
         todayValueCheck = streamofrandom.checks.${system}.default;
@@ -52,8 +84,6 @@
                       echo "*   **Distinctness:** New patterns in Nix expressions, novel URL sources, or unique combinations of dependencies." >> "$reportFile"
                       echo "*   **Value:** Contributions that introduce new functionalities, integrate new external resources, or improve existing code in a structurally different way." >> "$reportFile"
                       echo "" >> "$reportFile"
-                      echo "Further analysis would involve embedding these feature sets into a multi-dimensional space and calculating distance metrics to identify 'closest neighbors' and quantify the novelty of today's work." >> "$reportFile"
-                      echo "" >> "$reportFile"
                       echo "--- Combined Proof Report Generated to $reportFile ---"
             
                       # Calculate and append the Proof of Novelty Fingerprint
@@ -82,7 +112,12 @@
           echo "--- Registry Demo Complete ---"
         '';
 
-        checks.default = combinedProofReport;
+        checks = {
+          rnixDumpCheck = rnixDumpCheckResult;
+          # nixDumpCheck = nixDumpCheck; # Commented out
+          default = combinedProofReport;
+          narBinstoreLocator = binstore-locator.packages.${system}.default; # New check
+        };
         apps.registry-demo = {
           type = "app";
           program = "${registryDemoApp}/bin/registry-demo";

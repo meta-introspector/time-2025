@@ -7,9 +7,10 @@
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     # Reference the parent project's flake to access qa.nix
     parentProject.url = "path:../../..";
+    rnix-parser.url = "github:meta-introspector/rnix-parser?ref=feature/CRQ-016-nixify-workflow";
   };
 
-  outputs = { self, nixpkgs, flake-utils, parentProject }:
+  outputs = { self, nixpkgs, flake-utils, parentProject, rnix-parser }:
     let
       system = "aarch64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -28,34 +29,47 @@
             value = pkgs.runCommand "nix-dump-${packageName}"
               {
                 inherit nixFile;
-                projectRoot = parentProject;
-                buildInputs = [ pkgs.nix ]; # Ensure nix is available for nix eval
+                projectRoot = builtins.toString parentProject;
+                buildInputs = [ pkgs.nix ]; # Still need nix for nix eval
+                analyzerPath = builtins.toString ./analyzer.nix; # Path to the new analyzer.nix as a string
               } ''
-              echo "--- Running nix eval --json on $nixFile ---"
+              echo "--- Analyzing $nixFile with analyzer.nix ---"
               mkdir -p $out/share/nix-dumps
-              nix eval --json --file "$projectRoot/$nixFile" > "$out/share/nix-dumps/${packageName}.dump"
-              echo "--- Finished nix eval --json on $nixFile ---"
+              nix eval --json \
+                --arg nixpkgs ${nixpkgs} \
+                --arg rnixParser ${rnix-parser} \
+                --argstr projectRoot "$projectRoot" \
+                --argstr nixFile "$nixFile" \
+                --expr "let pkgs = import (builtins.getFlake \"git:meta-introspector/nixpkgs\").legacyPackages.aarch64-linux; rnixParser = ${rnix-parser}; in (import $analyzerPath) { builtins = builtins; projectRoot = \"doesnotmatter\"; nixFile = \"$nixFile\"; pkgs = pkgs; lib = pkgs.lib; rnix-parser = rnixParser; }" \
+                > "$out/share/nix-dumps/${packageName}.analysis.json"
+              echo "--- Finished analyzing $nixFile ---"
             '';
           }
         )
         allNixFiles);
 
       # Create a meta-package that depends on all individual dump packages
-      allNixDumps = pkgs.stdenv.mkDerivation {
-        pname = "all-nix-dumps";
-        version = "0.1.0";
-        propagatedBuildInputs = lib.map (x: toString x.out) (lib.attrValues dumpPackages);
-        src = ./.; # Dummy source to satisfy mkDerivation
-        dontBuild = true;
-        dontInstall = true;
-      };
+      allNixDumps = pkgs.runCommand "all-nix-dumps-0.1.0"
+        {
+          nativeBuildInputs = [ pkgs.bash ];
+          dumpOutputs = lib.map (x: x) (lib.attrValues dumpPackages);
+        }
+        ''
+          mkdir -p $out/share/nix-dumps
+          for dump in $dumpOutputs; do
+            cp -r $dump/share/nix-dumps/* $out/share/nix-dumps/
+          done
+        '';
     in
     {
       packages.${system}.default = allNixDumps; # Expose the meta-package as default
 
       apps.${system}.dump-nix-ast = {
         type = "app";
-        program = "${allNixDumps}/bin/nix-dump-evaluator"; # This will run the meta-package's script if it had one, or just build it
+        program = "${pkgs.writeShellScript "dump-nix-ast-app" ''
+          echo "Path to all Nix dumps: ${allNixDumps}"
+          ls -l ${allNixDumps}/share/nix-dumps
+        ''}";
       };
       apps.${system}.default = self.apps.${system}.dump-nix-ast;
     };

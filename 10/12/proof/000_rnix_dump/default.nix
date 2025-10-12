@@ -1,0 +1,15 @@
+# 10/12/proof/000_rnix_dump/default.nix
+{ rnix-parser
+, # The rnix-parser flake input, providing parsing capabilities
+  filePath
+, # The absolute path to the .nix file to be parsed
+  builtins     # The Nix builtins, specifically for builtins.readFile
+}:
+let
+  fileContent = builtins.readFile filePath;
+  parsedAst = rnix-parser.lib.parse fileContent;
+in
+{
+  inherit filePath;
+  ast = parsedAst;
+}
