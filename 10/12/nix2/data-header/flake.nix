@@ -21,16 +21,21 @@
           (lib.filterAttrs (name: value: lib.hasSuffix ".nix" name) (builtins.readDir ./data));
       in
       {
-        default = pkgs.runCommand "data-header-output"
-          {
-            inherit dataFiles;
-          } ''
-          mkdir -p $out/share/data-header
-          cp -r $dataFiles/* $out/share/data-header/
-        '';
-        # You might want to expose individual data files as separate packages or modules
-        # For example:
-        # packages.${system}.mySpecificData = dataFiles.mySpecificData;
+        packages = rec {
+          inherit (lib.mapAttrs
+            (name: value:
+              pkgs.runCommand "${name}-data"
+                {
+                  data = value;
+                } ''
+                mkdir -p $out/share/${name}
+                echo "$data" > $out/share/${name}/data.json
+              ''
+            )
+            dataFiles) platos-mountain; # Explicitly inherit platos-mountain for now
+
+          default = packages; # Expose all packages under default
+        };
       }
     );
 }
