@@ -8,7 +8,7 @@
     template-generator-bin.url = "github:meta-introspector/time-2025/feature/foaf?dir=tools/template_generator_bin";
   };
 
-  outputs = { self, nixpkgs, flake-utils, rust-overlay, template-generator-bin }:
+  outputs = { nixpkgs, flake-utils, rust-overlay }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {

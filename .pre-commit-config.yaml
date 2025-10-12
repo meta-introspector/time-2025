@@ -8,37 +8,35 @@
 repos:
   - repo: local
     hooks:
-      # - id: nixpkgs-fmt
-      #   name: nixpkgs-fmt
-      #   entry: nixpkgs-fmt
-      #   language: system
-      #   files: \.nix$
-        # This hook ensures Nix files are formatted consistently, embodying
-        # the bott principle of "Pattern Discernment" (bott 5).
+    - id: nixpkgs-fmt
+      name: nixpkgs-fmt
+      entry: nixpkgs-fmt
+      language: system
+      files: \.nix$
 
-      - id: statix
-        name: statix
-        entry: bash -c "statix check --config statix.toml"
-        language: system
-        files: \.nix$
-        pass_filenames: false        # This hook performs static analysis on Nix files, contributing to
-        # "Verification and Testing" (bott 10) and "Error Analysis" (bott 9).
+    - id: statix
+      name: statix
+      entry: bash -c "statix check --config statix.toml"
+      language: system
+      files: \.nix$
+      #pass_filenames: false        # This hook performs static analysis on Nix files, contributing to
+      # "Verification and Testing" (bott 10) and "Error Analysis" (bott 9).
 
-      - id: deadnix
-        name: deadnix
-        entry: nix develop --command bash -c "deadnix"
-        language: system
-        files: \.nix$
-        pass_filenames: false
-        # This hook finds unused variable bindings in Nix files, promoting code purity and cleanliness.
+    - id: deadnix
+      name: deadnix
+      entry: nix develop --command bash -c "deadnix"
+      language: system
+      files: \.nix$
+      #pass_filenames: false
+      # This hook finds unused variable bindings in Nix files, promoting code purity and cleanliness.
 
-      - id: shellcheck
-        name: shellcheck
-        entry: shellcheck -x
-        language: system
-        files: \.sh$
-        # Ensures shell scripts adhere to best practices, aiding in
-        # "Verification and Testing" (bott 10).
+    - id: shellcheck
+      name: shellcheck
+      entry: shellcheck -x
+      language: system
+      files: \.sh$
+      # Ensures shell scripts adhere to best practices, aiding in
+      # "Verification and Testing" (bott 10).
 
       # - id: script-sop-check
       #   name: Script SOP Documentation Check
@@ -53,16 +51,16 @@ repos:
       #   files: \.(md|txt)$
       #   stages: [commit-msg]
       #   enabled: false # Temporarily disabled as it's not working correctly
-        # This hook ensures that CRQ, Incident, or Task documents referenced in the commit message
-        # actually exist, enforcing "Verification and Testing" (bott 10).
+       # This hook ensures that CRQ, Incident, or Task documents referenced in the commit message
+       # actually exist, enforcing "Verification and Testing" (bott 10).
 
 
   - repo: https://github.com/meta-introspector/vale-precommit
     rev: 318812b24e90f97e458497976282014ee25a52fd
     hooks:
-      - id: vale-system
-        args: [--config, ./.vale.ini]
-        # Prose linter for checking writing style, grammar, and tone.
+    - id: vale-system
+      args: [--config, ./.vale.ini]
+      # Prose linter for checking writing style, grammar, and tone.
 
   # - repo: local
   #   hooks:
@@ -72,4 +70,4 @@ repos:
   #       language: system
   #       pass_filenames: false
   #       always_run: true
-        # Runs linters on staged git files, improving commit quality.
+       # Runs linters on staged git files, improving commit quality.
