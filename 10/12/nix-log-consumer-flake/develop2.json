@@ -1,0 +1,4 @@
+{"type":"StartActivity","id":"1","level":"Info","text":"building","fields":{"derivation":"/nix/store/abcd1234efgh-my-package-1.0.drv"}}
+{"type":"BuildLogLine","id":"1","line":"/nix/store/ijkl5678mnop-another-package-2.0"}
+{"type":"Message","level":"Info","text":"fetching /nix/store/qrst9012uvwx-yet-another-package-3.0.tar.gz"}
+{"type":"StopActivity","id":"1","status":"Succeeded"}
