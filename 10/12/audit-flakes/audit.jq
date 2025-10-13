@@ -1,0 +1,1 @@
+.nodes[] | [.locked.url // "N/A", .locked.narHash // "N/A", .locked.owner // "N/A", .locked.repo // "N/A", .locked.rev // "N/A", .locked.type // "N/A"] | @tsv
