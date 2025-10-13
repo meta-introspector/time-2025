@@ -19,36 +19,25 @@
         # Get the aggregated virtual packages data from the previous step's output
         allVirtualPackagesData = builtins.fromJSON (builtins.readFile "${virtualPackages.packages.${system}.default}/all-virtual-packages.json");
 
-        # Function to count unique occurrences of a field
-        countUnique = fieldName:
-          let
-            values = builtins.map (item: item.${fieldName}) allVirtualPackagesData;
-            # Group by value and count
-            grouped = lib.groupBy (x: x) values;
-          in
-          lib.mapAttrs
-            (value: list: {
-              count = builtins.length list;
-              value = value;
-            })
-            grouped;
-
-        # Expose the audit results as a matrix
-        auditMatrix = {
-          urls = countUnique "url";
-          narHashes = countUnique "narHash";
-          owners = countUnique "owner";
-          repos = countUnique "repo";
-          revs = countUnique "rev";
-          types = countUnique "type";
-        };
+        auditMatrix = pkgs.runCommand "audit-matrix-generator"
+          {
+            nativeBuildInputs = [ pkgs.jq ];
+            allVirtualPackagesDataJson = builtins.toJSON allVirtualPackagesData;
+          } ''
+          mkdir -p $out
+          echo "$allVirtualPackagesDataJson" | jq -s \
+            'group_by(.owner + "/" + .repo) | map({
+              owner: (.[0].owner // "N/A"),
+              repo: (.[0].repo // "N/A"),
+              narHashes: (map(.narHash) | group_by(.) | map({value: .[0], count: length})),
+              revs: (map(.rev) | group_by(.) | map({value: .[0], count: length})),
+              types: (map(.type) | group_by(.) | map({value: .[0], count: length}))
+            })' > $out/flake-audit-matrix.json
+        '';
       in
       {
-        packages.default = pkgs.writeText "flake-audit-matrix.json" (builtins.toJSON auditMatrix);
-        checks.auditMatrix = pkgs.runCommand "flake-audit-matrix-check"
-          {
-            inherit auditMatrix;
-          } "echo \"${builtins.toJSON auditMatrix}\" > $out";
+        packages.default = auditMatrix;
+        checks.auditMatrix = auditMatrix;
       }
     );
 }

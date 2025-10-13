@@ -19,9 +19,13 @@
       url = "path:./002_extract_data";
       inputs.collectedLocks.follows = "collectLocks";
     };
+    grepReferences = {
+      url = "path:./002a_grep_references";
+      inputs.extractedData.follows = "extractData";
+    };
     generateVirtualPackages = {
       url = "path:./003_generate_virtual_packages";
-      inputs.extractedData.follows = "extractData";
+      inputs.extractedData.follows = "grepReferences";
     };
     foldToMatrix = {
       url = "path:./004_fold_to_matrix";
