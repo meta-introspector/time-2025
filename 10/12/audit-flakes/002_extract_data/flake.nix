@@ -32,14 +32,12 @@
               pkgs.runCommand "extracted-data-${lib.strings.sanitizeDerivationName item.lockFilePath}"
                 {
                   nativeBuildInputs = [ pkgs.jq ];
-                  inherit lockFileContent nixFileContent;
-                  lockFilePath = item.lockFilePath;
-                  nixFilePath = item.nixFilePath;
-                  hasLockFile = builtins.toJSON item.hasLockFile;
+                  inherit lockFileContent nixFileContent lockFilePath nixFilePath;
+                  HAS_LOCK_FILE = builtins.toJSON item.hasLockFile;
                 }
                 ''
                   mkdir -p $out
-                  echo "$lockFileContent" | jq -c --arg lock_file_path "$lockFilePath" --arg nix_file_path "$nixFilePath" --arg nix_file_content "$nixFileContent" --arg has_lock_file "${hasLockFile}" '.nodes[] | select(.locked != null) | {sourceFile: $lock_file_path, nixFile: $nix_file_path, nixFileContent: $nix_file_content, hasLockFile: ($has_lock_file | fromjson), url: .locked.url // "N/A", narHash: .locked.narHash // "N/A", owner: .locked.owner // "N/A", repo: .locked.repo // "N/A", rev: .locked.rev // "N/A", type: .locked.type // "N/A"}' > $out/extracted-data.json
+                  echo "$lockFileContent" | jq -c --arg lock_file_path "$lockFilePath" --arg nix_file_path "$nixFilePath" --arg nix_file_content "$nixFileContent" --arg has_lock_file "$HAS_LOCK_FILE" '.nodes[] | select(.locked != null) | {sourceFile: $lock_file_path, nixFile: $nix_file_path, nixFileContent: $nix_file_content, hasLockFile: ($has_lock_file | fromjson), url: .locked.url // "N/A", narHash: .locked.narHash // "N/A", owner: .locked.owner // "N/A", repo: .locked.repo // "N/A", rev: .locked.rev // "N/A", type: .locked.type // "N/A"}' > $out/extracted-data.json
                 ''
             else
               null # Or handle missing lock files differently, e.g., log them
