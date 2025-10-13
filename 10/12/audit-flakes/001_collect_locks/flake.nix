@@ -41,6 +41,42 @@
           {
             inherit allLockFiles;
           } "echo \"${builtins.toJSON allLockFiles}\" > $out";
+
+        docs.usage = pkgs.writeText "usage.md" ''
+          # Flake: 001_collect_locks
+
+          ## Purpose
+
+          This flake is the first step in the flake audit process. Its primary purpose is to recursively find and collect the absolute paths of all `flake.lock` files within a given project directory.
+
+          ## Inputs
+
+          *   `nixpkgs`: Standard Nixpkgs input.
+          *   `flake-utils`: Utility functions for Nix flakes.
+          *   `project`: The root path of the project to be audited. This input should be treated as a path, not a flake.
+
+          ## Outputs
+
+          *   `packages.default`: A derivation containing a JSON file (`all-flake-locks.json`) which is a list of absolute paths to all found `flake.lock` files.
+          *   `checks.allFlakeLocks`: A check that outputs the same JSON list, useful for debugging and verification.
+
+          ## Usage
+
+          To build the default package (the JSON file containing the list of `flake.lock` paths):
+
+          ```bash
+          nix build .#default
+          ```
+
+          To inspect the list of collected `flake.lock` files (for debugging):
+
+          ```bash
+          nix build .#checks.allFlakeLocks
+          cat ./result
+          ```
+
+          This flake is designed to be chained with subsequent flakes in the audit process.
+        '';
       }
     );
 }
