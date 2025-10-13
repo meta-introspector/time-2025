@@ -35,17 +35,7 @@
                   hasLockFile = builtins.pathExists lockFilePath;
                   nixFileContent = builtins.readFile nixFilePath; # Read content here
                 in
-                pkgs.runCommand "flake-info-${lib.strings.sanitizeDerivationName nixFilePath}"
-                  {
-                    inherit nixFilePath lockFilePath nixFileContent hasLockFile;
-                  }
-                  ''
-                    mkdir -p $out
-                    echo "$nixFilePath" > $out/nixFilePath
-                    echo "$lockFilePath" > $out/lockFilePath
-                    echo "$nixFileContent" > $out/nixFileContent
-                    echo "$hasLockFile" > $out/hasLockFile
-                  ''
+                { inherit nixFilePath lockFilePath nixFileContent hasLockFile; }
               )
               currentNixFiles;
 
@@ -58,20 +48,29 @@
         allLockFiles = findAllFlakeLocks project;
       in
       {
-        packages.default = pkgs.runCommand "all-flake-locks-derivations.json"
+        packages.default = pkgs.runCommand "all-flake-locks-data.json"
           {
             nativeBuildInputs = [ pkgs.jq ];
-            allLockFilesPaths = builtins.toJSON (lib.map (x: toString x) allLockFiles);
+            allLockFilesJson = builtins.toJSON allLockFiles;
           }
           ''
             mkdir -p $out
-            echo "$allLockFilesPaths" | jq -c . > $out/all-flake-locks-derivations.json
+            echo "$allLockFilesJson" | jq -c . > $out/all-flake-locks-data.json
           '';
         # For debugging, expose the list of files as a check
         checks.allFlakeLocks = pkgs.runCommand "all-flake-locks-check"
           {
-            inherit allLockFiles;
-          } "echo \"${builtins.toJSON allLockFiles}\" > $out";
+            allLockFilesJson = builtins.toJSON allLockFiles;
+            debugOutput = builtins.toJSON {
+              projectPath = project;
+              projectDirContents = builtins.readDir project;
+            };
+          }
+          ''
+            mkdir -p $out
+            echo "$debugOutput" > $out/debug.json
+            echo "$allLockFilesJson" > $out/all-flake-locks.json
+          '';
 
         docs.usage = pkgs.writeText "usage.md" ''
           # Flake: 001_collect_locks

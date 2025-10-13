@@ -4,13 +4,13 @@ all: test
 
 raw-lock-data:
 	@echo "Building raw lock data check..."
-	nix build .#checks.rawLockData --no-link
+	nix build .#checks.aarch64-linux.rawLockData --no-link
 	@echo "Raw lock data check built. Output in ./result-raw-lock-data"
 	@echo "To inspect: ls -l ./result-raw-lock-data"
 
 extracted-data:
 	@echo "Building extracted data check..."
-	nix build .#checks.extractedData --no-link
+	nix build .#checks.aarch64-linux.extractedData --no-link
 	@echo "Extracted data check built. Output in ./result-extracted-data"
 	@echo "To inspect: cat ./result-extracted-data/extracted-data.json | jq ."
 

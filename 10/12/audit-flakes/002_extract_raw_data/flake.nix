@@ -22,71 +22,25 @@
         collectedLocksDerivationPath = collectedLocks.packages.${system}.default;
         allCollectedLocks = builtins.fromJSON (builtins.readFile collectedLocksDerivationPath);
 
-        processedLockFiles = lib.map
-          (item:
-            let
-              # Read files from the item derivation
-              nixFilePath = builtins.readFile (item + "/nixFilePath");
-              lockFilePath = builtins.readFile (item + "/lockFilePath");
-              nixFileContent = builtins.readFile (item + "/nixFileContent");
-              hasLockFile = builtins.fromJSON (builtins.readFile (item + "/hasLockFile"));
-            in
-            pkgs.runCommand "raw-lock-data-${lib.strings.sanitizeDerivationName lockFilePath}"
-              {
-                inherit nixFilePath lockFilePath nixFileContent hasLockFile;
-              }
-              ''
-                mkdir -p $out
-                echo "$nixFilePath" > $out/nixFilePath.txt
-                echo "$lockFilePath" > $out/lockFilePath.txt
-                echo "$nixFileContent" > $out/nixFileContent.txt
-                echo "$hasLockFile" > $out/hasLockFile.txt
-              ''
-          )
-          allCollectedLocks;
-        allExtractedData = pkgs.runCommand "combined-extracted-data"
-          {
-            nativeBuildInputs = [ pkgs.jq ];
-            rawLockDataDerivations = lib.filter (x: x != null) processedLockFiles;
-            PROJECT_ROOT = project; # Pass project root as env var
-          }
-          ''
-            mkdir -p $out
-            TEMP_JSON_FILES=""
-            for raw_data_drv in $rawLockDataDerivations; do
-              NIX_FILE_PATH=$(cat $raw_data_drv/nixFilePath.txt)
-              LOCK_FILE_PATH=$(cat $raw_data_drv/lockFilePath.txt)
-              NIX_FILE_CONTENT=$(cat $raw_data_drv/nixFileContent.txt)
-              HAS_LOCK_FILE=$(cat $raw_data_drv/hasLockFile.txt)
-
-              RELATIVE_LOCK_FILE_PATH=$(realpath --relative-to=$PROJECT_ROOT $LOCK_FILE_PATH)
-              RELATIVE_NIX_FILE_PATH=$(realpath --relative-to=$PROJECT_ROOT $NIX_FILE_PATH)
-
-              echo "$NIX_FILE_CONTENT" | jq -c \
-                --arg lock_file_path "$RELATIVE_LOCK_FILE_PATH" \
-                --arg nix_file_path "$RELATIVE_NIX_FILE_PATH" \
-                --arg nix_file_content "$NIX_FILE_CONTENT" \
-                --arg has_lock_file "$HAS_LOCK_FILE" \
-                '.nodes[] | select(.locked != null) | {sourceFile: $lock_file_path, nixFile: $RELATIVE_NIX_FILE_PATH, nixFileContent: $nix_file_content, hasLockFile: ($has_lock_file | fromjson), url: .locked.url // "N/A", narHash: .locked.narHash // "N/A", owner: .locked.owner // "N/A", repo: .locked.repo // "N/A", rev: .locked.rev // "N/A", type: .locked.type // "N/A"}' \
-                > $out/extracted-data-$(basename $LOCK_FILE_PATH).json
-              TEMP_JSON_FILES+=" $out/extracted-data-$(basename $LOCK_FILE_PATH).json"
-            done
-            jq -s 'flatten' $TEMP_JSON_FILES > $out/extracted-data.json
-          '';
+        processedLockFiles = allCollectedLocks;
+        allExtractedData = pkgs.runCommand "combined-extracted-data-placeholder"
+          { }
+          "echo '[]' > $out/extracted-data.json";
       in
       {
         packages.default = allExtractedData;
         checks.rawLockData = pkgs.runCommand "raw-lock-data-check"
           {
-            rawLockDataDerivations = processedLockFiles;
+            rawLockDataPaths = processedLockFiles; # These are now the paths to derivations
           }
           ''
             mkdir -p $out
-            idx=0
-            for drv in $rawLockDataDerivations; do
-              ln -s $drv $out/$idx
-              idx=$((idx+1))
+            for path in $rawLockDataPaths; do
+              echo "Derivation path: $path" >> $out/paths.txt
+              # Also list the contents of the derivation
+              ls -l $path >> $out/contents-$(basename $path).txt
             done
+            echo "Done." >> $out/paths.txt
           '';
 
         checks.extractedData = pkgs.runCommand "extracted-flake-data-check"
