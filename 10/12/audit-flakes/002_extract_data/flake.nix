@@ -35,7 +35,7 @@
                   inherit lockFileContent nixFileContent;
                   lockFilePath = item.lockFilePath;
                   nixFilePath = item.nixFilePath;
-                  hasLockFile = item.hasLockFile;
+                  hasLockFile = builtins.toJSON item.hasLockFile;
                 }
                 ''
                   mkdir -p $out
