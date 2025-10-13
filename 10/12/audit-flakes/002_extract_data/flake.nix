@@ -18,42 +18,51 @@
 
         # Get the path to the derivation output containing the list of flake.lock file paths
         collectedLocksDerivationPath = collectedLocks.packages.${system}.default;
+        allCollectedLocks = builtins.fromJSON (builtins.readFile "${collectedLocksDerivationPath}/all-flake-locks.json");
 
-        # Create a derivation to extract data from all lock files
-        extractedDataDerivation = pkgs.runCommand "extracted-flake-data"
+        # Process each collected lock file
+        processedLockFiles = lib.map
+          (item:
+            if item.hasLockFile then
+              let
+                lockFileContent = builtins.readFile item.lockFilePath;
+                nixFileContent = item.nixFileContent; # Already read in 001_collect_locks
+              in
+              # Create a derivation for each lock file to extract its data
+              pkgs.runCommand "extracted-data-${lib.strings.sanitizeDerivationName item.lockFilePath}"
+                {
+                  nativeBuildInputs = [ pkgs.jq ];
+                  inherit lockFileContent nixFileContent;
+                  lockFilePath = item.lockFilePath;
+                  nixFilePath = item.nixFilePath;
+                  hasLockFile = item.hasLockFile;
+                }
+                ''
+                  mkdir -p $out
+                  echo "$lockFileContent" | jq -c --arg lock_file_path "$lockFilePath" --arg nix_file_path "$nixFilePath" --arg nix_file_content "$nixFileContent" --arg has_lock_file "${hasLockFile}" '.nodes[] | select(.locked != null) | {sourceFile: $lock_file_path, nixFile: $nix_file_path, nixFileContent: $nix_file_content, hasLockFile: ($has_lock_file | fromjson), url: .locked.url // "N/A", narHash: .locked.narHash // "N/A", owner: .locked.owner // "N/A", repo: .locked.repo // "N/A", rev: .locked.rev // "N/A", type: .locked.type // "N/A"}' > $out/extracted-data.json
+                ''
+            else
+              null # Or handle missing lock files differently, e.g., log them
+          )
+          allCollectedLocks;
+
+        # Filter out nulls (for missing lock files) and combine all extracted data
+        allExtractedData = pkgs.runCommand "combined-extracted-data"
           {
-            collectedLocksPath = collectedLocksDerivationPath; # Pass the derivation path
-            nativeBuildInputs = [ pkgs.jq ]; # For processing JSON
-          } ''
-          mkdir -p $out
-          echo "[]" > $out/extracted-data.json # Initialize an empty JSON array
-
-          # Read the JSON file containing the list of lock file paths and nix file paths
-          allLockFilePathsJson=$(cat "$collectedLocksPath")
-          # Parse the JSON array of objects
-          echo "$allLockFilePathsJson" | jq -c '.[] | select(.hasLockFile == true)' | while IFS= read -r item; do
-            lock_file_path=$(echo "$item" | jq -r '.lockFilePath')
-            nix_file_path=$(echo "$item" | jq -r '.nixFilePath')
-            nix_file_content=$(echo "$item" | jq -r '.nixFileContent')
-            has_lock_file=$(echo "$item" | jq -r '.hasLockFile')
-
-            # Read the content of the lock file and pipe it to jq
-            cat "$lock_file_path" | jq -c --arg lock_file_path "$lock_file_path" --arg nix_file_path "$nix_file_path" --arg nix_file_content "$nix_file_content" --arg has_lock_file "$has_lock_file" '.nodes[] | select(.locked != null) | {sourceFile: $lock_file_path, nixFile: $nix_file_path, nixFileContent: $nix_file_content, hasLockFile: ($has_lock_file | fromjson), url: .locked.url // "N/A", narHash: .locked.narHash // "N/A", owner: .locked.owner // "N/A", repo: .locked.repo // "N/A", rev: .locked.rev // "N/A", type: .locked.type // "N/A"}' >> $out/temp-extracted-data.jsonl
-          done
-
-          # Convert the JSONL to a single JSON array
-          jq -s '.' $out/temp-extracted-data.jsonl > $out/extracted-data.json
-        '';
-
-        # The extracted data is now available as a JSON file in the derivation output
-        allExtractedData = builtins.fromJSON (builtins.readFile "${extractedDataDerivation}/extracted-data.json");
+            nativeBuildInputs = [ pkgs.jq ];
+            extractedDataJsons = builtins.toJSON (lib.filter (x: x != null) processedLockFiles);
+          }
+          ''
+            mkdir -p $out
+            echo "$extractedDataJsons" | jq -s 'flatten' > $out/extracted-data.json
+          '';
       in
       {
-        packages.default = extractedDataDerivation;
+        packages.default = allExtractedData;
         checks.extractedData = pkgs.runCommand "extracted-flake-data-check"
           {
-            inherit extractedDataDerivation;
-          } "cp ${extractedDataDerivation}/extracted-data.json $out";
+            inherit allExtractedData;
+          } "cp ${allExtractedData}/extracted-data.json $out";
 
         docs.usage = pkgs.writeText "usage.md" ''
           # Flake: 002_extract_data
