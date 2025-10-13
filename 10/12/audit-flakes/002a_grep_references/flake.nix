@@ -26,14 +26,14 @@
           echo "[]" > $out/grepped-data.json
 
           jq -c '.[]' "$extractedData/extracted-data.json" | while IFS= read -r item; do
-            nixFile=$(echo "$item" | jq -r '.nixFile')
+            nixFileContent=$(echo "$item" | jq -r '.nixFileContent')
             repo=$(echo "$item" | jq -r '.repo')
             sourceFile=$(echo "$item" | jq -r '.sourceFile') # Keep sourceFile for context
+            nixFilePath=$(echo "$item" | jq -r '.nixFilePath') # Keep nixFilePath for context
 
-            if [ -f "$nixFile" ]; then
-              grep_results=$(grep -n "$repo" "$nixFile" || true)
-              item=$(echo "$item" | jq --arg grep_results "$grep_results" '. + {grepResults: $grep_results}')
-            fi
+            # Grep the content directly, not the file path
+            grep_results=$(echo "$nixFileContent" | grep -n "$repo" || true)
+            item=$(echo "$item" | jq --arg grep_results "$grep_results" --arg nix_file_path "$nixFilePath" '. + {grepResults: $grep_results, nixFilePath: $nix_file_path}')
 
             echo "$item" >> $out/temp-grepped-data.jsonl
           done
