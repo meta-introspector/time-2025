@@ -24,7 +24,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-/WqfOxhY7aPpiEZSW2ZLKLOVhwJK7CHjceC5CtA5lhg=",
+        "narHash": "sha256-EBOirQvWA+pXp2Tvx+3yYeu6HLtiVfNtCThx3t7uPNA=",
         "path": "./002_binstore_locator",
         "type": "path"
       },
@@ -41,11 +41,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-P3Jvd/i4ypFbOky5uonc1TFs8eeVhHaWYFZgqvoClmM=",
-        "path": "/nix/store/2v2lvi13srx8jlln4qhna95l7jd6xi3i-source/flakes/data-sources",
+        "path": "/nix/store/9lx9jaac08806w7kmnnjn1crl59pk69s-source/flakes/data-sources",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/2v2lvi13srx8jlln4qhna95l7jd6xi3i-source/flakes/data-sources",
+        "path": "/nix/store/9lx9jaac08806w7kmnnjn1crl59pk69s-source/flakes/data-sources",
         "type": "path"
       }
     },
@@ -517,7 +517,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-1MGoPbDyox+lW5b3GIBpLl4FyLJEobjJPFiOQGKmln0=",
+        "narHash": "sha256-U/R9k1JMr8Uzj0xyTvL3YExeVRB4zMzTtbak/7PfYxw=",
         "path": "./001_nar_exporter",
         "type": "path"
       },
@@ -1332,11 +1332,11 @@
         "utils": "utils_3"
       },
       "locked": {
-        "lastModified": 1760353180,
-        "narHash": "sha256-XGvXHI0q9DKDY3eQvumVSj7fLPdrID/i6Ra9AgmwYiM=",
+        "lastModified": 1760363482,
+        "narHash": "sha256-GiW5XM0HHOqcDruQhm9wnn9t/SIj36y1rU7940vmfC4=",
         "owner": "meta-introspector",
         "repo": "rnix-parser",
-        "rev": "932fdecf4d8fc3ce2649fc61108af557bbd29750",
+        "rev": "3476d4b46faffeaa4e2199fa4a6759eabd5dbba5",
         "type": "github"
       },
       "original": {
@@ -1467,7 +1467,7 @@
       },
       "locked": {
         "lastModified": 0,
-        "narHash": "sha256-Dm82k7imq5pll3JsAdoQlq/Bz2vNXEWhdW/YRQCOhnw=",
+        "narHash": "sha256-E0OuYdkXtMqlB0bR8cPTuazcHDe8uOgilpAqCoJOkwE=",
         "path": "../../..",
         "type": "path"
       },
