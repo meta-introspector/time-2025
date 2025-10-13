@@ -5,11 +5,11 @@
 set -euo pipefail
 
 # The path to the audit flake
-AUDIT_FLAKE_PATH=".//10/12/audit-flakes"
+AUDIT_FLAKE_PATH="./10/12/audit-flakes"
 
 # Build the final report
 echo "Building the flake audit report..."
-nix build "$AUDIT_FLAKE_PATH#default"
+nix build --no-write-lock-file --recreate-lock-file "$AUDIT_FLAKE_PATH#default"
 
 # The result is a symlink in the current directory.
 # The report is in the output path.

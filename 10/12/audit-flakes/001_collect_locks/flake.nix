@@ -35,12 +35,17 @@
                   hasLockFile = builtins.pathExists lockFilePath;
                   nixFileContent = builtins.readFile nixFilePath; # Read content here
                 in
-                {
-                  inherit nixFilePath;
-                  inherit nixFileContent; # Add content to the output
-                  lockFilePath = if hasLockFile then lockFilePath else null;
-                  inherit hasLockFile;
-                }
+                pkgs.runCommand "flake-info-${lib.strings.sanitizeDerivationName nixFilePath}"
+                  {
+                    inherit nixFilePath lockFilePath nixFileContent hasLockFile;
+                  }
+                  ''
+                    mkdir -p $out
+                    echo "$nixFilePath" > $out/nixFilePath
+                    echo "$lockFilePath" > $out/lockFilePath
+                    echo "$nixFileContent" > $out/nixFileContent
+                    echo "$hasLockFile" > $out/hasLockFile
+                  ''
               )
               currentNixFiles;
 
@@ -53,7 +58,15 @@
         allLockFiles = findAllFlakeLocks project;
       in
       {
-        packages.default = pkgs.writeText "all-flake-locks.json" (builtins.toJSON allLockFiles);
+        packages.default = pkgs.runCommand "all-flake-locks-derivations.json"
+          {
+            nativeBuildInputs = [ pkgs.jq ];
+            allLockFilesPaths = builtins.toJSON (lib.map (x: toString x) allLockFiles);
+          }
+          ''
+            mkdir -p $out
+            echo "$allLockFilesPaths" | jq -c . > $out/all-flake-locks-derivations.json
+          '';
         # For debugging, expose the list of files as a check
         checks.allFlakeLocks = pkgs.runCommand "all-flake-locks-check"
           {
