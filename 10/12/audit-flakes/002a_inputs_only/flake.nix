@@ -18,15 +18,19 @@
 
         inputNames = lib.attrNames self.inputs;
         inputCount = lib.length inputNames;
-        inputSize = "N/A (complex to calculate without full evaluation)"; # Still a placeholder
-      in
-      {
-        packages.default = pkgs.hello;
-        checks.healthcheck = {
+        inputSize = "N/A (complex to calculate without full evaluation)";
+        healthcheckData = {
           healthy = true;
           inherit inputCount inputSize;
-          inputs = inputNames; # Add the list of input names
+          inputs = inputNames;
         };
+      in
+      {
+        packages.default = pkgs.runCommand "inputs-info" { } ''
+          mkdir -p $out
+          echo '${builtins.toJSON healthcheckData}' > $out/inputs-info.json
+        '';
+        checks.healthcheck = healthcheckData;
       }
     );
 }

@@ -1,5 +1,5 @@
 {
-  description = "A flake to extract raw data from a list of flake.lock files, including absolute paths.";
+  description = "fixme for now";
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
@@ -12,7 +12,7 @@
       flake = false;
     };
   };
-  outputs = { self, nixpkgs, flake-utils, ... }:
+  outputs = { self, nixpkgs, flake-utils, ... } @ args:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -21,15 +21,19 @@
         inputNames = lib.attrNames self.inputs;
         inputCount = lib.length inputNames;
         inputSize = "N/A (complex to calculate without full evaluation)";
-      in
-      {
-        packages.default = pkgs.hello;
-        checks.healthcheck = {
+        healthcheckData = {
           healthy = true;
           inherit inputCount inputSize;
           inputs = inputNames;
-          description = self.description; # Add the description to the healthcheck
+          description = "fixme self.description"; # Access description from self
         };
+      in
+      {
+        packages.default = pkgs.runCommand "inputs-and-description-info" { } ''
+          mkdir -p $out
+          echo '${builtins.toJSON healthcheckData}' > $out/inputs-and-description-info.json
+        '';
+        checks.healthcheck = healthcheckData;
       }
     );
 }
