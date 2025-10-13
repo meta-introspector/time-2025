@@ -17,25 +17,36 @@
         pkgs = nixpkgs.legacyPackages.${system};
         lib = pkgs.lib;
 
-        # Function to recursively find all flake.lock files and their corresponding flake.nix files
+        # Function to recursively find all flake.nix files and check for corresponding flake.lock files
         findAllFlakeLocks = pathValue:
           let
             # Read directory contents
             dirContents = builtins.readDir pathValue;
-            # Filter for flake.lock files directly in this directory
-            currentLockFiles = builtins.filter (name: name == "flake.lock" && dirContents.${name} == "regular") (builtins.attrNames dirContents);
-            currentLockFilePaths = builtins.map
-              (name: {
-                lockFilePath = pathValue + "/${name}";
-                nixFilePath = pathValue + "/flake.nix"; # Assuming flake.nix is in the same directory
-              })
-              currentLockFiles;
+
+            # Filter for flake.nix files directly in this directory
+            currentNixFiles = builtins.filter (name: name == "flake.nix" && dirContents.${name} == "regular") (builtins.attrNames dirContents);
+
+            # For each flake.nix file, check for a corresponding flake.lock
+            currentNixFileInfos = builtins.map
+              (name:
+                let
+                  nixFilePath = pathValue + "/${name}";
+                  lockFilePath = pathValue + "/flake.lock";
+                  hasLockFile = builtins.pathExists lockFilePath;
+                in
+                {
+                  inherit nixFilePath;
+                  lockFilePath = if hasLockFile then lockFilePath else null;
+                  inherit hasLockFile;
+                }
+              )
+              currentNixFiles;
 
             # Recursively search subdirectories
             subDirs = builtins.filter (name: dirContents.${name} == "directory") (builtins.attrNames dirContents);
-            recursiveLockFiles = builtins.concatLists (builtins.map (name: findAllFlakeLocks (pathValue + "/${name}")) subDirs);
+            recursiveNixFileInfos = builtins.concatLists (builtins.map (name: findAllFlakeLocks (pathValue + "/${name}")) subDirs);
           in
-          currentLockFilePaths ++ recursiveLockFiles;
+          currentNixFileInfos ++ recursiveNixFileInfos;
 
         allLockFiles = findAllFlakeLocks project;
       in
