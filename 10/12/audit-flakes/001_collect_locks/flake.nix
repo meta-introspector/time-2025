@@ -17,14 +17,19 @@
         pkgs = nixpkgs.legacyPackages.${system};
         lib = pkgs.lib;
 
-        # Function to recursively find all flake.lock files
+        # Function to recursively find all flake.lock files and their corresponding flake.nix files
         findAllFlakeLocks = pathValue:
           let
             # Read directory contents
             dirContents = builtins.readDir pathValue;
             # Filter for flake.lock files directly in this directory
             currentLockFiles = builtins.filter (name: name == "flake.lock" && dirContents.${name} == "regular") (builtins.attrNames dirContents);
-            currentLockFilePaths = builtins.map (name: pathValue + "/${name}") currentLockFiles;
+            currentLockFilePaths = builtins.map
+              (name: {
+                lockFilePath = pathValue + "/${name}";
+                nixFilePath = pathValue + "/flake.nix"; # Assuming flake.nix is in the same directory
+              })
+              currentLockFiles;
 
             # Recursively search subdirectories
             subDirs = builtins.filter (name: dirContents.${name} == "directory") (builtins.attrNames dirContents);

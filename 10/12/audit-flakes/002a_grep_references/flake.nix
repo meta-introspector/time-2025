@@ -7,9 +7,13 @@
     extractedData = {
       url = "path:../002_extract_data";
     };
+    project = {
+      url = "path:../.."; # Points to the streamofrandom 2025 root
+      flake = false; # Treat as a path, not a flake
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, extractedData }:
+  outputs = { self, nixpkgs, flake-utils, extractedData, project }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -21,20 +25,20 @@
           {
             nativeBuildInputs = [ pkgs.jq pkgs.gnugrep ];
             extractedData = extractedDataPath;
+            projectRoot = project; # Pass the project path
           } ''
           mkdir -p $out
           echo "[]" > $out/grepped-data.json
 
           jq -c '.[]' "$extractedData/extracted-data.json" | while IFS= read -r item; do
-            sourceFile=$(echo "$item" | jq -r '.sourceFile')
+            nixFile=$(echo "$item" | jq -r '.nixFile')
             repo=$(echo "$item" | jq -r '.repo')
 
-            flakeFile=$(echo "$sourceFile" | sed 's/flake.lock/flake.nix/')
+            # Read the content of the nixFile
+            nix_file_content=$(cat "$nixFile")
 
-            if [ -f "$flakeFile" ]; then
-              grep_results=$(grep -n "$repo" "$flakeFile" || true)
-              item=$(echo "$item" | jq --arg grep_results "$grep_results" '. + {grepResults: $grep_results}')
-            fi
+            grep_results=$(echo "$nix_file_content" | grep -n "$repo" || true)
+            item=$(echo "$item" | jq --arg grep_results "$grep_results" '. + {grepResults: $grep_results}')
 
             echo "$item" >> $out/temp-grepped-data.jsonl
           done
