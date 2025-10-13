@@ -22,7 +22,6 @@
     grepReferences = {
       url = "path:./002a_grep_references";
       inputs.extractedData.follows = "extractData";
-      inputs.project.follows = "project";
     };
     generateVirtualPackages = {
       url = "path:./003_generate_virtual_packages";

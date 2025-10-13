@@ -35,8 +35,11 @@
             lock_file_path=$(echo "$item" | jq -r '.lockFilePath')
             nix_file_path=$(echo "$item" | jq -r '.nixFilePath')
 
+            # Read the content of the nixFile
+            nix_file_content=$(cat "$nix_file_path")
+
             # Read the content of the lock file and pipe it to jq
-            cat "$lock_file_path" | jq -c --arg lock_file_path "$lock_file_path" --arg nix_file_path "$nix_file_path" '.nodes[] | select(.locked != null) | {sourceFile: $lock_file_path, nixFile: $nix_file_path, url: .locked.url // "N/A", narHash: .locked.narHash // "N/A", owner: .locked.owner // "N/A", repo: .locked.repo // "N/A", rev: .locked.rev // "N/A", type: .locked.type // "N/A"}' >> $out/temp-extracted-data.jsonl
+            cat "$lock_file_path" | jq -c --arg lock_file_path "$lock_file_path" --arg nix_file_path "$nix_file_path" --arg nix_file_content "$nix_file_content" '.nodes[] | select(.locked != null) | {sourceFile: $lock_file_path, nixFile: $nix_file_path, nixFileContent: $nix_file_content, url: .locked.url // "N/A", narHash: .locked.narHash // "N/A", owner: .locked.owner // "N/A", repo: .locked.repo // "N/A", rev: .locked.rev // "N/A", type: .locked.type // "N/A"}' >> $out/temp-extracted-data.jsonl
           done
 
           # Convert the JSONL to a single JSON array
