@@ -25,7 +25,7 @@
           mkdir -p $out
           echo "[]" > $out/grepped-data.json
 
-          jq -c '.[]' $extractedData | while IFS= read -r item; do
+          jq -c '.[]' "$extractedData/extracted-data.json" | while IFS= read -r item; do
             sourceFile=$(echo "$item" | jq -r '.sourceFile')
             repo=$(echo "$item" | jq -r '.repo')
 
