@@ -32,6 +32,12 @@
     },
     "time-2025": {
       "url": "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench"
+    },
+    "rnix-dumper": {
+      "url": "github:meta-introspector/time-2025?ref=feature/aimyc-002-sample-extraction&dir=10/12/proof/000_rnix_dump"
+    },
+    "readRdVial": {
+	"url": "github:meta-introspector/time-2025?ref=feature/aimyc-002-sample-extraction&dir=flakes/read-md-vial"
     }
   }
 }

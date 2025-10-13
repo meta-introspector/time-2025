@@ -99,7 +99,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, rnix-parser, nixTaskNew, nix-stdlib, nixOntologyRepo, month10Flake, sops-nix, nixIntrospector, logAnalyzer, node2nix-src, nurl, spore-vial, dataSources }:
+  outputs = { self, nixpkgs, flake-utils, rnix-parser, nixTaskNew, nix-stdlib, nixOntologyRepo, month10Flake, sops-nix, nixIntrospector, logAnalyzer, node2nix-src, nurl, spore-vial, dataSources, readMdVial, readRsVial }:
     let
       # Define mycologyWorkflow as nixTask
       mycologyWorkflow = nixTaskNew;

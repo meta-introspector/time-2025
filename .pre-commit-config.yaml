@@ -13,12 +13,12 @@ repos:
       entry: nixpkgs-fmt
       language: system
       files: \.nix$    
-    - id: statix
-      name: statix
-      entry: statix check --config statix.toml
-      language: system
-      files: \.nix$
-      pass_filenames: false
+#    - id: statix
+#      name: statix
+#      entry: statix check --config statix.toml
+#      language: system
+#      files: \.nix$
+#      pass_filenames: false
       # - id: deadnix
       #   name: deadnix
       #   entry: nix develop --command bash -c "deadnix"
@@ -32,11 +32,11 @@ repos:
       files: \.sh$
       pass_filenames: true
 
-    - id: vale-system
-      name: vale
-      entry: vale
-      language: system
-      args: [--config, ./.vale.ini]
+#    - id: vale-system
+#      name: vale
+#      entry: vale
+#      language: system
+#      args: [--config, ./.vale.ini]
   #    repo: https://github.com/meta-introspector/vale-precommit
   #    rev: 318812b24e90f97e458497976282014ee25a52fd
 

@@ -1,27 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 PROJECT_ROOT := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 export NIX_REGISTRY_CONFIG := $(PROJECT_ROOT)/registry.json
 

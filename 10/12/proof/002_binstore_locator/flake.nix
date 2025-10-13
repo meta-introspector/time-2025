@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    nar-exporter-flake.url = "path:../001_nar_exporter"; # Input from Layer 2
+    #    nar-exporter-flake.url = "path:../001_nar_exporter"; # Input from Layer 2
   };
 
   outputs = { self, nixpkgs, flake-utils, nar-exporter-flake }:
