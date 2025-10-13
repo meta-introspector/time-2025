@@ -33,7 +33,7 @@
           # Parse the JSON array of paths
           jq -r '.[]' <<< "$allLockFilePathsJson" | while IFS= read -r lock_file_path; do
             # Read the content of the lock file and pipe it to jq
-            cat "$lock_file_path" | jq -c '.nodes[] | select(.locked != null) | {url: .locked.url // "N/A", narHash: .locked.narHash // "N/A", owner: .locked.owner // "N/A", repo: .locked.repo // "N/A", rev: .locked.rev // "N/A", type: .locked.type // "N/A"}' >> $out/temp-extracted-data.jsonl
+            cat "$lock_file_path" | jq -c --arg lock_file_path "$lock_file_path" '.nodes[] | select(.locked != null) | {sourceFile: $lock_file_path, url: .locked.url // "N/A", narHash: .locked.narHash // "N/A", owner: .locked.owner // "N/A", repo: .locked.repo // "N/A", rev: .locked.rev // "N/A", type: .locked.type // "N/A"}' >> $out/temp-extracted-data.jsonl
           done
 
           # Convert the JSONL to a single JSON array

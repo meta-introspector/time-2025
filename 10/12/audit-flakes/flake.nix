@@ -38,7 +38,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, project, collectLocks, extractData, generateVirtualPackages, foldToMatrix, finalReport }:
+  outputs = { self, nixpkgs, flake-utils, project, collectLocks, extractData, grepReferences, generateVirtualPackages, foldToMatrix, finalReport }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
