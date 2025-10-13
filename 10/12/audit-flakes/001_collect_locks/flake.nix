@@ -33,9 +33,11 @@
                   nixFilePath = pathValue + "/${name}";
                   lockFilePath = pathValue + "/flake.lock";
                   hasLockFile = builtins.pathExists lockFilePath;
+                  nixFileContent = builtins.readFile nixFilePath; # Read content here
                 in
                 {
                   inherit nixFilePath;
+                  inherit nixFileContent; # Add content to the output
                   lockFilePath = if hasLockFile then lockFilePath else null;
                   inherit hasLockFile;
                 }
