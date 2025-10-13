@@ -32,7 +32,9 @@
               pkgs.runCommand "extracted-data-${lib.strings.sanitizeDerivationName item.lockFilePath}"
                 {
                   nativeBuildInputs = [ pkgs.jq ];
-                  inherit lockFileContent nixFileContent lockFilePath nixFilePath;
+                  inherit lockFileContent nixFileContent;
+                  lockFilePath = builtins.toString item.lockFilePath;
+                  nixFilePath = builtins.toString item.nixFilePath;
                   HAS_LOCK_FILE = builtins.toJSON item.hasLockFile;
                 }
                 ''
