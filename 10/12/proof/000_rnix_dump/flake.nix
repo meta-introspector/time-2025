@@ -19,11 +19,11 @@
           in
           pkgs.runCommand "rnix-ast-json"
             {
-              nativeBuildInputs = [ rnixParserExecutable ];
+              buildInputs = [ rnix-parser.packages.${system}.rnix-parser ];
               inherit targetNixFile;
             } ''
             mkdir -p $out
-            ${rnixParserExecutable}/bin/rnix-parser --json "$targetNixFile" > "$out/ast.json"
+            dump-ast --json "$targetNixFile" > "$out/ast.json"
           '';
       };
     }
@@ -42,7 +42,7 @@
               exit 1
             fi
             FILE_PATH="$1"
-            ${rnix-parser.packages.${system}.rnix-parser}/bin/rnix-parser --json "$FILE_PATH" > $out/ast.json
+            dump-ast --json "$FILE_PATH" > $out/ast.json
           '';
         };
         packages.default = self.lib.dumpNixFile { inherit system; targetNixFile = ./test.nix; };

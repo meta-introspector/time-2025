@@ -12,7 +12,10 @@
         flake-utils.follows = "flake-utils";
       };
     };
-    rnix-dumper.url = "github:meta-introspector/time-2025?ref=feature/aimyc-002-sample-extraction&dir=10/12/proof/000_rnix_dump";
+    rnix-dumper = {
+      url = "github:meta-introspector/time-2025?ref=feature/aimyc-002-sample-extraction&dir=10/12/proof/000_rnix_dump";
+      inputs.rnix-parser.follows = "rnix-parser";
+    };
     nar-exporter = {
       url = "path:./001_nar_exporter";
     };
@@ -22,9 +25,10 @@
     };
     nix-to-solana-translator = {
       url = "path:./004_nix_to_solana_translator";
-      #      inputs.nar-exporter-flake = nar-exporter;
+      inputs.nar-exporter-flake.follows = "nar-exporter";
     };
     # nix-dumper.url = "path:./001_dump_nix";
+    rnix-parser.url = "github:meta-introspector/rnix-parser?ref=feature/CRQ-016-nixify-workflow";
   };
 
   outputs =
@@ -36,6 +40,7 @@
     , nar-exporter
     , binstore-locator
     , nix-to-solana-translator
+    , rnix-parser
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
@@ -165,6 +170,7 @@
         solanaTranslator = nix-to-solana-translator.packages.${system}.default; # New check
       };
       packages.default = combinedProofReport;
+      packages.nar-exporter = nar-exporter.packages.${system}.default;
       apps.registry-demo = {
         type = "app";
         program = "${registryDemoApp}/bin/registry-demo";

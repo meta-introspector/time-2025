@@ -61,11 +61,11 @@
       },
       "locked": {
         "dir": "10/11/nix-store-dump",
-        "lastModified": 1760291549,
-        "narHash": "sha256-AHY5WDw1Rq8SGTrpC1SbrqmAin7F4S4iX/Q19W41hKQ=",
+        "lastModified": 1760362996,
+        "narHash": "sha256-5pf+uAdA2rpANGxBtkF96PHvYneIPRD2lHPicHRC4Iw=",
         "owner": "meta-introspector",
         "repo": "time-2025",
-        "rev": "46e3fa027b39c22f65fc65f2b42ce987e60c9a26",
+        "rev": "a141f195423401a95d374ccac357f17be3636c8a",
         "type": "github"
       },
       "original": {
@@ -131,11 +131,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1758426618,
-        "narHash": "sha256-jpF4Xm7dYe4Iwt87O6zPjxfPuxneJDoFXSdubwlS++c=",
+        "lastModified": 1760353180,
+        "narHash": "sha256-XGvXHI0q9DKDY3eQvumVSj7fLPdrID/i6Ra9AgmwYiM=",
         "owner": "meta-introspector",
         "repo": "rnix-parser",
-        "rev": "a9b2afe235aac649138020c7ee5e1354b9c4ec8d",
+        "rev": "932fdecf4d8fc3ce2649fc61108af557bbd29750",
         "type": "github"
       },
       "original": {

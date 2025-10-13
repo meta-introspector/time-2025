@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    #    rnix-dump-flake.url = "path:../000_rnix_dump"; # Input from Layer 1
+    rnix-dump-flake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-002-sample-extraction&dir=10/12/proof/000_rnix_dump"; # Input from Layer 1
   };
 
   outputs = { self, nixpkgs, flake-utils, rnix-dump-flake }:

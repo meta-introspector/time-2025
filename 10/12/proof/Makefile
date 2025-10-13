@@ -1,4 +1,6 @@
-all: test-rnix-dump test-nar-exporter test-binstore-locator
+all: doit test-rnix-dump test-nar-exporter test-binstore-locator
+
+doit: test-rnix-dump test-nar-exporter test-binstore-locator
 
 .PHONY: test-rnix-dump
 test-rnix-dump:
