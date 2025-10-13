@@ -41,10 +41,9 @@
           inherit (chunkedVirtualPackages);
           default = pkgs.runCommand "all-audit-chunks"
             {
-              # Pass the paths of the chunked virtual packages as a list of strings
-              chunkedVirtualPackagePaths = builtins.toJSON (lib.attrValues chunkedVirtualPackages);
-              nativeBuildInputs = [ pkgs.jq ]; # For processing JSON
+              nativeBuildInputs = [ pkgs.jq ];
             } ''
+            export chunkedVirtualPackagePaths='${builtins.toJSON (map (v: toString v) (lib.attrValues chunkedVirtualPackages))}'
             mkdir -p $out
             echo "[]" > $out/all-audit-chunks.json # Initialize an empty JSON array
 
@@ -60,10 +59,9 @@
         };
         checks.auditReport = pkgs.runCommand "audit-report-check"
           {
-            # Pass the paths of the chunked virtual packages as a list of strings
-            chunkedVirtualPackagePaths = builtins.toJSON (lib.attrValues chunkedVirtualPackages);
-            nativeBuildInputs = [ pkgs.jq ]; # For processing JSON
+            nativeBuildInputs = [ pkgs.jq ];
           } ''
+          export chunkedVirtualPackagePaths='${builtins.toJSON (map (v: toString v) (lib.attrValues chunkedVirtualPackages))}'
           mkdir -p $out
           echo "[]" > $out/audit-report.json # Initialize an empty JSON array
 
