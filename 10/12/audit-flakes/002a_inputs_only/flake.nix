@@ -10,5 +10,23 @@
       flake = false;
     };
   };
-  outputs = { ... }: { };
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+        lib = pkgs.lib;
+
+        inputNames = lib.attrNames self.inputs;
+        inputCount = lib.length inputNames;
+        inputSize = "N/A (complex to calculate without full evaluation)"; # Still a placeholder
+      in
+      {
+        packages.default = pkgs.hello;
+        checks.healthcheck = {
+          healthy = true;
+          inherit inputCount inputSize;
+          inputs = inputNames; # Add the list of input names
+        };
+      }
+    );
 }
