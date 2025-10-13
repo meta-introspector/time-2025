@@ -33,15 +33,22 @@
               .[] |
               .sourceFile = (.sourceFile | sub("^" + $project_root + "/"; "")) |
               .nixFile = (.nixFile | sub("^" + $project_root + "/"; ""))
-            ' "$extractedRawDataInput" > $out/sanitized-data.json
+            ' "$extractedRawDataInput/extracted-data.json" > $out/sanitized-data.json
           '';
       in
       {
         packages.default = sanitizedData;
-        checks.sanitizedData = pkgs.runCommand "sanitized-data-check"
+        # checks.sanitizedData = pkgs.runCommand "sanitized-data-check"
+        #   {
+        #     sanitizedDataDerivation = sanitizedData;
+        #   }
+        #   "cp $sanitizedDataDerivation/sanitized-data.json $out/sanitized-data.json";
+
+        checks.debugLsSource = pkgs.runCommand "debug-ls-source"
           {
-            sanitizedDataInput = sanitizedData;
-          } "cp $sanitizedDataInput/sanitized-data.json $out";
+            sourceToInspect = sanitizedData;
+          }
+          "ls -lR $sourceToInspect > $out";
 
         docs.usage = pkgs.writeText "usage.md" ''
           # Flake: 003_sanitize_extracted_data
