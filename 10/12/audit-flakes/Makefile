@@ -1,7 +1,7 @@
 
 .PHONY: all update-all build-all rebuild-all clean
 
-FLAKE_DIRS := $(shell find . -maxdepth 2 -name flake.nix -print0 | xargs -0 -n1 dirname)
+FLAKE_DIRS := $(shell find . -type f -name "flake.nix" -print0 | xargs -0 -n1 dirname)
 
 # Default target
 all: build-all
@@ -22,18 +22,27 @@ clean:
 	@find . -depth -name "result-*" -exec rm -rf {} +
 	@echo "Clean complete."
 
-# Template for individual flake targets
-$(FLAKE_DIRS)/update:
+# Generic update rule
+%/update:
 	@echo "Updating flake.lock in $(@D)..."
 	@cd $(@D) && nix flake update
 
-$(FLAKE_DIRS)/build:
-	@echo "Building flake in $(@D)..."
+# Generic build rule (tries to build default package)
+%/build:
+	@echo "Building default package for $(@D)..."
 	@cd $(@D) && nix build
 
-$(FLAKE_DIRS)/rebuild:
+# Generic rebuild rule
+%/rebuild:
 	@echo "Rebuilding flake in $(@D)..."
 	@cd $(@D) && nix build --rebuild
 
-# Specific dependency for 002c_collected_locks_derivation on 001_collect_locks
-/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/10/12/audit-flakes/002c_collected_locks_derivation/build: /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/10/12/audit-flakes/001_collect_locks/build
+# Specific build rule for 001_collect_locks
+001_collect_locks/build:
+	@echo "Building checks.allLockFilePackageNames for 001_collect_locks..."
+	@cd 001_collect_locks && nix build .#checks.aarch64-linux.allLockFilePackageNames
+
+# Specific build rule for 002c_collected_locks_derivation
+002c_collected_locks_derivation/build: 001_collect_locks/build
+	@echo "Building default package for 002c_collected_locks_derivation..."
+	@cd 002c_collected_locks_derivation && nix build .#aarch64-linux.default
