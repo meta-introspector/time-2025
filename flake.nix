@@ -56,6 +56,10 @@
     nixpkgs = { url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify"; };
     # 2. Integrate the Introspection Tooling (Quasiquotation Extraction)
     nixIntrospector = { url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; }; # Placeholder ref, acts as LIL/QQC for Nix expressions
+    cargo2nix = {
+      url = "github:meta-introspector/cargo2nix?ref=feature/CRQ-016-nixify";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     rnix-parser = {
       url = "github:meta-introspector/rnix-parser?ref=feature/CRQ-016-nixify-workflow";
       inputs.import-cargo.follows = "nixpkgs";
@@ -99,7 +103,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, rnix-parser, nixTaskNew, nix-stdlib, nixOntologyRepo, month10Flake, sops-nix, nixIntrospector, logAnalyzer, node2nix-src, nurl, spore-vial, dataSources, readMdVial, readRsVial }:
+  outputs = { self, nixpkgs, flake-utils, rnix-parser, nixTaskNew, nix-stdlib, nixOntologyRepo, month10Flake, sops-nix, nixIntrospector, cargo2nix, logAnalyzer, node2nix-src, nurl, spore-vial, dataSources, readMdVial, readRsVial }:
     let
       # Define mycologyWorkflow as nixTask
       mycologyWorkflow = nixTaskNew;

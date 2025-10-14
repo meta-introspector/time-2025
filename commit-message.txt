@@ -1,6 +1,0 @@
-feat: Add test flake for lib.packageBagOfWords
-
-Created a new test flake `tests/test-package-bag-of-words/flake.nix` to
-verify the functionality of `10/12/audit-flakes#lib.packageBagOfWords`.
-This flake uses `10/12/audit-flakes` as an input and calls its
-`lib.packageBagOfWords` function with a sample `flake.nix` path.
