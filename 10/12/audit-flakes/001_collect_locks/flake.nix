@@ -136,6 +136,7 @@
         '';
 
         test_flake_sh = ./test_flake_sh.sh;
+        run_flake_sh_test_env = ./run_flake_sh_test_env.sh;
       }
     );
 }
