@@ -30,33 +30,18 @@
               pkgs.runCommand "${name}-audited"
                 {
                   inherit flakeAuditor;
-                  lockFile = lockFilePackage; # The derivation containing the lock file info
-                  # Extract the actual lock file path from the derivation
-                  lockFilePath = "${lockFilePackage}/lock-file-info.json"; # This needs to be adjusted based on the actual output of 001_collect_locks
+                  lockFileDerivation = lockFilePackage; # The derivation containing the lock file info
+                  nativeBuildInputs = [ pkgs.jq ];
                 } ''
-                # The lockFilePackage is a derivation that contains lock-file-info.json
-                # We need to extract the actual lock file path from that JSON.
-                # For now, let's assume lockFilePackage/lock-file-info.json contains the path.
-                # We will need to refine this based on the actual structure of lock-file-info.json
+                # Build the lockFilePackage derivation to get its output path
+                lock_file_info_path=$(nix build --no-link --print-out-paths "$lockFileDerivation")
 
-                # For now, let's just run the auditor on the lockFilePackage itself, assuming it's the lock file.
-                # This will need to be corrected once we know the exact output format of 001_collect_locks
-                # For now, we'll just pass the path to the derivation output.
-                # The flake_auditor expects the actual flake.lock file.
+                # Extract the actual lockFilePath from the lock-file-info.json
+                actual_lock_file_path=$(jq -r '.lockFilePath' "$lock_file_info_path/lock-file-info.json")
 
-                # Let's assume the lockFilePackage output contains the actual flake.lock file at its root
-                # This is a placeholder and will need to be refined.
-                # The flake_auditor expects the actual flake.lock file path.
-                # We need to get the actual flake.lock path from the lockFilePackage derivation.
-
-                # For now, let's just run the auditor on a dummy file to get the structure right.
-                # This part needs careful adjustment based on the exact output of 001_collect_locks
-                # and how it exposes the actual flake.lock path.
-
-                # Placeholder: Run flakeAuditor on a dummy file
-                # This will be replaced with the actual lock file path.
-                echo "Running auditor on ${lockFilePackage}"
-                ${flakeAuditor}/bin/flake_auditor ${lockFile}/lock-file-info.json > $out/audit-report.txt
+                # Run the flakeAuditor on the extracted lockFilePath
+                mkdir -p $out
+                ${flakeAuditor}/bin/flake_auditor "$actual_lock_file_path" > $out/audit-report.txt
               '';
           ) collect_locks_flake.packages;
 
