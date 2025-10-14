@@ -3,14 +3,18 @@
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
-    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    flake-utils = {
+      url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+      inputs.systems.url = "github:meta-introspector/nix-systems-default-fork?ref=feature/CRQ-016-nixify";
+    };
     project = {
       # The project to audit, typically the root of the repository
       url = "path:../.."; # Points to the streamofrandom 2025 root
       flake = false; # Treat as a path, not a flake
     };
     bagOfWordsGenerator = {
-      url = "git+file:///data/data/com.termux.nix/files/home/git/time-2025?ref=feature/aimyc-002-sample-extraction&dir=flakes/bag-of-words-generator";
+      #url = "git+file:///data/data/com.termux.nix/files/home/git/time-2025?ref=feature/aimyc-002-sample-extraction&dir=flakes/bag-of-words-generator";
+      url = "github:meta-introspector/time-2025?ref=feature/aimyc-002-sample-extraction&dir=flakes/bag-of-words-generator";
       flake = true;
     };
   };

@@ -2,8 +2,8 @@
   description = "Nix flake for generating bag-of-words from a flake.nix file.";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify"; # Use project's nixpkgs as default
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     bagOfWordsScript = {
       url = "path:../../scripts/generate_flake_bag_of_words.sh";
       flake = false;
