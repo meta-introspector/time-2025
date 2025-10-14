@@ -25,7 +25,7 @@ BAG_OF_WORDS_DERIVATION_PATH=$(nix eval --raw --impure \
   --extra-experimental-features 'nix-command flakes' \
   --arg pkgs "$pkgs" \
   --arg lib "$lib" \
-  --arg system "$SYSTEM" \
+  --argstr system "$SYSTEM" \
   --arg bagOfWordsGeneratorPath "$BAG_OF_WORDS_GENERATOR_PATH" \
   --arg flakePath "$NIX_FILE_PATH" \
   -f "$SCRIPT_DIR/eval-test.nix")
