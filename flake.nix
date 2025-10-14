@@ -242,6 +242,9 @@
           gnupg # Add gnupg for sops encryption/decryption
           nurl.packages.${system}.default # Add nurl to the development shell
           deadnix # Add deadnix for finding unused Nix code
+          pkgs.python3 # Add python3 for running analysis scripts
+          pkgs.vim # Add vim as a text editor
+
 
           # Add any other development tools here
         ];
