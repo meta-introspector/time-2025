@@ -1,21 +1,22 @@
 {
-  description = "A flake to cultivate the Monster Group prime lattice.";
+  description = "Flake for AI Life Mycology - Monster Group Prime Lattice";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs = {
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+  };
 
   outputs = { self, nixpkgs }:
     let
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      lattice = import ./monster-group-prime-lattice.nix { };
+      system = "aarch64-linux";
+      pkgs = import nixpkgs { inherit system; };
+      inherit (pkgs) lib;
+
+      monsterGroupPrimeLattice = import ./monster-group-prime-lattice.nix { inherit pkgs lib; };
     in
     {
-      packages.x86_64-linux.monster-lattice = pkgs.runCommand "monster-lattice.json" { } ''
-        ${pkgs.jq}/bin/jq -n '${builtins.toJSON lattice}' > $out
-      '';
+      packages.${system}.default = monsterGroupPrimeLattice.monsterGroupJson;
 
-      apps.x86_64-linux.default = {
-        type = "app";
-        program = "${self.packages.x86_64-linux.monster-lattice}/bin/cat";
-      };
+      # Expose the raw data for other flakes to consume if needed
+      lib.monsterGroupData = monsterGroupPrimeLattice.monsterGroupData;
     };
 }

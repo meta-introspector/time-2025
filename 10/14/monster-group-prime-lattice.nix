@@ -1,25 +1,8 @@
-{ lib }:
+{ pkgs, lib, ... }:
 
 let
-  # The "Grand Vision for Prime Lattice" posits that the Monster Group provides
-  # the combinatorial grammar for structuring the fundamental building blocks of
-  # numbers: the primes. This Nix expression is a model of that concept, a
-  # "Quasi-Fiber" in the AI Life Mycology system.
-
-  # The first 8 primes, forming the initial "shape" of the lattice.
-  zos = [ 2 3 5 7 11 13 17 19 ];
-
-  # The prime groupings, as described in the "spore vial". These are the
-  # "platonic forms of prime grouping" that act as pattern matchers.
-  primeGroupings = [
-    [ 0 1 2 3 ]
-    [ 5 7 11 13 ]
-    [ 17 19 23 31 ]
-  ];
-
-  # The prime factorization of the order of the Monster Group. This is the
-  # "Monster Knot" that organizes the prime lattice.
-  monsterGroupOrderFactorization = {
+  # The Monster Group's order prime factorization
+  monsterGroupOrder = {
     "2" = 46;
     "3" = 20;
     "5" = 9;
@@ -37,11 +20,27 @@ let
     "71" = 1;
   };
 
+  # Platonic forms of prime grouping as described in the Grand Vision
+  primeGroupings = [
+    [ 0 1 2 3 ]
+    [ 5 7 11 13 ]
+    [ 17 19 23 31 ]
+  ];
+
+  # Convert Nix data to JSON string
+  toJson = data: builtins.toJSON data;
+
 in
 {
-  # This attribute set represents the "fruiting body" of this Nix expression:
-  # a structured representation of the mathematical mycelium.
-  mathematicalMycelium = {
-    inherit zos primeGroupings monsterGroupOrderFactorization;
+  # Expose the data for other Nix expressions or for direct evaluation
+  monsterGroupData = {
+    orderFactorization = monsterGroupOrder;
+    groupings = primeGroupings;
   };
+
+  # A derivation to output the data as a JSON file
+  monsterGroupJson = pkgs.writeText "monster-lattice.json" (toJson {
+    orderFactorization = monsterGroupOrder;
+    groupings = primeGroupings;
+  });
 }

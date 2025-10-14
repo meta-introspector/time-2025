@@ -1,4 +1,5 @@
 # Reboot Plan: Entering Nix Development Shell
+# Reboot 2: Preparing for Nix Develop
 
 This document outlines the preparation for rebooting the workflow into a `nix develop` shell.
 

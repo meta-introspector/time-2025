@@ -244,6 +244,10 @@
           deadnix # Add deadnix for finding unused Nix code
           pkgs.python3 # Add python3 for running analysis scripts
           pkgs.vim # Add vim as a text editor
+          pkgs.git # Add git for version control
+          pkgs.coreutils # Add coreutils for standard Unix utilities
+          pkgs.gnugrep # Add gnugrep
+          pkgs.gnused # Add gnused
 
 
           # Add any other development tools here
