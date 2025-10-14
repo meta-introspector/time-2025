@@ -31,7 +31,7 @@
                 ''
                   mkdir -p $out
                   # Read the lock file info and add some processing/metadata
-                  jq '. + { processedAt: "$(date -uIs)" }' $lockFilePackage/lock-file-info.json > $out/processed-lock-file-info.json
+                  cat $lockFilePackage/lock-file-info.json | jq '. + { processedAt: "$(date -uIs)" }' > $out/processed-lock-file-info.json
                 ''
           )
           allLockFilePackages;
