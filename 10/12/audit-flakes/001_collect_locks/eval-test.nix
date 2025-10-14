@@ -1,7 +1,8 @@
-{ pkgs, lib, system, bagOfWordsGeneratorPath, flakePath }:
+{ system, bagOfWordsGeneratorPath, flakePath }:
 
 let
-  bagOfWordsGenerator = import bagOfWordsGeneratorPath { inherit pkgs lib system; };
+  bagOfWordsGeneratorFlake = builtins.getFlake bagOfWordsGeneratorPath;
+  bagOfWordsGenerator = bagOfWordsGeneratorFlake.lib.${system};
 in
 
-toString (bagOfWordsGenerator.lib.${system}.generateBagOfWords flakePath)
+bagOfWordsGenerator.generateBagOfWords flakePath

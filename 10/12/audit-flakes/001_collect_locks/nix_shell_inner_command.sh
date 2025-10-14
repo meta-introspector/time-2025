@@ -21,16 +21,10 @@ echo "DEBUG: BAG_OF_WORDS_GENERATOR_PATH = $BAG_OF_WORDS_GENERATOR_PATH"
 SYSTEM=$(nix eval --raw --impure --expr 'builtins.currentSystem')
 BAG_OF_WORDS_JSON_FILE=$(mktemp)
 
-BAG_OF_WORDS_DERIVATION_PATH=$(nix eval --raw --impure \
+BAG_OF_WORDS_OUTPUT_PATH=$(nix build --no-link --print-out-paths \
   --extra-experimental-features 'nix-command flakes' \
-  --arg pkgs "$pkgs" \
-  --arg lib "$lib" \
-  --argstr system "$SYSTEM" \
-  --arg bagOfWordsGeneratorPath "$BAG_OF_WORDS_GENERATOR_PATH" \
-  --arg flakePath "$NIX_FILE_PATH" \
-  -f "$SCRIPT_DIR/eval-test.nix")
-
-BAG_OF_WORDS_OUTPUT_PATH=$(nix build --no-link --print-out-paths "$BAG_OF_WORDS_DERIVATION_PATH")
+  "$BAG_OF_WORDS_GENERATOR_PATH#lib.${SYSTEM}.generateBagOfWords" \
+  --argstr flakePath "$NIX_FILE_PATH")
 
 cat "$BAG_OF_WORDS_OUTPUT_PATH/report.json" > "$BAG_OF_WORDS_JSON_FILE"
 

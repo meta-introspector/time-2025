@@ -1,7 +1,8 @@
 
 .PHONY: all update-all build-all rebuild-all clean
 
-FLAKE_DIRS := $(shell find . -type f -name "flake.nix" -print0 | xargs -0 -n1 dirname)
+FLAKE_FILES := $(wildcard */flake.nix)
+FLAKE_DIRS := $(patsubst %/flake.nix,%,$(FLAKE_FILES))
 
 # Default target
 all: build-all

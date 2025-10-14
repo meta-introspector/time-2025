@@ -29,6 +29,7 @@ nix-shell --run "export out=\"$TEMP_OUT_DIR\" && \
   export lockFile=\"$lockFile\" && \
   export BAG_OF_WORDS_GENERATOR_PATH=\"$BAG_OF_WORDS_GENERATOR_PATH\" && \
   export SCRIPT_DIR=\"$SCRIPT_DIR\" && \
+  export TMP_SHELL_NIX=\"$TMP_SHELL_NIX\" && \
   bash $SCRIPT_DIR/nix_shell_inner_command.sh" --pure "$TMP_SHELL_NIX"
 
 echo "Test environment execution completed."
