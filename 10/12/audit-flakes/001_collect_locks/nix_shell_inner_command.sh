@@ -21,8 +21,7 @@ BAG_OF_WORDS_JSON_FILE=$(mktemp)
 
 BAG_OF_WORDS_OUTPUT_PATH=$(nix build --no-link --print-out-paths \
   --extra-experimental-features 'nix-command flakes' \
-  "$BAG_OF_WORDS_GENERATOR_PATH#lib.${SYSTEM}.generateBagOfWords" \
-  --argstr flakePath "$NIX_FILE_PATH")
+  "$BAG_OF_WORDS_GENERATOR_PATH#lib.${SYSTEM}.generateBagOfWords(flakePath: \"$NIX_FILE_PATH\")")
 
 cat "$BAG_OF_WORDS_OUTPUT_PATH/report.json" > "$BAG_OF_WORDS_JSON_FILE"
 
