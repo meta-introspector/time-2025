@@ -245,7 +245,7 @@
           gnupg # Add gnupg for sops encryption/decryption
           nurl.packages.${system}.default # Add nurl to the development shell
           deadnix # Add deadnix for finding unused Nix code
-          cargo2nix.packages.${system}.default # Add cargo2nix for Rust dependency management
+          # cargo2nix.packages.${system}.default # WARNING: Importing cargo2nix directly builds its entire dependency graph, which can be very large. Use `nix run` for standalone generation.
           # Add any other development tools here
         ];
         # You can also add shell hooks or environment variables here

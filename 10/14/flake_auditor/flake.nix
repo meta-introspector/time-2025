@@ -24,7 +24,8 @@
 
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
-            naersk.lib.${system}.rustToolchain
+            rustc
+            cargo
             rustfmt
             clippy
           ];

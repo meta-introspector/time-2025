@@ -2,7 +2,7 @@
   description = "Preconditions and checks for the flake_auditor's naersk input.";
 
   inputs = {
-    flake_auditor_flake = { url = "path:../.."; };
+    flake_auditor_flake = { url = "github:meta-introspector/streamofrandom?ref=feature/aimyc-003-cultivation&dir=10/14/flake_auditor"; };
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
   };

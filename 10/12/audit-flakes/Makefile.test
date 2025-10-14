@@ -1,0 +1,5 @@
+build-all: 001_collect_locks/build 002a_inputs_only/build
+
+%/build:
+	@echo "Building default package for $(@D)..."
+	@echo "Directory: $(@D)"
