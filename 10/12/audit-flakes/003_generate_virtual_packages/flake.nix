@@ -9,7 +9,7 @@
       url = "path:../002_extract_data";
     };
     bagOfWordsGenerator = {
-      url = "path:../../flakes/bag-of-words-generator"; # Using path: for now
+      url = "github:meta-introspector/streamofrandom/2025?ref=feature/aimyc-002-sample-extraction&dir=flakes/bag-of-words-generator";
       flake = false;
     };
   };

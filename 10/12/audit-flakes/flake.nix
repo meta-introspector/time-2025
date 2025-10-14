@@ -36,9 +36,12 @@
       url = "path:./005_final_report";
       inputs.foldToMatrix.follows = "foldToMatrix";
     };
+    bagOfWordsGenerator = {
+      url = "github:meta-introspector/streamofrandom/2025?ref=feature/aimyc-002-sample-extraction&dir=flakes/bag-of-words-generator";
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, project, collectLocks, extractData, grepReferences, generateVirtualPackages, foldToMatrix, finalReport }:
+  outputs = { self, nixpkgs, flake-utils, project, collectLocks, extractData, grepReferences, generateVirtualPackages, foldToMatrix, finalReport, bagOfWordsGenerator }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -54,6 +57,13 @@
       {
         packages.default = finalAuditReport; # Expose the final report as the default package
         checks.auditReport = finalAuditReport;
+        lib = {
+          packageBagOfWords = flakePath:
+            let
+              bagOfWordsDerivation = bagOfWordsGenerator.lib.generateBagOfWords flakePath;
+            in
+            builtins.fromJSON (builtins.readFile "${bagOfWordsDerivation}/report.json");
+        };
       }
     );
 }
