@@ -62,7 +62,12 @@
               }
               ''
                 mkdir -p $out
-                echo "{\"nixFilePath\": \"$NIX_FILE_PATH\", \"lockFilePath\": \"$lockFile\", \"nixFileContent\": \"$NIX_FILE_CONTENT\", \"hasLockFile\": true, \"content\": \"(content not read for debugging)\"}" > $out/lock-file-info.json
+
+                ESCAPED_NIX_FILE_PATH=$(echo -n "$NIX_FILE_PATH" | jq -Rsa .)
+                ESCAPED_LOCK_FILE=$(echo -n "$lockFile" | jq -Rsa .)
+                ESCAPED_NIX_FILE_CONTENT=$(echo -n "$NIX_FILE_CONTENT" | jq -Rsa .)
+
+                echo "{\"nixFilePath\": $ESCAPED_NIX_FILE_PATH, \"lockFilePath\": $ESCAPED_LOCK_FILE, \"nixFileContent\": $ESCAPED_NIX_FILE_CONTENT, \"hasLockFile\": true, \"content\": \"(content not read for debugging)\"}" > $out/lock-file-info.json
               ''
             )
           )
