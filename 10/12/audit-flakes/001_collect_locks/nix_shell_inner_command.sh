@@ -11,6 +11,8 @@ out="${out:-/tmp/nix-build-output}" # Default for shellcheck, actual value from 
 NIX_FILE_PATH="${NIX_FILE_PATH:-/tmp/flake.nix}"
 lockFile="${lockFile:-/tmp/flake.lock}"
 BAG_OF_WORDS_GENERATOR_PATH="${BAG_OF_WORDS_GENERATOR_PATH:-/tmp/bag-of-words-generator}"
+pkgs="${pkgs:-/tmp/pkgs}" # Default for shellcheck
+lib="${lib:-/tmp/lib}"   # Default for shellcheck
 
 mkdir -p "$out"
 
@@ -19,9 +21,16 @@ echo "DEBUG: BAG_OF_WORDS_GENERATOR_PATH = $BAG_OF_WORDS_GENERATOR_PATH"
 SYSTEM=$(nix eval --raw --impure --expr 'builtins.currentSystem')
 BAG_OF_WORDS_JSON_FILE=$(mktemp)
 
-BAG_OF_WORDS_OUTPUT_PATH=$(nix build --no-link --print-out-paths \
+BAG_OF_WORDS_DERIVATION_PATH=$(nix eval --raw --impure \
   --extra-experimental-features 'nix-command flakes' \
-  "$BAG_OF_WORDS_GENERATOR_PATH#lib.${SYSTEM}.generateBagOfWords(flakePath: \"$NIX_FILE_PATH\")")
+  --arg pkgs "$pkgs" \
+  --arg lib "$lib" \
+  --arg system "$SYSTEM" \
+  --arg bagOfWordsGeneratorPath "$BAG_OF_WORDS_GENERATOR_PATH" \
+  --arg flakePath "$NIX_FILE_PATH" \
+  -f "$SCRIPT_DIR/eval-test.nix")
+
+BAG_OF_WORDS_OUTPUT_PATH=$(nix build --no-link --print-out-paths "$BAG_OF_WORDS_DERIVATION_PATH")
 
 cat "$BAG_OF_WORDS_OUTPUT_PATH/report.json" > "$BAG_OF_WORDS_JSON_FILE"
 
