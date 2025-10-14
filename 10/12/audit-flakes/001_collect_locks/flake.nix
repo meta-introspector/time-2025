@@ -1,5 +1,5 @@
 {
-  description = "A flake to collect all flake.lock files in a given project path.";
+  description = "A flake to collect all flake.lock files in a given project path. // Forced re-evaluation.";
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";

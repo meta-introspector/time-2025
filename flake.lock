@@ -24,11 +24,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-P3Jvd/i4ypFbOky5uonc1TFs8eeVhHaWYFZgqvoClmM=",
-        "path": "/nix/store/2xkypprl7jnj8mizv66k6ihb824s9wmq-source/flakes/data-sources",
+        "path": "/nix/store/dizkaif305hzgk1yx8xfrnp6qskkb41m-source/flakes/data-sources",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/2xkypprl7jnj8mizv66k6ihb824s9wmq-source/flakes/data-sources",
+        "path": "/nix/store/dizkaif305hzgk1yx8xfrnp6qskkb41m-source/flakes/data-sources",
         "type": "path"
       }
     },
@@ -224,7 +224,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-luTPqe2LU+gdtk9OaE/7oyVidvn+hH49vmdWdu8i4hU=",
+        "narHash": "sha256-+TezjfNFBz40z7YedQPIeLqTSzNPBAiI55VGLU9lVO0=",
         "path": "./10",
         "type": "path"
       },
@@ -598,11 +598,11 @@
         "utils": "utils_3"
       },
       "locked": {
-        "lastModified": 1760353180,
-        "narHash": "sha256-XGvXHI0q9DKDY3eQvumVSj7fLPdrID/i6Ra9AgmwYiM=",
+        "lastModified": 1760390975,
+        "narHash": "sha256-QGWCp6mhVd6jbzOh9A8M9hUkVXMRvPKVY15V6Kff0/U=",
         "owner": "meta-introspector",
         "repo": "rnix-parser",
-        "rev": "932fdecf4d8fc3ce2649fc61108af557bbd29750",
+        "rev": "a84cdbaf50709e4c22d88f015a87dcbf935def9e",
         "type": "github"
       },
       "original": {
