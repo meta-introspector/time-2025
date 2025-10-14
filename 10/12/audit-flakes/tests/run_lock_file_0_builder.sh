@@ -13,7 +13,10 @@ mkdir -p "$out"
 BUILD_COMMAND="mkdir -p $out"
 
 # Calculate bag of words
-BAG_OF_WORDS=$(/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/scripts/generate_flake_bag_of_words.sh "$NIX_FILE_PATH")
+BAG_OF_WORDS=$(nix build --no-link --print-out-paths \
+"github:meta-introspector/streamofrandom/2025/flakes/bag-of-words-generator#lib.generateBagOfWords" \
+--argstr flakePath "$NIX_FILE_PATH" \
+| xargs cat)
 
 jq -n \
   --arg nixFilePath "$NIX_FILE_PATH" \

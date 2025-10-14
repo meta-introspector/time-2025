@@ -10,7 +10,9 @@ lockFile="${lockFile:-/tmp/flake.lock}"
 mkdir -p "$out"
 
 # Calculate bag of words
-BAG_OF_WORDS=$("${FLAKE_BASE_DIR}/scripts/calculate_bag_of_words.sh" <<< "$NIX_FILE_CONTENT")
+BAG_OF_WORDS=$(nix eval --raw --impure \
+  "path:/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/flakes/bag-of-words-generator#lib.generateBagOfWords \"$NIX_FILE_PATH\"" \
+  | xargs -I {} cat {}/report.json)
 
 echo "DEBUG: NIX_FILE_PATH = $NIX_FILE_PATH"
 echo "DEBUG: lockFile = $lockFile"
