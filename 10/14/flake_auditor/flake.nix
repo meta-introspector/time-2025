@@ -12,23 +12,19 @@
       let
         pkgs = import nixpkgs { inherit system; };
         naersk-lib = pkgs.callPackage naersk { };
-        src = pkgs.lib.cleanSource ./.; # Define src here
       in
       {
         packages.flake-auditor = naersk-lib.buildPackage {
           pname = "flake-auditor";
           version = "0.1.0"; # Matches Cargo.toml
-          inherit src; # Use the defined src
-          cargoLock = builtins.path { path = ./Cargo.lock; };
-          root = ".";
+          src = pkgs.lib.cleanSource ./.;
         };
 
         defaultPackage = self.packages.${system}.flake-auditor;
 
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
-            rustc
-            cargo
+            naersk.lib.${system}.rustToolchain
             rustfmt
             clippy
           ];
