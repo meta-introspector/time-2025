@@ -46,3 +46,8 @@ clean:
 002c_collected_locks_derivation/build: 001_collect_locks/build
 	@echo "Building default package for 002c_collected_locks_derivation..."
 	@cd 002c_collected_locks_derivation && nix build .#aarch64-linux.default
+
+# New report target
+report: 002c_collected_locks_derivation/build
+	@echo "Running audit report generation script..."
+	@"$(FLAKE_BASE_DIR)/scripts/generate_audit_report.sh"
