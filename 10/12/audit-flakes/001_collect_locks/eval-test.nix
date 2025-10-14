@@ -4,4 +4,4 @@ let
   bagOfWordsGenerator = import bagOfWordsGeneratorPath { inherit pkgs lib system; };
 in
 
-bagOfWordsGenerator.lib.${system}.generateBagOfWords flakePath
+toString (bagOfWordsGenerator.lib.${system}.generateBagOfWords flakePath)
