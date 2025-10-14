@@ -46,30 +46,39 @@
           currentNixFileInfos ++ recursiveNixFileInfos;
 
         allLockFiles = findAllFlakeLocks project;
+
+        lockFilePackages = lib.listToAttrs (lib.imap0
+          (index: item:
+            let
+              name = "lock-file-${toString index}";
+              lockFileContent = builtins.readFile item.lockFilePath;
+            in
+            lib.nameValuePair name (pkgs.runCommand name
+              {
+                nativeBuildInputs = [ pkgs.jq ];
+                lockFileInfo = builtins.toJSON {
+                  inherit (item) nixFilePath lockFilePath nixFileContent;
+                  content = lockFileContent;
+                };
+              }
+              ''
+                mkdir -p $out
+                echo "$lockFileInfo" > $out/lock-file-info.json
+              ''
+            )
+          )
+          allLockFiles
+        );
       in
       {
-        packages.default = pkgs.runCommand "all-flake-locks-data.json"
+        checks.allLockFilePackageNames = pkgs.runCommand "all-lock-file-package-names"
           {
             nativeBuildInputs = [ pkgs.jq ];
-            allLockFilesJson = builtins.toJSON allLockFiles;
+            lockFileNames = builtins.toJSON (builtins.attrNames lockFilePackages);
           }
           ''
             mkdir -p $out
-            echo "$allLockFilesJson" | jq -c . > $out/all-flake-locks-data.json
-          '';
-        # For debugging, expose the list of files as a check
-        checks.allFlakeLocks = pkgs.runCommand "all-flake-locks-check"
-          {
-            allLockFilesJson = builtins.toJSON allLockFiles;
-            debugOutput = builtins.toJSON {
-              projectPath = project;
-              projectDirContents = builtins.readDir project;
-            };
-          }
-          ''
-            mkdir -p $out
-            echo "$debugOutput" > $out/debug.json
-            echo "$allLockFilesJson" > $out/all-flake-locks.json
+            echo "$lockFileNames" > $out/names.json
           '';
 
         docs.usage = pkgs.writeText "usage.md" ''
@@ -87,22 +96,23 @@
 
           ## Outputs
 
-          *   `packages.default`: A derivation containing a JSON file (`all-flake-locks.json`) which is a list of absolute paths to all found `flake.lock` files.
-          *   `checks.allFlakeLocks`: A check that outputs the same JSON list, useful for debugging and verification.
+          *   `packages.*`: Individual derivations, each containing a `lock-file-info.json` for a specific `flake.lock` file found in the project. The attribute names are `lock-file-0`, `lock-file-1`, etc.
+          *   `checks.allLockFilePackageNames`: A check that outputs a JSON array of the attribute names of the `packages.*` derivations (e.g., `["lock-file-0", "lock-file-1"]`), useful for debugging and verification.
 
           ## Usage
 
-          To build the default package (the JSON file containing the list of `flake.lock` paths):
+          To build a specific lock file package (e.g., the first one):
 
           ```bash
-          nix build .#default
+          nix build .#packages.lock-file-0
+          cat ./result/lock-file-info.json
           ```
 
-          To inspect the list of collected `flake.lock` files (for debugging):
+          To inspect the names of all collected lock file packages:
 
           ```bash
-          nix build .#checks.allFlakeLocks
-          cat ./result
+          nix build .#checks.allLockFilePackageNames
+          cat ./result/names.json
           ```
 
           This flake is designed to be chained with subsequent flakes in the audit process.
