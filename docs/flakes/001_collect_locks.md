@@ -65,3 +65,22 @@ let
 in
   # ... use allSummaries or firstLockFileInfo ...
 ```
+
+## Testing
+
+To verify the functionality of this flake, you can run its associated test flake. The test flake executes the `flake.sh` script in a simulated Nix build environment and checks its output.
+
+```bash
+nix flake check 10/12/audit-flakes/001_collect_locks/test_flake.nix
+```
+
+If the check passes, it means the `flake.sh` script executed successfully and produced the expected `lock-file-info.json` output. The output of the test will be printed to the console during the check process.
+
+## Documentation Output
+
+To view the documentation for this flake, you can build its `docs.usage` output:
+
+```bash
+nix build 10/12/audit-flakes/001_collect_locks/.#docs.usage
+cat ./result
+```
