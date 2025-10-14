@@ -32,18 +32,10 @@
                   inherit flakeAuditor;
                   lockFileDerivation = lockFilePackage; # The derivation containing the lock file info
                   nativeBuildInputs = [ pkgs.jq ];
-                } ''
-                # Build the lockFilePackage derivation to get its output path
-                lock_file_info_path=$(nix build --no-link --print-out-paths "$lockFileDerivation")
-
-                # Extract the actual lockFilePath from the lock-file-info.json
-                actual_lock_file_path=$(jq -r '.lockFilePath' "$lock_file_info_path/lock-file-info.json")
-
-                # Run the flakeAuditor on the extracted lockFilePath
-                mkdir -p $out
-                ${flakeAuditor}/bin/flake_auditor "$actual_lock_file_path" > $out/audit-report.txt
-              '';
-          ) collect_locks_flake.packages;
+                  auditScript = ./audit_single_lock_file.sh;
+                } "$auditScript"
+          )
+          collect_locks_flake.packages;
 
       in
       {
