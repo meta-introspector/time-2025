@@ -17,7 +17,7 @@
         lib = pkgs.lib;
 
         # Get all individual lock file packages from 001_collect_locks
-        allLockFilePackages = collectedLocks.${system}.packages;
+        allLockFilePackages = collectedLocks.packages.${system};
 
         # Process each individual lock file package
         processedLockFilePackages = lib.mapAttrs

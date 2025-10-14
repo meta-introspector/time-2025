@@ -56,14 +56,13 @@
             lib.nameValuePair name (pkgs.runCommand name
               {
                 nativeBuildInputs = [ pkgs.jq ];
-                lockFile = builtins.path { path = item.lockFilePath; };
+                lockFile = item.lockFilePath;
                 NIX_FILE_PATH = item.nixFilePath;
                 NIX_FILE_CONTENT = item.nixFileContent;
               }
               ''
                 mkdir -p $out
-                lockFileContent=$(cat $lockFile)
-                echo "{\"nixFilePath\": \"$NIX_FILE_PATH\", \"lockFilePath\": \"$lockFile\", \"nixFileContent\": \"$NIX_FILE_CONTENT\", \"hasLockFile\": true, \"content\": \"$lockFileContent\"}" > $out/lock-file-info.json
+                echo "{\"nixFilePath\": \"$NIX_FILE_PATH\", \"lockFilePath\": \"$lockFile\", \"nixFileContent\": \"$NIX_FILE_CONTENT\", \"hasLockFile\": true, \"content\": \"(content not read for debugging)\"}" > $out/lock-file-info.json
               ''
             )
           )
