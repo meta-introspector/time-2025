@@ -60,26 +60,7 @@
                 NIX_FILE_PATH = item.nixFilePath;
                 NIX_FILE_CONTENT = item.nixFileContent;
               }
-              ''
-                mkdir -p $out
-
-                # Calculate bag of words
-                BAG_OF_WORDS=$(echo -n "$NIX_FILE_CONTENT" | \
-                  tr '[:upper:]' '[:lower:]' | \
-                  grep -oE '\w+' | \
-                  sort | \
-                  uniq -c | \
-                  awk '{print "\"" $2 "\":" $1}' | \
-                  paste -sd, - | \
-                  awk -v OFS="" 'BEGIN{print "{"};{print $0};END{print "}"}'
-                )
-
-                jq -n \
-                  --arg nixFilePath "$NIX_FILE_PATH" \
-                  --arg lockFilePath "$lockFile" \
-                  --argjson bagOfWords "$BAG_OF_WORDS" \
-                  '{nixFilePath: $nixFilePath, lockFilePath: $lockFilePath, bagOfWords: $bagOfWords, hasLockFile: true}' > $out/lock-file-info.json
-              ''
+              (builtins.readFile ./flake.sh)
             )
           )
           allLockFiles
