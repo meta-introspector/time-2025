@@ -10,8 +10,8 @@
       flake = false; # Treat as a path, not a flake
     };
     bagOfWordsGenerator = {
-      url = "github:meta-introspector/time-2025?ref=feature/aimyc-002-sample-extraction&dir=flakes/bag-of-words-generator";
-      flake = true; # It's a flake now
+      url = "git+file:///data/data/com.termux.nix/files/home/git/time-2025?ref=feature/aimyc-002-sample-extraction&dir=flakes/bag-of-words-generator";
+      flake = true;
     };
   };
 
