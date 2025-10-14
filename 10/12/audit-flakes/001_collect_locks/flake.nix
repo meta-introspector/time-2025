@@ -56,7 +56,7 @@
             lib.nameValuePair name (pkgs.runCommand name
               {
                 nativeBuildInputs = [ pkgs.jq ];
-                lockFile = item.lockFilePath;
+                lockFile = builtins.path { path = item.lockFilePath; };
                 NIX_FILE_PATH = item.nixFilePath;
                 NIX_FILE_CONTENT = item.nixFileContent;
               }
