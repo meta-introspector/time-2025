@@ -1,13 +1,6 @@
-feat: Integrate bag-of-words-generator flake
+feat: Add test flake for lib.packageBagOfWords
 
-Updated scripts to use the new `bag-of-words-generator` flake for
-calculating bag of words. This refactors the bag-of-words logic into a
-reusable Nix flake.
-
-- Modified `10/12/audit-flakes/001_collect_locks/flake.sh` to call the
-  `generateBagOfWords` function from the `bag-of-words-generator` flake
-  using `nix eval`.
-- Modified `10/12/audit-flakes/tests/lock_file_0_builder_script.sh` to
-  use the `bag-of-words-generator` flake.
-- Modified `10/12/audit-flakes/tests/run_lock_file_0_builder.sh` to
-  use the `bag-of-words-generator` flake.
+Created a new test flake `tests/test-package-bag-of-words/flake.nix` to
+verify the functionality of `10/12/audit-flakes#lib.packageBagOfWords`.
+This flake uses `10/12/audit-flakes` as an input and calls its
+`lib.packageBagOfWords` function with a sample `flake.nix` path.

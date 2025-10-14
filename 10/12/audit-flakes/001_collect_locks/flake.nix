@@ -10,8 +10,8 @@
       flake = false; # Treat as a path, not a flake
     };
     bagOfWordsGenerator = {
-      url = "path:../../flakes/bag-of-words-generator";
-      flake = false; # Treat as a path, not a flake
+      url = "github:meta-introspector/time-2025?ref=feature/aimyc-002-sample-extraction&dir=flakes/bag-of-words-generator";
+      flake = true; # It's a flake now
     };
   };
 
@@ -63,7 +63,7 @@
                 lockFile = item.lockFilePath;
                 NIX_FILE_PATH = item.nixFilePath;
                 NIX_FILE_CONTENT = item.nixFileContent;
-                BAG_OF_WORDS_GENERATOR_FLAKE_PATH = bagOfWordsGenerator;
+                BAG_OF_WORDS_GENERATOR_FLAKE_REF = "github:meta-introspector/time-2025?ref=feature/aimyc-002-sample-extraction&dir=flakes/bag-of-words-generator";
               }
               (builtins.readFile ./flake.sh)
             )

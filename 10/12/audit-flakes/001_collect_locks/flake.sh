@@ -11,7 +11,8 @@ mkdir -p "$out"
 
 # Calculate bag of words
 BAG_OF_WORDS=$(nix eval --raw --impure \
-  "$BAG_OF_WORDS_GENERATOR_FLAKE_PATH#lib.generateBagOfWords \"$NIX_FILE_PATH\"" \
+  --extra-experimental-features 'nix-command flakes' \
+  "$BAG_OF_WORDS_GENERATOR_FLAKE_REF#lib.generateBagOfWords \"$NIX_FILE_PATH\"" \
   | xargs -I {} cat {}/report.json)
 
 echo "DEBUG: NIX_FILE_PATH = $NIX_FILE_PATH"
