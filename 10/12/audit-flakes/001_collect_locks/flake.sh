@@ -11,7 +11,7 @@ mkdir -p "$out"
 
 # Calculate bag of words
 BAG_OF_WORDS=$(nix eval --raw --impure \
-  "path:/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/flakes/bag-of-words-generator#lib.generateBagOfWords \"$NIX_FILE_PATH\"" \
+  "$BAG_OF_WORDS_GENERATOR_FLAKE_PATH#lib.generateBagOfWords \"$NIX_FILE_PATH\"" \
   | xargs -I {} cat {}/report.json)
 
 echo "DEBUG: NIX_FILE_PATH = $NIX_FILE_PATH"

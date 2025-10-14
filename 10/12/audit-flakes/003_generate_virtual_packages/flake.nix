@@ -8,9 +8,13 @@
     extractedData = {
       url = "path:../002_extract_data";
     };
+    bagOfWordsGenerator = {
+      url = "path:../../flakes/bag-of-words-generator"; # Using path: for now
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, extractedData }:
+  outputs = { self, nixpkgs, flake-utils, extractedData, bagOfWordsGenerator }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -39,10 +43,13 @@
           (index: data:
             let
               packageName = lib.strings.sanitizeDerivationName (generateEmojiString data);
+              # Call bagOfWordsGenerator for each virtual package
+              bagOfWordsDerivation = bagOfWordsGenerator.lib.generateBagOfWords data.nixFilePath;
+              bagOfWordsContent = builtins.fromJSON (builtins.readFile "${bagOfWordsDerivation}/report.json");
             in
             {
               name = packageName;
-              value = pkgs.writeText "virtual-package-${packageName}.json" (builtins.toJSON data);
+              value = pkgs.writeText "virtual-package-${packageName}.json" (builtins.toJSON (data // { bagOfWords = bagOfWordsContent; }));
             }
           )
           allExtractedData);

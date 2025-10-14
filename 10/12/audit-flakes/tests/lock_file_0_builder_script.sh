@@ -13,10 +13,9 @@ lockFile="${lockFile:-/tmp/flake.lock}"
 mkdir -p "$out"
 
 # Use the centralized bag-of-words generator script
-BAG_OF_WORDS=$(nix build --no-link --print-out-paths \
-"github:meta-introspector/streamofrandom/2025/flakes/bag-of-words-generator#lib.generateBagOfWords" \
---argstr flakePath "$NIX_FILE_PATH" \
-| xargs cat)
+BAG_OF_WORDS=$(nix eval --raw --impure \
+"github:meta-introspector/time-2025?ref=feature/aimyc-002-sample-extraction&dir=flakes/bag-of-words-generator#lib.generateBagOfWords \"$NIX_FILE_PATH\"" \
+| xargs -I {} cat {}/report.json)
 
 echo "DEBUG: NIX_FILE_PATH = $NIX_FILE_PATH"
 echo "DEBUG: lockFile = $lockFile"

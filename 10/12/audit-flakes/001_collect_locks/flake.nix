@@ -9,9 +9,13 @@
       url = "path:../.."; # Points to the streamofrandom 2025 root
       flake = false; # Treat as a path, not a flake
     };
+    bagOfWordsGenerator = {
+      url = "path:../../flakes/bag-of-words-generator";
+      flake = false; # Treat as a path, not a flake
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, project }:
+  outputs = { self, nixpkgs, flake-utils, project, bagOfWordsGenerator }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -59,6 +63,7 @@
                 lockFile = item.lockFilePath;
                 NIX_FILE_PATH = item.nixFilePath;
                 NIX_FILE_CONTENT = item.nixFileContent;
+                BAG_OF_WORDS_GENERATOR_FLAKE_PATH = bagOfWordsGenerator;
               }
               (builtins.readFile ./flake.sh)
             )
