@@ -56,10 +56,7 @@
     nixpkgs = { url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify"; };
     # 2. Integrate the Introspection Tooling (Quasiquotation Extraction)
     nixIntrospector = { url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; }; # Placeholder ref, acts as LIL/QQC for Nix expressions
-    cargo2nix = {
-      url = "github:meta-introspector/cargo2nix?ref=feature/CRQ-016-nixify";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
     rnix-parser = {
       url = "github:meta-introspector/rnix-parser?ref=feature/CRQ-016-nixify-workflow";
       inputs.import-cargo.follows = "nixpkgs";
@@ -103,7 +100,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, rnix-parser, nixTaskNew, nix-stdlib, nixOntologyRepo, month10Flake, sops-nix, nixIntrospector, cargo2nix, logAnalyzer, node2nix-src, nurl, spore-vial, dataSources, readMdVial, readRsVial }:
+  outputs = { self, nixpkgs, flake-utils, rnix-parser, nixTaskNew, nix-stdlib, nixOntologyRepo, month10Flake, sops-nix, nixIntrospector, logAnalyzer, node2nix-src, nurl, spore-vial, dataSources, readMdVial, readRsVial }:
     let
       # Define mycologyWorkflow as nixTask
       mycologyWorkflow = nixTaskNew;
@@ -245,7 +242,7 @@
           gnupg # Add gnupg for sops encryption/decryption
           nurl.packages.${system}.default # Add nurl to the development shell
           deadnix # Add deadnix for finding unused Nix code
-          # cargo2nix.packages.${system}.default # WARNING: Importing cargo2nix directly builds its entire dependency graph, which can be very large. Use `nix run` for standalone generation.
+
           # Add any other development tools here
         ];
         # You can also add shell hooks or environment variables here
