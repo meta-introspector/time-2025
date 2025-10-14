@@ -14,4 +14,4 @@ sops-secrets/
 statix_output.txt
 /nix-vendor/
 #*#
-.#*
+.#*10/14/target/
