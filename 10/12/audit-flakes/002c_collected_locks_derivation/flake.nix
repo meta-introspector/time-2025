@@ -1,5 +1,5 @@
 {
-  description = "Flake to process collectedLocks and provide count and sample.";
+  description = "Flake to process collectedLocks and provide count and sample. // Forced re-evaluation.";
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
