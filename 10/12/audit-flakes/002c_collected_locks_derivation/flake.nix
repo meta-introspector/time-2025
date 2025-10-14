@@ -65,21 +65,6 @@
             echo "$processedPackageNames" > $out/names.json
           '';
 
-        checks.debugCollectedLocksOutputs = pkgs.runCommand "debug-collected-locks-outputs"
-          {
-            # Try to access collectedLocks.outputs
-            hasOutputs = builtins.hasAttr "outputs" collectedLocks;
-            # Try to access collectedLocks.outputs.${system}
-            hasSystemOutputs = builtins.hasAttr system collectedLocks.outputs;
-            # Try to access collectedLocks.outputs.${system}.packages
-            hasSystemPackages = builtins.hasAttr "packages" collectedLocks.outputs.${system};
-          }
-          ''
-            mkdir -p $out
-            echo "hasOutputs: $hasOutputs" > $out/debug-info.txt
-            echo "hasSystemOutputs: $hasSystemOutputs" >> $out/debug-info.txt
-            echo "hasSystemPackages: $hasSystemPackages" >> $out/debug-info.txt
-          '';
         docs.usage = pkgs.writeText "usage.md" ''
           # Flake: 002c_collected_locks_derivation
 
