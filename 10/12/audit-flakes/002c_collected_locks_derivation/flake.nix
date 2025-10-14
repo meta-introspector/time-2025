@@ -39,7 +39,7 @@
         allProcessedLocksMetaPackage = pkgs.runCommand "all-processed-locks-data"
           {
             nativeBuildInputs = [ pkgs.jq ];
-            processedInputs = lib.toJSON (builtins.attrValues processedLockFilePackages);
+            processedInputs = builtins.toJSON (builtins.attrValues processedLockFilePackages);
           }
           ''
             mkdir -p $out
