@@ -1,4 +1,3 @@
-
 {
   description = "A flake to cultivate the Monster Group prime lattice.";
 
