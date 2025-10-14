@@ -63,11 +63,22 @@
               ''
                 mkdir -p $out
 
-                ESCAPED_NIX_FILE_PATH=$(echo -n "$NIX_FILE_PATH" | jq -Rsa .)
-                ESCAPED_LOCK_FILE=$(echo -n "$lockFile" | jq -Rsa .)
-                ESCAPED_NIX_FILE_CONTENT=$(echo -n "$NIX_FILE_CONTENT" | jq -Rsa .)
+                # Calculate bag of words
+                BAG_OF_WORDS=$(echo -n "$NIX_FILE_CONTENT" | \
+                  tr '[:upper:]' '[:lower:]' | \
+                  grep -oE '\w+' | \
+                  sort | \
+                  uniq -c | \
+                  awk '{print "\"" $2 "\":" $1}' | \
+                  paste -sd, - | \
+                  awk -v OFS="" 'BEGIN{print "{"};{print $0};END{print "}"}'
+                )
 
-                echo "{\"nixFilePath\": $ESCAPED_NIX_FILE_PATH, \"lockFilePath\": $ESCAPED_LOCK_FILE, \"nixFileContent\": $ESCAPED_NIX_FILE_CONTENT, \"hasLockFile\": true, \"content\": \"(content not read for debugging)\"}" > $out/lock-file-info.json
+                jq -n \
+                  --arg nixFilePath "$NIX_FILE_PATH" \
+                  --arg lockFilePath "$lockFile" \
+                  --argjson bagOfWords "$BAG_OF_WORDS" \
+                  '{nixFilePath: $nixFilePath, lockFilePath: $lockFilePath, bagOfWords: $bagOfWords, hasLockFile: true}' > $out/lock-file-info.json
               ''
             )
           )
