@@ -19,7 +19,7 @@ echo "DEBUG: BAG_OF_WORDS_GENERATOR_PATH = $BAG_OF_WORDS_GENERATOR_PATH"
 SYSTEM=$(nix eval --raw --impure --expr 'builtins.currentSystem')
 BAG_OF_WORDS_JSON_FILE=$(mktemp)
 
-nix eval --raw --impure \
+nix build --no-link --print-out-paths \
   --extra-experimental-features 'nix-command flakes' \
   "$BAG_OF_WORDS_GENERATOR_PATH#lib.${SYSTEM}.generateBagOfWords" \
   --argstr flakePath "$NIX_FILE_PATH" \
