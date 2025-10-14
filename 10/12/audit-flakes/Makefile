@@ -45,7 +45,7 @@ clean:
 # Specific build rule for 002c_collected_locks_derivation
 002c_collected_locks_derivation/build: 001_collect_locks/build
 	@echo "Building default package for 002c_collected_locks_derivation..."
-	@cd 002c_collected_locks_derivation && nix build .#aarch64-linux.default
+	@cd 002c_collected_locks_derivation && nix build .#default
 
 # New report target
 report: 002c_collected_locks_derivation/build
