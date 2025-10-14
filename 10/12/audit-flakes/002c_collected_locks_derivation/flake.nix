@@ -6,6 +6,7 @@
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     collectedLocks = {
       url = "path:../001_collect_locks";
+      flake = true; # Explicitly tell Nix to treat this as a flake input
     };
   };
 
