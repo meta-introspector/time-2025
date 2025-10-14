@@ -2,8 +2,8 @@
   description = "A test flake for the packageBagOfWords function.";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     auditFlakes = {
       url = "github:meta-introspector/time-2025?ref=feature/aimyc-002-sample-extraction&dir=10/12/audit-flakes";
     };

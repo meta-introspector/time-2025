@@ -9,7 +9,7 @@
       flake = true;
     };
     # For secure credential handling
-    sops-nix.url = "github:NixOS/sops-nix"; # Placeholder, assuming sops-nix is available
+    sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/CRQ-016-nixify";
   };
 
   outputs = { self, nixpkgs, githubApiWrapper, sops-nix }:

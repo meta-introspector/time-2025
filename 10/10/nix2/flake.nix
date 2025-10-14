@@ -52,7 +52,7 @@
   description = "Dynamic Flake Checker";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11"; # Or a more appropriate nixpkgs
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     get-nix-file-list.url = "github:meta-introspector/get-nix-file-list?ref=feature/CRQ-016-nixify";
   };
 

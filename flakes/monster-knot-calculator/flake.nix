@@ -2,7 +2,7 @@
   description = "Nix flake to calculate Monster Knot similarity";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11"; # Using a stable nixpkgs branch
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     narSimilaritySearch = {
       url = "github:meta-introspector/nar-similarity-search?ref=feature/CRQ-016-nixify"; # Assuming this repo and branch
       inputs.nixpkgs.follows = "nixpkgs";

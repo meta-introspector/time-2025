@@ -38,7 +38,7 @@
 
   # Flake input for nix-community/flake-compat, pull/4/head
   nix-community-flake-compat = {
-    url = "github:nix-community/flake-compat/pull/4/head";
+    url = "github:meta-introspector/flake-compat?ref=feature/CRQ-016-nixify";
   };
 
   # Flake input for meta-introspector/flake-parts, CRQ-016-nixify branch
@@ -53,7 +53,7 @@
 
   # Flake input for numtide/flake-utils (no specific ref/dir provided in grep output)
   numtide-flake-utils = {
-    url = "github:numtide/flake-utils";
+    url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
   };
 
   # Flake input for time-2025's foaf context, foaf branch

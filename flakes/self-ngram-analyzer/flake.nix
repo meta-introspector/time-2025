@@ -2,7 +2,7 @@
   description = "A flake for performing n-gram analysis on its own source.";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11"; # Use a stable nixpkgs branch
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
   };
 
   outputs = { self, nixpkgs, ... }:

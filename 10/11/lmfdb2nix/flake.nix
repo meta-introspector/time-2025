@@ -13,15 +13,15 @@
 
     # Conceptual Inputs (placeholders for actual sources)
     lmfdbSource = {
-      url = "github:lmfdb/lmfdb?ref=master"; # Placeholder for LMFDB Git repository
+      url = "github:meta-introspector/lmfdb?ref=feature/CRQ-016-nixify";
       flake = false;
     };
     lean4Env = {
-      url = "github:leanprover/lean4?ref=master"; # Placeholder for Lean 4 environment
+      url = "github:meta-introspector/lean4?ref=feature/CRQ-016-nixify";
       flake = false;
     };
     postgresSchema = {
-      url = "github:some-repo/lmfdb-postgres-schema?ref=master"; # Placeholder for PostgreSQL schema
+      url = "github:meta-introspector/lmfdb-postgres-schema?ref=feature/CRQ-016-nixify";
       flake = false;
     };
   };

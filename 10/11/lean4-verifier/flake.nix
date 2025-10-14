@@ -58,7 +58,7 @@
       inputs.systems.follows = "nixpkgs/lib/systems/flakeExposed";
     };
     lean4Env = {
-      url = "github:leanprover/lean4?ref=master"; # Placeholder for Lean 4 environment
+      url = "github:meta-introspector/lean4?ref=feature/CRQ-016-nixify";
       flake = false;
     };
   };

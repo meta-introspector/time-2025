@@ -41,7 +41,7 @@ in
       nixStorePath = "/nix/store/sha256-my-immutable-data";
       # All inputs are pure, hashed references
       pureInputs = lib.mkForce [
-        "github:NixOS/nixpkgs/nixos-23.11"
+        "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify"
         "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"
       ];
     };

@@ -14,7 +14,7 @@
     };
     bagOfWordsGenerator = {
       #url = "git+file:///data/data/com.termux.nix/files/home/git/time-2025?ref=feature/aimyc-002-sample-extraction&dir=flakes/bag-of-words-generator";
-      url = "github:meta-introspector/time-2025?ref=feature/aimyc-002-sample-extraction&dir=flakes/bag-of-words-generator";
+      url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=flakes/bag-of-words-generator";
       flake = true;
     };
   };
@@ -67,7 +67,7 @@
                 lockFile = item.lockFilePath;
                 NIX_FILE_PATH = item.nixFilePath;
                 NIX_FILE_CONTENT = item.nixFileContent;
-                BAG_OF_WORDS_GENERATOR_FLAKE_REF = "github:meta-introspector/time-2025?ref=feature/aimyc-002-sample-extraction&dir=flakes/bag-of-words-generator";
+                BAG_OF_WORDS_GENERATOR_FLAKE_REF = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=flakes/bag-of-words-generator";
               }
               (builtins.readFile ./flake.sh)
             )

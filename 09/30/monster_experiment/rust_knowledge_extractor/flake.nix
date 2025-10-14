@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    naersk.url = "github:nix-community/naersk/master"; # Using standard naersk for now
+    naersk.url = "github:meta-introspector/naersk?ref=feature/CRQ-016-nixify";
     sops-nix.url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store";
   };
 

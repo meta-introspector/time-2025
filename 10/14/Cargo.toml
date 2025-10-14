@@ -1,0 +1,20 @@
+[workspace]
+members = [
+    "flake_auditor",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.70"
+license = "MIT"
+authors = ["Your Name <your.email@example.com>"]
+repository = "https://github.com/meta-introspector/streamofrandom"
+homepage = "https://github.com/meta-introspector/streamofrandom"
+documentation = "https://github.com/meta-introspector/streamofrandom"
+description = "A flake auditor for Nix flakes"
+keywords = ["nix", "flake", "auditor", "rust"]
+categories = ["command-line-utilities"]
+
+[workspace.lints]
+rust = { rust_2018_idioms = { level = "warn" }, unreachable_pub = { level = "warn" }, missing_debug_implementations = { level = "warn" }, missing_docs = { level = "warn" } }

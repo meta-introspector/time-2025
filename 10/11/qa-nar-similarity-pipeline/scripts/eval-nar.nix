@@ -2,7 +2,7 @@
   description = "Evaluates allNars from nar-binstore-builder";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11"; # Or a more appropriate nixpkgs
+    nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     narBinstoreBuilder.url = "../nar-binstore-builder"; # Relative path from this flake to nar-binstore-builder
   };
 
