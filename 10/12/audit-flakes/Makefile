@@ -5,7 +5,22 @@ FLAKE_FILES := $(wildcard */flake.nix)
 FLAKE_DIRS := $(patsubst %/flake.nix,%,$(FLAKE_FILES))
 
 # Default target
+FLAKE_AUDITOR_PATH := /data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025/10/14/flake_auditor
+
 all: build-all
+
+# Audit all flake.lock files
+audit-all-flakes: $(addsuffix /audit,$(FLAKE_DIRS))
+
+# Generic audit rule
+%/audit: %/update
+	@echo "Auditing flake.lock in $(@D)..."
+	@nix build $(FLAKE_AUDITOR_PATH)#flake-auditor --out-link $(@D)/result-flake-auditor
+	@$(@D)/result-flake-auditor $(@D)/flake.lock
+	@rm $(@D)/result-flake-auditor
+
+# Update all flake.lock files
+update-all: $(addsuffix /update,$(FLAKE_DIRS))
 
 # Update all flake.lock files
 update-all: $(addsuffix /update,$(FLAKE_DIRS))

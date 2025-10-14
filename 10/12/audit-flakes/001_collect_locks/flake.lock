@@ -8,11 +8,11 @@
       },
       "locked": {
         "dir": "flakes/bag-of-words-generator",
-        "lastModified": 1760421819,
-        "narHash": "sha256-l145PkuiRil12PfoEflvwB4DQUffDGU96vEsxMLX+os=",
+        "lastModified": 1760458014,
+        "narHash": "sha256-tI7FUYg7d8/purjeMPjH/l/6/QjYVhAFXFLuUxvnzIM=",
         "owner": "meta-introspector",
         "repo": "time-2025",
-        "rev": "07d956b40b9d0401d9031a32d4c5f1ee5e459f90",
+        "rev": "fb9993bbee46e94a6aa47eb9f1431dea14443f16",
         "type": "github"
       },
       "original": {
@@ -110,7 +110,7 @@
       "flake": false,
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-DlF6boda7UimKoo/SoIcqAdfrf5hlFOEUAm+ByLXX/c=",
+        "narHash": "sha256-a3foJrF0wTXslf9hZAQqhpEU0SxaCYWlsfzd0OSis9M=",
         "path": "../..",
         "type": "path"
       },
