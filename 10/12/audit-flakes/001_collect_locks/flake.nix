@@ -71,15 +71,17 @@
         );
       in
       {
-        packages.default = pkgs.runCommand "lock-file-summaries"
-          {
-            nativeBuildInputs = [ pkgs.jq ];
-            lockFileOutputs = builtins.toJSON (builtins.map (name: "${lockFilePackages.${name}}/lock-file-info.json") (builtins.attrNames lockFilePackages));
-          }
-          ''
-            mkdir -p $out
-            jq -s '.[].content | fromjson' $(echo $lockFileOutputs | jq -r '.[]') > $out/all-lock-file-summaries.json
-          '';
+        packages = lockFilePackages // {
+          default = pkgs.runCommand "lock-file-summaries"
+            {
+              nativeBuildInputs = [ pkgs.jq ];
+              lockFileOutputs = builtins.toJSON (builtins.map (name: "${lockFilePackages.${name}}/lock-file-info.json") (builtins.attrNames lockFilePackages));
+            }
+            ''
+              mkdir -p $out
+              jq -s '.[].content | fromjson' $(echo $lockFileOutputs | jq -r '.[]') > $out/all-lock-file-summaries.json
+            '';
+        };
 
         checks.allLockFilePackageNames = pkgs.runCommand "all-lock-file-package-names"
           {
