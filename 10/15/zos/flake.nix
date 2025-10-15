@@ -35,14 +35,14 @@
             # Observe
             observationReport = observeFlake.packages.${system}.default { inherit currentState; };
             # Orient
-            orientationDecision = orientFlake.packages.${system}.default {
-              inherit observationReport llmGeneratorFlake;
-            };
+            #orientationDecision = orientFlake.packages.${system}.default {
+            #  inherit observationReport llmGeneratorFlake;
+            #};
             # Decide
-            actionPlan = decideFlake.packages.${system}.default { inherit orientationDecision; };
+            #actionPlan = decideFlake.packages.${system}.default { inherit orientationDecision; };
             # Act
             nextState = actFlake.packages.${system}.default {
-              actionPlan = actionPlan;
+              actionPlan = "actionPlan";
               dwimFlake = dwimFlake;
             };
           in
