@@ -2,7 +2,7 @@
   description = "Flake for AI Life Mycology - Monster Group Prime Lattice";
 
   inputs = {
-    self.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/14";
+    self.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation";
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     bagOfWordsGenerator.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=flakes/bag-of-words-generator";
   };
