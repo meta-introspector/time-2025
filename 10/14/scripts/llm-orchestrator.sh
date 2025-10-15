@@ -1,50 +1,71 @@
 #!/usr/bin/env bash
 
-# This script acts as the monadic interface to execute LLM calls described by Nix.
-# It takes the JSON representation of the llmCallVectorDescription and keyObject as arguments.
+# This script transforms LLM call descriptions into structured "LLM Tasks" for a scheduler.
 
 LLM_CALL_VECTOR_JSON="$1"
 KEY_OBJECT_JSON="$2"
 MODEL_ROUTER_JSON="$3"
+FLAKE_CONTENT="$4" # Assuming flake content is passed as a 4th argument
 
-# In a real scenario, this script would parse the JSON, make API calls, etc.
-# For now, we'll produce a structured JSON output.
+# Ensure jq is available
+if ! command -v jq &> /dev/null
+then
+    echo "Error: jq is not installed. Please add it to buildInputs." >&2
+    exit 1
+fi
 
-# Simulate LLM responses based on the call vector
-# In a real scenario, you would iterate through LLM_CALL_VECTOR_JSON and make actual API calls.
+# Start the JSON output array
+echo "["
 
-# For demonstration, let's create dummy responses.
-# We'll assume LLM_CALL_VECTOR_JSON is a JSON array of objects, each with a 'prompt' field.
+first_call=true
+# Iterate through each LLM call description in the vector
+echo "$LLM_CALL_VECTOR_JSON" | jq -c '.calls[]' | while read -r call_desc; do
+    if [ "$first_call" = false ]; then
+        echo ","
+    fi
+    first_call=false
 
-# This is a very simplified parsing. A real script would use 'jq' or a proper JSON parser.
-# For now, we'll just embed the inputs and some dummy responses.
+    prompt=$(echo "$call_desc" | jq -r '.prompt')
+    checksum=$(echo "$call_desc" | jq -r '.checksum')
+    expectedOutputFormat=$(echo "$call_desc" | jq -r '.expectedOutputFormat')
 
-cat <<EOF
+    # Construct the LLM Task object
+    cat <<EOF
 {
-  "metadata": {
-    "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-    "orchestratorVersion": "1.0"
+  "taskDescription": "$prompt",
+  "modelDescription": {
+    "name": "default-model",
+    "config": $MODEL_ROUTER_JSON
   },
-  "input": {
-    "llmCallVectorDescription": $LLM_CALL_VECTOR_JSON,
-    "keyObject": $KEY_OBJECT_JSON,
-    "modelRouter": $MODEL_ROUTER_JSON
-  },
-  "results": [
+  "inputList": [
     {
-      "callId": "call-1",
-      "prompt": "Generate a short, creative description for a Nix flake that processes a 'Monster Group Prime Lattice' and outputs its JSON representation. The flake's previous version checksum is: <checksum>. Focus on the 'AI Life Mycology' theme. (Call 1)",
-      "response": "This Nix flake, a digital mycelium, cultivates the Monster Group Prime Lattice, transmuting its intricate structure into a JSON spore. Rooted in <checksum>, it germinates new forms within the AI Life Mycology.",
-      "modelUsed": "dummy-model-A",
-      "checksum": "dummy-checksum-1"
-    },
-    {
-      "callId": "call-2",
-      "prompt": "Summarize the core functionality of a Nix flake that manages a 'Monster Group Prime Lattice' and its JSON output, considering its previous version checksum: <checksum>. Emphasize the 'AI Life Mycology' context. (Call 2)",
-      "response": "Managing the Monster Group Prime Lattice, this Nix flake outputs its JSON representation. It ensures reproducible cultivation of digital life forms, with <checksum> anchoring its genetic lineage within AI Life Mycology.",
-      "modelUsed": "dummy-model-B",
-      "checksum": "dummy-checksum-2"
+      "type": "flakeContent",
+      "checksum": "$checksum",
+      "content": "$FLAKE_CONTENT"
     }
-  ]
+  ],
+  "splitterFunction": {
+    "type": "nixFunction",
+    "name": "defaultSplitter",
+    "config": {}
+  },
+  "metadata": {
+    "originalChecksum": "$checksum",
+    "expectedOutputFormat": "$expectedOutputFormat"
+  },
+  "cost": {
+    "timeEstimate": "30s",
+    "tokenEstimate": 2000,
+    "computeEstimate": "0.02 CPU-hours"
+  },
+  "benefit": {
+    "qualityScore": "high",
+    "reproducibilityScore": "medium",
+    "impactScore": "low"
+  }
 }
 EOF
+done
+
+# End the JSON output array
+echo "]"

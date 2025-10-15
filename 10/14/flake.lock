@@ -8,6 +8,29 @@
       },
       "locked": {
         "dir": "flakes/bag-of-words-generator",
+        "lastModified": 1760493061,
+        "narHash": "sha256-2F9yFDA3x/OVcJLo6hGfiZ6jRD3Ar6IJM5zRuJF3SKg=",
+        "owner": "meta-introspector",
+        "repo": "time-2025",
+        "rev": "5027b4f7d6b011f35a150ffb8efa5fdb4b64a5d1",
+        "type": "github"
+      },
+      "original": {
+        "dir": "flakes/bag-of-words-generator",
+        "owner": "meta-introspector",
+        "ref": "feature/aimyc-003-cultivation",
+        "repo": "time-2025",
+        "type": "github"
+      }
+    },
+    "bagOfWordsGenerator_2": {
+      "inputs": {
+        "bagOfWordsScript": "bagOfWordsScript_2",
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "dir": "flakes/bag-of-words-generator",
         "lastModified": 1760486775,
         "narHash": "sha256-rud5oy/3bwHsa+QkrEay9nXy5e9sDbc7bWhDFiPUQm0=",
         "owner": "meta-introspector",
@@ -36,9 +59,41 @@
         "type": "path"
       }
     },
+    "bagOfWordsScript_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-bKZsAz8hU5oaQfKroUzHcES1UANKruLynaFvKYq4NOE=",
+        "path": "../../scripts/generate_flake_bag_of_words.sh",
+        "type": "path"
+      },
+      "original": {
+        "path": "../../scripts/generate_flake_bag_of_words.sh",
+        "type": "path"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "meta-introspector",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "meta-introspector",
+        "ref": "feature/CRQ-016-nixify",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_2"
       },
       "locked": {
         "lastModified": 1731533236,
@@ -103,6 +158,38 @@
         "type": "github"
       }
     },
+    "nixpkgs_4": {
+      "locked": {
+        "lastModified": 1757898380,
+        "narHash": "sha256-1Z0KAfbySsHu/IoZbBJLrPgs3IqQGup0T8J9S1ffAkE=",
+        "owner": "meta-introspector",
+        "repo": "nixpkgs",
+        "rev": "26833ad1dad83826ef7cc52e0009ca9b7097c79f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "meta-introspector",
+        "ref": "feature/CRQ-016-nixify",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_5": {
+      "locked": {
+        "lastModified": 1757898380,
+        "narHash": "sha256-1Z0KAfbySsHu/IoZbBJLrPgs3IqQGup0T8J9S1ffAkE=",
+        "owner": "meta-introspector",
+        "repo": "nixpkgs",
+        "rev": "26833ad1dad83826ef7cc52e0009ca9b7097c79f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "meta-introspector",
+        "ref": "feature/CRQ-016-nixify",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "bagOfWordsGenerator": "bagOfWordsGenerator",
@@ -112,7 +199,30 @@
     },
     "self": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3"
+        "bagOfWordsGenerator": "bagOfWordsGenerator_2",
+        "nixpkgs": "nixpkgs_4",
+        "self": "self_2"
+      },
+      "locked": {
+        "dir": "10/14",
+        "lastModified": 1760493061,
+        "narHash": "sha256-2F9yFDA3x/OVcJLo6hGfiZ6jRD3Ar6IJM5zRuJF3SKg=",
+        "owner": "meta-introspector",
+        "repo": "time-2025",
+        "rev": "5027b4f7d6b011f35a150ffb8efa5fdb4b64a5d1",
+        "type": "github"
+      },
+      "original": {
+        "dir": "10/14",
+        "owner": "meta-introspector",
+        "ref": "feature/aimyc-003-cultivation",
+        "repo": "time-2025",
+        "type": "github"
+      }
+    },
+    "self_2": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_5"
       },
       "locked": {
         "dir": "10/14",
@@ -132,6 +242,21 @@
       }
     },
     "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",

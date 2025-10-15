@@ -20,26 +20,28 @@ let
   ];
 
   # Instantiate the LLM call vector
+  llmCallVectorDescription = (import ./llm-call-vector-functor.nix) { inherit lib; calls = llmCalls; };
+
   # The monadic interface: an impure derivation to execute initial LLM calls
-  llmOrchestratorInitial = pkgs.runCommand "llm-orchestrator-initial-results"
-    {
-      # Mark as impure to allow external network access and homedir access
-      __noChroot = true;
-      __noSandbox = true;
+  llmOrchestratorInitial = pkgs.runCommand "llm-orchestrator-initial-results" {
+    # Mark as impure to allow external network access and homedir access
+    __noChroot = true;
+    __noSandbox = true;
 
-      buildInputs = [ pkgs.bash ];
+    buildInputs = [ pkgs.bash pkgs.jq ];
 
-      # Pass the pure Nix objects as JSON strings to the script
-      LLM_CALL_VECTOR_JSON = builtins.toJSON llmCallVectorDescription;
-      KEY_OBJECT_JSON = builtins.toJSON myKeyObject;
-      MODEL_ROUTER_JSON = builtins.toJSON myModelRouter;
-      BAG_OF_WORDS_REPORT_JSON = bagOfWordsReportContent;
+    # Pass the pure Nix objects as JSON strings to the script
+    LLM_CALL_VECTOR_JSON = builtins.toJSON llmCallVectorDescription;
+    KEY_OBJECT_JSON = builtins.toJSON myKeyObject;
+    MODEL_ROUTER_JSON = builtins.toJSON myModelRouter;
+    BAG_OF_WORDS_REPORT_JSON = bagOfWordsReportContent;
+    FLAKE_CONTENT = builtins.readFile flakeFile;
 
-      # Make the script executable
-      script = pkgs.writeScript "llm-orchestrator.sh" (builtins.readFile ../scripts/llm-orchestrator.sh);
+    # Make the script executable
+    script = pkgs.writeScript "llm-orchestrator.sh" (builtins.readFile ../scripts/llm-orchestrator.sh);
 
-    } ''
-    $script "$LLM_CALL_VECTOR_JSON" "$KEY_OBJECT_JSON" "$MODEL_ROUTER_JSON" "$BAG_OF_WORDS_REPORT_JSON" > $out
+  } ''
+    $script "$LLM_CALL_VECTOR_JSON" "$KEY_OBJECT_JSON" "$MODEL_ROUTER_JSON" "$FLAKE_CONTENT" > $out
   '';
 
   # Fixme task generation stage
@@ -68,19 +70,20 @@ let
       __noChroot = true;
       __noSandbox = true;
 
-      buildInputs = [ pkgs.bash ];
+      buildInputs = [ pkgs.bash pkgs.jq ];
 
       # Pass the pure Nix objects as JSON strings to the script
       LLM_CALL_VECTOR_JSON = builtins.toJSON fixmeLlmCallVectorDescription;
       KEY_OBJECT_JSON = builtins.toJSON myKeyObject;
       MODEL_ROUTER_JSON = builtins.toJSON myModelRouter;
       BAG_OF_WORDS_REPORT_JSON = bagOfWordsReportContent; # Still pass bag of words for context
+      FLAKE_CONTENT = builtins.readFile flakeFile;
 
       # Make the script executable
       script = pkgs.writeScript "llm-orchestrator.sh" (builtins.readFile ../scripts/llm-orchestrator.sh);
 
     } ''
-    $script "$LLM_CALL_VECTOR_JSON" "$KEY_OBJECT_JSON" "$MODEL_ROUTER_JSON" "$BAG_OF_WORDS_REPORT_JSON" > $out
+    $script "$LLM_CALL_VECTOR_JSON" "$KEY_OBJECT_JSON" "$MODEL_ROUTER_JSON" "$FLAKE_CONTENT" > $out
   '';
 
 in
