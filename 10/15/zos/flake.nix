@@ -57,7 +57,8 @@
             repoSource = self; # The ZOS flake's self input, which is the repo root
             buildInputs = [ pkgs.nix ]; # For nix-hash
           } ''
-          echo "{ \"repoHash\": \"$(nix-hash --flat --base32 $repoSource)\", \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\", \"projects\": [], \"tasks\": [] }" > $out
+          mkdir -p $out
+          echo "{ \"repoHash\": \"$(nix-hash --flat --base32 $repoSource)\", \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\", \"projects\": [], \"tasks\": [] }" > $out/new-state.json
         '';
 
         # One application of the OODA loop
