@@ -49,23 +49,27 @@ in
     llmResults = llmPipelineResults.llmOrchestrator;
     llmResponses = llmResponsePackages; # Expose individual packages
     llmResponses.default = llmResponsesMetaPackage; # Expose meta-package
+    llmWorkpool = llmPipelineResults.workpool;
   };
 
   lib.monsterGroupData = flakeUtils.monsterGroupPrimeLattice.monsterGroupData;
 
   lib.previousVersionChecksum = llmPipelineResults.llmCallVectorDescription.calls .0.checksum; # Assuming first call's checksum
 
-  lib.llmCallVectorDescription = llmPipelineResults.updatedLlmCallVectorDescription;
+  lib.llmCallVectorDescription = llmPipelineResults.fixmeLlmCallVectorDescription;
 
   lib.debugDump = {
-    llmCallVector = llmPipelineResults.updatedLlmCallVectorDescription;
+    llmCallVectorInitial = llmPipelineResults.llmCallVectorDescription;
+    llmCallVectorFixme = llmPipelineResults.fixmeLlmCallVectorDescription;
     keyObject = llmPipelineResults.myKeyObject;
     modelRouter = llmPipelineResults.myModelRouter;
-    llmOrchestratorDerivation = llmPipelineResults.llmOrchestrator;
+    llmOrchestratorInitialDerivation = llmPipelineResults.llmOrchestratorInitial;
+    llmOrchestratorFixmeDerivation = llmPipelineResults.llmOrchestratorFixme;
     bagOfWordsReport = llmPipelineResults.bagOfWordsReportContent;
     orchestratorOutput = orchestratorOutput;
     llmResponsePackages = llmResponsePackages;
-    fixmeTaskGenerator = llmPipelineResults.fixmeTaskGenerator;
+    fixmeTaskGeneratorResults = llmPipelineResults.fixmeTaskGeneratorResults;
+    workpool = llmPipelineResults.workpool;
   };
 
   docs.md = pkgs.writeText "mycology-flake-docs.md" "see file";
