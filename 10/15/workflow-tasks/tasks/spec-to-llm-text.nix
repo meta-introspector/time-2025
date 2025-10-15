@@ -4,7 +4,8 @@ let
   # Import the spec flake to get its attributes
   spec = import specFlakePath { inherit lib pkgs; };
 in
-pkgs.runCommand "spec-to-llm-text" {
+pkgs.runCommand "spec-to-llm-text"
+{
   inherit specFlakePath;
   specName = spec.name;
   specDescription = spec.description;
@@ -12,28 +13,28 @@ pkgs.runCommand "spec-to-llm-text" {
   specInputs = builtins.toJSON spec.inputs; # Convert inputs to JSON string
   specOutputs = builtins.toJSON spec.outputs; # Convert outputs to JSON string
 } ''
-  set -euo pipefail
+    set -euo pipefail
 
-  cat > "$out" <<EOF
-# Task Specification: $specName
+    cat > "$out" <<EOF
+  # Task Specification: $specName
 
-## Description
-$specDescription
+  ## Description
+  $specDescription
 
-## Task Type
-$specTaskType
+  ## Task Type
+  $specTaskType
 
-## Inputs
-```json
-$specInputs
-```
+  ## Inputs
+  ```json
+  $specInputs
+  ```
 
-## Outputs
-```json
-$specOutputs
-```
+  ## Outputs
+  ```json
+  $specOutputs
+  ```
 
----
-Please use the above specification to generate a detailed plan or code for implementing this task.
-EOF
+  ---
+  Please use the above specification to generate a detailed plan or code for implementing this task.
+  EOF
 ''

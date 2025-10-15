@@ -22,20 +22,21 @@
               name = "unnamed-impure-call";
               description = "A deferred impure call.";
               command = "echo 'No command specified.'";
-              inputs = {}; # Attribute set of input derivations/paths
-              outputs = {}; # Attribute set of expected output types/paths
+              inputs = { }; # Attribute set of input derivations/paths
+              outputs = { }; # Attribute set of expected output types/paths
               typeSignature = "Any -> Any"; # Placeholder for formal type signature
               impureFlags = { __noChroot = true; __noSandbox = true; };
               buildInputs = [ pkgs.bash ];
             };
             mergedCallSpec = defaultCallSpec // callSpec;
 
-            executor = pkgs.runCommand mergedCallSpec.name (
-              mergedCallSpec.impureFlags // {
-                inherit (mergedCallSpec) buildInputs;
-                commandToExecute = mergedCallSpec.command;
-              } // mergedCallSpec.inputs # Merge inputs into the derivation attributes
-            ) ''
+            executor = pkgs.runCommand mergedCallSpec.name
+              (
+                mergedCallSpec.impureFlags // {
+                  inherit (mergedCallSpec) buildInputs;
+                  commandToExecute = mergedCallSpec.command;
+                } // mergedCallSpec.inputs # Merge inputs into the derivation attributes
+              ) ''
               echo "Executing deferred impure call: ${mergedCallSpec.name}" >&2
               echo "Description: ${mergedCallSpec.description}" >&2
               echo "Command: ${mergedCallSpec.command}" >&2
@@ -48,18 +49,20 @@
               echo "Status: executed" > "$out/status.json"
             '';
 
-            zkpProver = pkgs.runCommand "${mergedCallSpec.name}-zkp-prover" {
-              inherit executor spec; # Depend on the executor and spec directly
-              # Add ZKP tools here
-            } ''
+            zkpProver = pkgs.runCommand "${mergedCallSpec.name}-zkp-prover"
+              {
+                inherit executor spec; # Depend on the executor and spec directly
+                # Add ZKP tools here
+              } ''
               echo "Generating ZKP for ${mergedCallSpec.name}..." > $out
               echo "Proof generated (placeholder)." >> $out
             '';
 
-            zkpVerifier = pkgs.runCommand "${mergedCallSpec.name}-zkp-verifier" {
-              inherit zkpProver; # Depend on the prover
-              # Add ZKP verification tools here
-            } ''
+            zkpVerifier = pkgs.runCommand "${mergedCallSpec.name}-zkp-verifier"
+              {
+                inherit zkpProver; # Depend on the prover
+                # Add ZKP verification tools here
+              } ''
               echo "Verifying ZKP for ${mergedCallSpec.name}..." > $out
               echo "Proof verified (placeholder)." >> $out
             '';

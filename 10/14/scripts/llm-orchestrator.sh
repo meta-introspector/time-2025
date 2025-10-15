@@ -3,7 +3,7 @@
 # This script transforms LLM call descriptions into structured "LLM Tasks" for a scheduler.
 
 LLM_CALL_VECTOR_JSON="$1"
-KEY_OBJECT_JSON="$2"
+export KEY_OBJECT_JSON="$2"
 MODEL_ROUTER_JSON="$3"
 FLAKE_CONTENT="$4" # Assuming flake content is passed as a 4th argument
 

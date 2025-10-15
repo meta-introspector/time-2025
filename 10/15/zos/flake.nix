@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    self = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/zos"; }; # Self-reference to the ZOS flake
+
     dwimFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/dwim";
     workflowTasksFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/workflow-tasks";
     llmGeneratorFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/14";
@@ -52,10 +52,11 @@
         # This is a conceptual placeholder. Actual implementation will be complex.
         # It would involve a recursive function that applies ooda until a condition is met.
         # For now, let's just define an initial state and one application.
-        initialState = pkgs.runCommand "initial-system-state" {
-          repoSource = self; # The ZOS flake's self input, which is the repo root
-          buildInputs = [ pkgs.nix ]; # For nix-hash
-        } ''
+        initialState = pkgs.runCommand "initial-system-state"
+          {
+            repoSource = self; # The ZOS flake's self input, which is the repo root
+            buildInputs = [ pkgs.nix ]; # For nix-hash
+          } ''
           echo "{ \"repoHash\": \"$(nix-hash --flat --base32 $repoSource)\", \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\", \"projects\": [], \"tasks\": [] }" > $out
         '';
 
@@ -71,12 +72,16 @@
           # Expose the OODA loop's output
           oodaState = firstOodaIteration;
           run = runZosTasks;
-          bootstrap.zos = pkgs.runCommand "zos-bootstrap" {
-            inherit firstOodaIteration;
-            # This bootstrap target will trigger the first OODA iteration
-          } ''
+          bootstrap.zos = pkgs.runCommand "zos-bootstrap"
+            {
+              inherit firstOodaIteration;
+              # This bootstrap target will trigger the first OODA iteration
+            } ''
             echo "ZOS bootstrap complete. First OODA iteration result: $firstOodaIteration" > $out
           '';
-        };      }
+        };
+      } // {
+        defaultPackage = self.packages.${system}.bootstrap.zos;
+      }
     );
 }

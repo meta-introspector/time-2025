@@ -10,7 +10,8 @@ let
   # Import the monster-group-prime-lattice.nix from the mycologyState input
   monsterGroupPrimeLattice = import (mycologyState + "/monster-group-prime-lattice.nix") { inherit pkgs lib; };
 
-in {
+in
+{
   # Expose the monster group data from the imported state
   monsterGroupDataFromGit = monsterGroupPrimeLattice.monsterGroupData;
 

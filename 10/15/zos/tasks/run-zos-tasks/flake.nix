@@ -9,9 +9,10 @@
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system}; in
       {
-        packages.default = { tasksToRun }: pkgs.runCommand "task-execution-results" {
-          inherit tasksToRun;
-        } ''
+        packages.default = { tasksToRun }: pkgs.runCommand "task-execution-results"
+          {
+            inherit tasksToRun;
+          } ''
           echo "Executing ZOS tasks from: $tasksToRun" > $out/results.json
           # This would parse tasksToRun and execute them (e.g., nix build, run scripts).
           echo "{ \"status\": \"tasks_executed\", \"details\": \"simulated\" }" > $out/results.json

@@ -39,66 +39,67 @@ let
   # Invoke the impure LLM orchestrator to get the LLM tasks for scaffold generation
   # This will output a JSON array of LLM tasks, not the scaffold itself yet.
   # The actual scaffold generation (by a miner) is a subsequent step.
-  scaffoldGenerationLLMTasks = pkgs.runCommand "scaffold-generation-llm-tasks" {
-    __noChroot = true; # Impure call to orchestrator
-    __noSandbox = true;
-    buildInputs = [ pkgs.bash pkgs.jq ];
-    LLM_CALL_VECTOR_JSON = builtins.toJSON llmCallVectorDescription;
-    KEY_OBJECT_JSON = builtins.toJSON llmGeneratorFlake.lib.${pkgs.system}.myKeyObject;
-    MODEL_ROUTER_JSON = builtins.toJSON llmGeneratorFlake.lib.${pkgs.system}.myModelRouter;
-    FLAKE_CONTENT = ""; # No specific flake content for this prompt, it's generative
-    script = pkgs.writeScript "llm-orchestrator-wrapper" ''
-      bash ${llmGeneratorFlake.lib.${pkgs.system}.llmOrchestratorScript} "$LLM_CALL_VECTOR_JSON" "$KEY_OBJECT_JSON" "$MODEL_ROUTER_JSON" "$FLAKE_CONTENT" > $out
-    '';
-  } "$script";
+  scaffoldGenerationLLMTasks = pkgs.runCommand "scaffold-generation-llm-tasks"
+    {
+      __noChroot = true; # Impure call to orchestrator
+      __noSandbox = true;
+      buildInputs = [ pkgs.bash pkgs.jq ];
+      LLM_CALL_VECTOR_JSON = builtins.toJSON llmCallVectorDescription;
+      KEY_OBJECT_JSON = builtins.toJSON llmGeneratorFlake.lib.${pkgs.system}.myKeyObject;
+      MODEL_ROUTER_JSON = builtins.toJSON llmGeneratorFlake.lib.${pkgs.system}.myModelRouter;
+      FLAKE_CONTENT = ""; # No specific flake content for this prompt, it's generative
+      script = pkgs.writeScript "llm-orchestrator-wrapper" ''
+        bash ${llmGeneratorFlake.lib.${pkgs.system}.llmOrchestratorScript} "$LLM_CALL_VECTOR_JSON" "$KEY_OBJECT_JSON" "$MODEL_ROUTER_JSON" "$FLAKE_CONTENT" > $out
+      '';
+    } "$script";
 
   # Placeholder for the actual scaffold (after a miner executes scaffoldGenerationLLMTasks)
   # For now, this will just be a derivation containing the LLM tasks.
   generatedScaffold = scaffoldGenerationLLMTasks; # This needs to be replaced by the actual scaffold later
 
   docs.md = pkgs.writeText "dwim-flake-docs.md" ''
-# DWIM (Do What I Mean) Flake
+    # DWIM (Do What I Mean) Flake
 
-## Description
+    ## Description
 
-The DWIM flake is a powerful abstraction designed for autonomous project generation. It takes a high-level natural language prompt and, leveraging LLM capabilities, generates a complete Nix flake project scaffold. This scaffold is not just raw code; it's designed to be fully integrated into the project's meta-orchestration framework, including predefined task outputs for documentation, type analysis, usage analysis, user analysis, and Zero-Knowledge Proofs.
+    The DWIM flake is a powerful abstraction designed for autonomous project generation. It takes a high-level natural language prompt and, leveraging LLM capabilities, generates a complete Nix flake project scaffold. This scaffold is not just raw code; it's designed to be fully integrated into the project's meta-orchestration framework, including predefined task outputs for documentation, type analysis, usage analysis, user analysis, and Zero-Knowledge Proofs.
 
-## Inputs
+    ## Inputs
 
--   `promptString`: A string describing the desired project (e.g., "a battleship game", "a Dioxus webapp"). This is the primary input that guides the LLM's generation.
--   `pkgs`, `lib`, `builtins`: Standard Nix library functions.
--   `llmGeneratorFlake`: A reference to the LLM generator flake, used to create and execute LLM tasks for scaffold generation.
--   `metaOrchestratorFlake`: A reference to the meta-orchestrator flake, which will process the generated scaffold and apply further tasks.
+    -   `promptString`: A string describing the desired project (e.g., "a battleship game", "a Dioxus webapp"). This is the primary input that guides the LLM's generation.
+    -   `pkgs`, `lib`, `builtins`: Standard Nix library functions.
+    -   `llmGeneratorFlake`: A reference to the LLM generator flake, used to create and execute LLM tasks for scaffold generation.
+    -   `metaOrchestratorFlake`: A reference to the meta-orchestrator flake, which will process the generated scaffold and apply further tasks.
 
-## Outputs
+    ## Outputs
 
--   `output`: A derivation containing a JSON array of LLM tasks. These tasks, when executed by a miner, will generate the project scaffold. This output includes cost and benefit metadata for each task.
--   `bootstrap.scaffold`: A convenience target to trigger the initial LLM query for scaffold generation. Building this target will produce the LLM tasks that, when executed, will create the project scaffold.
+    -   `output`: A derivation containing a JSON array of LLM tasks. These tasks, when executed by a miner, will generate the project scaffold. This output includes cost and benefit metadata for each task.
+    -   `bootstrap.scaffold`: A convenience target to trigger the initial LLM query for scaffold generation. Building this target will produce the LLM tasks that, when executed, will create the project scaffold.
 
-## How it Works
+    ## How it Works
 
-1.  **Prompt Interpretation:** The `promptString` is used to construct a detailed LLM prompt.
-2.  **LLM Task Generation:** This prompt is then encapsulated into an LLM task using the `llmGeneratorFlake`. This task instructs the LLM to generate a `flake.nix` project scaffold that *already includes* outputs for `docs.md`, `packages.${system}.typeAnalysis`, `packages.${system}.usesAnalysis`, `packages.${system}.userAnalysis`, and `packages.${system}.zkpProof`.
-3.  **Miner Execution (External):** The generated LLM task (output by the DWIM flake) is then picked up by a miner. The miner executes this task (making the actual LLM API call) to produce the raw project scaffold.
-4.  **Meta-Orchestration (Subsequent Step):** The raw scaffold is then fed into the `metaOrchestratorFlake` for further processing, including documentation generation, type checking, and ZKP proving.
+    1.  **Prompt Interpretation:** The `promptString` is used to construct a detailed LLM prompt.
+    2.  **LLM Task Generation:** This prompt is then encapsulated into an LLM task using the `llmGeneratorFlake`. This task instructs the LLM to generate a `flake.nix` project scaffold that *already includes* outputs for `docs.md`, `packages.${system}.typeAnalysis`, `packages.${system}.usesAnalysis`, `packages.${system}.userAnalysis`, and `packages.${system}.zkpProof`.
+    3.  **Miner Execution (External):** The generated LLM task (output by the DWIM flake) is then picked up by a miner. The miner executes this task (making the actual LLM API call) to produce the raw project scaffold.
+    4.  **Meta-Orchestration (Subsequent Step):** The raw scaffold is then fed into the `metaOrchestratorFlake` for further processing, including documentation generation, type checking, and ZKP proving.
 
-## Usage Example
+    ## Usage Example
 
-To generate the initial LLM tasks for a "battleship game" project:
+    To generate the initial LLM tasks for a "battleship game" project:
 
-```bash
-nix build /path/to/dwim/flake.nix -L --argstr promptString "a battleship game"
-# The output will be a JSON file containing the LLM tasks.
-# A miner would then execute these tasks.
-```
+    ```bash
+    nix build /path/to/dwim/flake.nix -L --argstr promptString "a battleship game"
+    # The output will be a JSON file containing the LLM tasks.
+    # A miner would then execute these tasks.
+    ```
 
-To trigger the initial scaffold generation query:
+    To trigger the initial scaffold generation query:
 
-```bash
-nix build /path/to/dwim/flake.nix#bootstrap.scaffold --argstr promptString "a battleship game"
-# This will build the LLM tasks for scaffold generation.
-# The actual scaffold will be produced when these tasks are executed by a miner.
-```
+    ```bash
+    nix build /path/to/dwim/flake.nix#bootstrap.scaffold --argstr promptString "a battleship game"
+    # This will build the LLM tasks for scaffold generation.
+    # The actual scaffold will be produced when these tasks are executed by a miner.
+    ```
   '';
 
 in

@@ -35,9 +35,12 @@
       # This is a simplified append. A robust solution would use 'replace'
       # to find the correct insertion point and handle indentation.
       echo "" >> "$flake_path"
-      echo "      docs.md = pkgs.writeText \"$(basename "$flake_path" .nix)-docs.md\" ''" >> "$flake_path"
-      echo "$generated_docs" >> "$flake_path"
-      echo "      '';" >> "$flake_path"
+      echo "      docs.md = pkgs.writeText \"$(basename "$flake_path" .nix)-docs.md\" '' " >> "$
+    flake_path "
+      echo "$
+    generated_docs " >> "$
+    flake_path "
+      echo " '';" >> "$flake_path"
       echo "Documentation added to $flake_path."
     fi
   '';

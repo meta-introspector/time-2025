@@ -9,9 +9,10 @@
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system}; in
       {
-        packages.default = { currentState }: pkgs.runCommand "observation-report" {
-          inherit currentState;
-        } ''
+        packages.default = { currentState }: pkgs.runCommand "observation-report"
+          {
+            inherit currentState;
+          } ''
           echo "Observing state: $currentState" > $out/report.json
           # In a real scenario, this would parse currentState and generate a detailed observation report.
           echo "{ \"observedState\": \"$currentState\", \"status\": \"observed\" }" > $out/report.json

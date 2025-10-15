@@ -10,7 +10,16 @@
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system}; in
       {
-        packages.default = pkgs.runCommand "dummy-orient-output" {} "echo 'dummy' > $out";
+        packages.default = { observationReport, llmGeneratorFlake }:
+          pkgs.runCommand "orient-decision"
+            {
+              inherit observationReport llmGeneratorFlake;
+            } ''
+            echo "Orient task received observation: $observationReport and LLM generator: $llmGeneratorFlake" > $out
+            echo "This is a placeholder for the actual orientation decision." >> $out
+          '';
+      } // {
+        defaultPackage = pkgs.runCommand "simple-default-orient" { } "echo 'simple default orient' > $out";
       }
     );
 }

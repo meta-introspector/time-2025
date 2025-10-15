@@ -18,7 +18,7 @@
 
         # Placeholder for mirrored repository files
         # This will be populated in a subsequent step with a recursive file lister
-        mirroredRepoFiles = {};
+        mirroredRepoFiles = { };
 
         # Identify existing flake.nix files for task application
         # For now, let's just use a fixed list of known flakes for testing
@@ -29,16 +29,18 @@
         };
 
         # Apply documentation task to each target flake
-        documentedTargetFlakes = lib.mapAttrs (name: flakePath:
-          let
-            # Invoke the document-single-flake-pipeline for this flake
-            docPipeline = workflowTasksFlake.packages.${system}.document-single-flake-pipeline flakePath;
-          in
-          docPipeline.finalResult # We want the final documented flake
-        ) targetFlakes;
+        documentedTargetFlakes = lib.mapAttrs
+          (name: flakePath:
+            let
+              # Invoke the document-single-flake-pipeline for this flake
+              docPipeline = workflowTasksFlake.packages.${system}.document-single-flake-pipeline flakePath;
+            in
+            docPipeline.finalResult # We want the final documented flake
+          )
+          targetFlakes;
 
         # Placeholder for error handling LLM tasks
-        errorLLMTasks = []; # List of LLM tasks generated from failures
+        errorLLMTasks = [ ]; # List of LLM tasks generated from failures
 
       in
       {
@@ -50,10 +52,11 @@
         };
 
         # A bootstrap target to build everything
-        bootstrap = pkgs.runCommand "meta-orchestrator-bootstrap" {
-          inherit documentedTargetFlakes;
-          # Add other outputs here as they are implemented
-        } ''
+        bootstrap = pkgs.runCommand "meta-orchestrator-bootstrap"
+          {
+            inherit documentedTargetFlakes;
+            # Add other outputs here as they are implemented
+          } ''
           echo "Meta-orchestration complete." > $out
         '';
       }

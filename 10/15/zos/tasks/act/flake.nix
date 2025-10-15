@@ -10,11 +10,12 @@
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system}; in
       {
-        packages.default = { actionPlan, dwimFlake }: pkgs.runCommand "new-tasks-and-state" {
-          inherit actionPlan dwimFlake;
-          # This would involve invoking DWIM, or other task generators based on the plan.
-          # For now, a placeholder.
-        } ''
+        packages.default = { actionPlan, dwimFlake }: pkgs.runCommand "new-tasks-and-state"
+          {
+            inherit actionPlan dwimFlake;
+            # This would involve invoking DWIM, or other task generators based on the plan.
+            # For now, a placeholder.
+          } ''
           echo "Acting on plan: $actionPlan" > $out/new-state.json
           echo "{ \"generatedTasks\": [ \"dwim-task-1\" ], \"nextState\": \"updated\" }" > $out/new-state.json
         '';

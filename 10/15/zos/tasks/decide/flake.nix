@@ -9,9 +9,10 @@
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system}; in
       {
-        packages.default = { orientationDecision }: pkgs.runCommand "action-plan" {
-          inherit orientationDecision;
-        } ''
+        packages.default = { orientationDecision }: pkgs.runCommand "action-plan"
+          {
+            inherit orientationDecision;
+          } ''
           echo "Deciding actions based on: $orientationDecision" > $out/plan.json
           echo "{ \"actions\": [ { \"type\": \"dwim\", \"prompt\": \"a simple game\" } ], \"status\": \"planned\" }" > $out/plan.json
         '';
