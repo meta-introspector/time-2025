@@ -55,16 +55,17 @@ in
 
   lib.previousVersionChecksum = llmPipelineResults.llmCallVectorDescription.calls .0.checksum; # Assuming first call's checksum
 
-  lib.llmCallVectorDescription = llmPipelineResults.llmCallVectorDescription;
+  lib.llmCallVectorDescription = llmPipelineResults.updatedLlmCallVectorDescription;
 
   lib.debugDump = {
-    llmCallVector = llmPipelineResults.llmCallVectorDescription;
+    llmCallVector = llmPipelineResults.updatedLlmCallVectorDescription;
     keyObject = llmPipelineResults.myKeyObject;
     modelRouter = llmPipelineResults.myModelRouter;
     llmOrchestratorDerivation = llmPipelineResults.llmOrchestrator;
     bagOfWordsReport = llmPipelineResults.bagOfWordsReportContent;
     orchestratorOutput = orchestratorOutput;
     llmResponsePackages = llmResponsePackages;
+    fixmeTaskGenerator = llmPipelineResults.fixmeTaskGenerator;
   };
 
   docs.md = pkgs.writeText "mycology-flake-docs.md" "see file";

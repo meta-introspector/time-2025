@@ -20,6 +20,22 @@ let
   # Instantiate the LLM call vector
   llmCallVectorDescription = (import ./llm-call-vector-functor.nix) { inherit lib; calls = llmCalls; };
 
+  fixmeTaskGenerator = (import ./fixme-task-generator.nix) {
+    inherit pkgs lib llmFunctor myKeyObject myModelRouter;
+    llmOrchestratorOutput = llmOrchestrator;
+    bagOfWordsReportContent = bagOfWordsReportContent;
+    projectSource = self; # Pass the entire flake as project source for grep
+  };
+
+  # Combine original LLM calls with fixme tasks
+  allLlmCalls = llmCalls ++ fixmeTaskGenerator.fixmeTasks;
+
+  # Update llmCallVectorDescription to include fixme tasks
+  updatedLlmCallVectorDescription = (import ./llm-call-vector-functor.nix) {
+    inherit lib;
+    calls = allLlmCalls;
+  };
+
   # The monadic interface: an impure derivation to execute LLM calls
   llmOrchestrator = pkgs.runCommand "llm-orchestrator-results"
     {
@@ -30,7 +46,7 @@ let
       buildInputs = [ pkgs.bash ];
 
       # Pass the pure Nix objects as JSON strings to the script
-      LLM_CALL_VECTOR_JSON = builtins.toJSON llmCallVectorDescription;
+      LLM_CALL_VECTOR_JSON = builtins.toJSON updatedLlmCallVectorDescription;
       KEY_OBJECT_JSON = builtins.toJSON myKeyObject;
       MODEL_ROUTER_JSON = builtins.toJSON myModelRouter;
       BAG_OF_WORDS_REPORT_JSON = bagOfWordsReportContent;
@@ -46,5 +62,5 @@ in
 {
   inherit myKeyObject myModelRouter llmCallVectorDescription llmOrchestrator;
   # Expose other intermediate results if needed for debugging or further processing
-  inherit bagOfWordsReportDerivation bagOfWordsReportContent;
+  inherit bagOfWordsReportDerivation bagOfWordsReportContent fixmeTaskGenerator updatedLlmCallVectorDescription;
 }
