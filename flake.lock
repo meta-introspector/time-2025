@@ -240,7 +240,7 @@
       "original": {
         "dir": "10",
         "owner": "meta-introspector",
-        "ref": "feature/aimyc-003-cultivation",
+        "ref": "a7eb009bf70f77f95091b549ce68e8962663bfa4",
         "repo": "time-2025",
         "type": "github"
       }
