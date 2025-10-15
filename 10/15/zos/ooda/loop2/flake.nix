@@ -24,6 +24,133 @@
           pkgs = nixpkgs.legacyPackages.${system};
           loop1-output = loop1.packages.${system}.default;
 
+          # Define the OODA loop configurations and influences table
+          oodaLoops = {
+            loop1 = {
+              vibe = "initial-observation";
+              guidance = "Focus on broad data collection and initial state assessment.";
+              influences = [ "data-integrity" "context-awareness" ];
+            };
+            loop2 = {
+              vibe = "pattern-recognition";
+              guidance = "Identify emerging patterns and anomalies from observed data.";
+              influences = [ "historical-data" "predictive-models" ];
+            };
+            loop3 = {
+              vibe = "strategic-alignment";
+              guidance = "Align observations with strategic goals and potential actions.";
+              influences = [ "goal-relevance" "resource-availability" ];
+            };
+            loop4 = {
+              vibe = "action-synthesis";
+              guidance = "Synthesize potential actions and evaluate their feasibility.";
+              influences = [ "risk-assessment" "impact-analysis" ];
+            };
+            loop5 = {
+              vibe = "execution-orchestration";
+              guidance = "Orchestrate the execution of chosen actions.";
+              influences = [ "execution-efficiency" "dependency-management" ];
+            };
+            loop6 = {
+              vibe = "feedback-integration";
+              guidance = "Integrate feedback from executed actions into the observation phase.";
+              influences = [ "feedback-loop-speed" "error-detection" ];
+            };
+            loop7 = {
+              vibe = "system-adaptation";
+              guidance = "Adapt the system based on integrated feedback and new insights.";
+              influences = [ "system-resilience" "scalability-considerations" ];
+            };
+            loop8 = {
+              vibe = "adaptive-refinement";
+              guidance = "Continuously refine strategies and processes for optimal performance.";
+              influences = [ "performance-metrics" "user-feedback" ];
+            };
+          };
+
+          influencesTable = {
+            "data-integrity" = {
+              description = "Ensuring the accuracy and consistency of data across all sources.";
+              priority = 1;
+              category = "observation";
+            };
+            "context-awareness" = {
+              description = "Understanding the operational environment, external factors, and their dynamics.";
+              priority = 2;
+              category = "observation";
+            };
+            "historical-data" = {
+              description = "Leveraging past data to inform current pattern recognition and predictions.";
+              priority = 1;
+              category = "orientation";
+            };
+            "predictive-models" = {
+              description = "Utilizing models to forecast future states and potential outcomes.";
+              priority = 2;
+              category = "orientation";
+            };
+            "goal-relevance" = {
+              description = "Assessing how well potential actions align with overall strategic objectives.";
+              priority = 1;
+              category = "decision";
+            };
+            "resource-availability" = {
+              description = "Evaluating the availability of necessary resources (compute, data, personnel) for actions.";
+              priority = 2;
+              category = "decision";
+            };
+            "risk-assessment" = {
+              description = "Identifying and evaluating potential risks associated with proposed actions.";
+              priority = 1;
+              category = "decision";
+            };
+            "impact-analysis" = {
+              description = "Analyzing the potential positive and negative impacts of actions.";
+              priority = 2;
+              category = "decision";
+            };
+            "execution-efficiency" = {
+              description = "Optimizing the speed and resource usage of action execution.";
+              priority = 1;
+              category = "action";
+            };
+            "dependency-management" = {
+              description = "Managing interdependencies between different actions and components.";
+              priority = 2;
+              category = "action";
+            };
+            "feedback-loop-speed" = {
+              description = "The rapidity with which feedback from actions is collected and processed.";
+              priority = 1;
+              category = "observation";
+            };
+            "error-detection" = {
+              description = "Mechanisms for identifying and reporting failures or deviations from expected outcomes.";
+              priority = 2;
+              category = "observation";
+            };
+            "system-resilience" = {
+              description = "The ability of the system to withstand and recover from failures or unexpected events.";
+              priority = 1;
+              category = "adaptation";
+            };
+            "scalability-considerations" = {
+              description = "Planning for the system's ability to handle increased load or complexity.";
+              priority = 2;
+              category = "adaptation";
+            };
+            "performance-metrics" = {
+              description = "Key indicators used to measure the effectiveness and efficiency of the system.";
+              priority = 1;
+              category = "refinement";
+            };
+            "user-feedback" = {
+              description = "Incorporating input from users or external stakeholders for system improvement.";
+              priority = 2;
+              category = "refinement";
+            };
+          };
+
           # Execute the tasks in a sequential chain, passing the output of one
           # as the input to the next. This assumes each task flake's default
           # package is a function that accepts its inputs as arguments.
