@@ -29,13 +29,24 @@ let
     )
     (builtins.readDir ./qa.d);
 
-  # Collect all checks
+  # Dynamically load checks from qa.d/
+  qaModules = lib.mapAttrs'
+    (name: path:
+      if lib.hasSuffix ".nix" name && name != "helpers.nix" && name != "project-info.nix"
+      then {
+        name = lib.removeSuffix ".nix" name;
+        value = import path (commonArgs // { inherit qaHelpers projectInfo allNixFiles self; });
+      }
+      else null
+    )
+    (builtins.readDir ./qa.d);
+
+  # Collect all checks, filtering out nulls
   allChecks = lib.filterAttrs (name: value: value != null) qaModules;
 
-  # Define the default check that runs all other checks
+  # Define the default check that runs all other checks with logging
   defaultCheck = pkgs.runCommand "default-qa-check"
     {
-      # Inherit all checks to ensure they are built
       inherit (allChecks)
         check-all-nix-files
         check-uncommitted-files
@@ -45,9 +56,24 @@ let
         nix-emoji-report
         flake-metadata-from-nix2-task
         url-extractor
-        nix-dump-evaluator; # Add the new check
+        nix-dump-evaluator;
     } ''
     echo "--- Running all default QA checks ---"
+
+    # Log the type of each module before running the check
+    ${lib.strings.concatStringsSep "\n" (
+      lib.attrsets.mapAttrsToList
+        (name: value:
+          let
+            moduleType = builtins.typeOf value;
+          in
+          pkgs.runCommand "log-${name}" { inherit moduleType; } ''
+            echo "QA Module: ${name}, Type: ${moduleType}"
+            touch $out
+          ''
+        ) allChecks
+    )}
+
     ${allChecks.check-all-nix-files}
     ${allChecks.check-uncommitted-files}
     ${allChecks.nix-flake-check}
@@ -56,7 +82,7 @@ let
     ${allChecks.nix-emoji-report}
     ${allChecks.flake-metadata-from-nix2-task}
     ${allChecks.url-extractor}
-    ${allChecks.nix-dump-evaluator} # Run the new check
+    ${allChecks.nix-dump-evaluator}
     echo "--- All default QA checks passed. ---"
     touch $out
   '';
