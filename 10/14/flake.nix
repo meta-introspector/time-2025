@@ -18,5 +18,7 @@
 
       # Expose the raw data for other flakes to consume if needed
       lib.monsterGroupData = monsterGroupPrimeLattice.monsterGroupData;
+
+      docs.md = pkgs.writeText "mycology-flake-docs.md" "see file";
     };
 }
