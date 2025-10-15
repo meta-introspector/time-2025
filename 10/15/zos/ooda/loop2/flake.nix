@@ -15,9 +15,10 @@
     decideFlake = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/zos/tasks/decide"; flake = true; };
     actFlake = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/zos/tasks/act"; flake = true; };
     dwimFlake = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/dwim"; flake = true; };
+    sourceConfigFlake = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/zos/source-config"; flake = true; };
   };
 
-  outputs = { self, nixpkgs, flake-utils, loop1, observeFlake, orientFlake, decideFlake, actFlake, dwimFlake }:
+  outputs = { self, nixpkgs, flake-utils, loop1, observeFlake, orientFlake, decideFlake, actFlake, dwimFlake, sourceConfigFlake }:
     flake-utils.lib.eachDefaultSystem
       (system:
         let
@@ -151,12 +152,10 @@
             };
           };
 
-          currentCommit = "1916ba6f27eeebc82c339fa29a6dd36ae0c0dfa6"; # Current commit hash
-
-          getLoopSource = loopNum: initialCommit:
-            # For now, always return the initialCommit.
-            # This can be extended later to provide different commits per loop.
-            initialCommit;
+          # Get the commit source function from the sourceConfigFlake
+          # We pass the 'self' commit hash to the sourceConfigFlake so it can use it as a base.
+          # The 'self' here refers to the current flake (loop2).
+          sourceConfig = sourceConfigFlake.lib.getLoopSourceConfig self.rev;
 
           # Recursive function to run the OODA loop
           runOODALoop = loopNum: previousActResult:
@@ -165,7 +164,7 @@
               loopVibe = loopConfig.vibe;
               loopGuidance = loopConfig.guidance;
               loopInfluences = loopConfig.influences;
-              loopCommit = getLoopSource loopNum currentCommit; # Use the new function
+              loopCommit = sourceConfig.getCommitForLoop loopNum; # Use the function from sourceConfigFlake
 
               # Override inputs for observe, orient, decide, act with loop-specific commit
               # This is a conceptual change, actual implementation will be more involved
