@@ -3,14 +3,11 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    actionPlan = {
-      url = "path:./."; # Placeholder, will be passed dynamically
-      flake = false;
-    };
-    dwimFlake.url = "path:../../dwim"; # Need access to DWIM flake
     self = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation"; }; # Reference to the repository root
+    dwimFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/dwim"; # Need access to DWIM flake
   };
-  outputs = { self, nixpkgs, flake-utils, actionPlan, dwimFlake }:
+
+  outputs = { self, nixpkgs, flake-utils, dwimFlake, actionPlan }:
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system}; in
       {
