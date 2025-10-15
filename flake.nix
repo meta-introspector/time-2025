@@ -87,14 +87,14 @@
     };
 
     #    month10Flake = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=10"; };
-    month10Flake = { url = "github:meta-introspector/time-2025?ref=a7eb009bf70f77f95091b549ce68e8962663bfa4&dir=10"; };
+    month10Flake = { url = selfRepoWrapper { ref = "a7eb009bf70f77f95091b549ce68e8962663bfa4"; dir = "10"; }; };
 
     # 5. Data Sources Flake (as a path input)
     dataSources = {
-      url = "github:meta-introspector/time-2025?ref=7c2ef1198c1ae2ef45c09dc18d3d4dc2d580e9bb&dir=flakes/data-sources";
+      url = selfRepoWrapper { ref = "7c2ef1198c1ae2ef45c09dc18d3d4dc2d580e9bb"; dir = "flakes/data-sources"; };
       inputs = {
-        nixpkgs = { url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify"; };
-        flake-utils = { url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; };
+        nixpkgs = { url = githubWrapper { owner = "meta-introspector"; repo = "nixpkgs"; ref = "feature/CRQ-016-nixify"; useLocalMirror = true; }; };
+        flake-utils = { url = githubWrapper { owner = "meta-introspector"; repo = "flake-utils"; ref = "feature/CRQ-016-nixify"; }; };
       };
     };
     # Import the githubWrapper utility
