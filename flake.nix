@@ -88,7 +88,7 @@
     };
 
     #    month10Flake = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=10"; };
-    month10Flake = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10"; };
+    month10Flake = { url = "github:meta-introspector/time-2025?ref=a7eb009bf70f77f95091b549ce68e8962663bfa4&dir=10"; };
 
     # 5. Data Sources Flake (as a path input)
     dataSources = {
