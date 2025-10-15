@@ -24,11 +24,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-P3Jvd/i4ypFbOky5uonc1TFs8eeVhHaWYFZgqvoClmM=",
-        "path": "/nix/store/xmgbj8d12vzk3j7wk96gvw7gm0pgya9y-source/flakes/data-sources",
+        "path": "/nix/store/cprym8xm39pf4ffr20apvwnpn0m16zac-source/flakes/data-sources",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/xmgbj8d12vzk3j7wk96gvw7gm0pgya9y-source/flakes/data-sources",
+        "path": "/nix/store/cprym8xm39pf4ffr20apvwnpn0m16zac-source/flakes/data-sources",
         "type": "path"
       }
     },

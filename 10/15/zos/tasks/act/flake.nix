@@ -22,18 +22,39 @@
         packages.default = { actionPlan, dwimFlake }:
           let
             dwimToolPath = dwimFlake.lib.${system}.dwim; # Extract the path
+            actionPlanPath = actionPlan; # Explicitly assign actionPlan to a path variable
           in
           pkgs.runCommand "new-tasks-and-state"
             {
-              inherit actionPlan;
+              ACTION_PLAN = actionPlanPath; # Pass the path as an environment variable
               DWIM_TOOL = dwimToolPath; # Pass the path as an environment variable
               # This would involve invoking DWIM, or other task generators based on the plan.
               # For now, a placeholder.
             } ''
             mkdir -p $out
-            echo "{ \"actionPlan\": \"$actionPlan\", \"generatedTasks\": [ \"dwim-task-1\" ], \"nextState\": \"updated\", \"dwimToolUsed\": \"$DWIM_TOOL\" }" > $out/new-state.json
+            echo "{ \"actionPlan\": \"$ACTION_PLAN\", \"generatedTasks\": [ \"dwim-task-1\" ], \"nextState\": \"updated\", \"dwimToolUsed\": \"$DWIM_TOOL\" }" > $out/new-state.json
           '';
         checks.healthcheck = healthcheckData;
+
+        packages.typeReport = pkgs.writeText "act-type-report.json" (builtins.toJSON {
+          inputs = {
+            dwimFlake = {
+              lib = {
+                type = "attrset";
+                attrs = {
+                  "${system}" = {
+                    type = "attrset";
+                    attrs = {
+                      dwim = {
+                        type = "any";
+                      };
+                    };
+                  };
+                };
+              };
+            };
+          };
+        });
 
         # Add a new package for testing with dummy inputs
         packages.testOutput = self.packages.${system}.default {

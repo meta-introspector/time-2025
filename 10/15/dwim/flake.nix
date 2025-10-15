@@ -22,6 +22,22 @@
             inherit pkgs lib builtins llmGeneratorFlake metaOrchestratorFlake;
           }) promptString;
 
+        packages.typeReport = pkgs.writeText "dwim-type-report.json" (builtins.toJSON {
+          outputs = {
+            lib = {
+              type = "attrset";
+              attrs = {
+                dwimFunction = {
+                  type = "function";
+                  args = {
+                    promptString = "string";
+                  };
+                };
+              };
+            };
+          };
+        });
+
         # Expose the function directly for more advanced usage
         lib.dwimFunction = { promptString }:
           (import ./default.nix {

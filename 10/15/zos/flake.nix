@@ -46,7 +46,17 @@
     let
       lib = nixpkgs.lib; # Move lib definition here
 
-      # Custom attributes for the flake's state
+      # Custom attributes for the flake's state, with recursion fix
+      # We assume snapshot-1 is the source for the previous generation number
+      previousSnapshotInput = time-2025-snapshot-1;
+
+      derivedGeneration =
+        if lib.hasAttr "generation" previousSnapshotInput.outputs
+        then (builtins.mod previousSnapshotInput.outputs.generation 8) + 1
+        else 1; # Start at 1 if no previous snapshot generation
+
+      generation = derivedGeneration; # Use the derived generation
+
       currentSnapshotInput =
         if generation == 1 then time-2025-snapshot-1
         else if generation == 2 then time-2025-snapshot-2
@@ -56,13 +66,6 @@
         else if generation == 6 then time-2025-snapshot-6
         else if generation == 7 then time-2025-snapshot-7
         else time-2025-snapshot-8;
-
-      derivedGeneration =
-        if lib.hasAttr "generation" currentSnapshotInput.outputs
-        then (currentSnapshotInput.outputs.generation % 8) + 1
-        else 1; # Start at 1 if no previous snapshot generation
-
-      generation = derivedGeneration; # Use the derived generation
       commitHash = "a62a65a364546734bda438098dc44cefba63380e"; # Hardcode the commit hash
       gitRepoName = "time-2025"; # Hardcode for now, can be parsed from self.url
       branchName = "feature/aimyc-003-cultivation"; # Hardcode for now, can be parsed from self.url
