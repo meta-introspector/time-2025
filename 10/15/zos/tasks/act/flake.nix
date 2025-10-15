@@ -16,6 +16,7 @@
             # This would involve invoking DWIM, or other task generators based on the plan.
             # For now, a placeholder.
           } ''
+          mkdir -p $out
           echo "Acting on plan: $actionPlan" > $out/new-state.json
           echo "{ \"generatedTasks\": [ \"dwim-task-1\" ], \"nextState\": \"updated\" }" > $out/new-state.json
         '';
