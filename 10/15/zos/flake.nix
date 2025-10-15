@@ -1,89 +1,64 @@
 {
-  description = "The Zero-One-System (ZOS) flake: a self-evolving, OODA-loop-driven meta-orchestrator.";
+  description = "ZOS Orchestrator: Coordinates the Act, Decide, and Observe tasks.";
 
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
+    self = { url = "github:meta-introspector/time-2025?ref=a62a65a364546734bda438098dc44cefba63380e"; flake = true; }; # Hardcode the commit hash and explicitly set flake = true
 
-    dwimFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/dwim";
-    workflowTasksFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/workflow-tasks";
-    llmGeneratorFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/14";
-    metaOrchestratorFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/meta-orchestrator";
-    observeFlake = {
-      url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/zos/tasks/observe";
-      # inputs.currentState.url = initialState;
+    actFlake = { url = "path:./tasks/act"; };
+    decideFlake = { url = "path:./tasks/decide"; };
+    observeFlake = { url = "path:./tasks/observe"; };
+
+    projectToObserve = {
+      url = "path:../.."; # Points to the time-2025 repository root
+      flake = false;
     };
-    orientFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/zos/tasks/orient";
-    decideFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/zos/tasks/decide";
-    actFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/zos/tasks/act";
-    runZosTasksFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/zos/tasks/run-zos-tasks";
   };
 
-  outputs = { self, nixpkgs, flake-utils, dwimFlake, workflowTasksFlake, llmGeneratorFlake, metaOrchestratorFlake, observeFlake, orientFlake, decideFlake, actFlake, runZosTasksFlake, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-        lib = pkgs.lib;
+  outputs = { self, nixpkgs, flake-utils, actFlake, decideFlake, observeFlake, projectToObserve }:
+    let
+      lib = nixpkgs.lib; # Move lib definition here
 
-        # The OODA loop function
-        # Takes a 'state' (a derivation representing the current system state)
-        # and returns a new 'state' (a derivation representing the next system state)
-        # This is where the Observe, Orient, Decide, Act logic will reside.
-        ooda = currentState:
-          let
-            # observationReport = observeFlake.packages.${system}.default { inherit currentState; };
-            # Observe
-            observationReport = observeFlake.packages.${system}.default { inherit currentState; };
-            # Orient
-            #orientationDecision = orientFlake.packages.${system}.default {
-            #  inherit observationReport llmGeneratorFlake;
-            #};
-            # Decide
-            #actionPlan = decideFlake.packages.${system}.default { inherit orientationDecision; };
-            # Act
-            nextState = actFlake.packages.${system}.default {
-              actionPlan = "actionPlan";
-              dwimFlake = dwimFlake;
-            };
-          in
-          nextState;
+      # Custom attributes for the flake's state
+      generation = 3; # Hardcode generation to 1
+      commitHash = "a62a65a364546734bda438098dc44cefba63380e"; # Hardcode the commit hash
+      gitRepoName = "time-2025"; # Hardcode for now, can be parsed from self.url
+      branchName = "feature/aimyc-003-cultivation"; # Hardcode for now, can be parsed from self.url
+    in
+    flake-utils.lib.eachDefaultSystem
+      (system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          packages = {
+            default = pkgs.runCommand "zos-status-report"
+              {
+                nativeBuildInputs = [ pkgs.jq ];
+                inherit generation commitHash gitRepoName branchName; # Use derivedGeneration
+              } ''
+              set -x
+              mkdir -p $out
+              echo "{ \"generation\": $generation, \"commitHash\": \"$commitHash\", \"gitRepoName\": \"$gitRepoName\", \"branchName\": \"$branchName\", \"status\": \"ready\" }" | jq . > $out/status-report.json
+            '';
+          };
 
-        # Fixed-point combinator for iterative OODA application
-        # This is a conceptual placeholder. Actual implementation will be complex.
-        # It would involve a recursive function that applies ooda until a condition is met.
-        # For now, let's just define an initial state and one application.
-        initialState = pkgs.runCommand "initial-system-state"
-          {
-            repoSource = self; # The ZOS flake's self input, which is the repo root
-            buildInputs = [ pkgs.nix ]; # For nix-hash
-          } ''
-          mkdir -p $out
-          echo "{ \"repoHash\": \"$(nix-hash --flat --base32 $repoSource)\", \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\", \"projects\": [], \"tasks\": [] }" > $out/new-state.json
-        '';
-
-        # One application of the OODA loop
-        firstOodaIteration = ooda initialState;
-
-        # The 'run' command to execute generated tasks (placeholder)
-        runZosTasks = runZosTasksFlake.packages.${system}.default;
-
-      in
-      {
-        packages = {
-          # Expose the OODA loop's output
-          oodaState = firstOodaIteration;
-          run = runZosTasks;
-          bootstrap.zos = pkgs.runCommand "zos-bootstrap"
-            {
-              inherit firstOodaIteration;
-              # This bootstrap target will trigger the first OODA iteration
-            } ''
-            echo "ZOS bootstrap complete. First OODA iteration result: $firstOodaIteration" > $out
-          '';
-          initialState = initialState;
-        };
-      } // {
-        defaultPackage = self.packages.${system}.bootstrap.zos;
-      }
-    );
+          checks = {
+            healthcheck = pkgs.runCommand "orchestrator-healthcheck"
+              {
+                nativeBuildInputs = [ pkgs.jq ];
+                description = self.description; # Use self.description
+                flakeInputs = builtins.toJSON (lib.attrNames self.inputs);
+                system = system;
+              } ''
+              set -x
+              mkdir -p $out
+              echo "{ \"healthy\": true, \"description\": \"$description\", \"flakeInputs\": $flakeInputs, \"system\": \"$system\" }" | jq . > $out/healthcheck.json
+            '';
+          };
+        }) // {
+      # Expose generation as a top-level output
+      generation = generation;
+    };
 }
