@@ -2,10 +2,12 @@
   description = "Flake for AI Life Mycology - Monster Group Prime Lattice";
 
   inputs = {
+    self.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/14";
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
+    bag-of-words-generator.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=flakes/bag-of-words-generator";
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, bag-of-words-generator, ... }@inputs:
     let
       system = "aarch64-linux";
       pkgs = import nixpkgs { inherit system; };
