@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "bag-of-words-generator": {
+    "bagOfWordsGenerator": {
       "inputs": {
         "bagOfWordsScript": "bagOfWordsScript",
         "flake-utils": "flake-utils",
@@ -105,7 +105,7 @@
     },
     "root": {
       "inputs": {
-        "bag-of-words-generator": "bag-of-words-generator",
+        "bagOfWordsGenerator": "bagOfWordsGenerator",
         "nixpkgs": "nixpkgs_2",
         "self": "self"
       }
