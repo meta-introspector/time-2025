@@ -229,10 +229,7 @@ let
 
   # Create a symlink to the final flake for convenience
   ln -s "$FINAL_FLAKE_PATH" "$out/documented-flake.nix"
-  ''                  ;
-
-
-
+  '' ;
 in
 {
   name = "document-single-flake-pipeline";
@@ -244,16 +241,4 @@ in
   # Also expose a default output for convenience
   default = finalResult;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
