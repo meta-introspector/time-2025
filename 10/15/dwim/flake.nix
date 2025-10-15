@@ -6,7 +6,7 @@
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     llmGeneratorFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/14";
     metaOrchestratorFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/meta-orchestrator";
-    self = { url = "path:./."; }; # Reference to the current flake
+
   };
 
   outputs = { self, nixpkgs, flake-utils, llmGeneratorFlake, metaOrchestratorFlake }:
