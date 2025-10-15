@@ -3,13 +3,14 @@ flakePath: # This task is now a function that takes flakePath
 let
   # Helper to check if a flake output exists and builds
   checkFlakeOutput = outputName:
-    pkgs.runCommand "check-${(lib.strings.sanitizeDerivationName outputName)}-output" {
-      inherit flakePath;
-      output = outputName;
-      # We need to ensure the flake path is a valid Nix store path or a path that Nix can resolve.
-      # For simplicity, we assume flakePath is directly usable by nix build.
-      # In a real scenario, you might need to ensure it's a store path or a flake reference.
-    } ''
+    pkgs.runCommand "check-${(lib.strings.sanitizeDerivationName outputName)}-output"
+      {
+        inherit flakePath;
+        output = outputName;
+        # We need to ensure the flake path is a valid Nix store path or a path that Nix can resolve.
+        # For simplicity, we assume flakePath is directly usable by nix build.
+        # In a real scenario, you might need to ensure it's a store path or a flake reference.
+      } ''
       set +e # Don't exit on first error
       if nix build "$flakePath".#"$output" --no-link &> "$out/build_log.txt"; then
         echo "status=success" > "$out/status"
@@ -27,10 +28,10 @@ let
   pureDocGeneration = pkgs.stdenv.mkDerivation {
     name = "pure-doc-generation";
     inherit flakePath;
-    
+
     # This derivation will depend on the checkDocStatus to decide if it needs to run
     # For now, we'll always try to generate if docs are not found.
-    
+
     # We need to import the llm-pipeline.nix from llmGeneratorFlake
     llmPipeline = llmGeneratorFlake.lib.${pkgs.system}.llmPipeline;
 
@@ -38,7 +39,8 @@ let
     llmCallVectorDescription = (llmPipeline.llmCallVectorFunctor) {
       inherit lib;
       calls = [
-        (llmPipeline.llmFunctor) {
+        (llmPipeline.llmFunctor)
+        {
           checksum = lib.hashFile "sha256" flakePath; # Use flakePath hash as checksum
           keyObject = llmPipeline.myKeyObject; # Dummy key object
           modelRouter = llmPipeline.myModelRouter; # Dummy model router
@@ -67,22 +69,23 @@ let
       # In a real scenario, we'd process all tasks and extract the actual LLM response
       echo "$LLM_TASKS_JSON" | jq -r '.[0].taskDescription' > "$out"
     '';
-    
+
     # Dependencies for the builder script
     buildInputs = [ pkgs.bash pkgs.jq ];
-    
+
     # Pass the necessary Nix objects to the builder script
     # This is done via the builder script itself, as it's a pkgs.writeScript
   };
 
   # Step 3: Apply pure generated documentation to the flake
-  applyPureDoc = pkgs.runCommand "apply-pure-doc" {
-    inherit flakePath;
-    generatedDocContent = pureDocGeneration; # Input from previous step
-    # We need the original flake content to modify it
-    originalFlakeContent = builtins.readFile flakePath;
-    buildInputs = [ pkgs.gnused pkgs.nix ]; # Add sed and nix for parsing
-  } ''
+  applyPureDoc = pkgs.runCommand "apply-pure-doc"
+    {
+      inherit flakePath;
+      generatedDocContent = pureDocGeneration; # Input from previous step
+      # We need the original flake content to modify it
+      originalFlakeContent = builtins.readFile flakePath;
+      buildInputs = [ pkgs.gnused pkgs.nix ]; # Add sed and nix for parsing
+    } ''
     set -euo pipefail
 
     # Read the generated documentation content
@@ -95,15 +98,15 @@ let
     # This is a simplified approach and might break with complex flake structures.
     # A more robust solution would involve Nix AST manipulation.
     INSERTION_POINT="};"
-    NEW_DOC_BLOCK="      docs.md = pkgs.writeText \"$(basename "$flakePath" .nix)-docs.md\" ''\n$DOC_CONTENT\n      '';"
+    NEW_DOC_BLOCK="      docs.md = pkgs.writeText \"$(basename "$flakePath" .nix)-docs.md\" ''\n$DOC_CONTENT\n      '';
+  "
 
     # Use sed to insert the new doc block before the last '};'
     # This assumes the last '};' is the correct place to insert.
     # This is highly brittle and for demonstration purposes.
-    echo "$ORIGINAL_FLAKE_CONTENT" | sed -e "s|${INSERTION_POINT}|${NEW_DOC_BLOCK}\n${INSERTION_POINT}|g" > "$out/flake.nix"
-
-    # Verify the new flake.nix is syntactically valid (optional but good practice)
-    nix-instantiate --parse "$out/flake.nix"
+    echo "$ORIGINAL_FLAKE_CONTENT" |\
+    sed -e "s|${INSERTION_POINT}|${NEW_DOC_BLOCK}\\n${INSERTION_POINT}|g" > "$out/flake.nix";\
+    nix-instantiate --parse "$out/flake.nix";
   '';
 
   # Step 4: Impure documentation generation (fallback if pure fails)
@@ -167,10 +170,11 @@ let
     DOC_CONTENT=$(cat "$generatedDocContent")
     ORIGINAL_FLAKE_CONTENT="$originalFlakeContent"
     INSERTION_POINT="};"
-    NEW_DOC_BLOCK="      docs.md = pkgs.writeText \"$(basename "$flakePath" .nix)-docs.md\" ''\n$DOC_CONTENT\n      '';"
+    NEW_DOC_BLOCK="      docs.md = pkgs.writeText \"$(basename "$flakePath " .nix)-docs.md\" ''\n$DOC_CONTENT\n      '';"
 
-    echo "$ORIGINAL_FLAKE_CONTENT" | sed -e "s|${INSERTION_POINT}|${NEW_DOC_BLOCK}\n${INSERTION_POINT}|g" > "$out/flake.nix"
-    nix-instantiate --parse "$out/flake.nix"
+    echo "$ORIGINAL_FLAKE_CONTENT" |\
+    sed - e "s|${INSERTION_POINT}|${NEW_DOC_BLOCK}\\n${INSERTION_POINT}|g" > "$out/flake.nix"; \
+  nix-instantiate --parse "$out/flake.nix";
   '';
 
   # Step 6: Final Result Selection and Reporting
@@ -185,44 +189,47 @@ let
 
     # This script will decide which flake to output and what status to report
   } ''
-    set -euo pipefail
+  set - euo pipefail
 
-    FINAL_FLAKE_PATH=""
+  FINAL_FLAKE_PATH = ""
     FINAL_STATUS=""
-    REPORT_MESSAGE=""
+  REPORT_MESSAGE=""
 
-    # Check if docs already existed and built successfully
-    if [ "$(cat "$checkDocStatusResult/status")" = "status=success" ]; then
-      FINAL_FLAKE_PATH="$flakePath"
-      FINAL_STATUS="docs_already_exist"
-      REPORT_MESSAGE="Documentation already existed and built successfully."
-    elif [ -e "$applyPureDocResult" ]; then # Check if pure application succeeded
-      FINAL_FLAKE_PATH="$applyPureDocResult"
-      FINAL_STATUS="pure_generation_success"
-      REPORT_MESSAGE="Documentation generated and applied purely."
-    elif [ -e "$applyImpureDocResult" ]; then # Check if impure application succeeded
-      FINAL_FLAKE_PATH="$applyImpureDocResult"
-      FINAL_STATUS="impure_generation_success"
-      REPORT_MESSAGE="Documentation generated and applied impurely (fallback)."
-    else
-      FINAL_FLAKE_PATH="$flakePath" # Output original flake if all else fails
-      FINAL_STATUS="generation_failed"
-      REPORT_MESSAGE="Documentation generation failed for both pure and impure paths."
-    fi
+  # Check if docs already existed and built successfully
+  if [ "$(cat "$checkDocStatusResult/status")" = "status=success" ];
+  then
+  FINAL_FLAKE_PATH = "$flakePath"
+    FINAL_STATUS="docs_already_exist"
+  REPORT_MESSAGE="Documentation already existed and built successfully."
+  elif [ -e "$applyPureDocResult" ];
+  then # Check if pure application succeeded
+  FINAL_FLAKE_PATH = "$applyPureDocResult"
+    FINAL_STATUS="pure_generation_success"
+  REPORT_MESSAGE="Documentation generated and applied purely."
+  elif [ -e "$applyImpureDocResult" ];
+  then # Check if impure application succeeded
+  FINAL_FLAKE_PATH = "$applyImpureDocResult"
+    FINAL_STATUS="impure_generation_success"
+  REPORT_MESSAGE="Documentation generated and applied impurely (fallback)."
+  else
+  FINAL_FLAKE_PATH="$flakePath" # Output original flake if all else fails
+  FINAL_STATUS="generation_failed"
+  REPORT_MESSAGE="Documentation generation failed for both pure and impure paths."
+  fi
 
-    # Create a report file
-    cat > "$out/report.json" <<EOF
-{
+  # Create a report file
+  cat > "$out/report.json" <<EOF
+  {
   "flakePath": "$flakePath",
   "finalFlakePath": "$FINAL_FLAKE_PATH",
   "status": "$FINAL_STATUS",
   "message": "$REPORT_MESSAGE"
-}
-EOF
+  }
+  EOF
 
-    # Create a symlink to the final flake for convenience
-    ln -s "$FINAL_FLAKE_PATH" "$out/documented-flake.nix"
-  '';
+  # Create a symlink to the final flake for convenience
+  ln -s "$FINAL_FLAKE_PATH" "$out/documented-flake.nix"
+  ''               ;
 
 
 
@@ -237,3 +244,13 @@ in
   # Also expose a default output for convenience
   default = finalResult;
 }
+
+
+
+
+
+
+
+
+
+
