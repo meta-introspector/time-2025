@@ -1,0 +1,19 @@
+warning: Git tree '/data/data/com.termux.nix/files/home/pick-up-nix2/source/github/meta-introspector/streamofrandom/2025' is dirty
+error:
+       … while calling the 'derivationStrict' builtin
+
+         at /builtin/derivation.nix:9:12: (source not available)
+
+       … while evaluating derivation 'lock-file-0'
+         whose name attribute is located at /nix/store/j3sna6r5nrrqj5b3pslyc520cycfa43m-source/pkgs/stdenv/generic/make-derivation.nix:539:13
+
+       … while evaluating attribute 'BAG_OF_WORDS_GENERATOR_LIB_PATH' of derivation 'lock-file-0'
+
+         at /nix/store/0g7cqg5bpqr4jn26bmh4s1lr075mqnnp-source/10/12/audit-flakes/001_collect_locks/flake.nix:70:17:
+
+           69|                 NIX_FILE_CONTENT = item.nixFileContent;
+           70|                 BAG_OF_WORDS_GENERATOR_LIB_PATH = bagOfWordsGenerator.lib.${system}; # Pass the lib output of the fetched input
+             |                 ^
+           71|               }
+
+       error: cannot coerce a set to a string

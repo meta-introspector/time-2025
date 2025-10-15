@@ -1,0 +1,5 @@
+{
+  "nixFilePath": "/nix/store/dummy-source/flake.nix",
+  "lockFilePath": "/nix/store/dummy-source/flake.lock",
+  "nixFileContent": "{\"description\": \"dummy flake\"}\n"
+}
