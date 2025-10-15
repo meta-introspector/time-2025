@@ -4,8 +4,8 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    llmGeneratorFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/14";
-    metaOrchestratorFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/meta-orchestrator";
+    llmGeneratorFlake.url = "github:meta-introspector/time-2025?ref=7c2ef1198c1ae2ef45c09dc18d3d4dc2d580e9bb&dir=10/14";
+    metaOrchestratorFlake.url = "github:meta-introspector/time-2025?ref=7c2ef1198c1ae2ef45c09dc18d3d4dc2d580e9bb&dir=10/15/meta-orchestrator";
 
   };
 

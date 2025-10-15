@@ -4,9 +4,9 @@
   inputs = {
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
-    self.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation"; # Reference to the root of the current repository
-    workflowTasksFlake.url = "path:../workflow-tasks"; # Our workflow tasks flake
-    llmGeneratorFlake.url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/14"; # The LLM generator flake
+    self.url = "github:meta-introspector/time-2025?ref=7c2ef1198c1ae2ef45c09dc18d3d4dc2d580e9bb"; # Reference to the root of the current repository
+    workflowTasksFlake.url = "github:meta-introspector/time-2025?ref=7c2ef1198c1ae2ef45c09dc18d3d4dc2d580e9bb&dir=10/15/workflow-tasks"; # Our workflow tasks flake
+    llmGeneratorFlake.url = "github:meta-introspector/time-2025?ref=7c2ef1198c1ae2ef45c09dc18d3d4dc2d580e9bb&dir=10/14"; # The LLM generator flake
     # specFlakes = "path:../spec"; # Will be used later
   };
 

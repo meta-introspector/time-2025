@@ -92,7 +92,7 @@
 
     # 5. Data Sources Flake (as a path input)
     dataSources = {
-      url = "./flakes/data-sources";
+      url = "github:meta-introspector/time-2025?ref=7c2ef1198c1ae2ef45c09dc18d3d4dc2d580e9bb&dir=flakes/data-sources";
       inputs = {
         nixpkgs = { url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify"; };
         flake-utils = { url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; };
