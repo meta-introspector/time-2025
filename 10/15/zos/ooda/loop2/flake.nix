@@ -104,7 +104,7 @@
               description = "Identifying and evaluating potential risks associated with proposed actions.";
               priority = 1;
               category = "decision";
-            };\
+            };
             "impact-analysis" = {
               description = "Analyzing the potential positive and negative impacts of actions.";
               priority = 2;
