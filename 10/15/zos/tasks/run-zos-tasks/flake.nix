@@ -5,12 +5,11 @@
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     self = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation"; }; # Reference to the repository root
   };
-
-  outputs = { self, nixpkgs, flake-utils, tasksToRun }:
+  outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system}; in
       {
-        packages.default = pkgs.runCommand "task-execution-results" {
+        packages.default = { tasksToRun }: pkgs.runCommand "task-execution-results" {
           inherit tasksToRun;
         } ''
           echo "Executing ZOS tasks from: $tasksToRun" > $out/results.json
