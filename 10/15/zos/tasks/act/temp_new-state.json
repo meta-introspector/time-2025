@@ -1,0 +1,1 @@
+{ "actionPlan": "dummy-action-plan", "generatedTasks": [ "dwim-task-1" ], "nextState": "updated", "dwimToolUsed": "/nix/store/dummy-dwim" }

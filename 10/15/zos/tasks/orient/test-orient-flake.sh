@@ -6,4 +6,4 @@
 
 set -euo pipefail
 
-nix eval --no-write-lock-file --raw "${ORIENT_FLAKE_PATH}#default" --argfile args ./orient-eval-args.nix --apply 'x: x args' 
+nix eval --raw "$ORIENT_FLAKE_PATH"#default --argfile args ./orient-eval-args.nix --apply 'x: x args' --no-write-lock-file 

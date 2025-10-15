@@ -3,6 +3,6 @@ ORCHESTRATOR_FLAKE_PATH := .
 
 .PHONY: test
 test:
-	@echo "Evaluating orchestrator flake..."
-	@nix eval --raw $(ORCHESTRATOR_FLAKE_PATH)#default --no-write-lock-file
-	@echo "Orchestrator flake test complete."
+	@echo "Building orchestrator flake default package..."
+	@nix build .#packages.aarch64-linux.default
+	@echo "Orchestrator flake default package built. Output in ./result/status-report.json"

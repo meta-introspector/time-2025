@@ -18,20 +18,16 @@
         };
       in
       {
-        packages.default = { currentState }: pkgs.runCommand "observation-report"
+        packages.default = { projectPath }: pkgs.runCommand "observation-report"
           {
-            inherit currentState;
+            inherit projectPath;
             nativeBuildInputs = [ pkgs.jq ]; # Add jq as a build input
           } ''
           set -x
           mkdir -p $out # Explicitly create the output directory
-          echo "$currentState" | jq . > $out/report.json
+          echo "{ \"observedProject\": \"$projectPath\", \"status\": \"observed\" }" | jq . > $out/report.json
         '';
-        checks.healthcheck = healthcheckData;
 
-        # Add a new package for testing with dummy inputs
-        packages.testOutput = self.packages.${system}.default {
-          currentState = "{ \"actState\": \"dummy-act-state\", \"decidePlan\": \"dummy-decide-plan\" }";
-        };
+        checks.healthcheck = healthcheckData;
       });
 }

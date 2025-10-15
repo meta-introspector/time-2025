@@ -1,0 +1,9 @@
+{
+  "actions": [
+    {
+      "type": "dwim",
+      "prompt": "a simple game"
+    }
+  ],
+  "status": "planned"
+}
