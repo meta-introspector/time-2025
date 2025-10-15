@@ -103,7 +103,7 @@
               description = "Identifying and evaluating potential risks associated with proposed actions.";
               priority = 1;
               category = "decision";
-            };
+            };\
             "impact-analysis" = {
               description = "Analyzing the potential positive and negative impacts of actions.";
               priority = 2;
@@ -151,36 +151,67 @@
             };
           };
 
-          # Execute the tasks in a sequential chain, passing the output of one
-          # as the input to the next. This assumes each task flake's default
-          # package is a function that accepts its inputs as arguments.
+          currentCommit = "1916ba6f27eeebc82c339fa29a6dd36ae0c0dfa6"; # Current commit hash
 
-          observe-result = (observeFlake.packages.${system}.default) {
-            # Input for observe is the output of loop1
-            zos = loop1-output;
-          };
+          getLoopSource = loopNum: initialCommit:
+            # For now, always return the initialCommit.
+            # This can be extended later to provide different commits per loop.
+            initialCommit;
 
-          orient-result = (orientFlake.packages.${system}.default) {
-            # Input for orient is the output of observe
-            observe = observe-result;
-          };
+          # Recursive function to run the OODA loop
+          runOODALoop = loopNum: previousActResult:
+            let
+              loopConfig = builtins.getAttr ("loop" + (toString loopNum)) oodaLoops;
+              loopVibe = loopConfig.vibe;
+              loopGuidance = loopConfig.guidance;
+              loopInfluences = loopConfig.influences;
+              loopCommit = getLoopSource loopNum currentCommit; # Use the new function
 
-          decide-result = (decideFlake.packages.${system}.default) {
-            # Input for decide is the output of orient
-            orientationDecision = orient-result;
-          };
+              # Override inputs for observe, orient, decide, act with loop-specific commit
+              # This is a conceptual change, actual implementation will be more involved
+              # and might require modifying the task flakes themselves to accept these.
+              # For now, we'll just pass them as arguments to the task functions.
 
-          act-result = (actFlake.packages.${system}.default) {
-            # Input for act is the output of decide, passed as actionPlan
-            actionPlan = decide-result;
-            dwimFlake = dwimFlake;
-          };
+              observe-result = (observeFlake.packages.${system}.default) {
+                zos = previousActResult; # Pass previous act result as zos
+                loopInfo = {
+                  inherit loopNum loopVibe loopGuidance loopInfluences loopCommit;
+                };
+              };
 
+              orient-result = (orientFlake.packages.${system}.default) {
+                observe = observe-result;
+                loopInfo = {
+                  inherit loopNum loopVibe loopGuidance loopInfluences loopCommit;
+                };
+              };
+
+              decide-result = (decideFlake.packages.${system}.default) {
+                orientationDecision = orient-result;
+                loopInfo = {
+                  inherit loopNum loopVibe loopGuidance loopInfluences loopCommit;
+                };
+              };
+
+              act-result = (actFlake.packages.${system}.default) {
+                actionPlan = decide-result;
+                dwimFlake = dwimFlake; # dwimFlake is a global input
+                loopInfo = {
+                  inherit loopNum loopVibe loopGuidance loopInfluences loopCommit;
+                };
+              };
+
+            in
+            if loopNum == 8 then act-result # Base case: last loop returns its result
+            else runOODALoop (loopNum + 1) act-result;
+
+          # Initial call to the OODA loop
+          finalActResult = runOODALoop 1 loop1-output; # Start with loop1 and initial zos from loop1-output
         in
         {
           packages = {
             # The final result of the loop2 is the output of the 'act' task
-            default = act-result;
+            default = finalActResult;
           };
         });
 }
