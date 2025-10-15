@@ -22,7 +22,7 @@ let
     lib.flatten (
       lib.map
         (
-          result: lib.splitString " " (lib.replaceStrings [ "." "," ";" ":" "!" "?" "(" ")" "[" "]" "{" "}" "\"" "'" ] (lib.repeat 1 "") (lib.toLower result.response))
+          result: lib.splitString " " (lib.replaceStrings [ "." "," ";" ":" "!" "?" "(" ")" "[" "]" "{" "}" "\"" "'" ] (lib.map (x: "") [ "." "," ";" ":" "!" "?" "(" ")" "[" "]" "{" "}" "\"" "'" ]) (lib.toLower result.response))
         )
         orchestratorOutput.results
     )
