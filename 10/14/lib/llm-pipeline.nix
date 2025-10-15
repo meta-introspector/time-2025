@@ -1,48 +1,24 @@
-{ pkgs
-, lib
-, self
-, bagOfWordsGenerator
-,
-}:
+{ pkgs, lib, self, bagOfWordsGenerator, flakeFile }:
 
 let
   # Instantiate the key object
-  myKeyObject = (import ./key-object.nix) {
-    homedir = "/home/user"; # Placeholder
-    files = [ ]; # Placeholder
-  };
+  myKeyObject = (import ./key-object.nix) { inherit lib; homedir = "/home/user"; files = [ ]; };
 
   # Instantiate the model router
-  myModelRouter = (import ./model-router.nix) {
-    config = { }; # Placeholder
-  };
+  myModelRouter = (import ./model-router.nix) { inherit lib; config = { }; };
 
   # Generate bag-of-words report for the current flake.nix
-  bagOfWordsReportDerivation = bagOfWordsGenerator.lib.${pkgs.system}.generateBagOfWords self.flakeFile;
+  bagOfWordsReportDerivation = bagOfWordsGenerator.lib.${pkgs.system}.generateBagOfWords flakeFile;
   bagOfWordsReportContent = builtins.readFile "${bagOfWordsReportDerivation}/report.json";
 
   # Create a list of individual LLM call descriptions
   llmCalls = [
-    ((import ./llm-functor.nix) {
-      checksum = self.narHash;
-      keyObject = myKeyObject;
-      modelRouter = myModelRouter;
-      prompt = "Generate a short, creative description for a Nix flake that processes a 'Monster Group Prime Lattice' and outputs its JSON representation. The flake's previous version checksum is: ${self.narHash}. Focus on the 'AI Life Mycology' theme. (Call 1)";
-      expectedOutputFormat = "markdown";
-    })
-    ((import ./llm-functor.nix) {
-      checksum = self.narHash;
-      keyObject = myKeyObject;
-      modelRouter = myModelRouter;
-      prompt = "Summarize the core functionality of a Nix flake that manages a 'Monster Group Prime Lattice' and its JSON output, considering its previous version checksum: ${self.narHash}. Emphasize the 'AI Life Mycology' context. (Call 2)";
-      expectedOutputFormat = "markdown";
-    })
+    ((import ./llm-functor.nix) { inherit lib; checksum = self.narHash; keyObject = myKeyObject; modelRouter = myModelRouter; prompt = "Generate a short, creative description for a Nix flake that processes a 'Monster Group Prime Lattice' and outputs its JSON representation. The flake's previous version checksum is: ${self.narHash}. Focus on the 'AI Life Mycology' theme. (Call 1)"; expectedOutputFormat = "markdown"; })
+    ((import ./llm-functor.nix) { inherit lib; checksum = self.narHash; keyObject = myKeyObject; modelRouter = myModelRouter; prompt = "Summarize the core functionality of a Nix flake that manages a 'Monster Group Prime Lattice' and its JSON output, considering its previous version checksum: ${self.narHash}. Emphasize the 'AI Life Mycology' context. (Call 2)"; expectedOutputFormat = "markdown"; })
   ];
 
   # Instantiate the LLM call vector
-  llmCallVectorDescription = (import ./llm-call-vector-functor.nix) {
-    calls = llmCalls;
-  };
+  llmCallVectorDescription = (import ./llm-call-vector-functor.nix) { inherit lib; calls = llmCalls; };
 
   # The monadic interface: an impure derivation to execute LLM calls
   llmOrchestrator = pkgs.runCommand "llm-orchestrator-results"
@@ -51,6 +27,8 @@ let
       __noChroot = true;
       __noSandbox = true;
 
+      buildInputs = [ pkgs.bash ];
+
       # Pass the pure Nix objects as JSON strings to the script
       LLM_CALL_VECTOR_JSON = builtins.toJSON llmCallVectorDescription;
       KEY_OBJECT_JSON = builtins.toJSON myKeyObject;
@@ -58,9 +36,7 @@ let
       BAG_OF_WORDS_REPORT_JSON = bagOfWordsReportContent;
 
       # Make the script executable
-      script = pkgs.writeText "llm-orchestrator.sh" (builtins.readFile ../scripts/llm-orchestrator.sh);
-      # Ensure the script is executable
-      postPatch = "chmod +x $script";
+      script = pkgs.writeScript "llm-orchestrator.sh" (builtins.readFile ../scripts/llm-orchestrator.sh);
 
     } ''
     $script "$LLM_CALL_VECTOR_JSON" "$KEY_OBJECT_JSON" "$MODEL_ROUTER_JSON" "$BAG_OF_WORDS_REPORT_JSON" > $out

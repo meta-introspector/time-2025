@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This script acts as the monadic interface to execute LLM calls described by Nix.
 # It takes the JSON representation of the llmCallVectorDescription and keyObject as arguments.
