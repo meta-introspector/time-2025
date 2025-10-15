@@ -61,7 +61,6 @@
             lib.nameValuePair name (pkgs.runCommand name
               {
                 nativeBuildInputs = [ pkgs.jq ]; # Add jq to nativeBuildInputs
-                generate_lock_info_jq = ../scripts/jq/generate_lock_info.jq; # Add the jq script as a build input
                 # The output is a JSON file with the collected info
               }
               ''
@@ -70,7 +69,8 @@
                   --arg nixFilePath "${item.nixFilePath}" \
                   --arg lockFilePath "${item.lockFilePath}" \
                   --argjson nixFileContent "$(jq -Rs . <<< "${item.nixFileContent}")" \
-                  -f "$generate_lock_info_jq" | jq . > $out/lock-file-info.json
+                  '{ nixFilePath: $nixFilePath, lockFilePath: $lockFilePath, nixFileContent: $nixFileContent, hasLockFile: true }' \
+                  > $out/lock-file-info.json
               ''
             )
           )

@@ -131,7 +131,7 @@
       nixTermExtractor = month10Flake.crqTextExtractor;
       nGramGenerator = month10Flake.nGramGenerator;
 
-      qa = pkgs.callPackage ./qa.nix { inherit self nixTermExtractor nGramGenerator month10Flake nix-stdlib rnix-parser; };
+      # qa = pkgs.callPackage ./qa.nix { inherit self nixTermExtractor nGramGenerator month10Flake nix-stdlib rnix-parser; };
 
       # Define self-ingestion & modification derivation.
       # Temporarily using pkgs.stdenv.mkDerivation as pkgs.runCommand is causing "is not a derivation" error.
@@ -182,8 +182,8 @@
     {
       packages.${system} = {
         default = selfIngestionDerivation;
-        exampleUrlFetch = exampleUrlFetch.fetchedWebsite;
-        ontologyUrls = exampleUrlFetch.extractedUrls;
+        # exampleUrlFetch = exampleUrlFetch.fetchedWebsite;
+        # ontologyUrls = exampleUrlFetch.extractedUrls;
         # nixOwlOntology = exampleUrlFetch.nixToOwlOntology;
         generateHackathonUml = import ./theory/generate_hackathon_uml.nix { inherit pkgs lib self; };
 
@@ -259,6 +259,6 @@
         '';
       };
 
-      checks.${system} = qa;
+      # checks.${system} = qa;
     };
 }

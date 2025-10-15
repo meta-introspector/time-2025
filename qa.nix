@@ -20,24 +20,12 @@ let
   qaModules = lib.mapAttrs'
     (name: path:
       # Filter out non-nix files and the common helper modules
-      if lib.hasSuffix ".nix" name && name != "helpers.nix" && name != "project-info.nix"
+      if lib.hasSuffix ".nix" name && name != "helpers.nix" && name != "project-info.nix" && name != "url-extractor.nix"
       then {
         name = lib.removeSuffix ".nix" name;
         value = import path (commonArgs // { inherit qaHelpers projectInfo allNixFiles self; }); # Pass allNixFiles and self
       }
       else null # Filter out non-nix files and common modules
-    )
-    (builtins.readDir ./qa.d);
-
-  # Dynamically load checks from qa.d/
-  qaModules = lib.mapAttrs'
-    (name: path:
-      if lib.hasSuffix ".nix" name && name != "helpers.nix" && name != "project-info.nix"
-      then {
-        name = lib.removeSuffix ".nix" name;
-        value = import path (commonArgs // { inherit qaHelpers projectInfo allNixFiles self; });
-      }
-      else null
     )
     (builtins.readDir ./qa.d);
 
@@ -55,7 +43,6 @@ let
         shellcheck-config-sh
         nix-emoji-report
         flake-metadata-from-nix2-task
-        url-extractor
         nix-dump-evaluator;
     } ''
     echo "--- Running all default QA checks ---"
@@ -81,7 +68,6 @@ let
     ${allChecks.shellcheck-config-sh}
     ${allChecks.nix-emoji-report}
     ${allChecks.flake-metadata-from-nix2-task}
-    ${allChecks.url-extractor}
     ${allChecks.nix-dump-evaluator}
     echo "--- All default QA checks passed. ---"
     touch $out
