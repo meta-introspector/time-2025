@@ -80,6 +80,7 @@
             } ''
             echo "ZOS bootstrap complete. First OODA iteration result: $firstOodaIteration" > $out
           '';
+          initialState = initialState;
         };
       } // {
         defaultPackage = self.packages.${system}.bootstrap.zos;
