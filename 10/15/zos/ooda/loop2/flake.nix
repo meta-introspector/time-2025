@@ -40,7 +40,7 @@
 
           decide-result = (decideFlake.packages.${system}.default) {
             # Input for decide is the output of orient
-            orient = orient-result;
+            orientationDecision = orient-result;
           };
 
           act-result = (actFlake.packages.${system}.default) {
