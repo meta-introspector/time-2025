@@ -8,17 +8,37 @@
   };
   outputs = { self, nixpkgs, flake-utils, dwimFlake }:
     flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system}; in
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+        lib = pkgs.lib;
+        healthcheckData = {
+          healthy = true;
+          description = "ZOS Act task: Executes the planned actions and produces new tasks/state."; # Directly embed the string
+          flakeInputs = lib.attrNames self.inputs;
+          system = system;
+        };
+      in
       {
-        packages.default = { actionPlan, dwimFlake }: pkgs.runCommand "new-tasks-and-state"
-          {
-            inherit actionPlan dwimFlake;
-            # This would involve invoking DWIM, or other task generators based on the plan.
-            # For now, a placeholder.
-          } ''
-          mkdir -p $out
-          echo "Acting on plan: $actionPlan" > $out/new-state.json
-          echo "{ \"generatedTasks\": [ \"dwim-task-1\" ], \"nextState\": \"updated\" }" > $out/new-state.json
-        '';
+        packages.default = { actionPlan, dwimFlake }:
+          let
+            dwimToolPath = dwimFlake.lib.${system}.dwim; # Extract the path
+          in
+          pkgs.runCommand "new-tasks-and-state"
+            {
+              inherit actionPlan;
+              DWIM_TOOL = dwimToolPath; # Pass the path as an environment variable
+              # This would involve invoking DWIM, or other task generators based on the plan.
+              # For now, a placeholder.
+            } ''
+            mkdir -p $out
+            echo "{ \"actionPlan\": \"$actionPlan\", \"generatedTasks\": [ \"dwim-task-1\" ], \"nextState\": \"updated\", \"dwimToolUsed\": \"$DWIM_TOOL\" }" > $out/new-state.json
+          '';
+        checks.healthcheck = healthcheckData;
+
+        # Add a new package for testing with dummy inputs
+        packages.testOutput = self.packages.${system}.default {
+          actionPlan = "dummy-action-plan";
+          dwimFlake = { lib = { ${system} = { dwim = "/nix/store/dummy-dwim"; }; }; };
+        };
       });
 }
