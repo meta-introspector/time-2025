@@ -19,7 +19,7 @@
         };
       in
       {
-        packages.default = { actionPlan, dwimFlake }:
+        packages.default = { actionPlan, dwimFlake, loopInfo }:
           let
             dwimToolPath = dwimFlake.lib.${system}.dwim; # Extract the path
             actionPlanPath = actionPlan; # Explicitly assign actionPlan to a path variable

@@ -18,7 +18,7 @@
         };
       in
       {
-        packages.default = { orientationDecision }: pkgs.runCommand "action-plan"
+        packages.default = { orientationDecision, loopInfo }: pkgs.runCommand "action-plan"
           {
             inherit orientationDecision;
             nativeBuildInputs = [ pkgs.jq ]; # Add jq as a build input

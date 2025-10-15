@@ -10,7 +10,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system}; in
       {
-        packages.default = { observationReport, llmGeneratorFlake }:
+        packages.default = { observationReport, llmGeneratorFlake, loopInfo }:
           pkgs.runCommand "orient-decision"
             {
               inherit observationReport llmGeneratorFlake;

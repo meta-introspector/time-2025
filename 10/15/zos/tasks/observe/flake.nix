@@ -18,7 +18,7 @@
         };
       in
       {
-        packages.default = { projectPath }: pkgs.runCommand "observation-report"
+        packages.default = { projectPath, loopInfo }: pkgs.runCommand "observation-report"
           {
             inherit projectPath;
             nativeBuildInputs = [ pkgs.jq ]; # Add jq as a build input
