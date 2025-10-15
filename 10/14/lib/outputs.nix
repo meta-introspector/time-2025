@@ -46,7 +46,8 @@ in
 {
   packages.${pkgs.system} = {
     default = flakeUtils.monsterGroupPrimeLattice.monsterGroupJson;
-    llmResults = llmPipelineResults.llmOrchestrator;
+    llmResultsInitial = llmPipelineResults.llmOrchestratorInitial;
+    llmResultsFixme = llmPipelineResults.llmOrchestratorFixme;
     llmResponses = llmResponsePackages; # Expose individual packages
     llmResponses.default = llmResponsesMetaPackage; # Expose meta-package
     llmWorkpool = llmPipelineResults.workpool;
