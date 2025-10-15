@@ -13,8 +13,8 @@
     observeFlake = { url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/15/zos/tasks/observe"; flake = true; };
     orientFlake = { url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/15/zos/tasks/orient"; flake = true; };
     decideFlake = { url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/15/zos/tasks/decide"; flake = true; };
-    actFlake = { url = "github:meta-introspector/time-2025?ref=f3ba06c5951372adcc82192c024bfa7002321c22&dir=10/15/zos/tasks/act"; flake = true; };
-    dwimFlake = { url = "github:meta-introspector/time-2025?ref=e25f3a97b23a34f7e89174affbbe9cf1d5930a19&dir=10/15/dwim"; flake = true; };
+    actFlake = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/zos/tasks/act"; flake = true; };
+    dwimFlake = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/dwim"; flake = true; };
   };
 
   outputs = { self, nixpkgs, flake-utils, loop1, observeFlake, orientFlake, decideFlake, actFlake, dwimFlake }:
