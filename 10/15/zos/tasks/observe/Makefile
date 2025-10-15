@@ -1,5 +1,5 @@
-NIX_FLAKE_PATH := 10/15/zos
-OBSERVE_FLAKE_PATH := $(NIX_FLAKE_PATH)/tasks/observe
+NIX_FLAKE_PATH := ../..
+OBSERVE_FLAKE_PATH := .
 
 .PHONY: test
 test:
