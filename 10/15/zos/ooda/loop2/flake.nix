@@ -6,13 +6,13 @@
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
 
     loop1 = {
-      url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/15/zos";
+      url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/zos";
       flake = true;
     };
 
-    observeFlake = { url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/15/zos/tasks/observe"; flake = true; };
-    orientFlake = { url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/15/zos/tasks/orient"; flake = true; };
-    decideFlake = { url = "github:meta-introspector/time-2025?ref=feature/lattice-30030-homedir&dir=10/15/zos/tasks/decide"; flake = true; };
+    observeFlake = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/zos/tasks/observe"; flake = true; };
+    orientFlake = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/zos/tasks/orient"; flake = true; };
+    decideFlake = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/zos/tasks/decide"; flake = true; };
     actFlake = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/zos/tasks/act"; flake = true; };
     dwimFlake = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/15/dwim"; flake = true; };
   };
