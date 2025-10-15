@@ -34,7 +34,7 @@ let
     let
       repoName = repo;
       localPath = localMirrors.${repoName} or null;
-      basePath = if dir == null then "" else "/${dir}";
+      basePath = if dir == null then "" else "&dir=${dir}"; # Corrected to &dir=
       # If selfInput is provided, use its revision for the ref
       effectiveRef = if selfInput != null then selfInput.rev else ref;
     in
@@ -43,7 +43,15 @@ let
     else
       "github:${owner}/${repo}?ref=${effectiveRef}${basePath}";
 
+  # New function for self-repository references
+  selfRepoWrapper = { ref ? "master", dir ? null, useLocalMirror ? false, selfInput ? null }:
+    githubWrapper {
+      owner = "meta-introspector";
+      repo = "time-2025";
+      inherit ref dir useLocalMirror selfInput;
+    };
+
 in
 {
-  inherit githubWrapper getRevision getPermaUrlSelfReference;
+  inherit githubWrapper getRevision getPermaUrlSelfReference selfRepoWrapper;
 }

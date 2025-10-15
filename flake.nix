@@ -52,38 +52,37 @@
   description = "The Ultimate Nix Self-Ingesting Quine Derivation: Embodies Quasiquotation of System (CRQ-072) for self-referential architectural evolution.";
 
   inputs = {
-    # 1. Access the source code of this flake itself (last stable self)
-    nixpkgs = { url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify"; };
+    nixpkgs = { url = githubWrapper { owner = "meta-introspector"; repo = "nixpkgs"; ref = "feature/CRQ-016-nixify"; useLocalMirror = true; }; };
     # 2. Integrate the Introspection Tooling (Quasiquotation Extraction)
-    nixIntrospector = { url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; }; # Placeholder ref, acts as LIL/QQC for Nix expressions
+    nixIntrospector = { url = githubWrapper { owner = "meta-introspector"; repo = "flake-utils"; ref = "feature/CRQ-016-nixify"; }; }; # Placeholder ref, acts as LIL/QQC for Nix expressions
 
     rnix-parser = {
-      url = "github:meta-introspector/rnix-parser?ref=feature/CRQ-016-nixify-workflow";
+      url = githubWrapper { owner = "meta-introspector"; repo = "rnix-parser"; ref = "feature/CRQ-016-nixify-workflow"; };
       inputs.import-cargo.follows = "nixpkgs";
     };
     # 3. Reference the Log Analyzer for feedback (The Strange Loop Agent)
-    logAnalyzer = { url = "github:meta-introspector/time-2025?ref=feature/foaf&dir=09/25/log_analyzer"; };
-    sops-nix = { url = "github:meta-introspector/sops-nix?ref=feature/working-gemini-cli-nix-store"; };
-    node2nix-src = { url = "github:meta-introspector/node2nix"; };
-    nurl = { url = "github:meta-introspector/nurl"; };
-    nix-stdlib = { url = "github:meta-introspector/nix-stdlib"; };
+    logAnalyzer = { url = githubWrapper { owner = "meta-introspector"; repo = "time-2025"; ref = "feature/foaf"; dir = "09/25/log_analyzer"; }; };
+    sops-nix = { url = githubWrapper { owner = "meta-introspector"; repo = "sops-nix"; ref = "feature/working-gemini-cli-nix-store"; }; };
+    node2nix-src = { url = githubWrapper { owner = "meta-introspector"; repo = "node2nix"; }; };
+    nurl = { url = githubWrapper { owner = "meta-introspector"; repo = "nurl"; }; };
+    nix-stdlib = { url = githubWrapper { owner = "meta-introspector"; repo = "nix-stdlib"; }; };
 
     # nix-stdlib = { url = "github:meta-introspector/nix-stdlib?ref=feature/CRQ-016-nixify-workflow"; };
 
     # nixToPoemVial = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=flakes/nix-to-poem-vial"; }; # Placeholder (Commented out to fix build issue)
-    readMdVial = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=flakes/read-md-vial"; }; # Placeholder
-    readRsVial = { url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=flakes/read-rs-vial"; }; # Placeholder
+    readMdVial = { url = githubWrapper { owner = "meta-introspector"; repo = "time-2025"; ref = "feature/aimyc-001-cleanbench"; dir = "flakes/read-md-vial"; }; }; # Placeholder
+    readRsVial = { url = githubWrapper { owner = "meta-introspector"; repo = "time-2025"; ref = "feature/aimyc-001-cleanbench"; dir = "flakes/read-rs-vial"; }; }; # Placeholder
 
 
-    nixTaskNew = { url = "github:meta-introspector/nix-task?ref=feature/lattice-30030-homedir"; };
+    nixTaskNew = { url = githubWrapper { owner = "meta-introspector"; repo = "nix-task"; ref = "feature/lattice-30030-homedir"; }; };
 
     spore-vial = {
-      url = "github:meta-introspector/time-2025?ref=feature/aimyc-001-cleanbench&dir=theory/hackathon-mycology-workflow-puml";
+      url = githubWrapper { owner = "meta-introspector"; repo = "time-2025"; ref = "feature/aimyc-001-cleanbench"; dir = "theory/hackathon-mycology-workflow-puml"; };
       flake = false; # Since it's a directory, not a flake itself
     };
 
     nixOntologyRepo = {
-      url = "github:meta-introspector/ontology";
+      url = githubWrapper { owner = "meta-introspector"; repo = "ontology"; };
       flake = false;
     };
 
@@ -98,9 +97,14 @@
         flake-utils = { url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify"; };
       };
     };
+    # Import the githubWrapper utility
+    githubWrapperLib = {
+      url = "./lib/github-wrapper.nix";
+      flake = false; # It's a Nix file, not a flake
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, rnix-parser, nixTaskNew, nix-stdlib, nixOntologyRepo, month10Flake, sops-nix, nixIntrospector, logAnalyzer, node2nix-src, nurl, spore-vial, dataSources, readMdVial, readRsVial }:
+  outputs = { self, nixpkgs, flake-utils, rnix-parser, nixTaskNew, nix-stdlib, nixOntologyRepo, month10Flake, sops-nix, nixIntrospector, logAnalyzer, node2nix-src, nurl, spore-vial, dataSources, readMdVial, readRsVial, githubWrapperLib }:
     let
       # Define mycologyWorkflow as nixTask
       mycologyWorkflow = nixTaskNew;
@@ -109,6 +113,8 @@
       # Load core utilities
       pkgs = import nixpkgs { inherit system; };
       inherit (pkgs) lib;
+
+      githubWrapper = import githubWrapperLib { inherit lib; };
 
       # Import the secrets module and get the sopsSecretsPath option
       secretsModule = import ./lib/secrets.nix { inherit lib; };
