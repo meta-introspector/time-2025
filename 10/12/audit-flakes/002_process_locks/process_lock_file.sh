@@ -10,13 +10,13 @@ lockFile="${lockFile:-/tmp/flake.lock}"
 mkdir -p "$out"
 
 # Calculate bag of words
-echo "DEBUG: BAG_OF_WORDS_GENERATOR_PATH = $BAG_OF_WORDS_GENERATOR_PATH"
+echo "DEBUG: BAG_OF_WORDS_GENERATOR_LIB_PATH = $BAG_OF_WORDS_GENERATOR_LIB_PATH"
 SYSTEM=$(nix eval --raw --impure --expr 'builtins.currentSystem')
+export SYSTEM
 BAG_OF_WORDS_JSON_FILE=$(mktemp)
 
 BAG_OF_WORDS_DERIVATION=$(nix eval --raw --impure --extra-experimental-features 'nix-command flakes' \
-  "$BAG_OF_WORDS_GENERATOR_PATH#lib.${SYSTEM}.generateBagOfWords" \
-  --argstr flakePath "$NIX_FILE_PATH")
+  --expr "($BAG_OF_WORDS_GENERATOR_LIB_PATH).generateBagOfWords \"$NIX_FILE_PATH\"")
 
 BAG_OF_WORDS_OUTPUT_PATH=$(nix build --no-link --print-out-paths \
   --extra-experimental-features 'nix-command flakes' \

@@ -72,3 +72,39 @@ clean:
 report: 002c_collected_locks_derivation/build
 	@echo "Running audit report generation script..."
 	@"$(FLAKE_BASE_DIR)/scripts/generate_audit_report.sh"
+
+.PHONY: collect-locks-pickupnix
+collect-locks-pickupnix:
+	nix build ../001_collect_locks#packages.aarch64-linux.lock-file-0 --override-input project 'github:meta-introspector/pick-up-nix?ref=feature/CRQ-016-nixify' --extra-experimental-features 'nix-command flakes'
+
+.PHONY: collect-locks-streamofrandom
+collect-locks-streamofrandom:
+	nix build ../001_collect_locks#packages.aarch64-linux.lock-file-0 --override-input project 'github:meta-introspector/streamofrandom?ref=feature/aimyc-003-cultivation' --extra-experimental-features 'nix-command flakes'
+
+.PHONY: get-lock-info-current-project
+get-lock-info-current-project:
+	@echo "Collecting lock info for current project..."
+	@derivation_path=$$(nix build ../001_collect_locks#packages.aarch64-linux.lock-file-0 --extra-experimental-features 'nix-command flakes' --no-link --print-out-paths)
+	@output_path=$$(nix-store -q --outputs $$derivation_path)
+	@jq -r '.nixFilePath, .lockFilePath' "$$output_path/lock-file-info.json" | paste -sd ',' -
+
+.PHONY: get-lock-info-pickupnix
+get-lock-info-pickupnix:
+	@echo "Collecting lock info for pickupnix..."
+	@derivation_path=$$(nix build ../001_collect_locks#packages.aarch64-linux.lock-file-0 --override-input project 'github:meta-introspector/pick-up-nix?ref=feature/CRQ-016-nixify' --extra-experimental-features 'nix-command flakes' --no-link --print-out-paths)
+	@output_path=$$(nix-store -q --outputs $$derivation_path)
+	@jq -r '.nixFilePath, .lockFilePath' "$$output_path/lock-file-info.json" | paste -sd ',' -
+
+.PHONY: get-lock-info-streamofrandom
+get-lock-info-streamofrandom:
+	@echo "Collecting lock info for streamofrandom..."
+	@derivation_path=$$(nix build ../001_collect_locks#packages.aarch64-linux.lock-file-0 --override-input project 'github:meta-introspector/streamofrandom?ref=feature/foaf' --extra-experimental-features 'nix-command flakes' --no-link --print-out-paths)
+	@output_path=$$(nix-store -q --outputs $$derivation_path)
+	@jq -r '.nixFilePath, .lockFilePath' "$$output_path/lock-file-info.json" | paste -sd ',' -
+
+.PHONY: summarize-lock-files
+summarize-lock-files:
+	@echo "Project,Nix File Path,Lock File Path"
+	@echo -n "Current Project," && $(MAKE) get-lock-info-current-project
+	@echo -n "pickupnix," && $(MAKE) get-lock-info-pickupnix
+	@echo -n "streamofrandom," && $(MAKE) get-lock-info-streamofrandom
