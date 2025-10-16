@@ -9,28 +9,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
-    # Inputs for the generated lists of files
-    flake_lock_list_file = {
-      url = "path:./flake.lock.txt"; # Placeholder, will be replaced with actual path
-      flake = false;
-    };
-    flake_nix_store_list_file = {
-      url = "path:./flake.nix.store"; # Placeholder, will be replaced with actual path
-      flake = false;
-    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, flake_auditor_flake, flake_lock_list_file, flake_nix_store_list_file }:
+  outputs = { self, nixpkgs, flake-utils, flake_auditor_flake }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        flakeAuditor = flake_auditor_flake.packages.${system}.nix_auditor_rust; # Assuming the Rust flake provides a 'nix_auditor_rust' package
+        flakeAuditor = flake_auditor_flake.packages.${system}.default; # Assuming the Rust flake provides a 'default' package
       in
       rec {
         packages.default = pkgs.runCommand "flake-audit-report"
           {
             nativeBuildInputs = [ pkgs.bash ];
-            inherit flakeAuditor flake_lock_list_file flake_nix_store_list_file;
+            inherit flakeAuditor;
           } ''
           mkdir -p $out
           # Invoke the Rust flake_auditor tool
@@ -44,7 +35,14 @@
         apps.default = {
           type = "app";
           program = "${pkgs.writeShellScript "run-flake-audit" ''
-            cat ${self.packages.${system}.default}/audit-report.json
+            if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+              echo "Usage: $0 <lock_files_path> <nix_files_path> <output_path>"
+              exit 1
+            fi
+            ${flakeAuditor}/bin/nix_auditor_rust \
+              --lock-files "$1" \
+              --nix-files "$2" \
+              --output "$3"
           ''}";
         };
       }
