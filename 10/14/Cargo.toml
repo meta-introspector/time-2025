@@ -1,5 +1,5 @@
 [workspace]
-members = [
+members = ["audit-with-rust/flake_auditor",
     "flake_auditor",
 ]
 
