@@ -16,7 +16,7 @@
           pname = "nix_auditor_rust";
           version = "0.1.0";
           src = ./.;
-          cargoLock = { inherit (self) src; }; # Use the Cargo.lock from this directory
+          cargoLock = ./Cargo.lock;
 
           # Ensure the binary is installed to bin
           installPhase = ''
