@@ -5,7 +5,7 @@
     nixpkgs.url = "github:meta-introspector/nixpkgs?ref=feature/CRQ-016-nixify";
     flake-utils.url = "github:meta-introspector/flake-utils?ref=feature/CRQ-016-nixify";
     flake_auditor_flake = {
-      url = "path:../14/audit-with-rust/flake_auditor"; # Path to our Rust flake_auditor crate
+      url = "github:meta-introspector/time-2025?ref=feature/aimyc-003-cultivation&dir=10/14/audit-with-rust/flake_auditor"; # Path to our Rust flake_auditor crate
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
