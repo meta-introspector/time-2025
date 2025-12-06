@@ -1,0 +1,9 @@
+[package]
+name = "svg-renamer"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+usvg = "0.14.0"
+fontdb = "0.9.0"
+xmlwriter = "0.1.0"
