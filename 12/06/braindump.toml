@@ -1,0 +1,100 @@
+# braindump.toml
+# This document captures the current understanding and conceptual framework
+# for the 'rust-svg-meme' project, acting as a free-form brain dump.
+
+# --- Overall Concept ---
+[concept]
+name = "Rust-SVG-Meme: The Hecke Operator"
+description = """
+A morphism from SVG (X) to Rust-represented Monster Group elements (M) and back,
+conceived as a mathematical Hecke operator. This operator transforms the SVG
+diagram, revealing deeper structural and conceptual symmetries.
+The process is iterative, involving both human and AI 'brains' in the loop
+to guide and extend the operations, leading towards a self-modifying,
+automorphic form where the system encodes its own source code.
+"""
+
+# --- Input (X): SVG Document ---
+[input.svg]
+file = "solfunmeme-diagream2.svg"
+elements_parsed = ["svg", "g", "rect", "circle", "ellipse", "text", "path"]
+extracted_attributes = ["id", "x", "y", "cx", "cy", "r", "rx", "ry", "width", "height", "d", "content", "style", "transform"]
+style_attributes_parsed = ["fill", "stroke", "stroke-width"]
+
+# --- Mapping Function (f): Rules for MapsToMonster Trait ---
+[mapping.rules_overview]
+description = """
+The `MapsToMonster` trait embodies the 'f' in f(X)->M. It maps properties
+of SVG elements to specific `MonsterElementKind` archetypes.
+Rules are becoming increasingly sophisticated, moving beyond simple type matching.
+"""
+
+[mapping.text_rules]
+type = "Text"
+default_numerical_mapping = [
+    { value = "0", maps_to = "P2_46", description = "Global document division (46-layer binary tree)" },
+    { value = "1", maps_to = "P3_20", description = "20-triples encoding scheme" },
+    { value = "2", maps_to = "P5_9", description = "9-fold/recursive structure" },
+    { value = "3", maps_to = "P7_6", description = "6 states/symmetries" },
+    { value = "5", maps_to = "P11_2", description = "11 sub-components/dual nature" },
+    { value = "7", maps_to = "P13_3", description = "13 sub-components/triple nature" },
+    { value = "11", maps_to = "P17_1", description = "Single prominent element (Prime 17)" },
+    { value = "17", maps_to = "P19_1", description = "Single prominent element (Prime 19)" },
+    { value = "19", maps_to = "P23_1", description = "Single prominent element (Prime 23)" },
+    { value = "23", maps_to = "P29_1", description = "Shell/boundary (spiral stop)" },
+    { value = "71", maps_to = "P71_1", description = "Overall SVG structure / dominant element" }
+]
+unmatched_text_rules = [
+    { condition = "word_count = 2", maps_to = "TextTwoParts", description = "Dynamic rule: Text has two parts" },
+    { condition = "word_count = 3", maps_to = "TextThreeParts", description = "Dynamic rule: Text has three parts" },
+    { condition = "shares_color_with_X", maps_to = "Dynamic", description = "Future: Based on shared color" },
+    { condition = "shares_shape_with_X", maps_to = "Dynamic", description = "Future: Based on shared shape" },
+    { condition = "shares_location_with_X", maps_to = "Dynamic", description = "Future: Based on spatial proximity" },
+    { condition = "size_relative_to_X", maps_to = "Dynamic", description = "Future: Based on relative size" }
+]
+
+[mapping.shape_rules]
+type = "Geometric"
+rules = [
+    { type = "Rect", maps_to = "P31_1", description = "Basic rectangular structures" },
+    { type = "Circle", maps_to = "P37_1", description = "Circular or radial structures" },
+    { type = "Ellipse", maps_to = "P37_1", description = "Elliptical structures (shares with Circle for now)" },
+    { type = "Path", id = "path382", maps_to = "P29_1", description = "The spiral (shell/boundary)" },
+    { type = "Path", maps_to = "P41_1", description = "Other complex path data/curvilinear forms" },
+    { type = "Group", maps_to = "P43_1", description = "Hierarchical grouping/nested structures" },
+    { type = "Svg", maps_to = "P71_1", description = "Overall document structure" }
+]
+
+# --- Output (M): Monster Group Elements (Archetypes) ---
+[output.monster_elements]
+count = 15
+elements = [
+    { kind = "P2_46", symbolic_order = "2^46", conceptual_capture = "Global document division (46-layer binary tree)" },
+    { kind = "P3_20", symbolic_order = "3^20", conceptual_capture = "20-triples encoding scheme" },
+    { kind = "P5_9", symbolic_order = "5^9", conceptual_capture = "9-fold/recursive structure" },
+    { kind = "P7_6", symbolic_order = "7^6", conceptual_capture = "6 states/symmetries" },
+    { kind = "P11_2", symbolic_order = "11^2", conceptual_capture = "11 sub-components/dual nature" },
+    { kind = "P13_3", symbolic_order = "13^3", conceptual_capture = "13 sub-components/triple nature" },
+    { kind = "P17_1", symbolic_order = "17^1", conceptual_capture = "Single prominent elements (Prime 17)" },
+    { kind = "P19_1", symbolic_order = "19^1", conceptual_capture = "Single prominent elements (Prime 19)" },
+    { kind = "P23_1", symbolic_order = "23^1", conceptual_capture = "Single prominent elements (Prime 23)" },
+    { kind = "P29_1", symbolic_order = "29^1", conceptual_capture = "Shell/boundary of a section (spiral, text '23')" },
+    { kind = "P31_1", symbolic_order = "31^1", conceptual_capture = "Basic rectangular structures" },
+    { kind = "P37_1", symbolic_order = "37^1", conceptual_capture = "Circular or radial structures" },
+    { kind = "P41_1", symbolic_order = "41^1", conceptual_capture = "Complex path data/curvilinear forms" },
+    { kind = "P43_1", symbolic_order = "43^1", conceptual_capture = "Hierarchical grouping/nested structures" },
+    { kind = "P71_1", symbolic_order = "71^1", conceptual_capture = "Overall document structure / dominant element" }
+]
+
+# --- Structural Enhancements ---
+[structural.bsp]
+status = "Placeholder"
+goal = "Implement a 46-layered Binary Space Partitioning (BSP) tree of all SVG nodes."
+purpose = "To capture the 'P2_46' Monster ElementKind by spatially dividing the document."
+components = ["BoundingBox", "BspSplitAxis", "BspNode", "BspTree"]
+
+# --- Iterative & Self-Modifying Aspects ---
+[iterative_process]
+goal = "Repeated application of the Hecke operator (SVG->Rust mapping)."
+feedback_loop = "Human and AI 'brains' will guide and extend operations."
+end_state_vision = "Self-modifying, automorphic form; system encodes its own source code."
