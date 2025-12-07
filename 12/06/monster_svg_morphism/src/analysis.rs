@@ -9,7 +9,7 @@ use crate::traits::has_embedded_primes::HasEmbeddedPrimes; // Import the new tra
 use crate::types::prime_vector::{PrimeMorphism, PrimeVector}; // Import PrimeMorphism and PrimeVector
 use crate::types::keys::{
     PREDICATE_IS_FUNCTION, PREDICATE_IS_PUBLIC, PREDICATE_PARAM_COUNT,
-    PREDICATE_HAS_DOC_COMMENT, PREDICATE_PRIME_RESONANCE, PREDICATE_IS_STRUCT,
+    PREDICATE_HAS_DOC_COMMENT, PREDICATE_IS_STRUCT,
     PREDICATE_IS_ENUM, PREDICATE_IS_CONST, PREDICATE_FIELD_COUNT, PREDICATE_VARIANT_COUNT,
     PREDICATE_LITERAL_LENGTH, PREDICATE_NUMERIC_LITERAL_VALUE,
 }; // Import all predicate constants as they are referenced
