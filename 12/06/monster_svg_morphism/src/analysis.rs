@@ -7,7 +7,7 @@ use syn::visit::{self, Visit};
 use walkdir::WalkDir;
 
 pub struct AnalysisReport {
-    pub seventy_one_occurrences: Vec<String>,
+    pub prime_occurrences: HashMap<u64, Vec<String>>, // Renamed from seventy_one_occurrences
     pub prime_factor_occurrences: HashMap<u64, Vec<String>>,
     pub recursive_functions: Vec<String>, // Direct recursion
     pub recursive_cycles: Vec<(String, Vec<String>)>, // (Starting function, Cycle path)
@@ -35,18 +35,16 @@ impl PrimeFactorizer {
     }
 }
 
-// Monster Group primes for checking cycle lengths
-const MONSTER_PRIMES: [u64; 15] = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 41, 47, 59, 71];
-
-struct AnalysisVisitor {
-    seventy_one_occurrences: Vec<String>,
+struct AnalysisVisitor<'a> {
+    prime_occurrences: HashMap<u64, Vec<String>>,
     prime_factor_occurrences: HashMap<u64, Vec<String>>,
     recursive_functions: Vec<String>,
     current_function: Option<String>,
     function_calls: HashMap<String, Vec<String>>,
+    primes_to_analyze: &'a [u64], // Configurable list of primes
 }
 
-impl<'ast> visit::Visit<'ast> for AnalysisVisitor {
+impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
     fn visit_item_fn(&mut self, i: &'ast syn::ItemFn) {
         let function_name = i.sig.ident.to_string();
         self.current_function = Some(function_name.clone());
@@ -72,18 +70,20 @@ impl<'ast> visit::Visit<'ast> for AnalysisVisitor {
     fn visit_item(&mut self, item: &'ast Item) {
         match item {
             Item::Enum(item_enum) => {
-                if item_enum.variants.len() == 71 {
-                    self.seventy_one_occurrences.push(format!(
-                        "Enum '{}' has 71 variants.",
-                        item_enum.ident
+                let size = item_enum.variants.len() as u64;
+                if self.primes_to_analyze.contains(&size) {
+                    self.prime_occurrences.entry(size).or_default().push(format!(
+                        "Enum '{}' has {} variants.",
+                        item_enum.ident, size
                     ));
                 }
             }
             Item::Struct(item_struct) => {
-                if item_struct.fields.len() == 71 {
-                    self.seventy_one_occurrences.push(format!(
-                        "Struct '{}' has 71 fields.",
-                        item_struct.ident
+                let size = item_struct.fields.len() as u64;
+                if self.primes_to_analyze.contains(&size) {
+                    self.prime_occurrences.entry(size).or_default().push(format!(
+                        "Struct '{}' has {} fields.",
+                        item_struct.ident, size
                     ));
                 }
             }
@@ -97,20 +97,21 @@ impl<'ast> visit::Visit<'ast> for AnalysisVisitor {
                             }
                             _ => false,
                         })
-                        .count();
-                    if public_fns == 71 {
-                        self.seventy_one_occurrences.push(format!(
-                            "Module '{}' has 71 public functions.",
-                            item_mod.ident
+                        .count() as u64;
+                    if self.primes_to_analyze.contains(&public_fns) {
+                        self.prime_occurrences.entry(public_fns).or_default().push(format!(
+                            "Module '{}' has {} public functions.",
+                            item_mod.ident, public_fns
                         ));
                     }
                 }
             }
             Item::Fn(item_fn) => {
-                if item_fn.sig.inputs.len() == 71 {
-                    self.seventy_one_occurrences.push(format!(
-                        "Function '{}' has 71 parameters.",
-                        item_fn.sig.ident
+                let param_count = item_fn.sig.inputs.len() as u64;
+                if self.primes_to_analyze.contains(&param_count) {
+                    self.prime_occurrences.entry(param_count).or_default().push(format!(
+                        "Function '{}' has {} parameters.",
+                        item_fn.sig.ident, param_count
                     ));
                 }
             }
@@ -118,10 +119,11 @@ impl<'ast> visit::Visit<'ast> for AnalysisVisitor {
                 if let syn::Expr::Lit(expr_lit) = &*item_const.expr {
                     if let Lit::Str(lit_str) = &expr_lit.lit {
                         let s = lit_str.value();
-                        if s.len() == 71 {
-                            self.seventy_one_occurrences.push(format!(
-                                "String literal in const '{}' has length 71.",
-                                item_const.ident
+                        let len = s.len() as u64;
+                        if self.primes_to_analyze.contains(&len) {
+                            self.prime_occurrences.entry(len).or_default().push(format!(
+                                "String literal in const '{}' has length {}.",
+                                item_const.ident, len
                             ));
                         }
                         // Prime factorization of ASCII sum
@@ -138,11 +140,13 @@ impl<'ast> visit::Visit<'ast> for AnalysisVisitor {
                             }
                         }
                     } else if let Lit::Int(lit_int) = &expr_lit.lit {
-                        if lit_int.to_string() == "71" {
-                            self.seventy_one_occurrences
-                                .push(format!("Found numeric literal 71 in const '{}'.", item_const.ident));
-                        }
-                        if let Ok(num) = lit_int.base10_parse() {
+                        if let Ok(num) = lit_int.base10_parse::<u64>() {
+                            if self.primes_to_analyze.contains(&num) {
+                                self.prime_occurrences.entry(num).or_default().push(format!(
+                                    "Found numeric literal {} in const '{}'.",
+                                    num, item_const.ident
+                                ));
+                            }
                             if num > 1 {
                                 for factor in PrimeFactorizer::get_prime_factors(num) {
                                     self.prime_factor_occurrences
@@ -167,10 +171,10 @@ impl<'ast> visit::Visit<'ast> for AnalysisVisitor {
     fn visit_expr(&mut self, expr: &'ast Expr) {
         if let Expr::Lit(expr_lit) = expr {
             if let Lit::Int(lit_int) = &expr_lit.lit {
-                if lit_int.to_string() == "71" {
-                    self.seventy_one_occurrences.push(format!("Found numeric literal 71."));
-                }
-                if let Ok(num) = lit_int.base10_parse() {
+                if let Ok(num) = lit_int.base10_parse::<u64>() {
+                    if self.primes_to_analyze.contains(&num) {
+                        self.prime_occurrences.entry(num).or_default().push(format!("Found numeric literal {}.", num));
+                    }
                     if num > 1 {
                         for factor in PrimeFactorizer::get_prime_factors(num) {
                             self.prime_factor_occurrences
@@ -182,8 +186,9 @@ impl<'ast> visit::Visit<'ast> for AnalysisVisitor {
                 }
             } else if let Lit::Str(lit_str) = &expr_lit.lit {
                 let s = lit_str.value();
-                if s.len() == 71 {
-                    self.seventy_one_occurrences.push(format!("Found string literal with length 71."));
+                let len = s.len() as u64;
+                if self.primes_to_analyze.contains(&len) {
+                    self.prime_occurrences.entry(len).or_default().push(format!("Found string literal with length {}.", len));
                 }
                 let ascii_sum: u64 = s.bytes().map(|b| b as u64).sum();
                 if ascii_sum > 1 {
@@ -208,7 +213,7 @@ fn find_cycles_dfs(
     recursion_stack: &mut HashMap<String, bool>,
     path: &mut Vec<String>,
     cycles: &mut Vec<(String, Vec<String>)>,
-    primes: &[u64],
+    primes_to_check: &[u64],
 ) {
     visited.insert(node.to_string(), true);
     recursion_stack.insert(node.to_string(), true);
@@ -217,14 +222,14 @@ fn find_cycles_dfs(
     if let Some(callees) = graph.get(node) {
         for callee in callees {
             if !visited.get(callee).unwrap_or(&false) {
-                find_cycles_dfs(graph, callee, visited, recursion_stack, path, cycles, primes);
+                find_cycles_dfs(graph, callee, visited, recursion_stack, path, cycles, primes_to_check);
             } else if *recursion_stack.get(callee).unwrap_or(&false) {
                 // Cycle detected!
                 let cycle_start_index = path.iter().position(|f| f == callee).unwrap();
                 let cycle_path: Vec<String> = path[cycle_start_index..].to_vec();
                 
-                // Check if cycle length matches any of the Monster Group primes
-                if primes.contains(&(cycle_path.len() as u64)) {
+                // Check if cycle length matches any of the configured primes
+                if primes_to_check.contains(&(cycle_path.len() as u64)) {
                     cycles.push((node.to_string(), cycle_path));
                 }
             }
@@ -236,13 +241,14 @@ fn find_cycles_dfs(
 }
 
 
-pub fn run_analysis(path: &PathBuf) -> AnalysisReport {
+pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport {
     let mut visitor = AnalysisVisitor {
-        seventy_one_occurrences: Vec::new(),
+        prime_occurrences: HashMap::new(),
         prime_factor_occurrences: HashMap::new(),
         recursive_functions: Vec::new(),
         current_function: None,
         function_calls: HashMap::new(),
+        primes_to_analyze,
     };
 
     for entry in WalkDir::new(path)
@@ -290,19 +296,15 @@ pub fn run_analysis(path: &PathBuf) -> AnalysisReport {
                 &mut recursion_stack,
                 &mut path,
                 &mut all_recursive_cycles,
-                &MONSTER_PRIMES,
+                primes_to_analyze,
             );
         }
     }
 
     AnalysisReport {
-        seventy_one_occurrences: visitor.seventy_one_occurrences,
+        prime_occurrences: visitor.prime_occurrences,
         prime_factor_occurrences: visitor.prime_factor_occurrences,
         recursive_functions: visitor.recursive_functions,
         recursive_cycles: all_recursive_cycles,
     }
 }
-
-// TODO: Recursion depth analysis with prime limits (optional)
-// TODO: Integration with monster_svg_morphism main.rs for reporting.
-// TODO: Create keys.rs with string constants for prime factorization.

@@ -10,6 +10,16 @@ use monster_svg_morphism::types::{
 use monster_svg_morphism::traits::{MapsToMonster};
 use monster_svg_morphism::analysis; // Import the analysis module
 
+// The Monster Group primes
+const MONSTER_PRIMES: [u64; 15] = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 41, 47, 59, 71];
+
+fn parse_primes_arg(s: &str) -> Result<Vec<u64>, String> {
+    s.split(',')
+        .map(|s| s.trim().parse::<u64>())
+        .collect::<Result<Vec<u64>, _>>()
+        .map_err(|e| format!("Failed to parse prime number: {}", e))
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
     let mut hecke_amplify_enabled = false;
@@ -19,14 +29,48 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if args.len() > 1 && args[1] == "--analyze" {
         let current_dir = env::current_dir()?;
         println!("Running analysis on: {}", current_dir.display());
-        let report = analysis::run_analysis(&current_dir);
 
-        println!("\n--- '71-ness' Analysis Report ---");
-        if report.seventy_one_occurrences.is_empty() {
-            println!("No occurrences of '71-ness' found.");
+        let mut primes_to_analyze_vec = Vec::new();
+        let primes_arg_start_idx = 2; // Start checking from argument after --analyze
+
+        if args.len() > primes_arg_start_idx && args[primes_arg_start_idx] == "--primes" {
+            if args.len() > primes_arg_start_idx + 1 {
+                match parse_primes_arg(&args[primes_arg_start_idx + 1]) {
+                    Ok(primes) => primes_to_analyze_vec = primes,
+                    Err(e) => {
+                        eprintln!("Error parsing --primes argument: {}", e);
+                        return Err("Invalid --primes argument".into());
+                    }
+                }
+            } else {
+                eprintln!("Error: --primes argument requires a comma-separated list of numbers.");
+                return Err("Missing value for --primes".into());
+            }
+        }
+
+        // If no primes were provided via --primes, use MONSTER_PRIMES as default
+        let primes_to_analyze: &[u64] = if primes_to_analyze_vec.is_empty() {
+            &MONSTER_PRIMES
         } else {
-            for occurrence in report.seventy_one_occurrences {
-                println!("- {}", occurrence);
+            &primes_to_analyze_vec
+        };
+
+        let report = analysis::run_analysis(&current_dir, primes_to_analyze);
+
+        println!("\n--- Prime Resonance Analysis Report ---");
+        if report.prime_occurrences.is_empty() {
+            println!("No prime resonances found.");
+        } else {
+            // Sort primes for consistent output
+            let mut sorted_primes: Vec<u64> = report.prime_occurrences.keys().cloned().collect();
+            sorted_primes.sort_unstable();
+            for prime in sorted_primes {
+                if let Some(occurrences) = report.prime_occurrences.get(&prime) {
+                    println!("Prime {}:", prime);
+                    for occ in occurrences {
+                        println!("  - {}", occ);
+                    }
+                }
             }
         }
 
@@ -34,26 +78,21 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         if report.prime_factor_occurrences.is_empty() {
             println!("No prime factor occurrences found.");
         } else {
-            for (factor, occurrences) in report.prime_factor_occurrences {
-                println!("Prime {}:", factor);
-                for occ in occurrences {
-                    println!("  - {}", occ);
+            let mut sorted_factors: Vec<u64> = report.prime_factor_occurrences.keys().cloned().collect();
+            sorted_factors.sort_unstable();
+            for factor in sorted_factors {
+                if let Some(occurrences) = report.prime_factor_occurrences.get(&factor) {
+                    println!("Prime Factor {}:", factor);
+                    for occ in occurrences {
+                        println!("  - {}", occ);
+                    }
                 }
             }
         }
 
-        println!("\n--- Recursive Cycles (Prime Lengths) ---");
+        println!("\n--- Recursive Cycles ---");
         if report.recursive_cycles.is_empty() {
-            println!("No recursive cycles with Monster Group prime lengths found.");
-        } else {
-            for (start_node, cycle) in &report.recursive_cycles {
-                println!("- Cycle starting at '{}' with length {}: {:?}", start_node, cycle.len(), cycle);
-            }
-        }
-        
-        println!("\n--- Recursive Cycles (Prime Lengths) ---");
-        if report.recursive_cycles.is_empty() {
-            println!("No recursive cycles with Monster Group prime lengths found.");
+            println!("No recursive cycles with configured prime lengths found.");
         } else {
             for (start_node, cycle) in report.recursive_cycles {
                 println!("- Cycle starting at '{}' with length {}: {:?}", start_node, cycle.len(), cycle);
