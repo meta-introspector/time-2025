@@ -1,0 +1,3 @@
+# Gitignore for the project
+/target/
+/monster_svg_morphism/target/
