@@ -1,0 +1,1 @@
+C:\Users\gentd\OneDrive\Documents\GitHub\time-2025\12\06\svg_parser_tool\target\debug\svg_parser_tool.exe: C:\Users\gentd\OneDrive\Documents\GitHub\time-2025\12\06\monster_svg_morphism\src\lib.rs C:\Users\gentd\OneDrive\Documents\GitHub\time-2025\12\06\svg_parser_tool\src\main.rs
