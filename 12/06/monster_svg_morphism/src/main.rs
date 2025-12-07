@@ -42,16 +42,25 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
 
-        println!("\n--- Recursive Functions ---");
-        if report.recursive_functions.is_empty() {
-            println!("No directly recursive functions found.");
+        println!("\n--- Recursive Cycles (Prime Lengths) ---");
+        if report.recursive_cycles.is_empty() {
+            println!("No recursive cycles with Monster Group prime lengths found.");
         } else {
-            for func in report.recursive_functions {
-                println!("- {}", func);
+            for (start_node, cycle) in &report.recursive_cycles {
+                println!("- Cycle starting at '{}' with length {}: {:?}", start_node, cycle.len(), cycle);
+            }
+        }
+        
+        println!("\n--- Recursive Cycles (Prime Lengths) ---");
+        if report.recursive_cycles.is_empty() {
+            println!("No recursive cycles with Monster Group prime lengths found.");
+        } else {
+            for (start_node, cycle) in report.recursive_cycles {
+                println!("- Cycle starting at '{}' with length {}: {:?}", start_node, cycle.len(), cycle);
             }
         }
 
-        return Ok(());
+        return Ok(())
     }
 
     // Check for --hecke-amplify flag

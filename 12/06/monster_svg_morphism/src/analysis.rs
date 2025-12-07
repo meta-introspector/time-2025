@@ -3,13 +3,14 @@ use std::collections::HashMap;
 use std::fs;
 use std::path::PathBuf;
 use syn::{File, Item, Lit, Expr};
-use syn::visit::{self, Visit}; // Import the entire visit module AND the Visit trait
+use syn::visit::{self, Visit};
 use walkdir::WalkDir;
 
 pub struct AnalysisReport {
     pub seventy_one_occurrences: Vec<String>,
     pub prime_factor_occurrences: HashMap<u64, Vec<String>>,
-    pub recursive_functions: Vec<String>,
+    pub recursive_functions: Vec<String>, // Direct recursion
+    pub recursive_cycles: Vec<(String, Vec<String>)>, // (Starting function, Cycle path)
 }
 
 struct PrimeFactorizer;
@@ -34,6 +35,9 @@ impl PrimeFactorizer {
     }
 }
 
+// Monster Group primes for checking cycle lengths
+const MONSTER_PRIMES: [u64; 15] = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 41, 47, 59, 71];
+
 struct AnalysisVisitor {
     seventy_one_occurrences: Vec<String>,
     prime_factor_occurrences: HashMap<u64, Vec<String>>,
@@ -42,11 +46,11 @@ struct AnalysisVisitor {
     function_calls: HashMap<String, Vec<String>>,
 }
 
-impl<'ast> visit::Visit<'ast> for AnalysisVisitor { // Use fully qualified path for the trait
+impl<'ast> visit::Visit<'ast> for AnalysisVisitor {
     fn visit_item_fn(&mut self, i: &'ast syn::ItemFn) {
         let function_name = i.sig.ident.to_string();
         self.current_function = Some(function_name.clone());
-        visit::visit_item_fn(self, i); // Use fully qualified path for the function
+        visit::visit_item_fn(self, i);
         self.current_function = None;
     }
 
@@ -62,7 +66,7 @@ impl<'ast> visit::Visit<'ast> for AnalysisVisitor { // Use fully qualified path 
                 }
             }
         }
-        visit::visit_expr_call(self, i); // Use fully qualified path for the function
+        visit::visit_expr_call(self, i);
     }
 
     fn visit_item(&mut self, item: &'ast Item) {
@@ -156,7 +160,7 @@ impl<'ast> visit::Visit<'ast> for AnalysisVisitor { // Use fully qualified path 
             }
             _ => {}
         }
-        visit::visit_item(self, item); // Use fully qualified path for the function
+        visit::visit_item(self, item);
     }
     
     // Also visit expressions for standalone literals outside of consts
@@ -192,8 +196,43 @@ impl<'ast> visit::Visit<'ast> for AnalysisVisitor { // Use fully qualified path 
                 }
             }
         }
-        visit::visit_expr(self, expr); // Use fully qualified path for the function
+        visit::visit_expr(self, expr);
     }
+}
+
+// Helper function for DFS-based cycle detection
+fn find_cycles_dfs(
+    graph: &HashMap<String, Vec<String>>,
+    node: &str,
+    visited: &mut HashMap<String, bool>,
+    recursion_stack: &mut HashMap<String, bool>,
+    path: &mut Vec<String>,
+    cycles: &mut Vec<(String, Vec<String>)>,
+    primes: &[u64],
+) {
+    visited.insert(node.to_string(), true);
+    recursion_stack.insert(node.to_string(), true);
+    path.push(node.to_string());
+
+    if let Some(callees) = graph.get(node) {
+        for callee in callees {
+            if !visited.get(callee).unwrap_or(&false) {
+                find_cycles_dfs(graph, callee, visited, recursion_stack, path, cycles, primes);
+            } else if *recursion_stack.get(callee).unwrap_or(&false) {
+                // Cycle detected!
+                let cycle_start_index = path.iter().position(|f| f == callee).unwrap();
+                let cycle_path: Vec<String> = path[cycle_start_index..].to_vec();
+                
+                // Check if cycle length matches any of the Monster Group primes
+                if primes.contains(&(cycle_path.len() as u64)) {
+                    cycles.push((node.to_string(), cycle_path));
+                }
+            }
+        }
+    }
+
+    path.pop();
+    recursion_stack.insert(node.to_string(), false);
 }
 
 
@@ -229,9 +268,30 @@ pub fn run_analysis(path: &PathBuf) -> AnalysisReport {
     }
 
     // After visiting all files, analyze for direct recursion
+    // (This part remains for compatibility, but cycles will cover it)
     for (caller, callees) in &visitor.function_calls {
         if callees.contains(caller) {
             visitor.recursive_functions.push(caller.clone());
+        }
+    }
+
+    // --- Cycle Detection for Indirect Recursion ---
+    let mut all_recursive_cycles: Vec<(String, Vec<String>)> = Vec::new();
+    let mut visited: HashMap<String, bool> = HashMap::new();
+    let mut recursion_stack: HashMap<String, bool> = HashMap::new();
+    let mut path: Vec<String> = Vec::new();
+
+    for function_name in visitor.function_calls.keys() {
+        if !visited.get(function_name).unwrap_or(&false) {
+            find_cycles_dfs(
+                &visitor.function_calls,
+                function_name,
+                &mut visited,
+                &mut recursion_stack,
+                &mut path,
+                &mut all_recursive_cycles,
+                &MONSTER_PRIMES,
+            );
         }
     }
 
@@ -239,6 +299,7 @@ pub fn run_analysis(path: &PathBuf) -> AnalysisReport {
         seventy_one_occurrences: visitor.seventy_one_occurrences,
         prime_factor_occurrences: visitor.prime_factor_occurrences,
         recursive_functions: visitor.recursive_functions,
+        recursive_cycles: all_recursive_cycles,
     }
 }
 
