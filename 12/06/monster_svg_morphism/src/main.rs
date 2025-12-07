@@ -12,7 +12,10 @@ use monster_svg_morphism::analysis; // Import the analysis module
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
+    let mut hecke_amplify_enabled = false;
+    let mut input_path_idx = 1;
 
+    // Check for --analyze flag
     if args.len() > 1 && args[1] == "--analyze" {
         let current_dir = env::current_dir()?;
         println!("Running analysis on: {}", current_dir.display());
@@ -48,29 +51,45 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
 
-        return Ok(())
+        return Ok(());
+    }
+
+    // Check for --hecke-amplify flag
+    // The flag can be at position 1 or 2 (if input_path_idx is already advanced by --analyze)
+    if args.len() > 1 {
+        if args[1] == "--hecke-amplify" {
+            hecke_amplify_enabled = true;
+            input_path_idx = 2; // Input path will be at index 2
+        } else if args.len() > 2 && args[2] == "--hecke-amplify" {
+            hecke_amplify_enabled = true;
+            // input_path_idx remains 1 as --hecke-amplify is after input.svg
+        }
     }
 
 
-    if args.len() != 3 {
-        eprintln!("Usage: {} <input.svg> <output.svg>", args[0]);
+    if args.len() < input_path_idx + 2 { // Need at least input and output paths
+        eprintln!("Usage: {} [--hecke-amplify] <input.svg> <output.svg>", args[0]);
         eprintln!("       {} --analyze", args[0]);
         return Err("Invalid arguments".into());
     }
-    let input_path = &args[1];
-    let output_path = &args[2];
+    
+    let input_path = &args[input_path_idx];
+    let output_path = &args[input_path_idx + 1];
 
     let file = File::open(input_path)?;
     let file = BufReader::new(file);
 
     let mut svg_root = parse_svg(file)?;
 
-    apply_morphism(&mut svg_root);
+    apply_morphism(&mut svg_root, hecke_amplify_enabled);
 
     let output_svg_string = svg_root.to_svg_string();
     write(output_path, output_svg_string)?;
 
     println!("Successfully generated morphed SVG at {}", output_path);
+    if hecke_amplify_enabled {
+        println!("Applied Hecke-like amplification for P71_1 elements.");
+    }
 
     Ok(())
 }
@@ -143,7 +162,7 @@ fn parse_svg(file: BufReader<File>) -> Result<Svg, Box<dyn std::error::Error>> {
                         let path = Path { id, d, style, transform, triples: Vec::new(), approx_bbox };
                         element_scope_stack.last_mut().unwrap().push(SvgElementEnum::Path(path));
                     },
-                    _ => {},
+                    _ => {{}},
                 }
             },
             Ok(XmlEvent::EndElement { name }) => {
@@ -168,8 +187,8 @@ fn parse_svg(file: BufReader<File>) -> Result<Svg, Box<dyn std::error::Error>> {
                         current_text_content.clear();
                         in_text_element = false;
                     },
-                    "tspan" => {}, 
-                    _ => {},
+                    "tspan" => {{}},
+                    _ => {{}},
                 }
             },
             Ok(XmlEvent::Characters(s)) => {
@@ -181,22 +200,26 @@ fn parse_svg(file: BufReader<File>) -> Result<Svg, Box<dyn std::error::Error>> {
                 println!("Error: {}", e);
                 return Err(e.into());
             },
-            _ => {},
+            _ => {{}},
         }
     }
 
     svg_root_option.ok_or_else(|| "No SVG root element found".into())
 }
 
-fn apply_morphism(svg: &mut Svg) {
+fn apply_morphism(svg: &mut Svg, hecke_amplify: bool) {
     for child in &mut svg.children {
-        apply_morphism_to_element(child);
+        apply_morphism_to_element(child, hecke_amplify);
     }
 }
 
-fn apply_morphism_to_element(element: &mut SvgElementEnum) {
+fn apply_morphism_to_element(element: &mut SvgElementEnum, hecke_amplify: bool) {
     let monster_kind = element.map_to_monster_element();
     let new_color = monster_color(&monster_kind);
+
+    if hecke_amplify && monster_kind == MonsterElementKind::P71_1 {
+        apply_hecke_effect(element);
+    }
 
     let style = match element {
         SvgElementEnum::Rect(e) => &mut e.style,
@@ -204,7 +227,7 @@ fn apply_morphism_to_element(element: &mut SvgElementEnum) {
         SvgElementEnum::Ellipse(e) => &mut e.style,
         SvgElementEnum::Group(e) => {
             for child in &mut e.children {
-                apply_morphism_to_element(child);
+                apply_morphism_to_element(child, hecke_amplify);
             }
             &mut e.style
         },
@@ -217,6 +240,49 @@ fn apply_morphism_to_element(element: &mut SvgElementEnum) {
     }
     if let Some(s) = style {
         s.fill = Some(new_color);
+    }
+}
+
+fn apply_hecke_effect(element: &mut SvgElementEnum) {
+    match element {
+        SvgElementEnum::Rect(e) => {
+            e.width *= 2.0;
+            e.height *= 2.0;
+            // Adjust position to keep center somewhat
+            e.x -= e.width / 4.0;
+            e.y -= e.height / 4.0;
+        },
+        SvgElementEnum::Circle(e) => {
+            e.r *= 2.0;
+        },
+        SvgElementEnum::Ellipse(e) => {
+            e.rx *= 2.0;
+            e.ry *= 2.0;
+        },
+        SvgElementEnum::Text(e) => {
+            // For text, just make it a distinct color for visibility for now
+            if e.style.is_none() {
+                e.style = Some(Style { fill: None, stroke: None, stroke_width: None });
+            }
+            if let Some(s) = &mut e.style {
+                s.fill = Some(Color { r: 255, g: 255, b: 0, a: 255 }); // Bright yellow
+            }
+        },
+        SvgElementEnum::Path(e) => {
+            // Scaling path data is complex, for now, just change color
+            if e.style.is_none() {
+                e.style = Some(Style { fill: None, stroke: None, stroke_width: None });
+            }
+            if let Some(s) = &mut e.style {
+                s.fill = Some(Color { r: 0, g: 255, b: 255, a: 255 }); // Cyan
+            }
+        },
+        SvgElementEnum::Group(e) => {
+            // Recursively apply to children
+            for child in &mut e.children {
+                apply_hecke_effect(child);
+            }
+        }
     }
 }
 
@@ -362,7 +428,7 @@ fn parse_style(style_str: Option<String>) -> Option<Style> {
                     "fill" => style.fill = parse_color(value.trim()),
                     "stroke" => style.stroke = parse_color(value.trim()),
                     "stroke-width" => style.stroke_width = value.trim().parse().ok(),
-                    _ => {}
+                    _ => {{}},
                 }
             }
         }
