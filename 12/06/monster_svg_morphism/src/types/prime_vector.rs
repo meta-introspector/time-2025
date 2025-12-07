@@ -105,14 +105,36 @@ impl PrimeMorphism {
     pub fn path_to_prime_vector(&mut self, path: &[String]) -> PrimeVector {
         let mut prime_vector = PrimeVector::new();
         // Base prime for "crate"
-        prime_vector.map.insert(self.get_prime_for_component("crate_root"), 1); // special prime for root
+        // prime_vector.map.insert(self.get_prime_for_component("crate_root"), 1); // special prime for root
 
         for (depth, component) in path.iter().enumerate() {
-            let prime = self.get_prime_for_component(component);
-            // Coefficient based on depth, or some other metric
-            // For simplicity, let's use depth + 1 as the coefficient
-            *prime_vector.map.entry(prime).or_insert(0) += (depth + 1) as u64;
+            let parts: Vec<&str> = component.split("::").collect();
+            let (component_type, component_name) = if parts.len() > 1 {
+                (parts[0], parts[1..].join("::"))
+            } else {
+                ("raw", component.clone()) // Handle "crate" or other raw components
+            };
+
+            let prime = self.get_prime_for_component(&component_name);
+            let type_weight = self.get_type_weight(component_type);
+            
+            // Coefficient based on depth + type_weight
+            *prime_vector.map.entry(prime).or_insert(0) += (depth + 1) as u64 + type_weight;
         }
         prime_vector
+    }
+
+    // Helper function to assign weights based on component type
+    fn get_type_weight(&self, component_type: &str) -> u64 {
+        match component_type {
+            "crate" => 10,    // High weight for the crate root
+            "mod" => 5,     // Modules are significant
+            "fn" => 3,      // Functions are core logic
+            "struct" => 2,  // Structs define data structures
+            "enum" => 2,    // Enums define data structures
+            "const" => 1,   // Constants are values
+            "raw" => 1,     // Default for unknown or raw components
+            _ => 0,         // Fallback
+        }
     }
 }

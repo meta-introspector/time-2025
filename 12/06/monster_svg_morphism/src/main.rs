@@ -119,7 +119,28 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     }
                 }
             }
-        }        return Ok(())
+        }
+        
+        println!("\n--- Composite Prime Vectors (Conceptual Multiplication) ---");
+        if report.composite_prime_vectors.is_empty() {
+            println!("No composite prime vectors generated.");
+        } else {
+            let mut sorted_paths: Vec<String> = report.composite_prime_vectors.keys().cloned().collect();
+            sorted_paths.sort_unstable();
+            for path in sorted_paths {
+                if let Some(prime_vector) = report.composite_prime_vectors.get(&path) {
+                    println!("Parent Path: {}", path);
+                    let mut sorted_primes: Vec<u64> = prime_vector.map.keys().cloned().collect();
+                    sorted_primes.sort_unstable();
+                    for prime in sorted_primes {
+                        if let Some(coeff) = prime_vector.map.get(&prime) {
+                            println!("  Prime {}: Coefficient {}", prime, coeff);
+                        }
+                    }
+                }
+            }
+        }
+        return Ok(())
     }
 
     // Check for --hecke-amplify flag

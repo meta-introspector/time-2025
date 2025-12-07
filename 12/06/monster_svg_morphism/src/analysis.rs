@@ -23,6 +23,7 @@ pub struct AnalysisReport {
     pub symbol_matrix: Vec<Vec<u64>>, // New: Matrix representation of symbol data
     pub matrix_column_headers: Vec<u64>, // New: Ordered list of primes for matrix columns
     pub matrix_row_headers: Vec<String>, // New: Ordered list of symbol paths for matrix rows
+    pub composite_prime_vectors: HashMap<String, PrimeVector>, // New: Stores aggregated prime vectors for related nodes
 }
 
 struct PrimeFactorizer;
@@ -685,6 +686,42 @@ pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport
     
     final_symbol_table.insert(crate_root_path, crate_root_vector);
 
+    // --- Conceptual Matrix Self-Multiplication: Aggregating PrimeVectors for related nodes ---
+    let mut composite_prime_vectors: HashMap<String, PrimeVector> = HashMap::new();
+
+    // Iterate through symbols, sorted for deterministic aggregation
+    let mut all_symbol_paths: Vec<String> = final_symbol_table.keys().cloned().collect();
+    all_symbol_paths.sort_unstable(); // Sort to ensure consistent processing order
+
+    for symbol_path in &all_symbol_paths {
+        if symbol_path == "crate" {
+            // "crate" is the root; its PrimeVector is already computed.
+            // We can optionally "multiply" all top-level modules into it later if desired.
+            continue;
+        }
+
+        let parts: Vec<&str> = symbol_path.split("::").collect();
+        if parts.len() < 2 {
+            // Not a nested symbol (e.g., "crate" handled above, or malformed path)
+            continue;
+        }
+
+        // Reconstruct parent path
+        let parent_path = parts[0..(parts.len() - 1)].join("::");
+
+        if let Some(child_prime_vector) = final_symbol_table.get(symbol_path) {
+            let parent_composite_vector = composite_prime_vectors
+                .entry(parent_path.clone())
+                .or_insert_with(PrimeVector::new);
+            
+            // "Multiply" (add coefficients) the child's prime vector into the parent's composite
+            parent_composite_vector.multiply(child_prime_vector);
+        }
+    }
+
+    // Include the composite_prime_vectors in the final symbol_table as well,
+    // or keep them separate. For now, let's keep them separate as defined in AnalysisReport.
+
     // --- Flatten symbol_table into matrix views ---
     let mut all_unique_primes: Vec<u64> = Vec::new();
     for prime_vector in final_symbol_table.values() {
@@ -723,5 +760,6 @@ pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport
         symbol_matrix,
         matrix_column_headers: all_unique_primes,
         matrix_row_headers,
+        composite_prime_vectors, // Pass the populated HashMap
     }
 }
