@@ -3,6 +3,11 @@ use crate::types::MonsterElementKind;
 
 const PRIMES: [u64; 15] = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 41, 47, 59, 71];
 
+/// Exposes the prime factors of the Monster Group's order.
+pub fn get_primes() -> &'static [u64] {
+    &PRIMES
+}
+
 // This order must match the order of PRIMES
 const MONSTER_ELEMENTS: [MonsterElementKind; 15] = [
     MonsterElementKind::P2_46,
@@ -21,6 +26,11 @@ const MONSTER_ELEMENTS: [MonsterElementKind; 15] = [
     MonsterElementKind::P59_1,
     MonsterElementKind::P71_1,
 ];
+
+/// Exposes the MonsterElementKind mapping to the prime factors.
+pub fn get_monster_elements() -> &'static [MonsterElementKind] {
+    &MONSTER_ELEMENTS
+}
 
 pub fn construct_monster_matrix() -> DMatrix<f64> {
     let exponents = [46, 20, 9, 6, 2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1];

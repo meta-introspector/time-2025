@@ -20,31 +20,51 @@ The project is structured as a Rust library and a binary application.
     *   It includes a test to verify that "dividing" the Monster Group's order by this matrix yields a "100% match" (a vector of ones), demonstrating a mathematical resonance within the code.
 5.  **Code Analysis Tool (`--analyze` flag):**
     *   Performs static analysis on the Rust codebase to detect "prime resonances."
-    *   **"Prime Resonance" Detection:** Identifies code constructs whose properties (e.g., enum variant count, struct field count, function parameter count, string literal length, numeric literal value) match the prime `71`. This is currently hardcoded but will be made configurable.
+    *   **"Prime Resonance" Detection:** Identifies code constructs whose properties (e.g., enum variant count, struct field count, function parameter count, string literal length, numeric literal value) match configurable primes.
+    *   **Configurable Prime Analysis:** Allows the user to specify a list of primes for the `--analyze` command, enabling the tool to search for resonances with any desired set of primes.
+    *   **Embedded Prime Detection:** Identifies prime numbers (both `u64` and large numbers comparable as strings, like the Monster Group order) embedded as digit sequences within string literals.
     *   **Prime Factorization in Literals:** Calculates the sum of ASCII values for string literals and reports prime factors found in both this sum and in numeric literals.
-    *   **Recursion Analysis:** Detects direct and indirect recursive function calls. It specifically identifies recursive cycles whose lengths match the hardcoded Monster Group primes, linking code structure to fundamental mathematical properties.
+    *   **Recursion Analysis:** Detects direct and indirect recursive function calls. It specifically identifies recursive cycles whose lengths match the configured primes.
+    *   **Self-Path Generation:** Generates a unique, shortest path from the crate root to each significant declaration (modules, functions, structs, enums, constants). This path provides context for each analyzed element.
 
 ## Next Steps
 
-Based on previous discussions and the user's vision, the immediate next step is to enhance the **Code Analysis Tool** by making its "prime resonance" detection configurable.
+The overarching vision is to treat the program as a "tapestry of matrices" by embedding its structure and properties into mathematical forms. The immediate next steps build upon the self-path generation and prime vector embedding.
 
-### 1. Configurable Prime Analysis
+### 1. Program as a Matrix of Primes
 
-**Objective:** Allow the user to specify a list of primes for the `--analyze` command, enabling the tool to search for resonances with any desired set of primes, not just the hardcoded `71` or `MONSTER_PRIMES`.
+**Objective:** Represent the entire program, or significant parts of it, as a matrix derived from its prime vector embeddings.
 
 **Tasks:**
 
-*   **Modify `src/analysis.rs`:**
-    *   Update `AnalysisReport` to store occurrences by prime.
-    *   Refactor `AnalysisVisitor` to accept and use a configurable slice of primes (`&[u64]`) instead of hardcoded values like `71` or the `MONSTER_PRIMES` constant.
-    *   Update `visit_item` and `visit_expr` methods within `AnalysisVisitor` to check sizes/values against the configurable primes list.
-    *   Adjust the `run_analysis` function signature to accept the `primes_to_analyze: &[u64]` parameter.
+*   **Refine Prime-Coefficient Vector Embedding:**
+    *   Complete the implementation of mapping AST self-paths (`Vec<String>`) into `PrimeVector`s (prime-coefficient vectors).
+    *   Ensure coefficients accurately reflect path depth, component type, or other meaningful structural properties.
+    *   Store these `PrimeVector`s in a `symbol_table` within the `AnalysisReport`, mapping the full string path to its `PrimeVector`.
 
-*   **Modify `src/main.rs`:**
-    *   Add a new command-line argument (e.g., `--primes "p1,p2,p3"`) for the `--analyze` mode.
-    *   Parse this argument into a `Vec<u64>`.
-    *   If the `--primes` argument is not provided, define a default list of primes (e.g., the Monster Group primes) for the analysis.
-    *   Pass the parsed or default primes list to `analysis::run_analysis`.
-    *   Update the printing logic for the analysis report to display `prime_occurrences` (which will replace the old `seventy_one_occurrences`).
+### 2. Matrix Self-Multiplication (Conceptual Exploration)
 
-This enhancement will make the analysis tool much more flexible and aligned with the user's broader interest in prime number resonances within the codebase.
+**Objective:** Explore the implications and results of multiplying the "program matrix" by itself.
+
+**Tasks:**
+
+*   **Define "Program Matrix":** Determine how to construct a meaningful matrix from the collection of `PrimeVector`s in the `symbol_table`. This might involve:
+    *   Ordering elements based on their paths.
+    *   Selecting a subset of primes for the matrix dimensions.
+    *   Converting sparse `PrimeVector`s into rows/columns of the matrix.
+*   **Implement Matrix Multiplication (Conceptual/Simplified):**
+    *   For the initial exploration, this might not involve full-blown matrix algebra on a giant matrix.
+    *   Instead, focus on the *conceptual result*: what does multiplying a "program matrix" by itself signify in terms of program properties, connections, or emerging patterns?
+    *   This could involve operations on the `PrimeVector`s themselves (e.g., combining vectors of related nodes, or applying a transformation based on the structure).
+    *   Consider what "self-multiplication" of the program implies for its mathematical representation. Does it reveal symmetries, emergent properties, or deeper structural resonances?
+
+### 3. Enhanced Reporting
+
+**Objective:** Update the analysis report to present the newly generated `PrimeVector`s and any initial conceptual results from the matrix operations.
+
+**Tasks:**
+
+*   **Display Symbol Table:** Clearly present the `symbol_table` (full path -> `PrimeVector`) in the analysis report.
+*   **Report Matrix Multiplication Insights:** If conceptual multiplications are explored, report any derived insights or patterns.
+
+These steps will deepen the mathematical embedding of the codebase and open avenues for exploring its "algebraic" properties.

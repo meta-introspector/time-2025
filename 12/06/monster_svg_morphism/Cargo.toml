@@ -4,7 +4,15 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-xml-rs = "0.8"
-nalgebra = "0.32"
-syn = { version = "2.0.111", features = ["full", "visit"] }
-walkdir = "2"
+xml = "0.8"
+syn = { version = "2.0", features = ["full", "extra-traits", "visit"] }
+quote = "1.0"
+walkdir = "2.3"
+nalgebra = "0.32.3"
+simba = "0.8.1"
+matrixmultiply = "0.3.10"
+regex = "1.10.2"
+lazy_static = "1.4.0"
+num-bigint = "0.4.4"
+num-prime = "0.4.0"
+num-traits = "0.2"

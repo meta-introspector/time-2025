@@ -16,6 +16,7 @@ pub mod bsp_split_axis;
 pub mod bsp_node;
 pub mod bsp_tree;
 pub mod keys;
+pub mod prime_vector; // New: PrimeVector for symbolic embedding
 
 // Re-export common types for easier access
 pub use bounding_box::BoundingBox;

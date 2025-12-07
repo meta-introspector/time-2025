@@ -74,6 +74,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
 
+
         println!("\n--- Prime Factor Occurrences in Literals and String ASCII Sums ---");
         if report.prime_factor_occurrences.is_empty() {
             println!("No prime factor occurrences found.");
@@ -99,7 +100,26 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
 
-        return Ok(())
+        println!("\n--- Symbol Table (Path to PrimeVector Embedding) ---");
+        if report.symbol_table.is_empty() {
+            println!("No symbolic embeddings generated.");
+        } else {
+            let mut sorted_paths: Vec<String> = report.symbol_table.keys().cloned().collect();
+            sorted_paths.sort_unstable();
+            for path in sorted_paths {
+                if let Some(prime_vector) = report.symbol_table.get(&path) {
+                    println!("Path: {}", path);
+                    // Sort primes within the vector for consistent output
+                    let mut sorted_primes: Vec<u64> = prime_vector.map.keys().cloned().collect();
+                    sorted_primes.sort_unstable();
+                    for prime in sorted_primes {
+                        if let Some(coeff) = prime_vector.map.get(&prime) {
+                            println!("  Prime {}: Coefficient {}", prime, coeff);
+                        }
+                    }
+                }
+            }
+        }        return Ok(())
     }
 
     // Check for --hecke-amplify flag
