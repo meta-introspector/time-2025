@@ -1,5 +1,12 @@
 [workspace]
 members = [
     "monster_svg_morphism",
+    "svg_parser_tool",
     "svg-renamer",
+    "external/xmlwriter",
 ]
+
+[patch.crates-io]
+xmlwriter = { path = "external/xmlwriter" }
+usvg = { path = "external/resvg/crates/usvg" }
+

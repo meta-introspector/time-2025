@@ -29,3 +29,9 @@
 [submodule "12/06/external/xmlwriter"]
 	path = 12/06/external/xmlwriter
 	url = https://github.com/RazrFalcon/xmlwriter
+[submodule "12/12/06/external/resvg"]
+	path = 12/12/06/external/resvg
+	url = https://github.com/linebender/resvg
+[submodule "12/06/external/resvg"]
+	path = 12/06/external/resvg
+	url = https://github.com/linebender/resvg

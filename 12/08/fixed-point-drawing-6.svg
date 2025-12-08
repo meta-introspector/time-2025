@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="fixed-point-drawing-6.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.5946522"
+     inkscape:cx="559.9912"
+     inkscape:cy="281.67726"
+     inkscape:window-width="706"
+     inkscape:window-height="532"
+     inkscape:window-x="1151"
+     inkscape:window-y="532"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="33.370346"
+       y="26.251339"
+       id="text167"><tspan
+         sodipodi:role="line"
+         id="tspan165"
+         style="stroke-width:0.264583"
+         x="33.370346"
+         y="26.251339">fixed point</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="34.705162"
+       y="36.039974"
+       id="text221"><tspan
+         sodipodi:role="line"
+         id="tspan219"
+         style="stroke-width:0.264583"
+         x="34.705162"
+         y="36.039974">eigenvalue</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="32.480469"
+       y="46.273548"
+       id="text279"><tspan
+         sodipodi:role="line"
+         id="tspan277"
+         style="stroke-width:0.264583"
+         x="32.480469"
+         y="46.273548">y combinator</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="86.317963"
+       y="46.273544"
+       id="text283"><tspan
+         sodipodi:role="line"
+         id="tspan281"
+         style="stroke-width:0.264583"
+         x="86.317963"
+         y="46.273544">combinators</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="44.938732"
+       y="62.291317"
+       id="text287"><tspan
+         sodipodi:role="line"
+         id="tspan285"
+         style="stroke-width:0.264583"
+         x="44.938732"
+         y="62.291317">s combinator</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="36.484913"
+       y="69.410324"
+       id="text291"><tspan
+         sodipodi:role="line"
+         id="tspan289"
+         style="stroke-width:0.264583"
+         x="36.484913"
+         y="69.410324">k combinator</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="105.45029"
+       y="67.630569"
+       id="text295"><tspan
+         sodipodi:role="line"
+         id="tspan293"
+         style="stroke-width:0.264583"
+         x="105.45029"
+         y="67.630569">code that operates on svg</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="63.181187"
+       y="87.20784"
+       id="text299"><tspan
+         sodipodi:role="line"
+         id="tspan297"
+         style="stroke-width:0.264583"
+         x="63.181187"
+         y="87.20784">self referencial descriptive labels</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="87.20784"
+       y="102.33573"
+       id="text303"><tspan
+         sodipodi:role="line"
+         id="tspan301"
+         style="stroke-width:0.264583"
+         x="87.20784"
+         y="102.33573">mapping from types to imaginary numbers</tspan></text>
+    <ellipse
+       style="fill:#000000;stroke-width:0.264583"
+       id="path357"
+       cx="172.63593"
+       cy="30.700718"
+       rx="14.682953"
+       ry="14.238014" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="71.63501"
+       y="20.022207"
+       id="text361"><tspan
+         sodipodi:role="line"
+         id="tspan359"
+         style="stroke-width:0.264583"
+         x="71.63501"
+         y="20.022207">bootstrap</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="85.873016"
+       y="33.370346"
+       id="text365"><tspan
+         sodipodi:role="line"
+         id="tspan363"
+         style="stroke-width:0.264583"
+         x="85.873016"
+         y="33.370346">self hosting</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="56.952061"
+       y="113.90412"
+       id="text369"><tspan
+         sodipodi:role="line"
+         id="tspan367"
+         style="stroke-width:0.264583"
+         x="57.869232"
+         y="113.90412">self modifying svg diagram </tspan></text>
+  </g>
+</svg>

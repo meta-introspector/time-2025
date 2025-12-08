@@ -33,16 +33,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         return Err("SVG document has no root element.".into());
     }
 
-    writer.flush()?; // Explicitly flush to ensure all written content is in the buffer
-
     let modified_svg = String::from_utf8(output_buffer)?; // Convert to String
+
+    if let Some(parent) = args.output.parent() {
+        fs::create_dir_all(parent)?;
+    }
     fs::write(&args.output, modified_svg)?; // fs::write returns Result
 
     println!("Renamed groups and wrote to {}", args.output.display());
     Ok(())
 }
 
-fn process_roxml_node<W: io::Write>(node: &RoxmlNode, writer: &mut XmlWriter<W>, max_length: Option<usize>) -> io::Result<()> {
+fn process_roxml_node<'a, W: io::Write>(node: &RoxmlNode<'a, 'a>, writer: &mut XmlWriter<'a, W>, max_length: Option<usize>) -> io::Result<()> {
     if node.is_element() {
         writer.start_element(node.tag_name().name())?;
 
