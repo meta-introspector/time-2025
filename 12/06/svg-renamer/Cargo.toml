@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-usvg = "0.14.0"
-fontdb = "0.9.0"
+usvg = "0.45.1"
+fontdb = "0.15.0"
 xmlwriter = "0.1.0"
+roxmltree = "0.20.0"

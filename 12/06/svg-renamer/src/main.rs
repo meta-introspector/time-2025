@@ -1,7 +1,9 @@
 use std::path::PathBuf;
-use usvg::{Tree, Node, Group, WriteOptions};
-use xmlwriter::XmlWriter;
-use std::hash::{Hash, Hasher};
+use std::fs;
+use std::hash::{Hash, Hasher}; // Keep Hash and Hasher for truncate_with_hash
+use roxmltree::{Document, Node as RoxmlNode}; // Alias roxmltree::Node to RoxmlNode
+use xmlwriter::{XmlWriter, Indent, Options}; // Import Options explicitly
+use std::io; // Import io (needed for Box<dyn std::error::Error>)
 
 struct Args {
     input: PathBuf,
@@ -12,86 +14,85 @@ struct Args {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = parse_args();
 
-    // Load font database (required for text processing)
-    let mut fontdb = fontdb::Database::new();
-    fontdb.load_system_fonts();
+    let svg_data = fs::read_to_string(&args.input)?;
+    let doc = Document::parse(&svg_data)?;
 
-    // Parse SVG
-    let tree = Tree::from_file(&args.input, &usvg::Options::default(), &fontdb)?;
+    let mut output_buffer = Vec::new(); // Create an in-memory buffer
+    let mut writer = XmlWriter::new( // Correct initialization
+        &mut output_buffer, // Pass a mutable reference to the buffer
+        Options {
+            attributes_indent: Indent::None,
+            ..Default::default()
+        }
+    );
 
-    // Process tree to rename groups
-    let processed_tree = rename_groups_with_text(&tree, args.max_length);
+    // Start processing from the document's root element
+    if let Some(root_element) = doc.root().children().find(|n| n.is_element()) {
+        process_roxml_node(&root_element, &mut writer, args.max_length)?; // Now returns Result and uses ?
+    } else {
+        return Err("SVG document has no root element.".into());
+    }
 
-    // Write modified SVG
-    // The original snippet used `processed_tree.write(&mut xml, &WriteOptions::default())?`, 
-    // which is not standard in usvg 0.14.0. 
-    // Assuming the intent is to get the SVG XML string and write it to a file.
-    let svg_string = processed_tree.to_string(&WriteOptions::default());
-    std::fs::write(&args.output, svg_string)?;
+    writer.flush()?; // Explicitly flush to ensure all written content is in the buffer
 
+    let modified_svg = String::from_utf8(output_buffer)?; // Convert to String
+    fs::write(&args.output, modified_svg)?; // fs::write returns Result
 
     println!("Renamed groups and wrote to {}", args.output.display());
     Ok(())
 }
 
-fn rename_groups_with_text(tree: &Tree, max_length: Option<usize>) -> Tree {
-    // Clone the tree for modification
-    let mut new_tree = tree.clone();
+fn process_roxml_node<W: io::Write>(node: &RoxmlNode, writer: &mut XmlWriter<W>, max_length: Option<usize>) -> io::Result<()> {
+    if node.is_element() {
+        writer.start_element(node.tag_name().name())?;
 
-    // Process root group recursively
-    process_group(&mut new_tree.root, max_length);
+        let mut current_id: Option<String> = None;
+        if node.tag_name().name() == "g" {
+            let text_in_group = collect_text_from_children(node);
 
-    new_tree
-}
-
-fn process_group(group: &mut Group, max_length: Option<usize>) {
-    // Collect children that are groups to process them recursively
-    let mut groups_to_process = Vec::new();
-    for child_node in &mut group.children {
-        if let Node::Group(g) = child_node {
-            groups_to_process.push(g);
-        }
-    }
-
-    for g in groups_to_process {
-        // Check if group contains text
-        if let Some(text_content) = extract_text_from_group(g) {
-            let escaped = escape_text(&text_content);
-            let processed = if let Some(max_len) = max_length {
-                truncate_with_hash(&escaped, max_len)
-            } else {
-                escaped
-            };
-
-            // Update group ID
-            g.id = processed;
-        }
-
-        // Recursively process nested groups
-        process_group(g, max_length);
-    }
-}
-
-
-fn extract_text_from_group(group: &Group) -> Option<String> {
-    let mut text_parts = Vec::new();
-
-    for child in &group.children {
-        if let Node::Text(text) = child {
-            // Extract text content from text node
-            for chunk in &text.chunks {
-                for span in &chunk.spans {
-                    text_parts.push(&chunk.text[span.start..span.end]);
-                }
+            if !text_in_group.is_empty() {
+                let escaped = escape_text(&text_in_group);
+                let processed_id = if let Some(max_len) = max_length {
+                    truncate_with_hash(&escaped, max_len)
+                } else {
+                    escaped
+                };
+                writer.write_attribute("id", &processed_id)?;
+                current_id = Some(processed_id);
             }
         }
-    }
+        
+        for attr in node.attributes() {
+            if attr.name() == "id" {
+                if current_id.is_none() {
+                    writer.write_attribute(attr.name(), attr.value())?;
+                }
+            } else {
+                writer.write_attribute(attr.name(), attr.value())?;
+            }
+        }
 
-    if text_parts.is_empty() {
-        None
-    } else {
-        Some(text_parts.join(" "))
+        for child in node.children() {
+            process_roxml_node(&child, writer, max_length)?;
+        }
+
+        writer.end_element()?;
+    } else if node.is_text() {
+        writer.write_text(node.text().unwrap_or_default())?;
+    } else if node.is_comment() {
+        // Optionally handle comments
     }
+    Ok(())
+}
+
+fn collect_text_from_children(node: &RoxmlNode) -> String {
+    let mut text_parts = Vec::new();
+    for child in node.descendants().filter(|n| n.is_text()) {
+        if let Some(text_content) = child.text() {
+            text_parts.push(text_content.trim().to_string());
+        }
+    }
+    text_parts.join(" ")
 }
 
 fn escape_text(text: &str) -> String {
@@ -114,13 +115,11 @@ fn truncate_with_hash(text: &str, max_len: usize) -> String {
         return text.to_string();
     }
 
-    use std::hash::{Hash, Hasher};
     let mut hasher = std::collections::hash_map::DefaultHasher::new();
     text.hash(&mut hasher);
     let hash = hasher.finish();
 
-    // Use char_indices to correctly truncate based on characters, not bytes.
-    let truncate_char_len = max_len.saturating_sub(9); // Reserve space for "_hash123"
+    let truncate_char_len = max_len.saturating_sub(9);
     let truncated_text: String = text.char_indices()
         .take_while(|(i, _)| *i < truncate_char_len)
         .map(|(_, c)| c)
@@ -130,7 +129,6 @@ fn truncate_with_hash(text: &str, max_len: usize) -> String {
 }
 
 fn parse_args() -> Args {
-    // Simple argument parsing
     let mut args = std::env::args().skip(1);
     let input = PathBuf::from(args.next().expect("Missing input file"));
     let output = PathBuf::from(args.next().expect("Missing output file"));

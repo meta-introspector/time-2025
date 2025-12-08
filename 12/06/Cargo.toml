@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "monster_svg_morphism",
+    "svg-renamer",
+]

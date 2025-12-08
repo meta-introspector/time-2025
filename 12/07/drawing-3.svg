@@ -24,9 +24,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.5946522"
-     inkscape:cx="581.85272"
-     inkscape:cy="845.87259"
+     inkscape:zoom="0.84096521"
+     inkscape:cx="579.09649"
+     inkscape:cy="717.03323"
      inkscape:window-width="859"
      inkscape:window-height="711"
      inkscape:window-x="969"
@@ -164,5 +164,107 @@
        inkscape:transform-center-x="-0.0068259753"
        inkscape:transform-center-y="-0.0052655496"
        transform="rotate(-7.2356009,185.30202,88.568399)" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#800000;stroke-width:0.264583"
+       x="158.39792"
+       y="177.53024"
+       id="text1354"><tspan
+         sodipodi:role="line"
+         id="tspan1352"
+         style="stroke-width:0.264583"
+         x="158.39792"
+         y="177.53024">each face has its own angle</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#800000;stroke-width:0.264583"
+       x="128.67902"
+       y="117.35275"
+       id="text1358"><tspan
+         sodipodi:role="line"
+         id="tspan1356"
+         style="stroke-width:0.264583"
+         x="128.67902"
+         y="117.35275">sieve of erathonese</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#800000;stroke-width:0.264583"
+       x="136.54449"
+       y="126.47669"
+       id="text1362"><tspan
+         sodipodi:role="line"
+         id="tspan1360"
+         style="stroke-width:0.264583"
+         x="136.54449"
+         y="126.47669">each prime has its own angle</tspan></text>
+    <path
+       sodipodi:type="star"
+       style="fill:#800000;stroke-width:0.264583"
+       id="path1364"
+       inkscape:flatsided="false"
+       sodipodi:sides="7"
+       sodipodi:cx="152.27544"
+       sodipodi:cy="235.33475"
+       sodipodi:r1="13.532259"
+       sodipodi:r2="28.480799"
+       sodipodi:arg1="1.594048"
+       sodipodi:arg2="2.0767535"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 151.96082,248.86335 -13.48846,11.38386 3.02983,-16.7235 -17.31018,-3.44797 14.96402,-8.05812 -8.09698,-15.68342 15.63001,6.67519 7.2134,-16.10893 4.52628,16.38195 17.09195,-4.40409 -9.98583,13.75276 14.09991,10.61712 -16.97841,0.76747 0.49035,17.64342 z"
+       inkscape:transform-center-x="1.9184305e-06"
+       inkscape:transform-center-y="-2.9648472e-06"
+       transform="translate(11.64089,1.8877119)" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="161.39937"
+       y="237.8517"
+       id="text1368"><tspan
+         sodipodi:role="line"
+         id="tspan1366"
+         style="stroke-width:0.264583;fill:#000000"
+         x="161.39937"
+         y="237.8517">7</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="123.95975"
+       y="205.44597"
+       id="text1372"><tspan
+         sodipodi:role="line"
+         id="tspan1370"
+         style="stroke-width:0.264583;fill:#000000"
+         x="123.95975"
+         y="205.44597">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="141.89301"
+       y="152.90466"
+       id="text1478"><tspan
+         sodipodi:role="line"
+         id="tspan1476"
+         style="stroke-width:0.264583"
+         x="141.89301"
+         y="152.90466">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="129.9375"
+       y="206.38982"
+       id="text1482"><tspan
+         sodipodi:role="line"
+         id="tspan1480"
+         style="stroke-width:0.264583"
+         x="129.9375"
+         y="206.38982">6</tspan></text>
+    <rect
+       style="fill:#000000;stroke-width:0.264583"
+       id="rect1562"
+       width="6.2923727"
+       height="21.708685"
+       x="94.070976"
+       y="135.60063" />
   </g>
 </svg>

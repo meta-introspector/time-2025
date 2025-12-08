@@ -26,3 +26,6 @@
 	path = 10/12/proof/vendor/rnix-parser
 	url = https://github.com/meta-introspector/rnix-parser
 	branch = feature/CRQ-016-nixify-workflow
+[submodule "12/06/external/xmlwriter"]
+	path = 12/06/external/xmlwriter
+	url = https://github.com/RazrFalcon/xmlwriter
