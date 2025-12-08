@@ -251,7 +251,7 @@ fn parse_svg(file: BufReader<File>) -> Result<Svg, Box<dyn std::error::Error>> {
                         let path = Path { id, d, style, transform, triples: Vec::new(), approx_bbox };
                         element_scope_stack.last_mut().unwrap().push(SvgElementEnum::Path(path));
                     },
-                    _ => {{}},
+                    _ => {},
                 }
             },
             Ok(XmlEvent::EndElement { name }) => {
@@ -276,8 +276,8 @@ fn parse_svg(file: BufReader<File>) -> Result<Svg, Box<dyn std::error::Error>> {
                         current_text_content.clear();
                         in_text_element = false;
                     },
-                    "tspan" => {{}},
-                    _ => {{}},
+                    "tspan" => {},
+                    _ => {},
                 }
             },
             Ok(XmlEvent::Characters(s)) => {
@@ -289,7 +289,7 @@ fn parse_svg(file: BufReader<File>) -> Result<Svg, Box<dyn std::error::Error>> {
                 println!("Error: {}", e);
                 return Err(e.into());
             },
-            _ => {{}},
+            _ => {},
         }
     }
 
@@ -517,7 +517,7 @@ fn parse_style(style_str: Option<String>) -> Option<Style> {
                     "fill" => style.fill = parse_color(value.trim()),
                     "stroke" => style.stroke = parse_color(value.trim()),
                     "stroke-width" => style.stroke_width = value.trim().parse().ok(),
-                    _ => {{}},
+                    _ => {},
                 }
             }
         }

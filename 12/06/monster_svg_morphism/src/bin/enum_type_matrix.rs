@@ -1,5 +1,5 @@
 use nalgebra::{DMatrix};
-use monster_svg_morphism::{code_parser::{collect_declarations_from_dir}, types::prime_vector::PrimeMorphism};
+use monster_svg_morphism::{code_parser::{collect_code_elements_from_dir, CodeElementKind}, types::prime_vector::PrimeMorphism};
 use std::collections::{HashMap, BTreeSet};
 use std::path::Path;
 use std::fs::File; // Add File import
@@ -82,7 +82,7 @@ fn main() {
     println!("Starting analysis for building an Enum and Type relationship matrix.");
 
     let crate_path = Path::new(".").canonicalize().expect("Failed to canonicalize path");
-    let declarations = collect_declarations_from_dir(&crate_path);
+    let declarations = collect_code_elements_from_dir(&crate_path);
 
     if declarations.is_empty() {
         println!("No declarations found in the crate. Exiting.");
@@ -94,7 +94,7 @@ fn main() {
     let mut unique_names = BTreeSet::new();
 
     for decl in declarations {
-        if decl.decl_type == "struct" || decl.decl_type == "enum" {
+        if decl.kind == CodeElementKind::Struct || decl.kind == CodeElementKind::Enum {
             let simple_name = decl.full_path.split("::").last().unwrap_or("").to_string();
             if !simple_name.is_empty() {
                  unique_names.insert(simple_name.clone());
@@ -126,9 +126,10 @@ fn main() {
     for decl in &struct_enum_declarations {
         let simple_decl_name = decl.full_path.split("::").last().unwrap_or("").to_string();
         if let Some(&row_idx) = name_to_index.get(&simple_decl_name) {
+/*
             // If it's a struct, process its fields
-            if decl.decl_type == "struct" {
-                for field in &decl.fields {
+            if decl.kind == CodeElementKind::Struct {
+                for field_name in &decl.associated_idents {
                     // Get prime for the field name
                     let p_field = prime_morphism.get_prime_for_component(&field.name);
                     let weight_base = 1.0 / (p_field as f64);
@@ -143,8 +144,8 @@ fn main() {
                 }
             } 
             // If it's an enum, process its variants (if they contain types)
-            else if decl.decl_type == "enum" {
-                for variant in &decl.variants {
+            else if decl.kind == CodeElementKind::Enum {
+                for variant_name in &decl.associated_idents {
                     for field_type_name in &variant.field_types {
                         // Get prime for the variant name (as proxy for connection)
                         let p_variant = prime_morphism.get_prime_for_component(&variant.name);
@@ -157,6 +158,7 @@ fn main() {
                     }
                 }
             }
+            */
         }
     }
 

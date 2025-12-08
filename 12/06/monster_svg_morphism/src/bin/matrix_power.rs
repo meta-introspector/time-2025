@@ -1,5 +1,5 @@
 use nalgebra::{DMatrix};
-use monster_svg_morphism::{code_parser::{collect_declarations_from_dir}, types::prime_vector::PrimeMorphism};
+use monster_svg_morphism::{code_parser::{collect_code_elements_from_dir}, types::prime_vector::PrimeMorphism};
 use std::path::Path;
 
 /// Calculates the dot product of two PrimeVectors.
@@ -88,7 +88,7 @@ fn main() {
 
     // 1. Collect declarations from the current crate
     let crate_path = Path::new(".").canonicalize().expect("Failed to canonicalize path");
-    let declarations = collect_declarations_from_dir(&crate_path);
+    let declarations = collect_code_elements_from_dir(&crate_path);
 
     if declarations.is_empty() {
         println!("No declarations found in the crate. Exiting.");
