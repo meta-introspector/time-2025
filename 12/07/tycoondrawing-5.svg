@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg3172"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="tycoondrawing-5.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview3174"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.84096521"
+     inkscape:cx="316.30322"
+     inkscape:cy="820.48579"
+     inkscape:window-width="953"
+     inkscape:window-height="761"
+     inkscape:window-x="936"
+     inkscape:window-y="247"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs3169" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="107.59957"
+       y="37.754234"
+       id="text3178"><tspan
+         sodipodi:role="line"
+         id="tspan3176"
+         style="stroke-width:0.264583"
+         x="108.51675"
+         y="37.754234">Rust </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="108.18919"
+       y="46.205479"
+       id="text3178-2"><tspan
+         sodipodi:role="line"
+         id="tspan3176-0"
+         style="stroke-width:0.264583"
+         x="109.10637"
+         y="46.205479">EBPF </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="111.02077"
+       y="30.159927"
+       id="text3178-6"><tspan
+         sodipodi:role="line"
+         id="tspan3176-4"
+         style="stroke-width:0.264583"
+         x="111.93794"
+         y="30.159927">Solana </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="109.8019"
+       y="55.6875"
+       id="text3236"><tspan
+         sodipodi:role="line"
+         id="tspan3234"
+         style="stroke-width:0.264583"
+         x="110.71908"
+         y="55.6875">LLVM </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:11.5359px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.376171"
+       x="92.654213"
+       y="23.707378"
+       id="text3240"
+       transform="scale(1.42175,0.70335855)"><tspan
+         sodipodi:role="line"
+         id="tspan3238"
+         style="stroke-width:0.376171"
+         x="92.654213"
+         y="23.707378">Tycoon</tspan></text>
+    <g
+       id="g3418"
+       transform="matrix(1.8516747,0,0,2.2848837,-128.85064,-57.258765)">
+      <rect
+         style="fill:#ffff00;stroke-width:0.435246"
+         id="rect3242"
+         width="65.755295"
+         height="54.114407"
+         x="83.68856"
+         y="56.316738" />
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+         x="94.38559"
+         y="65.440681"
+         id="text3246"><tspan
+           sodipodi:role="line"
+           id="tspan3244"
+           style="stroke-width:0.264583"
+           x="94.38559"
+           y="65.440681">BASE</tspan></text>
+    </g>
+    <g
+       id="g3413"
+       transform="translate(-64.789082,90.387701)">
+      <circle
+         style="fill:#ff0000;stroke-width:0.484412"
+         id="path3300"
+         cx="104.64751"
+         cy="90.804291"
+         r="11.520393" />
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+         x="104.76528"
+         y="93.079689"
+         id="text3408"><tspan
+           sodipodi:role="line"
+           id="tspan3406"
+           style="fill:#000000;stroke-width:0.264583"
+           x="104.76528"
+           y="93.079689">player</tspan></text>
+    </g>
+    <g
+       id="g3533"
+       transform="translate(65.440678,39.956567)">
+      <rect
+         style="fill:#008000;stroke-width:0.264583"
+         id="rect3420"
+         width="54.429024"
+         height="20.135592"
+         x="25.48411"
+         y="93.441734" />
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#008000;stroke-width:0.264583"
+         x="44.990463"
+         y="104.76801"
+         id="text3528"><tspan
+           sodipodi:role="line"
+           id="tspan3526"
+           style="fill:#000000;stroke-width:0.264583"
+           x="44.990463"
+           y="104.76801">conveyor</tspan></text>
+    </g>
+    <g
+       id="g3698"
+       transform="translate(79.913136,28.315678)">
+      <rect
+         style="fill:#008080;stroke-width:0.341575"
+         id="rect3535"
+         width="40.900421"
+         height="22.652542"
+         x="14.472457"
+         y="77.396187" />
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000080;stroke-width:0.264583"
+         x="34.922668"
+         y="90.924789"
+         id="text3591"><tspan
+           sodipodi:role="line"
+           id="tspan3589"
+           style="fill:#000080;stroke-width:0.264583"
+           x="34.922668"
+           y="90.924789">DRIPPER</tspan></text>
+    </g>
+    <rect
+       style="fill:#ff5555;stroke-width:0.264583"
+       id="rect3752"
+       width="38.068855"
+       height="10.697034"
+       x="97.217155"
+       y="163.28708" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#280b0b;stroke-width:0.264583"
+       x="112.9481"
+       y="170.83792"
+       id="text3860"><tspan
+         sodipodi:role="line"
+         id="tspan3858"
+         style="fill:#280b0b;stroke-width:0.264583"
+         x="112.9481"
+         y="170.83792">output</tspan></text>
+    <path
+       style="fill:#ff5555;stroke-width:0.264583"
+       d="m 114.20657,123.64513 c 0.22046,4.0959 0.31461,8.11457 0.31461,12.27012"
+       id="path3925" />
+    <path
+       style="fill:#ff5555;stroke-width:0.264583"
+       d="m 117.35275,151.01695 c 0,3.77542 0,7.55085 0,11.32627 0,0.31462 -0.22247,0.72139 0,0.94386 0.41949,0.41949 0.31462,-0.52437 0.31462,0.31461 0,1.04873 -0.31462,0.94386 0.31462,0.94386"
+       id="path3927" />
+    <g
+       id="g4042"
+       transform="translate(17.933263,-0.62923729)">
+      <rect
+         style="fill:#ff5555;stroke-width:0.322659"
+         id="rect3981"
+         width="36.495762"
+         height="13.213983"
+         x="32.405716"
+         y="131.19598" />
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff5555;stroke-width:0.264583"
+         x="51.282841"
+         y="138.43221"
+         id="text4037"><tspan
+           sodipodi:role="line"
+           id="tspan4035"
+           style="fill:#000000;stroke-width:0.264583"
+           x="51.282841"
+           y="138.43221">process</tspan></text>
+    </g>
+    <g
+       id="g4042-2"
+       transform="translate(18.247886,14.787068)">
+      <rect
+         style="fill:#ff5555;stroke-width:0.322659"
+         id="rect3981-1"
+         width="36.495762"
+         height="13.213983"
+         x="32.405716"
+         y="131.19598" />
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff5555;stroke-width:0.264583"
+         x="51.282841"
+         y="138.43221"
+         id="text4037-2"><tspan
+           sodipodi:role="line"
+           id="tspan4035-3"
+           style="fill:#000000;stroke-width:0.264583"
+           x="51.282841"
+           y="138.43221">process</tspan></text>
+    </g>
+    <path
+       style="fill:#000000;stroke-width:0.264583"
+       d="m 84.003178,138.4322 10.382414,1.5731"
+       id="path4144" />
+    <path
+       style="fill:#000000;stroke-width:0.264583"
+       d="m 83.373941,154.47775 12.899363,-4.71928"
+       id="path4146" />
+    <ellipse
+       style="fill:#000000;stroke-width:0.264583"
+       id="path4200"
+       cx="135.44333"
+       cy="140.94914"
+       rx="3.6181142"
+       ry="3.7754235" />
+    <rect
+       style="fill:#800080;stroke-width:0.264583"
+       id="rect4202"
+       width="33.664192"
+       height="20.450211"
+       x="102.25106"
+       y="58.833687" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#800080;stroke-width:0.264583"
+       x="116.4089"
+       y="69.216103"
+       id="text4258"><tspan
+         sodipodi:role="line"
+         id="tspan4256"
+         style="fill:#000000;stroke-width:0.264583"
+         x="116.4089"
+         y="69.216103">hopper</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="99.104874"
+       y="215.8284"
+       id="text4312"><tspan
+         sodipodi:role="line"
+         id="tspan4310"
+         style="stroke-width:0.264583"
+         x="99.104874"
+         y="215.8284">SOLFUNMEME</tspan></text>
+  </g>
+</svg>
