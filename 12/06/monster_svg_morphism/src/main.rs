@@ -8,7 +8,9 @@ use monster_svg_morphism::types::{
     BoundingBox, Color, Transform, Style, MonsterElementKind,
 };
 use monster_svg_morphism::traits::{MapsToMonster};
-use monster_svg_morphism::analysis; // Import the analysis module
+use monster_svg_morphism::analysis::{run_analysis, CharFrequencyAnalyzer}; // Import CharFrequencyAnalyzer
+use monster_svg_morphism::types::prime_vector::{PrimeMorphism, PrimeVector}; // Import PrimeMorphism and PrimeVector
+
 
 // The Monster Group primes
 const MONSTER_PRIMES: [u64; 15] = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 41, 47, 59, 71];
@@ -24,6 +26,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
     let mut hecke_amplify_enabled = false;
     let mut input_path_idx = 1;
+    let mut find_similar_substring: Option<String> = None; // NEW: Flag for similarity search
 
     // Check for --analyze flag
     if args.len() > 1 && args[1] == "--analyze" {
@@ -55,7 +58,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             &primes_to_analyze_vec
         };
 
-        let report = analysis::run_analysis(&current_dir, primes_to_analyze);
+        let report = run_analysis(&current_dir, primes_to_analyze); // Use run_analysis from analysis module
 
         println!("\n--- Prime Resonance Analysis Report ---");
         if report.prime_occurrences.is_empty() {
@@ -140,25 +143,116 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 }
             }
         }
+
+        // NEW: Print Character Sequence Analysis
+        println!("\n--- Character Pair Transition Frequencies ---");
+        if report.char_pair_transitions.is_empty() {
+            println!("No character pair transitions found.");
+        } else {
+            let mut sorted_pairs: Vec<((char, char), usize)> = report.char_pair_transitions.into_iter().collect();
+            sorted_pairs.sort_by(|a, b| b.1.cmp(&a.1)); // Sort by frequency descending
+            for (pair, count) in sorted_pairs.iter().take(20) { // Print top 20
+                println!("  ('{}{}') -> {}", pair.0, pair.1, count);
+            }
+        }
+
+        println!("\n--- N-gram Frequencies ---");
+        if report.ngrams_frequencies.is_empty() {
+            println!("No N-gram frequencies found.");
+        } else {
+            for (n, ngrams_map) in &report.ngrams_frequencies {
+                println!("  N-grams of length {}:", n);
+                let mut sorted_ngrams: Vec<(&String, &usize)> = ngrams_map.iter().collect();
+                sorted_ngrams.sort_by(|a, b| b.1.cmp(&a.1)); // Sort by frequency descending
+                for (ngram, count) in sorted_ngrams.iter().take(10) { // Print top 10 per N
+                    println!("    '{}' -> {}", ngram, count);
+                }
+            }
+        }
+
         return Ok(())
     }
 
+    // NEW: Check for --find-similar flag
+    if args.len() > input_path_idx {
+        if args[input_path_idx] == "--find-similar" {
+            if args.len() > input_path_idx + 1 {
+                find_similar_substring = Some(args[input_path_idx + 1].clone());
+                input_path_idx += 2; // Advance past flag and substring
+            } else {
+                eprintln!("Error: --find-similar requires a substring argument.");
+                return Err("Missing value for --find-similar".into());
+            }
+        }
+    }
+
+
+    // --- Similarity Search Logic ---
+    if let Some(target_substring) = find_similar_substring {
+        let current_dir = env::current_dir()?;
+        println!("Searching for substrings similar to '{}' in: {}", target_substring, current_dir.display());
+
+        // We need the char_to_prime_map for PrimeMorphism
+        let mut char_freq_analyzer = CharFrequencyAnalyzer::new();
+        char_freq_analyzer.collect_char_frequencies(&current_dir);
+        let char_to_prime_map = char_freq_analyzer.generate_char_to_prime_map();
+        
+        // Create a PrimeMorphism to generate PrimeVectors for the target and existing substrings
+        let mut prime_morphism = PrimeMorphism::new(char_to_prime_map);
+
+        let target_pv = prime_morphism.string_to_char_prime_vector(&target_substring);
+
+        // Run analysis to get existing substring PrimeVectors
+        let primes_to_analyze: &[u64] = &MONSTER_PRIMES; // Use default primes for this analysis
+        let report = run_analysis(&current_dir, primes_to_analyze);
+        
+        if report.substring_prime_vectors.is_empty() {
+            println!("No substring PrimeVectors generated in the report. Cannot perform similarity search.");
+            return Ok(());
+        }
+
+        let mut similar_substrings: Vec<(String, f64)> = Vec::new();
+        let similarity_threshold = 0.7; // Adjustable threshold
+
+        for (substring, pv) in report.substring_prime_vectors {
+            if substring == target_substring { // Don't compare with itself
+                continue;
+            }
+            let similarity = target_pv.cosine_similarity(&pv);
+            if similarity >= similarity_threshold {
+                similar_substrings.push((substring, similarity));
+            }
+        }
+
+        similar_substrings.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap_or(std::cmp::Ordering::Equal));
+
+        println!("\n--- Similar Substrings (Similarity >= {:.2}) ---", similarity_threshold);
+        if similar_substrings.is_empty() {
+            println!("No similar substrings found.");
+        } else {
+            for (substring, similarity) in similar_substrings {
+                println!("  '{}' (Similarity: {:.4})", substring, similarity);
+            }
+        }
+
+        return Ok(());
+    }
+
+
     // Check for --hecke-amplify flag
-    // The flag can be at position 1 or 2 (if input_path_idx is already advanced by --analyze)
-    if args.len() > 1 {
-        if args[1] == "--hecke-amplify" {
+    // The flag can be at position 1 or 2 (if input_path_idx is already advanced by --analyze or --find-similar)
+    if args.len() > input_path_idx {
+        if args[input_path_idx] == "--hecke-amplify" {
             hecke_amplify_enabled = true;
-            input_path_idx = 2; // Input path will be at index 2
-        } else if args.len() > 2 && args[2] == "--hecke-amplify" {
-            hecke_amplify_enabled = true;
-            // input_path_idx remains 1 as --hecke-amplify is after input.svg
+            input_path_idx += 1; // Advance past flag
         }
     }
 
 
     if args.len() < input_path_idx + 2 { // Need at least input and output paths
         eprintln!("Usage: {} [--hecke-amplify] <input.svg> <output.svg>", args[0]);
-        eprintln!("       {} --analyze", args[0]);
+        eprintln!("       {} --analyze [--primes <p1,p2,...>]", args[0]);
+        eprintln!("       {} --find-similar <substring>", args[0]); // NEW: Add to usage
         return Err("Invalid arguments".into());
     }
     

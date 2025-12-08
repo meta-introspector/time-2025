@@ -1,6 +1,7 @@
 use nalgebra::{DMatrix};
 use monster_svg_morphism::{code_parser::{collect_code_elements_from_dir}, types::prime_vector::PrimeMorphism};
 use std::path::Path;
+use std::collections::HashMap;
 
 /// Calculates the dot product of two PrimeVectors.
 /// This measures their similarity based on common primes and their coefficients.
@@ -101,7 +102,7 @@ fn main() {
     // }
 
     // 2. Generate PrimeVectors for each declaration
-    let mut prime_morphism = PrimeMorphism::new();
+    let mut prime_morphism = PrimeMorphism::new(HashMap::new());
     let mut declaration_prime_vectors = Vec::new();
     
     for decl in &declarations {

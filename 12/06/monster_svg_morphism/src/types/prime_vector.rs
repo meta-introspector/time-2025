@@ -74,6 +74,23 @@ impl PrimeVector {
             *coeff *= factor;
         }
     }
+
+    /// Calculates the cosine similarity between two PrimeVectors.
+    /// Returns a value between 0.0 and 1.0.
+    pub fn cosine_similarity(&self, other: &PrimeVector) -> f64 {
+        let dot_product: f64 = self.map.iter().filter_map(|(prime, &coeff_self)| {
+            other.map.get(prime).map(|&coeff_other| (coeff_self as f64) * (coeff_other as f64))
+        }).sum();
+
+        let magnitude_self: f64 = self.map.values().map(|&coeff| (coeff as f64).powi(2)).sum();
+        let magnitude_other: f64 = other.map.values().map(|&coeff| (coeff as f64).powi(2)).sum();
+
+        if magnitude_self == 0.0 || magnitude_other == 0.0 {
+            return 0.0; // Avoid division by zero, no similarity if one vector is empty
+        }
+
+        dot_product / (magnitude_self.sqrt() * magnitude_other.sqrt())
+    }
 }
 
 impl Default for PrimeVector {
@@ -85,27 +102,40 @@ impl Default for PrimeVector {
 /// Manages the assignment of unique primes to string components.
 pub struct PrimeMorphism {
     component_to_prime: HashMap<String, u64>,
+    char_to_prime_map: HashMap<char, u64>, // NEW: Map for character-to-prime
 }
 
 impl PrimeMorphism {
-    pub fn new() -> Self {
+    pub fn new(char_to_prime_map: HashMap<char, u64>) -> Self {
         PrimeMorphism {
             component_to_prime: HashMap::new(),
+            char_to_prime_map, // Initialize with the provided map
         }
     }
 
     /// Gets the prime for a given component, assigning a new one if not already present.
+    /// This is primarily for predicates and other non-character-based prime assignments.
     pub fn get_prime_for_component(&mut self, component: &str) -> u64 {
         let mut generator = PRIME_GENERATOR.lock().unwrap();
         *self.component_to_prime.entry(component.to_string()).or_insert_with(|| generator.get_next_prime())
     }
 
+    /// Converts a string into a PrimeVector based on its characters' primes.
+    pub fn string_to_char_prime_vector(&self, s: &str) -> PrimeVector {
+        let mut pv = PrimeVector::new();
+        for ch in s.chars() {
+            if let Some(&prime) = self.char_to_prime_map.get(&ch) {
+                *pv.map.entry(prime).or_insert(0) += 1;
+            }
+        }
+        pv
+    }
+
     /// Converts a path (Vec<String>) into a PrimeVector.
     /// The coefficient of each prime is based on its depth in the path (e.g., higher depth, higher coeff).
+    /// It now incorporates character-based prime vectors for component names.
     pub fn path_to_prime_vector(&mut self, path: &[String]) -> PrimeVector {
         let mut prime_vector = PrimeVector::new();
-        // Base prime for "crate"
-        // prime_vector.map.insert(self.get_prime_for_component("crate_root"), 1); // special prime for root
 
         for (depth, component) in path.iter().enumerate() {
             let parts: Vec<&str> = component.split("::").collect();
@@ -115,11 +145,17 @@ impl PrimeMorphism {
                 ("raw", component.clone()) // Handle "crate" or other raw components
             };
 
-            let prime = self.get_prime_for_component(&component_name);
-            let type_weight = self.get_type_weight(component_type);
+            // Get character-based PrimeVector for the component name
+            let char_pv_for_name = self.string_to_char_prime_vector(&component_name);
             
+            let type_weight = self.get_type_weight(component_type);
             // Coefficient based on depth + type_weight
-            *prime_vector.map.entry(prime).or_insert(0) += (depth + 1) as u64 + type_weight;
+            let scaling_factor = (depth + 1) as u64 + type_weight;
+            
+            let mut scaled_char_pv_for_name = char_pv_for_name;
+            scaled_char_pv_for_name.scale(scaling_factor); // Scale the character-based PV
+
+            prime_vector.multiply(&scaled_char_pv_for_name); // Multiply into the path's PrimeVector
         }
         prime_vector
     }

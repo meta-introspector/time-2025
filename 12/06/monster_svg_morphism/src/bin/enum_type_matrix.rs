@@ -117,7 +117,7 @@ fn main() {
 
     let matrix_dim = unique_names.len();
     let mut relationship_matrix = DMatrix::<f64>::zeros(matrix_dim, matrix_dim);
-    let mut prime_morphism = PrimeMorphism::new();
+    let mut prime_morphism = PrimeMorphism::new(HashMap::new());
 
 
     println!("\nBuilding a {}x{} Enum and Type Relationship Matrix...", matrix_dim, matrix_dim);
