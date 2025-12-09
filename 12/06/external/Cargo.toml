@@ -1,0 +1,15 @@
+[workspace]
+members = [
+    "resvg/crates/c-api",
+    "resvg/crates/resvg",
+    "resvg/crates/usvg",
+    "resvg/crates/usvg/codegen",
+    "xmlwriter",
+]
+resolver = "2"
+
+[workspace.dependencies]
+xmlwriter = { version = "0.1.0", path = "xmlwriter" }
+
+[workspace.package]
+license = "Apache-2.0 OR MIT"

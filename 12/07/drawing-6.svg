@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="drawing-6.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.5946522"
+     inkscape:cx="389.30319"
+     inkscape:cy="533.08472"
+     inkscape:window-width="703"
+     inkscape:window-height="575"
+     inkscape:window-x="985"
+     inkscape:window-y="167"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="56.952057"
+       y="97.886353"
+       id="text113"><tspan
+         sodipodi:role="line"
+         id="tspan111"
+         style="stroke-width:0.264583"
+         x="56.952057"
+         y="97.886353">LLM</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="53.392555"
+       y="111.23449"
+       id="text117"><tspan
+         sodipodi:role="line"
+         id="tspan115"
+         style="stroke-width:0.264583"
+         x="53.392555"
+         y="111.23449">rust</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="52.502678"
+       y="125.02757"
+       id="text121"><tspan
+         sodipodi:role="line"
+         id="tspan119"
+         style="stroke-width:0.264583"
+         x="52.502678"
+         y="125.02757">svg</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="49.388111"
+       y="136.151"
+       id="text125"><tspan
+         sodipodi:role="line"
+         id="tspan123"
+         style="stroke-width:0.264583"
+         x="49.388111"
+         y="136.151">inkscape</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="48.498234"
+       y="152.16878"
+       id="text129"><tspan
+         sodipodi:role="line"
+         id="tspan127"
+         style="stroke-width:0.264583"
+         x="48.498234"
+         y="152.16878">user</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="101.89079"
+       y="123.24781"
+       id="text183"><tspan
+         sodipodi:role="line"
+         id="tspan181"
+         style="stroke-width:0.264583"
+         x="101.89079"
+         y="123.24781">cargo</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="96.106598"
+       y="136.59596"
+       id="text187"><tspan
+         sodipodi:role="line"
+         id="tspan185"
+         style="stroke-width:0.264583"
+         x="96.106598"
+         y="136.59596">run</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="89.877464"
+       y="150.38902"
+       id="text191"><tspan
+         sodipodi:role="line"
+         id="tspan189"
+         style="stroke-width:0.264583"
+         x="89.877464"
+         y="150.38902">eval-diagram</tspan></text>
+  </g>
+</svg>
