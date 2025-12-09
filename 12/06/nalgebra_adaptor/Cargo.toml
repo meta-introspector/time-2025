@@ -1,0 +1,8 @@
+[package]
+name = "nalgebra_adaptor"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+nalgebra = { workspace = true, features = ["serde-serialize"] }
+nalgebra-lapack = { workspace = true, default-features = false, features = ["lapack-custom"] }

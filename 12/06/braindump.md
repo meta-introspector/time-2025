@@ -11,3 +11,4 @@ Here is a list of ideas for processing and manipulating SVG diagrams:
 - Create a textual summary of all diagrams.
 - For each identified term, create a reference to each document where the term occurs.
 - Sample the diagrams with the identified terms and use them as symbol libraries to write new diagrams.
+- Define an "apply" function that mathematically represents the application of a function object to another mathematical object in the system.

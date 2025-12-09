@@ -1,7 +1,10 @@
 // src/analysis.rs
+use num_bigint::BigUint;
+use num_traits::{One, Zero};
 use std::collections::HashMap;
 use std::fs;
 use std::path::{Path, PathBuf};
+use quote::ToTokens;
 use syn::{File, Item, Lit, Expr};
 use syn::visit::{self, Visit};
 use walkdir::WalkDir;
@@ -13,7 +16,7 @@ use crate::types::keys::{
     PREDICATE_IS_ENUM, PREDICATE_IS_CONST, PREDICATE_FIELD_COUNT, PREDICATE_VARIANT_COUNT,
     PREDICATE_LITERAL_LENGTH, PREDICATE_NUMERIC_LITERAL_VALUE,
 };
-use crate::code_parser::{CodeElementInfo, collect_code_elements_from_dir}; // NEW: Import CodeElementInfo and collect_code_elements_from_dir
+use crate::code_parser::{collect_code_elements_from_dir};
 
 pub struct AnalysisReport {
     pub prime_occurrences: HashMap<u64, Vec<String>>, // Renamed from seventy_one_occurrences
@@ -33,20 +36,20 @@ pub struct AnalysisReport {
 struct PrimeFactorizer;
 
 impl PrimeFactorizer {
-    fn get_prime_factors(n: u64) -> Vec<u64> {
-        let mut factors = Vec::new();
+    fn get_prime_factors(n: u64) -> HashMap<u64, u32> {
+        let mut factors = HashMap::new();
         let mut d = 2;
         let mut num = n;
 
         while d * d <= num {
             while num % d == 0 {
-                factors.push(d);
+                *factors.entry(d).or_insert(0) += 1;
                 num /= d;
             }
             d += 1;
         }
         if num > 1 {
-            factors.push(num);
+            factors.insert(num, 1);
         }
         factors
     }
@@ -115,7 +118,43 @@ impl CharacterSequenceAnalyzer {
     pub fn collect_from_identifiers(&mut self, identifiers: &[String]) {
         for ident in identifiers {
             self.collect_pair_transitions_from_identifier(ident);
-            self.collect_ngrams_from_identifier(ident, &[3, 5, 7, 11]);
+
+            let mut substrings = Vec::new();
+            let mut current_word = String::new();
+            let mut last_char_was_upper = false;
+
+            for c in ident.chars() {
+                if c == '_' || c == '-' || c == '<' || c == '>' || c == ' ' {
+                    if !current_word.is_empty() {
+                        substrings.push(current_word.clone());
+                        current_word.clear();
+                    }
+                    last_char_was_upper = false;
+                } else if c.is_uppercase() {
+                    if !last_char_was_upper && !current_word.is_empty() {
+                        substrings.push(current_word.clone());
+                        current_word.clear();
+                    }
+                    current_word.push(c);
+                    last_char_was_upper = true;
+                } else { // is_lowercase or is_numeric
+                    if last_char_was_upper && current_word.len() > 1 {
+                        let last_char = current_word.pop().unwrap();
+                        substrings.push(current_word.clone());
+                        current_word.clear();
+                        current_word.push(last_char);
+                    }
+                    current_word.push(c);
+                    last_char_was_upper = false;
+                }
+            }
+            if !current_word.is_empty() {
+                substrings.push(current_word);
+            }
+
+            for sub in substrings {
+                self.collect_ngrams_from_identifier(&sub.to_lowercase(), &[3, 5, 7, 11]);
+            }
         }
     }
 
@@ -193,13 +232,13 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
         }
         let ascii_sum: u64 = s.bytes().map(|b| b as u64).sum();
         if ascii_sum > 1 {
-            for factor in PrimeFactorizer::get_prime_factors(ascii_sum) {
+            for (factor, exponent) in PrimeFactorizer::get_prime_factors(ascii_sum) {
                 self.prime_factor_occurrences
                     .entry(factor)
                     .or_default()
                     .push(format!(
-                        "Function name '{}' ASCII sum has prime factor {}. Path: {}",
-                        function_name, factor, full_path_str
+                        "Function name '{}' ASCII sum {} has prime factor {} with exponent {}. Path: {}",
+                        function_name, ascii_sum, factor, exponent, full_path_str
                     ));
             }
         }
@@ -268,13 +307,13 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                 }
                 let ascii_sum: u64 = s.bytes().map(|b| b as u64).sum();
                 if ascii_sum > 1 {
-                    for factor in PrimeFactorizer::get_prime_factors(ascii_sum) {
+                    for (factor, exponent) in PrimeFactorizer::get_prime_factors(ascii_sum) {
                         self.prime_factor_occurrences
                             .entry(factor)
                             .or_default()
                             .push(format!(
-                                "Enum name '{}' ASCII sum has prime factor {}. Path: {}",
-                                enum_name, factor, full_path_str
+                                "Enum name '{}' ASCII sum {} has prime factor {} with exponent {}. Path: {}",
+                                enum_name, ascii_sum, factor, exponent, full_path_str
                             ));
                     }
                 }
@@ -288,6 +327,22 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                         enum_name, size, full_path_str
                     ));
                 }
+
+                for variant in &item_enum.variants {
+                    let variant_name = variant.ident.to_string();
+                    let complexity = match &variant.fields {
+                        syn::Fields::Named(fields) => fields.named.len(),
+                        syn::Fields::Unnamed(fields) => fields.unnamed.len(),
+                        syn::Fields::Unit => 0,
+                    };
+
+                    let report_str = format!(
+                        "Enum variant '{}::{}' has complexity (number of fields): {}. Path: {}",
+                        enum_name, variant_name, complexity, full_path_str
+                    );
+                    self.prime_occurrences.entry(0).or_default().push(report_str);
+                }
+                
                 visit::visit_item_enum(self, item_enum); // Visit variants
                 self.current_path.pop(); // Pop enum name from path
             }            Item::Struct(item_struct) => {
@@ -329,13 +384,13 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                 }
                 let ascii_sum: u64 = s.bytes().map(|b| b as u64).sum();
                 if ascii_sum > 1 {
-                    for factor in PrimeFactorizer::get_prime_factors(ascii_sum) {
+                    for (factor, exponent) in PrimeFactorizer::get_prime_factors(ascii_sum) {
                         self.prime_factor_occurrences
                             .entry(factor)
                             .or_default()
                             .push(format!(
-                                "Struct name '{}' ASCII sum has prime factor {}. Path: {}",
-                                struct_name, factor, full_path_str
+                                "Struct name '{}' ASCII sum {} has prime factor {} with exponent {}. Path: {}",
+                                struct_name, ascii_sum, factor, exponent, full_path_str
                             ));
                     }
                 }
@@ -343,11 +398,31 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                 self.symbol_table.insert(full_path_str.clone(), prime_vector_for_declaration);
 
                 let size = item_struct.fields.len() as u64;
-                if self.primes_to_analyze.contains(&size) {
-                    self.prime_occurrences.entry(size).or_default().push(format!(
-                        "Struct '{}' has {} fields. Path: {}",
-                        struct_name, size, full_path_str
-                    ));
+                if size > 1 {
+                    let factors = PrimeFactorizer::get_prime_factors(size);
+                    let is_prime = factors.len() == 1 && factors.get(&size).map_or(false, |&exp| exp == 1);
+
+                    if !is_prime {
+                        let factors_str = factors.iter().map(|(f, e)| format!("{}^{}", f, e)).collect::<Vec<String>>().join(" * ");
+                        self.prime_occurrences.entry(0).or_default().push(format!(
+                            "Struct '{}' has {} fields. Factorization: {}. Path: {}",
+                            struct_name, size, factors_str, full_path_str
+                        ));
+                    } else {
+                        if self.primes_to_analyze.contains(&size) {
+                            self.prime_occurrences.entry(size).or_default().push(format!(
+                                "Struct '{}' has a prime number of {} fields. Path: {}",
+                                struct_name, size, full_path_str
+                            ));
+                        }
+                    }
+                } else {
+                     if self.primes_to_analyze.contains(&size) {
+                        self.prime_occurrences.entry(size).or_default().push(format!(
+                            "Struct '{}' has {} fields. Path: {}",
+                            struct_name, size, full_path_str
+                        ));
+                    }
                 }
                 visit::visit_item_struct(self, item_struct); // Visit fields
                 self.current_path.pop(); // Pop struct name from path
@@ -385,13 +460,13 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                 }
                 let ascii_sum: u64 = s.bytes().map(|b| b as u64).sum();
                 if ascii_sum > 1 {
-                    for factor in PrimeFactorizer::get_prime_factors(ascii_sum) {
+                    for (factor, exponent) in PrimeFactorizer::get_prime_factors(ascii_sum) {
                         self.prime_factor_occurrences
                             .entry(factor)
                             .or_default()
                             .push(format!(
-                                "Module name '{}' ASCII sum has prime factor {}. Path: {}",
-                                mod_name, factor, full_path_str
+                                "Module name '{}' ASCII sum {} has prime factor {} with exponent {}. Path: {}",
+                                mod_name, ascii_sum, factor, exponent, full_path_str
                             ));
                     }
                 }
@@ -458,13 +533,13 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                 }
                 let ascii_sum: u64 = s.bytes().map(|b| b as u64).sum();
                 if ascii_sum > 1 {
-                    for factor in PrimeFactorizer::get_prime_factors(ascii_sum) {
+                    for (factor, exponent) in PrimeFactorizer::get_prime_factors(ascii_sum) {
                         self.prime_factor_occurrences
                             .entry(factor)
                             .or_default()
                             .push(format!(
-                                "Function name (nested) '{}' ASCII sum has prime factor {}. Path: {}",
-                                fn_name, factor, full_path_str
+                                "Function name (nested) '{}' ASCII sum {} has prime factor {} with exponent {}. Path: {}",
+                                fn_name, ascii_sum, factor, exponent, full_path_str
                             ));
                     }
                 }
@@ -518,13 +593,13 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                 }
                 let ascii_sum: u64 = s.bytes().map(|b| b as u64).sum();
                 if ascii_sum > 1 {
-                    for factor in PrimeFactorizer::get_prime_factors(ascii_sum) {
+                    for (factor, exponent) in PrimeFactorizer::get_prime_factors(ascii_sum) {
                         self.prime_factor_occurrences
                             .entry(factor)
                             .or_default()
                             .push(format!(
-                                "Constant name '{}' ASCII sum has prime factor {}. Path: {}",
-                                const_name, factor, full_path_str
+                                "Constant name '{}' ASCII sum {} has prime factor {} with exponent {}. Path: {}",
+                                const_name, ascii_sum, factor, exponent, full_path_str
                             ));
                     }
                 }
@@ -557,13 +632,13 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                         // Prime factorization of ASCII sum
                         let ascii_sum: u64 = s.bytes().map(|b| b as u64).sum();
                         if ascii_sum > 1 {
-                            for factor in PrimeFactorizer::get_prime_factors(ascii_sum) {
+                            for (factor, exponent) in PrimeFactorizer::get_prime_factors(ascii_sum) {
                                 self.prime_factor_occurrences
                                     .entry(factor)
                                     .or_default()
                                     .push(format!(
-                                        "Const '{}' string ASCII sum has prime factor {}. Path: {}",
-                                        const_name, factor, full_path_str
+                                        "String literal \"{}\" in const '{}' (ASCII sum {}) has prime factor {} with exponent {}. Path: {}",
+                                        s, const_name, ascii_sum, factor, exponent, full_path_str
                                     ));
                             }
                         }
@@ -579,13 +654,13 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                                 *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
                             }
                             if num > 1 {
-                                for factor in PrimeFactorizer::get_prime_factors(num) {
+                                for (factor, exponent) in PrimeFactorizer::get_prime_factors(num) {
                                     self.prime_factor_occurrences
                                         .entry(factor)
                                         .or_default()
                                         .push(format!(
-                                            "Const '{}' numeric literal has prime factor {}. Path: {}",
-                                            num, const_name, full_path_str
+                                            "Const '{}' with value {} has prime factor {} with exponent {}. Path: {}",
+                                            const_name, num, factor, exponent, full_path_str
                                         ));
                                 }
                             }
@@ -608,13 +683,12 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                         self.prime_occurrences.entry(num).or_default().push(format!("Found numeric literal {}. Path: {}", num, self.current_path.join("::")));
                     }
                     if num > 1 {
-                        for factor in PrimeFactorizer::get_prime_factors(num) {
-                            self.prime_factor_occurrences
-                                .entry(factor)
-                                .or_default()
-                                .push(format!("Numeric literal has prime factor {}. Path: {}", factor, self.current_path.join("::")));
-                        }
-                    }
+                                            for (factor, exponent) in PrimeFactorizer::get_prime_factors(num) {
+                                                self.prime_factor_occurrences
+                                                    .entry(factor)
+                                                    .or_default()
+                                                    .push(format!("Numeric literal {} has prime factor {} with exponent {}. Path: {}", num, factor, exponent, self.current_path.join("::")));
+                                            }                    }
                 }
             } else if let Lit::Str(lit_str) = &expr_lit.lit {
                 let s = lit_str.value();
@@ -636,16 +710,80 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
 
                 let ascii_sum: u64 = s.bytes().map(|b| b as u64).sum();
                 if ascii_sum > 1 {
-                    for factor in PrimeFactorizer::get_prime_factors(ascii_sum) {
+                    for (factor, exponent) in PrimeFactorizer::get_prime_factors(ascii_sum) {
                         self.prime_factor_occurrences
                             .entry(factor)
                             .or_default()
-                            .push(format!("String literal ASCII sum has prime factor {}. Path: {}", factor, self.current_path.join("::")));
+                            .push(format!("String literal \"{}\" ASCII sum {} has prime factor {} with exponent {}. Path: {}", s, ascii_sum, factor, exponent, self.current_path.join("::")));
                     }
                 }
             }
         }
         visit::visit_expr(self, expr);
+    }
+
+    fn visit_local(&mut self, i: &'ast syn::Local) {
+        if let syn::Pat::Type(pat_type) = &i.pat {
+            if let syn::Pat::Ident(pat_ident) = &*pat_type.pat {
+                let var_name = pat_ident.ident.to_string();
+                self.current_path.push(format!("let::{}", var_name));
+                let full_path_str = self.current_path.join("::");
+
+                let mut prime_vector = self.prime_morphism.path_to_prime_vector(&self.current_path);
+
+                let type_name = pat_type.ty.to_token_stream().to_string();
+                prime_vector.map.insert(self.prime_morphism.get_prime_for_component(&format!("type::{}", type_name)), 1);
+
+                if pat_ident.mutability.is_some() {
+                    prime_vector.map.insert(self.prime_morphism.get_prime_for_component("usage::mut"), 1);
+                }
+
+                self.symbol_table.insert(full_path_str, prime_vector);
+                self.current_path.pop();
+            }
+        } else if let syn::Pat::Ident(pat_ident) = &i.pat {
+            let var_name = pat_ident.ident.to_string();
+            self.current_path.push(format!("let::{}", var_name));
+            let full_path_str = self.current_path.join("::");
+
+            let mut prime_vector = self.prime_morphism.path_to_prime_vector(&self.current_path);
+
+            if pat_ident.mutability.is_some() {
+                prime_vector.map.insert(self.prime_morphism.get_prime_for_component("usage::mut"), 1);
+            }
+
+            self.symbol_table.insert(full_path_str, prime_vector);
+            self.current_path.pop();
+        }
+
+        visit::visit_local(self, i);
+    }
+
+    fn visit_fn_arg(&mut self, i: &'ast syn::FnArg) {
+        if let syn::FnArg::Typed(pat_type) = i {
+            if let syn::Pat::Ident(pat_ident) = &*pat_type.pat {
+                let arg_name = pat_ident.ident.to_string();
+                self.current_path.push(format!("arg::{}", arg_name));
+                let full_path_str = self.current_path.join("::");
+
+                let mut prime_vector = self.prime_morphism.path_to_prime_vector(&self.current_path);
+
+                let type_name = pat_type.ty.to_token_stream().to_string();
+                prime_vector.map.insert(self.prime_morphism.get_prime_for_component(&format!("type::{}", type_name)), 1);
+
+                if pat_ident.mutability.is_some() {
+                    prime_vector.map.insert(self.prime_morphism.get_prime_for_component("usage::mut"), 1);
+                }
+
+                if arg_name == "self" {
+                    prime_vector.map.insert(self.prime_morphism.get_prime_for_component("usage::self"), 1);
+                }
+
+                self.symbol_table.insert(full_path_str, prime_vector);
+                self.current_path.pop();
+            }
+        }
+        visit::visit_fn_arg(self, i);
     }
 }
 

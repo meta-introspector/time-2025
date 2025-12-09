@@ -3,8 +3,15 @@ members = [
     "monster_svg_morphism",
     "svg_parser_tool",
     "svg-renamer",
-    "external/xmlwriter",
+    "external/xmlwriter", "lean_introspector", "nalgebra_adaptor", "external/nalgebra",
 ]
+resolver = "2"
+
+[workspace.dependencies]
+nalgebra = { path = "./external/nalgebra", features = ["serde-serialize"] }
+nalgebra_adaptor = { path = "./nalgebra_adaptor" }
+nalgebra-lapack = { path = "./external/nalgebra/nalgebra-lapack", default-features = false, features = ["lapack-custom"] }
+
 
 [patch.crates-io]
 xmlwriter = { path = "external/xmlwriter" }

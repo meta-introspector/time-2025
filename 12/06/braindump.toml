@@ -1,100 +1,104 @@
 # braindump.toml
 # This document captures the current understanding and conceptual framework
-# for the 'rust-svg-meme' project, acting as a free-form brain dump.
+# for the project, based on the vision.md document.
 
-# --- Overall Concept ---
-[concept]
-name = "Rust-SVG-Meme: The Hecke Operator"
+[core_ontology]
+description = "The core axioms of the system."
+axioms = [
+    "Everything is a Mathematical Object (MathObject), represented as a PrimeVector.",
+    "Functions themselves are MathObjects.",
+    "Application is a first-class mathematical operator: Apply(f, x)."
+]
+
+[core_ontology.apply_function]
+signature = "Apply : MathObject × MathObject → MathObject"
+conceptual_meaning = "Evaluation"
+initial_implementations = [
+    "PrimeVector multiplication",
+    "Convolution",
+    "Hecke-like correspondence",
+    "Tensor contraction"
+]
+
+[lean4_basis]
+name = "Lean4 Dataset as the First Self-Reflective Basis"
+huggingface_url = "https://huggingface.co/datasets/introspector/MicroLean4"
+source_repo = "https://github.com/meta-introspector/lean4"
 description = """
-A morphism from SVG (X) to Rust-represented Monster Group elements (M) and back,
-conceived as a mathematical Hecke operator. This operator transforms the SVG
-diagram, revealing deeper structural and conceptual symmetries.
-The process is iterative, involving both human and AI 'brains' in the loop
-to guide and extend the operations, leading towards a self-modifying,
-automorphic form where the system encodes its own source code.
+The MicroLean4 dataset is the first canonical MathObject dataset.
+It's a formal mathematical language, including syntax and semantics, and is self-describing.
+We are lifting Lean into a higher meta-category, not just modeling it.
 """
 
-# --- Input (X): SVG Document ---
-[input.svg]
-file = "solfunmeme-diagream2.svg"
-elements_parsed = ["svg", "g", "rect", "circle", "ellipse", "text", "path"]
-extracted_attributes = ["id", "x", "y", "cx", "cy", "r", "rx", "ry", "width", "height", "d", "content", "style", "transform"]
-style_attributes_parsed = ["fill", "stroke", "stroke-width"]
-
-# --- Mapping Function (f): Rules for MapsToMonster Trait ---
-[mapping.rules_overview]
+[lean4_basis.patched_lean4]
+name = "Lean4' (Prime Lean)"
 description = """
-The `MapsToMonster` trait embodies the 'f' in f(X)->M. It maps properties
-of SVG elements to specific `MonsterElementKind` archetypes.
-Rules are becoming increasingly sophisticated, moving beyond simple type matching.
+A patched version of Lean4 that can serialize its entire internal state (syntax, elaboration, type-checking, tactics, proof states) as MathObjects.
+This enables Gödel-complete self-reference: Apply(Lean4', Lean4') is defined.
 """
 
-[mapping.text_rules]
-type = "Text"
-default_numerical_mapping = [
-    { value = "0", maps_to = "P2_46", description = "Global document division (46-layer binary tree)" },
-    { value = "1", maps_to = "P3_20", description = "20-triples encoding scheme" },
-    { value = "2", maps_to = "P5_9", description = "9-fold/recursive structure" },
-    { value = "3", maps_to = "P7_6", description = "6 states/symmetries" },
-    { value = "5", maps_to = "P11_2", description = "11 sub-components/dual nature" },
-    { value = "7", maps_to = "P13_3", description = "13 sub-components/triple nature" },
-    { value = "11", maps_to = "P17_1", description = "Single prominent element (Prime 17)" },
-    { value = "17", maps_to = "P19_1", description = "Single prominent element (Prime 19)" },
-    { value = "19", maps_to = "P23_1", description = "Single prominent element (Prime 23)" },
-    { value = "23", maps_to = "P29_1", description = "Shell/boundary (spiral stop)" },
-    { value = "71", maps_to = "P71_1", description = "Overall SVG structure / dominant element" }
+[lean4_basis.self_describing_schema]
+name = "Self-Describing Schema"
+description = """
+The Lean4 JSON dataset contains its own schema. The key to parsing it is to find this schema within the data itself.
+This schema is not just for parsing; it is also the 'key' to unlock the transformation of the Lean4 data matrix into an eigenform.
+"""
+[visualization_pipeline]
+name = "Diagram → SVG → Spectral Objects"
+flow = [
+    "Repo / Dataset / Compiler",
+    "MathObject (PrimeVector / Typed Graph)",
+    "Diagram Notation (Category / String / Proof Net)",
+    "SVG (Spatialized Meaning)",
+    "Human + LLM Perception"
 ]
-unmatched_text_rules = [
-    { condition = "word_count = 2", maps_to = "TextTwoParts", description = "Dynamic rule: Text has two parts" },
-    { condition = "word_count = 3", maps_to = "TextThreeParts", description = "Dynamic rule: Text has three parts" },
-    { condition = "shares_color_with_X", maps_to = "Dynamic", description = "Future: Based on shared color" },
-    { condition = "shares_shape_with_X", maps_to = "Dynamic", description = "Future: Based on shared shape" },
-    { condition = "shares_location_with_X", maps_to = "Dynamic", description = "Future: Based on spatial proximity" },
-    { condition = "size_relative_to_X", maps_to = "Dynamic", description = "Future: Based on relative size" }
+svg_interpretation = """
+SVG is no longer just a visualization format. It is a geometric representation of computation,
+a spectral decomposition of meaning, and a spatially rendered Hecke correspondence.
+"""
+
+[solana_application]
+name = "Solana as a Composite MathObject"
+description = "Applying the operator stack to the Solana ecosystem."
+composite_structure = "Solana = Apply(Runtime, Apply(Compiler, Program))"
+components = [
+    { name = "Rust Compiler (rustc)", details = ["MIR", "LLVM IR", "Optimization passes as MathObjects"] },
+    { name = "Solana Program Library", details = ["Accounts", "Instructions", "Entry points", "ABI encoding"] },
+    { name = "Solana Runtime", details = ["BPF execution", "Account state transitions", "VM semantics"] },
+    { name = "Running State", details = ["Live ledger snapshot", "Slot/state evolution", "Execution trace"] }
 ]
+goal = "To create a single composite MathObject whose eigenstructure describes network behavior."
 
-[mapping.shape_rules]
-type = "Geometric"
-rules = [
-    { type = "Rect", maps_to = "P31_1", description = "Basic rectangular structures" },
-    { type = "Circle", maps_to = "P37_1", description = "Circular or radial structures" },
-    { type = "Ellipse", maps_to = "P37_1", description = "Elliptical structures (shares with Circle for now)" },
-    { type = "Path", id = "path382", maps_to = "P29_1", description = "The spiral (shell/boundary)" },
-    { type = "Path", maps_to = "P41_1", description = "Other complex path data/curvilinear forms" },
-    { type = "Group", maps_to = "P43_1", description = "Hierarchical grouping/nested structures" },
-    { type = "Svg", maps_to = "P71_1", description = "Overall document structure" }
+[hecke_interpretation]
+name = "Hecke / Eigenform Interpretation"
+description = "The application of the analysis across different systems (Lean → Rust → Solana) is a spectral action."
+roles = {
+    test_functions = "Lean expressions",
+    operator = "Rust compiler",
+    automorphic_representation = "Solana runtime"
+}
+algebra = "A non-number-theoretic Hecke algebra acting on programs to produce stable eigenbehaviors."
+
+[uml_integration]
+name = "UML as a Matrix"
+description = "Representing UML models (and related standards like MOF and XMI) as matrices in our number system (PrimeVectors)."
+goal = "To create function mappings between the mathematical representations of Lean4, the UML meta-model, and rustc, enabling iterative transformations and analysis."
+
+[project_status]
+name = "What You Have Now (Plain Truth)"
+achievements = [
+    "A universal Apply operator",
+    "A self-reflective formal substrate (Lean4)",
+    "A visualization language (diagram → SVG)",
+    "A path to runtime-level introspection (Solana)"
 ]
+identity = "A Closed, Self-Describing Computational Universe - a Mathematical Meta-Machine where computation itself has a spectral theory."
 
-# --- Output (M): Monster Group Elements (Archetypes) ---
-[output.monster_elements]
-count = 15
-elements = [
-    { kind = "P2_46", symbolic_order = "2^46", conceptual_capture = "Global document division (46-layer binary tree)" },
-    { kind = "P3_20", symbolic_order = "3^20", conceptual_capture = "20-triples encoding scheme" },
-    { kind = "P5_9", symbolic_order = "5^9", conceptual_capture = "9-fold/recursive structure" },
-    { kind = "P7_6", symbolic_order = "7^6", conceptual_capture = "6 states/symmetries" },
-    { kind = "P11_2", symbolic_order = "11^2", conceptual_capture = "11 sub-components/dual nature" },
-    { kind = "P13_3", symbolic_order = "13^3", conceptual_capture = "13 sub-components/triple nature" },
-    { kind = "P17_1", symbolic_order = "17^1", conceptual_capture = "Single prominent elements (Prime 17)" },
-    { kind = "P19_1", symbolic_order = "19^1", conceptual_capture = "Single prominent elements (Prime 19)" },
-    { kind = "P23_1", symbolic_order = "23^1", conceptual_capture = "Single prominent elements (Prime 23)" },
-    { kind = "P29_1", symbolic_order = "29^1", conceptual_capture = "Shell/boundary of a section (spiral, text '23')" },
-    { kind = "P31_1", symbolic_order = "31^1", conceptual_capture = "Basic rectangular structures" },
-    { kind = "P37_1", symbolic_order = "37^1", conceptual_capture = "Circular or radial structures" },
-    { kind = "P41_1", symbolic_order = "41^1", conceptual_capture = "Complex path data/curvilinear forms" },
-    { kind = "P43_1", symbolic_order = "43^1", conceptual_capture = "Hierarchical grouping/nested structures" },
-    { kind = "P71_1", symbolic_order = "71^1", conceptual_capture = "Overall document structure / dominant element" }
+[next_steps]
+name = "Natural Next Steps"
+items = [
+    { step = "Formalize Apply Variants", details = ["Multiplicative", "Convolutional", "Typed (Lean-aware)", "Execution-safe vs symbolic"] },
+    { step = "Canonical Diagram Grammar", details = ["Nodes = MathObjects", "Edges = Apply", "Regions = Contexts / Universes"] },
+    { step = "Lean Dataset → SVG Demo", details = ["One Lean expression", "Fully visualized", "Apply chain rendered"] },
+    { step = "Solana Minimal Slice", details = ["One instruction", "Compiler path", "Runtime execution", "All as MathObjects"] }
 ]
-
-# --- Structural Enhancements ---
-[structural.bsp]
-status = "Placeholder"
-goal = "Implement a 46-layered Binary Space Partitioning (BSP) tree of all SVG nodes."
-purpose = "To capture the 'P2_46' Monster ElementKind by spatially dividing the document."
-components = ["BoundingBox", "BspSplitAxis", "BspNode", "BspTree"]
-
-# --- Iterative & Self-Modifying Aspects ---
-[iterative_process]
-goal = "Repeated application of the Hecke operator (SVG->Rust mapping)."
-feedback_loop = "Human and AI 'brains' will guide and extend operations."
-end_state_vision = "Self-modifying, automorphic form; system encodes its own source code."

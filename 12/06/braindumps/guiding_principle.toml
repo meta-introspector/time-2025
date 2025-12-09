@@ -1,0 +1,5 @@
+# braindumps/guiding_principle.toml
+# This file captures the foundational guiding principle of the project.
+
+[concept]
+guiding_principle = "All good systems are automorphic orbits that will reveal themselves via observation."

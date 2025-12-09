@@ -35,3 +35,12 @@
 [submodule "12/06/external/resvg"]
 	path = 12/06/external/resvg
 	url = https://github.com/linebender/resvg
+[submodule "05/19/microlean"]
+	path = 05/19/microlean
+	url = https://huggingface.co/datasets/introspector/MicroLean4
+[submodule "12/06/external/nalgebra"]
+	path = 12/06/external/nalgebra
+	url = https://github.com/dimforge/nalgebra
+[submodule "12/06/external/OpenBLAS"]
+	path = 12/06/external/OpenBLAS
+	url = https://github.com/OpenMathLib/OpenBLAS
