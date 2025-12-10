@@ -3,14 +3,19 @@ members = [
     "monster_svg_morphism",
     "svg_parser_tool",
     "svg-renamer",
-    "external/xmlwriter", "lean_introspector", "nalgebra_adaptor", "external/nalgebra",
+    "external/xmlwriter", "lean_introspector",
+    #"external/nalgebra",
+    "build_tester", "libfaalg_adaptor", "external/linfa-linalg"
 ]
 resolver = "2"
 
 [workspace.dependencies]
-nalgebra = { path = "./external/nalgebra", features = ["serde-serialize"] }
-nalgebra_adaptor = { path = "./nalgebra_adaptor" }
-nalgebra-lapack = { path = "./external/nalgebra/nalgebra-lapack", default-features = false, features = ["lapack-custom"] }
+#nalgebra = { path = "./external/nalgebra", features = ["serde-serialize"] }
+libfaalg_adaptor = { path = "./libfaalg_adaptor" }
+# nalgebra-lapack = { path = "./external/nalgebra/nalgebra-lapack", default-features = false, features = ["lapack-custom"] }
+linfa-linalg = { path = "./external/linfa-linalg" }
+ndarray = { version = "0.16", features = ["serde"] }
+num-complex = { version = "0.4", features = ["serde"] }
 
 
 [patch.crates-io]

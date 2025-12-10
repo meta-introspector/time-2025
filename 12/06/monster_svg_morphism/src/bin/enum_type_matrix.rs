@@ -1,4 +1,4 @@
-use nalgebra::{DMatrix};
+use ndarray::{Array2};
 use monster_svg_morphism::{code_parser::{collect_code_elements_from_dir, CodeElementKind}, types::prime_vector::PrimeMorphism};
 use std::collections::{HashMap, BTreeSet};
 use std::path::Path;
@@ -10,7 +10,7 @@ use petgraph::dot::{Dot, Config}; // For Dot and Config
 
 
 /// Prints a summary of the matrix, including sum, zero percentage, and an 80-character visual representation.
-fn print_matrix_summary(matrix: &DMatrix<f64>, iteration: usize) {
+fn print_matrix_summary(matrix: &Array2<f64>, iteration: usize) {
     println!("\n--- Summary for Iteration {} (Matrix M^{}) ---", iteration, iteration);
 
     let total_sum = matrix.sum();
@@ -116,7 +116,7 @@ fn main() {
     }
 
     let matrix_dim = unique_names.len();
-    let mut relationship_matrix = DMatrix::<f64>::zeros(matrix_dim, matrix_dim);
+    let mut relationship_matrix = Array2::<f64>::zeros((matrix_dim, matrix_dim));
     let mut prime_morphism = PrimeMorphism::new(HashMap::new());
 
 
@@ -211,7 +211,7 @@ fn main() {
 
     let num_iterations = 5;
     for i in 2..=num_iterations {
-        current_matrix = &current_matrix * &relationship_matrix;
+        current_matrix = current_matrix.dot(&relationship_matrix);
         print_matrix_summary(&current_matrix, i);
     }
 

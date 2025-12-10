@@ -44,3 +44,6 @@
 [submodule "12/06/external/OpenBLAS"]
 	path = 12/06/external/OpenBLAS
 	url = https://github.com/OpenMathLib/OpenBLAS
+[submodule "12/06/external/linfa-linalg"]
+	path = 12/06/external/linfa-linalg
+	url = https://github.com/meta-introspector/linfa-linalg

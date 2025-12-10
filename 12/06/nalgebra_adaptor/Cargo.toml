@@ -5,4 +5,4 @@ edition = "2024"
 
 [dependencies]
 nalgebra = { workspace = true, features = ["serde-serialize"] }
-nalgebra-lapack = { workspace = true, default-features = false, features = ["lapack-custom"] }
+#nalgebra-lapack = { workspace = true, default-features = false, features = ["lapack-custom"] }

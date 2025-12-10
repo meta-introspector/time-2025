@@ -1,4 +1,4 @@
-use nalgebra::{DMatrix};
+use ndarray::{Array2};
 use monster_svg_morphism::{code_parser::{collect_code_elements_from_dir}, types::prime_vector::PrimeMorphism};
 use std::path::Path;
 use std::collections::HashMap;
@@ -16,7 +16,7 @@ fn prime_vector_dot_product(pv1: &monster_svg_morphism::types::prime_vector::Pri
 }
 
 /// Prints a summary of the matrix, including sum, zero percentage, and an 80-character visual representation.
-fn print_matrix_summary(matrix: &DMatrix<f64>, iteration: usize) {
+fn print_matrix_summary(matrix: &Array2<f64>, iteration: usize) {
     println!("\n--- Summary for Iteration {} (Matrix M^{}) ---", iteration, iteration);
 
     let total_sum = matrix.sum();
@@ -115,7 +115,7 @@ fn main() {
     
     // 3. Construct the Substantial Square Matrix (Declaration x Declaration) similarity
     let matrix_dim = num_declarations; // Matrix dimension is simply the number of declarations
-    let mut substantial_matrix = DMatrix::<f64>::zeros(matrix_dim, matrix_dim);
+    let mut substantial_matrix = Array2::<f64>::zeros((matrix_dim, matrix_dim));
 
     println!("\nBuilding a {}x{} substantial (Declaration x Declaration) matrix...", matrix_dim, matrix_dim);
 
@@ -140,7 +140,7 @@ fn main() {
     let num_iterations = 5;
     for i in 2..=num_iterations {
         // M^k = M^(k-1) * M
-        current_matrix = &current_matrix * &substantial_matrix;
+        current_matrix = current_matrix.dot(&substantial_matrix);
         print_matrix_summary(&current_matrix, i);
     }
 
