@@ -1,0 +1,6 @@
+{
+  "level": {
+    "$ref": "./level/_report.json"
+  },
+  "type": "sort"
+}

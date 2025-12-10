@@ -1,0 +1,8 @@
+{
+  "kind": "Lean.RecursorRule",
+  "name": "SimpleExpr.const",
+  "nfields": 2,
+  "rhs": {
+    "$ref": "./rhs/_report.json"
+  }
+}

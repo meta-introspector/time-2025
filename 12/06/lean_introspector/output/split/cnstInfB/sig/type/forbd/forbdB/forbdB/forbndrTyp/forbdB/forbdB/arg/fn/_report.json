@@ -1,0 +1,9 @@
+{
+  "arg": {
+    "$ref": "./arg/_report.json"
+  },
+  "fn": {
+    "$ref": "./fn/_report.json"
+  },
+  "type": "app"
+}

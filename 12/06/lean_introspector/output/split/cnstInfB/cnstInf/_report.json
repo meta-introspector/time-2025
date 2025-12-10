@@ -1,0 +1,22 @@
+{
+  "Rules": {
+    "$ref": "./Rules/_report.json"
+  },
+  "all": {
+    "$ref": "./all/_report.json"
+  },
+  "isUnsafe": false,
+  "k": false,
+  "kind": "Lean.RecursorVal",
+  "levelParams": {
+    "$ref": "./levelParams/_report.json"
+  },
+  "name": "SimpleExpr.rec",
+  "numIndices": 0,
+  "numMinors": 6,
+  "numMotives": 1,
+  "numParams": 0,
+  "type": {
+    "$ref": "./type/_report.json"
+  }
+}
