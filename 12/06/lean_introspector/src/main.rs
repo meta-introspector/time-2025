@@ -10,7 +10,10 @@ use lean_introspector_lib::matrix_representation::SchemaMatrix;
 use std::collections::HashMap;
 use ndarray::Array1;
 use num_complex::Complex;
+use lean_introspector_lib::emojilisp;
 // use libfaalg_adaptor::{LibfaalgAdaptor, LinearAlgebraAdaptor};
+
+const MAX_RECONSTRUCTED_PATHS_TO_PRINT: usize = 100; // Limit to 100 paths for brevity
 
 #[derive(Deserialize)]
 struct Config {
@@ -58,27 +61,48 @@ type ThreadSafeError = Box<dyn std::error::Error + Send + 'static>;
 
 
 // New helper functions
-fn read_config() -> Result<Config, ThreadSafeError> {
-    let config_str = fs::read_to_string("config.toml")
+fn read_config() -> Result<(Config, std::path::PathBuf), ThreadSafeError> {
+    use std::env;
+    let mut config_path_buf = env::current_dir().map_err(|e| Box::new(e) as ThreadSafeError)?;
+    config_path_buf.push("lean_introspector");
+    let config_dir = config_path_buf.clone(); // Store the directory path
+    config_path_buf.push("config.toml");
+    
+    let config_str = fs::read_to_string(&config_path_buf)
         .map_err(|e| Box::new(e) as ThreadSafeError)?;
     let config: Config = toml::from_str(&config_str)
         .map_err(|e| Box::new(e) as ThreadSafeError)?;
-    Ok(config)
+    Ok((config, config_dir))
 }
 
-fn get_input_file_path(config: &Config) -> std::path::PathBuf {
-    Path::new(&config.dataset_path)
+fn get_input_file_path(config: &Config, base_dir: &Path) -> std::path::PathBuf {
+    base_dir.join(&config.dataset_path)
         .join(&config.input_file)
 }
 
-fn read_input_json(config: &Config) -> Result<Value, ThreadSafeError> {
-    let file_path = get_input_file_path(config);
+fn read_input_json(file_path: &Path) -> Result<Value, ThreadSafeError> {
+    eprintln!("Debug: Attempting to locate data file: {}", file_path.display());
+    let canonical_file_path = file_path.canonicalize().unwrap_or_else(|_| {
+        eprintln!("Error: Could not canonicalize data path: {}", file_path.display());
+        file_path.to_path_buf()
+    });
+    eprintln!("Debug: Absolute data path: {}", canonical_file_path.display());
+    if !canonical_file_path.exists() {
+        eprintln!("Error: Data file does NOT exist at: {}", canonical_file_path.display());
+    }
+    if !canonical_file_path.is_file() {
+        eprintln!("Error: Data path is NOT a file: {}", canonical_file_path.display());
+    }
 
     let mut file = File::open(&file_path)
-        .map_err(|e| Box::new(e) as ThreadSafeError)?;
+        .map_err(|e| {
+            Box::new(GenericError(format!("Failed to open input JSON file '{}': {}", file_path.display(), e))) as ThreadSafeError
+        })?;
     let mut json_str = String::new();
     file.read_to_string(&mut json_str)
-        .map_err(|e| Box::new(e) as ThreadSafeError)?;
+        .map_err(|e| {
+            Box::new(GenericError(format!("Failed to read input JSON file '{}': {}", file_path.display(), e))) as ThreadSafeError
+        })?;
 
     let initial_json_value: Value = serde_json::from_str(&json_str)
         .map_err(|e| Box::new(e) as ThreadSafeError)?;
@@ -214,50 +238,70 @@ fn main() -> Result<(), ThreadSafeError> {
     let child_builder = std::thread::Builder::new()
         .stack_size(STACK_SIZE)
         .spawn(move || -> Result<(), ThreadSafeError> {
-            let config = read_config()?;
+            let (config, config_dir) = read_config()?;
+            println!("INFO: Config loaded and config directory identified.");
 
-            let input_path = get_input_file_path(&config);
+            let data_input_path = get_input_file_path(&config, &config_dir);
+            println!("INFO: Input data path resolved to: {}", data_input_path.display());
+
             let output_dir = Path::new("output/formatting");
             fs::create_dir_all(&output_dir).map_err(|e| Box::new(e) as ThreadSafeError)?;
-            if let Some(input_filename) = input_path.file_name() {
-                let dest_path = output_dir.join(input_filename);
-                fs::copy(&input_path, dest_path).map_err(|e| Box::new(e) as ThreadSafeError)?;
-            }
+            println!("INFO: Output formatting directory ensured.");
 
-            let initial_json_value = read_input_json(&config)?;
+            let initial_json_value = read_input_json(&data_input_path)?;
+            println!("INFO: Initial JSON value read from input file.");
+
+            println!("\nEmoji-Lisp representation of initial JSON:");
+            let emoji_lisp_string = emojilisp::json_to_emoji_lisp_string(&initial_json_value);
+            println!("{}", emoji_lisp_string);
+            println!("INFO: Emoji-Lisp representation generated.");
 
             // Recursive split logic
             let split_output_path = Path::new("output/split");
             if split_output_path.exists() {
                 fs::remove_dir_all(split_output_path).map_err(|e| Box::new(e) as ThreadSafeError)?;
+                println!("INFO: Existing split output directory removed.");
             }
+            println!("INFO: Starting recursive JSON splitting...");
             recursive_split_json(&initial_json_value, split_output_path)?;
+            println!("INFO: Recursive JSON splitting complete.");
 
+            println!("INFO: Starting iterative schema inference...");
             let (final_schema, all_iteration_reports) =
                 perform_iterative_schema_inference(initial_json_value.clone())?;
+            println!("INFO: Iterative schema inference complete.");
 
             let mut prime_morphism = PrimeMorphism::new(HashMap::new());
             let mut master_prime_vector = PrimeVector::new();
 
-            // The prime_morphism and master_prime_vector need to be generated based on the final schema,
-            // which happens inside generate_schema_matrix_and_eigen or a similar function
-            // Let's adjust this. traverse_schema_node_for_prime_vector needs to be called.
             if let Some(ref schema) = final_schema {
                 traverse_schema_node_for_prime_vector(&schema.root, &mut prime_morphism, &mut master_prime_vector);
+                println!("INFO: Prime vectors generated for final schema.");
             }
 
-
+            println!("INFO: Generating schema matrix and eigen decomposition...");
             let (schema_matrix_opt, eigenvalues_opt, eigenvectors_opt) =
                 generate_schema_matrix_and_eigen(&final_schema)?;
+            println!("INFO: Schema matrix and eigen decomposition complete.");
 
-            // Call to_paths and print
-            if let Some(ref sm) = schema_matrix_opt {
-                println!("\nReconstructed Paths from SchemaMatrix:");
-                for path in sm.to_paths() {
-                    println!("{}", path);
-                }
-            }
+            // // Call to_paths and print
+            // if let Some(ref sm) = schema_matrix_opt {
+            //     let all_paths: Vec<String> = sm.to_paths();
+            //     let total_paths = all_paths.len(); // Get length before moving
+            //     println!("\nReconstructed Paths from SchemaMatrix (Limited to {} of {}):", MAX_RECONSTRUCTED_PATHS_TO_PRINT, total_paths);
+            //     let mut count = 0;
+            //     for path in all_paths.into_iter() { // Now `all_paths` is moved here
+            //         if count >= MAX_RECONSTRUCTED_PATHS_TO_PRINT {
+            //             println!("... ({} more paths not shown)", total_paths - count);
+            //             break;
+            //         }
+            //         println!("{}", path);
+            //         count += 1;
+            //     }
+            //     println!("INFO: Reconstructed paths printed.");
+            // }
 
+            println!("INFO: Generating and saving analysis report...");
             generate_and_save_report(
                 initial_json_value,
                 all_iteration_reports,
@@ -266,6 +310,7 @@ fn main() -> Result<(), ThreadSafeError> {
                 eigenvalues_opt,
                 eigenvectors_opt,
             )?;
+            println!("INFO: Analysis report saved.");
 
             Ok(())
         })

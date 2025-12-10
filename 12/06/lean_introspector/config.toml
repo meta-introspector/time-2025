@@ -1,3 +1,3 @@
 # lean_introspector/config.toml
-dataset_path = "C:/Users/gentd/OneDrive/Documents/GitHub/time-2025/05/19/microlean"
+dataset_path = "data"
 input_file = "SimpleExpr.rec_686e510a6699f2e1ff1b216c16d94cd379ebeca00c030a79a3134adff699e06c.json"
