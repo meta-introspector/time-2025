@@ -104,14 +104,12 @@ fn perform_iterative_schema_inference(initial_json_value: Value) -> Result<(Opti
     Ok((final_schema, all_iteration_reports))
 }
 
-// Commented out generate_schema_matrix_and_eigen as LibfaalgAdaptor is disabled
-/*
 fn generate_schema_matrix_and_eigen(
     final_schema: &Option<Schema>,
 ) -> Result<(Option<SchemaMatrix>, Option<Vec<Complex<f64>>>, Option<Vec<Array1<Complex<f64>>>>), ThreadSafeError> {
     let mut schema_matrix_opt: Option<SchemaMatrix> = None;
-    let mut eigenvalues_opt: Option<Vec<Complex<f64>>> = None;
-    let mut eigenvectors_opt: Option<Vec<Array1<Complex<f64>>>> = None;
+    let eigenvalues_opt: Option<Vec<Complex<f64>>> = None; // Always None for now
+    let eigenvectors_opt: Option<Vec<Array1<Complex<f64>>>> = None; // Always None for now
 
     if let Some(schema) = final_schema {
         let mut final_schema_paths = HashMap::new();
@@ -132,35 +130,19 @@ fn generate_schema_matrix_and_eigen(
         }
         let sm = SchemaMatrix::from_schema(&final_schema_paths);
         
-        let size = sm.matrix.len();
-        if size > 0 {
-            let mut data = Vec::with_capacity(size * size);
-            for row in &sm.matrix {
-                for &val in row {
-                    data.push(val as f64);
-                }
-            }
-            let dmatrix = LibfaalgAdaptor::create_dmatrix(size, size, data);
-
-            if let Some((eigenvalues, eigenvectors)) = LibfaalgAdaptor::eigen_decompose(&dmatrix) {
-                eigenvalues_opt = Some(eigenvalues);
-                eigenvectors_opt = Some(eigenvectors);
-            } else {
-                eprintln!("Warning: Eigen decomposition failed for the schema matrix.");
-            }
-        }
+        // Eigenvalue/eigenvector decomposition is disabled as BLAS/LAPACK backends are commented out
         schema_matrix_opt = Some(sm);
     }
     Ok((schema_matrix_opt, eigenvalues_opt, eigenvectors_opt))
 }
-*/
+
 
 fn generate_and_save_report(
     initial_json_value: Value,
     all_iteration_reports: Vec<IterationReport>,
     master_prime_vector_map: HashMap<u64, u64>,
     schema_matrix_opt: Option<SchemaMatrix>,
-    eigenvalues_opt: Option<Vec<Complex<f64>>>,
+    eigenvalues_opt: Option<Vec<Complex<f64>>> ,
     eigenvectors_opt: Option<Vec<Array1<Complex<f64>>>>,
 ) -> Result<(), ThreadSafeError> {
     let report = Report {
@@ -265,16 +247,24 @@ fn main() -> Result<(), ThreadSafeError> {
             }
 
 
-            // let (schema_matrix_opt, eigenvalues_opt, eigenvectors_opt) =
-            //     generate_schema_matrix_and_eigen(&final_schema)?; // Commented out
+            let (schema_matrix_opt, eigenvalues_opt, eigenvectors_opt) =
+                generate_schema_matrix_and_eigen(&final_schema)?;
+
+            // Call to_paths and print
+            if let Some(ref sm) = schema_matrix_opt {
+                println!("\nReconstructed Paths from SchemaMatrix:");
+                for path in sm.to_paths() {
+                    println!("{}", path);
+                }
+            }
 
             generate_and_save_report(
                 initial_json_value,
                 all_iteration_reports,
                 master_prime_vector.map,
-                None, // schema_matrix_opt is None when generate_schema_matrix_and_eigen is commented out
-                None, // eigenvalues_opt is None when generate_schema_matrix_and_eigen is commented out
-                None, // eigenvectors_opt is None when generate_schema_matrix_and_eigen is commented out
+                schema_matrix_opt, // Pass the generated schema_matrix_opt
+                eigenvalues_opt,
+                eigenvectors_opt,
             )?;
 
             Ok(())
