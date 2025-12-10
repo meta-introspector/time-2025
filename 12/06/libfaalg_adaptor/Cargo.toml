@@ -4,6 +4,6 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-linfa-linalg = { workspace=true }
+#linfa-linalg = { workspace=true }
 ndarray = "0.16"
 num-complex = "0.4"

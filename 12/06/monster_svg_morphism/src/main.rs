@@ -9,7 +9,7 @@ use monster_svg_morphism::types::{
 };
 use monster_svg_morphism::traits::{MapsToMonster};
 use monster_svg_morphism::analysis::{run_analysis, CharFrequencyAnalyzer}; // Import CharFrequencyAnalyzer
-use monster_svg_morphism::types::prime_vector::{PrimeMorphism, PrimeVector}; // Import PrimeMorphism and PrimeVector
+use monster_svg_morphism::types::prime_vector::PrimeMorphism; // Import PrimeMorphism and PrimeVector
 
 
 // The Monster Group primes
@@ -198,7 +198,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let char_to_prime_map = char_freq_analyzer.generate_char_to_prime_map();
         
         // Create a PrimeMorphism to generate PrimeVectors for the target and existing substrings
-        let mut prime_morphism = PrimeMorphism::new(char_to_prime_map);
+        let prime_morphism = PrimeMorphism::new(char_to_prime_map);
 
         let target_pv = prime_morphism.string_to_char_prime_vector(&target_substring);
 

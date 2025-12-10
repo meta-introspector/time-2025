@@ -1,6 +1,4 @@
 // src/analysis.rs
-use num_bigint::BigUint;
-use num_traits::{One, Zero};
 use std::collections::HashMap;
 use std::fs;
 use std::path::{Path, PathBuf};

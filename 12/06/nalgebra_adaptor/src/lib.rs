@@ -1,6 +1,6 @@
 // nalgebra_adaptor/src/lib.rs
 use nalgebra::{DMatrix, Complex, DVector};
-use nalgebra_lapack::Eigen; // New import
+//use nalgebra_lapack::Eigen; // New import
 
 // Define a trait for linear algebra operations
 pub trait LinearAlgebraAdaptor {
@@ -37,15 +37,16 @@ impl LinearAlgebraAdaptor for NalgebraAdaptor {
             let eigenvectors = eigen_vectors_real.column_iter().map(|c| c.map(|v| Complex::new(v, 0.0))).collect();
             Some((eigenvalues, eigenvectors))
         } else {
-            // Use nalgebra_lapack::Eigen for general (non-symmetric) matrices
-            let eigen_decomposition = Eigen::new(matrix.clone(), false, true)?; // false for left_eigenvectors, true for eigenvectors
+            // // Use nalgebra_lapack::Eigen for general (non-symmetric) matrices
+            // let eigen_decomposition = Eigen::new(matrix.clone(), false, true)?; // false for left_eigenvectors, true for eigenvectors
             
-            let eigenvalues: Vec<Complex<f64>> = eigen_decomposition.eigenvalues_re.iter().zip(eigen_decomposition.eigenvalues_im.iter())
-                                                    .map(|(&re, &im)| Complex::new(re, im))
-                                                    .collect();
-            let eigenvectors: Vec<DVector<Complex<f64>>> = eigen_decomposition.eigenvectors.expect("Eigenvectors should be computed").column_iter().map(|c| c.map(|v| Complex::new(v, 0.0))).collect();
+            // let eigenvalues: Vec<Complex<f64>> = eigen_decomposition.eigenvalues_re.iter().zip(eigen_decomposition.eigenvalues_im.iter())
+            //                                         .map(|(&re, &im)| Complex::new(re, im))
+            //                                         .collect();
+            // let eigenvectors: Vec<DVector<Complex<f64>>> = eigen_decomposition.eigenvectors.expect("Eigenvectors should be computed").column_iter().map(|c| c.map(|v| Complex::new(v, 0.0))).collect();
             
-            Some((eigenvalues, eigenvectors))
+            // Some((eigenvalues, eigenvectors))
+            None // Return None for non-symmetric matrices if nalgebra-lapack is disabled
         }
     }
 }

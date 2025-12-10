@@ -8,9 +8,9 @@ use lean_introspector_lib::prime_analysis::{PrimeVector, PrimeMorphism};
 use lean_introspector_lib::report::{Report, IterationReport};
 use lean_introspector_lib::matrix_representation::SchemaMatrix;
 use std::collections::HashMap;
-use ndarray::{Array1, Array2};
+use ndarray::Array1;
 use num_complex::Complex;
-use libfaalg_adaptor::{LibfaalgAdaptor, LinearAlgebraAdaptor};
+// use libfaalg_adaptor::{LibfaalgAdaptor, LinearAlgebraAdaptor};
 
 #[derive(Deserialize)]
 struct Config {
@@ -104,6 +104,8 @@ fn perform_iterative_schema_inference(initial_json_value: Value) -> Result<(Opti
     Ok((final_schema, all_iteration_reports))
 }
 
+// Commented out generate_schema_matrix_and_eigen as LibfaalgAdaptor is disabled
+/*
 fn generate_schema_matrix_and_eigen(
     final_schema: &Option<Schema>,
 ) -> Result<(Option<SchemaMatrix>, Option<Vec<Complex<f64>>>, Option<Vec<Array1<Complex<f64>>>>), ThreadSafeError> {
@@ -151,6 +153,7 @@ fn generate_schema_matrix_and_eigen(
     }
     Ok((schema_matrix_opt, eigenvalues_opt, eigenvectors_opt))
 }
+*/
 
 fn generate_and_save_report(
     initial_json_value: Value,
@@ -262,16 +265,16 @@ fn main() -> Result<(), ThreadSafeError> {
             }
 
 
-            let (schema_matrix_opt, eigenvalues_opt, eigenvectors_opt) =
-                generate_schema_matrix_and_eigen(&final_schema)?;
+            // let (schema_matrix_opt, eigenvalues_opt, eigenvectors_opt) =
+            //     generate_schema_matrix_and_eigen(&final_schema)?; // Commented out
 
             generate_and_save_report(
                 initial_json_value,
                 all_iteration_reports,
                 master_prime_vector.map,
-                schema_matrix_opt,
-                eigenvalues_opt,
-                eigenvectors_opt,
+                None, // schema_matrix_opt is None when generate_schema_matrix_and_eigen is commented out
+                None, // eigenvalues_opt is None when generate_schema_matrix_and_eigen is commented out
+                None, // eigenvectors_opt is None when generate_schema_matrix_and_eigen is commented out
             )?;
 
             Ok(())

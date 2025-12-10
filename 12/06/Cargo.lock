@@ -326,8 +326,6 @@ checksum = "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe"
 name = "lean_introspector"
 version = "0.1.0"
 dependencies = [
- "libfaalg_adaptor",
- "linfa-linalg",
  "ndarray",
  "num-complex",
  "serde",
@@ -345,7 +343,6 @@ checksum = "37c93d8daa9d8a012fd8ab92f088405fb202ea0b6ab73ee2482ae66af4f42091"
 name = "libfaalg_adaptor"
 version = "0.1.0"
 dependencies = [
- "linfa-linalg",
  "ndarray",
  "num-complex",
 ]

@@ -1,7 +1,7 @@
 // lean_introspector/src/report.rs
 use std::collections::HashMap;
 use serde::Serialize;
-use serde_json::Value; // Added
+ // Added
 use crate::schema_inference::SchemaNode;
 use crate::matrix_representation::SchemaMatrix;
 use num_complex::Complex;

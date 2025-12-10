@@ -4,8 +4,8 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-linfa-linalg = { workspace = true }
-libfaalg_adaptor = { workspace = true }
+#linfa-linalg = { workspace = true }
+#libfaalg_adaptor = { workspace = true }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 toml = "0.8"
@@ -19,3 +19,7 @@ path = "src/lib.rs"
 [[bin]]
 name = "lean_introspector"
 path = "src/main.rs"
+
+# [features]
+# nalgebra-backend = ["nalgebra_adaptor", "nalgebra"]
+# linfa-backend = ["linfa-linalg"]

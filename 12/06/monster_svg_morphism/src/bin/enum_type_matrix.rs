@@ -5,7 +5,7 @@ use std::path::Path;
 use std::fs::File; // Add File import
 use std::io::Write; // Add Write import
 use petgraph::Graph; // Add petgraph Graph import
-use petgraph::stable_graph::NodeIndex; // For NodeIndex
+ // For NodeIndex
 use petgraph::dot::{Dot, Config}; // For Dot and Config
 
 
@@ -116,8 +116,8 @@ fn main() {
     }
 
     let matrix_dim = unique_names.len();
-    let mut relationship_matrix = Array2::<f64>::zeros((matrix_dim, matrix_dim));
-    let mut prime_morphism = PrimeMorphism::new(HashMap::new());
+    let relationship_matrix = Array2::<f64>::zeros((matrix_dim, matrix_dim));
+    let prime_morphism = PrimeMorphism::new(HashMap::new());
 
 
     println!("\nBuilding a {}x{} Enum and Type Relationship Matrix...", matrix_dim, matrix_dim);

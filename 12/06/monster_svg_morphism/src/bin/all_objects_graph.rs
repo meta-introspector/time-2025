@@ -5,7 +5,6 @@ use std::fs::File;
 use std::io::Write;
 use petgraph::Graph;
 use petgraph::dot::{Dot, Config}; // Only import Dot and Config
-use petgraph::stable_graph::NodeIndex;
 use petgraph::visit::{NodeRef, EdgeRef}; // Import NodeRef and EdgeRef
 
 
