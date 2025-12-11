@@ -1,6 +1,5 @@
 // lean_introspector_lib/src/matrix_representation.rs
 use serde::{Serialize, Deserialize};
-use std::collections::HashMap;
 use crate::schema_inference::{Schema, SchemaNode};
 use std::collections::VecDeque;
 

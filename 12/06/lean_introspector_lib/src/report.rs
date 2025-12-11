@@ -1,6 +1,5 @@
 // lean_introspector_lib/src/report.rs
 use serde::{Serialize, Deserialize};
-use serde_json::Value;
 use std::collections::HashMap;
 use ndarray::Array1;
 use num_complex::Complex;

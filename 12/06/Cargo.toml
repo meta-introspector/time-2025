@@ -6,7 +6,7 @@ members = [
     "external/xmlwriter", "lean_introspector",
     #"external/nalgebra",
     "build_tester", "libfaalg_adaptor", "external/linfa-linalg"
-]
+, "json_transformer", "hir_generator", "hir_model_tester", "hir_driver", "config_lib"]
 resolver = "2"
 
 [workspace.dependencies]

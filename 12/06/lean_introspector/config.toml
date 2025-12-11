@@ -1,5 +1,6 @@
 # lean_introspector/config.toml
-dataset_path = "data"
+# Paths are relative to the project root (time-2025)
+dataset_path = "05/19/microlean"
 input_file = "SimpleExpr.rec_686e510a6699f2e1ff1b216c16d94cd379ebeca00c030a79a3134adff699e06c.json"
 split_max_depth = 3
 schema_output_dir = "output/schemas"

@@ -1,20 +1,22 @@
-use std::path::PathBuf;
+
 use std::fs;
 use std::hash::{Hash, Hasher}; // Keep Hash and Hasher for truncate_with_hash
 use roxmltree::{Document, Node as RoxmlNode}; // Alias roxmltree::Node to RoxmlNode
 use xmlwriter::{XmlWriter, Indent, Options}; // Import Options explicitly
 use std::io; // Import io (needed for Box<dyn std::error::Error>)
-
-struct Args {
-    input: PathBuf,
-    output: PathBuf,
-    max_length: Option<usize>,
-}
+use config_lib;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let args = parse_args();
+    let (config, _) = config_lib::find_and_read_config("lean_introspector/config.toml").map_err(|e| {
+        eprintln!("Failed to read config file: {}", e);
+        io::Error::new(io::ErrorKind::NotFound, e)
+    })?;
 
-    let svg_data = fs::read_to_string(&args.input)?;
+    let input = &config.input_file;
+    let output = input.with_extension("renamed.svg");
+    let max_length = None;
+
+    let svg_data = fs::read_to_string(&input)?;
     let doc = Document::parse(&svg_data)?;
 
     let mut output_buffer = Vec::new(); // Create an in-memory buffer
@@ -28,19 +30,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Start processing from the document's root element
     if let Some(root_element) = doc.root().children().find(|n| n.is_element()) {
-        process_roxml_node(&root_element, &mut writer, args.max_length)?; // Now returns Result and uses ?
+        process_roxml_node(&root_element, &mut writer, max_length)?; // Now returns Result and uses ?
     } else {
         return Err("SVG document has no root element.".into());
     }
 
     let modified_svg = String::from_utf8(output_buffer)?; // Convert to String
 
-    if let Some(parent) = args.output.parent() {
+    if let Some(parent) = output.parent() {
         fs::create_dir_all(parent)?;
     }
-    fs::write(&args.output, modified_svg)?; // fs::write returns Result
+    fs::write(&output, modified_svg)?; // fs::write returns Result
 
-    println!("Renamed groups and wrote to {}", args.output.display());
+    println!("Renamed groups and wrote to {}", output.display());
     Ok(())
 }
 
@@ -130,11 +132,4 @@ fn truncate_with_hash(text: &str, max_len: usize) -> String {
     format!("{}_{:x}", truncated_text, hash)
 }
 
-fn parse_args() -> Args {
-    let mut args = std::env::args().skip(1);
-    let input = PathBuf::from(args.next().expect("Missing input file"));
-    let output = PathBuf::from(args.next().expect("Missing output file"));
-    let max_length = args.next().and_then(|s| s.parse().ok());
 
-    Args { input, output, max_length }
-}

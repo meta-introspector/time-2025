@@ -13,6 +13,7 @@ ndarray = { workspace = true, features = ["serde"] }
 num-complex = { workspace = true, features = ["serde"] }
 lazy_static = "1.4.0"
 lean_introspector_lib = { path = "../lean_introspector_lib" } # Add this line
+config_lib = { path = "../config_lib" }
 
 [[bin]]
 name = "lean_introspector"

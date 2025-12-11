@@ -1,9 +1,8 @@
 use std::fs::{self, File};
 use std::io::Read;
 use std::path::{Path, PathBuf, MAIN_SEPARATOR}; // Added MAIN_SEPARATOR
-use serde::Deserialize;
 use serde_json::Value;
-use lean_introspector_lib::schema_inference::{Chunk, Hyperedge, Schema, SchemaNode, JsonType, json_type_to_owl_type, generate_hypergraph_representation};
+use lean_introspector_lib::schema_inference::{Schema, SchemaNode, JsonType, json_type_to_owl_type, generate_hypergraph_representation};
 use lean_introspector_lib::prime_analysis::{PrimeVector, PrimeMorphism};
 use lean_introspector_lib::report::{Report, IterationReport};
 use lean_introspector_lib::matrix_representation::SchemaMatrix;
@@ -13,23 +12,9 @@ use num_complex::Complex;
 use lean_introspector_lib::emojilisp;
 use lean_introspector_lib::reporting; // Import the new reporting module
 
+use config_lib::{ThreadSafeError};
+
 const MAX_RECONSTRUCTED_PATHS_TO_PRINT: usize = 100; // Limit to 100 paths for brevity
-
-#[derive(Deserialize)]
-struct RawConfig {
-    dataset_path: String,
-    input_file: String,
-    split_max_depth: Option<usize>,
-    schema_output_dir: String,
-}
-
-#[derive(Debug, Deserialize)] // Config will now hold PathBufs
-struct Config {
-    dataset_path: PathBuf,
-    input_file: PathBuf,
-    split_max_depth: Option<usize>,
-    schema_output_dir: PathBuf,
-}
 
 // Helper function to traverse SchemaNode and generate PrimeVector
 fn traverse_schema_node_for_prime_vector(
@@ -51,87 +36,36 @@ fn traverse_schema_node_for_prime_vector(
     }
 }
 
-#[derive(Debug, Clone)] // Derive Clone for GenericError to be used as ThreadSafeError
-struct GenericError(String);
 
-impl std::fmt::Display for GenericError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.0)
-    }
-}
-
-impl std::error::Error for GenericError {}
-
-type ThreadSafeError = Box<dyn std::error::Error + Send + 'static>;
 
 
 // New helper functions
-fn read_config() -> Result<(Config, PathBuf), ThreadSafeError> {
-    use std::env;
-    let current_dir = env::current_dir().map_err(|e| Box::new(GenericError(format!("Failed to get current directory: {}", e))) as ThreadSafeError)?;
-    
-    let config_path_buf = current_dir.join("lean_introspector").join("config.toml");
-    
-    let config_str = fs::read_to_string(&config_path_buf)
-        .map_err(|e| Box::new(GenericError(format!("Failed to read config file '{}': {}", config_path_buf.display(), e))) as ThreadSafeError)?;
-    
-    let raw_config: RawConfig = toml::from_str(&config_str)
-        .map_err(|e| Box::new(GenericError(format!("Failed to parse config file '{}': {}", config_path_buf.display(), e))) as ThreadSafeError)?;
 
-    // Resolve base_dir to the directory containing config.toml
-    let base_dir = config_path_buf.parent()
-        .ok_or_else(|| Box::new(GenericError(format!("Config file path has no parent directory: {}", config_path_buf.display()))) as ThreadSafeError)?;
-    
-    // Dataset path and input file path should be canonicalized as they refer to existing files
-    let dataset_path = base_dir.join(PathBuf::from(&raw_config.dataset_path))
-        .canonicalize()
-        .map_err(|e| Box::new(GenericError(format!("Failed to canonicalize dataset_path '{}': {}", base_dir.join(&raw_config.dataset_path).display(), e))) as ThreadSafeError)?;
 
-    let input_file = dataset_path.join(PathBuf::from(&raw_config.input_file))
-        .canonicalize()
-        .map_err(|e| Box::new(GenericError(format!("Failed to canonicalize input_file '{}': {}", dataset_path.join(&raw_config.input_file).display(), e))) as ThreadSafeError)?;
 
-    // Schema output directory should only be resolved to an absolute path, not canonicalized, as it might not exist yet
-    let schema_output_dir = base_dir.join(PathBuf::from(&raw_config.schema_output_dir));
-    // Note: We don't call .canonicalize() here, as it's an output directory that will be created.
-
-    let config = Config {
-        dataset_path,
-        input_file,
-        split_max_depth: raw_config.split_max_depth,
-        schema_output_dir,
-    };
-
-    Ok((config, base_dir.to_path_buf()))
-}
-
-fn get_input_file_path(config: &Config, _base_dir: &Path) -> std::path::PathBuf {
-    // input_file is already canonicalized in Config
-    config.input_file.clone()
-}
 
 fn read_input_json(file_path: &Path) -> Result<Value, ThreadSafeError> {
     eprintln!("Debug: Attempting to locate data file: {}", file_path.display());
     // file_path is already canonicalized and absolute
     if !file_path.exists() {
-        return Err(Box::new(GenericError(format!("Error: Data file does NOT exist at: {}", file_path.display()))) as ThreadSafeError);
+        return Err(Box::new(config_lib::GenericError(format!("Error: Data file does NOT exist at: {}", file_path.display()))) as ThreadSafeError);
     }
     if !file_path.is_file() {
-        return Err(Box::new(GenericError(format!("Error: Data path is NOT a file: {}", file_path.display()))) as ThreadSafeError);
+        return Err(Box::new(config_lib::GenericError(format!("Error: Data path is NOT a file: {}", file_path.display()))) as ThreadSafeError);
     }
 
     let mut file = File::open(&file_path)
         .map_err(|e| {
-            Box::new(GenericError(format!("Failed to open input JSON file '{}': {}", file_path.display(), e))) as ThreadSafeError
+            Box::new(config_lib::GenericError(format!("Failed to open input JSON file '{}': {}", file_path.display(), e))) as ThreadSafeError
         })?;
     let mut json_str = String::new();
     file.read_to_string(&mut json_str)
         .map_err(|e| {
-            Box::new(GenericError(format!("Failed to read input JSON file '{}': {}", file_path.display(), e))) as ThreadSafeError
+            Box::new(config_lib::GenericError(format!("Failed to read input JSON file '{}': {}", file_path.display(), e))) as ThreadSafeError
         })?;
 
     let initial_json_value: Value = serde_json::from_str(&json_str)
-        .map_err(|e| Box::new(GenericError(format!("Failed to parse input JSON from '{}': {}", file_path.display(), e))) as ThreadSafeError)?;
+        .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to parse input JSON from '{}': {}", file_path.display(), e))) as ThreadSafeError)?;
     Ok(initial_json_value)
 }
 
@@ -141,17 +75,17 @@ fn perform_iterative_schema_inference(initial_json_value: Value, schema_output_d
     let mut all_iteration_reports: Vec<IterationReport> = Vec::new();
 
     fs::create_dir_all(schema_output_dir)
-        .map_err(|e| Box::new(GenericError(format!("Failed to create schema output directory '{}': {}", schema_output_dir.display(), e))) as ThreadSafeError)?;
+        .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to create schema output directory '{}': {}", schema_output_dir.display(), e))) as ThreadSafeError)?;
 
     for i in 0..8 {
         let schema = Schema::infer(&current_json_value, 8); // Limit recursion depth to 8
         
         let schema_filename = schema_output_dir.join(format!("iteration_{}.json", i + 1));
         let schema_json = serde_json::to_string_pretty(&schema)
-            .map_err(|e| Box::new(GenericError(format!("Failed to serialize schema for iteration {}: {}", i + 1, e))) as ThreadSafeError)?;
+            .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to serialize schema for iteration {}: {}", i + 1, e))) as ThreadSafeError)?;
         eprintln!("Debug: Attempting to write schema file: {}", schema_filename.display());
         fs::write(&schema_filename, schema_json)
-            .map_err(|e| Box::new(GenericError(format!("Failed to write schema file '{}': {}", schema_filename.display(), e))) as ThreadSafeError)?;
+            .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to write schema file '{}': {}", schema_filename.display(), e))) as ThreadSafeError)?;
 
         all_iteration_reports.push(IterationReport {
             iteration: i + 1,
@@ -167,15 +101,13 @@ fn perform_iterative_schema_inference(initial_json_value: Value, schema_output_d
 fn generate_schema_matrix_and_eigen(
     schema: &Schema,
 ) -> Result<(Option<SchemaMatrix>, Option<Vec<Complex<f64>>>, Option<Vec<Array1<Complex<f64>>>>), ThreadSafeError> {
-    let mut schema_matrix_opt: Option<SchemaMatrix> = None;
     let eigenvalues_opt: Option<Vec<Complex<f64>>> = None; // Always None for now
     let eigenvectors_opt: Option<Vec<Array1<Complex<f64>>>> = None; // Always None for now
 
     let sm = SchemaMatrix::from_schema(schema);
     
     // Eigenvalue/eigenvector decomposition is disabled as BLAS/LAPACK backends are commented out
-    schema_matrix_opt = Some(sm);
-    Ok((schema_matrix_opt, eigenvalues_opt, eigenvectors_opt))
+    Ok((Some(sm), eigenvalues_opt, eigenvectors_opt))
 }
 
 
@@ -207,10 +139,10 @@ fn generate_and_save_report(
     };
 
     let report_json = serde_json::to_string_pretty(&report)
-        .map_err(|e| Box::new(GenericError(format!("Failed to serialize final report: {}", e))) as ThreadSafeError)?;
+        .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to serialize final report: {}", e))) as ThreadSafeError)?;
     eprintln!("Debug: Attempting to write analysis_report.json");
     fs::write("analysis_report.json", report_json)
-        .map_err(|e| Box::new(GenericError(format!("Failed to write analysis_report.json: {}", e))) as ThreadSafeError)?;
+        .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to write analysis_report.json: {}", e))) as ThreadSafeError)?;
     println!("\nAnalysis report saved to analysis_report.json");
     Ok(())
 }
@@ -219,16 +151,16 @@ fn recursive_split_json(value: &Value, path: &Path, max_depth: Option<usize>, cu
     eprintln!("Debug: Entering recursive_split_json for path: {} at depth: {}", path.display(), current_depth);
     
     eprintln!("Debug: Attempting to create directory: {}", path.display());
-    fs::create_dir_all(path).map_err(|e| Box::new(GenericError(format!("Failed to create directory '{}': {}", path.display(), e))) as ThreadSafeError)?;
+    fs::create_dir_all(path).map_err(|e| Box::new(config_lib::GenericError(format!("Failed to create directory '{}': {}", path.display(), e))) as ThreadSafeError)?;
 
     if let Some(md) = max_depth {
         if current_depth >= md {
             // If max_depth is reached, inline the current value instead of splitting further
             let value_content = serde_json::to_string_pretty(value)
-                .map_err(|e| Box::new(GenericError(format!("Failed to serialize value for inlining to '{}': {}", path.join("_value.json").display(), e))) as ThreadSafeError)?;
+                .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to serialize value for inlining to '{}': {}", path.join("_value.json").display(), e))) as ThreadSafeError)?;
             eprintln!("Debug: Attempting to write inlined _value.json to: {}", path.join("_value.json").display());
             fs::write(path.join("_value.json"), value_content)
-                .map_err(|e| Box::new(GenericError(format!("Failed to write inlined _value.json to '{}': {}", path.join("_value.json").display(), e))) as ThreadSafeError)?;
+                .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to write inlined _value.json to '{}': {}", path.join("_value.json").display(), e))) as ThreadSafeError)?;
             return Ok(());
         }
     }
@@ -245,10 +177,10 @@ fn recursive_split_json(value: &Value, path: &Path, max_depth: Option<usize>, cu
                 }
             }
             let report_content = serde_json::to_string_pretty(&Value::Object(report))
-                .map_err(|e| Box::new(GenericError(format!("Failed to serialize report object for '{}': {}", path.join("_report.json").display(), e))) as ThreadSafeError)?;
+                .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to serialize report object for '{}': {}", path.join("_report.json").display(), e))) as ThreadSafeError)?;
             eprintln!("Debug: Attempting to write _report.json to: {}", path.join("_report.json").display());
             fs::write(path.join("_report.json"), report_content)
-                .map_err(|e| Box::new(GenericError(format!("Failed to write _report.json to '{}': {}", path.join("_report.json").display(), e))) as ThreadSafeError)?;
+                .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to write _report.json to '{}': {}", path.join("_report.json").display(), e))) as ThreadSafeError)?;
         }
         Value::Array(arr) => {
             let mut report = Vec::new();
@@ -262,17 +194,17 @@ fn recursive_split_json(value: &Value, path: &Path, max_depth: Option<usize>, cu
                 }
             }
             let report_content = serde_json::to_string_pretty(&Value::Array(report))
-                .map_err(|e| Box::new(GenericError(format!("Failed to serialize report array for '{}': {}", path.join("_report.json").display(), e))) as ThreadSafeError)?;
+                .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to serialize report array for '{}': {}", path.join("_report.json").display(), e))) as ThreadSafeError)?;
             eprintln!("Debug: Attempting to write _report.json to: {}", path.join("_report.json").display());
             fs::write(path.join("_report.json"), report_content)
-                .map_err(|e| Box::new(GenericError(format!("Failed to write _report.json to '{}': {}", path.join("_report.json").display(), e))) as ThreadSafeError)?;
+                .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to write _report.json to '{}': {}", path.join("_report.json").display(), e))) as ThreadSafeError)?;
         }
         _ => {
             let value_content = serde_json::to_string_pretty(value)
-                .map_err(|e| Box::new(GenericError(format!("Failed to serialize primitive value for '{}': {}", path.join("_value.json").display(), e))) as ThreadSafeError)?;
+                .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to serialize primitive value for '{}': {}", path.join("_value.json").display(), e))) as ThreadSafeError)?;
             eprintln!("Debug: Attempting to write _value.json to: {}", path.join("_value.json").display());
             fs::write(path.join("_value.json"), value_content)
-                .map_err(|e| Box::new(GenericError(format!("Failed to write _value.json to '{}': {}", path.join("_value.json").display(), e))) as ThreadSafeError)?;
+                .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to write _value.json to '{}': {}", path.join("_value.json").display(), e))) as ThreadSafeError)?;
         }
     }
     Ok(())
@@ -392,7 +324,7 @@ fn generate_ontology_report(final_schema: &Option<Schema>) -> Result<String, Thr
 
 fn main() -> Result<(), ThreadSafeError> {
     
-    let (config, config_dir) = read_config()?;
+    let (config, config_dir) = config_lib::find_and_read_config("config.toml")?;
     println!("INFO: Config loaded and config directory identified.");
 
     // Input file path is already canonicalized in config.input_file
@@ -401,7 +333,7 @@ fn main() -> Result<(), ThreadSafeError> {
 
     let output_formatting_dir = config_dir.join(PathBuf::from(format!("output{}formatting", MAIN_SEPARATOR))); // Corrected PathBuf::from with MAIN_SEPARATOR
     fs::create_dir_all(&output_formatting_dir)
-        .map_err(|e| Box::new(GenericError(format!("Failed to create output formatting directory '{}': {}", output_formatting_dir.display(), e))) as ThreadSafeError)?;
+        .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to create output formatting directory '{}': {}", output_formatting_dir.display(), e))) as ThreadSafeError)?;
     println!("INFO: Output formatting directory ensured.");
 
     let initial_json_value = read_input_json(&data_input_path)?;
@@ -416,12 +348,12 @@ fn main() -> Result<(), ThreadSafeError> {
     let split_output_path = config_dir.join(PathBuf::from(format!("output{}split", MAIN_SEPARATOR))); // Corrected PathBuf::from with MAIN_SEPARATOR
     if split_output_path.exists() {
         fs::remove_dir_all(&split_output_path)
-            .map_err(|e| Box::new(GenericError(format!("Failed to remove existing split output directory '{}': {}", split_output_path.display(), e))) as ThreadSafeError)?;
+            .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to remove existing split output directory '{}': {}", split_output_path.display(), e))) as ThreadSafeError)?;
         println!("INFO: Existing split output directory removed.");
     }
     // Explicitly create the root split output path
     fs::create_dir_all(&split_output_path)
-        .map_err(|e| Box::new(GenericError(format!("Failed to create split output root directory '{}': {}", split_output_path.display(), e))) as ThreadSafeError)?;
+        .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to create split output root directory '{}': {}", split_output_path.display(), e))) as ThreadSafeError)?;
 
     println!("INFO: Starting recursive JSON splitting...");
     recursive_split_json(&initial_json_value, &split_output_path, config.split_max_depth, 0)?;
@@ -431,7 +363,7 @@ fn main() -> Result<(), ThreadSafeError> {
     let schema_output_dir = &config.schema_output_dir; // This is already canonicalized
     if schema_output_dir.exists() {
         fs::remove_dir_all(schema_output_dir)
-            .map_err(|e| Box::new(GenericError(format!("Failed to remove existing schema output directory '{}': {}", schema_output_dir.display(), e))) as ThreadSafeError)?;
+            .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to remove existing schema output directory '{}': {}", schema_output_dir.display(), e))) as ThreadSafeError)?;
         println!("INFO: Existing schema output directory removed.");
     }
     let (final_schema, all_iteration_reports) = 
@@ -443,12 +375,12 @@ fn main() -> Result<(), ThreadSafeError> {
     println!("INFO: Ontology report generated and printed.");
 
     println!("INFO: Generating hypergraph representation...");
-    let (chunks, hyperedges) = generate_hypergraph_representation(&initial_json_value, &final_schema)
-        .map_err(|e| Box::new(GenericError(format!("Failed to generate hypergraph representation: {}", e))) as ThreadSafeError)?;
-    println!("\nHypergraph Chunks: {}", serde_json::to_string_pretty(&chunks)
-        .map_err(|e| Box::new(GenericError(format!("Failed to serialize hypergraph chunks: {}", e))) as ThreadSafeError)?);
-    println!("\nHypergraph Hyperedges: {}", serde_json::to_string_pretty(&hyperedges)
-        .map_err(|e| Box::new(GenericError(format!("Failed to serialize hypergraph hyperedges: {}", e))) as ThreadSafeError)?);
+    let (_chunks, _hyperedges) = generate_hypergraph_representation(&initial_json_value, &final_schema)
+        .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to generate hypergraph representation: {}", e))) as ThreadSafeError)?;
+    println!("\nHypergraph Chunks: {}", serde_json::to_string_pretty(&_chunks)
+        .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to serialize hypergraph chunks: {}", e))) as ThreadSafeError)?);
+    println!("\nHypergraph Hyperedges: {}", serde_json::to_string_pretty(&_hyperedges)
+        .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to serialize hypergraph hyperedges: {}", e))) as ThreadSafeError)?);
     println!("INFO: Hypergraph representation generated and printed.");
 
     let (schema_matrix_opt, eigenvalues_opt, eigenvectors_opt) = 
@@ -456,7 +388,7 @@ fn main() -> Result<(), ThreadSafeError> {
             println!("\nJSON representation of the inferred schema:");
             let schema_json_value = schema_val.to_json_value();
             println!("{}", serde_json::to_string_pretty(&schema_json_value)
-                .map_err(|e| Box::new(GenericError(format!("Failed to serialize inferred schema: {}", e))) as ThreadSafeError)?);
+                .map_err(|e| Box::new(config_lib::GenericError(format!("Failed to serialize inferred schema: {}", e))) as ThreadSafeError)?);
 
             println!("INFO: Generating schema matrix and eigen decomposition...");
             let res = generate_schema_matrix_and_eigen(schema_val)?;
