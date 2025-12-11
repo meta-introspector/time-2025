@@ -1,6 +1,0 @@
-{
-  "cnstInfB": {
-    "$ref": "./cnstInfB/_report.json"
-  },
-  "kind": "AsyncConstB"
-}

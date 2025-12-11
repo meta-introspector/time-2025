@@ -1,7 +1,0 @@
-{
-  "declName": "Name",
-  "levels": {
-    "$ref": "./levels/_report.json"
-  },
-  "type": "const"
-}

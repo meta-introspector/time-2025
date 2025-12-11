@@ -1,8 +1,0 @@
-{
-  "kind": "Lean.RecursorRule",
-  "name": "SimpleExpr.sort",
-  "nfields": 1,
-  "rhs": {
-    "$ref": "./rhs/_report.json"
-  }
-}

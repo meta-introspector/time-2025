@@ -9,7 +9,7 @@ use crate::matrix_representation::SchemaMatrix; // Assuming this will be created
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IterationReport {
     pub iteration: usize,
-    pub schema: crate::schema_inference::SchemaNode,
+    pub schema_file: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

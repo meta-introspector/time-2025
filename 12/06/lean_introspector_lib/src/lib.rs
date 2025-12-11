@@ -4,3 +4,4 @@ pub mod prime_analysis;
 pub mod report;
 pub mod matrix_representation;
 pub mod emojilisp;
+pub mod reporting;
