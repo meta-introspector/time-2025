@@ -1,0 +1,1783 @@
+{
+  "root": {
+    "name": "",
+    "json_type": "ObjectType",
+    "children": {
+      "cnstInfB": {
+        "name": "cnstInfB",
+        "json_type": "ObjectType",
+        "children": {
+          "cnstInf": {
+            "name": "cnstInf",
+            "json_type": "ObjectType",
+            "children": {
+              "numIndices": {
+                "name": "numIndices",
+                "json_type": "IntegerType",
+                "children": {},
+                "element": null
+              },
+              "numMotives": {
+                "name": "numMotives",
+                "json_type": "IntegerType",
+                "children": {},
+                "element": null
+              },
+              "numMinors": {
+                "name": "numMinors",
+                "json_type": "IntegerType",
+                "children": {},
+                "element": null
+              },
+              "type": {
+                "name": "type",
+                "json_type": "ObjectType",
+                "children": {
+                  "type": {
+                    "name": "type",
+                    "json_type": "StringType",
+                    "children": {},
+                    "element": null
+                  },
+                  "forbndrTypB": {
+                    "name": "forbndrTypB",
+                    "json_type": "ObjectType",
+                    "children": {
+                      "binderInfo": {
+                        "name": "binderInfo",
+                        "json_type": "StringType",
+                        "children": {},
+                        "element": null
+                      },
+                      "forbdB": {
+                        "name": "forbdB",
+                        "json_type": "ObjectType",
+                        "children": {
+                          "level": {
+                            "name": "level",
+                            "json_type": "ObjectType",
+                            "children": {
+                              "kind": {
+                                "name": "kind",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "level": {
+                                "name": "level",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              }
+                            },
+                            "element": null
+                          },
+                          "type": {
+                            "name": "type",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          }
+                        },
+                        "element": null
+                      },
+                      "forbndrTyp": {
+                        "name": "forbndrTyp",
+                        "json_type": "ObjectType",
+                        "children": {
+                          "declName": {
+                            "name": "declName",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          },
+                          "levels": {
+                            "name": "levels",
+                            "json_type": "ArrayType",
+                            "children": {},
+                            "element": {
+                              "name": "item",
+                              "json_type": "ObjectType",
+                              "children": {
+                                "kind": {
+                                  "name": "kind",
+                                  "json_type": "StringType",
+                                  "children": {},
+                                  "element": null
+                                },
+                                "level": {
+                                  "name": "level",
+                                  "json_type": "StringType",
+                                  "children": {},
+                                  "element": null
+                                }
+                              },
+                              "element": null
+                            }
+                          },
+                          "type": {
+                            "name": "type",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          }
+                        },
+                        "element": null
+                      },
+                      "type": {
+                        "name": "type",
+                        "json_type": "StringType",
+                        "children": {},
+                        "element": null
+                      },
+                      "binderName": {
+                        "name": "binderName",
+                        "json_type": "StringType",
+                        "children": {},
+                        "element": null
+                      }
+                    },
+                    "element": null
+                  },
+                  "binderInfo": {
+                    "name": "binderInfo",
+                    "json_type": "StringType",
+                    "children": {},
+                    "element": null
+                  },
+                  "binderName": {
+                    "name": "binderName",
+                    "json_type": "StringType",
+                    "children": {},
+                    "element": null
+                  },
+                  "forbd": {
+                    "name": "forbd",
+                    "json_type": "ObjectType",
+                    "children": {
+                      "forbdB": {
+                        "name": "forbdB",
+                        "json_type": "ObjectType",
+                        "children": {
+                          "forbndrTyp": {
+                            "name": "forbndrTyp",
+                            "json_type": "ObjectType",
+                            "children": {
+                              "binderName": {
+                                "name": "binderName",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "forbdB": {
+                                "name": "forbdB",
+                                "json_type": "ObjectType",
+                                "children": {
+                                  "fn": {
+                                    "name": "fn",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "type": {
+                                        "name": "type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  },
+                                  "type": {
+                                    "name": "type",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "arg": {
+                                    "name": "arg",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "type": {
+                                        "name": "type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "arg": {
+                                        "name": "arg",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "fn": {
+                                        "name": "fn",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  }
+                                },
+                                "element": null
+                              },
+                              "forbndrTyp": {
+                                "name": "forbndrTyp",
+                                "json_type": "ObjectType",
+                                "children": {
+                                  "type": {
+                                    "name": "type",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "declName": {
+                                    "name": "declName",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "levels": {
+                                    "name": "levels",
+                                    "json_type": "ArrayType",
+                                    "children": {},
+                                    "element": {
+                                      "name": "item",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    }
+                                  }
+                                },
+                                "element": null
+                              },
+                              "binderInfo": {
+                                "name": "binderInfo",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "type": {
+                                "name": "type",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              }
+                            },
+                            "element": null
+                          },
+                          "forbdB": {
+                            "name": "forbdB",
+                            "json_type": "ObjectType",
+                            "children": {
+                              "forbdB": {
+                                "name": "forbdB",
+                                "json_type": "ObjectType",
+                                "children": {
+                                  "binderName": {
+                                    "name": "binderName",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "binderInfo": {
+                                    "name": "binderInfo",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "forbndrTyp": {
+                                    "name": "forbndrTyp",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "binderInfo": {
+                                        "name": "binderInfo",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "forbdB": {
+                                        "name": "forbdB",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "forbndrTyp": {
+                                        "name": "forbndrTyp",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "type": {
+                                        "name": "type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "binderName": {
+                                        "name": "binderName",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  },
+                                  "forbdB": {
+                                    "name": "forbdB",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "binderInfo": {
+                                        "name": "binderInfo",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "binderName": {
+                                        "name": "binderName",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "forbdB": {
+                                        "name": "forbdB",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "forbndrTyp": {
+                                        "name": "forbndrTyp",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "type": {
+                                        "name": "type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  },
+                                  "type": {
+                                    "name": "type",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  }
+                                },
+                                "element": null
+                              },
+                              "forbndrTyp": {
+                                "name": "forbndrTyp",
+                                "json_type": "ObjectType",
+                                "children": {
+                                  "forbndrTyp": {
+                                    "name": "forbndrTyp",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "levels": {
+                                        "name": "levels",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "declName": {
+                                        "name": "declName",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "type": {
+                                        "name": "type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  },
+                                  "type": {
+                                    "name": "type",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "binderInfo": {
+                                    "name": "binderInfo",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "binderName": {
+                                    "name": "binderName",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "forbdB": {
+                                    "name": "forbdB",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "type": {
+                                        "name": "type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "binderInfo": {
+                                        "name": "binderInfo",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "binderName": {
+                                        "name": "binderName",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "forbndrTyp": {
+                                        "name": "forbndrTyp",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "forbdB": {
+                                        "name": "forbdB",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  }
+                                },
+                                "element": null
+                              },
+                              "binderName": {
+                                "name": "binderName",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "binderInfo": {
+                                "name": "binderInfo",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "type": {
+                                "name": "type",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              }
+                            },
+                            "element": null
+                          },
+                          "type": {
+                            "name": "type",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          },
+                          "binderInfo": {
+                            "name": "binderInfo",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          },
+                          "binderName": {
+                            "name": "binderName",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          }
+                        },
+                        "element": null
+                      },
+                      "binderName": {
+                        "name": "binderName",
+                        "json_type": "StringType",
+                        "children": {},
+                        "element": null
+                      },
+                      "type": {
+                        "name": "type",
+                        "json_type": "StringType",
+                        "children": {},
+                        "element": null
+                      },
+                      "forbndrTyp": {
+                        "name": "forbndrTyp",
+                        "json_type": "ObjectType",
+                        "children": {
+                          "forbndrTyp": {
+                            "name": "forbndrTyp",
+                            "json_type": "ObjectType",
+                            "children": {
+                              "level": {
+                                "name": "level",
+                                "json_type": "ObjectType",
+                                "children": {
+                                  "level": {
+                                    "name": "level",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "kind": {
+                                    "name": "kind",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  }
+                                },
+                                "element": null
+                              },
+                              "type": {
+                                "name": "type",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              }
+                            },
+                            "element": null
+                          },
+                          "type": {
+                            "name": "type",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          },
+                          "forbdB": {
+                            "name": "forbdB",
+                            "json_type": "ObjectType",
+                            "children": {
+                              "binderName": {
+                                "name": "binderName",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "type": {
+                                "name": "type",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "forbdB": {
+                                "name": "forbdB",
+                                "json_type": "ObjectType",
+                                "children": {
+                                  "fn": {
+                                    "name": "fn",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "type": {
+                                        "name": "type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  },
+                                  "arg": {
+                                    "name": "arg",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "type": {
+                                        "name": "type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "arg": {
+                                        "name": "arg",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "fn": {
+                                        "name": "fn",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  },
+                                  "type": {
+                                    "name": "type",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  }
+                                },
+                                "element": null
+                              },
+                              "binderInfo": {
+                                "name": "binderInfo",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "forbndrTyp": {
+                                "name": "forbndrTyp",
+                                "json_type": "ObjectType",
+                                "children": {
+                                  "type": {
+                                    "name": "type",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  }
+                                },
+                                "element": null
+                              }
+                            },
+                            "element": null
+                          },
+                          "binderInfo": {
+                            "name": "binderInfo",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          },
+                          "binderName": {
+                            "name": "binderName",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          }
+                        },
+                        "element": null
+                      },
+                      "binderInfo": {
+                        "name": "binderInfo",
+                        "json_type": "StringType",
+                        "children": {},
+                        "element": null
+                      }
+                    },
+                    "element": null
+                  }
+                },
+                "element": null
+              },
+              "k": {
+                "name": "k",
+                "json_type": "BooleanType",
+                "children": {},
+                "element": null
+              },
+              "numParams": {
+                "name": "numParams",
+                "json_type": "IntegerType",
+                "children": {},
+                "element": null
+              },
+              "kind": {
+                "name": "kind",
+                "json_type": "StringType",
+                "children": {},
+                "element": null
+              },
+              "levelParams": {
+                "name": "levelParams",
+                "json_type": "ArrayType",
+                "children": {},
+                "element": {
+                  "name": "item",
+                  "json_type": "StringType",
+                  "children": {},
+                  "element": null
+                }
+              },
+              "name": {
+                "name": "name",
+                "json_type": "StringType",
+                "children": {},
+                "element": null
+              },
+              "Rules": {
+                "name": "Rules",
+                "json_type": "ArrayType",
+                "children": {},
+                "element": {
+                  "name": "item",
+                  "json_type": "ObjectType",
+                  "children": {
+                    "rhs": {
+                      "name": "rhs",
+                      "json_type": "ObjectType",
+                      "children": {
+                        "binderInfo": {
+                          "name": "binderInfo",
+                          "json_type": "StringType",
+                          "children": {},
+                          "element": null
+                        },
+                        "binderName": {
+                          "name": "binderName",
+                          "json_type": "StringType",
+                          "children": {},
+                          "element": null
+                        },
+                        "type": {
+                          "name": "type",
+                          "json_type": "StringType",
+                          "children": {},
+                          "element": null
+                        },
+                        "lambd": {
+                          "name": "lambd",
+                          "json_type": "ObjectType",
+                          "children": {
+                            "binderInfo": {
+                              "name": "binderInfo",
+                              "json_type": "StringType",
+                              "children": {},
+                              "element": null
+                            },
+                            "lambdB": {
+                              "name": "lambdB",
+                              "json_type": "ObjectType",
+                              "children": {
+                                "lambdB": {
+                                  "name": "lambdB",
+                                  "json_type": "ObjectType",
+                                  "children": {
+                                    "binderInfo": {
+                                      "name": "binderInfo",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    },
+                                    "type": {
+                                      "name": "type",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    },
+                                    "binderName": {
+                                      "name": "binderName",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    },
+                                    "lambdB": {
+                                      "name": "lambdB",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    },
+                                    "lambndrTp": {
+                                      "name": "lambndrTp",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    }
+                                  },
+                                  "element": null
+                                },
+                                "binderName": {
+                                  "name": "binderName",
+                                  "json_type": "StringType",
+                                  "children": {},
+                                  "element": null
+                                },
+                                "binderInfo": {
+                                  "name": "binderInfo",
+                                  "json_type": "StringType",
+                                  "children": {},
+                                  "element": null
+                                },
+                                "lambndrTp": {
+                                  "name": "lambndrTp",
+                                  "json_type": "ObjectType",
+                                  "children": {
+                                    "type": {
+                                      "name": "type",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    },
+                                    "forbndrTyp": {
+                                      "name": "forbndrTyp",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    },
+                                    "binderName": {
+                                      "name": "binderName",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    },
+                                    "binderInfo": {
+                                      "name": "binderInfo",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    },
+                                    "forbdB": {
+                                      "name": "forbdB",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    }
+                                  },
+                                  "element": null
+                                },
+                                "type": {
+                                  "name": "type",
+                                  "json_type": "StringType",
+                                  "children": {},
+                                  "element": null
+                                }
+                              },
+                              "element": null
+                            },
+                            "lambndrTp": {
+                              "name": "lambndrTp",
+                              "json_type": "ObjectType",
+                              "children": {
+                                "forbdB": {
+                                  "name": "forbdB",
+                                  "json_type": "ObjectType",
+                                  "children": {
+                                    "type": {
+                                      "name": "type",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    },
+                                    "forbdB": {
+                                      "name": "forbdB",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    },
+                                    "forbndrTyp": {
+                                      "name": "forbndrTyp",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    },
+                                    "binderInfo": {
+                                      "name": "binderInfo",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    },
+                                    "binderName": {
+                                      "name": "binderName",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    }
+                                  },
+                                  "element": null
+                                },
+                                "binderName": {
+                                  "name": "binderName",
+                                  "json_type": "StringType",
+                                  "children": {},
+                                  "element": null
+                                },
+                                "forbndrTyp": {
+                                  "name": "forbndrTyp",
+                                  "json_type": "ObjectType",
+                                  "children": {
+                                    "type": {
+                                      "name": "type",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    },
+                                    "level": {
+                                      "name": "level",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    }
+                                  },
+                                  "element": null
+                                },
+                                "type": {
+                                  "name": "type",
+                                  "json_type": "StringType",
+                                  "children": {},
+                                  "element": null
+                                },
+                                "binderInfo": {
+                                  "name": "binderInfo",
+                                  "json_type": "StringType",
+                                  "children": {},
+                                  "element": null
+                                }
+                              },
+                              "element": null
+                            },
+                            "binderName": {
+                              "name": "binderName",
+                              "json_type": "StringType",
+                              "children": {},
+                              "element": null
+                            },
+                            "type": {
+                              "name": "type",
+                              "json_type": "StringType",
+                              "children": {},
+                              "element": null
+                            }
+                          },
+                          "element": null
+                        },
+                        "lambndrTpB": {
+                          "name": "lambndrTpB",
+                          "json_type": "ObjectType",
+                          "children": {
+                            "binderName": {
+                              "name": "binderName",
+                              "json_type": "StringType",
+                              "children": {},
+                              "element": null
+                            },
+                            "type": {
+                              "name": "type",
+                              "json_type": "StringType",
+                              "children": {},
+                              "element": null
+                            },
+                            "binderInfo": {
+                              "name": "binderInfo",
+                              "json_type": "StringType",
+                              "children": {},
+                              "element": null
+                            },
+                            "forbndrTyp": {
+                              "name": "forbndrTyp",
+                              "json_type": "ObjectType",
+                              "children": {
+                                "declName": {
+                                  "name": "declName",
+                                  "json_type": "StringType",
+                                  "children": {},
+                                  "element": null
+                                },
+                                "levels": {
+                                  "name": "levels",
+                                  "json_type": "ArrayType",
+                                  "children": {},
+                                  "element": {
+                                    "name": "item",
+                                    "json_type": "UnknownType",
+                                    "children": {},
+                                    "element": null
+                                  }
+                                },
+                                "type": {
+                                  "name": "type",
+                                  "json_type": "StringType",
+                                  "children": {},
+                                  "element": null
+                                }
+                              },
+                              "element": null
+                            },
+                            "forbdB": {
+                              "name": "forbdB",
+                              "json_type": "ObjectType",
+                              "children": {
+                                "level": {
+                                  "name": "level",
+                                  "json_type": "ObjectType",
+                                  "children": {
+                                    "kind": {
+                                      "name": "kind",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    },
+                                    "level": {
+                                      "name": "level",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    }
+                                  },
+                                  "element": null
+                                },
+                                "type": {
+                                  "name": "type",
+                                  "json_type": "StringType",
+                                  "children": {},
+                                  "element": null
+                                }
+                              },
+                              "element": null
+                            }
+                          },
+                          "element": null
+                        }
+                      },
+                      "element": null
+                    },
+                    "kind": {
+                      "name": "kind",
+                      "json_type": "StringType",
+                      "children": {},
+                      "element": null
+                    },
+                    "nfields": {
+                      "name": "nfields",
+                      "json_type": "IntegerType",
+                      "children": {},
+                      "element": null
+                    },
+                    "name": {
+                      "name": "name",
+                      "json_type": "StringType",
+                      "children": {},
+                      "element": null
+                    }
+                  },
+                  "element": null
+                }
+              },
+              "all": {
+                "name": "all",
+                "json_type": "ArrayType",
+                "children": {},
+                "element": {
+                  "name": "item",
+                  "json_type": "StringType",
+                  "children": {},
+                  "element": null
+                }
+              },
+              "isUnsafe": {
+                "name": "isUnsafe",
+                "json_type": "BooleanType",
+                "children": {},
+                "element": null
+              }
+            },
+            "element": null
+          },
+          "sig": {
+            "name": "sig",
+            "json_type": "ObjectType",
+            "children": {
+              "name": {
+                "name": "name",
+                "json_type": "StringType",
+                "children": {},
+                "element": null
+              },
+              "levelParams": {
+                "name": "levelParams",
+                "json_type": "ArrayType",
+                "children": {},
+                "element": {
+                  "name": "item",
+                  "json_type": "StringType",
+                  "children": {},
+                  "element": null
+                }
+              },
+              "type": {
+                "name": "type",
+                "json_type": "ObjectType",
+                "children": {
+                  "binderName": {
+                    "name": "binderName",
+                    "json_type": "StringType",
+                    "children": {},
+                    "element": null
+                  },
+                  "forbd": {
+                    "name": "forbd",
+                    "json_type": "ObjectType",
+                    "children": {
+                      "binderInfo": {
+                        "name": "binderInfo",
+                        "json_type": "StringType",
+                        "children": {},
+                        "element": null
+                      },
+                      "forbdB": {
+                        "name": "forbdB",
+                        "json_type": "ObjectType",
+                        "children": {
+                          "forbdB": {
+                            "name": "forbdB",
+                            "json_type": "ObjectType",
+                            "children": {
+                              "forbndrTyp": {
+                                "name": "forbndrTyp",
+                                "json_type": "ObjectType",
+                                "children": {
+                                  "type": {
+                                    "name": "type",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "forbdB": {
+                                    "name": "forbdB",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "type": {
+                                        "name": "type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "binderInfo": {
+                                        "name": "binderInfo",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "forbndrTyp": {
+                                        "name": "forbndrTyp",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "forbdB": {
+                                        "name": "forbdB",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "binderName": {
+                                        "name": "binderName",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  },
+                                  "binderInfo": {
+                                    "name": "binderInfo",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "binderName": {
+                                    "name": "binderName",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "forbndrTyp": {
+                                    "name": "forbndrTyp",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "levels": {
+                                        "name": "levels",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "type": {
+                                        "name": "type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "declName": {
+                                        "name": "declName",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  }
+                                },
+                                "element": null
+                              },
+                              "type": {
+                                "name": "type",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "binderName": {
+                                "name": "binderName",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "forbdB": {
+                                "name": "forbdB",
+                                "json_type": "ObjectType",
+                                "children": {
+                                  "forbdB": {
+                                    "name": "forbdB",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "type": {
+                                        "name": "type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "forbndrTyp": {
+                                        "name": "forbndrTyp",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "binderName": {
+                                        "name": "binderName",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "binderInfo": {
+                                        "name": "binderInfo",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "forbdB": {
+                                        "name": "forbdB",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  },
+                                  "binderInfo": {
+                                    "name": "binderInfo",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "forbndrTyp": {
+                                    "name": "forbndrTyp",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "binderInfo": {
+                                        "name": "binderInfo",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "type": {
+                                        "name": "type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "binderName": {
+                                        "name": "binderName",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "forbdB": {
+                                        "name": "forbdB",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "forbndrTyp": {
+                                        "name": "forbndrTyp",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  },
+                                  "type": {
+                                    "name": "type",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "binderName": {
+                                    "name": "binderName",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  }
+                                },
+                                "element": null
+                              },
+                              "binderInfo": {
+                                "name": "binderInfo",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              }
+                            },
+                            "element": null
+                          },
+                          "forbndrTyp": {
+                            "name": "forbndrTyp",
+                            "json_type": "ObjectType",
+                            "children": {
+                              "forbdB": {
+                                "name": "forbdB",
+                                "json_type": "ObjectType",
+                                "children": {
+                                  "arg": {
+                                    "name": "arg",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "arg": {
+                                        "name": "arg",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "fn": {
+                                        "name": "fn",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "type": {
+                                        "name": "type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  },
+                                  "fn": {
+                                    "name": "fn",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "type": {
+                                        "name": "type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  },
+                                  "type": {
+                                    "name": "type",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  }
+                                },
+                                "element": null
+                              },
+                              "binderInfo": {
+                                "name": "binderInfo",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "binderName": {
+                                "name": "binderName",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "forbndrTyp": {
+                                "name": "forbndrTyp",
+                                "json_type": "ObjectType",
+                                "children": {
+                                  "type": {
+                                    "name": "type",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "levels": {
+                                    "name": "levels",
+                                    "json_type": "ArrayType",
+                                    "children": {},
+                                    "element": {
+                                      "name": "item",
+                                      "json_type": "UnknownType",
+                                      "children": {},
+                                      "element": null
+                                    }
+                                  },
+                                  "declName": {
+                                    "name": "declName",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  }
+                                },
+                                "element": null
+                              },
+                              "type": {
+                                "name": "type",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              }
+                            },
+                            "element": null
+                          },
+                          "type": {
+                            "name": "type",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          },
+                          "binderName": {
+                            "name": "binderName",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          },
+                          "binderInfo": {
+                            "name": "binderInfo",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          }
+                        },
+                        "element": null
+                      },
+                      "type": {
+                        "name": "type",
+                        "json_type": "StringType",
+                        "children": {},
+                        "element": null
+                      },
+                      "binderName": {
+                        "name": "binderName",
+                        "json_type": "StringType",
+                        "children": {},
+                        "element": null
+                      },
+                      "forbndrTyp": {
+                        "name": "forbndrTyp",
+                        "json_type": "ObjectType",
+                        "children": {
+                          "binderInfo": {
+                            "name": "binderInfo",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          },
+                          "forbdB": {
+                            "name": "forbdB",
+                            "json_type": "ObjectType",
+                            "children": {
+                              "forbndrTyp": {
+                                "name": "forbndrTyp",
+                                "json_type": "ObjectType",
+                                "children": {
+                                  "type": {
+                                    "name": "type",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  }
+                                },
+                                "element": null
+                              },
+                              "binderName": {
+                                "name": "binderName",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "forbdB": {
+                                "name": "forbdB",
+                                "json_type": "ObjectType",
+                                "children": {
+                                  "type": {
+                                    "name": "type",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "fn": {
+                                    "name": "fn",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "type": {
+                                        "name": "type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  },
+                                  "arg": {
+                                    "name": "arg",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "fn": {
+                                        "name": "fn",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "arg": {
+                                        "name": "arg",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "type": {
+                                        "name": "type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  }
+                                },
+                                "element": null
+                              },
+                              "type": {
+                                "name": "type",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "binderInfo": {
+                                "name": "binderInfo",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              }
+                            },
+                            "element": null
+                          },
+                          "type": {
+                            "name": "type",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          },
+                          "binderName": {
+                            "name": "binderName",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          },
+                          "forbndrTyp": {
+                            "name": "forbndrTyp",
+                            "json_type": "ObjectType",
+                            "children": {
+                              "level": {
+                                "name": "level",
+                                "json_type": "ObjectType",
+                                "children": {
+                                  "kind": {
+                                    "name": "kind",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  },
+                                  "level": {
+                                    "name": "level",
+                                    "json_type": "StringType",
+                                    "children": {},
+                                    "element": null
+                                  }
+                                },
+                                "element": null
+                              },
+                              "type": {
+                                "name": "type",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              }
+                            },
+                            "element": null
+                          }
+                        },
+                        "element": null
+                      }
+                    },
+                    "element": null
+                  },
+                  "binderInfo": {
+                    "name": "binderInfo",
+                    "json_type": "StringType",
+                    "children": {},
+                    "element": null
+                  },
+                  "type": {
+                    "name": "type",
+                    "json_type": "StringType",
+                    "children": {},
+                    "element": null
+                  },
+                  "forbndrTypB": {
+                    "name": "forbndrTypB",
+                    "json_type": "ObjectType",
+                    "children": {
+                      "binderName": {
+                        "name": "binderName",
+                        "json_type": "StringType",
+                        "children": {},
+                        "element": null
+                      },
+                      "forbndrTyp": {
+                        "name": "forbndrTyp",
+                        "json_type": "ObjectType",
+                        "children": {
+                          "declName": {
+                            "name": "declName",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          },
+                          "levels": {
+                            "name": "levels",
+                            "json_type": "ArrayType",
+                            "children": {},
+                            "element": {
+                              "name": "item",
+                              "json_type": "ObjectType",
+                              "children": {
+                                "kind": {
+                                  "name": "kind",
+                                  "json_type": "StringType",
+                                  "children": {},
+                                  "element": null
+                                },
+                                "level": {
+                                  "name": "level",
+                                  "json_type": "StringType",
+                                  "children": {},
+                                  "element": null
+                                }
+                              },
+                              "element": null
+                            }
+                          },
+                          "type": {
+                            "name": "type",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          }
+                        },
+                        "element": null
+                      },
+                      "type": {
+                        "name": "type",
+                        "json_type": "StringType",
+                        "children": {},
+                        "element": null
+                      },
+                      "forbdB": {
+                        "name": "forbdB",
+                        "json_type": "ObjectType",
+                        "children": {
+                          "type": {
+                            "name": "type",
+                            "json_type": "StringType",
+                            "children": {},
+                            "element": null
+                          },
+                          "level": {
+                            "name": "level",
+                            "json_type": "ObjectType",
+                            "children": {
+                              "kind": {
+                                "name": "kind",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "level": {
+                                "name": "level",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              }
+                            },
+                            "element": null
+                          }
+                        },
+                        "element": null
+                      },
+                      "binderInfo": {
+                        "name": "binderInfo",
+                        "json_type": "StringType",
+                        "children": {},
+                        "element": null
+                      }
+                    },
+                    "element": null
+                  }
+                },
+                "element": null
+              },
+              "kind": {
+                "name": "kind",
+                "json_type": "StringType",
+                "children": {},
+                "element": null
+              }
+            },
+            "element": null
+          },
+          "name": {
+            "name": "name",
+            "json_type": "StringType",
+            "children": {},
+            "element": null
+          },
+          "kindB": {
+            "name": "kindB",
+            "json_type": "StringType",
+            "children": {},
+            "element": null
+          },
+          "kind": {
+            "name": "kind",
+            "json_type": "ObjectType",
+            "children": {
+              "kind": {
+                "name": "kind",
+                "json_type": "StringType",
+                "children": {},
+                "element": null
+              },
+              "value": {
+                "name": "value",
+                "json_type": "StringType",
+                "children": {},
+                "element": null
+              }
+            },
+            "element": null
+          }
+        },
+        "element": null
+      },
+      "kind": {
+        "name": "kind",
+        "json_type": "StringType",
+        "children": {},
+        "element": null
+      }
+    },
+    "element": null
+  }
+}

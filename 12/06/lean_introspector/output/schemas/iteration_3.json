@@ -1,0 +1,371 @@
+{
+  "root": {
+    "name": "",
+    "json_type": "ObjectType",
+    "children": {
+      "json_type": {
+        "name": "json_type",
+        "json_type": "StringType",
+        "children": {},
+        "element": null
+      },
+      "name": {
+        "name": "name",
+        "json_type": "StringType",
+        "children": {},
+        "element": null
+      },
+      "children": {
+        "name": "children",
+        "json_type": "ObjectType",
+        "children": {
+          "children": {
+            "name": "children",
+            "json_type": "ObjectType",
+            "children": {
+              "name": {
+                "name": "name",
+                "json_type": "StringType",
+                "children": {},
+                "element": null
+              },
+              "json_type": {
+                "name": "json_type",
+                "json_type": "StringType",
+                "children": {},
+                "element": null
+              },
+              "children": {
+                "name": "children",
+                "json_type": "ObjectType",
+                "children": {
+                  "kind": {
+                    "name": "kind",
+                    "json_type": "ObjectType",
+                    "children": {
+                      "children": {
+                        "name": "children",
+                        "json_type": "ObjectType",
+                        "children": {
+                          "name": {
+                            "name": "name",
+                            "json_type": "ObjectType",
+                            "children": {
+                              "name": {
+                                "name": "name",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "json_type": {
+                                "name": "json_type",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              }
+                            },
+                            "element": null
+                          },
+                          "json_type": {
+                            "name": "json_type",
+                            "json_type": "ObjectType",
+                            "children": {
+                              "name": {
+                                "name": "name",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "json_type": {
+                                "name": "json_type",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              }
+                            },
+                            "element": null
+                          }
+                        },
+                        "element": null
+                      },
+                      "json_type": {
+                        "name": "json_type",
+                        "json_type": "StringType",
+                        "children": {},
+                        "element": null
+                      },
+                      "name": {
+                        "name": "name",
+                        "json_type": "StringType",
+                        "children": {},
+                        "element": null
+                      }
+                    },
+                    "element": null
+                  },
+                  "cnstInfB": {
+                    "name": "cnstInfB",
+                    "json_type": "ObjectType",
+                    "children": {
+                      "name": {
+                        "name": "name",
+                        "json_type": "StringType",
+                        "children": {},
+                        "element": null
+                      },
+                      "children": {
+                        "name": "children",
+                        "json_type": "ObjectType",
+                        "children": {
+                          "json_type": {
+                            "name": "json_type",
+                            "json_type": "ObjectType",
+                            "children": {
+                              "name": {
+                                "name": "name",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "json_type": {
+                                "name": "json_type",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              }
+                            },
+                            "element": null
+                          },
+                          "name": {
+                            "name": "name",
+                            "json_type": "ObjectType",
+                            "children": {
+                              "json_type": {
+                                "name": "json_type",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "name": {
+                                "name": "name",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              }
+                            },
+                            "element": null
+                          },
+                          "children": {
+                            "name": "children",
+                            "json_type": "ObjectType",
+                            "children": {
+                              "children": {
+                                "name": "children",
+                                "json_type": "ObjectType",
+                                "children": {
+                                  "kind": {
+                                    "name": "kind",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "json_type": {
+                                        "name": "json_type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "children": {
+                                        "name": "children",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "name": {
+                                        "name": "name",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  },
+                                  "kindB": {
+                                    "name": "kindB",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "children": {
+                                        "name": "children",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "name": {
+                                        "name": "name",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "json_type": {
+                                        "name": "json_type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  },
+                                  "sig": {
+                                    "name": "sig",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "json_type": {
+                                        "name": "json_type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "name": {
+                                        "name": "name",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "children": {
+                                        "name": "children",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  },
+                                  "cnstInf": {
+                                    "name": "cnstInf",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "children": {
+                                        "name": "children",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "json_type": {
+                                        "name": "json_type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "name": {
+                                        "name": "name",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  },
+                                  "name": {
+                                    "name": "name",
+                                    "json_type": "ObjectType",
+                                    "children": {
+                                      "json_type": {
+                                        "name": "json_type",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "name": {
+                                        "name": "name",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      },
+                                      "children": {
+                                        "name": "children",
+                                        "json_type": "UnknownType",
+                                        "children": {},
+                                        "element": null
+                                      }
+                                    },
+                                    "element": null
+                                  }
+                                },
+                                "element": null
+                              },
+                              "name": {
+                                "name": "name",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              },
+                              "json_type": {
+                                "name": "json_type",
+                                "json_type": "StringType",
+                                "children": {},
+                                "element": null
+                              }
+                            },
+                            "element": null
+                          }
+                        },
+                        "element": null
+                      },
+                      "json_type": {
+                        "name": "json_type",
+                        "json_type": "StringType",
+                        "children": {},
+                        "element": null
+                      }
+                    },
+                    "element": null
+                  }
+                },
+                "element": null
+              }
+            },
+            "element": null
+          },
+          "json_type": {
+            "name": "json_type",
+            "json_type": "ObjectType",
+            "children": {
+              "json_type": {
+                "name": "json_type",
+                "json_type": "StringType",
+                "children": {},
+                "element": null
+              },
+              "name": {
+                "name": "name",
+                "json_type": "StringType",
+                "children": {},
+                "element": null
+              }
+            },
+            "element": null
+          },
+          "name": {
+            "name": "name",
+            "json_type": "ObjectType",
+            "children": {
+              "json_type": {
+                "name": "json_type",
+                "json_type": "StringType",
+                "children": {},
+                "element": null
+              },
+              "name": {
+                "name": "name",
+                "json_type": "StringType",
+                "children": {},
+                "element": null
+              }
+            },
+            "element": null
+          }
+        },
+        "element": null
+      }
+    },
+    "element": null
+  }
+}
