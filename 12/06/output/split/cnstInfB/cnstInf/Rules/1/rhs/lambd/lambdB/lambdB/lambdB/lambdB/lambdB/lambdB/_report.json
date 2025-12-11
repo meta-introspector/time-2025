@@ -1,0 +1,11 @@
+{
+  "binderInfo": "default",
+  "binderName": "u",
+  "lambdB": {
+    "$ref": "./lambdB/_report.json"
+  },
+  "lambndrTp": {
+    "$ref": "./lambndrTp/_report.json"
+  },
+  "type": "lam"
+}

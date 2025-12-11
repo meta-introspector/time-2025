@@ -1,0 +1,11 @@
+{
+  "binderInfo": "default",
+  "binderName": "sort",
+  "forbdB": {
+    "$ref": "./forbdB/_report.json"
+  },
+  "forbndrTyp": {
+    "$ref": "./forbndrTyp/_report.json"
+  },
+  "type": "forallE"
+}

@@ -1,0 +1,7 @@
+{
+  "declName": "SimpleExpr",
+  "levels": {
+    "$ref": "./levels/_report.json"
+  },
+  "type": "const"
+}

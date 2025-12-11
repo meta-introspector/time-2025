@@ -2,8 +2,8 @@
 use std::collections::HashMap;
 use serde::Serialize;
  // Added
-use crate::schema_inference::SchemaNode;
-use crate::matrix_representation::SchemaMatrix;
+use lean_introspector_lib::schema_inference::SchemaNode;
+use lean_introspector_lib::matrix_representation::SchemaMatrix;
 use num_complex::Complex;
 use ndarray::Array1;
 

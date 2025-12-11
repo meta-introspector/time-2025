@@ -327,11 +327,22 @@ name = "lean_introspector"
 version = "0.1.0"
 dependencies = [
  "lazy_static",
+ "lean_introspector_lib",
  "ndarray",
  "num-complex",
  "serde",
  "serde_json",
  "toml",
+]
+
+[[package]]
+name = "lean_introspector_lib"
+version = "0.1.0"
+dependencies = [
+ "ndarray",
+ "num-complex",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
@@ -551,9 +562,9 @@ dependencies = [
 
 [[package]]
 name = "once_cell"
-version = "1.19.0"
+version = "1.21.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3fdb12b2476b595f9358c5161aa467c2438859caa136dec86c26fdd2efe17b92"
+checksum = "42f5e15c9953c5e4ccceeb2e7382a716482c34515315f7b03532b8b4e8393d2d"
 
 [[package]]
 name = "paste"
@@ -764,9 +775,9 @@ checksum = "60a357793950651c4ed0f3f52338f53b2f809f32d83a07f72909fa13e4c6c1e3"
 
 [[package]]
 name = "regex"
-version = "1.10.6"
+version = "1.12.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4219d74c6b67a3654a9fbebc4b419e22126d13d2f3c4a07ee0cb61ff79a79619"
+checksum = "843bc0191f75f3e22651ae5f1e72939ab2f72a4bc30fa80a066bd66edefc24d4"
 dependencies = [
  "aho-corasick",
  "memchr",

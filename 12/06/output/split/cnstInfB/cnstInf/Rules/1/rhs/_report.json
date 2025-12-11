@@ -1,0 +1,11 @@
+{
+  "binderInfo": "default",
+  "binderName": "motive",
+  "lambd": {
+    "$ref": "./lambd/_report.json"
+  },
+  "lambndrTpB": {
+    "$ref": "./lambndrTpB/_report.json"
+  },
+  "type": "lam"
+}

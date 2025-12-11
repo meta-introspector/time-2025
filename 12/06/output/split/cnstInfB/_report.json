@@ -1,0 +1,13 @@
+{
+  "cnstInf": {
+    "$ref": "./cnstInf/_report.json"
+  },
+  "kind": {
+    "$ref": "./kind/_report.json"
+  },
+  "kindB": "AsyncConstInfoB",
+  "name": "SimpleExpr.rec",
+  "sig": {
+    "$ref": "./sig/_report.json"
+  }
+}

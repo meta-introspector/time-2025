@@ -3,11 +3,11 @@ use std::io::Read;
 use std::path::Path;
 use serde::Deserialize;
 use serde_json::Value;
-use lean_introspector_lib::schema_inference::{Schema, SchemaNode};
+use lean_introspector_lib::schema_inference::{Chunk, Hyperedge, Schema, SchemaNode, JsonType, json_type_to_owl_type, generate_hypergraph_representation};
 use lean_introspector_lib::prime_analysis::{PrimeVector, PrimeMorphism};
 use lean_introspector_lib::report::{Report, IterationReport};
 use lean_introspector_lib::matrix_representation::SchemaMatrix;
-use std::collections::HashMap;
+use std::collections::{HashMap, VecDeque};
 use ndarray::Array1;
 use num_complex::Complex;
 use lean_introspector_lib::emojilisp;
@@ -33,11 +33,6 @@ fn traverse_schema_node_for_prime_vector(
 
     let mut combined_pv = node_name_pv;
     combined_pv.multiply(&node_type_pv);
-
-    // Incorporate count as an exponent (simplified, can be more complex)
-    for (_prime, exponent) in &mut combined_pv.map {
-        *exponent += node.count;
-    }
 
     master_pv.multiply(&combined_pv);
 
@@ -129,48 +124,40 @@ fn perform_iterative_schema_inference(initial_json_value: Value) -> Result<(Opti
 }
 
 fn generate_schema_matrix_and_eigen(
-    final_schema: &Option<Schema>,
+    schema: &Schema,
 ) -> Result<(Option<SchemaMatrix>, Option<Vec<Complex<f64>>>, Option<Vec<Array1<Complex<f64>>>>), ThreadSafeError> {
     let mut schema_matrix_opt: Option<SchemaMatrix> = None;
     let eigenvalues_opt: Option<Vec<Complex<f64>>> = None; // Always None for now
     let eigenvectors_opt: Option<Vec<Array1<Complex<f64>>>> = None; // Always None for now
 
-    if let Some(schema) = final_schema {
-        let mut final_schema_paths = HashMap::new();
-        let mut path_stack = vec![("".to_string(), &schema.root)];
-
-        while let Some((current_path_str, current_node)) = path_stack.pop() {
-            if !current_path_str.is_empty() {
-                final_schema_paths.insert(current_path_str.clone(), current_node.json_type.clone());
-            }
-            for (key, child_node) in &current_node.children {
-                let next_path_str = if current_path_str.is_empty() {
-                    key.clone()
-                } else {
-                    format!("{}.{}", current_path_str, key)
-                };
-                path_stack.push((next_path_str, child_node));
-            }
-        }
-        let sm = SchemaMatrix::from_schema(&final_schema_paths);
-        
-        // Eigenvalue/eigenvector decomposition is disabled as BLAS/LAPACK backends are commented out
-        schema_matrix_opt = Some(sm);
-    }
+    let sm = SchemaMatrix::from_schema(schema);
+    
+    // Eigenvalue/eigenvector decomposition is disabled as BLAS/LAPACK backends are commented out
+    schema_matrix_opt = Some(sm);
     Ok((schema_matrix_opt, eigenvalues_opt, eigenvectors_opt))
 }
 
 
 fn generate_and_save_report(
-    initial_json_value: Value,
+    final_schema: &Option<Schema>,
     all_iteration_reports: Vec<IterationReport>,
-    master_prime_vector_map: HashMap<u64, u64>,
     schema_matrix_opt: Option<SchemaMatrix>,
     eigenvalues_opt: Option<Vec<Complex<f64>>> ,
     eigenvectors_opt: Option<Vec<Array1<Complex<f64>>>>,
 ) -> Result<(), ThreadSafeError> {
+    let mut master_prime_vector_map = HashMap::new();
+    if let Some(schema) = final_schema { // Removed 'ref'
+        let mut prime_morphism = PrimeMorphism::new(HashMap::new());
+        let mut master_prime_vector = PrimeVector::new();
+
+        traverse_schema_node_for_prime_vector(&schema.root, &mut prime_morphism, &mut master_prime_vector);
+        master_prime_vector_map = master_prime_vector.map;
+        println!("INFO: Prime vectors generated for final schema.");
+        println!("\nMaster Prime Vector: {:?}", master_prime_vector_map);
+    }
+
+
     let report = Report {
-        initial_json_value,
         iterations: all_iteration_reports,
         master_prime_vector: master_prime_vector_map,
         schema_matrix: schema_matrix_opt,
@@ -232,6 +219,117 @@ fn recursive_split_json(value: &Value, path: &Path) -> Result<(), ThreadSafeErro
 }
 
 
+// New helper function to get value at a given JSON path
+fn get_value_at_path<'a>(json_value: &'a Value, path: &str) -> Option<&'a Value> {
+    let mut current_value = json_value;
+    for segment in path.split('.') {
+        if segment.contains('[') && segment.contains(']') {
+            // Handle array access like "field[index]"
+            let parts: Vec<&str> = segment.split('[').collect();
+            if parts.len() == 2 {
+                let field_name = parts[0];
+                let index_str = parts[1].trim_end_matches(']');
+                if let Ok(index) = index_str.parse::<usize>() {
+                    if let Some(obj) = current_value.as_object() {
+                        current_value = obj.get(field_name)?;
+                        current_value = current_value.as_array()?.get(index)?;
+                    } else if field_name.is_empty() { // Case like "[0]" directly on an array
+                         current_value = current_value.as_array()?.get(index)?;
+                    } else {
+                        return None;
+                    }
+                } else {
+                    return None;
+                }
+            } else {
+                return None;
+            }
+        } else {
+            // Handle object field access
+            current_value = current_value.as_object()?.get(segment)?;
+        }
+    }
+    Some(current_value)
+}
+
+
+// Function to generate the ontology report
+fn generate_ontology_report(final_schema: &Option<Schema>) -> Result<String, ThreadSafeError> {
+    const MAX_ONTOLOGY_TRIPLES: usize = 20;
+    let mut report_lines = Vec::new();
+    report_lines.push("# Ontology Triples from Schema Analysis\n".to_string());
+    report_lines.push(format!("A sample of (Subject, Predicate, Object) triples (limited to {}):\n", MAX_ONTOLOGY_TRIPLES));
+
+    let mut triples: Vec<(String, String, String)> = Vec::new();
+    let mut queue: VecDeque<(&SchemaNode, Vec<String>)> = VecDeque::new();
+
+    if let Some(schema) = final_schema {
+        queue.push_back((&schema.root, Vec::new()));
+
+        while let Some((node, path_segments)) = queue.pop_front() {
+            let current_subject_base = if path_segments.is_empty() {
+                "Root".to_string()
+            } else {
+                path_segments.join(".")
+            };
+
+            // If the current node is an object or an array of objects, process its children as properties
+            if node.json_type == JsonType::ObjectType
+                || (node.json_type == JsonType::ArrayType
+                    && node.children.values().next().map_or(false, |child| child.json_type == JsonType::ObjectType))
+            {
+                // Iterate over children (properties)
+                for (prop_name, child_node) in &node.children {
+                    if triples.len() >= MAX_ONTOLOGY_TRIPLES {
+                        break;
+                    }
+
+                    let predicate = prop_name.clone();
+                    let object = if child_node.json_type == JsonType::ObjectType {
+                        // If the child is an object, its object is a new class
+                        format!("{}.{}", current_subject_base, prop_name)
+                    } else if child_node.json_type == JsonType::ArrayType {
+                        // If array, its object is a collection, and potentially a new class for its elements
+                        let element_type = if let Some(element_schema) = child_node.element.as_ref() {
+                            if element_schema.json_type == JsonType::ObjectType {
+                                format!("{}.{}", current_subject_base, prop_name) // Name the array elements after the path
+                            } else {
+                                json_type_to_owl_type(&element_schema.json_type)
+                            }
+                        } else {
+                            json_type_to_owl_type(&child_node.json_type) // Fallback for primitive elements
+                        };
+                        format!("owl:Collection<{}>", element_type)
+                    }
+                    else {
+                        // Otherwise, it's a primitive type
+                        json_type_to_owl_type(&child_node.json_type)
+                    };
+                    
+                    triples.push((current_subject_base.clone(), predicate, object));
+                    
+                    // Push child node for further traversal if it's a complex type
+                    if child_node.json_type == JsonType::ObjectType
+                        || child_node.json_type == JsonType::ArrayType
+                    {
+                        let mut next_path_segments = path_segments.clone();
+                        next_path_segments.push(prop_name.clone());
+                        queue.push_back((child_node, next_path_segments));
+                    }
+                }
+            }
+        }
+    } else {
+        report_lines.push("  No schema available to generate ontology.\n".to_string());
+    }
+
+    for (s, p, o) in triples {
+        report_lines.push(format!("  (\"{}\", \"{}\", \"{}\"", s, p, o))
+    }
+
+    Ok(report_lines.join(""))
+}
+
 fn main() -> Result<(), ThreadSafeError> {
     const STACK_SIZE: usize = 4 * 1024 * 1024; // 4MB stack size, adjust as needed
 
@@ -271,41 +369,51 @@ fn main() -> Result<(), ThreadSafeError> {
                 perform_iterative_schema_inference(initial_json_value.clone())?;
             println!("INFO: Iterative schema inference complete.");
 
-            let mut prime_morphism = PrimeMorphism::new(HashMap::new());
-            let mut master_prime_vector = PrimeVector::new();
+            let ontology_report = generate_ontology_report(&final_schema)?;
+            println!("\n{}", ontology_report);
+            println!("INFO: Ontology report generated and printed.");
 
-            if let Some(ref schema) = final_schema {
-                traverse_schema_node_for_prime_vector(&schema.root, &mut prime_morphism, &mut master_prime_vector);
-                println!("INFO: Prime vectors generated for final schema.");
+            println!("INFO: Generating hypergraph representation...");
+            let (chunks, hyperedges) = generate_hypergraph_representation(&initial_json_value, &final_schema).map_err(|e| Box::new(GenericError(e)) as ThreadSafeError)?;
+            println!("\nHypergraph Chunks: {}", serde_json::to_string_pretty(&chunks).map_err(|e| Box::new(e) as ThreadSafeError)?);
+            println!("\nHypergraph Hyperedges: {}", serde_json::to_string_pretty(&hyperedges).map_err(|e| Box::new(e) as ThreadSafeError)?);
+            println!("INFO: Hypergraph representation generated and printed.");
+
+            let (schema_matrix_opt, eigenvalues_opt, eigenvectors_opt) = 
+                if let Some(schema_val) = final_schema.as_ref() { // Use .as_ref() to borrow
+                    println!("\nJSON representation of the inferred schema:");
+                    let schema_json_value = schema_val.to_json_value();
+                    println!("{}", serde_json::to_string_pretty(&schema_json_value).map_err(|e| Box::new(e) as ThreadSafeError)?);
+
+                    println!("INFO: Generating schema matrix and eigen decomposition...");
+                    let res = generate_schema_matrix_and_eigen(schema_val)?;
+                    println!("INFO: Schema matrix and eigen decomposition complete.");
+                    res
+                } else {
+                    (None, None, None)
+                };
+
+            // Call to_paths and print
+            if let Some(ref sm) = schema_matrix_opt {
+                let all_paths: Vec<String> = sm.to_paths();
+                let total_paths = all_paths.len(); // Get length before moving
+                println!("\nMapping Original Data to Inferred Paths (Limited to {} of {}):", MAX_RECONSTRUCTED_PATHS_TO_PRINT, total_paths);
+                let mut count = 0;
+                for path_str in all_paths.into_iter() { // Now `all_paths` is moved here
+                    if count >= MAX_RECONSTRUCTED_PATHS_TO_PRINT {
+                        println!("  Path: \"{}\" -> Value: {}", path_str, serde_json::to_string_pretty(get_value_at_path(&initial_json_value, &path_str).unwrap_or(&Value::Null)).unwrap_or_else(|_| "[Error converting value]".to_string()));
+                    } else {
+                        println!("  Path: \"{}\" -> Value: [Not Found or Invalid Path]", path_str);
+                    }
+                    count += 1;
+                }
+                println!("INFO: Mapped data to inferred paths printed.");
             }
-
-            println!("INFO: Generating schema matrix and eigen decomposition...");
-            let (schema_matrix_opt, eigenvalues_opt, eigenvectors_opt) =
-                generate_schema_matrix_and_eigen(&final_schema)?;
-            println!("INFO: Schema matrix and eigen decomposition complete.");
-
-            // // Call to_paths and print
-            // if let Some(ref sm) = schema_matrix_opt {
-            //     let all_paths: Vec<String> = sm.to_paths();
-            //     let total_paths = all_paths.len(); // Get length before moving
-            //     println!("\nReconstructed Paths from SchemaMatrix (Limited to {} of {}):", MAX_RECONSTRUCTED_PATHS_TO_PRINT, total_paths);
-            //     let mut count = 0;
-            //     for path in all_paths.into_iter() { // Now `all_paths` is moved here
-            //         if count >= MAX_RECONSTRUCTED_PATHS_TO_PRINT {
-            //             println!("... ({} more paths not shown)", total_paths - count);
-            //             break;
-            //         }
-            //         println!("{}", path);
-            //         count += 1;
-            //     }
-            //     println!("INFO: Reconstructed paths printed.");
-            // }
 
             println!("INFO: Generating and saving analysis report...");
             generate_and_save_report(
-                initial_json_value,
+                &final_schema,
                 all_iteration_reports,
-                master_prime_vector.map,
                 schema_matrix_opt, // Pass the generated schema_matrix_opt
                 eigenvalues_opt,
                 eigenvectors_opt,
@@ -316,7 +424,7 @@ fn main() -> Result<(), ThreadSafeError> {
         })
         .map_err(|e| Box::new(e) as ThreadSafeError)?; // Handle std::io::Error from spawn
 
-    let thread_result = child_builder.join()
+    let thread_result = child_builder.join() 
         .map_err(|e| {
             if let Some(s) = e.downcast_ref::<String>() {
                 Box::new(GenericError(format!("Thread panicked: {}", s))) as ThreadSafeError

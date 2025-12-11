@@ -9,13 +9,10 @@ edition = "2024"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 toml = "0.8"
-ndarray = { workspace = true }
-num-complex = { workspace = true }
+ndarray = { workspace = true, features = ["serde"] }
+num-complex = { workspace = true, features = ["serde"] }
 lazy_static = "1.4.0"
-
-[lib]
-name = "lean_introspector_lib"
-path = "src/lib.rs"
+lean_introspector_lib = { path = "../lean_introspector_lib" } # Add this line
 
 [[bin]]
 name = "lean_introspector"
