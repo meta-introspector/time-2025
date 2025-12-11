@@ -1,6 +1,6 @@
-use crate::types::color::Color;
+use crate::color::Color;
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct Style {
     pub fill: Option<Color>,
     pub stroke: Option<Color>,

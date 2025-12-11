@@ -6,9 +6,9 @@ use quote::ToTokens;
 use syn::{File, Item, Lit, Expr};
 use syn::visit::{self, Visit};
 use walkdir::WalkDir;
-use crate::traits::has_embedded_primes::HasEmbeddedPrimes;
-use crate::types::prime_vector::{PrimeMorphism, PrimeVector, PrimeGenerator}; // Import PrimeGenerator as well
-use crate::types::keys::{
+use svg_hir::traits::has_embedded_primes::HasEmbeddedPrimes;
+use svg_hir::prime_vector::{PrimeMorphism, PrimeVector, PrimeGenerator}; // Import PrimeGenerator as well
+use svg_hir::keys::{
     PREDICATE_IS_FUNCTION, PREDICATE_IS_PUBLIC, PREDICATE_PARAM_COUNT,
     PREDICATE_HAS_DOC_COMMENT, PREDICATE_IS_STRUCT,
     PREDICATE_IS_ENUM, PREDICATE_IS_CONST, PREDICATE_FIELD_COUNT, PREDICATE_VARIANT_COUNT,
@@ -218,7 +218,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                 "Function name '{}' has length {}. Path: {}",
                 function_name, len, full_path_str
             ));
-            *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
+            *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
         }
         for (prime, desc) in s.as_str().find_embedded_primes(self.primes_to_analyze) {
             if prime == 0 { // Placeholder for large primes
@@ -226,7 +226,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
             } else {
                 self.prime_occurrences.entry(prime).or_default().push(format!("Function name '{}': {}. Path: {}", function_name, desc, full_path_str));
             }
-            *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
+            *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
         }
         let ascii_sum: u64 = s.bytes().map(|b| b as u64).sum();
         if ascii_sum > 1 {
@@ -293,7 +293,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                         "Enum name '{}' has length {}. Path: {}",
                         enum_name, len, full_path_str
                     ));
-                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
+                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
                 }
                 for (prime, desc) in s.as_str().find_embedded_primes(self.primes_to_analyze) {
                     if prime == 0 { // Placeholder for large primes
@@ -301,7 +301,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                     } else {
                         self.prime_occurrences.entry(prime).or_default().push(format!("Enum name '{}': {}. Path: {}", enum_name, desc, full_path_str));
                     }
-                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
+                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
                 }
                 let ascii_sum: u64 = s.bytes().map(|b| b as u64).sum();
                 if ascii_sum > 1 {
@@ -370,7 +370,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                         "Struct name '{}' has length {}. Path: {}",
                         struct_name, len, full_path_str
                     ));
-                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
+                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
                 }
                 for (prime, desc) in s.as_str().find_embedded_primes(self.primes_to_analyze) {
                     if prime == 0 { // Placeholder for large primes
@@ -378,7 +378,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                     } else {
                         self.prime_occurrences.entry(prime).or_default().push(format!("Struct name '{}': {}. Path: {}", struct_name, desc, full_path_str));
                     }
-                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
+                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
                 }
                 let ascii_sum: u64 = s.bytes().map(|b| b as u64).sum();
                 if ascii_sum > 1 {
@@ -446,7 +446,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                         "Module name '{}' has length {}. Path: {}",
                         mod_name, len, full_path_str
                     ));
-                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
+                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
                 }
                 for (prime, desc) in s.as_str().find_embedded_primes(self.primes_to_analyze) {
                     if prime == 0 { // Placeholder for large primes
@@ -454,7 +454,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                     } else {
                         self.prime_occurrences.entry(prime).or_default().push(format!("Module name '{}': {}. Path: {}", mod_name, desc, full_path_str));
                     }
-                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
+                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
                 }
                 let ascii_sum: u64 = s.bytes().map(|b| b as u64).sum();
                 if ascii_sum > 1 {
@@ -519,7 +519,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                         "Function name (nested) '{}' has length {}. Path: {}",
                         fn_name, len, full_path_str
                     ));
-                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
+                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
                 }
                 for (prime, desc) in s.as_str().find_embedded_primes(self.primes_to_analyze) {
                     if prime == 0 { // Placeholder for large primes
@@ -527,7 +527,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                     } else {
                         self.prime_occurrences.entry(prime).or_default().push(format!("Function name (nested) '{}': {}. Path: {}", fn_name, desc, full_path_str));
                     }
-                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
+                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
                 }
                 let ascii_sum: u64 = s.bytes().map(|b| b as u64).sum();
                 if ascii_sum > 1 {
@@ -579,7 +579,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                         "Constant name '{}' has length {}. Path: {}",
                         const_name, len, full_path_str
                     ));
-                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
+                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
                 }
                 for (prime, desc) in s.as_str().find_embedded_primes(self.primes_to_analyze) {
                     if prime == 0 { // Placeholder for large primes
@@ -587,7 +587,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                     } else {
                         self.prime_occurrences.entry(prime).or_default().push(format!("Constant name '{}': {}. Path: {}", const_name, desc, full_path_str));
                     }
-                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
+                    *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
                 }
                 let ascii_sum: u64 = s.bytes().map(|b| b as u64).sum();
                 if ascii_sum > 1 {
@@ -614,7 +614,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                                 "String literal in const '{}' has length {}. Path: {}",
                                 const_name, len, full_path_str
                             ));
-                            *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
+                            *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
                         }
 
                         // Check for embedded primes in the string literal
@@ -624,7 +624,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                             } else {
                                 self.prime_occurrences.entry(prime).or_default().push(format!("Const '{}': {}. Path: {}", const_name, desc, full_path_str));
                             }
-                            *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
+                            *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
                         }
 
                         // Prime factorization of ASCII sum
@@ -649,7 +649,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                                     "Found numeric literal {} in const '{}'. Path: {}",
                                     num, const_name, full_path_str
                                 ));
-                                *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
+                                *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
                             }
                             if num > 1 {
                                 for (factor, exponent) in PrimeFactorizer::get_prime_factors(num) {
@@ -907,24 +907,24 @@ pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport
 
     // Check if it's a Rust crate (has Cargo.toml)
     if path.join("Cargo.toml").exists() {
-        crate_root_vector.map.insert(visitor.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_IS_CRATE), 1);
+        crate_root_vector.map.insert(visitor.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_IS_CRATE), 1);
     }
     // Check if it's an executable crate (main.rs exists)
     if path.join("src").join("main.rs").exists() {
-        crate_root_vector.map.insert(visitor.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_IS_EXE), 1);
+        crate_root_vector.map.insert(visitor.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_IS_EXE), 1);
     }
     // Check for Nix flake (flake.nix exists)
     if path.join("flake.nix").exists() {
-        crate_root_vector.map.insert(visitor.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_IS_NIX_FLAKE), 1);
+        crate_root_vector.map.insert(visitor.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_IS_NIX_FLAKE), 1);
     }
     // Check for Git repository (.git directory exists)
     if path.join(".git").exists() {
-        crate_root_vector.map.insert(visitor.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_IS_GIT_REPOSITORY), 1);
+        crate_root_vector.map.insert(visitor.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_IS_GIT_REPOSITORY), 1);
         // Check if on an active Git branch (not detached HEAD)
         // For now, a simpler heuristic: if .git/HEAD contains "ref: refs/heads/", it's probably on a branch.
         if let Ok(head_content) = std::fs::read_to_string(path.join(".git").join("HEAD")) {
             if head_content.starts_with("ref: refs/heads/") {
-                crate_root_vector.map.insert(visitor.prime_morphism.get_prime_for_component(crate::types::keys::PREDICATE_IS_GIT_BRANCH_ACTIVE), 1);
+                crate_root_vector.map.insert(visitor.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_IS_GIT_BRANCH_ACTIVE), 1);
             }
         }
     }

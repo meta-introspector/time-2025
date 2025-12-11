@@ -1,16 +1,16 @@
-use crate::types::bounding_box::BoundingBox;
-use crate::types::monster_element_kind::MonsterElementKind;
-use crate::types::rect::Rect;
-use crate::types::circle::Circle;
-use crate::types::ellipse::Ellipse;
-use crate::types::group::Group;
-use crate::types::text::Text;
-use crate::types::path::Path;
+use crate::bounding_box::BoundingBox;
+use crate::monster_element_kind::MonsterElementKind;
+use crate::rect::Rect;
+use crate::circle::Circle;
+use crate::ellipse::Ellipse;
+use crate::group::Group;
+use crate::text::Text;
+use crate::path::Path;
 use crate::traits::svg_component::SvgComponent;
 use crate::traits::maps_to_monster::MapsToMonster;
 
 /// An enum to hold any of the possible SVG elements, allowing for heterogeneous collections.
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 pub enum SvgElementEnum {
     Rect(Rect),
     Circle(Circle),

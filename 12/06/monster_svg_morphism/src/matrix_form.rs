@@ -1,6 +1,6 @@
 use ndarray::{Array1, Array2};
 use linfa_linalg::qr::QR;
-use crate::types::MonsterElementKind;
+use svg_hir::MonsterElementKind;
 
 const PRIMES: [u64; 15] = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 41, 47, 59, 71];
 

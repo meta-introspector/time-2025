@@ -1,7 +1,7 @@
-use crate::types::bounding_box::BoundingBox;
-use crate::types::bsp_node::{BspNode}; // BspSplitAxis is also used here
-use crate::types::bsp_split_axis::BspSplitAxis;
-use crate::types::svg_element_enum::SvgElementEnum;
+use crate::bounding_box::BoundingBox;
+use crate::bsp_node::{BspNode}; // BspSplitAxis is also used here
+use crate::bsp_split_axis::BspSplitAxis;
+use crate::svg_element_enum::SvgElementEnum;
 use crate::traits::svg_component::SvgComponent; // Used for bounding_box()
 
 #[derive(Debug, Clone, PartialEq)]

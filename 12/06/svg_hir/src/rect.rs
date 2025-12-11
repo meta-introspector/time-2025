@@ -1,12 +1,12 @@
-use crate::types::bounding_box::BoundingBox;
-use crate::types::style::Style;
-use crate::types::transform::Transform;
-use crate::types::triple::Triple;
-use crate::types::monster_element_kind::MonsterElementKind;
+use crate::bounding_box::BoundingBox;
+use crate::style::Style;
+use crate::transform::Transform;
+use crate::triple::Triple;
+use crate::monster_element_kind::MonsterElementKind;
 use crate::traits::svg_component::SvgComponent;
 use crate::traits::maps_to_monster::MapsToMonster;
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct Rect {
     pub id: Option<String>,
     pub x: f32,

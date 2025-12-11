@@ -1,12 +1,12 @@
-use crate::types::bounding_box::BoundingBox;
-use crate::types::triple::Triple;
-use crate::types::svg_element_enum::SvgElementEnum;
-use crate::types::monster_element_kind::MonsterElementKind;
+use crate::bounding_box::BoundingBox;
+use crate::triple::Triple;
+use crate::svg_element_enum::SvgElementEnum;
+use crate::monster_element_kind::MonsterElementKind;
 use crate::traits::svg_component::SvgComponent;
 use crate::traits::maps_to_monster::MapsToMonster;
 
 /// The root of the SVG structure.
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct Svg {
     pub id: Option<String>,
     pub width: String,

@@ -517,6 +517,7 @@ dependencies = [
  "quote",
  "regex",
  "simba",
+ "svg_hir",
  "syn 2.0.111",
  "walkdir",
  "xml",
@@ -1082,6 +1083,7 @@ dependencies = [
  "simba",
  "syn 2.0.111",
  "walkdir",
+ "xml",
  "xmlwriter",
 ]
 

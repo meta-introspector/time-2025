@@ -1,11 +1,13 @@
 use ndarray::{Array2};
-use monster_svg_morphism::{code_parser::{collect_code_elements_from_dir}, types::prime_vector::PrimeMorphism};
+use monster_svg_morphism::code_parser::{collect_code_elements_from_dir};
+use svg_hir::prime_vector::PrimeMorphism;
+use svg_hir::prime_vector::PrimeVector;
 use std::path::Path;
 use std::collections::HashMap;
 
 /// Calculates the dot product of two PrimeVectors.
 /// This measures their similarity based on common primes and their coefficients.
-fn prime_vector_dot_product(pv1: &monster_svg_morphism::types::prime_vector::PrimeVector, pv2: &monster_svg_morphism::types::prime_vector::PrimeVector) -> f64 {
+fn prime_vector_dot_product(pv1: &PrimeVector, pv2: &PrimeVector) -> f64 {
     let mut dot_product = 0.0;
     for (prime, coeff1) in &pv1.map {
         if let Some(coeff2) = pv2.map.get(prime) {

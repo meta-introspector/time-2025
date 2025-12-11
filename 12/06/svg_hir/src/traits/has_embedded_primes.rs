@@ -1,7 +1,7 @@
 // src/traits/has_embedded_primes.rs
 use regex::Regex;
 use lazy_static::lazy_static;
-use crate::types::keys::MONSTER_GROUP_ORDER_STR; // Import the large prime string
+use crate::keys::MONSTER_GROUP_ORDER_STR; // Import the large prime string
 
 pub trait HasEmbeddedPrimes {
     fn find_embedded_primes(&self, primes_to_check: &[u64]) -> Vec<(u64, String)>;

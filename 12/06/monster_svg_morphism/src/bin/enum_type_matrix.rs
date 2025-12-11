@@ -1,5 +1,6 @@
 use ndarray::{Array2};
-use monster_svg_morphism::{code_parser::{collect_code_elements_from_dir, CodeElementKind}, types::prime_vector::PrimeMorphism};
+use monster_svg_morphism::code_parser::{collect_code_elements_from_dir, CodeElementKind};
+use svg_hir::prime_vector::PrimeMorphism;
 use std::collections::{HashMap, BTreeSet};
 use std::path::Path;
 use std::fs::File; // Add File import

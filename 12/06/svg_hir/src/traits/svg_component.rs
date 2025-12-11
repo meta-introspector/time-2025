@@ -1,4 +1,4 @@
-use crate::types::bounding_box::BoundingBox;
+use crate::bounding_box::BoundingBox;
 
 pub trait SvgComponent {
     fn id(&self) -> Option<&str>;

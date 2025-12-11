@@ -1,6 +1,6 @@
-use crate::types::bounding_box::BoundingBox;
-use crate::types::svg_element_enum::SvgElementEnum;
-use crate::types::bsp_split_axis::BspSplitAxis;
+use crate::bounding_box::BoundingBox;
+use crate::svg_element_enum::SvgElementEnum;
+use crate::bsp_split_axis::BspSplitAxis;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct BspNode {
