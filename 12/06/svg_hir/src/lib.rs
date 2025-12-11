@@ -19,6 +19,7 @@ pub mod keys;
 pub mod prime_vector; // New: PrimeVector for symbolic embedding
 pub mod traits;
 pub mod svg_parser;
+pub mod svg_analysis;
 
 // Re-export common types for easier access
 pub use bounding_box::BoundingBox;

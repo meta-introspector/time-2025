@@ -7,3 +7,6 @@ edition = "2021"
 monster_svg_morphism = { path = "../monster_svg_morphism" }
 xml-rs = "0.8" # For XML parsing
 config_lib = { path = "../config_lib" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+walkdir = "2.3"

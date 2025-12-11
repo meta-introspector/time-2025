@@ -1,6 +1,7 @@
 // src/types/prime_vector.rs
 use std::collections::HashMap;
 use std::sync::Mutex;
+use serde::{Serialize, Deserialize};
 
 lazy_static::lazy_static! {
     static ref PRIME_GENERATOR: Mutex<PrimeGenerator> = Mutex::new(PrimeGenerator::new());
@@ -49,7 +50,7 @@ impl PrimeGenerator {
 
 /// Represents a vector of primes with coefficients, where the key is the prime
 /// and the value is its coefficient.
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)] // Added Serialize, Deserialize
 pub struct PrimeVector {
     pub map: HashMap<u64, u64>,
 }
@@ -100,9 +101,10 @@ impl Default for PrimeVector {
 }
 
 /// Manages the assignment of unique primes to string components.
+#[derive(Debug, Serialize, Deserialize)] // Added Serialize, Deserialize
 pub struct PrimeMorphism {
     component_to_prime: HashMap<String, u64>,
-    char_to_prime_map: HashMap<char, u64>, // NEW: Map for character-to-prime
+    char_to_prime_map: HashMap<char, u64>,
 }
 
 impl PrimeMorphism {

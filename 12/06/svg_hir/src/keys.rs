@@ -35,3 +35,24 @@ pub const MONSTER_PRIME_71_STRING: &str = "a_string_of_exactly_seventy_one_chara
 // 'G' is ASCII 71.
 pub const MONSTER_KEY_ASCII_SUM_WITH_71: &str = "This string's ASCII sum should contain 71 as a prime factor. G"; // length 63
                                                                                                                    // Sum of 'G' is 71.
+
+// SVG Predicate Constants
+pub const PREDICATE_IS_SVG: &str = "predicate::is_svg";
+pub const PREDICATE_IS_GROUP: &str = "predicate::is_group";
+pub const PREDICATE_IS_RECT: &str = "predicate::is_rect";
+pub const PREDICATE_IS_CIRCLE: &str = "predicate::is_circle";
+pub const PREDICATE_IS_ELLIPSE: &str = "predicate::is_ellipse";
+pub const PREDICATE_IS_TEXT: &str = "predicate::is_text";
+pub const PREDICATE_IS_PATH: &str = "predicate::is_path";
+pub const PREDICATE_HAS_ID: &str = "predicate::has_id";
+pub const PREDICATE_HAS_FILL: &str = "predicate::has_fill";
+pub const PREDICATE_HAS_STROKE: &str = "predicate::has_stroke";
+pub const PREDICATE_HAS_TRANSFORM: &str = "predicate::has_transform";
+pub const PREDICATE_CHILD_COUNT: &str = "predicate::child_count";
+pub const PREDICATE_WIDTH: &str = "predicate::width";
+pub const PREDICATE_HEIGHT: &str = "predicate::height";
+pub const PREDICATE_AREA: &str = "predicate::area";
+pub const PREDICATE_VIEW_BOX: &str = "predicate::view_box";
+pub const PREDICATE_TEXT_CONTENT_LENGTH: &str = "predicate::text_content_length";
+pub const PREDICATE_TEXT_WORD_COUNT: &str = "predicate::text_word_count";
+pub const PREDICATE_PATH_DATA_LENGTH: &str = "predicate::path_data_length";

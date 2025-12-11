@@ -1,3 +1,9 @@
-pub mod analysis;
+pub mod analysis_report;
+pub mod prime_factorization;
+pub mod char_frequency;
+pub mod char_sequence;
+pub mod ast_visitor;
+pub mod cycle_detection;
+pub mod analyzer;
 pub mod matrix_form;
-pub mod code_parser; // Add the new code_parser module
+pub mod code_parser;

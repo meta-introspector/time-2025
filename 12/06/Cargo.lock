@@ -516,6 +516,7 @@ dependencies = [
  "petgraph",
  "quote",
  "regex",
+ "serde",
  "simba",
  "svg_hir",
  "syn 2.0.111",
@@ -1093,6 +1094,9 @@ version = "0.1.0"
 dependencies = [
  "config_lib",
  "monster_svg_morphism",
+ "serde",
+ "serde_json",
+ "walkdir",
  "xml-rs",
 ]
 

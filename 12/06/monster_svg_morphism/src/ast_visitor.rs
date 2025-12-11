@@ -1,13 +1,9 @@
-use serde::{Serialize, Deserialize};
 use std::collections::HashMap;
-use std::fs;
-use std::path::{Path, PathBuf};
 use quote::ToTokens;
 use syn::{File, Item, Lit, Expr};
 use syn::visit::{self, Visit};
-use walkdir::WalkDir;
 use svg_hir::traits::has_embedded_primes::HasEmbeddedPrimes;
-use svg_hir::prime_vector::{PrimeMorphism, PrimeVector, PrimeGenerator}; // Import PrimeGenerator as well
+use svg_hir::prime_vector::{PrimeMorphism, PrimeVector};
 use svg_hir::keys::{
     PREDICATE_IS_FUNCTION,
     PREDICATE_IS_PUBLIC,
@@ -21,180 +17,18 @@ use svg_hir::keys::{
     PREDICATE_LITERAL_LENGTH,
     PREDICATE_NUMERIC_LITERAL_VALUE,
 };
-use crate::code_parser::collect_code_elements_from_dir;
+use crate::prime_factorization::PrimeFactorizer; // Import PrimeFactorizer
 
-#[derive(Debug, Serialize, Deserialize)] // Added derives
-pub struct AnalysisReport {
-    pub prime_occurrences: HashMap<u64, Vec<String>>, // Renamed from seventy_one_occurrences
+pub struct AnalysisVisitor<'a> {
+    pub prime_occurrences: HashMap<u64, Vec<String>>,
     pub prime_factor_occurrences: HashMap<u64, Vec<String>>,
-    pub recursive_functions: Vec<String>, // Direct recursion
-    pub recursive_cycles: Vec<(String, Vec<String>)>, // (Starting function, Cycle path)
-    pub symbol_table: HashMap<String, PrimeVector>, // New: Maps full path to its PrimeVector embedding
-    pub symbol_matrix: Vec<Vec<u64>>, // New: Matrix representation of symbol data
-    pub matrix_column_headers: Vec<u64>, // New: Ordered list of primes for matrix columns
-    pub matrix_row_headers: Vec<String>, // New: Ordered list of symbol paths for matrix rows
-    pub composite_prime_vectors: HashMap<String, PrimeVector>, // New: Stores aggregated prime vectors for related nodes
-    pub char_pair_transitions: HashMap<(char, char), usize>, // NEW: Character pair transition frequencies
-    pub ngrams_frequencies: HashMap<usize, HashMap<String, usize>>, // NEW: N-gram frequencies
-    pub substring_prime_vectors: HashMap<String, PrimeVector>, // NEW: PrimeVectors for substrings
-}
-
-struct PrimeFactorizer;
-
-impl PrimeFactorizer {
-    fn get_prime_factors(n: u64) -> HashMap<u64, u32> {
-        let mut factors = HashMap::new();
-        let mut d = 2;
-        let mut num = n;
-
-        while d * d <= num {
-            while num % d == 0 {
-                *factors.entry(d).or_insert(0) += 1;
-                num /= d;
-            }
-            d += 1;
-        }
-        if num > 1 {
-            factors.insert(num, 1);
-        }
-        factors
-    }
-}
-
-pub struct CharFrequencyAnalyzer {
-    char_frequencies: HashMap<char, usize>,
-}
-
-impl CharFrequencyAnalyzer {
-    pub fn new() -> Self {
-        CharFrequencyAnalyzer {
-            char_frequencies: HashMap::new(),
-        }
-    }
-
-    pub fn collect_char_frequencies(&mut self, root_path: &Path) {
-        let code_elements = collect_code_elements_from_dir(root_path);
-        for element in code_elements {
-            for ch in element.name.chars() {
-                *self.char_frequencies.entry(ch).or_insert(0) += 1;
-            }
-            // Also consider characters in associated_idents (field/variant names)
-            for ident in element.associated_idents {
-                for ch in ident.chars() {
-                    *self.char_frequencies.entry(ch).or_insert(0) += 1;
-                }
-            }
-        }
-    }
-
-    pub fn generate_char_to_prime_map(self) -> HashMap<char, u64> {
-        let mut sorted_chars: Vec<(char, usize)> = self.char_frequencies.into_iter().collect();
-        // Sort by frequency (descending) then by char (ascending) for deterministic order
-        sorted_chars.sort_by(|a, b| b.1.cmp(&a.1).then_with(|| a.0.cmp(&b.0)));
-
-        let mut char_to_prime = HashMap::new();
-        let mut prime_generator = PrimeGenerator::new(); // Each call gets a fresh generator
-        
-        for (ch, _freq) in sorted_chars {
-            char_to_prime.insert(ch, prime_generator.get_next_prime());
-        }
-        char_to_prime
-    }
-}
-
-pub struct CharacterSequenceAnalyzer {
-    pub pair_transitions: HashMap<(char, char), usize>,
-    pub ngrams: HashMap<usize, HashMap<String, usize>>,
-}
-
-impl CharacterSequenceAnalyzer {
-    pub fn new() -> Self {
-        let mut ngrams_map = HashMap::new();
-        ngrams_map.insert(3, HashMap::new());
-        ngrams_map.insert(5, HashMap::new());
-        ngrams_map.insert(7, HashMap::new());
-        ngrams_map.insert(11, HashMap::new());
-
-        CharacterSequenceAnalyzer {
-            pair_transitions: HashMap::new(),
-            ngrams: ngrams_map,
-        }
-    }
-
-    pub fn collect_from_identifiers(&mut self, identifiers: &[String]) {
-        for ident in identifiers {
-            self.collect_pair_transitions_from_identifier(ident);
-
-            let mut substrings = Vec::new();
-            let mut current_word = String::new();
-            let mut last_char_was_upper = false;
-
-            for c in ident.chars() {
-                if c == '_' || c == '-' || c == '<' || c == '>' || c == ' ' {
-                    if !current_word.is_empty() {
-                        substrings.push(current_word.clone());
-                        current_word.clear();
-                    }
-                    last_char_was_upper = false;
-                } else if c.is_uppercase() {
-                    if !last_char_was_upper && !current_word.is_empty() {
-                        substrings.push(current_word.clone());
-                        current_word.clear();
-                    }
-                    current_word.push(c);
-                    last_char_was_upper = true;
-                } else { // is_lowercase or is_numeric
-                    if last_char_was_upper && current_word.len() > 1 {
-                        let last_char = current_word.pop().unwrap();
-                        substrings.push(current_word.clone());
-                        current_word.clear();
-                        current_word.push(last_char);
-                    }
-                    current_word.push(c);
-                    last_char_was_upper = false;
-                }
-            }
-            if !current_word.is_empty() {
-                substrings.push(current_word);
-            }
-
-            for sub in substrings {
-                self.collect_ngrams_from_identifier(&sub.to_lowercase(), &[3, 5, 7, 11]);
-            }
-        }
-    }
-
-    fn collect_pair_transitions_from_identifier(&mut self, s: &str) {
-        let chars: Vec<char> = s.chars().collect();
-        for i in 0..chars.len().saturating_sub(1) {
-            *self.pair_transitions.entry((chars[i], chars[i+1])).or_insert(0) += 1;
-        }
-    }
-
-    fn collect_ngrams_from_identifier(&mut self, s: &str, n_values: &[usize]) {
-        for &n in n_values {
-            if s.len() >= n {
-                for i in 0..=s.len() - n {
-                    let ngram = &s[i..i+n];
-                    *self.ngrams.get_mut(&n).unwrap().entry(ngram.to_string()).or_insert(0) += 1;
-                }
-            }
-        }
-    }
-}
-
-
-
-struct AnalysisVisitor<'a> {
-    prime_occurrences: HashMap<u64, Vec<String>>,
-    prime_factor_occurrences: HashMap<u64, Vec<String>>,
-    recursive_functions: Vec<String>,
-    current_function: Option<String>,
-    function_calls: HashMap<String, Vec<String>>,
-    primes_to_analyze: &'a [u64], // Configurable list of primes
-    current_path: Vec<String>, // New: Tracks the current AST path for context
-    prime_morphism: PrimeMorphism, // Manages mapping string components to primes
-    symbol_table: HashMap<String, PrimeVector>, // Stores PrimeVector for each full path
+    pub recursive_functions: Vec<String>,
+    pub current_function: Option<String>,
+    pub function_calls: HashMap<String, Vec<String>>,
+    pub primes_to_analyze: &'a [u64], // Configurable list of primes
+    pub current_path: Vec<String>, // New: Tracks the current AST path for context
+    pub prime_morphism: PrimeMorphism, // Manages mapping string components to primes
+    pub symbol_table: HashMap<String, PrimeVector>, // Stores PrimeVector for each full path
 }
 
 impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
@@ -437,7 +271,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
             Item::Mod(item_mod) => {
                 let mod_name = item_mod.ident.to_string();
                 self.current_path.push(format!("mod::{}", mod_name)); // Push module name to path
-                
+
                 let full_path_str = self.current_path.join("::");
                 let mut prime_vector_for_declaration = self.prime_morphism.path_to_prime_vector(&self.current_path);
 
@@ -679,7 +513,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                 self.symbol_table.insert(full_path_str.clone(), prime_vector_for_declaration); // Store the final PrimeVector for this constant
                 self.current_path.pop(); // Pop const name from path
             }
-            _ => {}
+            _ => {} // Ignore other item types for now
         }
         visit::visit_item(self, item);
     }
@@ -805,7 +639,7 @@ fn find_cycles_dfs(
     visited: &mut HashMap<String, bool>,
     recursion_stack: &mut HashMap<String, bool>,
     path: &mut Vec<String>,
-    cycles: &mut Vec<(String, Vec<String>)>, 
+    cycles: &mut Vec<(String, Vec<String>)>, // Changed to Vec<(String, Vec<String>)>
     primes_to_check: &[u64],
 ) {
     visited.insert(node.to_string(), true);
@@ -1025,7 +859,7 @@ pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport
         recursive_cycles: all_recursive_cycles,
         symbol_table: final_symbol_table, // Pass the populated symbol table from the visitor
         symbol_matrix,
-        matrix_column_headers: all_unique_primes,
+        matrix_column_headers,
         matrix_row_headers,
         composite_prime_vectors, // Pass the populated HashMap
         char_pair_transitions: char_sequence_analyzer.pair_transitions, // NEW
