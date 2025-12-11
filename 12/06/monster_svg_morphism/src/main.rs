@@ -1,8 +1,7 @@
 use std::env;
-use std::fs::{File, write};
+use std::fs::{self, File};
 use std::io::BufReader;
 use xml::reader::{EventReader, XmlEvent};
-
 use monster_svg_morphism::types::{
     Svg, SvgElementEnum, Rect, Circle, Group, Text, Path, Ellipse,
     BoundingBox, Color, Transform, Style, MonsterElementKind,
@@ -10,6 +9,7 @@ use monster_svg_morphism::types::{
 use monster_svg_morphism::traits::{MapsToMonster};
 use monster_svg_morphism::analysis::{run_analysis, CharFrequencyAnalyzer}; // Import CharFrequencyAnalyzer
 use monster_svg_morphism::types::prime_vector::PrimeMorphism; // Import PrimeMorphism and PrimeVector
+use config_lib;
 
 
 // The Monster Group primes
@@ -249,33 +249,42 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
 
-    if args.len() < input_path_idx + 2 { // Need at least input and output paths
-        eprintln!("Usage: {} [--hecke-amplify] <input.svg> <output.svg>", args[0]);
+    if args.len() < input_path_idx {
+        eprintln!("Usage: {} [--hecke-amplify]", args[0]);
         eprintln!("       {} --analyze [--primes <p1,p2,...>]", args[0]);
         eprintln!("       {} --find-similar <substring>", args[0]); // NEW: Add to usage
         return Err("Invalid arguments".into());
     }
-    
-    let input_path = &args[input_path_idx];
-    let output_path = &args[input_path_idx + 1];
 
-    let file = File::open(input_path)?;
-    let file = BufReader::new(file);
+    let (config, _) = match config_lib::find_and_read_config("lean_introspector/config.toml") {
+        Ok(config) => config,
+        Err(e) => {
+            eprintln!("Failed to read config file: {}", e);
+            std::process::exit(1);
+        }
+    };;
 
-    let mut svg_root = parse_svg(file)?;
+    for entry in fs::read_dir(config.dataset_path)? {
+        let entry = entry?;
+        let path = entry.path();
+        if path.is_file() && path.extension().map_or(false, |ext| ext == "svg") {
+            println!("Processing file: {}", path.display());
+            let file = File::open(&path)?;
+            let file = BufReader::new(file);
 
-    apply_morphism(&mut svg_root, hecke_amplify_enabled);
+            let mut svg_root = parse_svg(file)?;
 
-    let output_svg_string = svg_root.to_svg_string();
-    write(output_path, output_svg_string)?;
+            apply_morphism(&mut svg_root, hecke_amplify_enabled);
 
-    println!("Successfully generated morphed SVG at {}", output_path);
-    if hecke_amplify_enabled {
-        println!("Applied Hecke-like amplification for P71_1 elements.");
+            // The output is now printed to the console
+            // let output_svg_string = svg_root.to_svg_string();
+            // println!("{}", output_svg_string);
+        }
     }
 
     Ok(())
 }
+
 
 fn parse_svg(file: BufReader<File>) -> Result<Svg, Box<dyn std::error::Error>> {
     let parser = EventReader::new(file);

@@ -1,0 +1,23 @@
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum MonsterElementKind {
+    P2_46,
+    P3_20,
+    P5_9,
+    P7_6,
+    P11_2,
+    P13_3,
+    P17_1,
+    P19_1,
+    P23_1,
+    P29_1,
+    P31_1,
+    P41_1,
+    P47_1,
+    P59_1,
+    P71_1,
+    Unknown,
+    TextOnePart,
+    TextTwoParts,
+    TextThreeParts,
+    ExternalSystem,
+}

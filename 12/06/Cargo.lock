@@ -505,6 +505,7 @@ dependencies = [
 name = "monster_svg_morphism"
 version = "0.1.0"
 dependencies = [
+ "config_lib",
  "lazy_static",
  "linfa-linalg",
  "matrixmultiply",
@@ -1059,6 +1060,28 @@ dependencies = [
  "fontdb 0.15.0",
  "roxmltree",
  "usvg",
+ "xmlwriter",
+]
+
+[[package]]
+name = "svg_hir"
+version = "0.1.0"
+dependencies = [
+ "lazy_static",
+ "linfa-linalg",
+ "matrixmultiply",
+ "ndarray",
+ "num-bigint",
+ "num-prime",
+ "num-traits",
+ "petgraph",
+ "quote",
+ "regex",
+ "roxmltree",
+ "serde",
+ "simba",
+ "syn 2.0.111",
+ "walkdir",
  "xmlwriter",
 ]
 
