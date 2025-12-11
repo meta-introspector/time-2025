@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-struct PrimeFactorizer;
+pub struct PrimeFactorizer;
 
 impl PrimeFactorizer {
     pub fn get_prime_factors(n: u64) -> HashMap<u64, u32> {

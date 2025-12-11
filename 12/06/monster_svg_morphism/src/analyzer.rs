@@ -1,9 +1,11 @@
 use std::collections::HashMap;
 use std::fs;
-use std::path::{Path, PathBuf};
+// Removed unused Path import
+use std::path::PathBuf;
 use walkdir::WalkDir;
 use syn::File;
-use svg_hir::prime_vector::{PrimeMorphism, PrimeGenerator};
+use syn::visit::Visit; // Added this import
+use svg_hir::prime_vector::{PrimeMorphism, PrimeVector}; // Removed unused PrimeGenerator
 use crate::analysis_report::AnalysisReport;
 use crate::char_frequency::CharFrequencyAnalyzer;
 use crate::char_sequence::CharacterSequenceAnalyzer;
@@ -14,8 +16,11 @@ use svg_hir::keys;
 
 
 pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport {
+    eprintln!("DEBUG: Entering run_analysis for path: {}", path.display());
     let mut char_freq_analyzer = CharFrequencyAnalyzer::new();
+    eprintln!("DEBUG: Calling CharFrequencyAnalyzer::collect_char_frequencies");
     char_freq_analyzer.collect_char_frequencies(path);
+    eprintln!("DEBUG: Calling CharFrequencyAnalyzer::generate_char_to_prime_map");
     let char_to_prime_map = char_freq_analyzer.generate_char_to_prime_map();
 
     let mut visitor = AnalysisVisitor {
@@ -30,7 +35,9 @@ pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport
         symbol_table: HashMap::new(), // Initialize symbol_table
     };
 
+    eprintln!("DEBUG: Calling collect_code_elements_from_dir");
     let all_code_elements = collect_code_elements_from_dir(path);
+    eprintln!("DEBUG: Returned from collect_code_elements_from_dir. Elements count: {}", all_code_elements.len());
     // Collect identifiers for CharacterSequenceAnalyzer
     let mut identifiers_for_sequence_analysis = Vec::new();
     for element in &all_code_elements {
@@ -41,39 +48,53 @@ pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport
     }
 
     let mut char_sequence_analyzer = CharacterSequenceAnalyzer::new();
+    eprintln!("DEBUG: Calling CharacterSequenceAnalyzer::collect_from_identifiers");
     char_sequence_analyzer.collect_from_identifiers(&identifiers_for_sequence_analysis);
+    eprintln!("DEBUG: Returned from CharacterSequenceAnalyzer::collect_from_identifiers");
 
+    eprintln!("DEBUG: Starting WalkDir loop for .rs files");
     for entry in WalkDir::new(path)
         .into_iter()
         .filter_map(|e| e.ok())
         .filter(|e| e.path().extension().map_or(false, |s| s == "rs"))
     {
         let file_path = entry.path(); // Renamed to avoid shadowing
+        eprintln!("DEBUG: Processing Rust file: {}", file_path.display());
         let content = match fs::read_to_string(file_path) {
             Ok(c) => c,
-            Err(_) => continue,
-        };
-
-        let ast: File = match syn::parse_file(&content) {
-            Ok(a) => a,
             Err(e) => {
-                eprintln!("Error parsing file {}: {}", file_path.display(), e); // Use file_path here
+                eprintln!("ERROR: Failed to read file {}: {}", file_path.display(), e);
                 continue;
             }
         };
 
+        eprintln!("DEBUG: Parsing AST for file: {}", file_path.display());
+        let ast: File = match syn::parse_file(&content) {
+            Ok(a) => a,
+            Err(e) => {
+                eprintln!("ERROR: Failed to parse AST for file {}: {}", file_path.display(), e);
+                continue;
+            }
+        };
+
+        eprintln!("DEBUG: Visiting AST for file: {}", file_path.display());
         visitor.visit_file(&ast);
+        eprintln!("DEBUG: Finished visiting AST for file: {}", file_path.display());
     }
+    eprintln!("DEBUG: Finished WalkDir loop");
 
     // After visiting all files, analyze for direct recursion
     // (This part remains for compatibility, but cycles will cover it)
+    eprintln!("DEBUG: Analyzing for direct recursion");
     for (caller, callees) in &visitor.function_calls {
         if callees.contains(caller) {
             visitor.recursive_functions.push(caller.clone());
         }
     }
+    eprintln!("DEBUG: Finished direct recursion analysis");
 
     // --- Cycle Detection for Indirect Recursion ---
+    eprintln!("DEBUG: Starting cycle detection for indirect recursion");
     let mut all_recursive_cycles: Vec<(String, Vec<String>)> = Vec::new();
     let mut visited: HashMap<String, bool> = HashMap::new();
     let mut recursion_stack: HashMap<String, bool> = HashMap::new();
@@ -92,6 +113,7 @@ pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport
             );
         }
     }
+    eprintln!("DEBUG: Finished cycle detection");
     
     let mut final_symbol_table = visitor.symbol_table; // Get the populated symbol table from the visitor
     let crate_root_path = "crate".to_string();
@@ -123,6 +145,7 @@ pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport
     
     final_symbol_table.insert(crate_root_path, crate_root_vector);
 
+    eprintln!("DEBUG: Starting matrix self-multiplication");
     // --- Conceptual Matrix Self-Multiplication: Aggregating PrimeVectors for related nodes ---
     let mut composite_prime_vectors: HashMap<String, PrimeVector> = HashMap::new();
 
@@ -155,10 +178,12 @@ pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport
             parent_composite_vector.multiply(child_prime_vector);
         }
     }
+    eprintln!("DEBUG: Finished matrix self-multiplication");
 
     // Include the composite_prime_vectors in the final symbol_table as well,
     // or keep them separate. For now, let's keep them separate as defined in AnalysisReport.
 
+    eprintln!("DEBUG: Starting symbol table flattening into matrix views");
     // --- Flatten symbol_table into matrix views ---
     let mut all_unique_primes: Vec<u64> = Vec::new();
     for prime_vector in final_symbol_table.values() {
@@ -187,7 +212,9 @@ pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport
             matrix_row_headers.push(symbol_name.clone());
         }
     }
+    eprintln!("DEBUG: Finished symbol table flattening");
 
+    eprintln!("DEBUG: Collecting substring PrimeVectors");
     // --- Collect substring PrimeVectors ---
     let mut substring_prime_vectors = HashMap::new();
     for (_n_val, ngrams_map) in &char_sequence_analyzer.ngrams {
@@ -196,7 +223,9 @@ pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport
             substring_prime_vectors.insert(ngram.clone(), pv);
         }
     }
+    eprintln!("DEBUG: Finished collecting substring PrimeVectors");
 
+    eprintln!("DEBUG: Constructing final AnalysisReport");
     AnalysisReport {
         prime_occurrences: visitor.prime_occurrences,
         prime_factor_occurrences: visitor.prime_factor_occurrences,

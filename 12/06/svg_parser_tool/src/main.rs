@@ -2,7 +2,8 @@ use std::env;
 use std::path::{Path, PathBuf};
 use walkdir::WalkDir;
 use serde::{Serialize, Deserialize};
-use monster_svg_morphism::analysis::{run_analysis, AnalysisReport};
+use monster_svg_morphism::analyzer::run_analysis;
+use monster_svg_morphism::analysis_report::AnalysisReport;
 use std::collections::{HashMap, HashSet};
 
 // Define a structure to hold the results of all analyses
@@ -57,7 +58,7 @@ fn find_cargo_tomls(root: &Path) -> Vec<PathBuf> {
 
 // Helper to identify unique, non-nested project roots from Cargo.toml paths
 fn identify_project_roots(cargo_toml_paths: Vec<PathBuf>) -> Vec<PathBuf> {
-    let mut project_roots: HashSet<PathBuf> = HashSet::new();
+    let project_roots: HashSet<PathBuf> = HashSet::new();
     let mut candidate_roots: Vec<PathBuf> = cargo_toml_paths
         .into_iter()
         .filter_map(|p| p.parent().map(|parent| parent.to_path_buf()))

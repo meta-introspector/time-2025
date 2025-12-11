@@ -1,21 +1,17 @@
 use std::collections::HashMap;
+// use std::fs; // Removed unused import
+// use std::path::{Path, PathBuf}; // Removed unused import
 use quote::ToTokens;
-use syn::{File, Item, Lit, Expr};
-use syn::visit::{self, Visit};
+use syn::{Item, Lit, Expr}; // Keep File for visit_file in analyzer.rs, though it's here to ensure compilation
+use syn::visit::{self}; // Ensure Visit is in scope for the trait implementation
+// use walkdir::WalkDir; // Removed unused import
 use svg_hir::traits::has_embedded_primes::HasEmbeddedPrimes;
-use svg_hir::prime_vector::{PrimeMorphism, PrimeVector};
+use svg_hir::prime_vector::{PrimeMorphism, PrimeVector}; // Removed unused PrimeGenerator
 use svg_hir::keys::{
-    PREDICATE_IS_FUNCTION,
-    PREDICATE_IS_PUBLIC,
-    PREDICATE_PARAM_COUNT,
-    PREDICATE_HAS_DOC_COMMENT,
-    PREDICATE_IS_STRUCT,
-    PREDICATE_IS_ENUM,
-    PREDICATE_IS_CONST,
-    PREDICATE_FIELD_COUNT,
-    PREDICATE_VARIANT_COUNT,
-    PREDICATE_LITERAL_LENGTH,
-    PREDICATE_NUMERIC_LITERAL_VALUE,
+    PREDICATE_IS_FUNCTION, PREDICATE_IS_PUBLIC, PREDICATE_PARAM_COUNT,
+    PREDICATE_HAS_DOC_COMMENT, PREDICATE_IS_STRUCT,
+    PREDICATE_IS_ENUM, PREDICATE_IS_CONST, PREDICATE_FIELD_COUNT, PREDICATE_VARIANT_COUNT,
+    PREDICATE_LITERAL_LENGTH, PREDICATE_NUMERIC_LITERAL_VALUE,
 };
 use crate::prime_factorization::PrimeFactorizer; // Import PrimeFactorizer
 
@@ -33,6 +29,7 @@ pub struct AnalysisVisitor<'a> {
 
 impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
     fn visit_item_fn(&mut self, i: &'ast syn::ItemFn) {
+        eprintln!("DEBUG: AnalysisVisitor::visit_item_fn for: {}", i.sig.ident);
         let function_name = i.sig.ident.to_string();
         self.current_function = Some(function_name.clone());
         self.current_path.push(format!("fn::{}", function_name)); // Push function name to path
@@ -88,10 +85,11 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
 
         visit::visit_item_fn(self, i);
         self.current_path.pop(); // Pop function name from path
-        self.current_function = None;
+        eprintln!("DEBUG: Exiting AnalysisVisitor::visit_item_fn for: {}", function_name);
     }
 
     fn visit_expr_call(&mut self, i: &'ast syn::ExprCall) {
+        // eprintln!("DEBUG: AnalysisVisitor::visit_expr_call");
         if let Some(ref current_fn) = self.current_function {
             if let Expr::Path(expr_path) = &*i.func {
                 if let Some(segment) = expr_path.path.segments.last() {
@@ -107,8 +105,10 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
     }
 
     fn visit_item(&mut self, item: &'ast Item) {
+        eprintln!("DEBUG: AnalysisVisitor::visit_item. Current path: {}", self.current_path.join("::"));
         match item {
             Item::Enum(item_enum) => {
+                eprintln!("DEBUG: Found enum: {}", item_enum.ident);
                 let enum_name = item_enum.ident.to_string();
                 self.current_path.push(format!("enum::{}", enum_name)); // Push enum name to path
                 
@@ -187,6 +187,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                 self.current_path.pop(); // Pop enum name from path
             }
             Item::Struct(item_struct) => {
+                eprintln!("DEBUG: Found struct: {}", item_struct.ident);
                 let struct_name = item_struct.ident.to_string();
                 self.current_path.push(format!("struct::{}", struct_name)); // Push struct name to path
 
@@ -244,7 +245,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                     let is_prime = factors.len() == 1 && factors.get(&size).map_or(false, |&exp| exp == 1);
 
                     if !is_prime {
-                        let factors_str = factors.iter().map(|(f, e)| format!("{}^{}", f, e)).collect::<Vec<String>>().join(" * ");
+                        let factors_str = factors.iter().map(|(f, e)| format!("{}=>{}", f, e)).collect::<Vec<String>>().join(" * ");
                         self.prime_occurrences.entry(0).or_default().push(format!(
                             "Struct '{}' has {} fields. Factorization: {}. Path: {}",
                             struct_name, size, factors_str, full_path_str
@@ -269,6 +270,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                 self.current_path.pop(); // Pop struct name from path
             }
             Item::Mod(item_mod) => {
+                eprintln!("DEBUG: Found mod: {}", item_mod.ident);
                 let mod_name = item_mod.ident.to_string();
                 self.current_path.push(format!("mod::{}", mod_name)); // Push module name to path
 
@@ -276,9 +278,6 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                 let mut prime_vector_for_declaration = self.prime_morphism.path_to_prime_vector(&self.current_path);
 
                 // Add predicate primes
-                // Modules don't have explicit visibility or doc comments in the same way functions/structs do
-                // We'll add a predicate for being a module.
-                // You might extend this to count public items, etc.
                 prime_vector_for_declaration.map.insert(self.prime_morphism.get_prime_for_component("predicate::is_module"), 1);
 
                 // Analyze mod_name as a symbol
@@ -335,6 +334,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                 self.current_path.pop(); // Pop module name from path
             }
             Item::Fn(item_fn) => {
+                eprintln!("DEBUG: Found inner fn: {}", item_fn.sig.ident);
                 let fn_name = item_fn.sig.ident.to_string();
                 // This branch is for Item::Fn that are not top-level (e.g. associated functions,
                 // or functions inside blocks/modules, where visit_item_fn might not catch all).
@@ -399,6 +399,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                 self.current_path.pop(); // Pop function name from path
             }
             Item::Const(item_const) => {
+                eprintln!("DEBUG: Found const: {}", item_const.ident);
                 let const_name = item_const.ident.to_string();
                 self.current_path.push(format!("const::{}", const_name)); // Push const name to path
 
@@ -449,6 +450,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
 
                 if let syn::Expr::Lit(expr_lit) = &*item_const.expr {
                     if let Lit::Str(lit_str) = &expr_lit.lit {
+                        eprintln!("DEBUG: Found string literal in const '{}': {}", const_name, lit_str.value());
                         let s = lit_str.value();
                         let len = s.len() as u64;
                         prime_vector_for_declaration.map.insert(self.prime_morphism.get_prime_for_component(PREDICATE_LITERAL_LENGTH), len);
@@ -486,6 +488,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                             }
                         }
                     } else if let Lit::Int(lit_int) = &expr_lit.lit {
+                        eprintln!("DEBUG: Found int literal in const '{}': {}", const_name, lit_int);
                         if let Ok(num) = lit_int.base10_parse::<u64>() {
                             prime_vector_for_declaration.map.insert(self.prime_morphism.get_prime_for_component(PREDICATE_NUMERIC_LITERAL_VALUE), num);
 
@@ -515,13 +518,16 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
             }
             _ => {} // Ignore other item types for now
         }
+        eprintln!("DEBUG: Exiting AnalysisVisitor::visit_item");
         visit::visit_item(self, item);
     }
     
     // Also visit expressions for standalone literals outside of consts
     fn visit_expr(&mut self, expr: &'ast Expr) {
+        // eprintln!("DEBUG: AnalysisVisitor::visit_expr");
         if let Expr::Lit(expr_lit) = expr {
             if let Lit::Int(lit_int) = &expr_lit.lit {
+                // eprintln!("DEBUG: Found int literal in expr: {}", lit_int);
                 if let Ok(num) = lit_int.base10_parse::<u64>() {
                     if self.primes_to_analyze.contains(&num) {
                         self.prime_occurrences.entry(num).or_default().push(format!("Found numeric literal {}. Path: {}", num, self.current_path.join("::")));
@@ -536,6 +542,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                                         }
                 }
             } else if let Lit::Str(lit_str) = &expr_lit.lit {
+                // eprintln!("DEBUG: Found string literal in expr: {}", lit_str.value());
                 let s = lit_str.value();
 
                 // Check for string literal length resonance
@@ -551,6 +558,8 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                     } else {
                         self.prime_occurrences.entry(prime).or_default().push(format!("{}. Path: {}", desc, self.current_path.join("::")));
                     }
+                    // Removed incorrect reference to prime_vector_for_declaration
+                    // *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
                 }
 
                 let ascii_sum: u64 = s.bytes().map(|b| b as u64).sum();
@@ -568,6 +577,7 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
     }
 
     fn visit_local(&mut self, i: &'ast syn::Local) {
+        // eprintln!("DEBUG: AnalysisVisitor::visit_local");
         if let syn::Pat::Type(pat_type) = &i.pat {
             if let syn::Pat::Ident(pat_ident) = &*pat_type.pat {
                 let var_name = pat_ident.ident.to_string();
@@ -601,10 +611,14 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
             self.current_path.pop();
         }
 
+        // Removed incorrect reference to prime_vector_for_declaration
+        // *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
+
         visit::visit_local(self, i);
     }
 
     fn visit_fn_arg(&mut self, i: &'ast syn::FnArg) {
+        // eprintln!("DEBUG: AnalysisVisitor::visit_fn_arg");
         if let syn::FnArg::Typed(pat_type) = i {
             if let syn::Pat::Ident(pat_ident) = &*pat_type.pat {
                 let arg_name = pat_ident.ident.to_string();
@@ -628,242 +642,8 @@ impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {
                 self.current_path.pop();
             }
         }
+        // Removed incorrect reference to prime_vector_for_declaration
+        // *prime_vector_for_declaration.map.entry(self.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_PRIME_RESONANCE)).or_insert(0) += 1; // Mark resonance
         visit::visit_fn_arg(self, i);
     }
 }
-
-// Helper function for DFS-based cycle detection
-fn find_cycles_dfs(
-    graph: &HashMap<String, Vec<String>>,
-    node: &str,
-    visited: &mut HashMap<String, bool>,
-    recursion_stack: &mut HashMap<String, bool>,
-    path: &mut Vec<String>,
-    cycles: &mut Vec<(String, Vec<String>)>, // Changed to Vec<(String, Vec<String>)>
-    primes_to_check: &[u64],
-) {
-    visited.insert(node.to_string(), true);
-    recursion_stack.insert(node.to_string(), true);
-    path.push(node.to_string());
-
-    if let Some(callees) = graph.get(node) {
-        for callee in callees {
-            if !visited.get(callee).unwrap_or(&false) {
-                find_cycles_dfs(graph, callee, visited, recursion_stack, path, cycles, primes_to_check);
-            } else if *recursion_stack.get(callee).unwrap_or(&false) {
-                // Cycle detected!
-                let cycle_start_index = path.iter().position(|f| f == callee).unwrap();
-                let cycle_path: Vec<String> = path[cycle_start_index..].to_vec();
-                
-                // Check if cycle length matches any of the configured primes
-                if primes_to_check.contains(&(cycle_path.len() as u64)) {
-                    cycles.push((node.to_string(), cycle_path));
-                }
-            }
-        }
-    }
-
-    path.pop();
-    recursion_stack.insert(node.to_string(), false);
-}
-
-
-pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport {
-    let mut char_freq_analyzer = CharFrequencyAnalyzer::new();
-    char_freq_analyzer.collect_char_frequencies(path);
-    let char_to_prime_map = char_freq_analyzer.generate_char_to_prime_map();
-
-    let mut visitor = AnalysisVisitor {
-        prime_occurrences: HashMap::new(),
-        prime_factor_occurrences: HashMap::new(),
-        recursive_functions: Vec::new(),
-        current_function: None,
-        function_calls: HashMap::new(),
-        primes_to_analyze,
-        current_path: vec!["crate".to_string()], // Initialize with "crate" as the root
-        prime_morphism: PrimeMorphism::new(char_to_prime_map), // Initialize PrimeMorphism with the new map
-        symbol_table: HashMap::new(), // Initialize symbol_table
-    };
-
-    let all_code_elements = collect_code_elements_from_dir(path);
-    // Collect identifiers for CharacterSequenceAnalyzer
-    let mut identifiers_for_sequence_analysis = Vec::new();
-    for element in &all_code_elements {
-        identifiers_for_sequence_analysis.push(element.name.clone());
-        for ident in &element.associated_idents {
-            identifiers_for_sequence_analysis.push(ident.clone());
-        }
-    }
-
-    let mut char_sequence_analyzer = CharacterSequenceAnalyzer::new();
-    char_sequence_analyzer.collect_from_identifiers(&identifiers_for_sequence_analysis);
-
-    for entry in WalkDir::new(path)
-        .into_iter()
-        .filter_map(|e| e.ok())
-        .filter(|e| e.path().extension().map_or(false, |s| s == "rs"))
-    {
-        let file_path = entry.path(); // Renamed to avoid shadowing
-        let content = match fs::read_to_string(file_path) {
-            Ok(c) => c,
-            Err(_) => continue,
-        };
-
-        let ast: File = match syn::parse_file(&content) {
-            Ok(a) => a,
-            Err(e) => {
-                eprintln!("Error parsing file {}: {}", file_path.display(), e); // Use file_path here
-                continue;
-            }
-        };
-
-        visitor.visit_file(&ast);
-    }
-
-    // After visiting all files, analyze for direct recursion
-    // (This part remains for compatibility, but cycles will cover it)
-    for (caller, callees) in &visitor.function_calls {
-        if callees.contains(caller) {
-            visitor.recursive_functions.push(caller.clone());
-        }
-    }
-
-    // --- Cycle Detection for Indirect Recursion ---
-    let mut all_recursive_cycles: Vec<(String, Vec<String>)> = Vec::new();
-    let mut visited: HashMap<String, bool> = HashMap::new();
-    let mut recursion_stack: HashMap<String, bool> = HashMap::new();
-    let mut path_vec: Vec<String> = Vec::new(); // Renamed to avoid shadowing
-
-    for function_name in visitor.function_calls.keys() {
-        if !visited.get(function_name).unwrap_or(&false) {
-            find_cycles_dfs(
-                &visitor.function_calls,
-                function_name,
-                &mut visited,
-                &mut recursion_stack,
-                &mut path_vec, // Use renamed variable
-                &mut all_recursive_cycles,
-                primes_to_analyze,
-            );
-        }
-    }
-    
-    let mut final_symbol_table = visitor.symbol_table; // Get the populated symbol table from the visitor
-    let crate_root_path = "crate".to_string();
-    let mut crate_root_vector = visitor.prime_morphism.path_to_prime_vector(&visitor.current_path); // Base vector for crate root
-
-    // Check if it's a Rust crate (has Cargo.toml)
-    if path.join("Cargo.toml").exists() {
-        crate_root_vector.map.insert(visitor.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_IS_CRATE), 1);
-    }
-    // Check if it's an executable crate (main.rs exists)
-    if path.join("src").join("main.rs").exists() {
-        crate_root_vector.map.insert(visitor.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_IS_EXE), 1);
-    }
-    // Check for Nix flake (flake.nix exists)
-    if path.join("flake.nix").exists() {
-        crate_root_vector.map.insert(visitor.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_IS_NIX_FLAKE), 1);
-    }
-    // Check for Git repository (.git directory exists)
-    if path.join(".git").exists() {
-        crate_root_vector.map.insert(visitor.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_IS_GIT_REPOSITORY), 1);
-        // Check if on an active Git branch (not detached HEAD)
-        // For now, a simpler heuristic: if .git/HEAD contains "ref: refs/heads/", it's probably on a branch.
-        if let Ok(head_content) = std::fs::read_to_string(path.join(".git").join("HEAD")) {
-            if head_content.starts_with("ref: refs/heads/") {
-                crate_root_vector.map.insert(visitor.prime_morphism.get_prime_for_component(svg_hir::keys::PREDICATE_IS_GIT_BRANCH_ACTIVE), 1);
-            }
-        }
-    }
-    
-    final_symbol_table.insert(crate_root_path, crate_root_vector);
-
-    // --- Conceptual Matrix Self-Multiplication: Aggregating PrimeVectors for related nodes ---
-    let mut composite_prime_vectors: HashMap<String, PrimeVector> = HashMap::new();
-
-    // Iterate through symbols, sorted for deterministic aggregation
-    let mut all_symbol_paths: Vec<String> = final_symbol_table.keys().cloned().collect();
-    all_symbol_paths.sort_unstable(); // Sort to ensure consistent processing order
-
-    for symbol_path in &all_symbol_paths {
-        if symbol_path == "crate" {
-            // "crate" is the root; its PrimeVector is already computed.
-            // We can optionally "multiply" all top-level modules into it later if desired.
-            continue;
-        }
-
-        let parts: Vec<&str> = symbol_path.split("::").collect();
-        if parts.len() < 2 {
-            // Not a nested symbol (e.g., "crate" handled above, or malformed path)
-            continue;
-        }
-
-        // Reconstruct parent path
-        let parent_path = parts[0..(parts.len() - 1)].join("::");
-
-        if let Some(child_prime_vector) = final_symbol_table.get(symbol_path) {
-            let parent_composite_vector = composite_prime_vectors
-                .entry(parent_path.clone())
-                .or_insert_with(PrimeVector::new);
-            
-            // "Multiply" (add coefficients) the child's prime vector into the parent's composite
-            parent_composite_vector.multiply(child_prime_vector);
-        }
-    }
-
-    // Include the composite_prime_vectors in the final symbol_table as well,
-    // or keep them separate. For now, let's keep them separate as defined in AnalysisReport.
-
-    // --- Flatten symbol_table into matrix views ---
-    let mut all_unique_primes: Vec<u64> = Vec::new();
-    for prime_vector in final_symbol_table.values() {
-        for &prime in prime_vector.map.keys() {
-            if !all_unique_primes.contains(&prime) {
-                all_unique_primes.push(prime);
-            }
-        }
-    }
-    all_unique_primes.sort_unstable(); // Sort primes to ensure consistent column order
-
-    let mut symbol_matrix: Vec<Vec<u64>> = Vec::new();
-    let mut matrix_row_headers: Vec<String> = Vec::new();
-
-    // Collect symbols and sort them for consistent row order
-    let mut sorted_symbol_names: Vec<String> = final_symbol_table.keys().cloned().collect();
-    sorted_symbol_names.sort_unstable();
-
-    for symbol_name in sorted_symbol_names {
-        if let Some(prime_vector) = final_symbol_table.get(&symbol_name) {
-            let mut row: Vec<u64> = Vec::with_capacity(all_unique_primes.len());
-            for &prime_col_header in &all_unique_primes {
-                row.push(*prime_vector.map.get(&prime_col_header).unwrap_or(&0));
-            }
-            symbol_matrix.push(row);
-            matrix_row_headers.push(symbol_name.clone());
-        }
-    }
-
-    // --- Collect substring PrimeVectors ---
-    let mut substring_prime_vectors = HashMap::new();
-    for (_n_val, ngrams_map) in &char_sequence_analyzer.ngrams {
-        for (ngram, _freq) in ngrams_map {
-            let pv = visitor.prime_morphism.string_to_char_prime_vector(ngram);
-            substring_prime_vectors.insert(ngram.clone(), pv);
-        }
-    }
-
-    AnalysisReport {
-        prime_occurrences: visitor.prime_occurrences,
-        prime_factor_occurrences: visitor.prime_factor_occurrences,
-        recursive_functions: visitor.recursive_functions,
-        recursive_cycles: all_recursive_cycles,
-        symbol_table: final_symbol_table, // Pass the populated symbol table from the visitor
-        symbol_matrix,
-        matrix_column_headers,
-        matrix_row_headers,
-        composite_prime_vectors, // Pass the populated HashMap
-        char_pair_transitions: char_sequence_analyzer.pair_transitions, // NEW
-        ngrams_frequencies: char_sequence_analyzer.ngrams, // NEW
-        substring_prime_vectors, // NEW
-    } // CLOSING BRACE FOR STRUCT LITERAL
-} // CLOSING BRACE FOR run_analysis function

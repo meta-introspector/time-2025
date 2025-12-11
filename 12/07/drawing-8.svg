@@ -24,17 +24,23 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="1.6819304"
-     inkscape:cx="491.69692"
-     inkscape:cy="2231.6619"
+     inkscape:zoom="1.1893044"
+     inkscape:cx="143.78152"
+     inkscape:cy="3091.3028"
      inkscape:window-width="750"
      inkscape:window-height="534"
-     inkscape:window-x="1072"
-     inkscape:window-y="526"
+     inkscape:window-x="926"
+     inkscape:window-y="284"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer1" />
   <defs
      id="defs2">
+    <rect
+       x="309.16856"
+       y="2888.3478"
+       width="98.696116"
+       height="38.051515"
+       id="rect15040" />
     <rect
        x="343.05767"
        y="2427.4694"
@@ -4074,5 +4080,395 @@
          style="stroke-width:0.264583"
          x="122.38665"
          y="590.69647">cost</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="146.14035"
+       y="609.88824"
+       id="text15032"><tspan
+         sodipodi:role="line"
+         id="tspan15030"
+         style="stroke-width:0.264583"
+         x="146.14035"
+         y="609.88824">the compiler bootstrap labels the parts</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="143.15149"
+       y="576.22406"
+       id="text15036"><tspan
+         sodipodi:role="line"
+         id="tspan15034"
+         style="stroke-width:0.264583"
+         x="143.15149"
+         y="576.22406">each term will get mapped into a numeric expression with prime powers</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text15038"
+       style="font-weight:bold;font-size:12px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;white-space:pre;shape-inside:url(#rect15040);display:inline;fill:#000000" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="93.756355"
+       y="748.16309"
+       id="text15046"><tspan
+         sodipodi:role="line"
+         id="tspan15044"
+         style="stroke-width:0.264583"
+         x="93.756355"
+         y="748.16309">TOKEN</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="105.22782"
+       y="748.27441"
+       id="text15050"><tspan
+         sodipodi:role="line"
+         id="tspan15048"
+         style="stroke-width:0.264583"
+         x="105.22782"
+         y="748.27441">meaning</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="102.11326"
+       y="752.83496"
+       id="text15054"><tspan
+         sodipodi:role="line"
+         id="tspan15052"
+         style="stroke-width:0.264583"
+         x="102.11326"
+         y="752.83496">layer</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="99.888573"
+       y="757.06189"
+       id="text15058"><tspan
+         sodipodi:role="line"
+         id="tspan15056"
+         style="stroke-width:0.264583"
+         x="99.888573"
+         y="757.06189">context</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="117.24115"
+       y="742.93512"
+       id="text15062"><tspan
+         sodipodi:role="line"
+         id="tspan15060"
+         style="stroke-width:0.264583"
+         x="117.24115"
+         y="742.93512">wallet address</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="119.68831"
+       y="746.82837"
+       id="text15066"><tspan
+         sodipodi:role="line"
+         id="tspan15064"
+         style="stroke-width:0.264583"
+         x="119.68831"
+         y="746.82837">connections</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="120.91189"
+       y="750.49908"
+       id="text15070"><tspan
+         sodipodi:role="line"
+         id="tspan15068"
+         style="stroke-width:0.264583"
+         x="120.91189"
+         y="750.49908">urls</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="93.325737"
+       y="761.40009"
+       id="text15074"><tspan
+         sodipodi:role="line"
+         id="tspan15072"
+         style="stroke-width:0.264583"
+         x="93.684631"
+         y="761.40009">text section function pointer = trace of meaning in compiler that produced it. </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="95.105484"
+       y="765.62695"
+       id="text15078"><tspan
+         sodipodi:role="line"
+         id="tspan15076"
+         style="stroke-width:0.264583"
+         x="95.105484"
+         y="765.62695">trace of program = outout file, position at time t and instruction i</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="128.58707"
+       y="770.18762"
+       id="text15082"><tspan
+         sodipodi:role="line"
+         id="tspan15080"
+         style="stroke-width:0.264583"
+         x="128.58707"
+         y="770.18762">perf trace record</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="97.775108"
+       y="774.63696"
+       id="text15086"><tspan
+         sodipodi:role="line"
+         id="tspan15084"
+         style="stroke-width:0.264583"
+         x="97.775108"
+         y="774.63696">k=v</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="96.662766"
+       y="778.86389"
+       id="text15090"><tspan
+         sodipodi:role="line"
+         id="tspan15088"
+         style="stroke-width:0.264583"
+         x="96.662766"
+         y="778.86389">key=value</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="114.34905"
+       y="781.75598"
+       id="text15094"><tspan
+         sodipodi:role="line"
+         id="tspan15092"
+         style="stroke-width:0.264583"
+         x="114.34905"
+         y="781.75598">complex object key=complex object value contains  second key</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="92.547096"
+       y="785.64917"
+       id="text15098"><tspan
+         sodipodi:role="line"
+         id="tspan15096"
+         style="stroke-width:0.264583"
+         x="92.547096"
+         y="785.64917">second key=second object</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="81.089935"
+       y="791.76709"
+       id="text15102"><tspan
+         sodipodi:role="line"
+         id="tspan15100"
+         style="stroke-width:0.264583"
+         x="81.089935"
+         y="791.76709">book,chapter,section,module</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="70.967598"
+       y="797.7738"
+       id="text15106"><tspan
+         sodipodi:role="line"
+         id="tspan15104"
+         style="stroke-width:0.264583"
+         x="70.967598"
+         y="797.7738">FIXED POINT</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="70.077721"
+       y="802.00067"
+       id="text15884"><tspan
+         sodipodi:role="line"
+         id="tspan15882"
+         style="stroke-width:0.264583"
+         x="70.077721"
+         y="802.00067">traits</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="83.092163"
+       y="801.7782"
+       id="text15888"><tspan
+         sodipodi:role="line"
+         id="tspan15886"
+         style="stroke-width:0.264583"
+         x="83.092163"
+         y="801.7782">properties</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="96.996483"
+       y="801.88947"
+       id="text15892"><tspan
+         sodipodi:role="line"
+         id="tspan15890"
+         style="stroke-width:0.264583"
+         x="96.996483"
+         y="801.88947">columns</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="108.34239"
+       y="801.66693"
+       id="text15896"><tspan
+         sodipodi:role="line"
+         id="tspan15894"
+         style="stroke-width:0.264583"
+         x="108.34239"
+         y="801.66693">primes</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="117.79733"
+       y="802.00061"
+       id="text15900"><tspan
+         sodipodi:role="line"
+         id="tspan15898"
+         style="stroke-width:0.264583"
+         x="117.79733"
+         y="802.00061">index</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="91.434753"
+       y="809.45337"
+       id="text15904"><tspan
+         sodipodi:role="line"
+         id="tspan15902"
+         style="stroke-width:0.264583"
+         x="91.434753"
+         y="809.45337">base idea ^ fieldnumber ^  field value</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="78.197845"
+       y="812.90161"
+       id="text15908"><tspan
+         sodipodi:role="line"
+         id="tspan15906"
+         style="stroke-width:0.264583"
+         x="78.197845"
+         y="812.90161">ring</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="76.974266"
+       y="816.57239"
+       id="text15912"><tspan
+         sodipodi:role="line"
+         id="tspan15910"
+         style="stroke-width:0.264583"
+         x="76.974266"
+         y="816.57239">ordered</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="76.863029"
+       y="820.46564"
+       id="text15916"><tspan
+         sodipodi:role="line"
+         id="tspan15914"
+         style="stroke-width:0.264583"
+         x="76.863029"
+         y="820.46564">relative pointers</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="66.629456"
+       y="824.91498"
+       id="text15920"><tspan
+         sodipodi:role="line"
+         id="tspan15918"
+         style="stroke-width:0.264583"
+         x="66.629456"
+         y="824.91498">rocksdb</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="63.737362"
+       y="829.25311"
+       id="text15924"><tspan
+         sodipodi:role="line"
+         id="tspan15922"
+         style="stroke-width:0.264583"
+         x="63.737362"
+         y="829.25311">table</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="62.513779"
+       y="832.70135"
+       id="text15928"><tspan
+         sodipodi:role="line"
+         id="tspan15926"
+         style="stroke-width:0.264583"
+         x="62.513779"
+         y="832.70135">parquet</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="62.291313"
+       y="835.2597"
+       id="text15932"><tspan
+         sodipodi:role="line"
+         id="tspan15930"
+         style="stroke-width:0.264583"
+         x="62.291313"
+         y="835.2597">arrow</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="60.06662"
+       y="839.26422"
+       id="text15936"><tspan
+         sodipodi:role="line"
+         id="tspan15934"
+         style="stroke-width:0.264583"
+         x="60.06662"
+         y="839.26422">graphql</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-8.0088835"
+       y="792.65698"
+       id="text16742"><tspan
+         sodipodi:role="line"
+         id="tspan16740"
+         style="stroke-width:0.264583"
+         x="-8.0088835"
+         y="792.65698">rustc(code)=query/key</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-23.80418"
+       y="806.22754"
+       id="text17550"><tspan
+         sodipodi:role="line"
+         id="tspan17548"
+         style="stroke-width:0.264583"
+         x="-23.80418"
+         y="806.22754">inkscape plugin</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-3.5595024"
+       y="812.6792"
+       id="text18360"><tspan
+         sodipodi:role="line"
+         id="tspan18358"
+         style="stroke-width:0.264583"
+         x="-3.5595024"
+         y="812.6792">https://inkscape.org/develop/extensions/</tspan></text>
   </g>
 </svg>
