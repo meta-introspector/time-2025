@@ -1,0 +1,11 @@
+[package]
+name = "wikivector"
+version = "0.1.0"
+edition = "2024"
+license.workspace = true
+
+[dependencies]
+roxmltree = "0.20.0"
+toml = "0.8"
+serde = { version = "1.0", features = ["derive"] }
+pico-args = "0.5" # For parsing command-line arguments
