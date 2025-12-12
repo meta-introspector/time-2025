@@ -6,10 +6,9 @@ use svg_hir::svg_element_enum::SvgElementEnum;
 use svg_hir::bounding_box::BoundingBox;
 use svg_hir::traits::svg_component::SvgComponent;
 use usvg::{Node, Tree, Group};
+use usvg::parser::EId;
 use std::collections::HashMap;
-use regex::Regex;
 use svg_hir::text::{Text as HirText};
-use svg_hir::Triple;
 
 #[derive(Serialize)]
 struct BuddyReport {
@@ -38,7 +37,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // --- Creation Order Buddies ---
     let mut sorted_elements = elements.clone();
-    sorted_elements.sort_by_key(|el| get_numeric_id(el.id().unwrap_or("")).unwrap_or(u32::MAX));
+    sorted_elements.sort_by_key(|el| {
+        el.id()
+            .and_then(|id_str| id_str.split(|c: char| !c.is_digit(10)).last())
+            .and_then(|num_str| num_str.parse::<u32>().ok())
+            .unwrap_or(u32::MAX)
+    });
     let mut creation_order_buddies: HashMap<String, String> = HashMap::new();
     for i in 1..sorted_elements.len() {
         if let (Some(prev_id), Some(curr_id)) = (sorted_elements[i-1].id(), sorted_elements[i].id()) {
@@ -120,45 +124,42 @@ fn collect_svg_elements(group: &Group, elements: &mut Vec<SvgElementEnum>, conta
 fn convert_usvg_node_to_svg_element_enum(node: &Node) -> Option<SvgElementEnum> {
     match node {
         Node::Path(p) => {
-            let path_data = path_to_string(p.data());
-            if p.bounding_box().width() > 0.0 && p.bounding_box().height() > 0.0 {
-                Some(SvgElementEnum::Path(svg_hir::path::Path {
+            let bbox = p.bounding_box();
+            match p.as_ref().original_eid {
+                Some(EId::Rect) => Some(SvgElementEnum::Rect(svg_hir::rect::Rect {
                     id: Some(p.id().to_string()),
-                    d: path_data,
+                    x: bbox.x(),
+                    y: bbox.y(),
+                    width: bbox.width(),
+                    height: bbox.height(),
                     ..Default::default()
-                }))
-            } else {
-                None
-            }
-        }
-        Node::Group(g) if g.id().starts_with("rect") => {
-            let bbox = g.bounding_box();
-            Some(SvgElementEnum::Rect(svg_hir::rect::Rect {
-                id: Some(g.id().to_string()),
-                x: bbox.x(),
-                y: bbox.y(),
-                width: bbox.width(),
-                height: bbox.height(),
-                ..Default::default()
-            }))
-        }
-        Node::Group(g) if g.id().starts_with("ellipse") || g.id().starts_with("path") && g.children().len() == 1 => {
-            if let Some(Node::Path(p)) = g.children().get(0) {
-                 let bbox = p.bounding_box();
-                 let cx = bbox.x() + bbox.width() / 2.0;
-                 let cy = bbox.y() + bbox.height() / 2.0;
-                 let rx = bbox.width() / 2.0;
-                 let ry = bbox.height() / 2.0;
-                Some(SvgElementEnum::Ellipse(svg_hir::ellipse::Ellipse {
-                    id: Some(g.id().to_string()),
-                    cx,
-                    cy,
-                    rx,
-                    ry,
+                })),
+                Some(EId::Circle) => {
+                    let r = (bbox.width() + bbox.height()) / 4.0;
+                    Some(SvgElementEnum::Circle(svg_hir::circle::Circle {
+                        id: Some(p.id().to_string()),
+                        cx: bbox.x() + r,
+                        cy: bbox.y() + r,
+                        r,
+                        ..Default::default()
+                    }))
+                }
+                Some(EId::Ellipse) => Some(SvgElementEnum::Ellipse(svg_hir::ellipse::Ellipse {
+                    id: Some(p.id().to_string()),
+                    cx: bbox.x() + bbox.width() / 2.0,
+                    cy: bbox.y() + bbox.height() / 2.0,
+                    rx: bbox.width() / 2.0,
+                    ry: bbox.height() / 2.0,
                     ..Default::default()
-                }))
-            } else {
-                 None
+                })),
+                _ => { // Includes Path, Line, Polyline, Polygon
+                    let path_data = path_to_string(p.data());
+                    Some(SvgElementEnum::Path(svg_hir::path::Path {
+                        id: Some(p.id().to_string()),
+                        d: path_data,
+                        ..Default::default()
+                    }))
+                }
             }
         }
         Node::Text(t) => {
@@ -214,10 +215,5 @@ fn path_to_string(path: &usvg::tiny_skia_path::Path) -> String {
 
 
 fn get_numeric_id(id: &str) -> Option<u32> {
-    let re = Regex::new(r"\d+").unwrap();
-    if let Some(mat) = re.find(id) {
-        mat.as_str().parse().ok()
-    } else {
-        None
-    }
+    id.chars().filter(|c| c.is_digit(10)).collect::<String>().parse().ok()
 }

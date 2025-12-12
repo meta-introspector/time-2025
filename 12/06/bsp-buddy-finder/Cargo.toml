@@ -6,8 +6,7 @@ license.workspace = true
 
 [dependencies]
 svg_hir = { path = "../svg_hir" }
-usvg = "0.45.1"
+usvg = { workspace = true }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 pico-args = "0.5"
-regex = "1.10"
