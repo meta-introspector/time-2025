@@ -2,7 +2,7 @@
 members = [
     "monster_svg_morphism",
     "svg_parser_tool",
-    "svg-renamer",
+    # "svg-renamer",
     "external/xmlwriter",
     "lean_introspector",
     "build_tester",

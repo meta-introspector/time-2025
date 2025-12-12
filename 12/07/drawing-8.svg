@@ -25,12 +25,12 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="2.3786088"
-     inkscape:cx="36.155588"
-     inkscape:cy="3688.5006"
+     inkscape:cx="-45.825106"
+     inkscape:cy="3957.5654"
      inkscape:window-width="862"
      inkscape:window-height="580"
-     inkscape:window-x="830"
-     inkscape:window-y="115"
+     inkscape:window-x="883"
+     inkscape:window-y="108"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer1" />
   <defs
@@ -4914,7 +4914,7 @@
        transform="matrix(2.167547,-1.6004508,1.6004508,2.167547,-1546.2713,-1080.3109)"><tspan
          x="22.135662"
          y="958.2851"
-         id="tspan23790">wikivector</tspan></text>
+         id="tspan26664">wikivector</tspan></text>
     <path
        style="fill:#000000;stroke-width:0.264583"
        d="m 19.910973,967.62881 c -2.447159,-0.0371 -4.894317,-0.0742 -7.341476,-0.11123"
@@ -4975,5 +4975,159 @@
          style="stroke-width:0.264583"
          x="6.8965383"
          y="991.32172">creating numerical embeddings directly with primes.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-21.134552"
+       y="1000.2205"
+       id="text23794"><tspan
+         sodipodi:role="line"
+         id="tspan23792"
+         style="stroke-width:0.264583"
+         x="-21.134552"
+         y="1000.2205">escaped rdfa</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-19.354801"
+       y="1004.1136"
+       id="text23798"><tspan
+         sodipodi:role="line"
+         id="tspan23796"
+         style="stroke-width:0.264583"
+         x="-19.354801"
+         y="1004.1136">clarifai hackathon</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-28.253561"
+       y="1008.007"
+       id="text23802"><tspan
+         sodipodi:role="line"
+         id="tspan23800"
+         style="stroke-width:0.264583"
+         x="-28.253561"
+         y="1008.007">streamlit</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-5.8954282"
+       y="1008.8968"
+       id="text23806"><tspan
+         sodipodi:role="line"
+         id="tspan23804"
+         style="stroke-width:0.264583"
+         x="-5.8954282"
+         y="1008.8968">graph</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-8.0088835"
+       y="1012.9012"
+       id="text23810"><tspan
+         sodipodi:role="line"
+         id="tspan23808"
+         style="stroke-width:0.264583"
+         x="-8.0088835"
+         y="1012.9012">lattice of characters</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-9.899869"
+       y="1016.6832"
+       id="text23814"><tspan
+         sodipodi:role="line"
+         id="tspan23812"
+         style="stroke-width:0.264583"
+         x="-9.899869"
+         y="1016.6832">graph generators</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="10.789745"
+       y="1011.0103"
+       id="text23818"><tspan
+         sodipodi:role="line"
+         id="tspan23816"
+         style="stroke-width:0.264583"
+         x="10.789745"
+         y="1011.0103">grammars</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="11.568387"
+       y="1015.0147"
+       id="text23822"><tspan
+         sodipodi:role="line"
+         id="tspan23820"
+         style="stroke-width:0.264583"
+         x="11.568387"
+         y="1015.0147">constraint system</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="8.7875252"
+       y="1019.4641"
+       id="text23826"><tspan
+         sodipodi:role="line"
+         id="tspan23824"
+         style="stroke-width:0.264583"
+         x="9.1464195"
+         y="1019.4641">unitary conformal field theory </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="22.135662"
+       y="1001.5553"
+       id="text23830"><tspan
+         sodipodi:role="line"
+         id="tspan23828"
+         style="stroke-width:0.264583"
+         x="22.135662"
+         y="1001.5553">m=1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-5.1167865"
+       y="1024.1359"
+       id="text24758"><tspan
+         sodipodi:role="line"
+         id="tspan24756"
+         style="stroke-width:0.264583"
+         x="-5.116786"
+         y="1024.1359">platonic 1  is big</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-11.123448"
+       y="1048.0513"
+       id="text25688"><tspan
+         sodipodi:role="line"
+         id="tspan25686"
+         style="stroke-width:0.264583"
+         x="-11.123448"
+         y="1048.0513">67</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:25.2923px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:2.10769"
+       x="20.313017"
+       y="1062.7095"
+       id="text25688-2"><tspan
+         sodipodi:role="line"
+         id="tspan25686-3"
+         style="stroke-width:2.10769"
+         x="20.313017"
+         y="1062.7095">67</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:39.2432px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:3.27026"
+       x="-14.372537"
+       y="1058.1035"
+       id="text25688-7"><tspan
+         sodipodi:role="line"
+         id="tspan25686-8"
+         style="stroke-width:3.27026"
+         x="-14.372537"
+         y="1058.1035">67</tspan></text>
   </g>
 </svg>

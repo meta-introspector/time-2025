@@ -1,27 +1,19 @@
 use std::env;
 use std::path::PathBuf;
-use walkdir::WalkDir;
-use std::collections::{HashMap, HashSet};
+use ignore::{WalkBuilder, DirEntry}; // Add ignore crate imports
+use std::collections::HashSet;
 use std::io::Read;
 use std::fs;
 
 use monster_svg_morphism::analyzer::run_analysis;
 use monster_svg_morphism::analysis_report::AnalysisReport;
-use svg_parser_tool::processors::{ExtractedData, FileEntry, Term, TermType, Relationship, RelationshipType};
-use usvg::Tree; // Add usvg for SVG parsing
-use xmlwriter::XmlWriter; // Add xmlwriter, might be used by usvg or for xml parsing
-use rocksdb::{DB, Options}; // Import rocksdb
-use sha2::{Sha256, Digest}; // Import sha2 for hashing
-use serde_json; // Import serde_json for (de)serialization
-
-// Define the primes to analyze
-const PRIMES_TO_ANALYZE: &[u64] = &[
-    2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,
-    101, 103, 107, 109, 113,
-];
+use svg_parser_tool::processors::{ExtractedData, FileEntry, PRIMES_TO_ANALYZE, process_svg_file};
+use rocksdb::{DB};
+use sha2::{Sha256, Digest};
+use serde_json;
 
 // Define the RocksDB cache directory
-const ROCKSDB_CACHE_DIR: &str = "C:\\Users\\gentd\\.gemini\\tmp\\wordcloud_cache"; // Use the project's temporary directory, adjust if needed
+const ROCKSDB_CACHE_DIR: &str = "C:\\Users\\gentd\\.gemini\\tmp\\wordcloud_cache";
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
@@ -47,18 +39,26 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut org_files: Vec<FileEntry> = Vec::new();
 
 
-    for entry in WalkDir::new(&root_path)
-        .into_iter()
-        .filter_map(|e| e.ok())
-        .filter(|e| e.file_type().is_file()) // Only process files
-    {
+    for result in WalkBuilder::new(&root_path).git_ignore(true).build() {
+        let entry = match result {
+            Ok(entry) => entry,
+            Err(e) => {
+                eprintln!("Error walking directory: {}", e);
+                continue;
+            }
+        };
+
+        if !entry.file_type().map_or(false, |ft| ft.is_file()) {
+            continue; // Only process files
+        }
+
         let path = entry.path().to_path_buf();
         let file_hash_key = format!("file_content_hash:{}", path.to_string_lossy());
         let file_content: Vec<u8>;
 
         if let Some(cached_content_bytes) = db.get(&file_hash_key)? {
             file_content = cached_content_bytes;
-            // eprintln!("Loaded content for {} from cache.", path.display());
+            eprintln!("Loaded {} content from cache.", path.display());
         } else {
             // Read file from filesystem
             let mut file = fs::File::open(&path)?;
@@ -67,7 +67,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             file_content = buffer;
             // Cache raw file content
             db.put(&file_hash_key, &file_content)?;
-            // eprintln!("Read content for {} from filesystem and cached it.", path.display());
+            eprintln!("Read {} content from filesystem and cached it.", path.display());
         }
 
         let file_entry = FileEntry { path: path.clone(), content: file_content };
@@ -120,27 +120,108 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let project_rs_files: Vec<&FileEntry> = rs_files.iter()
             .filter(|fe| fe.path.starts_with(&project_root))
             .collect();
-        let cache_key = get_project_analysis_cache_key(&project_root, &project_rs_files)?;
-
-        if let Some(cached_report_bytes) = db.get(&cache_key)? {
-            let cached_report: AnalysisReport = serde_json::from_slice(&cached_report_bytes)?;
-            extracted_data.merge_rust_report(project_root.display().to_string(), cached_report);
-            eprintln!("Loaded Rust analysis for {} from cache.", project_root.display());
-        } else {
-            let report = run_analysis(&project_root, PRIMES_TO_ANALYZE);
-            let serialized_report = serde_json::to_vec(&report)?;
-            db.put(&cache_key, serialized_report)?;
-            extracted_data.merge_rust_report(project_root.display().to_string(), report);
-            eprintln!("Ran Rust analysis for {} and cached it.", project_root.display());
-        }
+                let cache_key = get_project_analysis_cache_key(&project_root, &project_rs_files)?;
+        
+                match db.get(&cache_key) {
+                    Ok(Some(cached_report_bytes)) => {
+                        match serde_json::from_slice(&cached_report_bytes) {
+                            Ok(cached_report) => {
+                                extracted_data.merge_rust_report(project_root.display().to_string(), cached_report);
+                                eprintln!("Cache HIT for Rust analysis of {}. Loaded from RocksDB.", project_root.display());
+                            },
+                            Err(e) => {
+                                eprintln!("Cache DECODE ERROR for Rust analysis of {}: {}. Re-running analysis.", project_root.display(), e);
+                                let report = run_analysis(&project_root, PRIMES_TO_ANALYZE);
+                                let serialized_report = serde_json::to_vec(&report)?;
+                                db.put(&cache_key, serialized_report)?;
+                                extracted_data.merge_rust_report(project_root.display().to_string(), report);
+                                eprintln!("Ran Rust analysis for {} and cached it.", project_root.display());
+                            }
+                        }
+                    },
+                    Ok(None) => {
+                        eprintln!("Cache MISS for Rust analysis of {}. Running analysis.", project_root.display());
+                        let report = run_analysis(&project_root, PRIMES_TO_ANALYZE);
+                        let serialized_report = serde_json::to_vec(&report)?;
+                        db.put(&cache_key, serialized_report)?;
+                        extracted_data.merge_rust_report(project_root.display().to_string(), report);
+                        eprintln!("Ran Rust analysis for {} and cached it.", project_root.display());
+                    },
+                    Err(e) => {
+                        eprintln!("RocksDB READ ERROR for Rust analysis of {}: {}. Running analysis.", project_root.display(), e);
+                        let report = run_analysis(&project_root, PRIMES_TO_ANALYZE);
+                        let serialized_report = serde_json::to_vec(&report)?;
+                        db.put(&cache_key, serialized_report)?;
+                        extracted_data.merge_rust_report(project_root.display().to_string(), report);
+                        eprintln!("Ran Rust analysis for {} and cached it.", project_root.display());
+                    }
+                }
     }
     // TODO: Process SVG files using `svg_files`
-    // TODO: Process JSON files using `json_files`
-    // TODO: Process other file types (lock, nix, settings.toml, md, org)
+    eprintln!("\nProcessing SVG files...");
+    for file_entry in svg_files {
+        eprintln!("Processing SVG file: {}", file_entry.path.display());
+        let cache_key = format!("svg_analysis_report:{}", calculate_file_content_hash(&file_entry.content));
+        
+        match db.get(&cache_key) {
+            Ok(Some(cached_svg_extracted_data_bytes)) => {
+                let cached_svg_extracted_data: ExtractedData = serde_json::from_slice(&cached_svg_extracted_data_bytes)?;
+                // Merge terms and relationships from cached SVG data
+                for (name, term) in cached_svg_extracted_data.terms {
+                    extracted_data.add_term(term);
+                }
+                for rel in cached_svg_extracted_data.relationships {
+                    extracted_data.add_relationship(rel);
+                }
+                eprintln!("Cache HIT for SVG analysis of {}. Loaded from RocksDB.", file_entry.path.display());
+            },
+            Ok(None) => {
+                eprintln!("Cache MISS for SVG analysis of {}. Running analysis.", file_entry.path.display());
+                let mut svg_extracted_data = ExtractedData::new(); // Temporary ExtractedData for SVG processing
+                process_svg_file(&file_entry, &mut svg_extracted_data)?;
+                
+                let serialized_svg_extracted_data = serde_json::to_vec(&svg_extracted_data)?;
+                db.put(&cache_key, serialized_svg_extracted_data)?;
+
+                // Merge terms and relationships from newly processed SVG data
+                for (name, term) in svg_extracted_data.terms {
+                    extracted_data.add_term(term);
+                }
+                for rel in svg_extracted_data.relationships {
+                    extracted_data.add_relationship(rel);
+                }
+                eprintln!("Ran SVG analysis for {} and cached it.", file_entry.path.display());
+            },
+            Err(e) => {
+                eprintln!("RocksDB READ ERROR for SVG analysis of {}: {}. Running analysis.", file_entry.path.display(), e);
+                let mut svg_extracted_data = ExtractedData::new(); // Temporary ExtractedData for SVG processing
+                process_svg_file(&file_entry, &mut svg_extracted_data)?;
+                
+                let serialized_svg_extracted_data = serde_json::to_vec(&svg_extracted_data)?;
+                db.put(&cache_key, serialized_svg_extracted_data)?;
+
+                // Merge terms and relationships from newly processed SVG data
+                for (name, term) in svg_extracted_data.terms {
+                    extracted_data.add_term(term);
+                }
+                for rel in svg_extracted_data.relationships {
+                    extracted_data.add_relationship(rel);
+                }
+                eprintln!("Ran SVG analysis for {} and cached it.", file_entry.path.display());
+            }
+        }
+    }
 
     // Example: Print some extracted data
     println!("Total terms extracted: {}", extracted_data.terms.len());
     println!("Total relationships extracted: {}", extracted_data.relationships.len());
+    
+    println!("Running prime power counts:");
+    for &prime in PRIMES_TO_ANALYZE {
+        if let Some(&count) = extracted_data.prime_power_counts.get(&prime) {
+            println!("  Prime {}: {}", prime, count);
+        }
+    }
 
 
     Ok(())
@@ -149,12 +230,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 // Helper to identify unique, non-nested project roots from Cargo.toml paths
 // This function needs to be adjusted as we now pass the collected Cargo.toml paths directly
 fn identify_project_roots(cargo_toml_paths: Vec<PathBuf>) -> Vec<PathBuf> {
-    let mut project_roots: HashSet<PathBuf> = HashSet::new();
     let mut candidate_roots: Vec<PathBuf> = cargo_toml_paths
         .into_iter()
         .filter_map(|p| p.parent().map(|parent| parent.to_path_buf()))
         .collect();
     
+    // Sort to handle parent directories first for proper nesting checks
     candidate_roots.sort_by(|a, b| a.cmp(b));
 
     let mut final_roots: Vec<PathBuf> = Vec::new();
