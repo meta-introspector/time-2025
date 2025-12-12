@@ -840,6 +840,7 @@ dependencies = [
  "simba",
  "svg_hir",
  "syn 2.0.111",
+ "toml 0.8.23",
  "walkdir",
  "xml",
 ]

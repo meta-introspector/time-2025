@@ -13,10 +13,35 @@ use crate::ast_visitor::AnalysisVisitor;
 use crate::cycle_detection::find_cycles_dfs;
 use crate::code_parser::{collect_code_elements_from_dir};
 use svg_hir::keys;
+use toml; // Add this line
 
 
 pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport {
     eprintln!("DEBUG: Entering run_analysis for path: {}", path.display());
+    
+    // Infer crate name
+    let crate_name = if let Some(cargo_toml_path) = path.join("Cargo.toml").to_str() {
+        if let Ok(cargo_toml_content) = fs::read_to_string(cargo_toml_path) {
+            if let Ok(cargo_toml) = cargo_toml_content.parse::<toml::Value>() {
+                if let Some(package) = cargo_toml.get("package") {
+                    if let Some(name) = package.get("name") {
+                        name.as_str().unwrap_or("unknown_crate").to_string()
+                    } else {
+                        path.file_name().and_then(|s| s.to_str()).unwrap_or("unknown_crate").to_string()
+                    }
+                } else {
+                    path.file_name().and_then(|s| s.to_str()).unwrap_or("unknown_crate").to_string()
+                }
+            } else {
+                path.file_name().and_then(|s| s.to_str()).unwrap_or("unknown_crate").to_string()
+            }
+        } else {
+            path.file_name().and_then(|s| s.to_str()).unwrap_or("unknown_crate").to_string()
+        }
+    } else {
+        path.file_name().and_then(|s| s.to_str()).unwrap_or("unknown_crate").to_string()
+    };
+
     let mut char_freq_analyzer = CharFrequencyAnalyzer::new();
     eprintln!("DEBUG: Calling CharFrequencyAnalyzer::collect_char_frequencies");
     char_freq_analyzer.collect_char_frequencies(path);
@@ -33,6 +58,7 @@ pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport
         current_path: vec!["crate".to_string()], // Initialize with "crate" as the root
         prime_morphism: PrimeMorphism::new(char_to_prime_map), // Initialize PrimeMorphism with the new map
         symbol_table: HashMap::new(), // Initialize symbol_table
+        crate_name: crate_name.clone(), // Pass the inferred crate name
     };
 
     eprintln!("DEBUG: Calling collect_code_elements_from_dir");
@@ -226,7 +252,7 @@ pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport
     eprintln!("DEBUG: Finished collecting substring PrimeVectors");
 
     eprintln!("DEBUG: Constructing final AnalysisReport");
-    AnalysisReport {
+    let report = AnalysisReport {
         prime_occurrences: visitor.prime_occurrences,
         prime_factor_occurrences: visitor.prime_factor_occurrences,
         recursive_functions: visitor.recursive_functions,
@@ -239,5 +265,7 @@ pub fn run_analysis(path: &PathBuf, primes_to_analyze: &[u64]) -> AnalysisReport
         char_pair_transitions: char_sequence_analyzer.pair_transitions, // NEW
         ngrams_frequencies: char_sequence_analyzer.ngrams, // NEW
         substring_prime_vectors, // NEW
-    } // CLOSING BRACE FOR STRUCT LITERAL
+    };
+    eprintln!("DEBUG: AnalysisReport before serialization: {:?}", report);
+    report // CLOSING BRACE FOR STRUCT LITERAL
 } // CLOSING BRACE FOR run_analysis function

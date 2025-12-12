@@ -25,6 +25,7 @@ pub struct AnalysisVisitor<'a> {
     pub current_path: Vec<String>, // New: Tracks the current AST path for context
     pub prime_morphism: PrimeMorphism, // Manages mapping string components to primes
     pub symbol_table: HashMap<String, PrimeVector>, // Stores PrimeVector for each full path
+    pub crate_name: String, // NEW: Store the current crate name
 }
 
 impl<'ast, 'a> visit::Visit<'ast> for AnalysisVisitor<'a> {

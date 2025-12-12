@@ -1,16 +1,16 @@
 use std::path::PathBuf;
-use ignore::{WalkBuilder}; // Add ignore crate imports
-use std::collections::HashSet;
+use ignore::{WalkBuilder};
 use std::io::Read;
 use std::fs;
 
 use monster_svg_morphism::analyzer::run_analysis;
-use monster_svg_morphism::analysis_report::AnalysisReport;
 use svg_parser_tool::processors::{ExtractedData, FileEntry, PRIMES_TO_ANALYZE, process_svg_file};
 use rocksdb::{DB};
-use sha2::{Sha256, Digest};
 use serde_json;
-use pico_args::Arguments; // Import pico_args
+use pico_args::Arguments;
+
+use svg_parser_tool::utils::{calculate_master_cache_key, identify_project_roots, calculate_file_content_hash, get_project_analysis_cache_key};
+
 
 // Define the RocksDB cache directory
 const ROCKSDB_CACHE_DIR: &str = "C:\\Users\\gentd\\.gemini\\tmp\\wordcloud_cache";
@@ -18,7 +18,7 @@ const ROCKSDB_CACHE_DIR: &str = "C:\\Users\\gentd\\.gemini\\tmp\\wordcloud_cache
 fn print_help() {
     println!(
         r#"wordcloud_generator
-Usage: wordcloud_generator [OPTIONS] [PATH]
+Usage: wordcloud_generator [PATH]
 
 Arguments:
   [PATH]    The root directory to start collecting files from. Defaults to current directory.
@@ -41,23 +41,61 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let root_path_str: String = args.free_from_str().unwrap_or_else(|_| ".".to_string());
     let root_path = PathBuf::from(root_path_str);
 
-    println!("Collecting files from: {}", root_path.display());
-
     // Initialize RocksDB
     let db = DB::open_default(ROCKSDB_CACHE_DIR)?;
     println!("RocksDB opened at: {}", ROCKSDB_CACHE_DIR);
 
-    let mut all_files: Vec<FileEntry> = Vec::new();
-    let mut rs_files: Vec<FileEntry> = Vec::new();
-    let mut svg_files: Vec<FileEntry> = Vec::new();
-    let mut json_files: Vec<FileEntry> = Vec::new();
-    let mut lock_files: Vec<FileEntry> = Vec::new();
-    let mut nix_files: Vec<FileEntry> = Vec::new();
-    let mut cargo_toml_files: Vec<FileEntry> = Vec::new();
-    let mut settings_toml_files: Vec<FileEntry> = Vec::new();
-    let mut md_files: Vec<FileEntry> = Vec::new();
-    let mut org_files: Vec<FileEntry> = Vec::new();
+    let mut extracted_data: ExtractedData;
 
+    let all_file_entries = collect_all_file_entries(&root_path, &db)?;
+
+    let master_cache_key = calculate_master_cache_key(&root_path, &all_file_entries);
+
+    // Attempt to load aggregated ExtractedData from cache
+    match db.get(&master_cache_key)? {
+        Some(cached_data_bytes) => {
+            match serde_json::from_slice(&cached_data_bytes) {
+                Ok(loaded_data) => {
+                    extracted_data = loaded_data;
+                    eprintln!("Cache HIT for aggregated ExtractedData. Loaded from RocksDB.");
+                },
+                Err(e) => {
+                    eprintln!("Cache DECODE ERROR for aggregated ExtractedData: {}. Re-processing all files. Bytes: {:?}", e, cached_data_bytes);
+                    extracted_data = ExtractedData::new(); // Reset and re-process
+                    process_all_files(&root_path, &db, &all_file_entries, &mut extracted_data)?;
+                    let serialized_extracted_data = serde_json::to_vec(&extracted_data)?;
+                    db.put(&master_cache_key, serialized_extracted_data)?;
+                    eprintln!("Re-processed all files and cached aggregated ExtractedData.");
+                }
+            }
+        },
+        None => {
+            eprintln!("Cache MISS for aggregated ExtractedData. Processing all files.");
+            extracted_data = ExtractedData::new();
+            process_all_files(&root_path, &db, &all_file_entries, &mut extracted_data)?;
+            let serialized_extracted_data = serde_json::to_vec(&extracted_data)?;
+            db.put(&master_cache_key, serialized_extracted_data)?;
+            eprintln!("Processed all files and cached aggregated ExtractedData.");
+        }
+    }
+
+    // Example: Print some extracted data
+    println!("Total terms extracted: {}", extracted_data.terms.len());
+    println!("Total relationships extracted: {}", extracted_data.relationships.len());
+    
+    println!("Running prime power counts:");
+    for &prime in PRIMES_TO_ANALYZE {
+        if let Some(&count) = extracted_data.prime_power_counts.get(&prime) {
+            println!("  Prime {}: {}", prime, count);
+        }
+    }
+
+    Ok(())
+}
+
+fn collect_all_file_entries(root_path: &PathBuf, db: &DB) -> Result<Vec<FileEntry>, Box<dyn std::error::Error>> {
+    let mut all_file_entries: Vec<FileEntry> = Vec::new();
+    println!("Scanning files from: {}", root_path.display());
 
     for result in WalkBuilder::new(&root_path).git_ignore(true).build() {
         let entry = match result {
@@ -73,27 +111,43 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
 
         let path = entry.path().to_path_buf();
-        let file_hash_key = format!("file_content_hash:{}", path.to_string_lossy());
         let file_content: Vec<u8>;
-
-        if let Some(cached_content_bytes) = db.get(&file_hash_key)? {
+        
+        // Always read file content to compute its hash, either from cache or filesystem
+        let file_content_cache_key = format!("file_content_hash:{}", path.to_string_lossy());
+        if let Some(cached_content_bytes) = db.get(&file_content_cache_key)? {
             file_content = cached_content_bytes;
-            eprintln!("Loaded {} content from cache.", path.display());
         } else {
-            // Read file from filesystem
             let mut file = fs::File::open(&path)?;
             let mut buffer = Vec::new();
             file.read_to_end(&mut buffer)?;
             file_content = buffer;
-            // Cache raw file content
-            db.put(&file_hash_key, &file_content)?;
-            eprintln!("Read {} content from filesystem and cached it.", path.display());
+            db.put(&file_content_cache_key, &file_content)?;
         }
+        
+        all_file_entries.push(FileEntry { path, content: file_content });
+    }
+    Ok(all_file_entries)
+}
 
-        let file_entry = FileEntry { path: path.clone(), content: file_content };
-        all_files.push(file_entry.clone());
+fn process_all_files(
+    _root_path: &PathBuf,
+    db: &DB,
+    all_file_entries: &[FileEntry],
+    extracted_data: &mut ExtractedData
+) -> Result<(), Box<dyn std::error::Error>> {
+    let mut rs_files: Vec<&FileEntry> = Vec::new();
+    let mut svg_files: Vec<&FileEntry> = Vec::new();
+    let mut json_files: Vec<&FileEntry> = Vec::new();
+    let mut lock_files: Vec<&FileEntry> = Vec::new();
+    let mut nix_files: Vec<&FileEntry> = Vec::new();
+    let mut cargo_toml_files: Vec<&FileEntry> = Vec::new();
+    let mut settings_toml_files: Vec<&FileEntry> = Vec::new();
+    let mut md_files: Vec<&FileEntry> = Vec::new();
+    let mut org_files: Vec<&FileEntry> = Vec::new();
 
-        if let Some(extension) = path.extension() {
+    for file_entry in all_file_entries {
+        if let Some(extension) = file_entry.path.extension() {
             match extension.to_str() {
                 Some("rs") => rs_files.push(file_entry),
                 Some("svg") => svg_files.push(file_entry),
@@ -101,7 +155,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 Some("lock") => lock_files.push(file_entry),
                 Some("nix") => nix_files.push(file_entry),
                 Some("toml") => {
-                    if let Some(file_name) = path.file_name().and_then(|f| f.to_str()) {
+                    if let Some(file_name) = file_entry.path.file_name().and_then(|f| f.to_str()) {
                         if file_name == "Cargo.toml" {
                             cargo_toml_files.push(file_entry);
                         } else if file_name == "settings.toml" {
@@ -116,7 +170,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
 
-    println!("Found {} total files.", all_files.len());
+    println!("Found {} total files.", all_file_entries.len());
     println!("Found {} Rust files.", rs_files.len());
     println!("Found {} SVG files.", svg_files.len());
     println!("Found {} JSON files.", json_files.len());
@@ -126,8 +180,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Found {} settings.toml files.", settings_toml_files.len());
     println!("Found {} Markdown files.", md_files.len());
     println!("Found {} Org-mode files.", org_files.len());
-
-    let mut extracted_data = ExtractedData::new();
 
     // Process Rust files
     // Use the `cargo_toml_files` (now as FileEntry) to identify project roots
@@ -139,6 +191,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         // Generate cache key for project based on all rs files within it
         let project_rs_files: Vec<&FileEntry> = rs_files.iter()
             .filter(|fe| fe.path.starts_with(&project_root))
+            .cloned() // Add .cloned() here to resolve the `&&FileEntry` to `&FileEntry` issue
             .collect();
                 let cache_key = get_project_analysis_cache_key(&project_root, &project_rs_files)?;
         
@@ -153,6 +206,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                                 eprintln!("Cache DECODE ERROR for Rust analysis of {}: {}. Bytes: {:?}", project_root.display(), e, cached_report_bytes);
                                 let report = run_analysis(&project_root, PRIMES_TO_ANALYZE);
                                 let serialized_report = serde_json::to_vec(&report)?;
+                                eprintln!("DEBUG: Serialized Rust AnalysisReport size: {}, first 100 bytes: {:?}", serialized_report.len(), &serialized_report[..std::cmp::min(serialized_report.len(), 100)]);
                                 db.put(&cache_key, serialized_report)?;
                                 extracted_data.merge_rust_report(project_root.display().to_string(), report);
                                 eprintln!("Ran Rust analysis for {} and cached it.", project_root.display());
@@ -187,7 +241,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             Ok(Some(cached_svg_extracted_data_bytes)) => {
                 let cached_svg_extracted_data: ExtractedData = serde_json::from_slice(&cached_svg_extracted_data_bytes)?;
                 // Merge terms and relationships from cached SVG data
-                for (name, term) in cached_svg_extracted_data.terms {
+                for (_name, term) in cached_svg_extracted_data.terms {
                     extracted_data.add_term(term);
                 }
                 for rel in cached_svg_extracted_data.relationships {
@@ -204,7 +258,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 db.put(&cache_key, serialized_svg_extracted_data)?;
 
                 // Merge terms and relationships from newly processed SVG data
-                for (name, term) in svg_extracted_data.terms {
+                for (_name, term) in svg_extracted_data.terms {
                     extracted_data.add_term(term);
                 }
                 for rel in svg_extracted_data.relationships {
@@ -221,7 +275,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 db.put(&cache_key, serialized_svg_extracted_data)?;
 
                 // Merge terms and relationships from newly processed SVG data
-                for (name, term) in svg_extracted_data.terms {
+                for (_name, term) in svg_extracted_data.terms {
                     extracted_data.add_term(term);
                 }
                 for rel in svg_extracted_data.relationships {
@@ -231,74 +285,5 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     }
-
-    // Example: Print some extracted data
-    println!("Total terms extracted: {}", extracted_data.terms.len());
-    println!("Total relationships extracted: {}", extracted_data.relationships.len());
-    
-    println!("Running prime power counts:");
-    for &prime in PRIMES_TO_ANALYZE {
-        if let Some(&count) = extracted_data.prime_power_counts.get(&prime) {
-            println!("  Prime {}: {}", prime, count);
-        }
-    }
-
-
     Ok(())
-}
-
-// Helper to identify unique, non-nested project roots from Cargo.toml paths
-// This function needs to be adjusted as we now pass the collected Cargo.toml paths directly
-fn identify_project_roots(cargo_toml_paths: Vec<PathBuf>) -> Vec<PathBuf> {
-    let mut candidate_roots: Vec<PathBuf> = cargo_toml_paths
-        .into_iter()
-        .filter_map(|p| p.parent().map(|parent| parent.to_path_buf()))
-        .collect();
-    
-    // Sort to handle parent directories first for proper nesting checks
-    candidate_roots.sort_by(|a, b| a.cmp(b));
-
-    let mut final_roots: Vec<PathBuf> = Vec::new();
-
-    for candidate in candidate_roots {
-        let mut is_nested = false;
-        for existing_root in &final_roots {
-            if candidate.starts_with(existing_root) && candidate != *existing_root {
-                is_nested = true;
-                break;
-            }
-        }
-        if !is_nested {
-            final_roots.push(candidate);
-        }
-    }
-    final_roots
-}
-
-// Function to calculate SHA256 hash of a file's content
-fn calculate_file_content_hash(content: &[u8]) -> String {
-    let mut hasher = Sha256::new();
-    hasher.update(content);
-    format!("{:x}", hasher.finalize())
-}
-
-// Function to generate a unique cache key for a Rust project's analysis report
-// This key combines the project root path and hashes of all relevant Rust files' contents.
-fn get_project_analysis_cache_key(project_root: &PathBuf, rs_files: &[&FileEntry]) -> Result<String, Box<dyn std::error::Error>> {
-    let mut hasher = Sha256::new();
-    hasher.update(project_root.to_string_lossy().as_bytes());
-
-    let mut file_content_hashes: Vec<String> = Vec::new();
-    for file_entry in rs_files {
-        // Use the content hash
-        file_content_hashes.push(calculate_file_content_hash(&file_entry.content));
-    }
-    // Sort file hashes to ensure a consistent key regardless of file system iteration order
-    file_content_hashes.sort();
-
-    for hash in file_content_hashes {
-        hasher.update(hash.as_bytes());
-    }
-
-    Ok(format!("rust_analysis_report:{}", calculate_file_content_hash(&hasher.finalize())))
 }
