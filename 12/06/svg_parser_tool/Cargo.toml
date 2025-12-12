@@ -23,3 +23,5 @@ resvg = { workspace = true } # For SVG parsing
 xmlwriter = { workspace = true } # For xml parsing
 svg_hir = { workspace = true }
 usvg = { workspace = true } # For USVG parsing (part of resvg)
+rocksdb = { version = "0.24.0", features = ["serde", "lz4"] }
+sha2 = "0.10.9"

@@ -26,11 +26,11 @@
      showgrid="false"
      inkscape:zoom="2.3786088"
      inkscape:cx="36.155588"
-     inkscape:cy="3553.9682"
+     inkscape:cy="3688.5006"
      inkscape:window-width="862"
      inkscape:window-height="580"
-     inkscape:window-x="814"
-     inkscape:window-y="284"
+     inkscape:window-x="830"
+     inkscape:window-y="115"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer1" />
   <defs
@@ -52,6 +52,10 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <path
+       style="fill:#ffff00;stroke-width:0.264583"
+       d="m 6.5628347,918.24068 c -1.3348139,0.29662 -2.6696275,0.59328 -4.0044415,0.8899 -0.037078,0 -0.076059,-0.0116 -0.1112345,0 -1.1507564,0.38357 -2.20056371,1.04016 -3.33703459,1.44603 -0.80614601,0.28792 -1.67779871,0.40335 -2.44715861,0.77864 -0.7671919,0.37425 -1.4262571,0.93969 -2.1134554,1.44605 -0.02985,0.022 0.01302,0.0765 0,0.11123 -0.2074973,0.55333 -0.6764655,1.3969 -0.2224691,2.00224 0.049746,0.0663 0.1638435,0.0526 0.2224691,0.11123 0.058626,0.0586 0.035029,0.18981 0.1112345,0.22246 0.4422159,0.18952 0.7514971,-0.0272 1.1123449,0.33372 0.4690057,0.469 0.429801,1.30196 0.889876,1.77975 0.5482489,0.56933 2.2305556,1.76535 3.22580001,2.22469 0.13880627,0.0641 0.30179459,0.0575 0.44493794,0.11123 1.47819435,0.5543 2.40303165,0.97833 3.55950375,2.33593 0.274143,0.32181 0.2451237,0.81021 0.3337033,1.22357 0.1601523,0.74736 -0.1005668,1.87764 -0.5561724,2.44715 -0.1483127,0.1854 -0.388294,0.27707 -0.5561724,0.44495 -0.026218,0.0262 0.026218,0.085 0,0.11123 -0.3157093,0.3157 -0.8014384,0.49054 -1.0011104,0.88988 -0.6647989,1.32958 -0.875519,2.60858 -1.0011104,4.11567 -0.058358,0.7003 0.1097716,1.44896 -0.22246901,2.11346 -0.096688,0.19336 -0.2312026,0.36582 -0.33370345,0.55616 -0.15722912,0.29199 -0.21811765,0.64794 -0.44493795,0.88987 -1.16284269,1.24037 -1.22552279,0.48461 -2.11345529,1.66854 -0.062924,0.0839 -0.1755684,0.12867 -0.2224689,0.22247 -0.3792568,0.7585 -0.1790545,1.35868 0.1112344,2.11343 0.071678,0.18638 0.1007268,0.39791 0.222469,0.55618 0.2557685,0.33251 0.5932506,0.59325 0.8898759,0.88988 0.17896025,0.17896 0.61912533,0.6355 0.77864143,0.66741 1.54754567,0.30951 4.23161287,0.4169 5.89542797,0.33369 0.6338839,-0.0317 1.2591692,-0.16229 1.890986,-0.22246 1.8137563,-0.17275 3.086349,-0.47614 4.560614,-1.55728 0.0598,-0.0439 -0.0067,-0.14862 0,-0.22247 0.122958,-1.35252 0.476577,-1.36056 -1.334814,-2.33592 -0.429394,-0.23122 -0.9601944,-0.18021 -1.4460482,-0.22246 -2.6618991,-0.23149 -5.3412413,0.18213 -8.0088829,0.33369 -0.034974,0.003 -3.8877641,0.16415 -4.4493796,0.44495"
+       id="path21873" />
     <text
        xml:space="preserve"
        style="font-weight:bold;font-size:3.18576px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.103883"
@@ -4657,5 +4661,319 @@
          style="stroke-width:0.264583"
          x="-16.90764"
          y="951.38855">use neural networks</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="5.0055518"
+       y="934.92584"
+       id="text21748"><tspan
+         sodipodi:role="line"
+         id="tspan21746"
+         style="stroke-width:0.264583"
+         x="5.0055518"
+         y="934.92584">trait</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="2.2246897"
+       y="939.15277"
+       id="text21752"><tspan
+         sodipodi:role="line"
+         id="tspan21750"
+         style="stroke-width:0.264583"
+         x="2.2246897"
+         y="939.15277">fixers</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="6.5628347"
+       y="942.48981"
+       id="text21756"><tspan
+         sodipodi:role="line"
+         id="tspan21754"
+         style="stroke-width:0.264583"
+         x="6.5628347"
+         y="942.48981">modeling</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="5.2280207"
+       y="946.60553"
+       id="text21760"><tspan
+         sodipodi:role="line"
+         id="tspan21758"
+         style="stroke-width:0.264583"
+         x="5.2280207"
+         y="946.60553">symmetry</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="4.5606136"
+       y="950.16498"
+       id="text21764"><tspan
+         sodipodi:role="line"
+         id="tspan21762"
+         style="stroke-width:0.264583"
+         x="4.5606136"
+         y="950.16498">fixed point</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="2.7808621"
+       y="953.94702"
+       id="text21768"><tspan
+         sodipodi:role="line"
+         id="tspan21766"
+         style="stroke-width:0.264583"
+         x="2.7808619"
+         y="953.94702">combinators</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="16.573938"
+       y="952.27844"
+       id="text21772"><tspan
+         sodipodi:role="line"
+         id="tspan21770"
+         style="stroke-width:0.264583"
+         x="16.573938"
+         y="952.27844">hypergraph</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="22.358131"
+       y="927.25067"
+       id="text21776"><tspan
+         sodipodi:role="line"
+         id="tspan21774"
+         style="stroke-width:0.264583"
+         x="22.358131"
+         y="927.25067">circuits</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="20.022207"
+       y="931.25519"
+       id="text21780"><tspan
+         sodipodi:role="line"
+         id="tspan21778"
+         style="stroke-width:0.264583"
+         x="20.022207"
+         y="931.25519">n shot</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="28.920965"
+       y="935.59326"
+       id="text21784"><tspan
+         sodipodi:role="line"
+         id="tspan21782"
+         style="stroke-width:0.264583"
+         x="28.920965"
+         y="935.59326">pattern languages</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="26.473808"
+       y="939.82019"
+       id="text21788"><tspan
+         sodipodi:role="line"
+         id="tspan21786"
+         style="stroke-width:0.264583"
+         x="26.473808"
+         y="939.82019">cycles</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="28.920965"
+       y="944.492"
+       id="text21792"><tspan
+         sodipodi:role="line"
+         id="tspan21790"
+         style="stroke-width:0.264583"
+         x="28.920965"
+         y="944.492">circular references</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-24.471586"
+       y="926.69452"
+       id="text21796"><tspan
+         sodipodi:role="line"
+         id="tspan21794"
+         style="stroke-width:0.264583"
+         x="-24.471586"
+         y="926.69452">real/imaginary</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="1.5572828"
+       y="926.69452"
+       id="text21800"><tspan
+         sodipodi:role="line"
+         id="tspan21798"
+         style="stroke-width:0.264583"
+         x="1.5572829"
+         y="926.69452">automatic</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-2.1134553"
+       y="920.35413"
+       id="text21804"><tspan
+         sodipodi:role="line"
+         id="tspan21802"
+         style="stroke-width:0.264583"
+         x="-2.1134553"
+         y="920.35413">clippy</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="8.1201172"
+       y="919.68677"
+       id="text21808"><tspan
+         sodipodi:role="line"
+         id="tspan21806"
+         style="stroke-width:0.264583"
+         x="8.1201172"
+         y="919.68677">llm</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ffff00;stroke-width:0.264583"
+       x="-28.809732"
+       y="958.73004"
+       id="text21940"><tspan
+         sodipodi:role="line"
+         id="tspan21938"
+         style="stroke-width:0.264583"
+         x="-28.809732"
+         y="958.73004">r<tspan
+   style="fill:#000000"
+   id="tspan21942">ocksd</tspan>b</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-22.691835"
+       y="963.06818"
+       id="text21946"><tspan
+         sodipodi:role="line"
+         id="tspan21944"
+         style="stroke-width:0.264583"
+         x="-22.691835"
+         y="963.06818">rocksdb</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-19.910973"
+       y="967.40631"
+       id="text21950"><tspan
+         sodipodi:role="line"
+         id="tspan21948"
+         style="stroke-width:0.264583"
+         x="-19.910973"
+         y="967.40631">document</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-8.5650558"
+       y="965.51532"
+       id="text21954"><tspan
+         sodipodi:role="line"
+         id="tspan21952"
+         style="stroke-width:0.264583"
+         x="-8.5650558"
+         y="965.51532">decls</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="9.4549313"
+       y="964.40302"
+       id="text21958"><tspan
+         sodipodi:role="line"
+         id="tspan21956"
+         style="stroke-width:0.264583"
+         x="9.4549313"
+         y="964.40302">terms</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="10.233573"
+       y="969.96472"
+       id="text21962"><tspan
+         sodipodi:role="line"
+         id="tspan21960"
+         style="stroke-width:0.264583"
+         x="10.233573"
+         y="969.96472">vectors</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;white-space:pre;inline-size:20.3291;display:inline;fill:#000000;stroke-width:0.264583"
+       x="22.135662"
+       y="958.2851"
+       id="text21966"
+       transform="matrix(2.167547,-1.6004508,1.6004508,2.167547,-1546.2713,-1080.3109)"><tspan
+         x="22.135662"
+         y="958.2851"
+         id="tspan23790">wikivector</tspan></text>
+    <path
+       style="fill:#000000;stroke-width:0.264583"
+       d="m 19.910973,967.62881 c -2.447159,-0.0371 -4.894317,-0.0742 -7.341476,-0.11123"
+       id="path21968" />
+    <path
+       style="fill:#000000;stroke-width:0.264583"
+       d="m 21.57949,963.95806 c -6.957562,-1.41727 -3.97679,-0.98936 -8.898758,-1.55728"
+       id="path21970" />
+    <path
+       style="fill:#000000;stroke-width:0.264583"
+       d="m 19.688504,966.07153 c -1.260657,0.74154 -2.521315,1.48312 -3.781972,2.22469 0.0107,0.1247 -0.03215,0.47707 -0.111235,0.55616 -0.02622,0.0262 -0.09465,-0.0332 -0.111234,0 -0.03316,0.0663 0.03316,0.15615 0,0.22248 -0.01658,0.0332 -0.08502,-0.0262 -0.111235,0 -0.117251,0.11724 -0.148313,0.29663 -0.222469,0.44493"
+       id="path21972" />
+    <path
+       style="fill:#000000;stroke-width:0.264583"
+       d="m 14.571718,952.50091 12.013324,8.00889 -9.454931,-7.78641"
+       id="path21974" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-25.917637"
+       y="976.30511"
+       id="text22874"><tspan
+         sodipodi:role="line"
+         id="tspan22872"
+         style="stroke-width:0.264583"
+         x="-25.917637"
+         y="976.30511">lattice</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-10.011103"
+       y="981.64435"
+       id="text22878"><tspan
+         sodipodi:role="line"
+         id="tspan22876"
+         style="stroke-width:0.264583"
+         x="-10.011103"
+         y="981.64435">reed solomon encoding</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-20.022207"
+       y="986.87238"
+       id="text22882"><tspan
+         sodipodi:role="line"
+         id="tspan22880"
+         style="stroke-width:0.264583"
+         x="-20.022207"
+         y="986.87238">huggingface</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="6.8965383"
+       y="991.32172"
+       id="text22886"><tspan
+         sodipodi:role="line"
+         id="tspan22884"
+         style="stroke-width:0.264583"
+         x="6.8965383"
+         y="991.32172">creating numerical embeddings directly with primes.</tspan></text>
   </g>
 </svg>
