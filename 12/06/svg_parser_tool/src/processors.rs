@@ -110,7 +110,7 @@ impl ExtractedData {
         }
 
         // Extract terms and relationships from prime_occurrences
-        for (prime, occurrences) in &report.prime_occurrences {
+        for (_prime, occurrences) in &report.prime_occurrences {
             // Treat prime as a property, the actual term is the occurrence
             for occurrence in occurrences {
                 self.add_term(Term {
