@@ -1,0 +1,548 @@
+{
+  "terms": {
+    "path21873": {
+      "name": "path21873",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect11194": {
+      "name": "rect11194",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect11893": {
+      "name": "rect11893",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect10490": {
+      "name": "rect10490",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path21974": {
+      "name": "path21974",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path9669": {
+      "name": "path9669",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect10488": {
+      "name": "rect10488",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path9607": {
+      "name": "path9607",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect7197": {
+      "name": "rect7197",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path21972": {
+      "name": "path21972",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect2391": {
+      "name": "rect2391",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect781": {
+      "name": "rect781",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "g1112": {
+      "name": "g1112",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path9609": {
+      "name": "path9609",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect7207": {
+      "name": "rect7207",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path10502": {
+      "name": "path10502",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path2497": {
+      "name": "path2497",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect11947": {
+      "name": "rect11947",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "layer1": {
+      "name": "layer1",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path7366": {
+      "name": "path7366",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect7370": {
+      "name": "rect7370",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path9671": {
+      "name": "path9671",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path10500": {
+      "name": "path10500",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect12005-2": {
+      "name": "rect12005-2",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect7207-8": {
+      "name": "rect7207-8",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path1108": {
+      "name": "path1108",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path26666": {
+      "name": "path26666",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect2389": {
+      "name": "rect2389",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "g9502": {
+      "name": "g9502",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect12005": {
+      "name": "rect12005",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path27647": {
+      "name": "path27647",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path1053": {
+      "name": "path1053",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect9491": {
+      "name": "rect9491",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path7368": {
+      "name": "path7368",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect2335": {
+      "name": "rect2335",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path10492": {
+      "name": "path10492",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path21970": {
+      "name": "path21970",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "rect12005-25": {
+      "name": "rect12005-25",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path10430": {
+      "name": "path10430",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "g921": {
+      "name": "g921",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path10498": {
+      "name": "path10498",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    },
+    "path21968": {
+      "name": "path21968",
+      "source_file": "C:\\Users\\gentd\\.gemini\\tmp\\adf9f56441bc958b7259e58eeac4bdd5b6e63323da8eff07fae11f51d0531785\\drawing-8-head_prev.svg",
+      "term_type": "SvgElement",
+      "prime_vector": null,
+      "frequency": 1
+    }
+  },
+  "relationships": [
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path21873",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "g921",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "g921",
+      "target_term_name": "rect781",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "g1112",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "g1112",
+      "target_term_name": "path1053",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "g1112",
+      "target_term_name": "path1108",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "rect2335",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "rect2389",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "rect2391",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path2497",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "rect7197",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "rect7207",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "rect7207-8",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path7366",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path7368",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "rect7370",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "g9502",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "g9502",
+      "target_term_name": "rect9491",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path9607",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path9609",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path9669",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path9671",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path10430",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "rect10488",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "rect10490",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path10492",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path10498",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path10500",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path10502",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "rect11194",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "rect11893",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "rect11947",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "rect12005",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "rect12005-2",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "rect12005-25",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path21968",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path21970",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path21972",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path21974",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path26666",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    },
+    {
+      "source_term_name": "layer1",
+      "target_term_name": "path27647",
+      "rel_type": "SvgHierarchy",
+      "prime_vector": null
+    }
+  ],
+  "rust_analysis_reports": {},
+  "prime_power_counts": {}
+}

@@ -15,6 +15,22 @@ path = "src/bin/wordcloud_generator.rs"
 name = "cache_inspector"
 path = "src/bin/cache_inspector.rs"
 
+[[bin]]
+name = "svg_diff_tool"
+path = "src/bin/svg_diff_tool.rs"
+
+[[bin]]
+name = "svg_hash_calculator"
+path = "src/bin/svg_hash_calculator.rs"
+
+[[bin]]
+name = "svg_extractor"
+path = "src/bin/svg_extractor.rs"
+
+[[bin]]
+name = "raw_file_inspector"
+path = "src/bin/raw_file_inspector.rs"
+
 [dependencies]
 monster_svg_morphism = { path = "../monster_svg_morphism" }
 xml-rs = "0.8" # For XML parsing
@@ -31,3 +47,4 @@ rocksdb = { version = "0.24.0", features = ["serde", "lz4"] }
 sha2 = "0.10.9"
 ignore = "0.4.25"
 pico-args = "0.5"
+encoding_rs = "0.8.31"
