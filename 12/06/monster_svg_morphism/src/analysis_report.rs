@@ -15,7 +15,9 @@ pub struct AnalysisReport {
     pub matrix_column_headers: Vec<u64>,
     pub matrix_row_headers: Vec<String>,
     pub composite_prime_vectors: HashMap<String, PrimeVector>,
+    #[serde(with = "crate::serde_map_char_pair_key")]
     pub char_pair_transitions: HashMap<(char, char), usize>,
+    #[serde(with = "svg_hir::serde_map_u64_key")] // Reuse the u64 key serializer for usize
     pub ngrams_frequencies: HashMap<usize, HashMap<String, usize>>,
     pub substring_prime_vectors: HashMap<String, PrimeVector>,
 }

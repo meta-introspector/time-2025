@@ -7,3 +7,4 @@ pub mod cycle_detection;
 pub mod analyzer;
 pub mod matrix_form;
 pub mod code_parser;
+pub mod serde_map_char_pair_key;

@@ -837,6 +837,7 @@ dependencies = [
  "quote",
  "regex",
  "serde",
+ "serde_json",
  "simba",
  "svg_hir",
  "syn 2.0.111",
