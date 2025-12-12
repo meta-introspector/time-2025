@@ -6,7 +6,7 @@ use crate::monster_element_kind::MonsterElementKind;
 use crate::traits::svg_component::SvgComponent;
 use crate::traits::maps_to_monster::MapsToMonster;
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
 pub struct Rect {
     pub id: Option<String>,
     pub x: f32,

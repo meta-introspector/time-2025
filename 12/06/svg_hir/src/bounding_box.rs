@@ -1,4 +1,4 @@
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
 pub struct BoundingBox {
     pub x: f32,
     pub y: f32,
@@ -9,6 +9,15 @@ pub struct BoundingBox {
 impl BoundingBox {
     pub fn new(x: f32, y: f32, width: f32, height: f32) -> Self {
         BoundingBox { x, y, width, height }
+    }
+
+    pub fn default() -> Self {
+        BoundingBox {
+            x: 0.0,
+            y: 0.0,
+            width: 0.0,
+            height: 0.0,
+        }
     }
 
     pub fn area(&self) -> f32 {
@@ -29,5 +38,27 @@ impl BoundingBox {
         (self.x + self.width) > other.x &&
         self.y < (other.y + other.height) &&
         (self.y + self.height) > other.y
+    }
+
+    pub fn union(&self, other: &BoundingBox) -> BoundingBox {
+        if self.width == 0.0 && self.height == 0.0 {
+            return other.clone();
+        }
+        if other.width == 0.0 && other.height == 0.0 {
+            return self.clone();
+        }
+
+        let x = self.x.min(other.x);
+        let y = self.y.min(other.y);
+
+        let x_max = (self.x + self.width).max(other.x + other.width);
+        let y_max = (self.y + self.height).max(other.y + other.height);
+
+        BoundingBox {
+            x,
+            y,
+            width: x_max - x,
+            height: y_max - y,
+        }
     }
 }

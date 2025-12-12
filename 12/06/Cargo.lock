@@ -132,6 +132,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "bsp-buddy-finder"
+version = "0.1.0"
+dependencies = [
+ "pico-args",
+ "regex",
+ "serde",
+ "serde_json",
+ "svg_hir",
+ "usvg 0.45.1 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "bstr"
 version = "1.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -648,6 +660,17 @@ dependencies = [
 
 [[package]]
 name = "kurbo"
+version = "0.11.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c62026ae44756f8a599ba21140f350303d4f08dcdcc71b5ad9c9bb8128c13c62"
+dependencies = [
+ "arrayvec",
+ "euclid",
+ "smallvec",
+]
+
+[[package]]
+name = "kurbo"
 version = "0.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ce9729cc38c18d86123ab736fd2e7151763ba226ac2490ec092d1dd148825e32"
@@ -881,6 +904,17 @@ dependencies = [
  "ndarray",
  "rand 0.8.5",
  "rand_distr",
+]
+
+[[package]]
+name = "ngram-analyzer"
+version = "0.1.0"
+dependencies = [
+ "pico-args",
+ "roxmltree",
+ "serde",
+ "serde_json",
+ "unicode-segmentation",
 ]
 
 [[package]]
@@ -1392,9 +1426,9 @@ dependencies = [
  "pico-args",
  "png",
  "rgb",
- "svgtypes",
+ "svgtypes 0.16.0",
  "tiny-skia",
- "usvg",
+ "usvg 0.45.1",
  "zune-jpeg",
 ]
 
@@ -1681,10 +1715,20 @@ dependencies = [
  "sha2",
  "svg",
  "svg_hir",
- "usvg",
+ "usvg 0.45.1",
  "walkdir",
  "xml-rs",
  "xmlwriter 0.1.0",
+]
+
+[[package]]
+name = "svgtypes"
+version = "0.15.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "68c7541fff44b35860c1a7a47a7cadf3e4a304c457b58f9870d9706ece028afc"
+dependencies = [
+ "kurbo 0.11.3",
+ "siphasher 1.0.1",
 ]
 
 [[package]]
@@ -1693,7 +1737,7 @@ version = "0.16.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c9165405c8cf6bdc11d4417ef1c8c90521ebbadffe7da5c67bb5c1b90a14aeb1"
 dependencies = [
- "kurbo",
+ "kurbo 0.12.0",
  "siphasher 1.0.1",
 ]
 
@@ -1907,6 +1951,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "383ad40bb927465ec0ce7720e033cb4ca06912855fc35db31b5755d0de75b1ee"
 
 [[package]]
+name = "unicode-segmentation"
+version = "1.12.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f6ccf251212114b54433ec949fd6a7841275f9ada20dddd2f29e9ceea4501493"
+
+[[package]]
 name = "unicode-vo"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1921,7 +1971,7 @@ dependencies = [
  "flate2",
  "fontdb",
  "imagesize",
- "kurbo",
+ "kurbo 0.12.0",
  "log",
  "once_cell",
  "pico-args",
@@ -1930,12 +1980,39 @@ dependencies = [
  "simplecss",
  "siphasher 1.0.1",
  "strict-num",
- "svgtypes",
+ "svgtypes 0.16.0",
  "tiny-skia-path",
  "unicode-bidi",
  "unicode-script",
  "unicode-vo",
  "xmlwriter 0.1.0",
+]
+
+[[package]]
+name = "usvg"
+version = "0.45.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "80be9b06fbae3b8b303400ab20778c80bbaf338f563afe567cf3c9eea17b47ef"
+dependencies = [
+ "base64",
+ "data-url",
+ "flate2",
+ "fontdb",
+ "imagesize",
+ "kurbo 0.11.3",
+ "log",
+ "pico-args",
+ "roxmltree",
+ "rustybuzz",
+ "simplecss",
+ "siphasher 1.0.1",
+ "strict-num",
+ "svgtypes 0.15.3",
+ "tiny-skia-path",
+ "unicode-bidi",
+ "unicode-script",
+ "unicode-vo",
+ "xmlwriter 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -1998,6 +2075,16 @@ checksum = "0ce5da8ecb62bcd8ec8b7ea19f69a51275e91299be594ea5cc6ef7819e16cd03"
 dependencies = [
  "bytemuck",
  "safe_arch",
+]
+
+[[package]]
+name = "wikivector"
+version = "0.1.0"
+dependencies = [
+ "pico-args",
+ "roxmltree",
+ "serde",
+ "toml 0.8.23",
 ]
 
 [[package]]

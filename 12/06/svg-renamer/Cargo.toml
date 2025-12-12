@@ -8,4 +8,5 @@ usvg = "0.45.1"
 fontdb = "0.15.0"
 xmlwriter = "0.1.0"
 roxmltree = "0.20.0"
-config_lib = { path = "../config_lib" }
+toml = "0.8"
+serde = { version = "1.0", features = ["derive"] }

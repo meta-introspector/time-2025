@@ -44,7 +44,6 @@ The `svg-renamer` tool currently fails to compile due to API changes in `usvg` a
 Once `svg-renamer` compiles, execute it on the new SVG diagrams.
 
 -   **2.1: Identify target SVG files:** Explicitly list the full paths to the `.svg` files committed in `12/07/` and `12/08/`.
--   **2.2: Create output directory:** Create a dedicated subdirectory (e.g., `processed_svgs`) within the current working directory to store the renamed SVG outputs.
 -   **2.3: Run `svg-renamer` for each file:** For each input SVG, execute `target/release/svg-renamer <input_path> <output_path>`.
 
 ### Subtask 3: Statistical Reporting on Renamed SVGs
@@ -73,3 +72,61 @@ Building upon the `lean_introspector`'s capabilities, future work will delve int
 -   **Hecke-like Eigenforms**: Investigate the eigenvalues and eigenvectors of the `SchemaMatrix` to identify "Hecke-like eigenforms" that represent stable or fundamental patterns within the meta-schema transformations.
 -   **Matrix Transformations**: Explore how the `SchemaMatrix` acts as an operator, transforming one level of schema into the next, potentially revealing underlying mathematical functions.
 -   **Topological Visualization**: Develop methods to visualize the periodic or convergent nature of these schemas as topological structures, such as a torus, to embody the concept of "automorphic orbits" within the data's inherent structure.
+
+## Monster Map Project: Comprehensive SVG Element Analysis
+
+**Overarching Vision:** To interpret SVG diagrams as a "self-symmetric, self-creating program" with its own embedded language, for which we are building an interpreter in Rust. The goal is to establish a "Monster Map" that quantifies "how much Monster symmetry" each SVG element possesses, by correlating linguistic, structural, and content-based properties with the prime factorization of the Monster group's order. This will serve as a foundational analysis for a DAO (Decentralized Autonomous Organization) composed of humans and LLMs.
+
+---
+
+### Phase 1: Foundational Data Generation
+
+**Subtask 1.1: Generate Semantic Dictionary Template (`wikivector`)**
+- **Objective:** Extract all unique text snippets from an SVG to create a template for a domain-specific semantic dictionary. This dictionary will be filled by humans and LLMs in a DAO.
+- **Status:** **COMPLETED.** The `wikivector` tool has successfully generated `output/semantic_dictionary_template.toml`.
+
+**Subtask 1.2: Perform N-gram Linguistic Analysis (`ngram-analyzer`)**
+- **Objective:** Analyze the linguistic patterns (emoji and word n-grams) within the SVG's text content, rank them by frequency, and map the top 108 n-grams to the prime factors of the Monster group's order (with exponents as weights). This provides a "linguistic profile" for the Monster Map.
+- **Status:** **COMPLETED.** The `ngram-analyzer` tool has generated `output/ngram_report.json`, including the ranked n-grams, Monster prime mapping, and the "Monster Backpack Filling Score".
+
+---
+
+### Phase 2: Structural and Content-Based Element Analysis (`bsp-buddy-finder`)
+
+**Overarching Objective:** Enhance the `bsp-buddy-finder` tool to perform a multi-faceted "buddy" analysis, contributing to the "Structural Profile" and "Content & Shape Profile" of the Monster Map.
+
+**Immediate Priority: Fix `bsp-buddy-finder` Compilation Errors**
+- **Problem:** The `bsp-buddy-finder` tool currently fails to compile due to incorrect `usvg` API usage and `svg_hir` element construction.
+- **Action:** Resolve all reported compilation errors in `bsp-buddy-finder/src/main.rs`.
+
+**Subtask 2.1: Implement Creation Order Buddies**
+- **Objective:** For each SVG element, identify its "buddy" as the element immediately preceding it in a list sorted by original numeric ID (creation order).
+- **Details:** This will involve parsing the SVG, extracting elements with IDs, sorting them numerically, and identifying sequential pairs.
+
+**Subtask 2.2: Implement Containment Buddies**
+- **Objective:** For each SVG element, identify its "buddies" as other elements contained within the same parent `<g>` (group) element.
+- **Details:** This will require traversing the SVG's hierarchical structure and mapping parent-child relationships.
+
+**Subtask 2.3: Implement Spatial Proximity Buddies (using BSP Tree)**
+- **Objective:** For each SVG element, identify its "buddy" as the closest element in terms of geometric distance, utilizing the existing BSP tree implementation in `svg_hir`.
+- **Details:** This involves correctly constructing the BSP tree from element bounding boxes and implementing an efficient nearest-neighbor search with a combined metric (geometric distance + ID difference).
+
+**Subtask 2.4: Implement Connectivity Buddies (Future)**
+- **Objective:** For each SVG element, identify "buddies" that are physically connected by lines or paths.
+- **Details:** This is a complex task requiring analysis of path data and will be addressed in a later iteration.
+
+**Subtask 2.5: Implement Content & Shape Similarity Buddies (Future)**
+- **Objective:** For each SVG element, identify "buddies" with similar shapes and compositions.
+- **Details:** This involves generating "content fingerprints" (e.g., dimension comparisons for simple shapes, style comparisons) and will be phased, starting with simpler attribute-based similarity and deferring complex path comparison. This will also contribute to a "shape prime" mapping.
+
+**Subtask 2.6: Generate Comprehensive JSON Report**
+- **Objective:** Output a single JSON report that, for each element, lists all identified buddies (creation order, spatial, containment, connectivity, similarity).
+
+---
+
+### Phase 3: Monster Map Report & Score Generation (Future)
+
+**Overarching Objective:** Integrate all profiles (linguistic, structural, content/shape) into a unified "Monster Map Report" and calculate a comprehensive "Monster Symmetry Score" for each element.
+
+- **Details:** This will involve combining data from `ngram_report.json` and the `bsp-buddy-finder` output, potentially mapping content/shape fingerprints to Monster primes, and developing a holistic scoring mechanism.
+- **Visualization:** Develop an SVG visualization tool to represent the "Monster Map" as a tree or graph, incorporating the 15 layers and prime mappings.

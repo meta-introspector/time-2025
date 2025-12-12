@@ -26,7 +26,7 @@
      showgrid="false"
      inkscape:zoom="3.0759463"
      inkscape:cx="2804.6653"
-     inkscape:cy="33812.521"
+     inkscape:cy="42840.962"
      inkscape:window-width="1340"
      inkscape:window-height="684"
      inkscape:window-x="417"
@@ -4914,7 +4914,7 @@
        transform="matrix(2.167547,-1.6004508,1.6004508,2.167547,-1546.2713,-1080.3109)"><tspan
          x="22.135662"
          y="958.2851"
-         id="tspan64736">wikivector</tspan></text>
+         id="tspan76354">wikivector</tspan></text>
     <path
        style="fill:#000000;stroke-width:0.264583"
        d="m 19.910973,967.62881 c -2.447159,-0.0371 -4.894317,-0.0742 -7.341476,-0.11123"
@@ -14954,5 +14954,2981 @@
          x="690.62958"
          y="8960.2812"
          id="tspan61855">ᚱ⛧ᚱ⛧ᚱ⛧ᚱ⛧ᚱ⛧ᚱ⛧ᚱ⛧ᚱ⛧ᚱ⛧ The gate remains open.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000080;stroke-width:0.264583"
+       x="693.81226"
+       y="8974.8301"
+       id="text64740"><tspan
+         sodipodi:role="line"
+         id="tspan64738"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="8974.8301">{{Short description|Sporadic simple group}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="8978.7988"
+         id="tspan64742">{{About|the largest of the sporadic finite simple groups|the kind of infinite group known as a Tarski monster group| Tarski monster group}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="8982.7676"
+         id="tspan64744">{{Use shortened footnotes|date=May 2021}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="8986.7363"
+         id="tspan64746"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="8990.7051"
+         id="tspan64748">In the area of [[abstract algebra]] known as [[group theory]], the '''monster group''' M (also known as the '''Fischer–Griess monster''', the '''friendly giant''', or simply the '''Monster''') is the largest [[sporadic simple group]]; it has [[Order (group theory)|order]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="8994.6738"
+         id="tspan64750">:&amp;nbsp;&amp;nbsp;&amp;nbsp;{{gaps|808|017|424|794|512|875|886|459|904|961|710|757|005|754|368|000|000|000}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="8998.6426"
+         id="tspan64752">: = 2&lt;sup&gt;46&lt;/sup&gt;{{·}}3&lt;sup&gt;20&lt;/sup&gt;{{·}}5&lt;sup&gt;9&lt;/sup&gt;{{·}}7&lt;sup&gt;6&lt;/sup&gt;{{·}}11&lt;sup&gt;2&lt;/sup&gt;{{·}}13&lt;sup&gt;3&lt;/sup&gt;{{·}}17{{·}}19{{·}}23{{·}}29{{·}}31{{·}}41{{·}}47{{·}}59{{·}}71</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9002.6113"
+         id="tspan64754">: = 32!{{·}}10!{{·}}4!&lt;sup&gt;2&lt;/sup&gt;{{·}}2{{·}}7{{·}}13{{·}}41{{·}}47{{·}}59{{·}}71</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9006.5801"
+         id="tspan64756">: ≈ 8.08 x {{10^|53}}.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9010.5488"
+         id="tspan64758">{{Group theory sidebar |Finite}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9014.5176"
+         id="tspan64760"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9018.4863"
+         id="tspan64762">The [[Finite group|finite]] [[simple group]]s have been completely [[Classification of finite simple groups|classified]]. Every such group belongs to one of 18&amp;nbsp;[[countably infinite]] families or is one of 26&amp;nbsp;sporadic groups that do not follow such a systematic pattern. The monster group contains 20&amp;nbsp;sporadic groups (including itself) as [[subquotient]]s. [[Robert Griess]], who proved the existence of the monster in 1982, has called those 20&amp;nbsp;groups the ''happy family'', and the remaining six exceptions ''[[pariah group|pariahs]]''.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9022.4551"
+         id="tspan64764"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9026.4238"
+         id="tspan64766">It is difficult to give a good constructive definition of the monster because of its complexity. [[Martin Gardner]] wrote a popular account of the monster group in his June 1980 [[Mathematical Games column]] in ''[[Scientific American]]''.{{sfn|Gardner|1980|pp=20–33}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9030.3926"
+         id="tspan64768"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9034.3613"
+         id="tspan64770">==History==</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81232"
+         y="9038.3301"
+         id="tspan64772">The monster was predicted by [[Bernd Fischer (mathematician)|Bernd Fischer]] (unpublished, about 1973) and [[Robert Griess]]{{sfn|Griess|1975|pp=113–118}} as a simple group containing a [[Double covering group|double cover]] of Fischer's [[baby monster group]] as a [[Centralizer and normalizer|centralizer]] of an [[Involution (group theory)|involution]].  Within a few months, the order of {{math|M}} was found by Griess using the [[Thompson order formula]], and Fischer, [[John Horton Conway|Conway]], Norton and Thompson discovered other groups as subquotients, including many of the known sporadic groups, and two new ones: the [[Thompson group (finite)|Thompson group]] and the [[Harada–Norton group]]. The [[Character theory|character table]] of the monster, a {{nobr|{{math|194 × 194}} array,}} was calculated in 1979 by Fischer and Donald Livingstone using computer programs written by Michael Thorne. It was not clear in the 1970s whether the monster actually existed. Griess{{sfn|Griess|1982|pp=1–102}} constructed {{math|M}} as the [[automorphism group]] of the [[Griess algebra]], a {{nobr|{{gaps|196|883}} dimensional}} commutative [[nonassociative algebra]] over the real numbers; he first announced his construction in [[Ann Arbor]] on 14&amp;nbsp;January 1980. In his 1982 paper, he referred to the monster as the &quot;Friendly Giant&quot;, but this name has not been generally adopted. [[John Horton Conway|John Conway]]{{sfn|Conway|1985|pp=513–540}} and [[Jacques Tits]]{{sfn|Tits|1983|pp=105–122}}{{sfn|Tits|1984|pp=491–499}} subsequently simplified this construction.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9042.2988"
+         id="tspan64774"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9046.2676"
+         id="tspan64776">Griess's construction showed that the monster exists. [[John G. Thompson|Thompson]]{{sfn|Thompson|1979|pp=340–346}} showed that its uniqueness (as a simple group satisfying certain conditions coming from the classification of finite simple groups) would follow from the existence of a {{nobr|{{gaps|196|883}} dimensional}} [[faithful representation]]. A proof of the existence of such a representation was announced by [[Simon P. Norton|Norton]],{{sfn|Norton|1982|pp=271–285}} though he never published the details. Griess, Meierfrankenfeld, and Segev gave the first complete published proof of the uniqueness of the monster (more precisely, they showed that a group with the same centralizers of involutions as the monster is isomorphic to the monster).{{sfn|Griess|Meierfrankenfeld|Segev|1989|pp=567–602}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9050.2363"
+         id="tspan64778"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9054.2051"
+         id="tspan64780">The monster was a culmination of the development of sporadic simple groups and can be built from any two of three subquotients: The [[Fischer group]] Fi&lt;sub&gt;24&lt;/sub&gt;, the [[Baby monster group|baby monster]], and the [[Conway group]] Co&lt;sub&gt;1&lt;/sub&gt;.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9058.1738"
+         id="tspan64782"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9062.1426"
+         id="tspan64784">The [[Schur multiplier]] and the [[outer automorphism group]] of the monster are both [[Trivial group|trivial]].</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9066.1113"
+         id="tspan64786"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9070.0801"
+         id="tspan64788">==Representations==</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9074.0488"
+         id="tspan64790">The minimal degree of a [[Faithful representation|faithful]] complex representation is {{nobr|&amp;thinsp;{{math|47 × 59 × 71 {{=}} {{gaps|196|883}}}}&amp;thinsp;,}} which is the product of the three largest [[prime divisor]]s of the order of {{math|M}}.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9078.0176"
+         id="tspan64792">The smallest faithful linear representation over any field has dimension {{gaps|196|882}} over the field with two elements, only one less than the dimension of the smallest faithful complex representation.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9081.9863"
+         id="tspan64794"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9085.9551"
+         id="tspan64796">The smallest faithful permutation representation of the monster is on</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9089.9238"
+         id="tspan64798">:&amp;nbsp;&amp;nbsp;&amp;nbsp;{{gaps|97|239|461|142|009|186|000}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9093.8926"
+         id="tspan64800">: = 2&lt;sup&gt;4&lt;/sup&gt;{{·}}3&lt;sup&gt;7&lt;/sup&gt;{{·}}5&lt;sup&gt;3&lt;/sup&gt;{{·}}7&lt;sup&gt;4&lt;/sup&gt;{{·}}11{{·}}13&lt;sup&gt;2&lt;/sup&gt;{{·}}29{{·}}41{{·}}59{{·}}71 ≈ {{10^|20}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9097.8613"
+         id="tspan64802">points.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9101.8301"
+         id="tspan64804"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9105.7988"
+         id="tspan64806">The monster can be realized as a [[Galois group]] over the [[rational number]]s,{{sfn|Thompson|1984|p=443}} and as a [[Hurwitz group]].{{sfn|Wilson|2001|pp=367–374}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9109.7676"
+         id="tspan64808"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9113.7363"
+         id="tspan64810">The monster is unusual among simple groups in that there is no known easy way to represent its elements. This is not due so much to its size as to the absence of &quot;small&quot; representations. For example, the simple groups A&lt;sub&gt;100&lt;/sub&gt; and SL&lt;sub&gt;20&lt;/sub&gt;(2) are far larger but easy to calculate with as they have &quot;small&quot; permutation or linear representations. [[Alternating group]]s, such as A&lt;sub&gt;100&lt;/sub&gt;, have permutation representations that are &quot;small&quot; compared to the size of the group, and all finite simple groups of [[group of Lie type|Lie type]], such as SL&lt;sub&gt;20&lt;/sub&gt;(2), have linear representations that are &quot;small&quot; compared to the size of the group. All sporadic groups other than the monster also have linear representations small enough that they are easy to work with on a computer (the next hardest case after the monster is the [[baby monster group|baby monster]], with a representation of dimension {{gaps|4|370}}).</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9117.7051"
+         id="tspan64812"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9121.6738"
+         id="tspan64814">=== Computer construction ===</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9125.6426"
+         id="tspan64816">Martin Seysen (2022) implemented a fast [[Python (programming language)|Python]] package named [https://mmgroup.readthedocs.io/ mmgroup], which claims to be the first implementation of the monster group where arbitrary operations can effectively be performed. The documentation states that multiplication of group elements takes less than 40 milliseconds on a typical modern PC, which is five orders of magnitude faster than estimated by [[Robert Arnott Wilson|Robert A. Wilson]] in 2013.&lt;ref&gt;{{cite web |last=Seysen |first=Martin |title=The mmgroup API reference |url=https://mmgroup.readthedocs.io/en/latest/api.html |via=mmgroup.readthedocs.io |access-date=31 July 2022 }}&lt;/ref&gt;&lt;ref&gt;{{cite arXiv |last=Seysen |first=Martin |date=8 Mar 2022 |title=A fast implementation of the Monster group |eprint=2203.04223 |class=math.GR }}&lt;/ref&gt;&lt;ref&gt;{{cite arXiv |last=Seysen |first=Martin |author-link= |eprint=2002.10921 |title=A computer-friendly construction of the monster |class=math.GR |date=13 May 2020}}&lt;/ref&gt;&lt;ref&gt;{{cite arXiv |last=Wilson |first=Robert A. |author-link=Robert A. Wilson (mathematician) |date=18 Oct 2013 |title=The Monster and black-box groups |eprint=1310.5016 |class=math.GR }}&lt;/ref&gt; The mmgroup software package has been used to find two new maximal subgroups of the monster group.{{sfn|Dietrich|Lee|Popiel|2025|}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9129.6113"
+         id="tspan64818"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9133.5801"
+         id="tspan64820">Previously, Robert A. Wilson had found explicitly (with the aid of a computer) two invertible 196,882 by 196,882 matrices (with elements in [[GF(2)|the field of order 2]]) which together [[Generating set of a group|generate]] the monster group by matrix multiplication; this is one dimension lower than the {{nobr|{{gaps|196|883}} dimensional}} representation in characteristic 0. Performing calculations with these matrices was possible but is too expensive in terms of time and storage space to be useful, as each such matrix occupies over four and a half gigabytes.{{sfn|Borcherds|2002|p=1076}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9137.5488"
+         id="tspan64822"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9141.5176"
+         id="tspan64824">Wilson asserts that the best description of the monster is to say, ''&quot;It is the [[automorphism group]] of the [[monster vertex algebra]]&quot;''. This is not much help however, because nobody has found a &quot;really simple and natural construction of the ''monster vertex algebra''&quot;.{{sfn|Borcherds|2002|p=1077}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9145.4863"
+         id="tspan64826"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81232"
+         y="9149.4551"
+         id="tspan64828">Wilson with collaborators found a method of performing calculations with the monster that was considerably faster, although now superseded by Seysen's abovementioned work. Let {{mvar|V}} be a 196,882 dimensional vector space over the field with 2&amp;nbsp;elements. A large subgroup {{mvar|H}} (preferably a maximal subgroup) of the Monster is selected in which it is easy to perform calculations. The subgroup {{mvar|H}} chosen is 3&lt;sup&gt;1+12&lt;/sup&gt;.2.Suz.2, where Suz is the [[Suzuki group (mathematics)|Suzuki group]]. Elements of the monster are stored as words in the elements of {{mvar|H}} and an extra generator {{mvar|T}}. It is reasonably quick to calculate the action of one of these words on a vector in {{mvar|V}}. Using this action, it is possible to perform calculations (such as the order of an element of the monster). Wilson has exhibited vectors {{mvar|u}} and {{mvar|v}} whose joint stabilizer is the trivial group. Thus (for example) one can calculate the order of an element {{mvar|g}} of the monster by finding the smallest {{nobr|&amp;thinsp;{{math|''i'' &amp;gt; 0}}&amp;thinsp;}} such that {{nobr|&amp;thinsp;{{math|''g''&lt;sup&gt;''i''&lt;/sup&gt;''u'' {{=}} ''u''}}&amp;thinsp;}} and {{nobr|&amp;thinsp;{{math|''g''&lt;sup&gt;''i''&lt;/sup&gt;''v'' {{=}} ''v''}}&amp;thinsp;.}} This and similar constructions (in different [[characteristic (algebra)|characteristics]]) were used to find some of the non-local maximal subgroups of the monster group.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9153.4238"
+         id="tspan64830"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9157.3926"
+         id="tspan64832">== Subquotients ==</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9161.3613"
+         id="tspan64834">[[File:MonsterSporadicGroupGraph.svg|thumb|350px|Diagram of the 26&amp;nbsp;sporadic simple groups, showing subquotient relationships.]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9165.3301"
+         id="tspan64836"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9169.2988"
+         id="tspan64838">The monster contains 20 of the 26&amp;nbsp;[[sporadic groups]] as subquotients. This diagram, based on one in the book ''Symmetry and the Monster'' by [[Mark Ronan]], shows how they fit together.{{sfn|Ronan|2006}} The lines signify inclusion, as a subquotient, of the lower group by the upper one. The circled symbols denote groups not involved in larger sporadic groups. For the sake of clarity redundant inclusions are not shown.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9173.2676"
+         id="tspan64840"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9177.2363"
+         id="tspan64842">== Maximal subgroups ==</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9181.2051"
+         id="tspan64844"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9185.1738"
+         id="tspan64846">The monster has 46&amp;nbsp;conjugacy classes of maximal [[subgroups]].{{sfn|Dietrich|Lee|Popiel|2025}} Non-abelian simple groups of some 60&amp;nbsp;[[isomorphism]] types are found as subgroups or as quotients of subgroups. The largest [[alternating group]] represented is A&lt;sub&gt;12&lt;/sub&gt;.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9189.1426"
+         id="tspan64848"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9193.1113"
+         id="tspan64850">The 46 classes of maximal subgroups of the monster are given by the following table. Previous unpublished work of Wilson et. al had purported to rule out any almost simple subgroups with non-abelian simple [[Socle of a group|socles]] of the form U&lt;sub&gt;3&lt;/sub&gt;(4), L&lt;sub&gt;2&lt;/sub&gt;(8), and L&lt;sub&gt;2&lt;/sub&gt;(16).{{sfn|Wilson|2010|pp=393–403}}{{sfn|Norton|Wilson|2013|pp=943–962}}{{sfn|Wilson|2016|pp=355–364}} However, the latter was contradicted by Dietrich et al., who found a new maximal subgroup of the form U&lt;sub&gt;3&lt;/sub&gt;(4). The same authors had previously found a new maximal subgroup of the form L&lt;sub&gt;2&lt;/sub&gt;(13) and confirmed that there are no maximal subgroups with socle L&lt;sub&gt;2&lt;/sub&gt;(8) or L&lt;sub&gt;2&lt;/sub&gt;(16), thus completing the classification in the literature.{{sfn|Dietrich|Lee|Popiel|2025|}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9197.0801"
+         id="tspan64852"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9201.0488"
+         id="tspan64854">{| class=&quot;wikitable&quot;</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9205.0176"
+         id="tspan64856">|+ Maximal subgroups of the Monster</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9208.9863"
+         id="tspan64858">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9212.9551"
+         id="tspan64860">! No. !! Structure !! Order !! Comments</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9216.9238"
+         id="tspan64862">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9220.8926"
+         id="tspan64864">| 1||2&lt;sup&gt;&amp;thinsp;·&amp;thinsp;&lt;/sup&gt;[[Baby Monster group|B]]||style=&quot;text-align:right;&quot;|8,309,562,962,452,852,382,355,161,088,000,000&lt;br /&gt;= 2&lt;sup&gt;42&lt;/sup&gt;·3&lt;sup&gt;13&lt;/sup&gt;·5&lt;sup&gt;6&lt;/sup&gt;·7&lt;sup&gt;2&lt;/sup&gt;·11·13·17·19·23·31·47||centralizer of an involution of class 2A; contains the normalizer (47:23) × 2 of a Sylow 47-subgroup</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9224.8613"
+         id="tspan64866">|- </tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9228.8301"
+         id="tspan64868">| 2||2{{su|a=l|b=+|p=1+24}}&lt;sup&gt;&amp;thinsp;·&amp;thinsp;&lt;/sup&gt;[[Conway group Co1|Co&lt;sub&gt;1&lt;/sub&gt;]]||style=&quot;text-align:right;&quot;|139,511,839,126,336,328,171,520,000&lt;br /&gt;= 2&lt;sup&gt;46&lt;/sup&gt;·3&lt;sup&gt;9&lt;/sup&gt;·5&lt;sup&gt;4&lt;/sup&gt;·7&lt;sup&gt;2&lt;/sup&gt;·11·13·23||centralizer of an involution of class 2B</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9232.7988"
+         id="tspan64870">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9236.7676"
+         id="tspan64872">| 3||3&lt;sup&gt;&amp;thinsp;·&amp;thinsp;&lt;/sup&gt;[[Fischer group Fi24|Fi&lt;sub&gt;24&lt;/sub&gt;]]||style=&quot;text-align:right;&quot;|7,531,234,255,143,970,327,756,800&lt;br /&gt;= 2&lt;sup&gt;22&lt;/sup&gt;·3&lt;sup&gt;17&lt;/sup&gt;·5&lt;sup&gt;2&lt;/sup&gt;·7&lt;sup&gt;3&lt;/sup&gt;·11·13·17·23·29||normalizer of a subgroup of order 3 (class 3A); contains the normalizer ((29:14) × 3).2 of a Sylow 29-subgroup</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9240.7363"
+         id="tspan64874">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9244.7051"
+         id="tspan64876">| 4||2&lt;sup&gt;2&amp;thinsp;·&amp;thinsp;2&lt;/sup&gt;E&lt;sub&gt;6&lt;/sub&gt;(2):S&lt;sub&gt;3&lt;/sub&gt;||style=&quot;text-align:right;&quot;|1,836,779,512,410,596,494,540,800&lt;br /&gt;= 2&lt;sup&gt;39&lt;/sup&gt;·3&lt;sup&gt;10&lt;/sup&gt;·5&lt;sup&gt;2&lt;/sup&gt;·7&lt;sup&gt;2&lt;/sup&gt;·11·13·17·19||normalizer of a Klein 4-group of type 2A&lt;sup&gt;2&lt;/sup&gt;</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9248.6738"
+         id="tspan64878">|- </tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9252.6426"
+         id="tspan64880">| 5||{{nowrap|2&lt;sup&gt;10+16 ·&amp;thinsp;&lt;/sup&gt;O{{su|a=c|b=10|p=+}}(2)}}||style=&quot;text-align:right;&quot;|1,577,011,055,923,770,163,200&lt;br /&gt;= 2&lt;sup&gt;46&lt;/sup&gt;·3&lt;sup&gt;5&lt;/sup&gt;·5&lt;sup&gt;2&lt;/sup&gt;·7·17·31||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9256.6113"
+         id="tspan64882">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9260.5801"
+         id="tspan64884">| 6||2&lt;sup&gt;2+11+22&lt;/sup&gt;.(S&lt;sub&gt;3&lt;/sub&gt; × [[Mathieu group M24|M&lt;sub&gt;24&lt;/sub&gt;]])||style=&quot;text-align:right;&quot;|50,472,333,605,150,392,320&lt;br /&gt;= 2&lt;sup&gt;46&lt;/sup&gt;·3&lt;sup&gt;4&lt;/sup&gt;·5·7·11·23||normalizer of a Klein 4-group; contains the normalizer (23:11) × S&lt;sub&gt;4&lt;/sub&gt; of a Sylow 23-subgroup</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9264.5488"
+         id="tspan64886">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9268.5176"
+         id="tspan64888">| 7||3{{su|a=l|b=+|p=1+12}}.2[[Suzuki group (mathematics)|Suz]].2||style=&quot;text-align:right;&quot;|2,859,230,155,080,499,200&lt;br /&gt;= 2&lt;sup&gt;15&lt;/sup&gt;·3&lt;sup&gt;20&lt;/sup&gt;·5&lt;sup&gt;2&lt;/sup&gt;·7·11·13||normalizer of a subgroup of order 3 (class 3B)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9272.4863"
+         id="tspan64890">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9276.4551"
+         id="tspan64892">| 8||2&lt;sup&gt;5+10+20&lt;/sup&gt;.(S&lt;sub&gt;3&lt;/sub&gt; × L&lt;sub&gt;5&lt;/sub&gt;(2))||style=&quot;text-align:right;&quot;|2,061,452,360,684,666,880&lt;br /&gt;= 2&lt;sup&gt;46&lt;/sup&gt;·3&lt;sup&gt;3&lt;/sup&gt;·5·7·31||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9280.4238"
+         id="tspan64894">|- </tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9284.3926"
+         id="tspan64896">| 9||S&lt;sub&gt;3&lt;/sub&gt; × [[Thompson group (mathematics)|Th]]||style=&quot;text-align:right;&quot;|544,475,663,327,232,000&lt;br /&gt;= 2&lt;sup&gt;16&lt;/sup&gt;·3&lt;sup&gt;11&lt;/sup&gt;·5&lt;sup&gt;3&lt;/sup&gt;·7&lt;sup&gt;2&lt;/sup&gt;·13·19·31||normalizer of a subgroup of order 3 (class 3C); contains the normalizer (31:15) × S&lt;sub&gt;3&lt;/sub&gt; of a Sylow 31-subgroup</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9288.3613"
+         id="tspan64898">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9292.3301"
+         id="tspan64900">|10||2&lt;sup&gt;3+6+12+18&lt;/sup&gt;.(L&lt;sub&gt;3&lt;/sub&gt;(2) × 3S&lt;sub&gt;6&lt;/sub&gt;)||style=&quot;text-align:right;&quot;|199,495,389,743,677,440&lt;br /&gt;= 2&lt;sup&gt;46&lt;/sup&gt;·3&lt;sup&gt;4&lt;/sup&gt;·5·7||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9296.2988"
+         id="tspan64902">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9300.2676"
+         id="tspan64904">|11||3&lt;sup&gt;8&amp;thinsp;·&amp;thinsp;&lt;/sup&gt;O{{su|a=c|b=8|p=&amp;minus;}}(3)&lt;sup&gt;&amp;thinsp;·&amp;thinsp;&lt;/sup&gt;2&lt;sub&gt;3&lt;/sub&gt;||style=&quot;text-align:right;&quot;|133,214,132,225,341,440&lt;br /&gt;= 2&lt;sup&gt;11&lt;/sup&gt;·3&lt;sup&gt;20&lt;/sup&gt;·5·7·13·41||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9304.2363"
+         id="tspan64906">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9308.2051"
+         id="tspan64908">|12||(D&lt;sub&gt;10&lt;/sub&gt; × [[Harada-Norton group|HN]]).2||style=&quot;text-align:right;&quot;|5,460,618,240,000,000&lt;br /&gt;= 2&lt;sup&gt;16&lt;/sup&gt;·3&lt;sup&gt;6&lt;/sup&gt;·5&lt;sup&gt;7&lt;/sup&gt;·7·11·19||normalizer of a subgroup of order 5 (class 5A)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9312.1738"
+         id="tspan64910">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9316.1426"
+         id="tspan64912">|13||(3&lt;sup&gt;2&lt;/sup&gt;:2 × {{nowrap|O{{su|a=c|b=8|p=+}}(3)}}).S&lt;sub&gt;4&lt;/sub&gt;||style=&quot;text-align:right;&quot;|2,139,341,679,820,800&lt;br /&gt;= 2&lt;sup&gt;16&lt;/sup&gt;·3&lt;sup&gt;15&lt;/sup&gt;·5&lt;sup&gt;2&lt;/sup&gt;·7·13||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9320.1113"
+         id="tspan64914">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9324.0801"
+         id="tspan64916">|14||3&lt;sup&gt;2+5+10&lt;/sup&gt;.([[Mathieu group M11|M&lt;sub&gt;11&lt;/sub&gt;]] × 2S&lt;sub&gt;4&lt;/sub&gt;)||style=&quot;text-align:right;&quot;|49,093,924,366,080&lt;br /&gt;= 2&lt;sup&gt;8&lt;/sup&gt;·3&lt;sup&gt;20&lt;/sup&gt;·5·11||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9328.0488"
+         id="tspan64918">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9332.0176"
+         id="tspan64920">|15||3&lt;sup&gt;3+2+6+6&lt;/sup&gt;:(L&lt;sub&gt;3&lt;/sub&gt;(3) × SD&lt;sub&gt;16&lt;/sub&gt;)||style=&quot;text-align:right;&quot;|11,604,018,486,528&lt;br /&gt;= 2&lt;sup&gt;8&lt;/sup&gt;·3&lt;sup&gt;20&lt;/sup&gt;·13||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9335.9863"
+         id="tspan64922">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9339.9551"
+         id="tspan64924">|16||5{{su|a=l|b=+|p=1+6}}:2[[Janko group J2|J&lt;sub&gt;2&lt;/sub&gt;]]:4||style=&quot;text-align:right;&quot;|378,000,000,000&lt;br /&gt;= 2&lt;sup&gt;10&lt;/sup&gt;·3&lt;sup&gt;3&lt;/sup&gt;·5&lt;sup&gt;9&lt;/sup&gt;·7||normalizer of a subgroup of order 5 (class 5B)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9343.9238"
+         id="tspan64926">|- </tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9347.8926"
+         id="tspan64928">|17||(7:3 × [[Held group|He]]):2||style=&quot;text-align:right;&quot;|169,276,262,400&lt;br /&gt;= 2&lt;sup&gt;11&lt;/sup&gt;·3&lt;sup&gt;4&lt;/sup&gt;·5&lt;sup&gt;2&lt;/sup&gt;·7&lt;sup&gt;4&lt;/sup&gt;·17||normalizer of a subgroup of order 7 (class 7A)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9351.8613"
+         id="tspan64930">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9355.8301"
+         id="tspan64932">|18||(A&lt;sub&gt;5&lt;/sub&gt; × A&lt;sub&gt;12&lt;/sub&gt;):2||style=&quot;text-align:right;&quot;|28,740,096,000&lt;br /&gt;= 2&lt;sup&gt;12&lt;/sup&gt;·3&lt;sup&gt;6&lt;/sup&gt;·5&lt;sup&gt;3&lt;/sup&gt;·7·11||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9359.7988"
+         id="tspan64934">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9363.7676"
+         id="tspan64936">|19||5&lt;sup&gt;3+3&lt;/sup&gt;.(2 × L&lt;sub&gt;3&lt;/sub&gt;(5))||style=&quot;text-align:right;&quot;|11,625,000,000&lt;br /&gt;= 2&lt;sup&gt;6&lt;/sup&gt;·3·5&lt;sup&gt;9&lt;/sup&gt;·31||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9367.7363"
+         id="tspan64938">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9371.7051"
+         id="tspan64940">|20||(A&lt;sub&gt;6&lt;/sub&gt; × A&lt;sub&gt;6&lt;/sub&gt; × A&lt;sub&gt;6&lt;/sub&gt;).(2 × S&lt;sub&gt;4&lt;/sub&gt;)||style=&quot;text-align:right;&quot;|2,239,488,000&lt;br /&gt;= 2&lt;sup&gt;13&lt;/sup&gt;·3&lt;sup&gt;7&lt;/sup&gt;·5&lt;sup&gt;3&lt;/sup&gt;||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9375.6738"
+         id="tspan64942">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9379.6426"
+         id="tspan64944">|21||(A&lt;sub&gt;5&lt;/sub&gt; × U&lt;sub&gt;3&lt;/sub&gt;(8):3&lt;sub&gt;1&lt;/sub&gt;):2||style=&quot;text-align:right;&quot;|1,985,679,360&lt;br /&gt;= 2&lt;sup&gt;12&lt;/sup&gt;·3&lt;sup&gt;6&lt;/sup&gt;·5·7·19||contains the normalizer ((19:9) × A&lt;sub&gt;5&lt;/sub&gt;):2 of a Sylow 19-subgroup</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9383.6113"
+         id="tspan64946">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9387.5801"
+         id="tspan64948">|22||5&lt;sup&gt;2+2+4&lt;/sup&gt;:(S&lt;sub&gt;3&lt;/sub&gt; × GL&lt;sub&gt;2&lt;/sub&gt;(5))||style=&quot;text-align:right;&quot;|1,125,000,000&lt;br /&gt;= 2&lt;sup&gt;6&lt;/sup&gt;·3&lt;sup&gt;2&lt;/sup&gt;·5&lt;sup&gt;9&lt;/sup&gt;||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9391.5488"
+         id="tspan64950">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9395.5176"
+         id="tspan64952">|23||(L&lt;sub&gt;3&lt;/sub&gt;(2) × S&lt;sub&gt;4&lt;/sub&gt;(4):2).2||style=&quot;text-align:right;&quot;|658,022,400&lt;br /&gt;= 2&lt;sup&gt;13&lt;/sup&gt;·3&lt;sup&gt;3&lt;/sup&gt;·5&lt;sup&gt;2&lt;/sup&gt;·7·17||contains the normalizer ((17:8) × L&lt;sub&gt;3&lt;/sub&gt;(2)).2 of a Sylow 17-subgroup</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9399.4863"
+         id="tspan64954">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9403.4551"
+         id="tspan64956">|24||7{{su|a=l|b=+|p=1+4}}:(3 × 2S&lt;sub&gt;7&lt;/sub&gt;)||style=&quot;text-align:right;&quot;|508,243,680&lt;br /&gt;= 2&lt;sup&gt;5&lt;/sup&gt;·3&lt;sup&gt;3&lt;/sup&gt;·5·7&lt;sup&gt;6&lt;/sup&gt;||normalizer of a subgroup of order 7 (class 7B)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9407.4238"
+         id="tspan64958">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9411.3926"
+         id="tspan64960">|25||(5&lt;sup&gt;2&lt;/sup&gt;:4.2&lt;sup&gt;2&lt;/sup&gt; × U&lt;sub&gt;3&lt;/sub&gt;(5)).S&lt;sub&gt;3&lt;/sub&gt;||style=&quot;text-align:right;&quot;|302,400,000&lt;br /&gt;= 2&lt;sup&gt;9&lt;/sup&gt;·3&lt;sup&gt;3&lt;/sup&gt;·5&lt;sup&gt;5&lt;/sup&gt;·7||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9415.3613"
+         id="tspan64962">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9419.3301"
+         id="tspan64964">|26||(L&lt;sub&gt;2&lt;/sub&gt;(11) × [[Mathieu group M12|M&lt;sub&gt;12&lt;/sub&gt;]]):2||style=&quot;text-align:right;&quot;|125,452,800&lt;br /&gt;= 2&lt;sup&gt;9&lt;/sup&gt;·3&lt;sup&gt;4&lt;/sup&gt;·5&lt;sup&gt;2&lt;/sup&gt;·11&lt;sup&gt;2&lt;/sup&gt;||contains the normalizer (11:5 × M&lt;sub&gt;12&lt;/sub&gt;):2 of a subgroup of order 11</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9423.2988"
+         id="tspan64966">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9427.2676"
+         id="tspan64968">|27||(A&lt;sub&gt;7&lt;/sub&gt; × (A&lt;sub&gt;5&lt;/sub&gt; × A&lt;sub&gt;5&lt;/sub&gt;):2&lt;sup&gt;2&lt;/sup&gt;):2||style=&quot;text-align:right;&quot;|72,576,000&lt;br /&gt;= 2&lt;sup&gt;10&lt;/sup&gt;·3&lt;sup&gt;4&lt;/sup&gt;·5&lt;sup&gt;3&lt;/sup&gt;·7||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9431.2363"
+         id="tspan64970">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9435.2051"
+         id="tspan64972">|28||5&lt;sup&gt;4&lt;/sup&gt;:(3 × 2L&lt;sub&gt;2&lt;/sub&gt;(25)):2&lt;sub&gt;2&lt;/sub&gt;||style=&quot;text-align:right;&quot;|58,500,000&lt;br /&gt;= 2&lt;sup&gt;5&lt;/sup&gt;·3&lt;sup&gt;2&lt;/sup&gt;·5&lt;sup&gt;6&lt;/sup&gt;·13||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9439.1738"
+         id="tspan64974">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9443.1426"
+         id="tspan64976">|29||7&lt;sup&gt;2+1+2&lt;/sup&gt;:GL&lt;sub&gt;2&lt;/sub&gt;(7)||style=&quot;text-align:right;&quot;|33,882,912&lt;br /&gt;= 2&lt;sup&gt;5&lt;/sup&gt;·3&lt;sup&gt;2&lt;/sup&gt;·7&lt;sup&gt;6&lt;/sup&gt;||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9447.1113"
+         id="tspan64978">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9451.0801"
+         id="tspan64980">|30||[[Mathieu group M11|M&lt;sub&gt;11&lt;/sub&gt;]] × A&lt;sub&gt;6&lt;/sub&gt;.2&lt;sup&gt;2&lt;/sup&gt;||style=&quot;text-align:right;&quot;|11,404,800&lt;br /&gt;= 2&lt;sup&gt;9&lt;/sup&gt;·3&lt;sup&gt;4&lt;/sup&gt;·5&lt;sup&gt;2&lt;/sup&gt;·11||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9455.0488"
+         id="tspan64982">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9459.0176"
+         id="tspan64984">|31||(S&lt;sub&gt;5&lt;/sub&gt; × S&lt;sub&gt;5&lt;/sub&gt; × S&lt;sub&gt;5&lt;/sub&gt;):S&lt;sub&gt;3&lt;/sub&gt;||style=&quot;text-align:right;&quot;|10,368,000&lt;br /&gt;= 2&lt;sup&gt;10&lt;/sup&gt;·3&lt;sup&gt;4&lt;/sup&gt;·5&lt;sup&gt;3&lt;/sup&gt;||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9462.9863"
+         id="tspan64986">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9466.9551"
+         id="tspan64988">|32||(L&lt;sub&gt;2&lt;/sub&gt;(11) × L&lt;sub&gt;2&lt;/sub&gt;(11)):4||style=&quot;text-align:right;&quot;|1,742,400&lt;br /&gt;= 2&lt;sup&gt;6&lt;/sup&gt;·3&lt;sup&gt;2&lt;/sup&gt;·5&lt;sup&gt;2&lt;/sup&gt;·11&lt;sup&gt;2&lt;/sup&gt;||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9470.9238"
+         id="tspan64990">|- </tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9474.8926"
+         id="tspan64992">|33||13&lt;sup&gt;2&lt;/sup&gt;:2L&lt;sub&gt;2&lt;/sub&gt;(13).4||style=&quot;text-align:right;&quot;|1,476,384&lt;br /&gt;= 2&lt;sup&gt;5&lt;/sup&gt;·3·7·13&lt;sup&gt;3&lt;/sup&gt;||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9478.8613"
+         id="tspan64994">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9482.8301"
+         id="tspan64996">|34||(7&lt;sup&gt;2&lt;/sup&gt;:(3 × 2A&lt;sub&gt;4&lt;/sub&gt;) × L&lt;sub&gt;2&lt;/sub&gt;(7)):2||style=&quot;text-align:right;&quot;|1,185,408&lt;br /&gt;= 2&lt;sup&gt;7&lt;/sup&gt;·3&lt;sup&gt;3&lt;/sup&gt;·7&lt;sup&gt;3&lt;/sup&gt;||</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9486.7988"
+         id="tspan64998">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9490.7676"
+         id="tspan65000">|35||(13:6 × L&lt;sub&gt;3&lt;/sub&gt;(3)).2||style=&quot;text-align:right;&quot;|876,096&lt;br /&gt;= 2&lt;sup&gt;6&lt;/sup&gt;·3&lt;sup&gt;4&lt;/sup&gt;·13&lt;sup&gt;2&lt;/sup&gt;||normalizer of a subgroup of order 13 (class 13A)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9494.7363"
+         id="tspan65002">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9498.7051"
+         id="tspan65004">|36||13{{su|a=l|b=+|p=1+2}}:(3 × 4S&lt;sub&gt;4&lt;/sub&gt;)||style=&quot;text-align:right;&quot;|632,736&lt;br /&gt;= 2&lt;sup&gt;5&lt;/sup&gt;·3&lt;sup&gt;2&lt;/sup&gt;·13&lt;sup&gt;3&lt;/sup&gt;||normalizer of a subgroup of order 13 (class 13B); normalizer of a Sylow 13-subgroup</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9502.6738"
+         id="tspan65006">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9506.6426"
+         id="tspan65008">|37||U&lt;sub&gt;3&lt;/sub&gt;(4):4||style=&quot;text-align:right;&quot;|249,600&lt;br /&gt;= 2&lt;sup&gt;8&lt;/sup&gt;·3·5&lt;sup&gt;2&lt;/sup&gt;·13||{{sfn|Dietrich|Lee|Popiel|2025|}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9510.6113"
+         id="tspan65010">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9514.5801"
+         id="tspan65012">|38||L&lt;sub&gt;2&lt;/sub&gt;(71)||style=&quot;text-align:right;&quot;|178,920&lt;br /&gt;= 2&lt;sup&gt;3&lt;/sup&gt;·3&lt;sup&gt;2&lt;/sup&gt;·5·7·71||contains the normalizer 71:35 of a Sylow 71-subgroup{{sfn|Holmes|Wilson|2008|pp=2653–2667}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9518.5488"
+         id="tspan65014">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9522.5176"
+         id="tspan65016">|39||11&lt;sup&gt;2&lt;/sup&gt;:(5 × 2A&lt;sub&gt;5&lt;/sub&gt;)||style=&quot;text-align:right;&quot;|72,600&lt;br /&gt;= 2&lt;sup&gt;3&lt;/sup&gt;·3·5&lt;sup&gt;2&lt;/sup&gt;·11&lt;sup&gt;2&lt;/sup&gt;||normalizer of a Sylow 11-subgroup.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9526.4863"
+         id="tspan65018">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9530.4551"
+         id="tspan65020">|40||L&lt;sub&gt;2&lt;/sub&gt;(41)||style=&quot;text-align:right;&quot;|34,440&lt;br /&gt;= 2&lt;sup&gt;3&lt;/sup&gt;·3·5·7·41||Norton and Wilson found a maximal subgroup of this form; due to a subtle error pointed out by Zavarnitsine some previous lists and papers stated that no such maximal subgroup existed{{sfn|Norton|Wilson|2013|pp=943–962}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9534.4238"
+         id="tspan65022">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9538.3926"
+         id="tspan65024">|41||L&lt;sub&gt;2&lt;/sub&gt;(29):2||style=&quot;text-align:right;&quot;|24,360&lt;br /&gt;= 2&lt;sup&gt;3&lt;/sup&gt;·3·5·7·29||{{sfn|Holmes|Wilson|2002|pp=435–447}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9542.3613"
+         id="tspan65026">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9546.3301"
+         id="tspan65028">|42||7&lt;sup&gt;2&lt;/sup&gt;:SL&lt;sub&gt;2&lt;/sub&gt;(7)||style=&quot;text-align:right;&quot;|16,464&lt;br /&gt;=2&lt;sup&gt;4&lt;/sup&gt;·3·7&lt;sup&gt;3&lt;/sup&gt;||this was accidentally omitted from some previous lists of 7-local subgroups</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9550.2988"
+         id="tspan65030">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9554.2676"
+         id="tspan65032">|43||L&lt;sub&gt;2&lt;/sub&gt;(19):2||style=&quot;text-align:right;&quot;|6,840&lt;br /&gt;= 2&lt;sup&gt;3&lt;/sup&gt;·3&lt;sup&gt;2&lt;/sup&gt;·5·19||{{sfn|Holmes|Wilson|2008|pp=2653–2667}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9558.2363"
+         id="tspan65034">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9562.2051"
+         id="tspan65036">|44||L&lt;sub&gt;2&lt;/sub&gt;(13):2||style=&quot;text-align:right;&quot;|2,184&lt;br /&gt;= 2&lt;sup&gt;3&lt;/sup&gt;·3·7·13||{{sfn|Dietrich|Lee|Popiel|2025|}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9566.1738"
+         id="tspan65038">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9570.1426"
+         id="tspan65040">|45||59:29||style=&quot;text-align:right;&quot;|1,711&lt;br /&gt;= 29·59||previously thought to be L&lt;sub&gt;2&lt;/sub&gt;(59);{{sfn|Dietrich|Lee|Popiel|2025|}} normalizer of a Sylow 59-subgroup</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9574.1113"
+         id="tspan65042">|-</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9578.0801"
+         id="tspan65044">|46||41:40||style=&quot;text-align:right;&quot;|1,640&lt;br /&gt;= 2&lt;sup&gt;3&lt;/sup&gt;·5·41||normalizer of a Sylow 41-subgroup</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9582.0488"
+         id="tspan65046">|}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9586.0176"
+         id="tspan65048"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9589.9863"
+         id="tspan65050">Note that tables of maximal subgroups have often been found to contain subtle errors, and in particular at least two of the subgroups in this table were incorrectly omitted from some previous lists.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9593.9551"
+         id="tspan65052"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9597.9238"
+         id="tspan65054">== McKay's E&lt;sub&gt;8&lt;/sub&gt; observation ==</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9601.8926"
+         id="tspan65056">There are also connections between the monster and the extended [[Dynkin diagram]]s &lt;math&gt;\tilde E_8&lt;/math&gt; specifically between the nodes of the diagram and certain conjugacy classes in the monster, known as ''McKay's E&lt;sub&gt;8&lt;/sub&gt; observation''.{{sfn|Duncan|2008}}{{sfn|le Bruyn|2009}}{{sfn|He|McKay|2015}} This is then extended to a relation between the extended diagrams &lt;math&gt;\tilde E_6, \tilde E_7, \tilde E_8&lt;/math&gt; and the groups 3.Fi&lt;sub&gt;24&lt;/sub&gt;{{prime}}, 2.B, and M, where these are (3/2/1-fold central extensions) of the [[Fischer group]], [[baby monster group]], and monster. These are the [[sporadic group]]s associated with centralizers of elements of type 1A, 2A, and 3A in the monster, and the order of the extension corresponds to the symmetries of the diagram. See [[ADE classification#Trinities|ADE classification: trinities]] for further connections (of [[McKay correspondence]] type), including (for the monster) with the rather small simple group [[projective special linear group|PSL]](2,11) and with the 120 tritangent planes of a canonic sextic curve of genus 4 known as [[Bring's curve]].</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9605.8613"
+         id="tspan65058"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9609.8301"
+         id="tspan65060">== Moonshine ==</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9613.7988"
+         id="tspan65062">{{main|Monstrous moonshine}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9617.7676"
+         id="tspan65064"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9621.7363"
+         id="tspan65066">The monster group is one of two principal constituents in the [[monstrous moonshine]] conjecture by Conway and Norton,{{sfn|Conway|Norton|1979|pp=308–339}} which relates discrete and non-discrete mathematics and was finally proved by [[Richard Ewen Borcherds|Richard Borcherds]] in 1992.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9625.7051"
+         id="tspan65068"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9629.6738"
+         id="tspan65070">In this setting, the monster group is visible as the automorphism group of the [[monster module]], a [[vertex operator algebra]], an infinite dimensional algebra containing the Griess algebra, and acts on the [[monster Lie algebra]], a [[generalized Kac–Moody algebra]].</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9633.6426"
+         id="tspan65072"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9637.6113"
+         id="tspan65074">Many mathematicians, including Conway, have seen the monster as a beautiful and still mysterious object.{{sfn|Roberts|2013}} Conway said of the monster group: &quot;There's never been any kind of explanation of why it's there, and it's obviously not there just by coincidence. It's got too many intriguing properties for it all to be just an accident.&quot;{{sfn|Haran|2014|loc=[https://www.youtube.com/watch?v=xOCe5HUObD4&amp;t=477s 7:57]}} [[Simon P. Norton]], an expert on the properties of the monster group, is quoted as saying, &quot;I can explain what Monstrous Moonshine is in one sentence, it is the voice of God.&quot;{{sfn|Masters|2019}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9641.5801"
+         id="tspan65076"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9645.5488"
+         id="tspan65078">== See also ==</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9649.5176"
+         id="tspan65080">* [[Supersingular prime (moonshine theory)|Supersingular prime]], the prime numbers that divide the order of the monster</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9653.4863"
+         id="tspan65082">* [[Bimonster group]], the wreath square of the monster group, which has a surprisingly simple presentation</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9657.4551"
+         id="tspan65084"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9661.4238"
+         id="tspan65086">==Citations==</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9665.3926"
+         id="tspan65088">{{Reflist|20em}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9669.3613"
+         id="tspan65090"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9673.3301"
+         id="tspan65092">== Sources ==</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9677.2988"
+         id="tspan65094">{{refbegin|25em|small=y}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9681.2676"
+         id="tspan65096">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9685.2363"
+         id="tspan65098"> | last = Borcherds | first = R.E.  | author-link = Richard Borcherds</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9689.2051"
+         id="tspan65100"> | date = October 2002</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9693.1738"
+         id="tspan65102"> | title = What is ... the Monster?</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9697.1426"
+         id="tspan65104"> | journal = [[Notices of the American Mathematical Society]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9701.1113"
+         id="tspan65106"> | volume = 49 | issue = 9</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9705.0801"
+         id="tspan65108"> | url = https://www.ams.org/notices/200209/what-is.pdf</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9709.0488"
+         id="tspan65110"> | via=ams.org</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9713.0176"
+         id="tspan65112">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9716.9863"
+         id="tspan65114">* {{cite web</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9720.9551"
+         id="tspan65116"> | last = le Bruyn | first = Lieven</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9724.9238"
+         id="tspan65118"> | date = 22 April 2009</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9728.8926"
+         id="tspan65120"> | title = The monster graph and McKay's observation</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9732.8613"
+         id="tspan65122"> | website = neverendingbooks</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9736.8301"
+         id="tspan65124"> | url = http://www.neverendingbooks.org/the-monster-graph-and-mckays-observation</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9740.7988"
+         id="tspan65126">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9744.7676"
+         id="tspan65128">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9748.7363"
+         id="tspan65130"> | last = Conway | first = J.H. | author-link = John Horton Conway</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9752.7051"
+         id="tspan65132"> | year = 1985</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9756.6738"
+         id="tspan65134"> | title = A simple construction for the Fischer–Griess monster group</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9760.6426"
+         id="tspan65136"> | journal = [[Inventiones Mathematicae]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9764.6113"
+         id="tspan65138"> | volume = 79 | issue = 3 | pages = 513–540</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9768.5801"
+         id="tspan65140"> | bibcode = 1985InMat..79..513C  | mr = 782233</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9772.5488"
+         id="tspan65142"> | doi = 10.1007/BF01388521 | s2cid = 123340529</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9776.5176"
+         id="tspan65144">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9780.4863"
+         id="tspan65146">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9784.4551"
+         id="tspan65148"> | last1 = Conway | first1 = J.H. | author1-link = John Horton Conway</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9788.4238"
+         id="tspan65150"> | last2 = Norton | first2 = S.P. | author2-link = Simon P. Norton</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9792.3926"
+         id="tspan65152"> | year  = 1979</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9796.3613"
+         id="tspan65154"> | title = Monstrous moonshine</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9800.3301"
+         id="tspan65156"> | journal = [[Bulletin of the London Mathematical Society]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9804.2988"
+         id="tspan65158"> | volume = 11 | issue = 3 | pages = 308–339</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9808.2676"
+         id="tspan65160"> | doi = 10.1112/blms/11.3.308 </tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9812.2363"
+         id="tspan65162">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9816.2051"
+         id="tspan65164">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9820.1738"
+         id="tspan65166"> | last1 = Dietrich | first1 = Heiko</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9824.1426"
+         id="tspan65168"> | last2 = Lee      | first2 = Melissa</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9828.1113"
+         id="tspan65170"> | last3 = Popiel   | first3 = Tomasz</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9832.0801"
+         id="tspan65172"> | year = 2025</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9836.0488"
+         id="tspan65174"> | title = The maximal subgroups of the Monster</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9840.0176"
+         id="tspan65176"> | journal = [[Advances in Mathematics]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9843.9863"
+         id="tspan65178"> | volume = 469</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9847.9551"
+         id="tspan65180"> | article-number=110214</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9851.9238"
+         id="tspan65182"> | doi = 10.1016/j.aim.2025.110214 | arxiv = 2304.14646</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9855.8926"
+         id="tspan65184"> | bibcode = 2023arXiv230414646D</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9859.8613"
+         id="tspan65186">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9863.8301"
+         id="tspan65188">* {{cite arXiv</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9867.7988"
+         id="tspan65190"> | last = Duncan | first = John F.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9871.7676"
+         id="tspan65192"> | year = 2008</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9875.7363"
+         id="tspan65194"> | title = Arithmetic groups and the affine E8 Dynkin diagram</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9879.7051"
+         id="tspan65196"> | class = math. RT</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9883.6738"
+         id="tspan65198"> | eprint = 0810.1465</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9887.6426"
+         id="tspan65200">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9891.6113"
+         id="tspan65202">* {{cite magazine</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9895.5801"
+         id="tspan65204"> | last = Gardner | first = Martin | author-link = Martin Gardner</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9899.5488"
+         id="tspan65206"> | date = June 1980</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9903.5176"
+         id="tspan65208"> | title = The capture of the monster: A mathematical group with a ridiculous number of elements</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9907.4863"
+         id="tspan65210"> | department = Mathematical games</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9911.4551"
+         id="tspan65212"> | magazine = [[Scientific American]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9915.4238"
+         id="tspan65214"> | volume = 242 | issue = 6 | pages = 20–33</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9919.3926"
+         id="tspan65216"> | issn = 0036-8733 | jstor = 24966339</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9923.3613"
+         id="tspan65218"> | url  = http://www.scientificamerican.com/article/mathematical-games-1980-06/</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9927.3301"
+         id="tspan65220"> | via  = scientificamerican.com</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9931.2988"
+         id="tspan65222">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9935.2676"
+         id="tspan65224">* {{cite conference</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9939.2363"
+         id="tspan65226"> | last = Griess | first = Robert L.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9943.2051"
+         id="tspan65228"> | year = 1975</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9947.1738"
+         id="tspan65230"> | title = The structure of the monster simple group</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9951.1426"
+         id="tspan65232"> | book-title = Proceedings of the Conference on Finite Groups</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9955.1113"
+         id="tspan65234"> | place = [[University of Utah]], Provo, UT</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9959.0801"
+         id="tspan65236"> | editor1-last = Scott | editor1-first = W. Richard</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9963.0488"
+         id="tspan65238"> | editor2-last = Gross | editor2-first = Fletcher</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9967.0176"
+         id="tspan65240"> | publisher = [[Academic Press]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9970.9863"
+         id="tspan65242"> | publication-date = 1976</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9974.9551"
+         id="tspan65244"> | publication-place = Boston, MA</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9978.9238"
+         id="tspan65246"> | pages = 113–118</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9982.8926"
+         id="tspan65248"> | isbn = 978-012633650-4 | mr = 0399248</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9986.8613"
+         id="tspan65250">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9990.8301"
+         id="tspan65252">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9994.7988"
+         id="tspan65254"> | last = Griess | first = Robert L.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="9998.7676"
+         id="tspan65256"> | year = 1982</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10002.736"
+         id="tspan65258"> | title = The friendly giant</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10006.705"
+         id="tspan65260"> | journal = [[Inventiones Mathematicae]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10010.674"
+         id="tspan65262"> | volume = 69 | issue = 1 | pages = 1–102</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10014.643"
+         id="tspan65264"> | bibcode = 1982InMat..69....1G | mr = 671653</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10018.611"
+         id="tspan65266"> | doi = 10.1007/BF01389186 | s2cid = 123597150</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10022.58"
+         id="tspan65268"> | hdl = 2027.42/46608 | hdl-access = free</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10026.549"
+         id="tspan65270"> | url = https://deepblue.lib.umich.edu/bitstream/2027.42/46608/1/222_2005_Article_BF01389186.pdf</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10030.518"
+         id="tspan65272"> | via = U.Mich. (lib.umich.edu)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10034.486"
+         id="tspan65274"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10038.455"
+         id="tspan65276">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10042.424"
+         id="tspan65278">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10046.393"
+         id="tspan65280"> | last1 = Griess | first1 = Robert L.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10050.361"
+         id="tspan65282"> | last2 = Meierfrankenfeld | first2 = Ulrich</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10054.33"
+         id="tspan65284"> | last3 = Segev | first3 = Yoav</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10058.299"
+         id="tspan65286"> | year = 1989</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10062.268"
+         id="tspan65288"> | title = A uniqueness proof for the Monster</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10066.236"
+         id="tspan65290"> | journal = [[Annals of Mathematics]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10070.205"
+         id="tspan65292"> | volume = 130 | issue = 3 | pages = 567–602</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10074.174"
+         id="tspan65294"> | series = Second Series</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10078.143"
+         id="tspan65296"> | doi = 10.2307/1971455 | jstor = 1971455 | mr = 1025167</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10082.111"
+         id="tspan65298">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10086.08"
+         id="tspan65300">* {{cite AV media</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10090.049"
+         id="tspan65302"> | last = Haran | first = Brady</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10094.018"
+         id="tspan65304"> | year = 2014</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10097.986"
+         id="tspan65306"> | title = Life, death, and the Monster (John Conway)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10101.955"
+         id="tspan65308"> | publisher = [[Numberphile]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10105.924"
+         id="tspan65310"> | at = 7{{sup|m}}57{{sup|s}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10109.893"
+         id="tspan65312"> | url = https://www.youtube.com/watch?v=xOCe5HUObD4</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10113.861"
+         id="tspan65314"> | via = [[YouTube]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10117.83"
+         id="tspan65316">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10121.799"
+         id="tspan65318">* {{cite arXiv</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10125.768"
+         id="tspan65320"> | last1 = He    | first1 = Y.-H. | author1-link = Yang-Hui He</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10129.736"
+         id="tspan65322"> | last2 = McKay | first2 = John</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10133.705"
+         id="tspan65324"> | date = 25 May 2015</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10137.674"
+         id="tspan65326"> | title = Sporadic and Exceptional</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10141.643"
+         id="tspan65328"> | class = math. AG</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10145.611"
+         id="tspan65330"> | eprint = 1505.06742</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10149.58"
+         id="tspan65332">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10153.549"
+         id="tspan65334">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10157.518"
+         id="tspan65336"> | last1 = Holmes | first1 = Petra E.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10161.486"
+         id="tspan65338"> | last2 = Wilson | first2 = Robert A.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10165.455"
+         id="tspan65340"> | year = 2002</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10169.424"
+         id="tspan65342"> | title = A new maximal subgroup of the Monster</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10173.393"
+         id="tspan65344"> | journal = [[Journal of Algebra]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10177.361"
+         id="tspan65346"> | volume = 251 | issue = 1 | pages = 435–447</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10181.33"
+         id="tspan65348"> | doi = 10.1006/jabr.2001.9037 | doi-access = free</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10185.299"
+         id="tspan65350"> | mr = 1900293</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10189.268"
+         id="tspan65352">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10193.236"
+         id="tspan65354">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10197.205"
+         id="tspan65356"> | last1 = Holmes | first1 = Petra E.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10201.174"
+         id="tspan65358"> | last2 = Wilson | first2 = Robert A.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10205.143"
+         id="tspan65360"> | year = 2004</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10209.111"
+         id="tspan65362"> | title = PSL&lt;sub&gt;2&lt;/sub&gt;(59) is a subgroup of the Monster</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10213.08"
+         id="tspan65364"> | journal = [[Journal of the London Mathematical Society]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10217.049"
+         id="tspan65366"> | volume = 69 | issue = 1 | pages = 141–152</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10221.018"
+         id="tspan65368"> | series = Second Series</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10224.986"
+         id="tspan65370"> | doi = 10.1112/S0024610703004915</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10228.955"
+         id="tspan65372"> | mr = 2025332 | s2cid = 122913546</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10232.924"
+         id="tspan65374">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10236.893"
+         id="tspan65376">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10240.861"
+         id="tspan65378"> | last1 = Holmes | first1 = Petra E.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10244.83"
+         id="tspan65380"> | last2 = Wilson | first2 = Robert A.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10248.799"
+         id="tspan65382"> | year = 2008</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10252.768"
+         id="tspan65384"> | title = On subgroups of the Monster containing A&lt;sub&gt;5&lt;/sub&gt;'s</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10256.736"
+         id="tspan65386"> | journal = [[Journal of Algebra]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10260.705"
+         id="tspan65388"> | volume = 319 | issue = 7 | pages = 2653–2667</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10264.674"
+         id="tspan65390"> | doi = 10.1016/j.jalgebra.2003.11.014 | doi-access = free</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10268.643"
+         id="tspan65392"> | mr = 2397402</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10272.611"
+         id="tspan65394">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10276.58"
+         id="tspan65396">* {{cite news</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10280.549"
+         id="tspan65398"> | last = Masters | first = Alexander</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10284.518"
+         id="tspan65400"> | date = 22 February 2019</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10288.486"
+         id="tspan65402"> | title = Simon Norton</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10292.455"
+         id="tspan65404"> | department = Obituary</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10296.424"
+         id="tspan65406"> | newspaper = [[The Guardian]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10300.393"
+         id="tspan65408"> | url = https://www.theguardian.com/education/2019/feb/22/simon-norton-obituary</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10304.361"
+         id="tspan65410">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10308.33"
+         id="tspan65412">* {{cite conference</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10312.299"
+         id="tspan65414"> | last = Norton | first = Simon P.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10316.268"
+         id="tspan65416"> | year =  1982</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10320.236"
+         id="tspan65418"> | title = The uniqueness of the Fischer–Griess Monster</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10324.205"
+         id="tspan65420"> | conference = Finite groups – coming of age</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10328.174"
+         id="tspan65422"> | place = Montreal, QC</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10332.143"
+         id="tspan65424"> | publisher = [[American Mathematical Society]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10336.111"
+         id="tspan65426"> | publication-place = Providence, RI</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10340.08"
+         id="tspan65428"> | publication-date = 1985</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10344.049"
+         id="tspan65430"> | series = Contemp. Math.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10348.018"
+         id="tspan65432"> | volume = 45 | pages = 271–285</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10351.986"
+         id="tspan65434"> | doi = 10.1090/conm/045/822242</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10355.955"
+         id="tspan65436"> | isbn = 978-082185047-3 | mr = 822242</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10359.924"
+         id="tspan65438">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10363.893"
+         id="tspan65440">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10367.861"
+         id="tspan65442"> | last1 = Norton | first1 = Simon P.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10371.83"
+         id="tspan65444"> | last2 = Wilson | first2 = Robert A.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10375.799"
+         id="tspan65446"> | year = 2013</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10379.768"
+         id="tspan65448"> | title = A correction to the 41&amp;nbsp;structure of the Monster, a construction of a new maximal subgroup L2(41) and a new Moonshine phenomenon</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10383.736"
+         id="tspan65450"> | journal = [[Journal of the London Mathematical Society]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10387.705"
+         id="tspan65452"> | series = Second Series</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10391.674"
+         id="tspan65454"> | volume = 87 | issue = 3 | pages = 943–962</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10395.643"
+         id="tspan65456"> | doi = 10.1112/jlms/jds078</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10399.611"
+         id="tspan65458"> | s2cid = 7075719</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10403.58"
+         id="tspan65460"> | url = http://www.maths.qmul.ac.uk/~raw/pubs_files/ML241sub.pdf</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10407.549"
+         id="tspan65462"> | via=Q.Mary.U.London</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10411.518"
+         id="tspan65464">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10415.486"
+         id="tspan65466">* {{cite book</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10419.455"
+         id="tspan65468"> | last = Roberts | first = Siobhan</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10423.424"
+         id="tspan65470"> | year = 2013</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10427.393"
+         id="tspan65472"> | title = Curiosities: Pursuing the Monster</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10431.361"
+         id="tspan65474"> | publisher = [[Institute for Advanced Study]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10435.33"
+         id="tspan65476"> | place = Princeton, NJ</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10439.299"
+         id="tspan65478"> | url = https://www.ias.edu/ideas/2013/roberts-monster</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10443.268"
+         id="tspan65480">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10447.236"
+         id="tspan65482">* {{cite book</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10451.205"
+         id="tspan65484"> | last = Ronan | first = M.  | author-link = Mark Ronan</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10455.174"
+         id="tspan65486"> | year = 2006</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10459.143"
+         id="tspan65488"> | title = Symmetry and the Monster</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10463.111"
+         id="tspan65490"> | publisher = Oxford University Press</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10467.08"
+         id="tspan65492"> | isbn = 019280722-6</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10471.049"
+         id="tspan65494">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10475.018"
+         id="tspan65496">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10478.986"
+         id="tspan65498"> | last = Thompson | first = John G. | author-link = John G. Thompson</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10482.955"
+         id="tspan65500"> | year = 1979</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10486.924"
+         id="tspan65502"> | title = Uniqueness of the Fischer-Griess monster</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10490.893"
+         id="tspan65504"> | journal = [[Bulletin of the London Mathematical Society]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10494.861"
+         id="tspan65506"> | volume = 11 | issue = 3 | pages = 340–346</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10498.83"
+         id="tspan65508"> | doi = 10.1112/blms/11.3.340 | mr = 554400</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10502.799"
+         id="tspan65510">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10506.768"
+         id="tspan65512">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10510.736"
+         id="tspan65514"> | last = Thompson | first = John G. | author-link = John G. Thompson</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10514.705"
+         id="tspan65516"> | year = 1984</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10518.81"
+         id="tspan65518"> | title = Some finite groups which appear as Gal ''L''/''K'', where ''K'' ⊆ Q(μ&lt;sub&gt;n&lt;/sub&gt;)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10522.778"
+         id="tspan65520"> | journal = [[Journal of Algebra]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10526.747"
+         id="tspan65522"> | volume = 89 | issue = 2 | pages = 437–499</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10530.716"
+         id="tspan65524"> | doi = 10.1016/0021-8693(84)90228-X | doi-access = free</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10534.685"
+         id="tspan65526"> | mr = 751155</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10538.653"
+         id="tspan65528">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10542.622"
+         id="tspan65530">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10546.591"
+         id="tspan65532"> | last = Tits | first = Jacques | author-link = Jacques Tits</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10550.56"
+         id="tspan65534"> | year = 1983</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10554.528"
+         id="tspan65536"> | title = Le Monstre (d'après R.&amp;nbsp;Griess, B.&amp;nbsp;Fischer ''et al''.)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10558.497"
+         id="tspan65538"> | journal = [[Astérisque]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10562.466"
+         id="tspan65540"> | issue = 121 | pages = 105–122</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10566.435"
+         id="tspan65542"> | mr = 768956 | zbl = 0548.20010</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10570.403"
+         id="tspan65544"> | url = http://www.numdam.org/item?id=SB_1983-1984__26__105_0</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10574.372"
+         id="tspan65546">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10578.341"
+         id="tspan65548">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10582.31"
+         id="tspan65550"> | last = Tits | first = Jacques | author-link = Jacques Tits</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10586.278"
+         id="tspan65552"> | year = 1984</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10590.247"
+         id="tspan65554"> | title = On R. Griess' &quot;friendly giant&quot;</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10594.216"
+         id="tspan65556"> | journal = [[Inventiones Mathematicae]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10598.185"
+         id="tspan65558"> | volume = 78 | issue = 3 | pages = 491–499</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10602.153"
+         id="tspan65560"> | bibcode = 1984InMat..78..491T | doi = 10.1007/BF01388446</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10606.122"
+         id="tspan65562"> | mr = 768989 | s2cid = 122379975 </tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10610.091"
+         id="tspan65564">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10614.06"
+         id="tspan65566">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10618.028"
+         id="tspan65568"> | last = Wilson | first = R.A. | author-link = Robert Arnott Wilson</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10621.997"
+         id="tspan65570"> | year = 2001</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10625.966"
+         id="tspan65572"> | title = The Monster is a Hurwitz group</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10629.935"
+         id="tspan65574"> | journal = [[Journal of Group Theory]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10633.903"
+         id="tspan65576"> | volume = 4 | issue = 4 | pages = 367–374</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10637.872"
+         id="tspan65578"> | doi = 10.1515/jgth.2001.027 | mr = 1859175</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10641.841"
+         id="tspan65580"> | url = http://web.mat.bham.ac.uk/R.A.Wilson/pubs/MHurwitz.ps</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10645.81"
+         id="tspan65582"> | url-access = subscription |via=mat.bham.ac.uk/</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10649.778"
+         id="tspan65584"> | archive-url = https://web.archive.org/web/20120305071856/http://web.mat.bham.ac.uk/R.A.Wilson/pubs/MHurwitz.ps</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10653.747"
+         id="tspan65586"> | archive-date = 2012-03-05 </tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10657.716"
+         id="tspan65588"> }}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10661.685"
+         id="tspan65590">* {{cite book</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10665.653"
+         id="tspan65592"> | last = Wilson | first = R.A.  | author-link = Robert Arnott Wilson</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10669.622"
+         id="tspan65594"> | year = 2010</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10673.591"
+         id="tspan65596"> | chapter = New computations in the Monster</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10677.56"
+         id="tspan65598"> | title = Moonshine: The first quarter century and beyond</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10681.528"
+         id="tspan65600"> | publisher = [[Cambridge University Press]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10685.497"
+         id="tspan65602"> | volume = 372 | series = [[London Mathematical Society|London Math. Soc.]] Lecture Note Ser.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10689.466"
+         id="tspan65604"> | pages = 393–403</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10693.435"
+         id="tspan65606"> | isbn = 978-052110664-1 | mr = 2681789</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10697.403"
+         id="tspan65608">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10701.372"
+         id="tspan65610">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10705.341"
+         id="tspan65612"> | last = Wilson | first = R.A.  | author-link = Robert Arnott Wilson</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10709.31"
+         id="tspan65614"> | year = 2016</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10713.278"
+         id="tspan65616"> | title = Is the Suzuki group Sz(8) a subgroup of the Monster?</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10717.247"
+         id="tspan65618"> | journal = [[Bulletin of the London Mathematical Society]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10721.216"
+         id="tspan65620"> | volume = 48 | issue = 2 | pages = 355–364</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10725.185"
+         id="tspan65622"> | doi = 10.1112/blms/bdw012 | mr = 3483073</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10729.153"
+         id="tspan65624"> | s2cid = 123219818</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10733.122"
+         id="tspan65626"> | url = https://qmro.qmul.ac.uk/xmlui/bitstream/123456789/12414/1/Wilson%20Is%20Sz%20%288%29%20a%20subgroup%202016%20Accepted.pdf</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10737.091"
+         id="tspan65628"> | via=Q.Mary.U.London / research online (qmro.qmul.ac.uk)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10741.06"
+         id="tspan65630">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10745.028"
+         id="tspan65632">{{refend}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10748.997"
+         id="tspan65634"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10752.966"
+         id="tspan65636">==Further reading==</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10756.935"
+         id="tspan65638">{{refbegin|25em|small=y}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10760.903"
+         id="tspan65640">* {{cite book</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10764.872"
+         id="tspan65642"> | last1 = Conway | first1 = J.H. | author1-link = John Horton Conway</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10768.841"
+         id="tspan65644"> | last2 = Curtis | first2 = R.T.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10772.81"
+         id="tspan65646"> | last3 = Norton | first3 = S.P. | author3-link = Simon P. Norton</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10776.778"
+         id="tspan65648"> | last4 = Parker | first4 = R.A. | author4-link = Richard A. Parker</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10780.747"
+         id="tspan65650"> | last5 = Wilson | first5 = R.A. | author5-link = Robert Arnott Wilson</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10784.716"
+         id="tspan65652"> | year = 1985</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10788.685"
+         id="tspan65654"> | title = Atlas of Finite Groups: Maximal subgroups and ordinary characters for simple groups</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10792.653"
+         id="tspan65656"> | others = Thackray, J.G. (computational assistance)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10796.622"
+         id="tspan65658"> | publisher = Oxford University Press</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10800.591"
+         id="tspan65660"> | isbn = 978-019853199-9</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10804.56"
+         id="tspan65662">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10808.528"
+         id="tspan65664">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10812.497"
+         id="tspan65666"> | last = Harada | first = Koichiro | author-link = Koichiro Harada</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10816.466"
+         id="tspan65668"> | year = 2001</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10820.435"
+         id="tspan65670"> | title = Mathematics of the Monster</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10824.403"
+         id="tspan65672"> | journal = Sugaku Expositions</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10828.372"
+         id="tspan65674"> | volume = 14 | issue = 1 | pages = 55–71</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10832.341"
+         id="tspan65676"> | mr = 1690763</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10836.31"
+         id="tspan65678">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10840.278"
+         id="tspan65680">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10844.247"
+         id="tspan65682"> | last1 = Holmes | first1 = P.E.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10848.216"
+         id="tspan65684"> | last2 = Wilson | first2 = R.A. | author2-link = Robert Arnott Wilson</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10852.185"
+         id="tspan65686"> | year = 2003</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10856.153"
+         id="tspan65688"> | title = A computer construction of the Monster using 2-local subgroups</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10860.122"
+         id="tspan65690"> | journal = [[Journal of the London Mathematical Society]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10864.091"
+         id="tspan65692"> | volume = 67 | issue = 2 | pages = 346–364</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10868.06"
+         id="tspan65694"> | doi = 10.1112/S0024610702003976</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10872.028"
+         id="tspan65696"> | s2cid = 102338377</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10875.997"
+         id="tspan65698">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10879.966"
+         id="tspan65700">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10883.935"
+         id="tspan65702"> | last = Holmes | first = Petra E.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10887.903"
+         id="tspan65704"> | year = 2008</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10891.872"
+         id="tspan65706"> | title = A classification of subgroups of the Monster isomorphic to S&lt;sub&gt;4&lt;/sub&gt; and an application</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10895.841"
+         id="tspan65708"> | journal = [[Journal of Algebra]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10899.81"
+         id="tspan65710"> | volume = 319 | issue = 8 | pages = 3089–3099</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10903.778"
+         id="tspan65712"> | doi = 10.1016/j.jalgebra.2004.01.031 | doi-access = free</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10907.747"
+         id="tspan65714"> | mr = 2408306</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10911.716"
+         id="tspan65716">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10915.685"
+         id="tspan65718">* {{cite book</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10919.653"
+         id="tspan65720"> | last = Ivanov | first = A.A.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10923.622"
+         id="tspan65722"> | year = 2009</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10927.591"
+         id="tspan65724"> | title = The Monster group and Majorana involutions</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10931.56"
+         id="tspan65726"> | publisher = Cambridge University Press</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10935.528"
+         id="tspan65728"> | volume = 176 | series = Cambridge tracts in mathematics</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10939.497"
+         id="tspan65730"> | doi = 10.1017/CBO9780511576812</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10943.466"
+         id="tspan65732"> | isbn = 978-052188994-0</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10947.435"
+         id="tspan65734"> | url = https://doi.org/10.1017/CBO9780511576812</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10951.403"
+         id="tspan65736">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10955.372"
+         id="tspan65738">* {{cite conference</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10959.341"
+         id="tspan65740"> | last = Norton | first = Simon P.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10963.31"
+         id="tspan65742"> | year = 1995</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10967.278"
+         id="tspan65744"> | title = Anatomy of the Monster.&amp;nbsp;I</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10971.247"
+         id="tspan65746"> | conference = The Atlas of Finite Groups: Ten years on</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10975.216"
+         id="tspan65748"> | place = Birmingham, UK</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10979.185"
+         id="tspan65750"> | publisher = [[Cambridge University Press]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10983.153"
+         id="tspan65752"> | publication-date = 1998</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10987.122"
+         id="tspan65754"> | volume = 249 | series = [[London Mathematical Society|London Math. Soc.]] Lecture Note Ser.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10991.091"
+         id="tspan65756"> | pages = 198–214</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10995.06"
+         id="tspan65758"> | doi = 10.1017/CBO9780511565830.020</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="10999.028"
+         id="tspan65760"> | isbn = 978-052157587-4 | mr = 1647423</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11002.997"
+         id="tspan65762">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11006.966"
+         id="tspan65764">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11010.935"
+         id="tspan65766"> | last1 = Norton | first1 = Simon P.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11014.903"
+         id="tspan65768"> | last2 = Wilson | first2 = Robert A.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11018.872"
+         id="tspan65770"> | year = 2002</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11022.841"
+         id="tspan65772"> | title = Anatomy of the Monster.&amp;nbsp;II</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11026.81"
+         id="tspan65774"> | journal = Proceedings of the London Mathematical Society</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11030.778"
+         id="tspan65776"> | volume = 84 | issue = 3 | pages = 581–598</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11034.747"
+         id="tspan65778"> | series = Third Series</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11038.716"
+         id="tspan65780"> | doi = 10.1112/S0024611502013357 | mr = 1888424</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11042.685"
+         id="tspan65782">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11046.653"
+         id="tspan65784">* {{cite book</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11050.622"
+         id="tspan65786"> | last = du&amp;nbsp;Sautoy | first = M. | author-link = Marcus du Sautoy</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11054.591"
+         id="tspan65788"> | year = 2008</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11058.56"
+         id="tspan65790"> | title = Finding Moonshine</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11062.528"
+         id="tspan65792"> | publisher = Fourth Estate</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11066.497"
+         id="tspan65794"> | isbn = 978-000721461-7</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11070.466"
+         id="tspan65796">}} published in the US by HarperCollins as ''Symmetry'', {{isbn|978-006078940-4}}).</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11074.435"
+         id="tspan65798">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11078.403"
+         id="tspan65800"> | last1 = Wilson | first1 = R.A.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11082.372"
+         id="tspan65802"> | last2 = Walsh  | first2 = P.G.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11086.341"
+         id="tspan65804"> | last3 = Parker | first3 = R.A.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11090.31"
+         id="tspan65806"> | last4 = Linton | first4 = S.A.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11094.278"
+         id="tspan65808"> | year = 1998</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11098.247"
+         id="tspan65810"> | title = Computer construction of the Monster</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11102.216"
+         id="tspan65812"> | journal = [[Journal of Group Theory]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11106.185"
+         id="tspan65814"> | volume = 1 | issue = 4 | pages = 307–337</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11110.153"
+         id="tspan65816"> | doi = 10.1515/jgth.1998.023 | ref = none</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11114.122"
+         id="tspan65818">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11118.091"
+         id="tspan65820">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11122.06"
+         id="tspan65822"> | last1 = McKay | first1 = John</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11126.028"
+         id="tspan65824"> | last2 = He    | first2 = Yang-Hui | author2-link = Yang-Hui He</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11129.997"
+         id="tspan65826"> | year = 2022</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11133.966"
+         id="tspan65828"> | title = Kashiwa Lectures on &quot;New approaches to the Monster&quot;</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11137.935"
+         id="tspan65830"> | journal = Notices of the [[International Congress of Chinese Mathematicians|ICCM]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11141.903"
+         id="tspan65832"> | volume = 10 | issue = 1 | pages = 71–88</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11145.872"
+         id="tspan65834"> | doi = 10.4310/ICCM.2022.v10.n1.a4</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11149.841"
+         id="tspan65836"> | arxiv = 2106.01162 | s2cid = 235293875</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11153.81"
+         id="tspan65838">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11157.778"
+         id="tspan65840">{{refend}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11161.747"
+         id="tspan65842"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11165.716"
+         id="tspan65844">==External links==</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11169.685"
+         id="tspan65846">* {{cite journal</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11173.653"
+         id="tspan65848"> |first=R.E. |last=Borcherds  |author-link=Richard Borcherds</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11177.622"
+         id="tspan65850"> |date=October 2002x</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11181.591"
+         id="tspan65852"> |title=What is ... the Monster?</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11185.56"
+         id="tspan65854"> |journal=[[Notices of the American Mathematical Society]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11189.528"
+         id="tspan65856"> |volume=1077</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11193.497"
+         id="tspan65858"> |url=https://www.ams.org/notices/200209/what-is.pdf</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11197.466"
+         id="tspan65860">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11201.435"
+         id="tspan65862">* {{cite web</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11205.403"
+         id="tspan65864"> |title=Monster group</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11209.372"
+         id="tspan65866"> |website=MathWorld</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11213.341"
+         id="tspan65868"> |url=http://mathworld.wolfram.com/MonsterGroup.html</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11217.31"
+         id="tspan65870"> |via=mathworld.wolfram.com</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11221.278"
+         id="tspan65872">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11225.247"
+         id="tspan65874">* {{cite web</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11229.216"
+         id="tspan65876"> |editor10-first=Robert A. |editor10-last=Wilson</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11233.185"
+         id="tspan65878"> |editor9-first=Peter      |editor9-last=Walsh</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11237.153"
+         id="tspan65880"> |editor8-first=Jonathan   |editor8-last=Tripp</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11241.122"
+         id="tspan65882"> |editor7-first=Ibrahim    |editor7-last=Suleiman</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11245.091"
+         id="tspan65884"> |editor6-first=Richard A. |editor6-last=Parker</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11249.06"
+         id="tspan65886"> |editor5-first=Simon      |editor5-last=Norton</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11253.028"
+         id="tspan65888"> |editor4-first=Simon J.   |editor4-last=Nickerson</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11256.997"
+         id="tspan65890"> |editor3-first=Steve      |editor3-last=Linton</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11260.966"
+         id="tspan65892"> |editor2-first=John N.    |editor2-last=Bray</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11264.935"
+         id="tspan65894"> |editor1-first=Rachel     |editor1-last=Abbott</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11268.903"
+         id="tspan65896"> |display-editors=6</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11272.872"
+         id="tspan65898"> |date=17 April 2024  |orig-date=4 May 1999</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11276.841"
+         id="tspan65900"> |title=Monster group</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11280.81"
+         id="tspan65902"> |department=Atlas of Finite Group Representations</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11284.778"
+         id="tspan65904"> |publisher=[[Queen Mary University of London]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11288.747"
+         id="tspan65906"> |series=School of Mathematical Sciences</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11292.716"
+         id="tspan65908"> |id=version&amp;nbsp;2.0</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11296.685"
+         id="tspan65910"> |url=http://brauer.maths.qmul.ac.uk/Atlas/v3/spor/M/</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11300.653"
+         id="tspan65912">}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11304.622"
+         id="tspan65914"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11308.591"
+         id="tspan65916">{{Group navbox}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11312.56"
+         id="tspan65918"></tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11316.528"
+         id="tspan65920">{{DEFAULTSORT:Monster Group}}</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11320.497"
+         id="tspan65922">[[Category:Moonshine theory]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11324.466"
+         id="tspan65924">[[Category:Sporadic groups]]</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="693.81226"
+         y="11328.435"
+         id="tspan65926" /></text>
   </g>
 </svg>

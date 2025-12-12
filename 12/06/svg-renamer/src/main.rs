@@ -1,22 +1,35 @@
-
 use std::fs;
-use std::hash::{Hash, Hasher}; // Keep Hash and Hasher for truncate_with_hash
-use roxmltree::{Document, Node as RoxmlNode}; // Alias roxmltree::Node to RoxmlNode
-use xmlwriter::{XmlWriter, Options, Indent}; // Import Options and Indent explicitly
-use std::io; // Import io (needed for Box<dyn std::error::Error>)
-use config_lib;
+use std::hash::{Hash, Hasher};
+use roxmltree::{Document, Node as RoxmlNode};
+use xmlwriter::{XmlWriter, Options, Indent};
+use std::io;
+use serde::Deserialize;
+use std::collections::hash_map::DefaultHasher;
+use std::path::Path;
+
+mod escape;
+use escape::escape_text;
+
+#[derive(Debug, Deserialize)]
+struct SvgReaderConfig {
+    input_file: String,
+    output_file: String,
+}
+
+#[derive(Debug, Deserialize)]
+struct AppConfig {
+    svg_reader: SvgReaderConfig,
+}
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let (config, _) = config_lib::find_and_read_config("lean_introspector/config.toml").map_err(|e| {
-        eprintln!("Failed to read config file: {}", e);
-        io::Error::new(io::ErrorKind::NotFound, e)
-    })?;
+    let config_str = fs::read_to_string("lean_introspector/config.toml")?;
+    let app_config: AppConfig = toml::from_str(&config_str)?;
 
-    let input = &config.input_file;
-    let output = input.with_extension("renamed.svg");
+    let input_path = Path::new(&app_config.svg_reader.input_file);
+    let output_path = Path::new(&app_config.svg_reader.output_file);
     let max_length = None;
 
-    let svg_data = fs::read_to_string(&input)?;
+    let svg_data = fs::read_to_string(&input_path)?;
     let doc = Document::parse(&svg_data)?;
 
     let mut writer = XmlWriter::new(Options {
@@ -24,21 +37,20 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             ..Default::default()
         });
 
-    // Start processing from the document's root element
     if let Some(root_element) = doc.root().children().find(|n| n.is_element()) {
         process_roxml_node(&root_element, &mut writer, max_length)?;
     } else {
         return Err("SVG document has no root element.".into());
     }
 
-    let modified_svg = writer.into_string(); // Get the XML string
+    let modified_svg = writer.into_string();
 
-    if let Some(parent) = output.parent() {
+    if let Some(parent) = output_path.parent() {
         fs::create_dir_all(parent)?;
     }
-    fs::write(&output, modified_svg)?; // fs::write returns Result
+    fs::write(&output_path, modified_svg)?;
 
-    println!("Renamed groups and wrote to {}", output.display());
+    println!("Renamed groups and wrote to {}", output_path.display());
     Ok(())
 }
 
@@ -85,4 +97,28 @@ fn process_roxml_node(node: &RoxmlNode, writer: &mut XmlWriter, max_length: Opti
     Ok(())
 }
 
+fn collect_text_from_children(node: &RoxmlNode) -> String {
+    let mut text = String::new();
+    for child in node.children() {
+        if child.is_text() {
+            text.push_str(child.text().unwrap_or(""));
+        }
+        if child.is_element() {
+            text.push_str(&collect_text_from_children(&child));
+        }
+    }
+    text.split_whitespace().collect::<Vec<_>>().join(" ")
+}
 
+fn truncate_with_hash(s: &str, max_len: usize) -> String {
+    if s.len() <= max_len {
+        return s.to_string();
+    }
+
+    let mut hasher = DefaultHasher::new();
+    s.hash(&mut hasher);
+    let hash = hasher.finish();
+
+    let truncated = &s[..max_len - 9]; // 8 for hash, 1 for underscore
+    format!("{}_{:x}", truncated, hash)
+}

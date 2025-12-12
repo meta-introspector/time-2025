@@ -1,8 +1,10 @@
 use crate::bounding_box::BoundingBox;
-use crate::bsp_node::{BspNode}; // BspSplitAxis is also used here
+use crate::bsp_node::{BspNode};
 use crate::bsp_split_axis::BspSplitAxis;
 use crate::svg_element_enum::SvgElementEnum;
-use crate::traits::svg_component::SvgComponent; // Used for bounding_box()
+use crate::traits::svg_component::SvgComponent;
+use regex::Regex;
+use std::f32;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct BspTree {
@@ -18,12 +20,6 @@ impl BspTree {
         }
     }
 
-    /// Recursively builds the BSP tree by spatially partitioning the elements.
-    ///
-    /// The BSP tree is built to a maximum depth, alternating splitting axes.
-    /// Elements are distributed into child nodes if they are fully contained.
-    /// Elements that span a split or are not fully contained by a child node
-    /// remain in the parent node's `elements` list.
     pub fn build_recursive(
         node: &mut BspNode,
         all_elements: Vec<SvgElementEnum>,
@@ -99,4 +95,109 @@ impl BspTree {
     pub fn build(&mut self, elements: Vec<SvgElementEnum>) {
         Self::build_recursive(&mut self.root, elements, self.max_depth, 0);
     }
+
+    pub fn find_nearest_neighbor(
+        &self,
+        target_element: &SvgElementEnum,
+        alpha: f32,
+    ) -> Option<(SvgElementEnum, f32)> {
+        let mut best_match = None;
+        let mut min_score = f32::MAX;
+
+        self.search_node(
+            &self.root,
+            target_element,
+            alpha,
+            &mut best_match,
+            &mut min_score,
+        );
+
+        best_match.map(|buddy| (buddy, min_score))
+    }
+
+    fn search_node(
+        &self,
+        node: &BspNode,
+        target_element: &SvgElementEnum,
+        alpha: f32,
+        best_match: &mut Option<SvgElementEnum>,
+        min_score: &mut f32,
+    ) {
+        for element in &node.elements {
+            if element.id().unwrap_or_default() == target_element.id().unwrap_or_default() {
+                continue; // Skip self
+            }
+            let score = calculate_closeness_score(target_element, element, alpha);
+            if score < *min_score {
+                *min_score = score;
+                *best_match = Some(element.clone());
+            }
+        }
+
+        if let Some((ref split_axis, split_point)) = node.split {
+            let target_bbox = target_element.bounding_box();
+            let (first_child, second_child) = match split_axis {
+                BspSplitAxis::X => {
+                    if target_bbox.x + target_bbox.width / 2.0 < split_point {
+                        (&node.left_child, &node.right_child)
+                    } else {
+                        (&node.right_child, &node.left_child)
+                    }
+                }
+                BspSplitAxis::Y => {
+                    if target_bbox.y + target_bbox.height / 2.0 < split_point {
+                        (&node.left_child, &node.right_child)
+                    } else {
+                        (&node.right_child, &node.left_child)
+                    }
+                }
+            };
+
+            if let Some(child) = first_child {
+                self.search_node(child, target_element, alpha, best_match, min_score);
+            }
+
+            if let Some(child) = second_child {
+                // Pruning: only search the other side if it could contain a closer element
+                let distance_to_child_bbox = match split_axis {
+                    BspSplitAxis::X => (target_bbox.x - child.bbox.x - child.bbox.width).abs(),
+                    BspSplitAxis::Y => (target_bbox.y - child.bbox.y - child.bbox.height).abs(),
+                };
+                if distance_to_child_bbox < *min_score {
+                    self.search_node(child, target_element, alpha, best_match, min_score);
+                }
+            }
+        }
+    }
+}
+
+fn get_numeric_id(name: &str) -> Option<u32> {
+    let re = Regex::new(r"\d+").unwrap();
+    if let Some(mat) = re.find(name) {
+        mat.as_str().parse().ok()
+    } else {
+        None
+    }
+}
+
+fn calculate_closeness_score(
+    element1: &SvgElementEnum,
+    element2: &SvgElementEnum,
+    alpha: f32,
+) -> f32 {
+    let bbox1 = element1.bounding_box();
+    let bbox2 = element2.bounding_box();
+
+    let center1 = (bbox1.x + bbox1.width / 2.0, bbox1.y + bbox1.height / 2.0);
+    let center2 = (bbox2.x + bbox2.width / 2.0, bbox2.y + bbox2.height / 2.0);
+
+    let dx = center1.0 - center2.0;
+    let dy = center1.1 - center2.1;
+    let geometric_distance = (dx * dx + dy * dy).sqrt();
+
+    let id1 = get_numeric_id(element1.id().unwrap_or("")).unwrap_or(0);
+    let id2 = get_numeric_id(element2.id().unwrap_or("")).unwrap_or(0);
+    let id_difference = (id1 as i32 - id2 as i32).abs() as f32;
+
+    geometric_distance + (alpha * id_difference)
 }

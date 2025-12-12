@@ -18,7 +18,7 @@ members = [
     "external/resvg/crates/c-api",
     "external/resvg/crates/resvg",
     "external/resvg/crates/usvg",
-    "external/resvg/crates/usvg/codegen",
+    "external/resvg/crates/usvg/codegen", "wikivector", "ngram-analyzer", "bsp-buddy-finder",
 ]
 resolver = "2"
 
