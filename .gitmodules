@@ -47,3 +47,6 @@
 [submodule "12/06/external/linfa-linalg"]
 	path = 12/06/external/linfa-linalg
 	url = https://github.com/meta-introspector/linfa-linalg
+[submodule "12/06/external/svg-rs"]
+	path = 12/06/external/svg-rs
+	url = https://github.com/meta-introspector/svg-rs

@@ -24,12 +24,12 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="1.1893044"
-     inkscape:cx="143.78152"
-     inkscape:cy="3091.3028"
-     inkscape:window-width="750"
-     inkscape:window-height="534"
-     inkscape:window-x="926"
+     inkscape:zoom="2.3786088"
+     inkscape:cx="36.155588"
+     inkscape:cy="3553.9682"
+     inkscape:window-width="862"
+     inkscape:window-height="580"
+     inkscape:window-x="814"
      inkscape:window-y="284"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer1" />
@@ -4470,5 +4470,192 @@
          style="stroke-width:0.264583"
          x="-3.5595024"
          y="812.6792">https://inkscape.org/develop/extensions/</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-25.583931"
+       y="901.66681"
+       id="text19172"><tspan
+         sodipodi:role="line"
+         id="tspan19170"
+         style="stroke-width:0.264583"
+         x="-25.583931"
+         y="901.66681">wordcloud</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-22.246897"
+       y="906.33862"
+       id="text19176"><tspan
+         sodipodi:role="line"
+         id="tspan19174"
+         style="stroke-width:0.264583"
+         x="-22.246897"
+         y="906.33862">position</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-26.69628"
+       y="910.00934"
+       id="text19180"><tspan
+         sodipodi:role="line"
+         id="tspan19178"
+         style="stroke-width:0.264583"
+         x="-26.69628"
+         y="910.00934">size</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-25.138994"
+       y="912.67896"
+       id="text19184"><tspan
+         sodipodi:role="line"
+         id="tspan19182"
+         style="stroke-width:0.264583"
+         x="-25.138994"
+         y="912.67896">hyperbolic</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-24.137884"
+       y="917.90698"
+       id="text19188"><tspan
+         sodipodi:role="line"
+         id="tspan19186"
+         style="stroke-width:0.264583"
+         x="-24.137884"
+         y="917.90698">monster</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-26.02887"
+       y="922.13391"
+       id="text19192"><tspan
+         sodipodi:role="line"
+         id="tspan19190"
+         style="stroke-width:0.264583"
+         x="-26.02887"
+         y="922.13391">torus</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-10.456041"
+       y="913.1239"
+       id="text19196"><tspan
+         sodipodi:role="line"
+         id="tspan19194"
+         style="stroke-width:0.264583"
+         x="-10.456041"
+         y="913.1239">unitary</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-10.567276"
+       y="904.22516"
+       id="text19200"><tspan
+         sodipodi:role="line"
+         id="tspan19198"
+         style="stroke-width:0.264583"
+         x="-10.567276"
+         y="904.22516">multi scale</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:1.41111111px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-9.0099936"
+       y="908.00708"
+       id="text19204"><tspan
+         sodipodi:role="line"
+         id="tspan19202"
+         style="stroke-width:0.264583;font-size:1.41111111px"
+         x="-8.6511011"
+         y="908.00708">tiny </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:50.8px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="68.186745"
+       y="905.44867"
+       id="text19208"><tspan
+         sodipodi:role="line"
+         id="tspan19206"
+         style="font-size:50.8px;stroke-width:0.264583"
+         x="68.186745"
+         y="905.44867">huge</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:1.41111px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="13.459373"
+       y="914.79242"
+       id="text19212"><tspan
+         sodipodi:role="line"
+         id="tspan19210"
+         style="stroke-width:0.264583"
+         x="13.459373"
+         y="914.79242">4pt</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="21.690725"
+       y="916.01605"
+       id="text19216"><tspan
+         sodipodi:role="line"
+         id="tspan19214"
+         style="font-size:3.175px;stroke-width:0.264583"
+         x="21.690725"
+         y="916.01605">144pt</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="0.11123449"
+       y="910.67676"
+       id="text20052"><tspan
+         sodipodi:role="line"
+         id="tspan20050"
+         style="stroke-width:0.264583"
+         x="0.11123431"
+         y="910.67676">functional</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-24.026649"
+       y="936.03821"
+       id="text20890"><tspan
+         sodipodi:role="line"
+         id="tspan20888"
+         style="stroke-width:0.264583"
+         x="-24.026649"
+         y="936.03821">render bitmap</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-23.692945"
+       y="941.48871"
+       id="text20894"><tspan
+         sodipodi:role="line"
+         id="tspan20892"
+         style="stroke-width:0.264583"
+         x="-23.692945"
+         y="941.48871">compress image</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-23.359243"
+       y="946.49426"
+       id="text20898"><tspan
+         sodipodi:role="line"
+         id="tspan20896"
+         style="stroke-width:0.264583"
+         x="-23.359243"
+         y="946.49426">see to image</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:3.175px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="-16.90764"
+       y="951.38855"
+       id="text20902"><tspan
+         sodipodi:role="line"
+         id="tspan20900"
+         style="stroke-width:0.264583"
+         x="-16.90764"
+         y="951.38855">use neural networks</tspan></text>
   </g>
 </svg>

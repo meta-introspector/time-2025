@@ -3,22 +3,37 @@ members = [
     "monster_svg_morphism",
     "svg_parser_tool",
     "svg-renamer",
-    "external/xmlwriter", "lean_introspector",
-    #"external/nalgebra",
-    "build_tester", "libfaalg_adaptor", "external/linfa-linalg"
-, "json_transformer", "hir_generator", "hir_model_tester", "hir_driver", "config_lib", "svg_hir"]
+    "external/xmlwriter",
+    "lean_introspector",
+    "build_tester",
+    "libfaalg_adaptor",
+    "external/linfa-linalg",
+    "json_transformer",
+    "hir_generator",
+    "hir_model_tester",
+    "hir_driver",
+    "config_lib",
+    "svg_hir",
+    "external/svg-rs",
+    "external/resvg/crates/c-api",
+    "external/resvg/crates/resvg",
+    "external/resvg/crates/usvg",
+    "external/resvg/crates/usvg/codegen",
+]
 resolver = "2"
 
 [workspace.dependencies]
-#nalgebra = { path = "./external/nalgebra", features = ["serde-serialize"] }
 libfaalg_adaptor = { path = "./libfaalg_adaptor" }
-# nalgebra-lapack = { path = "./external/nalgebra/nalgebra-lapack", default-features = false, features = ["lapack-custom"] }
 linfa-linalg = { path = "./external/linfa-linalg" }
 ndarray = { version = "0.16", features = ["serde"] }
 num-complex = { version = "0.4", features = ["serde"] }
+resvg = { path = "./external/resvg/crates/resvg" }
+usvg = { path = "./external/resvg/crates/usvg" }
+svg = { path = "./external/svg-rs" }
+xmlwriter = { version = "0.1.0", path = "./external/xmlwriter" }
+svg_hir = { path = "./svg_hir" }
 
+[workspace.package]
+license = "Apache-2.0 OR MIT"
 
-[patch.crates-io]
-xmlwriter = { path = "external/xmlwriter" }
-usvg = { path = "external/resvg/crates/usvg" }
 
