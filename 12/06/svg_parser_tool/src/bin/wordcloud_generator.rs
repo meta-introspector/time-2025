@@ -1,6 +1,5 @@
-use std::env;
 use std::path::PathBuf;
-use ignore::{WalkBuilder, DirEntry}; // Add ignore crate imports
+use ignore::{WalkBuilder}; // Add ignore crate imports
 use std::collections::HashSet;
 use std::io::Read;
 use std::fs;
@@ -11,14 +10,35 @@ use svg_parser_tool::processors::{ExtractedData, FileEntry, PRIMES_TO_ANALYZE, p
 use rocksdb::{DB};
 use sha2::{Sha256, Digest};
 use serde_json;
+use pico_args::Arguments; // Import pico_args
 
 // Define the RocksDB cache directory
 const ROCKSDB_CACHE_DIR: &str = "C:\\Users\\gentd\\.gemini\\tmp\\wordcloud_cache";
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let args: Vec<String> = env::args().collect();
-    let root_path_str = args.get(1).map_or(".", |s| s);
+fn print_help() {
+    println!(
+        r#"wordcloud_generator
+Usage: wordcloud_generator [OPTIONS] [PATH]
 
+Arguments:
+  [PATH]    The root directory to start collecting files from. Defaults to current directory.
+
+Options:
+  -h, --help    Print help information
+"#
+    );
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let mut args = Arguments::from_env();
+
+    // Check for --help or -h
+    if args.contains(["-h", "--help"]) {
+        print_help();
+        return Ok(());
+    }
+
+    let root_path_str: String = args.free_from_str().unwrap_or_else(|_| ".".to_string());
     let root_path = PathBuf::from(root_path_str);
 
     println!("Collecting files from: {}", root_path.display());
@@ -130,7 +150,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                                 eprintln!("Cache HIT for Rust analysis of {}. Loaded from RocksDB.", project_root.display());
                             },
                             Err(e) => {
-                                eprintln!("Cache DECODE ERROR for Rust analysis of {}: {}. Re-running analysis.", project_root.display(), e);
+                                eprintln!("Cache DECODE ERROR for Rust analysis of {}: {}. Bytes: {:?}", project_root.display(), e, cached_report_bytes);
                                 let report = run_analysis(&project_root, PRIMES_TO_ANALYZE);
                                 let serialized_report = serde_json::to_vec(&report)?;
                                 db.put(&cache_key, serialized_report)?;

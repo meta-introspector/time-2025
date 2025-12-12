@@ -1661,6 +1661,7 @@ dependencies = [
  "config_lib",
  "ignore",
  "monster_svg_morphism",
+ "pico-args",
  "resvg",
  "rocksdb",
  "serde",
