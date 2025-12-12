@@ -52,6 +52,7 @@ impl PrimeGenerator {
 /// and the value is its coefficient.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)] // Added Serialize, Deserialize
 pub struct PrimeVector {
+    #[serde(with = "crate::serde_map_u64_key")]
     pub map: HashMap<u64, u64>,
 }
 

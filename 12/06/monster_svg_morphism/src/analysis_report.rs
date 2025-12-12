@@ -4,7 +4,9 @@ use svg_hir::prime_vector::PrimeVector;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct AnalysisReport {
+    #[serde(with = "svg_hir::serde_map_u64_key")]
     pub prime_occurrences: HashMap<u64, Vec<String>>,
+    #[serde(with = "svg_hir::serde_map_u64_key")]
     pub prime_factor_occurrences: HashMap<u64, Vec<String>>,
     pub recursive_functions: Vec<String>,
     pub recursive_cycles: Vec<(String, Vec<String>)>,

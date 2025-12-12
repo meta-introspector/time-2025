@@ -17,6 +17,7 @@ pub mod bsp_node;
 pub mod bsp_tree;
 pub mod keys;
 pub mod prime_vector; // New: PrimeVector for symbolic embedding
+pub mod serde_map_u64_key;
 pub mod traits;
 pub mod svg_parser;
 pub mod svg_analysis;
