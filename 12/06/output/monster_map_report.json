@@ -1,0 +1,746 @@
+[
+  {
+    "id": "path26666",
+    "buddies": {
+      "creation_order_buddy": "rect12005",
+      "spatial_proximity_buddy": "rect11947",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": []
+    }
+  },
+  {
+    "id": "rect12005",
+    "buddies": {
+      "creation_order_buddy": "rect11947",
+      "spatial_proximity_buddy": "rect12005-2",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": [
+        {
+          "id": "rect11194",
+          "score": 0.8802367
+        },
+        {
+          "id": "rect12005-2",
+          "score": 1.0
+        },
+        {
+          "id": "rect12005-25",
+          "score": 1.0
+        }
+      ]
+    }
+  },
+  {
+    "id": "rect2391",
+    "buddies": {
+      "creation_order_buddy": "rect2389",
+      "spatial_proximity_buddy": "rect2389",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [
+        "path2497"
+      ],
+      "connected_to": [],
+      "similar_to": []
+    }
+  },
+  {
+    "id": "rect10488",
+    "buddies": {
+      "creation_order_buddy": "path10430",
+      "spatial_proximity_buddy": "rect10490",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": [
+        {
+          "id": "rect2335",
+          "score": 0.8356744
+        }
+      ]
+    }
+  },
+  {
+    "id": "rect10490",
+    "buddies": {
+      "creation_order_buddy": "rect10488",
+      "spatial_proximity_buddy": "rect10488",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": []
+    }
+  },
+  {
+    "id": "path2497",
+    "buddies": {
+      "creation_order_buddy": "rect2391",
+      "spatial_proximity_buddy": "rect2391",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": []
+    }
+  },
+  {
+    "id": "rect9491",
+    "buddies": {
+      "creation_order_buddy": "rect7370",
+      "spatial_proximity_buddy": "path10430",
+      "containment_buddies": [],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": []
+    }
+  },
+  {
+    "id": "rect2335",
+    "buddies": {
+      "creation_order_buddy": "path1053",
+      "spatial_proximity_buddy": "rect2389",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [
+        "rect2389",
+        "rect2391",
+        "path2497"
+      ],
+      "connected_to": [],
+      "similar_to": [
+        {
+          "id": "rect10488",
+          "score": 0.8356744
+        }
+      ]
+    }
+  },
+  {
+    "id": "rect2389",
+    "buddies": {
+      "creation_order_buddy": "rect2335",
+      "spatial_proximity_buddy": "rect2391",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": []
+    }
+  },
+  {
+    "id": "path1053",
+    "buddies": {
+      "creation_order_buddy": "rect781",
+      "spatial_proximity_buddy": "rect781",
+      "containment_buddies": [],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": []
+    }
+  },
+  {
+    "id": "rect11947",
+    "buddies": {
+      "creation_order_buddy": "rect11893",
+      "spatial_proximity_buddy": "rect11893",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": []
+    }
+  },
+  {
+    "id": "path10502",
+    "buddies": {
+      "creation_order_buddy": "path10492",
+      "spatial_proximity_buddy": "rect10488",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": []
+    }
+  },
+  {
+    "id": "rect11893",
+    "buddies": {
+      "creation_order_buddy": "rect11194",
+      "spatial_proximity_buddy": "rect12005",
+      "containment_buddies": [
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": []
+    }
+  },
+  {
+    "id": "rect7207-8",
+    "buddies": {
+      "creation_order_buddy": "rect12005-2",
+      "spatial_proximity_buddy": "rect7197",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": [
+        {
+          "id": "rect7207",
+          "score": 0.9999999
+        }
+      ]
+    }
+  },
+  {
+    "id": "rect7370",
+    "buddies": {
+      "creation_order_buddy": "rect7207",
+      "spatial_proximity_buddy": "rect7197",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": []
+    }
+  },
+  {
+    "id": "rect781",
+    "buddies": {
+      "creation_order_buddy": "rect12005-25",
+      "spatial_proximity_buddy": "path1053",
+      "containment_buddies": [],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": []
+    }
+  },
+  {
+    "id": "path10492",
+    "buddies": {
+      "creation_order_buddy": "rect10490",
+      "spatial_proximity_buddy": "rect10488",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "rect7207-8"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": []
+    }
+  },
+  {
+    "id": "rect11194",
+    "buddies": {
+      "creation_order_buddy": "path10502",
+      "spatial_proximity_buddy": "rect10488",
+      "containment_buddies": [
+        "rect11893",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": [
+        {
+          "id": "rect12005",
+          "score": 0.8802367
+        },
+        {
+          "id": "rect12005-2",
+          "score": 0.8802367
+        },
+        {
+          "id": "rect12005-25",
+          "score": 0.8802367
+        }
+      ]
+    }
+  },
+  {
+    "id": "rect12005-2",
+    "buddies": {
+      "creation_order_buddy": null,
+      "spatial_proximity_buddy": "rect12005",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": [
+        {
+          "id": "rect11194",
+          "score": 0.8802367
+        },
+        {
+          "id": "rect12005",
+          "score": 1.0
+        },
+        {
+          "id": "rect12005-25",
+          "score": 1.0
+        }
+      ]
+    }
+  },
+  {
+    "id": "rect12005-25",
+    "buddies": {
+      "creation_order_buddy": "rect7207-8",
+      "spatial_proximity_buddy": "rect12005-2",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": [
+        {
+          "id": "rect11194",
+          "score": 0.8802367
+        },
+        {
+          "id": "rect12005",
+          "score": 1.0
+        },
+        {
+          "id": "rect12005-2",
+          "score": 1.0
+        }
+      ]
+    }
+  },
+  {
+    "id": "path10430",
+    "buddies": {
+      "creation_order_buddy": "rect9491",
+      "spatial_proximity_buddy": "rect10488",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": []
+    }
+  },
+  {
+    "id": "rect7207",
+    "buddies": {
+      "creation_order_buddy": "rect7197",
+      "spatial_proximity_buddy": "rect7197",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect7197",
+        "rect2335",
+        "rect2391",
+        "path10430",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": [
+        {
+          "id": "rect7207-8",
+          "score": 0.9999999
+        }
+      ]
+    }
+  },
+  {
+    "id": "path1108",
+    "buddies": {
+      "creation_order_buddy": null,
+      "spatial_proximity_buddy": null,
+      "containment_buddies": [],
+      "deep_containment_buddies": [],
+      "connected_to": [
+        "path1053"
+      ],
+      "similar_to": []
+    }
+  },
+  {
+    "id": "rect7197",
+    "buddies": {
+      "creation_order_buddy": "path2497",
+      "spatial_proximity_buddy": "rect7207",
+      "containment_buddies": [
+        "rect11893",
+        "rect11194",
+        "rect12005",
+        "rect12005-25",
+        "rect11947",
+        "rect7370",
+        "rect2389",
+        "path2497",
+        "rect10490",
+        "path26666",
+        "path10502",
+        "rect12005-2",
+        "rect2335",
+        "rect2391",
+        "rect7207",
+        "path10430",
+        "rect10488",
+        "rect7207-8",
+        "path10492"
+      ],
+      "deep_containment_buddies": [],
+      "connected_to": [],
+      "similar_to": []
+    }
+  }
+]

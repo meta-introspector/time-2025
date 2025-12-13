@@ -1,11 +1,10 @@
 [package]
-name = "connectivity-analyzer"
+name = "monster-map-generator"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-usvg = { workspace = true }
-svg_hir = { path = "../svg_hir" }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 pico-args = "0.5"
+tempfile = "3.10.1"

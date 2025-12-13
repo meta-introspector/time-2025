@@ -5,6 +5,7 @@ use crate::{
     Svg, SvgElementEnum, Rect, Circle, Group, Text, Path, Ellipse,
     BoundingBox, Color, Transform, Style,
 };
+use usvg::parser::EId;
 
 // --- Helper Functions for Parsing Attributes ---
 fn get_attr_value<'a>(attributes: &'a [xml::attribute::OwnedAttribute], name: &str) -> Option<String> {
@@ -92,14 +93,14 @@ pub fn parse_svg(file: BufReader<File>) -> Result<Svg, Box<dyn std::error::Error
                         let height = get_attr_f32(&attributes, "height");
                         let rx = get_attr_f32(&attributes, "rx");
                         let ry = get_attr_f32(&attributes, "ry");
-                        let rect = Rect { id, x, y, width, height, rx: Some(rx), ry: Some(ry), style, transform, triples: Vec::new() };
+                        let rect = Rect { id, x, y, width, height, rx: Some(rx), ry: Some(ry), style, transform, triples: Vec::new(), original_eid: None };
                         element_scope_stack.last_mut().unwrap().push(SvgElementEnum::Rect(rect));
                     },
                     "circle" => {
                         let cx = get_attr_f32(&attributes, "cx");
                         let cy = get_attr_f32(&attributes, "cy");
                         let r = get_attr_f32(&attributes, "r");
-                        let circle = Circle { id, cx, cy, r, style, transform, triples: Vec::new() };
+                        let circle = Circle { id, cx, cy, r, style, transform, triples: Vec::new(), original_eid: None };
                         element_scope_stack.last_mut().unwrap().push(SvgElementEnum::Circle(circle));
                     },
                     "ellipse" => {
@@ -107,7 +108,7 @@ pub fn parse_svg(file: BufReader<File>) -> Result<Svg, Box<dyn std::error::Error
                         let cy = get_attr_f32(&attributes, "cy");
                         let rx = get_attr_f32(&attributes, "rx");
                         let ry = get_attr_f32(&attributes, "ry");
-                        let ellipse = Ellipse { id, cx, cy, rx, ry, style, transform, triples: Vec::new() };
+                        let ellipse = Ellipse { id, cx, cy, rx, ry, style, transform, triples: Vec::new(), original_eid: None };
                         element_scope_stack.last_mut().unwrap().push(SvgElementEnum::Ellipse(ellipse));
                     },
                     "text" => {
@@ -115,7 +116,7 @@ pub fn parse_svg(file: BufReader<File>) -> Result<Svg, Box<dyn std::error::Error
                         let y = get_attr_f32(&attributes, "y");
                         current_text_content.clear();
                         in_text_element = true;
-                        element_scope_stack.last_mut().unwrap().push(SvgElementEnum::Text(Text { id, x, y, content: String::new(), word_count: 0, style, transform, triples: Vec::new() }));
+                        element_scope_stack.last_mut().unwrap().push(SvgElementEnum::Text(Text { id, x, y, content: String::new(), word_count: 0, style, transform, triples: Vec::new(), original_eid: None }));
                     },
                     "tspan" => {
                         in_text_element = true;
@@ -123,7 +124,7 @@ pub fn parse_svg(file: BufReader<File>) -> Result<Svg, Box<dyn std::error::Error
                     "path" => {
                         let d = get_attr_value(&attributes, "d").unwrap_or_default();
                         let approx_bbox = calculate_path_bbox_approx(&d);
-                        let path = Path { id, d, style, transform, triples: Vec::new(), approx_bbox };
+                        let path = Path { id, d, style, transform, triples: Vec::new(), approx_bbox, original_eid: None };
                         element_scope_stack.last_mut().unwrap().push(SvgElementEnum::Path(path));
                     },
                     _ => {},

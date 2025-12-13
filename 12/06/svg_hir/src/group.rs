@@ -45,6 +45,10 @@ impl SvgComponent for Group {
     fn size(&self) -> f32 {
         self.bounding_box().area()
     }
+
+    fn style(&self) -> Option<&Style> {
+        self.style.as_ref()
+    }
 }
 
 impl MapsToMonster for Group {

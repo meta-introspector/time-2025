@@ -5,6 +5,7 @@ use crate::triple::Triple;
 use crate::monster_element_kind::MonsterElementKind;
 use crate::traits::svg_component::SvgComponent;
 use crate::traits::maps_to_monster::MapsToMonster;
+use usvg::parser::EId;
 
 #[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
 pub struct Circle {
@@ -15,6 +16,8 @@ pub struct Circle {
     pub style: Option<Style>,
     pub transform: Option<Transform>,
     pub triples: Vec<Triple>,
+    #[serde(skip)]
+    pub original_eid: Option<EId>,
 }
 
 impl SvgComponent for Circle {
@@ -28,6 +31,10 @@ impl SvgComponent for Circle {
 
     fn size(&self) -> f32 {
         std::f32::consts::PI * self.r * self.r
+    }
+
+    fn style(&self) -> Option<&Style> {
+        self.style.as_ref()
     }
 }
 

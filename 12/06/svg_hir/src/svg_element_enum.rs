@@ -6,6 +6,7 @@ use crate::ellipse::Ellipse;
 use crate::group::Group;
 use crate::text::Text;
 use crate::path::Path;
+use crate::style::Style;
 use crate::traits::svg_component::SvgComponent;
 use crate::traits::maps_to_monster::MapsToMonster;
 
@@ -52,6 +53,17 @@ impl SvgComponent for SvgElementEnum {
             SvgElementEnum::Group(g) => g.size(),
             SvgElementEnum::Text(t) => t.size(),
             SvgElementEnum::Path(p) => p.size(),
+        }
+    }
+
+    fn style(&self) -> Option<&Style> {
+        match self {
+            SvgElementEnum::Rect(r) => r.style(),
+            SvgElementEnum::Circle(c) => c.style(),
+            SvgElementEnum::Ellipse(e) => e.style(),
+            SvgElementEnum::Group(g) => g.style(),
+            SvgElementEnum::Text(t) => t.style(),
+            SvgElementEnum::Path(p) => p.style(),
         }
     }
 }

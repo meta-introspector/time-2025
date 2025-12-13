@@ -16,6 +16,7 @@ struct BuddyReport {
     creation_order_buddy: Option<String>,
     spatial_proximity_buddy: Option<String>,
     containment_buddies: Vec<String>,
+    deep_containment_buddies: Vec<String>,
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -67,6 +68,23 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
 
+    // --- Deep Containment Buddies ---
+    let mut deep_containment_buddies: HashMap<String, Vec<String>> = HashMap::new();
+    for i in 0..elements.len() {
+        for j in 0..elements.len() {
+            if i == j { continue; }
+
+            let el_i = &elements[i];
+            let el_j = &elements[j];
+
+            if let (Some(id_i), Some(id_j)) = (el_i.id(), el_j.id()) {
+                if el_i.bounding_box().contains(&el_j.bounding_box()) {
+                    deep_containment_buddies.entry(id_i.to_string()).or_default().push(id_j.to_string());
+                }
+            }
+        }
+    }
+
     // --- Generate Report ---
     let mut reports = Vec::new();
     for element in &elements {
@@ -85,6 +103,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 creation_order_buddy: creation_order_buddies.get(element_id).cloned(),
                 spatial_proximity_buddy: spatial_buddies.get(element_id).cloned(),
                 containment_buddies: containment_buddies_list,
+                deep_containment_buddies: deep_containment_buddies.get(element_id).cloned().unwrap_or_default(),
             });
         }
     }
@@ -132,6 +151,7 @@ fn convert_usvg_node_to_svg_element_enum(node: &Node) -> Option<SvgElementEnum> 
                     y: bbox.y(),
                     width: bbox.width(),
                     height: bbox.height(),
+                    original_eid: p.original_eid,
                     ..Default::default()
                 })),
                 Some(EId::Circle) => {
@@ -141,6 +161,7 @@ fn convert_usvg_node_to_svg_element_enum(node: &Node) -> Option<SvgElementEnum> 
                         cx: bbox.x() + r,
                         cy: bbox.y() + r,
                         r,
+                        original_eid: p.original_eid,
                         ..Default::default()
                     }))
                 }
@@ -150,6 +171,7 @@ fn convert_usvg_node_to_svg_element_enum(node: &Node) -> Option<SvgElementEnum> 
                     cy: bbox.y() + bbox.height() / 2.0,
                     rx: bbox.width() / 2.0,
                     ry: bbox.height() / 2.0,
+                    original_eid: p.original_eid,
                     ..Default::default()
                 })),
                 _ => { // Includes Path, Line, Polyline, Polygon
@@ -157,6 +179,7 @@ fn convert_usvg_node_to_svg_element_enum(node: &Node) -> Option<SvgElementEnum> 
                     Some(SvgElementEnum::Path(svg_hir::path::Path {
                         id: Some(p.id().to_string()),
                         d: path_data,
+                        original_eid: p.original_eid,
                         ..Default::default()
                     }))
                 }
@@ -178,6 +201,7 @@ fn convert_usvg_node_to_svg_element_enum(node: &Node) -> Option<SvgElementEnum> 
                 style: None,
                 transform: None,
                 triples: Vec::new(),
+                original_eid: None,
             }))
         }
         _ => None,

@@ -2,17 +2,18 @@ use std::fs;
 use std::path::PathBuf;
 use serde::Serialize;
 use svg_hir::svg_element_enum::SvgElementEnum;
-use svg_hir::traits::svg_component::SvgComponent;
 use usvg::{Node, Tree, Group, parser::EId, Paint};
-use std::collections::{HashMap, HashSet};
 use svg_hir::text::{Text as HirText};
 use svg_hir::style::Style;
 use svg_hir::color::Color;
+use edit_distance::edit_distance;
+use svg_hir::traits::svg_component::SvgComponent;
 
 #[derive(Serialize, Debug)]
-struct ConnectivityReport {
-    element: String,
-    connections: Vec<String>,
+struct SimilarityReport {
+    element_a: String,
+    element_b: String,
+    similarity_score: f32,
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -20,6 +21,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let input_svg_path: PathBuf = args.value_from_os_str("--input", |s| -> Result<PathBuf, String> { Ok(PathBuf::from(s)) })?;
     let output_json_path: PathBuf = args.value_from_os_str("--output", |s| -> Result<PathBuf, String> { Ok(PathBuf::from(s)) })?;
+    let similarity_threshold: f32 = args.opt_value_from_str("--threshold")?.unwrap_or(0.8);
 
     let svg_data = fs::read(&input_svg_path)?;
     let tree = Tree::from_data(&svg_data, &usvg::Options::default())?;
@@ -27,57 +29,91 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut elements: Vec<SvgElementEnum> = Vec::new();
     collect_svg_elements(tree.root(), &mut elements);
 
-    let (lines, other_elements): (Vec<SvgElementEnum>, Vec<SvgElementEnum>) = elements.into_iter().partition(|el| {
-        if let SvgElementEnum::Path(p) = el {
-            if let Some(style) = &p.style {
-                return style.stroke.is_some() && style.fill.is_none();
-            }
-        }
-        false
-    });
+    let mut reports: Vec<SimilarityReport> = Vec::new();
 
-    let mut connections: HashMap<String, HashSet<String>> = HashMap::new();
+    for i in 0..elements.len() {
+        for j in i + 1..elements.len() {
+            let el_a = &elements[i];
+            let el_b = &elements[j];
 
-    for line in &lines {
-        if let SvgElementEnum::Path(p_line) = line {
-            let line_points = extract_path_points_from_d(p_line.d.as_str());
+            let score = calculate_similarity(el_a, el_b);
 
-            for point in line_points {
-                for other_el in &other_elements {
-                    let bbox = other_el.bounding_box();
-                    if let Some(el_id) = other_el.id() {
-                        if bbox.contains_point(point.0, point.1) {
-                            if let Some(line_id) = p_line.id() {
-                                connections
-                                    .entry(line_id.to_string())
-                                    .or_default()
-                                    .insert(el_id.to_string());
-                            }
-                        }
-                    }
+            if score >= similarity_threshold {
+                if let (Some(id_a), Some(id_b)) = (el_a.id(), el_b.id()) {
+                    reports.push(SimilarityReport {
+                        element_a: id_a.to_string(),
+                        element_b: id_b.to_string(),
+                        similarity_score: score,
+                    });
                 }
             }
         }
     }
 
-    let report: Vec<ConnectivityReport> = connections
-        .into_iter()
-        .map(|(element, connected_to)| ConnectivityReport {
-            element,
-            connections: connected_to.into_iter().collect(),
-        })
-        .collect();
-
-    let json_content = serde_json::to_string_pretty(&report)?;
+    let json_content = serde_json::to_string_pretty(&reports)?;
     
     if let Some(parent) = output_json_path.parent() {
         fs::create_dir_all(parent)?;
     }
     fs::write(&output_json_path, json_content)?;
 
-    println!("Connectivity report written to {}", output_json_path.display());
+    println!("Similarity report written to {}", output_json_path.display());
     Ok(())
 }
+
+fn calculate_similarity(a: &SvgElementEnum, b: &SvgElementEnum) -> f32 {
+    let shape_score = match (a, b) {
+        (SvgElementEnum::Path(p1), SvgElementEnum::Path(p2)) => {
+            let dist = edit_distance(&p1.d, &p2.d) as f32;
+            1.0 - (dist / (p1.d.len().max(p2.d.len()) as f32))
+        }
+        (SvgElementEnum::Circle(c1), SvgElementEnum::Circle(c2)) => {
+            1.0 - (c1.r - c2.r).abs() / (c1.r.max(c2.r))
+        }
+        (SvgElementEnum::Rect(r1), SvgElementEnum::Rect(r2)) => {
+            let size_diff = (r1.width - r2.width).abs() + (r1.height - r2.height).abs();
+            let max_size = r1.width.max(r2.width) + r1.height.max(r2.height);
+            1.0 - size_diff / max_size
+        }
+        _ => 0.0,
+    };
+
+    let style1 = a.style();
+    let style2 = b.style();
+
+    let style_score = match (style1, style2) {
+        (Some(s1), Some(s2)) => {
+            let mut score = 0.0;
+            let mut total = 0.0;
+
+            if s1.fill.is_some() || s2.fill.is_some() {
+                total += 1.0;
+                if s1.fill == s2.fill {
+                    score += 1.0;
+                }
+            }
+
+            if s1.stroke.is_some() || s2.stroke.is_some() {
+                total += 1.0;
+                if s1.stroke == s2.stroke {
+                    score += 1.0;
+                }
+            }
+
+            if let (Some(w1), Some(w2)) = (s1.stroke_width, s2.stroke_width) {
+                total += 1.0;
+                score += 1.0 - (w1 - w2).abs() / w1.max(w2);
+            }
+            
+            if total > 0.0 { score / total } else { 1.0 }
+        }
+        (None, None) => 1.0,
+        _ => 0.0,
+    };
+
+    (shape_score * 0.5) + (style_score * 0.5)
+}
+
 
 fn collect_svg_elements(group: &Group, elements: &mut Vec<SvgElementEnum>) {
     for child in group.children() {
@@ -175,44 +211,6 @@ fn convert_usvg_node_to_svg_element_enum(node: &Node) -> Option<SvgElementEnum> 
         _ => None,
     }
 }
-
-// Extracts all points from a path's d attribute.
-fn extract_path_points_from_d(d: &str) -> Vec<(f32, f32)> {
-    let mut points = Vec::new();
-    let mut last_point = (0.0, 0.0);
-    let mut d_iter = d.split_whitespace().peekable();
-
-    while let Some(cmd) = d_iter.next() {
-        let is_relative = cmd.chars().next().unwrap().is_lowercase();
-        let mut numbers = Vec::new();
-
-        while let Some(next_char) = d_iter.peek() {
-            if next_char.parse::<f32>().is_ok() || *next_char == "." || *next_char == "-" {
-                numbers.push(d_iter.next().unwrap().parse::<f32>().unwrap_or(0.0));
-            } else {
-                break;
-            }
-        }
-
-        let mut i = 0;
-        while i < numbers.len() {
-            let mut x = numbers[i];
-            let mut y = numbers[i+1];
-
-            if is_relative {
-                x += last_point.0;
-                y += last_point.1;
-            }
-
-            points.push((x, y));
-            last_point = (x, y);
-            i += 2;
-        }
-    }
-
-    points
-}
-
 
 fn path_to_string(path: &usvg::tiny_skia_path::Path) -> String {
     let mut s = String::new();

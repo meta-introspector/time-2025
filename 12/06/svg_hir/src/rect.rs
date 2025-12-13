@@ -5,6 +5,7 @@ use crate::triple::Triple;
 use crate::monster_element_kind::MonsterElementKind;
 use crate::traits::svg_component::SvgComponent;
 use crate::traits::maps_to_monster::MapsToMonster;
+use usvg::parser::EId;
 
 #[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
 pub struct Rect {
@@ -18,6 +19,8 @@ pub struct Rect {
     pub style: Option<Style>,
     pub transform: Option<Transform>,
     pub triples: Vec<Triple>,
+    #[serde(skip)]
+    pub original_eid: Option<EId>,
 }
 
 impl SvgComponent for Rect {
@@ -31,6 +34,10 @@ impl SvgComponent for Rect {
 
     fn size(&self) -> f32 {
         self.bounding_box().area()
+    }
+
+    fn style(&self) -> Option<&Style> {
+        self.style.as_ref()
     }
 }
 

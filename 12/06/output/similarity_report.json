@@ -1,0 +1,42 @@
+[
+  {
+    "element_a": "rect2335",
+    "element_b": "rect10488",
+    "similarity_score": 0.8356744
+  },
+  {
+    "element_a": "rect7207",
+    "element_b": "rect7207-8",
+    "similarity_score": 0.9999999
+  },
+  {
+    "element_a": "rect11194",
+    "element_b": "rect12005",
+    "similarity_score": 0.8802367
+  },
+  {
+    "element_a": "rect11194",
+    "element_b": "rect12005-2",
+    "similarity_score": 0.8802367
+  },
+  {
+    "element_a": "rect11194",
+    "element_b": "rect12005-25",
+    "similarity_score": 0.8802367
+  },
+  {
+    "element_a": "rect12005",
+    "element_b": "rect12005-2",
+    "similarity_score": 1.0
+  },
+  {
+    "element_a": "rect12005",
+    "element_b": "rect12005-25",
+    "similarity_score": 1.0
+  },
+  {
+    "element_a": "rect12005-2",
+    "element_b": "rect12005-25",
+    "similarity_score": 1.0
+  }
+]

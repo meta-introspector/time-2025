@@ -248,6 +248,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "connectivity-analyzer"
+version = "0.1.0"
+dependencies = [
+ "pico-args",
+ "serde",
+ "serde_json",
+ "svg_hir",
+ "usvg",
+]
+
+[[package]]
 name = "core_maths"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -324,6 +335,12 @@ dependencies = [
  "block-buffer",
  "crypto-common",
 ]
+
+[[package]]
+name = "edit-distance"
+version = "2.2.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "324d428080b707bac399325341bd61af5ded1b30f33b7c949792ca464733c2d5"
 
 [[package]]
 name = "either"
@@ -839,6 +856,16 @@ checksum = "1fa76a2c86f704bdb222d66965fb3d63269ce38518b83cb0575fca855ebb6316"
 dependencies = [
  "adler2",
  "simd-adler32",
+]
+
+[[package]]
+name = "monster-map-generator"
+version = "0.1.0"
+dependencies = [
+ "pico-args",
+ "serde",
+ "serde_json",
+ "tempfile",
 ]
 
 [[package]]
@@ -1616,6 +1643,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e320a6c5ad31d271ad523dcf3ad13e2767ad8b1cb8f047f75a8aeaf8da139da2"
 
 [[package]]
+name = "similarity-analyzer"
+version = "0.1.0"
+dependencies = [
+ "edit-distance",
+ "pico-args",
+ "serde",
+ "serde_json",
+ "svg_hir",
+ "usvg",
+]
+
+[[package]]
 name = "simplecss"
 version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1682,6 +1721,7 @@ dependencies = [
  "serde",
  "simba",
  "syn 2.0.111",
+ "usvg",
  "walkdir",
  "xml",
  "xmlwriter 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",

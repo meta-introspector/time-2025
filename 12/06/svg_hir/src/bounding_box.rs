@@ -11,15 +11,6 @@ impl BoundingBox {
         BoundingBox { x, y, width, height }
     }
 
-    pub fn default() -> Self {
-        BoundingBox {
-            x: 0.0,
-            y: 0.0,
-            width: 0.0,
-            height: 0.0,
-        }
-    }
-
     pub fn area(&self) -> f32 {
         self.width * self.height
     }
@@ -30,6 +21,11 @@ impl BoundingBox {
         other.y >= self.y &&
         (other.x + other.width) <= (self.x + self.width) &&
         (other.y + other.height) <= (self.y + self.height)
+    }
+
+    pub fn contains_point(&self, px: f32, py: f32) -> bool {
+        px >= self.x && px <= (self.x + self.width) &&
+        py >= self.y && py <= (self.y + self.height)
     }
 
     /// Checks if two bounding boxes overlap.

@@ -1,4 +1,5 @@
 use crate::bounding_box::BoundingBox;
+use crate::style::Style;
 use crate::triple::Triple;
 use crate::svg_element_enum::SvgElementEnum;
 use crate::monster_element_kind::MonsterElementKind;
@@ -46,6 +47,10 @@ impl SvgComponent for Svg {
 
     fn size(&self) -> f32 {
         self.bounding_box().area()
+    }
+
+    fn style(&self) -> Option<&Style> {
+        None
     }
 }
 
