@@ -50,3 +50,21 @@
 [submodule "12/06/external/svg-rs"]
 	path = 12/06/external/svg-rs
 	url = https://github.com/meta-introspector/svg-rs
+[submodule "12/06/external/gmp-mpfr-sys"]
+	path = 12/06/external/gmp-mpfr-sys
+	url = https://github.com/meta-introspector/gmp-mpfr-sys
+[submodule "12/06/external/num-rs"]
+	path = 12/06/external/num-rs
+	url = https://github.com/meta-introspector/num-rs
+[submodule "12/06/external/oxirs"]
+	path = 12/06/external/oxirs
+	url = https://github.com/meta-introspector/oxirs
+[submodule "12/06/external/pcp-constraint-programming-rs"]
+	path = 12/06/external/pcp-constraint-programming-rs
+	url = https://github.com/meta-introspector/pcp-constraint-programming-rs
+[submodule "12/06/external/rand"]
+	path = 12/06/external/rand
+	url = https://github.com/meta-introspector/rand
+[submodule "12/06/external/scirs"]
+	path = 12/06/external/scirs
+	url = https://github.com/meta-introspector/scirs
