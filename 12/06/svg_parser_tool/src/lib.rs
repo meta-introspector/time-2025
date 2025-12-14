@@ -3,4 +3,7 @@ pub mod utils;
 pub mod file_collector;
 pub mod rust_processor;
 pub mod svg_processor;
+pub mod db_trait;
+pub mod rocksdb_cache;
+pub mod redb_cache;
 pub use utils::*;

@@ -8,21 +8,26 @@ use svg_parser_tool::utils::{calculate_master_cache_key};
 use svg_parser_tool::file_collector::collect_all_file_entries;
 use svg_parser_tool::rust_processor::process_rust_files;
 use svg_parser_tool::svg_processor::process_svg_files;
+use svg_parser_tool::rocksdb_cache::RocksDBCache;
+use svg_parser_tool::redb_cache::RedbCache;
+use svg_parser_tool::db_trait::CacheDB;
 
 
 // Define the RocksDB cache directory
-const ROCKSDB_CACHE_DIR: &str = "C:\\Users\\gentd\\.gemini\\tmp\\wordcloud_cache";
+const ROCKSDB_CACHE_DIR: &str = "C:\\Users\\gentd\\.gemini\\tmp\\wordcloud_cache_rocksdb";
+const REDB_CACHE_DIR: &str = "C:\\Users\\gentd\\.gemini\\tmp\\wordcloud_cache_redb";
 
 fn print_help() {
     println!(
         r#"wordcloud_generator
-Usage: wordcloud_generator [PATH]
+Usage: wordcloud_generator [PATH] [OPTIONS]
 
 Arguments:
   [PATH]    The root directory to start collecting files from. Defaults to current directory.
 
 Options:
-  -h, --help    Print help information
+  --db-type <DB_TYPE>    The database type to use for caching. Can be 'rocksdb' or 'redb'. Defaults to 'rocksdb'.
+  -h, --help             Print help information
 "#
     );
 }
@@ -36,31 +41,52 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         return Ok(());
     }
 
+    let db_type: String = args.opt_value_from_str("--db-type")?.unwrap_or("rocksdb".to_string());
+
     let root_path_str: String = args.free_from_str().unwrap_or_else(|_| ".".to_string());
     let root_path = PathBuf::from(root_path_str);
 
-    // Initialize RocksDB
-    let db = DB::open_default(ROCKSDB_CACHE_DIR)?;
-    println!("RocksDB opened at: {}", ROCKSDB_CACHE_DIR);
+    let cache: Box<dyn CacheDB>;
+    let _db_rocks: DB; // To keep the DB alive
+    let _db_redb: redb::Database;
+
+    match db_type.as_str() {
+        "rocksdb" => {
+            let db = DB::open_default(ROCKSDB_CACHE_DIR)?;
+            println!("RocksDB opened at: {}", ROCKSDB_CACHE_DIR);
+            _db_rocks = db;
+            cache = Box::new(RocksDBCache::new(&_db_rocks));
+        }
+        "redb" => {
+            let db = redb::Database::create(REDB_CACHE_DIR)?;
+            println!("Redb opened at: {}", REDB_CACHE_DIR);
+            _db_redb = db;
+            cache = Box::new(RedbCache::new(&_db_redb));
+        }
+        _ => {
+            eprintln!("Error: Invalid database type '{}'. Use 'rocksdb' or 'redb'.", db_type);
+            return Ok(());
+        }
+    }
 
     let mut extracted_data: ExtractedData;
 
-    let all_file_entries = collect_all_file_entries(&root_path, &db)?;
+    let all_file_entries = collect_all_file_entries(&root_path, cache.as_ref())?;
 
     let master_cache_key = calculate_master_cache_key(&root_path, &all_file_entries);
 
     // Attempt to load aggregated ExtractedData from cache
-    match db.get(&master_cache_key)? {
+    match cache.get(&master_cache_key)? {
         Some(cached_data_bytes) => {
             match serde_json::from_slice(&cached_data_bytes) {
                 Ok(loaded_data) => {
                     extracted_data = loaded_data;
-                    eprintln!("Cache HIT for aggregated ExtractedData. Loaded from RocksDB.");
+                    eprintln!("Cache HIT for aggregated ExtractedData. Loaded from database.");
                 },
                 Err(e) => {
                     eprintln!("Cache DECODE ERROR for aggregated ExtractedData: {}. Re-processing all files. Bytes: {:?}", e, cached_data_bytes);
                     extracted_data = ExtractedData::new(); // Reset and re-process
-                    process_files_and_cache(&root_path, &db, &all_file_entries, &mut extracted_data, master_cache_key.as_bytes())?;
+                    process_files_and_cache(&root_path, cache.as_ref(), &all_file_entries, &mut extracted_data, master_cache_key.as_bytes())?;
                     eprintln!("Re-processed all files and cached aggregated ExtractedData.");
                 }
             }
@@ -68,7 +94,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         None => {
             eprintln!("Cache MISS for aggregated ExtractedData. Processing all files.");
             extracted_data = ExtractedData::new();
-            process_files_and_cache(&root_path, &db, &all_file_entries, &mut extracted_data, master_cache_key.as_bytes())?;
+            process_files_and_cache(&root_path, cache.as_ref(), &all_file_entries, &mut extracted_data, master_cache_key.as_bytes())?;
             eprintln!("Processed all files and cached aggregated ExtractedData.");
         }
     }
@@ -87,9 +113,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
+
+use svg_parser_tool::db_trait::CacheDB;
 fn process_files_and_cache(
     root_path: &PathBuf,
-    db: &DB,
+    db: &dyn CacheDB,
     all_file_entries: &[FileEntry],
     extracted_data: &mut ExtractedData,
     master_cache_key: &[u8],

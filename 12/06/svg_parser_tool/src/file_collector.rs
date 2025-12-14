@@ -2,11 +2,11 @@ use std::path::PathBuf;
 use ignore::WalkBuilder;
 use std::io::Read;
 use std::fs;
-use rocksdb::DB;
+use crate::db_trait::CacheDB;
 
 use crate::processors::FileEntry; // Assuming FileEntry is defined in processors.rs
 
-pub fn collect_all_file_entries(root_path: &PathBuf, db: &DB) -> Result<Vec<FileEntry>, Box<dyn std::error::Error>> {
+pub fn collect_all_file_entries(root_path: &PathBuf, db: &dyn CacheDB) -> Result<Vec<FileEntry>, Box<dyn std::error::Error>> {
     let mut all_file_entries: Vec<FileEntry> = Vec::new();
     println!("Scanning files from: {}", root_path.display());
 

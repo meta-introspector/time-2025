@@ -1,4 +1,4 @@
-use rocksdb::DB;
+use crate::db_trait::CacheDB;
 use serde_json;
 
 use monster_svg_morphism::analyzer::run_analysis;
@@ -6,7 +6,7 @@ use crate::processors::{ExtractedData, FileEntry, PRIMES_TO_ANALYZE};
 use crate::utils::get_project_analysis_cache_key;
 
 pub fn process_rust_files(
-    db: &DB,
+    db: &dyn CacheDB,
     rs_files: &[&FileEntry],
     cargo_toml_files: &[&FileEntry],
     extracted_data: &mut ExtractedData,
@@ -27,7 +27,7 @@ pub fn process_rust_files(
                 match serde_json::from_slice(&cached_report_bytes) {
                     Ok(cached_report) => {
                         extracted_data.merge_rust_report(project_root.display().to_string(), cached_report);
-                        eprintln!("Cache HIT for Rust analysis of {}. Loaded from RocksDB.", project_root.display());
+                        eprintln!("Cache HIT for Rust analysis of {}. Loaded from database.", project_root.display());
                     },
                     Err(e) => {
                         eprintln!("Cache DECODE ERROR for Rust analysis of {}: {}. Bytes: {:?}. Re-running analysis.", project_root.display(), e, cached_report_bytes);
@@ -35,7 +35,7 @@ pub fn process_rust_files(
                         match serde_json::to_vec(&report) {
                             Ok(serialized_report) => {
                                 eprintln!("DEBUG: Serialized Rust AnalysisReport size: {}, first 100 bytes: {:?}", serialized_report.len(), &serialized_report[..std::cmp::min(serialized_report.len(), 100)]);
-                                db.put(&_cache_key, serialized_report)?;
+                                db.put(&_cache_key, &serialized_report)?;
                                 extracted_data.merge_rust_report(project_root.display().to_string(), report);
                                 eprintln!("Ran Rust analysis for {} and cached it.", project_root.display());
                             },
@@ -53,7 +53,7 @@ pub fn process_rust_files(
                 match serde_json::to_vec(&report) {
                     Ok(serialized_report) => {
                         eprintln!("DEBUG: Serialized Rust AnalysisReport size: {}, first 100 bytes: {:?}", serialized_report.len(), &serialized_report[..std::cmp::min(serialized_report.len(), 100)]);
-                        db.put(&_cache_key, serialized_report)?;
+                        db.put(&_cache_key, &serialized_report)?;
                         extracted_data.merge_rust_report(project_root.display().to_string(), report);
                         eprintln!("Ran Rust analysis for {} and cached it.", project_root.display());
                     },
@@ -64,17 +64,17 @@ pub fn process_rust_files(
                 }
             },
             Err(e) => {
-                eprintln!("RocksDB READ ERROR for Rust analysis of {}: {}. Running analysis.", project_root.display(), e);
+                eprintln!("Database READ ERROR for Rust analysis of {}: {}. Running analysis.", project_root.display(), e);
                 let report = run_analysis(project_root, PRIMES_TO_ANALYZE);
                 match serde_json::to_vec(&report) {
                     Ok(serialized_report) => {
                         eprintln!("DEBUG: Serialized Rust AnalysisReport size: {}, first 100 bytes: {:?}", serialized_report.len(), &serialized_report[..std::cmp::min(serialized_report.len(), 100)]);
-                        db.put(&_cache_key, serialized_report)?;
+                        db.put(&_cache_key, &serialized_report)?;
                         extracted_data.merge_rust_report(project_root.display().to_string(), report);
                         eprintln!("Ran Rust analysis for {} and cached it.", project_root.display());
                     },
                     Err(ser_err) => {
-                        eprintln!("CRITICAL ERROR: Failed to serialize AnalysisReport for {} after RocksDB read error: {}", project_root.display(), ser_err);
+                        eprintln!("CRITICAL ERROR: Failed to serialize AnalysisReport for {} after database read error: {}", project_root.display(), ser_err);
                         extracted_data.merge_rust_report(project_root.display().to_string(), report);
                     }
                 }
