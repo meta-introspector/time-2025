@@ -23,7 +23,6 @@ members = [
 resolver = "2"
 
 [workspace.dependencies]
-libfaalg_adaptor = { path = "./libfaalg_adaptor" }
 linfa-linalg = { path = "./external/linfa-linalg" }
 ndarray = { version = "0.16", features = ["serde"] }
 num-complex = { version = "0.4", features = ["serde"] }

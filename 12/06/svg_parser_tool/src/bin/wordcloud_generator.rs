@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use rocksdb::{DB};
 use serde_json;
 use pico_args::Arguments;
@@ -12,8 +12,7 @@ use svg_parser_tool::rocksdb_cache::RocksDBCache;
 use svg_parser_tool::redb_cache::RedbCache;
 use svg_parser_tool::db_trait::CacheDB;
 
-
-// Define the RocksDB cache directory
+// Define the cache directories
 const ROCKSDB_CACHE_DIR: &str = "C:\\Users\\gentd\\.gemini\\tmp\\wordcloud_cache_rocksdb";
 const REDB_CACHE_DIR: &str = "C:\\Users\\gentd\\.gemini\\tmp\\wordcloud_cache_redb";
 
@@ -46,28 +45,24 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let root_path_str: String = args.free_from_str().unwrap_or_else(|_| ".".to_string());
     let root_path = PathBuf::from(root_path_str);
 
-    let cache: Box<dyn CacheDB>;
-    let _db_rocks: DB; // To keep the DB alive
-    let _db_redb: redb::Database;
-
-    match db_type.as_str() {
+    let cache: Box<dyn CacheDB> = match db_type.as_str() {
         "rocksdb" => {
             let db = DB::open_default(ROCKSDB_CACHE_DIR)?;
             println!("RocksDB opened at: {}", ROCKSDB_CACHE_DIR);
-            _db_rocks = db;
-            cache = Box::new(RocksDBCache::new(&_db_rocks));
+            let leaked_db = Box::leak(Box::new(db));
+            Box::new(RocksDBCache::new(leaked_db))
         }
         "redb" => {
             let db = redb::Database::create(REDB_CACHE_DIR)?;
             println!("Redb opened at: {}", REDB_CACHE_DIR);
-            _db_redb = db;
-            cache = Box::new(RedbCache::new(&_db_redb));
+            let leaked_db = Box::leak(Box::new(db));
+            Box::new(RedbCache::new(leaked_db))
         }
         _ => {
             eprintln!("Error: Invalid database type '{}'. Use 'rocksdb' or 'redb'.", db_type);
             return Ok(());
         }
-    }
+    };
 
     let mut extracted_data: ExtractedData;
 
@@ -175,7 +170,7 @@ fn process_files_and_cache(
 
     // Serialize and cache the aggregated ExtractedData
     let serialized_extracted_data = serde_json::to_vec(extracted_data)?;
-    db.put(master_cache_key, serialized_extracted_data)?;
+    db.put(&String::from_utf8_lossy(master_cache_key), &serialized_extracted_data)?;
 
     Ok(())
 }

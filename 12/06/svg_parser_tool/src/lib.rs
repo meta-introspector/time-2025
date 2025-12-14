@@ -6,4 +6,5 @@ pub mod svg_processor;
 pub mod db_trait;
 pub mod rocksdb_cache;
 pub mod redb_cache;
+pub mod sled_cache;
 pub use utils::*;

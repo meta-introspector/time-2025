@@ -1,4 +1,4 @@
-use redb::{Database, ReadableTable, TableDefinition};
+use redb::{Database, ReadableDatabase, ReadableTable, TableDefinition};
 use crate::db_trait::CacheDB;
 
 pub const TABLE: TableDefinition<&str, &[u8]> = TableDefinition::new("cache");
