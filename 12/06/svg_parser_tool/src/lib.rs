@@ -4,6 +4,7 @@ pub mod file_collector;
 pub mod rust_processor;
 pub mod svg_processor;
 pub mod db_trait;
+#[cfg(feature = "rocksdb-backend")]
 pub mod rocksdb_cache;
 pub mod redb_cache;
 pub mod sled_cache;

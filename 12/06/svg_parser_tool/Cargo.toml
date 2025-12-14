@@ -43,10 +43,17 @@ resvg = { workspace = true } # For SVG parsing
 xmlwriter = { workspace = true } # For xml parsing
 svg_hir = { workspace = true }
 usvg = { workspace = true } # For USVG parsing (part of resvg)
-rocksdb = { version = "0.24.0", features = ["serde", "lz4"] }
+rocksdb = { version = "0.24.0", features = ["serde", "lz4"], optional = true }
 sha2 = "0.10.9"
 ignore = "0.4.25"
 pico-args = "0.5"
 encoding_rs = "0.8.31"
 redb = "3.1.0"
 sled = "0.34.7"
+diesel = { version = "2.1.0", features = ["sqlite", "r2d2"] }
+dotenvy = "0.15"
+
+[features]
+default = []
+rocksdb-backend = ["rocksdb"]
+
