@@ -1,5 +1,5 @@
 use std::fs;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use rocksdb::{DB};
 use pico_args::Arguments;
 use serde_json::{self, Value};
@@ -8,6 +8,9 @@ use svg_parser_tool::rocksdb_cache::RocksDBCache;
 use svg_parser_tool::redb_cache::RedbCache;
 use svg_parser_tool::sled_cache::SledCache;
 use redb::{ReadableDatabase, ReadableTable};
+use svg_parser_tool::processors::ExtractedData;
+use svg_parser_tool::file_collector::collect_all_file_entries;
+use svg_parser_tool::utils::calculate_master_cache_key;
 
 // Define the cache directories
 const ROCKSDB_CACHE_DIR: &str = "C:\\Users\\gentd\\.gemini\\tmp\\wordcloud_cache_rocksdb";
@@ -25,7 +28,9 @@ Options:
   --get <KEY>                       Retrieve and print the value for a specific key.
   --delete <KEY>                    Delete a specific key-value pair.  --clear-all                       Clear the entire RocksDB database.
   --validate-json <KEY>             Retrieve a key's value and validate if it's valid JSON.
+  --most-common-terms <N>           Retrieve the aggregated ExtractedData and list the N most common terms.
   --db-path <PATH>                  Specify an alternative database path.
+  --root-path <PATH>                Specify the root path used by wordcloud_generator. Defaults to current directory.
   -h, --help                        Print help information.
 "#
     );
@@ -40,6 +45,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     let db_type: String = args.opt_value_from_str("--db-type")?.unwrap_or("rocksdb".to_string());
+    let root_path_str: String = args.opt_value_from_str("--root-path")?.unwrap_or(".".to_string());
+    let root_path = PathBuf::from(root_path_str);
 
     let db_path_str: String = args.opt_value_from_str("--db-path")?.unwrap_or(
         match db_type.as_str() {
@@ -164,6 +171,32 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
         println!("--- End of validate JSON operation ---");
+    } else if let Some(num_terms) = args.opt_value_from_str::<&str, usize>("--most-common-terms")? {
+        println!("\n--- Listing {} most common terms ---", num_terms);
+        let all_file_entries = collect_all_file_entries(&root_path, cache.as_ref())?;
+        let master_cache_key = calculate_master_cache_key(&root_path, &all_file_entries);
+
+        match cache.get(&master_cache_key)? {
+            Some(cached_data_bytes) => {
+                match serde_json::from_slice::<ExtractedData>(&cached_data_bytes) {
+                    Ok(extracted_data) => {
+                        let mut sorted_terms: Vec<_> = extracted_data.terms.into_iter().collect();
+                        sorted_terms.sort_by(|a, b| b.1.frequency.cmp(&a.1.frequency));
+
+                        for (i, (term_name, term)) in sorted_terms.iter().take(num_terms).enumerate() {
+                            println!("{}. {}: {:?} (Freq: {})", i + 1, term_name, term.term_type, term.frequency);
+                        }
+                    },
+                    Err(e) => {
+                        eprintln!("Error deserializing ExtractedData from cache: {}", e);
+                    }
+                }
+            },
+            None => {
+                println!("No aggregated ExtractedData found in cache. Run `wordcloud_generator` first.");
+            }
+        }
+        println!("--- End of most common terms list ---");
     } else {
         print_help();
     }
