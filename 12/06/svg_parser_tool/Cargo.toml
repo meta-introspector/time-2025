@@ -9,7 +9,7 @@ path = "src/main.rs"
 
 [[bin]]
 name = "wordcloud_generator"
-path = "src/bin/wordcloud_generator.rs"
+path = "src/bin/wordcloud_generator/main.rs"
 
 [[bin]]
 name = "cache_inspector"

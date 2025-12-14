@@ -26,7 +26,7 @@
      showgrid="false"
      inkscape:zoom="1.1198726"
      inkscape:cx="64.739509"
-     inkscape:cy="1060.3885"
+     inkscape:cy="1203.2619"
      inkscape:window-width="725"
      inkscape:window-height="562"
      inkscape:window-x="1213"
@@ -1922,13 +1922,188 @@
     <text
        xml:space="preserve"
        style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff0000;stroke-width:0.893"
-       x="25.280033"
-       y="311.15707"
+       x="32.604156"
+       y="312.10211"
        id="text153404"><tspan
          sodipodi:role="line"
          id="tspan153402"
          style="stroke-width:0.893"
-         x="25.280033"
-         y="311.15707">functional</tspan></text>
+         x="32.604156"
+         y="312.10211">functional</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff0000;stroke-width:0.893"
+       x="-26.461346"
+       y="326.27783"
+       id="text153860"><tspan
+         sodipodi:role="line"
+         id="tspan153858"
+         style="stroke-width:0.893"
+         x="-25.544174"
+         y="326.27783">url </tspan></text>
+    <g
+       id="g155052"
+       transform="translate(9.45048,2.36262)">
+      <ellipse
+         style="fill:#ff5555;stroke-width:1.09813"
+         id="path155035"
+         cx="22.563021"
+         cy="336.90961"
+         rx="51.623241"
+         ry="22.917414" />
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff0000;stroke-width:0.893"
+         x="0.23626208"
+         y="325.56903"
+         id="text153864"><tspan
+           sodipodi:role="line"
+           id="tspan153862"
+           style="stroke-width:0.893"
+           x="0.23626165"
+           y="325.56903">document</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff0000;stroke-width:0.893"
+         x="-8.0329084"
+         y="337.38214"
+         id="text153868"><tspan
+           sodipodi:role="line"
+           id="tspan153866"
+           style="stroke-width:0.893"
+           x="-8.0329084"
+           y="337.38214">abstract</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff0000;stroke-width:0.893"
+         x="-9.2142172"
+         y="347.06885"
+         id="text153872"><tspan
+           sodipodi:role="line"
+           id="tspan153870"
+           style="stroke-width:0.893"
+           x="-9.2142172"
+           y="347.06885">chapters</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff0000;stroke-width:0.893"
+         x="18.664698"
+         y="348.01392"
+         id="text153876"><tspan
+           sodipodi:role="line"
+           id="tspan153874"
+           style="stroke-width:0.893"
+           x="18.664698"
+           y="348.01392">pages</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff0000;stroke-width:0.893"
+         x="36.620609"
+         y="338.79968"
+         id="text153880"><tspan
+           sodipodi:role="line"
+           id="tspan153878"
+           style="stroke-width:0.893"
+           x="36.620609"
+           y="338.79968">diagrams</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff0000;stroke-width:0.893"
+         x="31.186583"
+         y="327.22287"
+         id="text153884"><tspan
+           sodipodi:role="line"
+           id="tspan153882"
+           style="stroke-width:0.893"
+           x="31.186583"
+           y="327.22287">latex</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff0000;stroke-width:0.893"
+         x="49.378754"
+         y="323.67896"
+         id="text153888"><tspan
+           sodipodi:role="line"
+           id="tspan153886"
+           style="stroke-width:0.893"
+           x="49.378754"
+           y="323.67896">style</tspan></text>
+    </g>
+    <g
+       id="g155033">
+      <ellipse
+         style="fill:#ff5555;stroke-width:0.893"
+         id="path154914"
+         cx="-9.2142172"
+         cy="387.82407"
+         rx="49.615017"
+         ry="24.453115" />
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff0000;stroke-width:0.893"
+         x="-22.208628"
+         y="373.05768"
+         id="text154360"><tspan
+           sodipodi:role="line"
+           id="tspan154358"
+           style="stroke-width:0.893"
+           x="-22.208628"
+           y="373.05768">oodar</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff0000;stroke-width:0.893"
+         x="-18.428434"
+         y="383.21698"
+         id="text154364"><tspan
+           sodipodi:role="line"
+           id="tspan154362"
+           style="stroke-width:0.893"
+           x="-18.428434"
+           y="383.21698">observe</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff0000;stroke-width:0.893"
+         x="-30.950321"
+         y="393.84875"
+         id="text154368"><tspan
+           sodipodi:role="line"
+           id="tspan154366"
+           style="stroke-width:0.893"
+           x="-30.950321"
+           y="393.84875">orient</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff0000;stroke-width:0.893"
+         x="-33.076679"
+         y="404.24429"
+         id="text154372"><tspan
+           sodipodi:role="line"
+           id="tspan154370"
+           style="stroke-width:0.893"
+           x="-33.076679"
+           y="404.24429">decide</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff0000;stroke-width:0.893"
+         x="-1.4175719"
+         y="399.99155"
+         id="text154376"><tspan
+           sodipodi:role="line"
+           id="tspan154374"
+           style="stroke-width:0.893"
+           x="-1.4175719"
+           y="399.99155">act</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:8.1139px;font-family:Calibri;-inkscape-font-specification:'Calibri Bold';text-align:center;text-anchor:middle;fill:#ff0000;stroke-width:0.893"
+         x="16.53834"
+         y="396.6839"
+         id="text154380"><tspan
+           sodipodi:role="line"
+           id="tspan154378"
+           style="stroke-width:0.893"
+           x="16.53834"
+           y="396.6839">reflect</tspan></text>
+    </g>
   </g>
 </svg>

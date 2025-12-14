@@ -7,7 +7,7 @@ use svg_parser_tool::db_trait::CacheDB;
 use svg_parser_tool::rocksdb_cache::RocksDBCache;
 use svg_parser_tool::redb_cache::RedbCache;
 use svg_parser_tool::sled_cache::SledCache;
-use redb::ReadableDatabase;
+use redb::{ReadableDatabase, ReadableTable};
 
 // Define the cache directories
 const ROCKSDB_CACHE_DIR: &str = "C:\\Users\\gentd\\.gemini\\tmp\\wordcloud_cache_rocksdb";
@@ -65,7 +65,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             let db = redb::Database::create(db_path)?;
             println!("Redb opened at: {}", db_path.display());
             let leaked_db = Box::leak(Box::new(db));
-            Box::new(RedbCache::new(leaked_db))
+            Box::new(RedbCache::new(leaked_db)?)
         }
         "sled" => {
             let db = sled::open(db_path)?;

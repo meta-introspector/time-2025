@@ -8,8 +8,13 @@ pub struct RedbCache<'a> {
 }
 
 impl<'a> RedbCache<'a> {
-    pub fn new(db: &'a Database) -> Self {
-        Self { db }
+    pub fn new(db: &'a Database) -> Result<Self, Box<dyn std::error::Error>> {
+        let write_txn = db.begin_write()?;
+        {
+            write_txn.open_table(TABLE)?; // Create the table if it doesn't exist
+        }
+        write_txn.commit()?;
+        Ok(Self { db })
     }
 }
 

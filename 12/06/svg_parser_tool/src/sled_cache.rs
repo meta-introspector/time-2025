@@ -1,19 +1,17 @@
 use sled::Db;
 use crate::db_trait::CacheDB;
-use std::path::Path;
 
-pub struct SledCache {
-    db: Db,
+pub struct SledCache<'a> {
+    db: &'a Db,
 }
 
-impl SledCache {
-    pub fn new(path: &Path) -> Result<Self, sled::Error> {
-        let db = sled::open(path)?;
-        Ok(Self { db })
+impl<'a> SledCache<'a> {
+    pub fn new(db: &'a Db) -> Self {
+        Self { db }
     }
 }
 
-impl CacheDB for SledCache {
+impl<'a> CacheDB for SledCache<'a> {
     fn get(&self, key: &str) -> Result<Option<Vec<u8>>, Box<dyn std::error::Error>> {
         match self.db.get(key)? {
             Some(value) => Ok(Some(value.to_vec())),
